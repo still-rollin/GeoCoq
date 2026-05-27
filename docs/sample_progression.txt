@@ -1,0 +1,216 @@
+
+
+╭──────────────────────────────────────────────────────────────────────────────╮
+│                                                                              │
+│                                                                              │
+│                         ▄▀▀ ▄▀█ █▀▀ ▀█▀ █▀▄▀█ █▀▀ █▀█                        │
+│                         █▀  █▀█ ▄▄█  █  █ ▀ █ █▄▄ █▀▀                        │
+│                                                                              │
+│                                                                              │
+│                                                                              │
+│                                FastMCP 3.3.1                                 │
+│                            https://gofastmcp.com                             │
+│                                                                              │
+│                  🖥  Server:      rocq-mcp, 3.3.1                             │
+│                  🚀 Deploy free: https://horizon.prefect.io                  │
+│                                                                              │
+╰──────────────────────────────────────────────────────────────────────────────╯
+
+
+[05/28/26 12:12:34] INFO     Starting MCP server 'rocq-mcp'     transport.py:209
+                             with transport 'stdio'                             
+[05/28/26 12:12:46] INFO     Processing request of type            server.py:727
+                             CallToolRequest                                    
+[05/28/26 12:12:55] INFO     Processing request of type            server.py:727
+                             ListToolsRequest                                   
+                    INFO     Session ending — cleaning up          server.py:431
+                             per-session resources                              
+
+
+╭──────────────────────────────────────────────────────────────────────────────╮
+│                                                                              │
+│                                                                              │
+│                         ▄▀▀ ▄▀█ █▀▀ ▀█▀ █▀▄▀█ █▀▀ █▀█                        │
+│                         █▀  █▀█ ▄▄█  █  █ ▀ █ █▄▄ █▀▀                        │
+│                                                                              │
+│                                                                              │
+│                                                                              │
+│                                FastMCP 3.3.1                                 │
+│                            https://gofastmcp.com                             │
+│                                                                              │
+│                  🖥  Server:      rocq-mcp, 3.3.1                             │
+│                  🚀 Deploy free: https://horizon.prefect.io                  │
+│                                                                              │
+╰──────────────────────────────────────────────────────────────────────────────╯
+
+
+[05/28/26 12:12:55] INFO     Starting MCP server 'rocq-mcp'     transport.py:209
+                             with transport 'stdio'                             
+[05/28/26 12:13:11] INFO     Processing request of type            server.py:727
+                             CallToolRequest                                    
+[05/28/26 12:13:14] INFO     Processing request of type            server.py:727
+                             ListToolsRequest                                   
+                    INFO     Session ending — cleaning up          server.py:431
+                             per-session resources                              
+
+
+╭──────────────────────────────────────────────────────────────────────────────╮
+│                                                                              │
+│                                                                              │
+│                         ▄▀▀ ▄▀█ █▀▀ ▀█▀ █▀▄▀█ █▀▀ █▀█                        │
+│                         █▀  █▀█ ▄▄█  █  █ ▀ █ █▄▄ █▀▀                        │
+│                                                                              │
+│                                                                              │
+│                                                                              │
+│                                FastMCP 3.3.1                                 │
+│                            https://gofastmcp.com                             │
+│                                                                              │
+│                  🖥  Server:      rocq-mcp, 3.3.1                             │
+│                  🚀 Deploy free: https://horizon.prefect.io                  │
+│                                                                              │
+╰──────────────────────────────────────────────────────────────────────────────╯
+
+
+[05/28/26 12:13:14] INFO     Starting MCP server 'rocq-mcp'     transport.py:209
+                             with transport 'stdio'                             
+[05/28/26 12:13:35] INFO     Processing request of type            server.py:727
+                             CallToolRequest                                    
+[05/28/26 12:13:38] INFO     Processing request of type            server.py:727
+                             ListToolsRequest                                   
+                    INFO     Session ending — cleaning up          server.py:431
+                             per-session resources                              
+
+
+╭──────────────────────────────────────────────────────────────────────────────╮
+│                                                                              │
+│                                                                              │
+│                         ▄▀▀ ▄▀█ █▀▀ ▀█▀ █▀▄▀█ █▀▀ █▀█                        │
+│                         █▀  █▀█ ▄▄█  █  █ ▀ █ █▄▄ █▀▀                        │
+│                                                                              │
+│                                                                              │
+│                                                                              │
+│                                FastMCP 3.3.1                                 │
+│                            https://gofastmcp.com                             │
+│                                                                              │
+│                  🖥  Server:      rocq-mcp, 3.3.1                             │
+│                  🚀 Deploy free: https://horizon.prefect.io                  │
+│                                                                              │
+╰──────────────────────────────────────────────────────────────────────────────╯
+
+
+[05/28/26 12:13:39] INFO     Starting MCP server 'rocq-mcp'     transport.py:209
+                             with transport 'stdio'                             
+[05/28/26 12:13:51] INFO     Processing request of type            server.py:727
+                             CallToolRequest                                    
+[05/28/26 12:13:54] INFO     Processing request of type            server.py:727
+                             ListToolsRequest                                   
+                    INFO     Session ending — cleaning up          server.py:431
+                             per-session resources                              
+
+
+╭──────────────────────────────────────────────────────────────────────────────╮
+│                                                                              │
+│                                                                              │
+│                         ▄▀▀ ▄▀█ █▀▀ ▀█▀ █▀▄▀█ █▀▀ █▀█                        │
+│                         █▀  █▀█ ▄▄█  █  █ ▀ █ █▄▄ █▀▀                        │
+│                                                                              │
+│                                                                              │
+│                                                                              │
+│                                FastMCP 3.3.1                                 │
+│                            https://gofastmcp.com                             │
+│                                                                              │
+│                  🖥  Server:      rocq-mcp, 3.3.1                             │
+│                  🚀 Deploy free: https://horizon.prefect.io                  │
+│                                                                              │
+╰──────────────────────────────────────────────────────────────────────────────╯
+
+
+[05/28/26 12:13:55] INFO     Starting MCP server 'rocq-mcp'     transport.py:209
+                             with transport 'stdio'                             
+[05/28/26 12:16:26] INFO     Processing request of type            server.py:727
+                             CallToolRequest                                    
+[05/28/26 12:16:35] INFO     Processing request of type            server.py:727
+                             ListToolsRequest                                   
+                    INFO     Session ending — cleaning up          server.py:431
+                             per-session resources                              
+running 5 case(s) on theories/Axioms/rocq_demo.v...
+
+=== [1/5] add_0_r ===
+      gemini transient error (503); retrying in 1s
+
+[1/5] add_0_r -- PASS
+  desc:      nat identity, single induction
+  rocq:      forall n : nat, n + 0 = n
+  lean[1:6]: theorem add_0_r (n : Nat) : n + 0 = n := by
+               induction n with
+               | zero =>
+                 rfl
+               | succ k ih =>
+                 calc
+  diag:      {   "success": true,   "timed_out": false,   "items": [],   "failed_dependencies": [] }
+
+=== [2/5] add_comm ===
+
+[2/5] add_comm -- PASS
+  desc:      nat addition commutativity, nested induction
+  rocq:      forall n m : nat, n + m = m + n
+  lean[1:6]: theorem add_comm (n m : Nat) : n + m = m + n := by
+               induction m with
+               | zero =>
+                 calc
+                   n + 0 = n     := Nat.add_zero n
+                   _     = 0 + n := (Nat.zero_add n).symm
+  diag:      {   "success": true,   "timed_out": false,   "items": [],   "failed_dependencies": [] }
+
+=== [3/5] length_app ===
+
+[3/5] length_app -- FAIL
+  desc:      list length distributes over append
+  rocq:      forall (A : Type) (l l' : list A), length (l ++ l') = length l + length l'
+  lean[1:6]: -- The `List` type, `List.length` function, and `List.append` operator (++)
+             -- are part of Lean's core library, so no external imports like Mathlib are needed.
+             
+             -- We open the `List` namespace to allow using `length`, `nil`, `cons`, and `append`
+             -- directly without the `List.` prefix.
+             open List
+  diag:      {   "success": false,   "timed_out": false,   "items": [     {       "severity": "error",       "message": "Unknown identifier `append_nil_left_eq`",       "line": 19,       "column": 16     },     {       "severity": "error",       "message": "unsolved goals\ncase nil\nA : Type\nl' : List A\n⊢ ([] 
+
+=== [4/5] de_morgan ===
+
+[4/5] de_morgan -- PASS
+  desc:      De Morgan, pure propositional logic
+  rocq:      forall P Q : Prop, ~ (P \/ Q) <-> ~ P /\ ~ Q
+  lean[1:6]: theorem de_morgan (P Q : Prop) : ¬ (P ∨ Q) ↔ ¬ P ∧ ¬ Q := by
+               apply Iff.intro
+               . -- Proof of `¬ (P ∨ Q) → ¬ P ∧ ¬ Q`
+                 intro h
+                 apply And.intro
+                 . -- Proof of `¬ P`
+  diag:      {   "success": true,   "timed_out": false,   "items": [],   "failed_dependencies": [] }
+
+=== [5/5] exists_not_all ===
+      gemini transient error (503); retrying in 1s
+
+[5/5] exists_not_all -- FAIL
+  desc:      mixes exists, forall, and negation
+  rocq:      forall P : nat -> Prop, (exists n : nat, P n) -> ~ (forall n : nat, ~ P n)
+  lean[1:6]: theorem exists_not_all (P : Nat → Prop) : (∃ n, P n) → ¬ (∀ n, ¬ P n) := by
+               intro h_exists_P -- Assume there exists an n such that P n
+               intro h_forall_not_P -- Assume for all n, P n is false
+               
+               -- From 'h_exists_P', destructure it to get a specific n0 and a proof that P n0 holds
+               cases h_exists_P with n0 h_P_n0
+  diag:      {   "success": false,   "timed_out": false,   "items": [     {       "severity": "error",       "message": "unknown tactic",       "line": 6,       "column": 26     },     {       "severity": "error",       "message": "Invalid syntax for case analysis tactic: The `with` keyword must be followed by a
+
+==============================================================================
+name                   status description
+------------------------------------------------------------------------------
+add_0_r                PASS   nat identity, single induction
+add_comm               PASS   nat addition commutativity, nested induction
+length_app             FAIL   list length distributes over append
+de_morgan              PASS   De Morgan, pure propositional logic
+exists_not_all         FAIL   mixes exists, forall, and negation
+
+3/5 cases verified by lean-mcp
+
+Lean outputs saved to orchestrator/experiment_outputs/
