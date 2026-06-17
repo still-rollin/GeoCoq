@@ -1,0 +1,77 @@
+/-
+Structure-preserving translation of `proposition_01.v` — each GeoCoq proof line
+maps to one Lean `have … := by conclude…` line, using the ported tactic
+vocabulary in `euclidean_tactics.lean`. Validation target for the approach.
+-/
+import GeocoqTranslate.Elements.OriginalProofs.euclidean_tactics
+import GeocoqTranslate.Elements.OriginalProofs.Lemmas.lemma_congruencesymmetric
+import GeocoqTranslate.Elements.OriginalProofs.Lemmas.lemma_congruencetransitive
+import GeocoqTranslate.Elements.OriginalProofs.Lemmas.lemma_congruenceflip
+import GeocoqTranslate.Elements.OriginalProofs.Lemmas.lemma_inequalitysymmetric
+import GeocoqTranslate.Elements.OriginalProofs.Lemmas.lemma_localextension
+import GeocoqTranslate.Elements.OriginalProofs.Lemmas.lemma_partnotequalwhole
+
+namespace GeocoqTranslate.Elements
+
+open euclidean_neutral_basis euclidean_neutral euclidean_neutral_ruler_compass
+
+variable {Point : Type} [euclidean_neutral_ruler_compass Point]
+
+theorem proposition_01_structured (A B : Point) (H : A ≠ B) :
+    ∃ X, equilateral A B X ∧ Triangle A B X := by
+  obtain ⟨J, _⟩ : ∃ J, CI J A A B := by conclude postulate_Euclid3
+  have : B ≠ A := by conclude lemma_inequalitysymmetric
+  obtain ⟨K, _⟩ : ∃ K, CI K B B A := by conclude postulate_Euclid3
+  obtain ⟨D, _, _⟩ : ∃ D, BetS B A D ∧ Cong A D A B := by conclude lemma_localextension
+  have : Cong B A B A := by conclude cn_congruencereflexive
+  have : OutCirc D K := by conclude_def OutCirc
+  have : B = B := by conclude cn_equalityreflexive
+  have : InCirc B K := by conclude_def InCirc
+  have : Cong A B A B := by conclude cn_congruencereflexive
+  have : OnCirc B J := by conclude_def OnCirc
+  have : OnCirc D J := by conclude_def OnCirc
+  have : A = A := by conclude cn_equalityreflexive
+  have : InCirc A J := by conclude_def InCirc
+  obtain ⟨C, _, _⟩ : ∃ C, OnCirc C K ∧ OnCirc C J := by conclude postulate_circle_circle
+  have : Cong A C A B := by conclude axiom_circle_center_radius
+  have : Cong A B A C := by conclude lemma_congruencesymmetric
+  have : Cong B C B A := by conclude axiom_circle_center_radius
+  have : Cong B C A B := by forward_using lemma_congruenceflip
+  have : Cong B C A C := by conclude lemma_congruencetransitive
+  have : Cong A B B C := by conclude lemma_congruencesymmetric
+  have : Cong A C C A := by conclude cn_equalityreverse
+  have : Cong B C C A := by conclude lemma_congruencetransitive
+  have : equilateral A B C := by conclude_def equilateral
+  have : B ≠ C := by conclude axiom_nocollapse
+  have : C ≠ A := by conclude axiom_nocollapse
+  have : ¬ BetS A C B := by
+    intro h
+    have : ¬ Cong A C A B := by conclude lemma_partnotequalwhole
+    have : Cong C A A C := by conclude cn_equalityreverse
+    have : Cong C A A B := by conclude lemma_congruencetransitive
+    have : Cong A C C A := by conclude cn_equalityreverse
+    have : Cong A C A B := by conclude lemma_congruencetransitive
+    contradict
+  have : ¬ BetS A B C := by
+    intro h
+    have : ¬ Cong A B A C := by conclude lemma_partnotequalwhole
+    have : Cong A B C A := by conclude lemma_congruencetransitive
+    have : Cong C A A C := by conclude cn_equalityreverse
+    have : Cong A B A C := by conclude lemma_congruencetransitive
+    contradict
+  have : ¬ BetS B A C := by
+    intro h
+    have : ¬ Cong B A B C := by conclude lemma_partnotequalwhole
+    have : Cong B A A B := by conclude cn_equalityreverse
+    have : Cong B A B C := by conclude lemma_congruencetransitive
+    contradict
+  have : ¬ Col A B C := by
+    intro h
+    have : A ≠ C := by conclude lemma_inequalitysymmetric
+    have : A = B ∨ A = C ∨ B = C ∨ BetS B A C ∨ BetS A B C ∨ BetS A C B := by
+      conclude_def Col
+    contradict
+  have : Triangle A B C := by conclude_def Triangle
+  close
+
+end GeocoqTranslate.Elements
