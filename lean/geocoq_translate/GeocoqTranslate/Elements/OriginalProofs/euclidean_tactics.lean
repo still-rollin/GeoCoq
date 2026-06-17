@@ -40,6 +40,15 @@ so the translation can reference them 1:1 (`conclude cn_equalityreflexive`). -/
 /-- GeoCoq `cn_equalityreflexive : eq A A`. In Lean, `=` reflexivity. -/
 theorem cn_equalityreflexive {Point : Type} (A : Point) : A = A := rfl
 
+/-- GeoCoq `cn_equalitytransitive`. In Lean, `=` transitivity. -/
+theorem cn_equalitytransitive {Point : Type} (A B C : Point) :
+    A = B → B = C → A = C := fun h g => h.trans g
+
+/-- GeoCoq `cn_equalitysub` — substitution of equals (Leibniz). Lets `conclude`
+    resolve the name; the concrete goal is closed by `subst`/`aesop`. -/
+theorem cn_equalitysub {Point : Type} {p : Point → Prop} {A B : Point} :
+    A = B → p A → p B := fun h pa => h ▸ pa
+
 /-! ## General tactics (`general_tactics.v`) -/
 
 /-- GeoCoq `spliter`: destruct every conjunction in the context. -/
