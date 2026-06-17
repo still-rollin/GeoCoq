@@ -81,10 +81,13 @@ macro "conclude " t:term : tactic =>
 macro "conclude_def " t:ident : tactic =>
   `(tactic|
     first
+      -- fast path: the fact is already a hypothesis — extract it by unfolding
+      -- everywhere + assumption. Avoids aesop reconstructing huge defs (e.g. Par).
+      | (unfold $t at *; (try spliter); first | done | assumption)
       -- forward: construct the unfolded goal
       | (unfold $t; (try remove_double_neg);
          first | done | assumption | (repeat' apply And.intro) <;> assumption | aesop)
-      -- backward: a hypothesis already has type `t`
+      -- backward: search after unfolding into the context
       | (unfold $t at *; (try spliter); (try remove_double_neg);
          first | done | assumption | tauto | aesop))
 
@@ -111,6 +114,8 @@ macro "close" : tactic =>
   `(tactic|
     first
       | assumption
+      | (by_contra h; contradiction)      -- classical ¬¬-elim BEFORE aesop, which
+                                          -- would normalise away the `¬¬` hypothesis
       | solve_by_elim
       | ((repeat' apply And.intro) <;> (first | assumption | aesop))
       | tauto
