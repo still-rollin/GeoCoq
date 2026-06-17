@@ -30,7 +30,8 @@ attribute [aesop norm unfold]
   euclidean_neutral_basis.Triangle euclidean_neutral_basis.OnCirc
   euclidean_neutral_basis.InCirc euclidean_neutral_basis.OutCirc
   euclidean_neutral_basis.Cong_3 euclidean_neutral_basis.TS
-  equilateral
+  equilateral Lt Out TG Midpoint Per Supp CongA Perp_at Perp InAngle OS
+  isosceles Cut Meet CR LtA TT RT TP Par SumA PG SQ RE
 
 /-! ## Compatibility shims
 
