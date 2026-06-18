@@ -13,6 +13,7 @@ import GeocoqTranslate.Tarski.Axioms
 import GeocoqTranslate.Tarski.Definitions
 import GeocoqTranslate.Tarski_dev.Ch03_bet
 import GeocoqTranslate.Tarski_dev.Ch04_cong_bet
+import GeocoqTranslate.Tarski_dev.tarski_tactics
 
 namespace GeocoqTranslate.Tarski
 
@@ -78,18 +79,12 @@ variable {Tpoint : Type} [Tarski_neutral_dimensionless Tpoint]
 theorem Col_cases (A B C : Tpoint)
     (h : Col A B C ∨ Col A C B ∨ Col B A C ∨
          Col B C A ∨ Col C A B ∨ Col C B A) : Col A B C := by
-  unfold Col at *
-  rcases h with h | h | h | h | h | h <;> rcases h with h | h | h <;>
-    first
-      | tauto
-      | (have hs := between_symmetry _ _ _ h; tauto)
+  rcases h with h | h | h | h | h | h <;> Col
 
 theorem Col_perm (A B C : Tpoint) (h : Col A B C) :
     Col A B C ∧ Col A C B ∧ Col B A C ∧
     Col B C A ∧ Col C A B ∧ Col C B A := by
-  unfold Col at *
-  rcases h with h | h | h <;>
-    (have hs := between_symmetry _ _ _ h; tauto)
+  refine ⟨?_, ?_, ?_, ?_, ?_, ?_⟩ <;> Col
 
 @[aesop safe]
 theorem col_trivial_1 (A B : Tpoint) : Col A A B :=
@@ -146,15 +141,18 @@ theorem l4_19 (A B C C' : Tpoint)
     (h₁ : Cong A C A C') (h₂ : Cong B C B C') : C = C' := sorry
 
 theorem not_col_distincts (A B C : Tpoint) (h : ¬ Col A B C) :
-    ¬ Col A B C ∧ A ≠ B ∧ B ≠ C ∧ A ≠ C := sorry
+    ¬ Col A B C ∧ A ≠ B ∧ B ≠ C ∧ A ≠ C := by
+  refine ⟨h, ?_, ?_, ?_⟩ <;> (rintro rfl; exact h (by Col))
 
 theorem NCol_cases (A B C : Tpoint)
     (h : ¬ Col A B C ∨ ¬ Col A C B ∨ ¬ Col B A C ∨
-         ¬ Col B C A ∨ ¬ Col C A B ∨ ¬ Col C B A) : ¬ Col A B C := sorry
+         ¬ Col B C A ∨ ¬ Col C A B ∨ ¬ Col C B A) : ¬ Col A B C := by
+  rcases h with h | h | h | h | h | h <;> (intro hc; exact h (by Col))
 
 theorem NCol_perm (A B C : Tpoint) (h : ¬ Col A B C) :
     ¬ Col A B C ∧ ¬ Col A C B ∧ ¬ Col B A C ∧
-    ¬ Col B C A ∧ ¬ Col C A B ∧ ¬ Col C B A := sorry
+    ¬ Col B C A ∧ ¬ Col C A B ∧ ¬ Col C B A := by
+  refine ⟨h, ?_, ?_, ?_, ?_, ?_⟩ <;> (intro hc; exact h (by Col))
 
 theorem col_cong_3_cong_3_eq (A B C A' B' C₁ C₂ : Tpoint)
     (hAB : A ≠ B) (hCol : Col A B C)
