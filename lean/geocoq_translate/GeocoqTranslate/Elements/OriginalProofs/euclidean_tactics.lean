@@ -121,4 +121,20 @@ macro "close" : tactic =>
       | tauto
       | aesop)
 
+/-! ## Basic Col/nCol lemmas (`euclidean_tactics.v` `basic_lemmas`).
+    `nCol` is definitionally `¬ Col` up to reordering, so all three are `tauto`.
+    Stated at `euclidean_neutral` (not the basis) to match downstream proof
+    contexts and avoid deep-`extends` instance-synthesis failures. -/
+
+variable {Point : Type} [euclidean_neutral Point]
+
+theorem not_nCol_Col (A B C : Point) (h : ¬ nCol A B C) : Col A B C := by
+  unfold nCol Col at *; tauto
+
+theorem nCol_notCol (A B C : Point) (h : ¬ Col A B C) : nCol A B C := by
+  unfold nCol Col at *; tauto
+
+theorem Col_nCol_False (A B C : Point) (h1 : nCol A B C) (h2 : Col A B C) : False := by
+  unfold nCol Col at *; tauto
+
 end GeocoqTranslate.Elements
