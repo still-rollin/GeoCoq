@@ -7,9 +7,15 @@ argument-finding** tactics, per Julien's direction (no explicit lemma arguments,
 no oracle; an automated tactic that mimics Coq's `eauto`/`auto`, validated by
 scaling unit tests).
 
-**Headline result:** frontier failures **11 → 4** (8 lemmas unblocked), both core
-tactics measured to scale **linearly**, **zero regressions** — achieved purely by
-swapping the tactic engine, no proof edits.
+**Headline result:** frontier failures **11 → 0** — the bounded tactics unblocked
+**8 lemmas** automatically (no proof edits), and the remaining **4 `Par`-family
+lemmas were hand-finished** (§6); both core tactics measured to scale **linearly**,
+**zero regressions**. The Elements frontier now builds fully green (3027 jobs).
+
+> **Update (resolution):** the `Par`-4 (`parallelflip`, `parallelNC`,
+> `paralleldef2A`, `proposition_08`) are now **done**, committed in `657d294`.
+> See §6.5. The §1–§5 measurements below describe the automatic-tactic stage
+> (commit `448d4c4`); §6 covers the `Par` reconstruction and its hand-finish.
 
 ---
 
@@ -362,6 +368,30 @@ passed in isolation but failed in the full tree under the new `conclude_def`). S
 *inside a generic `conclude_def`* — the generic tactic and the `Par` special case
 pull in opposite directions (generic wants `at *` + search; `Par` needs surgical
 single-hyp destructure + no unfold-at-*). They should be **separate tactics.**
+
+### 6.5 Resolution — hand-finished (commit `657d294`)
+
+Rather than over-fit `conclude_def`, the 4 were hand-finished in the
+`lemma_parallelsymmetric` style. The reasoning steps are unchanged and still use
+the bounded `conclude`/`forward_using`; only the `Par`/`OS`/`CongA` existential
+*packing* is made explicit.
+
+| lemma | what was done |
+|---|---|
+| `parallelflip` | destruct `Par` once (`obtain ⟨U,V,u,v,X,…⟩ := h1`), rebuild each flipped variant with `exact ⟨…⟩` reusing the same witnesses; each `¬ Meet` variant reduced by hand to the original `¬ Meet A B C D` |
+| `parallelNC` | the only failure was the `Par` *extract* — replaced by a direct `obtain` in the def's witness order (`U V u v X` bound as `a b c d M`); the rest already worked |
+| `paralleldef2A` | direct `obtain` for `OS` (witness order `X U V`), explicit `Par` build, explicit `Meet` contradictions (`exact hnMeet ⟨…⟩`), and **`subst` for `cn_equalitysub`** — `solve_by_elim` on the Leibniz lemma `A=B → p A → p B` does **higher-order unification** on the motive `?p` and `whnf`-explodes |
+| `proposition_08` | the `conclude_def CongA` builds need `nCol B A C`, but the proof had `¬ Col B A C`; produce `nCol` directly via `nCol_notCol` so the build matches the leaf whole (the ladder otherwise splits `nCol` into De Morgan pieces it can't all close) |
+
+**Two reusable findings** (candidates to fold into the transpiler / tactics):
+- `conclude cn_equalitysub` (Leibniz substitution) should emit `subst`/`▸`, never
+  `solve_by_elim` (HO-unification blow-up).
+- `conclude_def CongA`/`Par` builds want the `nCol` form of a non-collinearity
+  hypothesis, not `¬ Col`; the transpiler should state these as `nCol` (via
+  `nCol_notCol`) so the witness ladder closes them.
+
+All four are sorry-free (`parallelflip` needs **no** axioms; the rest only
+`propext`/`Classical.choice`/`Quot.sound`). Full tree: **3027 jobs, exit 0.**
 
 ---
 
