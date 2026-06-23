@@ -33,3 +33,4 @@ theorem lemma_3_7b (A B C D : Point) (h1 : BetS A B C) (h2 : BetS B C D) :
       (axiom_betweennesssymmetry A B C h1))
 
 end GeocoqTranslate.Elements
+
