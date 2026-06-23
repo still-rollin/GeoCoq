@@ -66,4 +66,19 @@ macro "treat_equalities" : tactic =>
     ((try simp_all only [cong_reverse_identity, cong_trivial_identity]);
      (try subst_vars)))
 
+/-- One-shot closer battery for the sorry-backlog sweep: tries the cheap
+    domain closers. Used as `by first | tarski_auto | sorry` so a lemma either
+    closes automatically or stays `sorry` without breaking the build. -/
+macro "tarski_auto" : tactic =>
+  `(tactic|
+    ((try intros);
+     first
+       | assumption
+       | Col
+       | Cong
+       | Between
+       | (treat_equalities; first | assumption | Col | Cong | Between | tauto)
+       | tauto
+       | simp_all))
+
 end GeocoqTranslate.Tarski
