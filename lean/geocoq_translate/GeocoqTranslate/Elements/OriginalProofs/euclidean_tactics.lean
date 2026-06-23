@@ -71,7 +71,14 @@ macro "conclude " t:term : tactic =>
        | assumption
        | exact $t
        | (apply $t <;> assumption)
+       -- BOUNDED path (eauto analog): apply/eliminate `t` with depth-limited
+       -- backtracking. Mimics Coq's bounded `eauto`; replaces unbounded `aesop`
+       -- for the common case. NB: NO And.left/right/intro in the set — `conclude`
+       -- pivots have an atomic goal and atomic premises (no projection needed),
+       -- and adding the And lemmas makes solve_by_elim's search superlinear in the
+       -- number of context facts (measured: hangs at N=48). Scales linearly here.
        | solve_by_elim [$t:term]
+       -- last-resort fallbacks (kept so nothing that compiled under aesop regresses)
        | (apply $t <;> (first | assumption | aesop))
        | aesop))
 
@@ -84,9 +91,27 @@ macro "conclude_def " t:ident : tactic =>
       -- fast path: the fact is already a hypothesis — extract it by unfolding
       -- everywhere + assumption. Avoids aesop reconstructing huge defs (e.g. Par).
       | (unfold $t at *; (try spliter); first | done | assumption)
-      -- forward: construct the unfolded goal
+      -- forward BUILD (bounded, type-directed). The goal is an existential over
+      -- point witnesses whose body is a conjunction of facts already in context.
+      -- Supply the witnesses as metavars `_` and let the body's `assumption`s pin
+      -- them by unification — the holistic `exact ⟨…⟩` defers the metavars, while
+      -- `refine`/`apply` would commit them too early and pick the wrong points.
+      -- `assumption`-before-`And.intro` makes `nCol`-shaped leaves match WHOLE
+      -- instead of shattering into their De Morgan conjuncts. The witness-count
+      -- ladder (0..6) covers every GeoCoq def (Meet/TS=1, CongA=4, Par=5, …).
+      -- Replaces the unbounded `aesop` that exploded reconstructing these defs;
+      -- aesop kept only as a last-resort fallback.
       | (unfold $t; (try remove_double_neg);
-         first | done | assumption | (repeat' apply And.intro) <;> assumption | aesop)
+         first
+           | done | assumption
+           | ((repeat' (first | assumption | apply And.intro)); done)
+           | exact ⟨_, by repeat' (first | assumption | apply And.intro)⟩
+           | exact ⟨_, _, by repeat' (first | assumption | apply And.intro)⟩
+           | exact ⟨_, _, _, by repeat' (first | assumption | apply And.intro)⟩
+           | exact ⟨_, _, _, _, by repeat' (first | assumption | apply And.intro)⟩
+           | exact ⟨_, _, _, _, _, by repeat' (first | assumption | apply And.intro)⟩
+           | exact ⟨_, _, _, _, _, _, by repeat' (first | assumption | apply And.intro)⟩
+           | aesop)
       -- backward: search after unfolding into the context
       | (unfold $t at *; (try spliter); (try remove_double_neg);
          first | done | assumption | tauto | aesop))
@@ -99,7 +124,21 @@ macro "forward_using " t:term : tactic =>
      first
        | done
        | assumption
-       | solve_by_elim [$t:term]
+       -- BOUNDED path: forward-apply `t` to a hypothesis and PROJECT the needed
+       -- permutation out of the resulting conjunction. This is TYPE-DIRECTED: the
+       -- goal's permutation unifies with one projection, which pins `t`'s point
+       -- arguments, so `(by assumption)` finds the exact source hypothesis even
+       -- among many similarly-shaped facts. Bounded (no search) and scales flat in
+       -- the number of context facts — unlike `solve_by_elim [t, And.left, ...]`,
+       -- whose backtracking over And-projections is superlinear (measured).
+       -- Covers the 5-permutation reorder lemmas (collinearorder, NCorder, …).
+       | exact ($t _ _ _ (by assumption)).1
+       | exact ($t _ _ _ (by assumption)).2.1
+       | exact ($t _ _ _ (by assumption)).2.2.1
+       | exact ($t _ _ _ (by assumption)).2.2.2.1
+       | exact ($t _ _ _ (by assumption)).2.2.2.2
+       -- last-resort fallbacks (kept for no-regression / non-3-point lemmas)
+       | solve_by_elim [$t:term, And.left, And.right]
        | aesop (add unsafe 90% forward ($t))
        | aesop))
 
