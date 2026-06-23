@@ -1,16 +1,32 @@
-theorem exists_not_all (P : Nat → Prop) : (∃ n, P n) → ¬ (∀ n, ¬ P n) := by
-  intro h_exists_P -- Assume there exists an n such that P n
-  intro h_forall_not_P -- Assume for all n, P n is false
-  
-  -- From 'h_exists_P', destructure it to get a specific n0 and a proof that P n0 holds
-  cases h_exists_P with n0 h_P_n0
-  
-  -- We have 'n0 : Nat' and 'h_P_n0 : P n0'
-  -- We also have 'h_forall_not_P : ∀ (n : Nat), ¬P n'
-  
-  -- Apply 'h_forall_not_P' to our specific 'n0' to get a proof that ¬P n0 holds
-  let h_not_P_n0 := h_forall_not_P n0
-  
-  -- Now we have 'h_P_n0 : P n0' and 'h_not_P_n0 : ¬P n0' (which is P n0 → False)
-  -- Applying 'h_not_P_n0' to 'h_P_n0' yields 'False', which is what we need for a contradiction.
-  exact h_not_P_n0 h_P_n0
+-- Translated from theories/Axioms/rocq_demo.v via rocq-mcp + lean-lsp-mcp.
+
+theorem add_0_r : ∀ n : Nat, n + 0 = n := by
+  intro n; rfl
+
+theorem add_comm : ∀ n m : Nat, n + m = m + n := by
+  intro n m
+  induction n with
+  | zero => simp
+  | succ k ih => rw [Nat.succ_add, ih, ← Nat.add_succ]
+
+theorem length_app : ∀ (A : Type) (l l' : List A),
+    (l ++ l').length = l.length + l'.length := by
+  intro A l l'
+  induction l with
+  | nil => simp
+  | cons x xs ih => simp [List.cons_append, List.length_cons, ih, Nat.succ_add]
+
+theorem de_morgan : ∀ P Q : Prop, ¬ (P ∨ Q) ↔ ¬ P ∧ ¬ Q := by
+  intro P Q
+  constructor
+  · intro h
+    exact ⟨fun hp => h (Or.inl hp), fun hq => h (Or.inr hq)⟩
+  · intro ⟨hnp, hnq⟩ h
+    cases h with
+    | inl hp => exact hnp hp
+    | inr hq => exact hnq hq
+
+theorem exists_not_all : ∀ P : Nat → Prop,
+    (∃ n : Nat, P n) → ¬ (∀ n : Nat, ¬ P n) := by
+  intro P ⟨n, hn⟩ hall
+  exact hall n hn
