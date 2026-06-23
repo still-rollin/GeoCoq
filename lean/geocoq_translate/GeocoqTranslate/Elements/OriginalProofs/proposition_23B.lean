@@ -109,120 +109,120 @@ theorem proposition_23B :
   have : CongA J H F J H S := by conclude lemma_Euclid4
   have : S = S := by conclude cn_equalityreflexive
   have : H ≠ S := by forward_using lemma_angledistinct
-  sorry -- TODO: assert (CongA F A G S A G).
-  rcases (show A = H ∨ A ≠ H by first | assumption | exact Classical.em _ | tauto | aesop) with c1 | c2
-  · have : Per J A F := by conclude cn_equalitysub
-    have : Per J A S := by conclude cn_equalitysub
-    have : Col A B G := by conclude lemma_rayimpliescollinear
-    have : Col J H G := by conclude lemma_collinear5
-    have : Col J A G := by conclude cn_equalitysub
-    have : G ≠ A := by conclude lemma_inequalitysymmetric
-    have : Per G A F := by conclude lemma_collinearright
-    have : Per F A G := by conclude lemma_8_2
-    have : Per G A S := by conclude lemma_collinearright
-    have : Per S A G := by conclude lemma_8_2
-    have : CongA F A G S A G := by conclude lemma_Euclid4
-    close
-  · have : Cong F H S H := by forward_using lemma_doublereverse
-    have : Per A H F := by conclude lemma_collinearright
-    have : Per F H A := by conclude lemma_8_2
-    have : Per J H S := by conclude lemma_8_2
-    have : Per A H S := by conclude lemma_collinearright
-    have : CongA A H F A H S := by conclude lemma_Euclid4
-    have : nCol F H A := by conclude lemma_rightangleNC
-    have : CongA F H A A H F := by conclude lemma_ABCequalsCBA
-    have : CongA F H A A H S := by conclude lemma_equalanglestransitive
-    have : nCol A H S := by conclude lemma_rightangleNC
-    have : CongA A H S S H A := by conclude lemma_ABCequalsCBA
-    have : CongA F H A S H A := by conclude lemma_equalanglestransitive
-    have : Cong H F H S := by forward_using lemma_congruenceflip
-    have : Cong H A H A := by conclude cn_congruencereflexive
-    have : ¬ Col S H A := by
-        intro h
-        have : Col A H S := by forward_using lemma_collinearorder
-        contradict
-    have : (Cong F A S A ∧ CongA H F A H S A ∧ CongA H A F H A S) := by conclude proposition_04
-    have : ¬ Col F A H := by
-        intro h
-        have : Col F H A := by forward_using lemma_collinearorder
-        contradict
-    have : CongA F A H H A F := by conclude lemma_ABCequalsCBA
-    have : ¬ Col H A S := by
-        intro h
-        have : Col S H A := by forward_using lemma_collinearorder
-        contradict
-    have : CongA H A S S A H := by conclude lemma_ABCequalsCBA
-    have : CongA F A H H A S := by conclude lemma_equalanglestransitive
-    have : CongA F A H S A H := by conclude lemma_equalanglestransitive
-    have : A = A := by conclude cn_equalityreflexive
-    have : Col A B A := by conclude_def Col
-    have : Col A B G := by conclude lemma_rayimpliescollinear
-    sorry -- TODO: assert (Col G H A).
-    rcases (show G = H ∨ G ≠ H by first | assumption | exact Classical.em _ | tauto | aesop) with c1 | c2
-    · have : Col G H A := by conclude_def Col
-      close
-    · have : Col G H A := by conclude lemma_collinear5
-      close
-    have : F ≠ A := by forward_using lemma_angledistinct
-    have : A ≠ F := by conclude lemma_inequalitysymmetric
-    have : Out A F F := by conclude lemma_ray4
-    have : S ≠ A := by forward_using lemma_angledistinct
-    have : A ≠ S := by conclude lemma_inequalitysymmetric
-    have : Out A S S := by conclude lemma_ray4
-    have : (G = H ∨ G = A ∨ H = A ∨ BetS H G A ∨ BetS G H A ∨ BetS G A H) := by conclude_def Col
-    sorry -- TODO: assert (CongA F A G S A G).
-    rcases (show G = H ∨ G = A ∨ H = A ∨ BetS H G A ∨ BetS G H A ∨ BetS G A H by first | assumption | exact Classical.em _ | tauto | aesop) with c1 | c2 | c3 | c4 | c5 | c6
-    · have : ¬ ¬ CongA F A G S A G := by
-          intro h
-          have : CongA F A G S A G := by conclude cn_equalitysub
-          contradict
-      close
-    · have : ¬ ¬ CongA F A G S A G := by
-          intro h
-          have : A ≠ G := by conclude lemma_raystrict
-          have : G ≠ A := by conclude lemma_inequalitysymmetric
-          contradict
-      close
-    · have : ¬ ¬ CongA F A G S A G := by
-          intro h
-          have : H ≠ A := by conclude lemma_inequalitysymmetric
-          contradict
-      close
-    · have : BetS A G H := by conclude axiom_betweennesssymmetry
-      have : Out A H G := by conclude lemma_ray4
-      have : CongA F A H F A H := by conclude lemma_equalanglesreflexive
-      have : ¬ Col S A H := by
-          intro h
-          have : Col S H A := by forward_using lemma_collinearorder
-          contradict
-      have : CongA S A H S A H := by conclude lemma_equalanglesreflexive
-      have : CongA F A H F A G := by conclude lemma_equalangleshelper
-      have : CongA S A H S A G := by conclude lemma_equalangleshelper
-      have : CongA F A G F A H := by conclude lemma_equalanglessymmetric
-      have : CongA F A G S A H := by conclude lemma_equalanglestransitive
-      have : CongA F A G S A G := by conclude lemma_equalanglestransitive
-      close
-    · have : BetS A H G := by conclude axiom_betweennesssymmetry
-      have : Out A H G := by conclude lemma_ray4
-      have : CongA F A H F A H := by conclude lemma_equalanglesreflexive
-      have : ¬ Col S A H := by
-          intro h
-          have : Col S H A := by forward_using lemma_collinearorder
-          contradict
-      have : CongA S A H S A H := by conclude lemma_equalanglesreflexive
-      have : CongA F A H F A G := by conclude lemma_equalangleshelper
-      have : CongA S A H S A G := by conclude lemma_equalangleshelper
-      have : CongA F A G F A H := by conclude lemma_equalanglessymmetric
-      have : CongA F A G S A H := by conclude lemma_equalanglestransitive
-      have : CongA F A G S A G := by conclude lemma_equalanglestransitive
-      close
-    · have : BetS H A G := by conclude axiom_betweennesssymmetry
-      have : Supp H A F F G := by conclude_def Supp
-      have : Supp H A S S G := by conclude_def Supp
-      have : CongA H A F H A S := by conclude lemma_equalanglesflip
-      have : CongA F A G S A G := by conclude lemma_supplements
-      close
-    close
+  have : CongA F A G S A G := by
+      rcases (show A = H ∨ A ≠ H by first | assumption | exact Classical.em _ | tauto | aesop) with c1 | c2
+      · have : Per J A F := by conclude cn_equalitysub
+        have : Per J A S := by conclude cn_equalitysub
+        have : Col A B G := by conclude lemma_rayimpliescollinear
+        have : Col J H G := by conclude lemma_collinear5
+        have : Col J A G := by conclude cn_equalitysub
+        have : G ≠ A := by conclude lemma_inequalitysymmetric
+        have : Per G A F := by conclude lemma_collinearright
+        have : Per F A G := by conclude lemma_8_2
+        have : Per G A S := by conclude lemma_collinearright
+        have : Per S A G := by conclude lemma_8_2
+        have : CongA F A G S A G := by conclude lemma_Euclid4
+        close
+      · have : Cong F H S H := by forward_using lemma_doublereverse
+        have : Per A H F := by conclude lemma_collinearright
+        have : Per F H A := by conclude lemma_8_2
+        have : Per J H S := by conclude lemma_8_2
+        have : Per A H S := by conclude lemma_collinearright
+        have : CongA A H F A H S := by conclude lemma_Euclid4
+        have : nCol F H A := by conclude lemma_rightangleNC
+        have : CongA F H A A H F := by conclude lemma_ABCequalsCBA
+        have : CongA F H A A H S := by conclude lemma_equalanglestransitive
+        have : nCol A H S := by conclude lemma_rightangleNC
+        have : CongA A H S S H A := by conclude lemma_ABCequalsCBA
+        have : CongA F H A S H A := by conclude lemma_equalanglestransitive
+        have : Cong H F H S := by forward_using lemma_congruenceflip
+        have : Cong H A H A := by conclude cn_congruencereflexive
+        have : ¬ Col S H A := by
+            intro h
+            have : Col A H S := by forward_using lemma_collinearorder
+            contradict
+        have : (Cong F A S A ∧ CongA H F A H S A ∧ CongA H A F H A S) := by conclude proposition_04
+        have : ¬ Col F A H := by
+            intro h
+            have : Col F H A := by forward_using lemma_collinearorder
+            contradict
+        have : CongA F A H H A F := by conclude lemma_ABCequalsCBA
+        have : ¬ Col H A S := by
+            intro h
+            have : Col S H A := by forward_using lemma_collinearorder
+            contradict
+        have : CongA H A S S A H := by conclude lemma_ABCequalsCBA
+        have : CongA F A H H A S := by conclude lemma_equalanglestransitive
+        have : CongA F A H S A H := by conclude lemma_equalanglestransitive
+        have : A = A := by conclude cn_equalityreflexive
+        have : Col A B A := by conclude_def Col
+        have : Col A B G := by conclude lemma_rayimpliescollinear
+        have : Col G H A := by
+            rcases (show G = H ∨ G ≠ H by first | assumption | exact Classical.em _ | tauto | aesop) with c1 | c2
+            · have : Col G H A := by conclude_def Col
+              close
+            · have : Col G H A := by conclude lemma_collinear5
+              close
+        have : F ≠ A := by forward_using lemma_angledistinct
+        have : A ≠ F := by conclude lemma_inequalitysymmetric
+        have : Out A F F := by conclude lemma_ray4
+        have : S ≠ A := by forward_using lemma_angledistinct
+        have : A ≠ S := by conclude lemma_inequalitysymmetric
+        have : Out A S S := by conclude lemma_ray4
+        have : (G = H ∨ G = A ∨ H = A ∨ BetS H G A ∨ BetS G H A ∨ BetS G A H) := by conclude_def Col
+        have : CongA F A G S A G := by
+            rcases (show G = H ∨ G = A ∨ H = A ∨ BetS H G A ∨ BetS G H A ∨ BetS G A H by first | assumption | exact Classical.em _ | tauto | aesop) with c1 | c2 | c3 | c4 | c5 | c6
+            · have : ¬ ¬ CongA F A G S A G := by
+                  intro h
+                  have : CongA F A G S A G := by conclude cn_equalitysub
+                  contradict
+              close
+            · have : ¬ ¬ CongA F A G S A G := by
+                  intro h
+                  have : A ≠ G := by conclude lemma_raystrict
+                  have : G ≠ A := by conclude lemma_inequalitysymmetric
+                  contradict
+              close
+            · have : ¬ ¬ CongA F A G S A G := by
+                  intro h
+                  have : H ≠ A := by conclude lemma_inequalitysymmetric
+                  contradict
+              close
+            · have : BetS A G H := by conclude axiom_betweennesssymmetry
+              have : Out A H G := by conclude lemma_ray4
+              have : CongA F A H F A H := by conclude lemma_equalanglesreflexive
+              have : ¬ Col S A H := by
+                  intro h
+                  have : Col S H A := by forward_using lemma_collinearorder
+                  contradict
+              have : CongA S A H S A H := by conclude lemma_equalanglesreflexive
+              have : CongA F A H F A G := by conclude lemma_equalangleshelper
+              have : CongA S A H S A G := by conclude lemma_equalangleshelper
+              have : CongA F A G F A H := by conclude lemma_equalanglessymmetric
+              have : CongA F A G S A H := by conclude lemma_equalanglestransitive
+              have : CongA F A G S A G := by conclude lemma_equalanglestransitive
+              close
+            · have : BetS A H G := by conclude axiom_betweennesssymmetry
+              have : Out A H G := by conclude lemma_ray4
+              have : CongA F A H F A H := by conclude lemma_equalanglesreflexive
+              have : ¬ Col S A H := by
+                  intro h
+                  have : Col S H A := by forward_using lemma_collinearorder
+                  contradict
+              have : CongA S A H S A H := by conclude lemma_equalanglesreflexive
+              have : CongA F A H F A G := by conclude lemma_equalangleshelper
+              have : CongA S A H S A G := by conclude lemma_equalangleshelper
+              have : CongA F A G F A H := by conclude lemma_equalanglessymmetric
+              have : CongA F A G S A H := by conclude lemma_equalanglestransitive
+              have : CongA F A G S A G := by conclude lemma_equalanglestransitive
+              close
+            · have : BetS H A G := by conclude axiom_betweennesssymmetry
+              have : Supp H A F F G := by conclude_def Supp
+              have : Supp H A S S G := by conclude_def Supp
+              have : CongA H A F H A S := by conclude lemma_equalanglesflip
+              have : CongA F A G S A G := by conclude lemma_supplements
+              close
+        close
   have : CongA S A G F A G := by conclude lemma_equalanglessymmetric
   have : CongA S A G D C E := by conclude lemma_equalanglestransitive
   have : Out H S Q := by conclude lemma_ray5

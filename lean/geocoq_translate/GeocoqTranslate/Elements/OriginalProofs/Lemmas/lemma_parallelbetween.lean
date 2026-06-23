@@ -38,50 +38,50 @@ theorem lemma_parallelbetween :
   have : nCol M K H := by conclude lemma_NChelper
   have : nCol H M K := by forward_using lemma_NCorder
   have : (L = M ∨ L = K ∨ M = K ∨ BetS M L K ∨ BetS L M K ∨ BetS L K M) := by conclude_def Col
-  sorry -- TODO: assert (BetS L M K).
-  rcases (show L = M ∨ L = K ∨ M = K ∨ BetS M L K ∨ BetS L M K ∨ BetS L K M by first | assumption | exact Classical.em _ | tauto | aesop) with c1 | c2 | c3 | c4 | c5 | c6
-  · have : ¬ ¬ BetS L M K := by
-        intro h
-        have : Col M B M := by conclude_def Col
-        have : Col H L L := by conclude_def Col
-        have : Col H L M := by conclude cn_equalitysub
-        have : Meet M B H L := by conclude_def Meet
-        contradict
-    close
-  · have : ¬ ¬ BetS L M K := by
-        intro h
-        have : Col H B L := by conclude cn_equalitysub
-        have : Col H L B := by forward_using lemma_collinearorder
-        have : Col M B B := by conclude_def Col
-        have : Meet M B H L := by conclude_def Meet
-        contradict
-    close
-  · have : ¬ ¬ BetS L M K := by
-        intro h
-        contradict
-    close
-  · have : ¬ ¬ BetS L M K := by
-        intro h
-        have : nCol H K M := by forward_using lemma_NCorder
-        obtain ⟨E, _, _⟩ : ∃ E, (BetS H E L ∧ BetS M E B) := by conclude postulate_Pasch_inner
-        have : Col H E L := by conclude_def Col
-        have : Col M E B := by conclude_def Col
-        have : Col H L E := by forward_using lemma_collinearorder
-        have : Col M B E := by forward_using lemma_collinearorder
-        have : Meet M B H L := by conclude_def Meet
-        contradict
-    close
-  · close
-  · have : ¬ ¬ BetS L M K := by
-        intro h
-        have : BetS M K L := by conclude axiom_betweennesssymmetry
-        obtain ⟨E, _, _⟩ : ∃ E, (BetS H E L ∧ BetS M B E) := by conclude postulate_Pasch_outer
-        have : Col H E L := by conclude_def Col
-        have : Col M B E := by conclude_def Col
-        have : Col H L E := by forward_using lemma_collinearorder
-        have : Meet M B H L := by conclude_def Meet
-        contradict
-    close
+  have : BetS L M K := by
+      rcases (show L = M ∨ L = K ∨ M = K ∨ BetS M L K ∨ BetS L M K ∨ BetS L K M by first | assumption | exact Classical.em _ | tauto | aesop) with c1 | c2 | c3 | c4 | c5 | c6
+      · have : ¬ ¬ BetS L M K := by
+            intro h
+            have : Col M B M := by conclude_def Col
+            have : Col H L L := by conclude_def Col
+            have : Col H L M := by conclude cn_equalitysub
+            have : Meet M B H L := by conclude_def Meet
+            contradict
+        close
+      · have : ¬ ¬ BetS L M K := by
+            intro h
+            have : Col H B L := by conclude cn_equalitysub
+            have : Col H L B := by forward_using lemma_collinearorder
+            have : Col M B B := by conclude_def Col
+            have : Meet M B H L := by conclude_def Meet
+            contradict
+        close
+      · have : ¬ ¬ BetS L M K := by
+            intro h
+            contradict
+        close
+      · have : ¬ ¬ BetS L M K := by
+            intro h
+            have : nCol H K M := by forward_using lemma_NCorder
+            obtain ⟨E, _, _⟩ : ∃ E, (BetS H E L ∧ BetS M E B) := by conclude postulate_Pasch_inner
+            have : Col H E L := by conclude_def Col
+            have : Col M E B := by conclude_def Col
+            have : Col H L E := by forward_using lemma_collinearorder
+            have : Col M B E := by forward_using lemma_collinearorder
+            have : Meet M B H L := by conclude_def Meet
+            contradict
+        close
+      · close
+      · have : ¬ ¬ BetS L M K := by
+            intro h
+            have : BetS M K L := by conclude axiom_betweennesssymmetry
+            obtain ⟨E, _, _⟩ : ∃ E, (BetS H E L ∧ BetS M B E) := by conclude postulate_Pasch_outer
+            have : Col H E L := by conclude_def Col
+            have : Col M B E := by conclude_def Col
+            have : Col H L E := by forward_using lemma_collinearorder
+            have : Meet M B H L := by conclude_def Meet
+            contradict
+        close
   close
 
 end GeocoqTranslate.Elements

@@ -19,21 +19,21 @@ theorem proposition_41 :
   have : Par A B C D := by conclude_def PG
   have : nCol A B C := by forward_using lemma_parallelNC
   have : Triangle A B C := by conclude_def Triangle
-  sorry -- TODO: assert (ET A B C E B C).
-  rcases (show A = E ∨ A ≠ E by first | assumption | exact Classical.em _ | tauto | aesop) with c1 | c2
-  · have : ET A B C A B C := by conclude lemma_ETreflexive
-    have : ET A B C E B C := by conclude cn_equalitysub
-    close
-  · have : Par A D B C := by conclude_def PG
-    have : Col D A E := by forward_using lemma_collinearorder
-    have : Par B C A D := by conclude lemma_parallelsymmetric
-    have : Par B C D A := by forward_using lemma_parallelflip
-    have : E ≠ A := by conclude lemma_inequalitysymmetric
-    have : Par B C E A := by conclude lemma_collinearparallel
-    have : Par B C A E := by forward_using lemma_parallelflip
-    have : Par A E B C := by conclude lemma_parallelsymmetric
-    have : ET A B C E B C := by conclude proposition_37
-    close
+  have : ET A B C E B C := by
+      rcases (show A = E ∨ A ≠ E by first | assumption | exact Classical.em _ | tauto | aesop) with c1 | c2
+      · have : ET A B C A B C := by conclude lemma_ETreflexive
+        have : ET A B C E B C := by conclude cn_equalitysub
+        close
+      · have : Par A D B C := by conclude_def PG
+        have : Col D A E := by forward_using lemma_collinearorder
+        have : Par B C A D := by conclude lemma_parallelsymmetric
+        have : Par B C D A := by forward_using lemma_parallelflip
+        have : E ≠ A := by conclude lemma_inequalitysymmetric
+        have : Par B C E A := by conclude lemma_collinearparallel
+        have : Par B C A E := by forward_using lemma_parallelflip
+        have : Par A E B C := by conclude lemma_parallelsymmetric
+        have : ET A B C E B C := by conclude proposition_37
+        close
   close
 
 end GeocoqTranslate.Elements

@@ -42,49 +42,49 @@ theorem lemma_supplements :
   have : Cong U B u b := by forward_using lemma_congruenceflip
   have : Cong V W v w := by conclude axiom_5_line
   have : (BetS B U A ∨ A = U ∨ BetS B A U) := by conclude lemma_ray1
-  sorry -- TODO: assert (BetS A B W).
-  rcases (show BetS B U A ∨ A = U ∨ BetS B A U by first | assumption | exact Classical.em _ | tauto | aesop) with c1 | c2 | c3
-  · have : BetS A U B := by conclude axiom_betweennesssymmetry
-    have : BetS A B W := by conclude lemma_3_7a
-    close
-  · have : BetS A B W := by conclude cn_equalitysub
-    close
-  · have : BetS U A B := by conclude axiom_betweennesssymmetry
-    have : BetS A B W := by conclude lemma_3_6a
-    close
+  have : BetS A B W := by
+      rcases (show BetS B U A ∨ A = U ∨ BetS B A U by first | assumption | exact Classical.em _ | tauto | aesop) with c1 | c2 | c3
+      · have : BetS A U B := by conclude axiom_betweennesssymmetry
+        have : BetS A B W := by conclude lemma_3_7a
+        close
+      · have : BetS A B W := by conclude cn_equalitysub
+        close
+      · have : BetS U A B := by conclude axiom_betweennesssymmetry
+        have : BetS A B W := by conclude lemma_3_6a
+        close
   have : Out B F W := by conclude_def Out
   have : (BetS B W F ∨ F = W ∨ BetS B F W) := by conclude lemma_ray1
-  sorry -- TODO: assert (BetS U B F).
-  rcases (show BetS B W F ∨ F = W ∨ BetS B F W by first | assumption | exact Classical.em _ | tauto | aesop) with c1 | c2 | c3
-  · have : BetS U B F := by conclude lemma_3_7b
-    close
-  · have : BetS U B F := by conclude cn_equalitysub
-    close
-  · have : BetS U B F := by conclude axiom_innertransitivity
-    close
+  have : BetS U B F := by
+      rcases (show BetS B W F ∨ F = W ∨ BetS B F W by first | assumption | exact Classical.em _ | tauto | aesop) with c1 | c2 | c3
+      · have : BetS U B F := by conclude lemma_3_7b
+        close
+      · have : BetS U B F := by conclude cn_equalitysub
+        close
+      · have : BetS U B F := by conclude axiom_innertransitivity
+        close
   have : B ≠ F := by forward_using lemma_betweennotequal
   have : Out B F W := by conclude_def Out
   have : (BetS b u a ∨ a = u ∨ BetS b a u) := by conclude lemma_ray1
-  sorry -- TODO: assert (BetS a b w).
-  rcases (show BetS b u a ∨ a = u ∨ BetS b a u by first | assumption | exact Classical.em _ | tauto | aesop) with c1 | c2 | c3
-  · have : BetS a u b := by conclude axiom_betweennesssymmetry
-    have : BetS a b w := by conclude lemma_3_7a
-    close
-  · have : BetS a b w := by conclude cn_equalitysub
-    close
-  · have : BetS u a b := by conclude axiom_betweennesssymmetry
-    have : BetS a b w := by conclude lemma_3_6a
-    close
+  have : BetS a b w := by
+      rcases (show BetS b u a ∨ a = u ∨ BetS b a u by first | assumption | exact Classical.em _ | tauto | aesop) with c1 | c2 | c3
+      · have : BetS a u b := by conclude axiom_betweennesssymmetry
+        have : BetS a b w := by conclude lemma_3_7a
+        close
+      · have : BetS a b w := by conclude cn_equalitysub
+        close
+      · have : BetS u a b := by conclude axiom_betweennesssymmetry
+        have : BetS a b w := by conclude lemma_3_6a
+        close
   have : Out b f w := by conclude_def Out
   have : (BetS b w f ∨ f = w ∨ BetS b f w) := by conclude lemma_ray1
-  sorry -- TODO: assert (BetS u b f).
-  rcases (show BetS b w f ∨ f = w ∨ BetS b f w by first | assumption | exact Classical.em _ | tauto | aesop) with c1 | c2 | c3
-  · have : BetS u b f := by conclude lemma_3_7b
-    close
-  · have : BetS u b f := by conclude cn_equalitysub
-    close
-  · have : BetS u b f := by conclude axiom_innertransitivity
-    close
+  have : BetS u b f := by
+      rcases (show BetS b w f ∨ f = w ∨ BetS b f w by first | assumption | exact Classical.em _ | tauto | aesop) with c1 | c2 | c3
+      · have : BetS u b f := by conclude lemma_3_7b
+        close
+      · have : BetS u b f := by conclude cn_equalitysub
+        close
+      · have : BetS u b f := by conclude axiom_innertransitivity
+        close
   have : b ≠ f := by forward_using lemma_betweennotequal
   have : Out b f w := by conclude_def Out
   have : b ≠ f := by forward_using lemma_betweennotequal

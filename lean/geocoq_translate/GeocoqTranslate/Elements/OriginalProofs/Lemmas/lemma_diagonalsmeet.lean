@@ -70,13 +70,13 @@ theorem lemma_diagonalsmeet :
       obtain ⟨R, _, _, _, _⟩ : ∃ R, (E ≠ A ∧ S ≠ B ∧ Col E A R ∧ Col S B R) := by conclude_def Meet
       have : Col B C S := by conclude_def Col
       have : Col S B C := by forward_using lemma_collinearorder
-      sorry -- TODO: assert (Col B C R).
-      rcases (show B = R ∨ B ≠ R by first | assumption | exact Classical.em _ | tauto | aesop) with c1 | c2
-      · have : Col B C R := by conclude_def Col
-        close
-      · have : Col B R C := by conclude lemma_collinear4
-        have : Col B C R := by forward_using lemma_collinearorder
-        close
+      have : Col B C R := by
+          rcases (show B = R ∨ B ≠ R by first | assumption | exact Classical.em _ | tauto | aesop) with c1 | c2
+          · have : Col B C R := by conclude_def Col
+            close
+          · have : Col B R C := by conclude lemma_collinear4
+            have : Col B C R := by forward_using lemma_collinearorder
+            close
       have : Col A D E := by conclude_def Col
       have : Col E A D := by forward_using lemma_collinearorder
       have : A ≠ D := by forward_using lemma_betweennotequal

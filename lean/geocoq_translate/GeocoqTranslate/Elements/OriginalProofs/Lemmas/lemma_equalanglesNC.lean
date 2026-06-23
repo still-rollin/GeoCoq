@@ -41,13 +41,13 @@ theorem lemma_equalanglesNC :
       have : B ≠ U := by conclude lemma_raystrict
       have : Col U V A := by conclude lemma_collinear4
       have : Col U V B := by forward_using lemma_collinearorder
-      sorry -- TODO: assert (Col V A B).
-      rcases (show U = V ∨ U ≠ V by first | assumption | exact Classical.em _ | tauto | aesop) with c1 | c2
-      · have : Col B A V := by conclude cn_equalitysub
-        have : Col V A B := by forward_using lemma_collinearorder
-        close
-      · have : Col V A B := by conclude lemma_collinear4
-        close
+      have : Col V A B := by
+          rcases (show U = V ∨ U ≠ V by first | assumption | exact Classical.em _ | tauto | aesop) with c1 | c2
+          · have : Col B A V := by conclude cn_equalitysub
+            have : Col V A B := by forward_using lemma_collinearorder
+            close
+          · have : Col V A B := by conclude lemma_collinear4
+            close
       have : Col V B A := by forward_using lemma_collinearorder
       have : Col V B C := by forward_using lemma_collinearorder
       have : B ≠ V := by conclude lemma_raystrict

@@ -24,16 +24,16 @@ theorem lemma_ondiameter :
       have : F = N := by conclude axiom_connectivity
       contradict
   have : Cong F N F N := by conclude cn_congruencereflexive
-  sorry -- TODO: assert (InCirc N K).
-  rcases (show BetS D N F ∨ BetS F N M ∨ F = N by first | assumption | exact Classical.em _ | tauto | aesop) with c1 | c2 | c3
-  · have : BetS F N D := by conclude axiom_betweennesssymmetry
-    have : InCirc N K := by conclude_def InCirc
-    close
-  · have : InCirc N K := by conclude_def InCirc
-    close
-  · have : N = F := by conclude lemma_equalitysymmetric
-    have : InCirc N K := by conclude_def InCirc
-    close
+  have : InCirc N K := by
+      rcases (show BetS D N F ∨ BetS F N M ∨ F = N by first | assumption | exact Classical.em _ | tauto | aesop) with c1 | c2 | c3
+      · have : BetS F N D := by conclude axiom_betweennesssymmetry
+        have : InCirc N K := by conclude_def InCirc
+        close
+      · have : InCirc N K := by conclude_def InCirc
+        close
+      · have : N = F := by conclude lemma_equalitysymmetric
+        have : InCirc N K := by conclude_def InCirc
+        close
   close
 
 end GeocoqTranslate.Elements

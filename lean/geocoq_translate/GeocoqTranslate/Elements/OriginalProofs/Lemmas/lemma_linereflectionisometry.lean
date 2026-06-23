@@ -112,50 +112,50 @@ theorem lemma_linereflectionisometry :
   have : Cong E A A C := by forward_using lemma_doublereverse
   have : BetS E A C := by conclude axiom_betweennesssymmetry
   have : Midpoint E A C := by conclude_def Midpoint
-  sorry -- TODO: assert (Cong C D E F).
-  rcases (show E ≠ Q ∨ E = Q by first | assumption | exact Classical.em _ | tauto | aesop) with c1 | c2
-  · have : Cong E Q C R := by conclude lemma_pointreflectionisometry
-    have : Cong Q E R C := by forward_using lemma_congruenceflip
-    have : Cong E F C D := by conclude axiom_5_line
-    have : Cong C D E F := by conclude lemma_congruencesymmetric
-    close
-  · have : Midpoint F M E := by conclude cn_equalitysub
-    have : F ≠ B := by forward_using lemma_betweennotequal
-    have : F ≠ D := by forward_using lemma_betweennotequal
-    have : B ≠ D := by forward_using lemma_betweennotequal
-    have : Cong F B E A := by conclude lemma_pointreflectionisometry
-    have : Cong B D A R := by conclude lemma_pointreflectionisometry
-    have : Cong F D E R := by conclude lemma_pointreflectionisometry
-    have : BetS E A R := by conclude lemma_betweennesspreserved
-    have : BetS E A C := by conclude axiom_betweennesssymmetry
-    have : Cong A C A C := by conclude cn_congruencereflexive
-    have : Cong A R B D := by conclude lemma_congruencesymmetric
-    have : Cong A R B F := by conclude lemma_congruencetransitive
-    have : Cong B F A E := by forward_using lemma_congruenceflip
-    have : Cong A R A E := by conclude lemma_congruencetransitive
-    have : Cong A E A C := by conclude lemma_congruencesymmetric
-    have : Cong A R A C := by conclude lemma_congruencetransitive
-    have : R = C := by conclude lemma_extensionunique
-    have : Col D B F := by conclude_def Col
-    have : B ≠ F := by forward_using lemma_betweennotequal
-    have : F ≠ B := by conclude lemma_inequalitysymmetric
-    have : Per F B M := by conclude lemma_collinearright
-    have : Cong F B B D := by forward_using lemma_congruenceflip
-    have : Cong F M D M := by conclude lemma_rightreverse
-    have : Cong F M M D := by forward_using lemma_congruenceflip
-    have : Cong F M M R := by conclude lemma_congruencetransitive
-    have : Cong F M M C := by conclude cn_equalitysub
-    have : Cong D M F M := by conclude lemma_congruencesymmetric
-    have : Cong F M M E := by conclude cn_equalitysub
-    have : Cong D M M E := by conclude lemma_congruencetransitive
-    have : Cong M C F M := by conclude lemma_congruencesymmetric
-    have : Cong C M F M := by forward_using lemma_congruenceflip
-    have : Cong M D M E := by forward_using lemma_congruenceflip
-    have : BetS C M D := by conclude cn_equalitysub
-    have : BetS F M E := by conclude cn_equalitysub
-    have : Cong C D F E := by conclude cn_sumofparts
-    have : Cong C D E F := by forward_using lemma_congruenceflip
-    close
+  have : Cong C D E F := by
+      rcases (show E ≠ Q ∨ E = Q by first | assumption | exact Classical.em _ | tauto | aesop) with c1 | c2
+      · have : Cong E Q C R := by conclude lemma_pointreflectionisometry
+        have : Cong Q E R C := by forward_using lemma_congruenceflip
+        have : Cong E F C D := by conclude axiom_5_line
+        have : Cong C D E F := by conclude lemma_congruencesymmetric
+        close
+      · have : Midpoint F M E := by conclude cn_equalitysub
+        have : F ≠ B := by forward_using lemma_betweennotequal
+        have : F ≠ D := by forward_using lemma_betweennotequal
+        have : B ≠ D := by forward_using lemma_betweennotequal
+        have : Cong F B E A := by conclude lemma_pointreflectionisometry
+        have : Cong B D A R := by conclude lemma_pointreflectionisometry
+        have : Cong F D E R := by conclude lemma_pointreflectionisometry
+        have : BetS E A R := by conclude lemma_betweennesspreserved
+        have : BetS E A C := by conclude axiom_betweennesssymmetry
+        have : Cong A C A C := by conclude cn_congruencereflexive
+        have : Cong A R B D := by conclude lemma_congruencesymmetric
+        have : Cong A R B F := by conclude lemma_congruencetransitive
+        have : Cong B F A E := by forward_using lemma_congruenceflip
+        have : Cong A R A E := by conclude lemma_congruencetransitive
+        have : Cong A E A C := by conclude lemma_congruencesymmetric
+        have : Cong A R A C := by conclude lemma_congruencetransitive
+        have : R = C := by conclude lemma_extensionunique
+        have : Col D B F := by conclude_def Col
+        have : B ≠ F := by forward_using lemma_betweennotequal
+        have : F ≠ B := by conclude lemma_inequalitysymmetric
+        have : Per F B M := by conclude lemma_collinearright
+        have : Cong F B B D := by forward_using lemma_congruenceflip
+        have : Cong F M D M := by conclude lemma_rightreverse
+        have : Cong F M M D := by forward_using lemma_congruenceflip
+        have : Cong F M M R := by conclude lemma_congruencetransitive
+        have : Cong F M M C := by conclude cn_equalitysub
+        have : Cong D M F M := by conclude lemma_congruencesymmetric
+        have : Cong F M M E := by conclude cn_equalitysub
+        have : Cong D M M E := by conclude lemma_congruencetransitive
+        have : Cong M C F M := by conclude lemma_congruencesymmetric
+        have : Cong C M F M := by forward_using lemma_congruenceflip
+        have : Cong M D M E := by forward_using lemma_congruenceflip
+        have : BetS C M D := by conclude cn_equalitysub
+        have : BetS F M E := by conclude cn_equalitysub
+        have : Cong C D F E := by conclude cn_sumofparts
+        have : Cong C D E F := by forward_using lemma_congruenceflip
+        close
   close
 
 end GeocoqTranslate.Elements

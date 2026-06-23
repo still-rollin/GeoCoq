@@ -26,16 +26,16 @@ theorem lemma_Playfair :
       have : BetS B p D := by conclude axiom_betweennesssymmetry
       have : CR A C B D := by conclude_def CR
       contradict
-  sorry -- TODO: assert (Col C D E).
-  rcases (show CR A D B C ∨ CR A C B D by first | assumption | exact Classical.em _ | tauto | aesop) with c1 | c2
-  · have : Col C D E := by conclude lemma_Playfairhelper2
-    close
-  · obtain ⟨p, _, _⟩ : ∃ p, (BetS A p C ∧ BetS B p D) := by conclude_def CR
-    have : CR B D A C := by conclude_def CR
-    have : Par B A C D := by forward_using lemma_parallelflip
-    have : Par B A C E := by forward_using lemma_parallelflip
-    have : Col C D E := by conclude lemma_Playfairhelper2
-    close
+  have : Col C D E := by
+      rcases (show CR A D B C ∨ CR A C B D by first | assumption | exact Classical.em _ | tauto | aesop) with c1 | c2
+      · have : Col C D E := by conclude lemma_Playfairhelper2
+        close
+      · obtain ⟨p, _, _⟩ : ∃ p, (BetS A p C ∧ BetS B p D) := by conclude_def CR
+        have : CR B D A C := by conclude_def CR
+        have : Par B A C D := by forward_using lemma_parallelflip
+        have : Par B A C E := by forward_using lemma_parallelflip
+        have : Col C D E := by conclude lemma_Playfairhelper2
+        close
   close
 
 end GeocoqTranslate.Elements

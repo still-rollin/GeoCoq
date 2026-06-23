@@ -14,51 +14,51 @@ variable {Point : Type} [euclidean_neutral_ruler_compass Point]
 theorem lemma_differenceofparts :
     ∀ (A B C a b c : Point), Cong A B a b → Cong A C a c → BetS A B C → BetS a b c → Cong B C b c := by
   intro A B C a b c h1 h2 h3 h4
-  sorry -- TODO: assert (Cong B C b c).
-  rcases (show B = A ∨ B ≠ A by first | assumption | exact Classical.em _ | tauto | aesop) with c1 | c2
-  · have : Cong A A a b := by conclude cn_equalitysub
-    have : Cong a b A A := by conclude lemma_congruencesymmetric
-    have : ¬ a ≠ b := by
-        intro h
-        have : A ≠ A := by conclude axiom_nocollapse
-        have : A = A := by conclude cn_equalityreflexive
-        contradict
-    have : Cong A C A C := by conclude cn_congruencereflexive
-    have : Cong B C A C := by conclude cn_equalitysub
-    have : Cong B C a c := by conclude lemma_congruencetransitive
-    have : Cong b c b c := by conclude cn_congruencereflexive
-    have : Cong b c a c := by conclude cn_equalitysub
-    have : Cong a c b c := by conclude lemma_congruencesymmetric
-    have : Cong B C b c := by conclude lemma_congruencetransitive
-    close
-  · have : ¬ C = A := by
-        intro h
-        have : BetS A B A := by conclude cn_equalitysub
-        have : ¬ BetS A B A := by conclude axiom_betweennessidentity
-        contradict
-    have : A ≠ C := by conclude lemma_inequalitysymmetric
-    obtain ⟨E, _, _⟩ : ∃ E, (BetS C A E ∧ Cong A E A C) := by conclude lemma_localextension
-    have : A ≠ C := by conclude lemma_inequalitysymmetric
-    have : a ≠ c := by conclude axiom_nocollapse
-    have : c ≠ a := by conclude lemma_inequalitysymmetric
-    obtain ⟨e, _, _⟩ : ∃ e, (BetS c a e ∧ Cong a e a c) := by conclude lemma_localextension
-    have : Cong E A A E := by conclude cn_equalityreverse
-    have : Cong E A A C := by conclude lemma_congruencetransitive
-    have : Cong E A a c := by conclude lemma_congruencetransitive
-    have : Cong e a a e := by conclude cn_equalityreverse
-    have : Cong e a a c := by conclude lemma_congruencetransitive
-    have : Cong a c e a := by conclude lemma_congruencesymmetric
-    have : Cong E A a c := by conclude lemma_congruencetransitive
-    have : Cong E A e a := by conclude lemma_congruencetransitive
-    have : BetS E A C := by conclude axiom_betweennesssymmetry
-    have : BetS e a c := by conclude axiom_betweennesssymmetry
-    have : Cong E C e c := by conclude cn_sumofparts
-    have : BetS E A B := by conclude axiom_innertransitivity
-    have : BetS e a b := by conclude axiom_innertransitivity
-    have : Cong C B c b := by conclude axiom_5_line
-    have : Cong b c B C := by forward_using lemma_doublereverse
-    have : Cong B C b c := by conclude lemma_congruencesymmetric
-    close
+  have : Cong B C b c := by
+      rcases (show B = A ∨ B ≠ A by first | assumption | exact Classical.em _ | tauto | aesop) with c1 | c2
+      · have : Cong A A a b := by conclude cn_equalitysub
+        have : Cong a b A A := by conclude lemma_congruencesymmetric
+        have : ¬ a ≠ b := by
+            intro h
+            have : A ≠ A := by conclude axiom_nocollapse
+            have : A = A := by conclude cn_equalityreflexive
+            contradict
+        have : Cong A C A C := by conclude cn_congruencereflexive
+        have : Cong B C A C := by conclude cn_equalitysub
+        have : Cong B C a c := by conclude lemma_congruencetransitive
+        have : Cong b c b c := by conclude cn_congruencereflexive
+        have : Cong b c a c := by conclude cn_equalitysub
+        have : Cong a c b c := by conclude lemma_congruencesymmetric
+        have : Cong B C b c := by conclude lemma_congruencetransitive
+        close
+      · have : ¬ C = A := by
+            intro h
+            have : BetS A B A := by conclude cn_equalitysub
+            have : ¬ BetS A B A := by conclude axiom_betweennessidentity
+            contradict
+        have : A ≠ C := by conclude lemma_inequalitysymmetric
+        obtain ⟨E, _, _⟩ : ∃ E, (BetS C A E ∧ Cong A E A C) := by conclude lemma_localextension
+        have : A ≠ C := by conclude lemma_inequalitysymmetric
+        have : a ≠ c := by conclude axiom_nocollapse
+        have : c ≠ a := by conclude lemma_inequalitysymmetric
+        obtain ⟨e, _, _⟩ : ∃ e, (BetS c a e ∧ Cong a e a c) := by conclude lemma_localextension
+        have : Cong E A A E := by conclude cn_equalityreverse
+        have : Cong E A A C := by conclude lemma_congruencetransitive
+        have : Cong E A a c := by conclude lemma_congruencetransitive
+        have : Cong e a a e := by conclude cn_equalityreverse
+        have : Cong e a a c := by conclude lemma_congruencetransitive
+        have : Cong a c e a := by conclude lemma_congruencesymmetric
+        have : Cong E A a c := by conclude lemma_congruencetransitive
+        have : Cong E A e a := by conclude lemma_congruencetransitive
+        have : BetS E A C := by conclude axiom_betweennesssymmetry
+        have : BetS e a c := by conclude axiom_betweennesssymmetry
+        have : Cong E C e c := by conclude cn_sumofparts
+        have : BetS E A B := by conclude axiom_innertransitivity
+        have : BetS e a b := by conclude axiom_innertransitivity
+        have : Cong C B c b := by conclude axiom_5_line
+        have : Cong b c B C := by forward_using lemma_doublereverse
+        have : Cong B C b c := by conclude lemma_congruencesymmetric
+        close
   close
 
 end GeocoqTranslate.Elements

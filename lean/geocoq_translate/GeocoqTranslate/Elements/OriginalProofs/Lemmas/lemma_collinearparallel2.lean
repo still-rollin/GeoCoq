@@ -25,30 +25,30 @@ theorem lemma_collinearparallel2 :
   have : Col C E F := by conclude lemma_collinear4
   have : Col C F E := by forward_using lemma_collinearorder
   have : Par A B D C := by forward_using lemma_parallelflip
-  sorry -- TODO: assert (Par A B E F).
-  rcases (show E = D ∨ E ≠ D by first | assumption | exact Classical.em _ | tauto | aesop) with c1 | c2
-  · have : D ≠ F := by conclude cn_equalitysub
-    have : F ≠ D := by conclude lemma_inequalitysymmetric
-    have : Par A B F D := by conclude lemma_collinearparallel
-    have : Par A B D F := by forward_using lemma_parallelflip
-    have : Col C F D := by forward_using lemma_collinearorder
-    have : Col C F E := by forward_using lemma_collinearorder
-    sorry -- TODO: assert (Col F D E).
-    rcases (show C = F ∨ C ≠ F by first | assumption | exact Classical.em _ | tauto | aesop) with c1 | c2
-    · have : Col C D E := by forward_using lemma_collinearorder
-      have : Col F D E := by conclude cn_equalitysub
-      close
-    · have : Col F D E := by conclude lemma_collinear4
-      close
-    have : Col D F E := by forward_using lemma_collinearorder
-    have : Par A B E F := by conclude lemma_collinearparallel
-    close
-  · have : Par A B E D := by conclude lemma_collinearparallel
-    have : Par A B D E := by forward_using lemma_parallelflip
-    have : Col D E F := by conclude lemma_collinear4
-    have : Par A B F E := by conclude lemma_collinearparallel
-    have : Par A B E F := by forward_using lemma_parallelflip
-    close
+  have : Par A B E F := by
+      rcases (show E = D ∨ E ≠ D by first | assumption | exact Classical.em _ | tauto | aesop) with c1 | c2
+      · have : D ≠ F := by conclude cn_equalitysub
+        have : F ≠ D := by conclude lemma_inequalitysymmetric
+        have : Par A B F D := by conclude lemma_collinearparallel
+        have : Par A B D F := by forward_using lemma_parallelflip
+        have : Col C F D := by forward_using lemma_collinearorder
+        have : Col C F E := by forward_using lemma_collinearorder
+        have : Col F D E := by
+            rcases (show C = F ∨ C ≠ F by first | assumption | exact Classical.em _ | tauto | aesop) with c1 | c2
+            · have : Col C D E := by forward_using lemma_collinearorder
+              have : Col F D E := by conclude cn_equalitysub
+              close
+            · have : Col F D E := by conclude lemma_collinear4
+              close
+        have : Col D F E := by forward_using lemma_collinearorder
+        have : Par A B E F := by conclude lemma_collinearparallel
+        close
+      · have : Par A B E D := by conclude lemma_collinearparallel
+        have : Par A B D E := by forward_using lemma_parallelflip
+        have : Col D E F := by conclude lemma_collinear4
+        have : Par A B F E := by conclude lemma_collinearparallel
+        have : Par A B E F := by forward_using lemma_parallelflip
+        close
   close
 
 end GeocoqTranslate.Elements

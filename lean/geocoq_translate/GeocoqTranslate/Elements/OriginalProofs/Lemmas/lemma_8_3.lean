@@ -19,21 +19,21 @@ theorem lemma_8_3 :
   have : Cong B A B E := by forward_using lemma_congruenceflip
   have : Cong C A C E := by forward_using lemma_congruenceflip
   have : (BetS B D C ∨ C = D ∨ BetS B C D) := by conclude lemma_ray1
-  sorry -- TODO: assert (Per A B D).
-  rcases (show BetS B D C ∨ C = D ∨ BetS B C D by first | assumption | exact Classical.em _ | tauto | aesop) with c1 | c2 | c3
-  · have : Cong B D B D := by conclude cn_congruencereflexive
-    have : Cong D C D C := by conclude cn_congruencereflexive
-    have : Cong D A D E := by conclude lemma_interior5
-    have : Cong A D E D := by forward_using lemma_congruenceflip
-    have : B ≠ D := by forward_using lemma_betweennotequal
-    have : Per A B D := by conclude_def Per
-    close
-  · have : Per A B D := by conclude cn_equalitysub
-    close
-  · have : Cong A D E D := by conclude axiom_5_line
-    have : B ≠ D := by forward_using lemma_betweennotequal
-    have : Per A B D := by conclude_def Per
-    close
+  have : Per A B D := by
+      rcases (show BetS B D C ∨ C = D ∨ BetS B C D by first | assumption | exact Classical.em _ | tauto | aesop) with c1 | c2 | c3
+      · have : Cong B D B D := by conclude cn_congruencereflexive
+        have : Cong D C D C := by conclude cn_congruencereflexive
+        have : Cong D A D E := by conclude lemma_interior5
+        have : Cong A D E D := by forward_using lemma_congruenceflip
+        have : B ≠ D := by forward_using lemma_betweennotequal
+        have : Per A B D := by conclude_def Per
+        close
+      · have : Per A B D := by conclude cn_equalitysub
+        close
+      · have : Cong A D E D := by conclude axiom_5_line
+        have : B ≠ D := by forward_using lemma_betweennotequal
+        have : Per A B D := by conclude_def Per
+        close
   close
 
 end GeocoqTranslate.Elements

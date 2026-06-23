@@ -119,18 +119,18 @@ theorem proposition_42B :
   have : Par F G E C := by conclude_def PG
   have : Par E C F G := by conclude lemma_parallelsymmetric
   have : Par E C G F := by forward_using lemma_parallelflip
-  sorry -- TODO: assert (OS R F E C).
-  rcases (show A = F ∨ A ≠ F by first | assumption | exact Classical.em _ | tauto | aesop) with c1 | c2
-  · have : OS R A E C := by conclude lemma_samesideflip
-    have : OS R F E C := by conclude cn_equalitysub
-    close
-  · have : Par E C A F := by conclude lemma_collinearparallel
-    have : Par E C F A := by forward_using lemma_parallelflip
-    have : TP E C F A := by conclude lemma_paralleldef2B
-    have : OS F A E C := by conclude_def TP
-    have : OS F R E C := by conclude lemma_samesidetransitive
-    have : OS R F E C := by forward_using lemma_samesidesymmetric
-    close
+  have : OS R F E C := by
+      rcases (show A = F ∨ A ≠ F by first | assumption | exact Classical.em _ | tauto | aesop) with c1 | c2
+      · have : OS R A E C := by conclude lemma_samesideflip
+        have : OS R F E C := by conclude cn_equalitysub
+        close
+      · have : Par E C A F := by conclude lemma_collinearparallel
+        have : Par E C F A := by forward_using lemma_parallelflip
+        have : TP E C F A := by conclude lemma_paralleldef2B
+        have : OS F A E C := by conclude_def TP
+        have : OS F R E C := by conclude lemma_samesidetransitive
+        have : OS R F E C := by forward_using lemma_samesidesymmetric
+        close
   close
 
 end GeocoqTranslate.Elements

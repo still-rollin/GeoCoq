@@ -40,18 +40,18 @@ theorem lemma_sameside2 :
           intro h
           have : BetS F B Q := by conclude cn_equalitysub
           have : (BetS B G F ∨ F = G ∨ BetS B F G) := by conclude lemma_ray1
-          sorry -- TODO: assert (BetS G B Q).
-          rcases (show BetS B G F ∨ F = G ∨ BetS B F G by first | assumption | exact Classical.em _ | tauto | aesop) with c1 | c2 | c3
-          · have : BetS F G B := by conclude axiom_betweennesssymmetry
-            have : BetS G B Q := by conclude lemma_3_6a
-            close
-          · have : ¬ ¬ BetS G B Q := by
-                intro h
-                contradict
-            close
-          · have : BetS G F B := by conclude axiom_betweennesssymmetry
-            have : BetS G B Q := by conclude lemma_3_7a
-            close
+          have : BetS G B Q := by
+              rcases (show BetS B G F ∨ F = G ∨ BetS B F G by first | assumption | exact Classical.em _ | tauto | aesop) with c1 | c2 | c3
+              · have : BetS F G B := by conclude axiom_betweennesssymmetry
+                have : BetS G B Q := by conclude lemma_3_6a
+                close
+              · have : ¬ ¬ BetS G B Q := by
+                    intro h
+                    contradict
+                close
+              · have : BetS G F B := by conclude axiom_betweennesssymmetry
+                have : BetS G B Q := by conclude lemma_3_7a
+                close
           have : ¬ Col A C G := by
               intro h
               have : Col A C B := by forward_using lemma_collinearorder
@@ -108,23 +108,23 @@ theorem lemma_sameside2 :
           have : Col A C F := by forward_using lemma_collinearorder
           contradict
       have : (BetS B G F ∨ F = G ∨ BetS B F G) := by conclude lemma_ray1
-      sorry -- TODO: assert (TS G A C Q).
-      rcases (show BetS B G F ∨ F = G ∨ BetS B F G by first | assumption | exact Classical.em _ | tauto | aesop) with c1 | c2 | c3
-      · have : TS G A C Q := by conclude lemma_9_5b
-        close
-      · have : TS G A C Q := by conclude cn_equalitysub
-        close
-      · have : ¬ Col B G Q := by
-            intro h
-            have : Col G B F := by forward_using lemma_collinearorder
-            have : B ≠ G := by forward_using lemma_betweennotequal
-            have : G ≠ B := by conclude lemma_inequalitysymmetric
-            have : Col G B Q := by forward_using lemma_collinearorder
-            have : Col B F Q := by conclude lemma_collinear4
-            have : Col Q F B := by forward_using lemma_collinearorder
-            contradict
-        have : TS G A C Q := by conclude lemma_9_5a
-        close
+      have : TS G A C Q := by
+          rcases (show BetS B G F ∨ F = G ∨ BetS B F G by first | assumption | exact Classical.em _ | tauto | aesop) with c1 | c2 | c3
+          · have : TS G A C Q := by conclude lemma_9_5b
+            close
+          · have : TS G A C Q := by conclude cn_equalitysub
+            close
+          · have : ¬ Col B G Q := by
+                intro h
+                have : Col G B F := by forward_using lemma_collinearorder
+                have : B ≠ G := by forward_using lemma_betweennotequal
+                have : G ≠ B := by conclude lemma_inequalitysymmetric
+                have : Col G B Q := by forward_using lemma_collinearorder
+                have : Col B F Q := by conclude lemma_collinear4
+                have : Col Q F B := by forward_using lemma_collinearorder
+                contradict
+            have : TS G A C Q := by conclude lemma_9_5a
+            close
       contradict
   obtain ⟨H, _, _, _⟩ : ∃ H, (BetS G H Q ∧ Col A C H ∧ nCol A C G) := by conclude_def TS
   have : OS E G A C := by conclude_def OS

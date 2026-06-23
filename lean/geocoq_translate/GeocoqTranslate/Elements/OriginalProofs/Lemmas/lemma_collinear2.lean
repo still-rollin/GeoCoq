@@ -11,24 +11,24 @@ theorem lemma_collinear2 :
     ∀ (A B C : Point), Col A B C → Col B C A := by
   intro A B C h1
   have : (A = B ∨ A = C ∨ B = C ∨ BetS B A C ∨ BetS A B C ∨ BetS A C B) := by conclude_def Col
-  sorry -- TODO: assert (Col B C A).
-  rcases (show A = B ∨ A = C ∨ B = C ∨ BetS B A C ∨ BetS A B C ∨ BetS A C B by first | assumption | exact Classical.em _ | tauto | aesop) with c1 | c2 | c3 | c4 | c5 | c6
-  · have : B = A := by conclude lemma_equalitysymmetric
-    have : Col B C A := by conclude_def Col
-    close
-  · have : C = A := by conclude lemma_equalitysymmetric
-    have : Col B C A := by conclude_def Col
-    close
-  · have : Col B C A := by conclude_def Col
-    close
-  · have : Col B C A := by conclude_def Col
-    close
-  · have : BetS C B A := by conclude axiom_betweennesssymmetry
-    have : Col B C A := by conclude_def Col
-    close
-  · have : BetS B C A := by conclude axiom_betweennesssymmetry
-    have : Col B C A := by conclude_def Col
-    close
+  have : Col B C A := by
+      rcases (show A = B ∨ A = C ∨ B = C ∨ BetS B A C ∨ BetS A B C ∨ BetS A C B by first | assumption | exact Classical.em _ | tauto | aesop) with c1 | c2 | c3 | c4 | c5 | c6
+      · have : B = A := by conclude lemma_equalitysymmetric
+        have : Col B C A := by conclude_def Col
+        close
+      · have : C = A := by conclude lemma_equalitysymmetric
+        have : Col B C A := by conclude_def Col
+        close
+      · have : Col B C A := by conclude_def Col
+        close
+      · have : Col B C A := by conclude_def Col
+        close
+      · have : BetS C B A := by conclude axiom_betweennesssymmetry
+        have : Col B C A := by conclude_def Col
+        close
+      · have : BetS B C A := by conclude axiom_betweennesssymmetry
+        have : Col B C A := by conclude_def Col
+        close
   close
 
 end GeocoqTranslate.Elements

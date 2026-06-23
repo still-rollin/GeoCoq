@@ -140,29 +140,29 @@ theorem proposition_46 :
   have : e ≠ G := by conclude lemma_inequalitysymmetric
   have : Col G D E := by conclude lemma_collinear4
   have : (G = D ∨ G = E ∨ D = E ∨ BetS D G E ∨ BetS G D E ∨ BetS G E D) := by conclude_def Col
-  sorry -- TODO: assert (BetS G D E).
-  rcases (show G = D ∨ G = E ∨ D = E ∨ BetS D G E ∨ BetS G D E ∨ BetS G E D by first | assumption | exact Classical.em _ | tauto | aesop) with c1 | c2 | c3 | c4 | c5 | c6
-  · have : ¬ ¬ BetS G D E := by
-        intro h
-        contradict
-    close
-  · have : ¬ ¬ BetS G D E := by
-        intro h
-        contradict
-    close
-  · have : ¬ ¬ BetS G D E := by
-        intro h
-        contradict
-    close
-  · have : ¬ ¬ BetS G D E := by
-        intro h
-        contradict
-    close
-  · close
-  · have : ¬ ¬ BetS G D E := by
-        intro h
-        contradict
-    close
+  have : BetS G D E := by
+      rcases (show G = D ∨ G = E ∨ D = E ∨ BetS D G E ∨ BetS G D E ∨ BetS G E D by first | assumption | exact Classical.em _ | tauto | aesop) with c1 | c2 | c3 | c4 | c5 | c6
+      · have : ¬ ¬ BetS G D E := by
+            intro h
+            contradict
+        close
+      · have : ¬ ¬ BetS G D E := by
+            intro h
+            contradict
+        close
+      · have : ¬ ¬ BetS G D E := by
+            intro h
+            contradict
+        close
+      · have : ¬ ¬ BetS G D E := by
+            intro h
+            contradict
+        close
+      · close
+      · have : ¬ ¬ BetS G D E := by
+            intro h
+            contradict
+        close
   have : Col G D E := by conclude_def Col
   have : E ≠ D := by conclude lemma_inequalitysymmetric
   have : Per E D A := by conclude lemma_collinearright

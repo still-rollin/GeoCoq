@@ -14,16 +14,16 @@ theorem lemma_extension :
     ∀ (A B P Q : Point), A ≠ B → P ≠ Q → ∃ X, BetS A B X ∧ Cong B X P Q := by
   intro A B P Q h1 h2
   have : B = B := by conclude cn_equalityreflexive
-  sorry -- TODO: assert (exists D, Cong B D P Q).
-  rcases (show B = P ∨ B ≠ P by first | assumption | exact Classical.em _ | tauto | aesop) with c1 | c2
-  · have : Q ≠ P := by conclude lemma_inequalitysymmetric
-    have : Q ≠ B := by conclude cn_equalitysub
-    have : B ≠ Q := by conclude lemma_inequalitysymmetric
-    obtain ⟨D, _⟩ : ∃ D, Cong B D Q P := by conclude proposition_02
-    have : Cong B D P Q := by forward_using lemma_congruenceflip
-    close
-  · obtain ⟨D, _⟩ : ∃ D, Cong B D P Q := by conclude proposition_02
-    sorry -- TODO: exists D;auto.
+  have : ∃ D, Cong B D P Q := by
+      rcases (show B = P ∨ B ≠ P by first | assumption | exact Classical.em _ | tauto | aesop) with c1 | c2
+      · have : Q ≠ P := by conclude lemma_inequalitysymmetric
+        have : Q ≠ B := by conclude cn_equalitysub
+        have : B ≠ Q := by conclude lemma_inequalitysymmetric
+        obtain ⟨D, _⟩ : ∃ D, Cong B D Q P := by conclude proposition_02
+        have : Cong B D P Q := by forward_using lemma_congruenceflip
+        close
+      · obtain ⟨D, _⟩ : ∃ D, Cong B D P Q := by conclude proposition_02
+        sorry -- TODO: exists D;auto.
   sorry -- TODO: destruct H2 as [D];spliter.
   have : Cong P Q B D := by conclude lemma_congruencesymmetric
   have : B ≠ D := by conclude axiom_nocollapse

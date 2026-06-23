@@ -29,42 +29,42 @@ theorem lemma_collinearright :
       have : Col A A D := by forward_using lemma_collinearorder
       contradict
   have : Per D B A := by conclude lemma_8_2
-  sorry -- TODO: assert (Per D B C).
-  rcases (show A = B ∨ A = C ∨ B = C ∨ BetS B A C ∨ BetS A B C ∨ BetS A C B by first | assumption | exact Classical.em _ | tauto | aesop) with c1 | c2 | c3 | c4 | c5 | c6
-  · have : ¬ ¬ Per D B C := by
-        intro h
-        have : Col A B D := by conclude_def Col
-        contradict
-    close
-  · have : Per D B C := by conclude cn_equalitysub
-    close
-  · have : ¬ ¬ Per D B C := by
-        intro h
-        have : C = B := by conclude lemma_equalitysymmetric
-        contradict
-    close
-  · have : B ≠ A := by conclude lemma_inequalitysymmetric
-    have : Out B A C := by conclude lemma_ray4
-    have : Per D B C := by conclude lemma_8_3
-    close
-  · obtain ⟨E, _, _, _, _⟩ : ∃ E, (BetS A B E ∧ Cong A B E B ∧ Cong A D E D ∧ B ≠ D) := by conclude_def Per
-    have : BetS E B A := by conclude axiom_betweennesssymmetry
-    have : Cong E B A B := by conclude lemma_congruencesymmetric
-    have : Cong E D A D := by conclude lemma_congruencesymmetric
-    have : Per E B D := by conclude_def Per
-    have : Per D B E := by conclude lemma_8_2
-    have : BetS A B E := by conclude axiom_betweennesssymmetry
-    have : Out B E C := by conclude_def Out
-    have : Per D B C := by conclude lemma_8_3
-    close
-  · have : BetS B C A := by conclude axiom_betweennesssymmetry
-    have : C ≠ B := by forward_using lemma_betweennotequal
-    have : B ≠ C := by conclude lemma_inequalitysymmetric
-    have : Out B C A := by conclude lemma_ray4
-    have : Per D B A := by conclude lemma_8_2
-    have : Out B A C := by conclude lemma_ray5
-    have : Per D B C := by conclude lemma_8_3
-    close
+  have : Per D B C := by
+      rcases (show A = B ∨ A = C ∨ B = C ∨ BetS B A C ∨ BetS A B C ∨ BetS A C B by first | assumption | exact Classical.em _ | tauto | aesop) with c1 | c2 | c3 | c4 | c5 | c6
+      · have : ¬ ¬ Per D B C := by
+            intro h
+            have : Col A B D := by conclude_def Col
+            contradict
+        close
+      · have : Per D B C := by conclude cn_equalitysub
+        close
+      · have : ¬ ¬ Per D B C := by
+            intro h
+            have : C = B := by conclude lemma_equalitysymmetric
+            contradict
+        close
+      · have : B ≠ A := by conclude lemma_inequalitysymmetric
+        have : Out B A C := by conclude lemma_ray4
+        have : Per D B C := by conclude lemma_8_3
+        close
+      · obtain ⟨E, _, _, _, _⟩ : ∃ E, (BetS A B E ∧ Cong A B E B ∧ Cong A D E D ∧ B ≠ D) := by conclude_def Per
+        have : BetS E B A := by conclude axiom_betweennesssymmetry
+        have : Cong E B A B := by conclude lemma_congruencesymmetric
+        have : Cong E D A D := by conclude lemma_congruencesymmetric
+        have : Per E B D := by conclude_def Per
+        have : Per D B E := by conclude lemma_8_2
+        have : BetS A B E := by conclude axiom_betweennesssymmetry
+        have : Out B E C := by conclude_def Out
+        have : Per D B C := by conclude lemma_8_3
+        close
+      · have : BetS B C A := by conclude axiom_betweennesssymmetry
+        have : C ≠ B := by forward_using lemma_betweennotequal
+        have : B ≠ C := by conclude lemma_inequalitysymmetric
+        have : Out B C A := by conclude lemma_ray4
+        have : Per D B A := by conclude lemma_8_2
+        have : Out B A C := by conclude lemma_ray5
+        have : Per D B C := by conclude lemma_8_3
+        close
   have : Per C B D := by conclude lemma_8_2
   close
 

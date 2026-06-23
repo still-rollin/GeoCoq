@@ -74,22 +74,22 @@ theorem lemma_triangletoparallelogram :
   have : PG A b C D := by conclude_def PG
   have : E = E := by conclude cn_equalityreflexive
   have : Col E F E := by conclude_def Col
-  sorry -- TODO: assert (Col E F b).
-  rcases (show A = F ∨ A ≠ F by first | assumption | exact Classical.em _ | tauto | aesop) with c1 | c2
-  · have : F ≠ E := by conclude lemma_inequalitysymmetric
-    have : A ≠ E := by conclude cn_equalitysub
-    have : Par D C A E := by conclude lemma_collinearparallel2
-    have : Col A b E := by conclude lemma_Playfair
-    have : Col F b E := by conclude cn_equalitysub
-    have : Col E F b := by forward_using lemma_collinearorder
-    close
-  · have : Par D C A F := by conclude lemma_collinearparallel
-    have : Col A b F := by conclude lemma_Playfair
-    have : Col A F b := by forward_using lemma_collinearorder
-    have : Col A F E := by forward_using lemma_collinearorder
-    have : Col F b E := by conclude lemma_collinear4
-    have : Col E F b := by forward_using lemma_collinearorder
-    close
+  have : Col E F b := by
+      rcases (show A = F ∨ A ≠ F by first | assumption | exact Classical.em _ | tauto | aesop) with c1 | c2
+      · have : F ≠ E := by conclude lemma_inequalitysymmetric
+        have : A ≠ E := by conclude cn_equalitysub
+        have : Par D C A E := by conclude lemma_collinearparallel2
+        have : Col A b E := by conclude lemma_Playfair
+        have : Col F b E := by conclude cn_equalitysub
+        have : Col E F b := by forward_using lemma_collinearorder
+        close
+      · have : Par D C A F := by conclude lemma_collinearparallel
+        have : Col A b F := by conclude lemma_Playfair
+        have : Col A F b := by forward_using lemma_collinearorder
+        have : Col A F E := by forward_using lemma_collinearorder
+        have : Col F b E := by conclude lemma_collinear4
+        have : Col E F b := by forward_using lemma_collinearorder
+        close
   close
 
 end GeocoqTranslate.Elements

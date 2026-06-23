@@ -15,31 +15,31 @@ theorem lemma_parallelcollinear :
   intro A B C c d h1 h2 h3
   have : (A ≠ B ∧ c ≠ d ∧ ¬ Meet A B c d ∧ OS c d A B) := by conclude_def TP
   have : (c = d ∨ c = C ∨ d = C ∨ BetS d c C ∨ BetS c d C ∨ BetS c C d) := by conclude_def Col
-  sorry -- TODO: assert (TP A B C d).
-  rcases (show c = d ∨ c = C ∨ d = C ∨ BetS d c C ∨ BetS c d C ∨ BetS c C d by first | assumption | exact Classical.em _ | tauto | aesop) with c1 | c2 | c3 | c4 | c5 | c6
-  · have : ¬ ¬ TP A B C d := by
-        intro h
-        contradict
-    close
-  · have : TP A B C d := by conclude cn_equalitysub
-    close
-  · have : ¬ ¬ TP A B C d := by
-        intro h
-        have : C = d := by conclude lemma_equalitysymmetric
-        contradict
-    close
-  · have : BetS C c d := by conclude axiom_betweennesssymmetry
-    have : TP A B C d := by conclude lemma_parallelcollinear1
-    close
-  · have : BetS C d c := by conclude axiom_betweennesssymmetry
-    have : TP A B d c := by forward_using lemma_tarskiparallelflip
-    have : TP A B C c := by conclude lemma_parallelcollinear1
-    have : TP A B c C := by forward_using lemma_tarskiparallelflip
-    have : TP A B d C := by conclude lemma_parallelcollinear2
-    have : TP A B C d := by forward_using lemma_tarskiparallelflip
-    close
-  · have : TP A B C d := by conclude lemma_parallelcollinear2
-    close
+  have : TP A B C d := by
+      rcases (show c = d ∨ c = C ∨ d = C ∨ BetS d c C ∨ BetS c d C ∨ BetS c C d by first | assumption | exact Classical.em _ | tauto | aesop) with c1 | c2 | c3 | c4 | c5 | c6
+      · have : ¬ ¬ TP A B C d := by
+            intro h
+            contradict
+        close
+      · have : TP A B C d := by conclude cn_equalitysub
+        close
+      · have : ¬ ¬ TP A B C d := by
+            intro h
+            have : C = d := by conclude lemma_equalitysymmetric
+            contradict
+        close
+      · have : BetS C c d := by conclude axiom_betweennesssymmetry
+        have : TP A B C d := by conclude lemma_parallelcollinear1
+        close
+      · have : BetS C d c := by conclude axiom_betweennesssymmetry
+        have : TP A B d c := by forward_using lemma_tarskiparallelflip
+        have : TP A B C c := by conclude lemma_parallelcollinear1
+        have : TP A B c C := by forward_using lemma_tarskiparallelflip
+        have : TP A B d C := by conclude lemma_parallelcollinear2
+        have : TP A B C d := by forward_using lemma_tarskiparallelflip
+        close
+      · have : TP A B C d := by conclude lemma_parallelcollinear2
+        close
   close
 
 end GeocoqTranslate.Elements

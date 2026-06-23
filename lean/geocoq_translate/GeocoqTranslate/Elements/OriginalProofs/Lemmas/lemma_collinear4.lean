@@ -16,119 +16,119 @@ variable {Point : Type} [euclidean_neutral_ruler_compass Point]
 theorem lemma_collinear4 :
     ∀ (A B C D : Point), Col A B C → Col A B D → A ≠ B → Col B C D := by
   intro A B C D h1 h2 h3
-  sorry -- TODO: assert (Col B C D).
-  rcases (show B = C ∨ B = D ∨ C = D ∨ A = C ∨ A = D ∨ (B ≠ C ∧ B ≠ D ∧ C ≠ D ∧ A ≠ C ∧ A ≠ D) by first | assumption | exact Classical.em _ | tauto | aesop) with c1 | c2 | c3 | c4 | c5 | c6
-  · have : Col B C D := by conclude_def Col
-    close
-  · have : Col B C D := by conclude_def Col
-    close
-  · have : Col B C D := by conclude_def Col
-    close
-  · have : Col C B D := by conclude cn_equalitysub
-    have : Col B C D := by forward_using lemma_collinearorder
-    close
-  · have : Col D B C := by conclude cn_equalitysub
-    have : Col B C D := by forward_using lemma_collinearorder
-    close
-  · have : (A = B ∨ A = C ∨ B = C ∨ BetS B A C ∨ BetS A B C ∨ BetS A C B) := by conclude_def Col
-    sorry -- TODO: assert (Col B C D).
-    rcases (show BetS B A C ∨ BetS A B C ∨ BetS A C B by first | assumption | exact Classical.em _ | tauto | aesop) with c1 | c2 | c3
-    · have : (A = B ∨ A = D ∨ B = D ∨ BetS B A D ∨ BetS A B D ∨ BetS A D B) := by conclude_def Col
-      sorry -- TODO: assert (Col B C D).
-      rcases (show BetS B A D ∨ BetS A B D ∨ BetS A D B by first | assumption | exact Classical.em _ | tauto | aesop) with c1 | c2 | c3
-      · have : ¬ nCol B C D := by
-            intro h
-            have : ¬ BetS B C D := by
-                intro h
-                have : Col B C D := by conclude_def Col
-                contradict
-            have : ¬ BetS A C D := by
-                intro h
-                have : BetS B C D := by conclude lemma_3_5b
-                contradict
-            have : ¬ nCol B D C := by
-                intro h
-                have : ¬ BetS C D C := by conclude axiom_betweennessidentity
-                have : ¬ BetS A D C := by
-                    intro h
-                    have : BetS B D C := by conclude lemma_3_5b
+  have : Col B C D := by
+      rcases (show B = C ∨ B = D ∨ C = D ∨ A = C ∨ A = D ∨ (B ≠ C ∧ B ≠ D ∧ C ≠ D ∧ A ≠ C ∧ A ≠ D) by first | assumption | exact Classical.em _ | tauto | aesop) with c1 | c2 | c3 | c4 | c5 | c6
+      · have : Col B C D := by conclude_def Col
+        close
+      · have : Col B C D := by conclude_def Col
+        close
+      · have : Col B C D := by conclude_def Col
+        close
+      · have : Col C B D := by conclude cn_equalitysub
+        have : Col B C D := by forward_using lemma_collinearorder
+        close
+      · have : Col D B C := by conclude cn_equalitysub
+        have : Col B C D := by forward_using lemma_collinearorder
+        close
+      · have : (A = B ∨ A = C ∨ B = C ∨ BetS B A C ∨ BetS A B C ∨ BetS A C B) := by conclude_def Col
+        have : Col B C D := by
+            rcases (show BetS B A C ∨ BetS A B C ∨ BetS A C B by first | assumption | exact Classical.em _ | tauto | aesop) with c1 | c2 | c3
+            · have : (A = B ∨ A = D ∨ B = D ∨ BetS B A D ∨ BetS A B D ∨ BetS A D B) := by conclude_def Col
+              have : Col B C D := by
+                  rcases (show BetS B A D ∨ BetS A B D ∨ BetS A D B by first | assumption | exact Classical.em _ | tauto | aesop) with c1 | c2 | c3
+                  · have : ¬ nCol B C D := by
+                        intro h
+                        have : ¬ BetS B C D := by
+                            intro h
+                            have : Col B C D := by conclude_def Col
+                            contradict
+                        have : ¬ BetS A C D := by
+                            intro h
+                            have : BetS B C D := by conclude lemma_3_5b
+                            contradict
+                        have : ¬ nCol B D C := by
+                            intro h
+                            have : ¬ BetS C D C := by conclude axiom_betweennessidentity
+                            have : ¬ BetS A D C := by
+                                intro h
+                                have : BetS B D C := by conclude lemma_3_5b
+                                have : Col B D C := by conclude_def Col
+                                contradict
+                            have : C = D := by conclude lemma_outerconnectivity
+                            have : Col B C D := by conclude_def Col
+                            have : Col B D C := by forward_using lemma_collinearorder
+                            contradict
+                        have : Col B C D := by forward_using lemma_collinearorder
+                        contradict
+                    close
+                  · have : BetS D B A := by conclude axiom_betweennesssymmetry
+                    have : BetS D B C := by conclude lemma_3_7b
+                    have : Col D B C := by conclude_def Col
+                    have : Col B C D := by forward_using lemma_collinearorder
+                    close
+                  · have : BetS B D A := by conclude axiom_betweennesssymmetry
+                    have : BetS B D C := by conclude lemma_3_6b
                     have : Col B D C := by conclude_def Col
-                    contradict
-                have : C = D := by conclude lemma_outerconnectivity
-                have : Col B C D := by conclude_def Col
-                have : Col B D C := by forward_using lemma_collinearorder
-                contradict
-            have : Col B C D := by forward_using lemma_collinearorder
-            contradict
+                    have : Col B C D := by forward_using lemma_collinearorder
+                    close
+              close
+            · have : (A = B ∨ A = D ∨ B = D ∨ BetS B A D ∨ BetS A B D ∨ BetS A D B) := by conclude_def Col
+              have : Col B C D := by
+                  rcases (show BetS B A D ∨ BetS A B D ∨ BetS A D B by first | assumption | exact Classical.em _ | tauto | aesop) with c1 | c2 | c3
+                  · have : BetS D A B := by conclude axiom_betweennesssymmetry
+                    have : BetS D B C := by conclude lemma_3_7a
+                    have : Col D B C := by conclude_def Col
+                    have : Col B C D := by forward_using lemma_collinearorder
+                    close
+                  · have : ¬ nCol B C D := by
+                        intro h
+                        have : ¬ BetS B C D := by
+                            intro h
+                            have : Col B C D := by conclude_def Col
+                            contradict
+                        have : ¬ BetS B D C := by
+                            intro h
+                            have : Col B D C := by conclude_def Col
+                            have : Col B C D := by forward_using lemma_collinearorder
+                            contradict
+                        have : C = D := by conclude lemma_outerconnectivity
+                        have : Col B C D := by conclude_def Col
+                        contradict
+                    close
+                  · have : BetS D B C := by conclude lemma_3_6a
+                    have : Col D B C := by conclude_def Col
+                    have : Col B C D := by forward_using lemma_collinearorder
+                    close
+              close
+            · have : (A = B ∨ A = D ∨ B = D ∨ BetS B A D ∨ BetS A B D ∨ BetS A D B) := by conclude_def Col
+              have : Col B C D := by
+                  rcases (show BetS B A D ∨ BetS A B D ∨ BetS A D B by first | assumption | exact Classical.em _ | tauto | aesop) with c1 | c2 | c3
+                  · have : BetS D A B := by conclude axiom_betweennesssymmetry
+                    have : BetS D C B := by conclude lemma_3_5b
+                    have : BetS B C D := by conclude axiom_betweennesssymmetry
+                    have : Col B C D := by conclude_def Col
+                    close
+                  · have : BetS C B D := by conclude lemma_3_6a
+                    have : Col B C D := by conclude_def Col
+                    close
+                  · have : ¬ nCol B C D := by
+                        intro h
+                        have : ¬ ¬ BetS B D C := by
+                            intro h
+                            have : ¬ ¬ BetS B C D := by
+                                intro h
+                                have : BetS B C A := by conclude axiom_betweennesssymmetry
+                                have : BetS B D A := by conclude axiom_betweennesssymmetry
+                                have : C = D := by conclude axiom_connectivity
+                                contradict
+                            have : Col B C D := by conclude_def Col
+                            contradict
+                        have : Col B D C := by conclude_def Col
+                        have : Col B C D := by forward_using lemma_collinearorder
+                        contradict
+                    close
+              close
         close
-      · have : BetS D B A := by conclude axiom_betweennesssymmetry
-        have : BetS D B C := by conclude lemma_3_7b
-        have : Col D B C := by conclude_def Col
-        have : Col B C D := by forward_using lemma_collinearorder
-        close
-      · have : BetS B D A := by conclude axiom_betweennesssymmetry
-        have : BetS B D C := by conclude lemma_3_6b
-        have : Col B D C := by conclude_def Col
-        have : Col B C D := by forward_using lemma_collinearorder
-        close
-      close
-    · have : (A = B ∨ A = D ∨ B = D ∨ BetS B A D ∨ BetS A B D ∨ BetS A D B) := by conclude_def Col
-      sorry -- TODO: assert (Col B C D).
-      rcases (show BetS B A D ∨ BetS A B D ∨ BetS A D B by first | assumption | exact Classical.em _ | tauto | aesop) with c1 | c2 | c3
-      · have : BetS D A B := by conclude axiom_betweennesssymmetry
-        have : BetS D B C := by conclude lemma_3_7a
-        have : Col D B C := by conclude_def Col
-        have : Col B C D := by forward_using lemma_collinearorder
-        close
-      · have : ¬ nCol B C D := by
-            intro h
-            have : ¬ BetS B C D := by
-                intro h
-                have : Col B C D := by conclude_def Col
-                contradict
-            have : ¬ BetS B D C := by
-                intro h
-                have : Col B D C := by conclude_def Col
-                have : Col B C D := by forward_using lemma_collinearorder
-                contradict
-            have : C = D := by conclude lemma_outerconnectivity
-            have : Col B C D := by conclude_def Col
-            contradict
-        close
-      · have : BetS D B C := by conclude lemma_3_6a
-        have : Col D B C := by conclude_def Col
-        have : Col B C D := by forward_using lemma_collinearorder
-        close
-      close
-    · have : (A = B ∨ A = D ∨ B = D ∨ BetS B A D ∨ BetS A B D ∨ BetS A D B) := by conclude_def Col
-      sorry -- TODO: assert (Col B C D).
-      rcases (show BetS B A D ∨ BetS A B D ∨ BetS A D B by first | assumption | exact Classical.em _ | tauto | aesop) with c1 | c2 | c3
-      · have : BetS D A B := by conclude axiom_betweennesssymmetry
-        have : BetS D C B := by conclude lemma_3_5b
-        have : BetS B C D := by conclude axiom_betweennesssymmetry
-        have : Col B C D := by conclude_def Col
-        close
-      · have : BetS C B D := by conclude lemma_3_6a
-        have : Col B C D := by conclude_def Col
-        close
-      · have : ¬ nCol B C D := by
-            intro h
-            have : ¬ ¬ BetS B D C := by
-                intro h
-                have : ¬ ¬ BetS B C D := by
-                    intro h
-                    have : BetS B C A := by conclude axiom_betweennesssymmetry
-                    have : BetS B D A := by conclude axiom_betweennesssymmetry
-                    have : C = D := by conclude axiom_connectivity
-                    contradict
-                have : Col B C D := by conclude_def Col
-                contradict
-            have : Col B D C := by conclude_def Col
-            have : Col B C D := by forward_using lemma_collinearorder
-            contradict
-        close
-      close
-    close
   close
 
 end GeocoqTranslate.Elements

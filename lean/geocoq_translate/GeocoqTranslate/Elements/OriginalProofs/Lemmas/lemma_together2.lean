@@ -48,16 +48,16 @@ theorem lemma_together2 :
   have : M ≠ F := by conclude lemma_inequalitysymmetric
   obtain ⟨D, _, _⟩ : ∃ D, (BetS M F D ∧ Cong F D M F) := by conclude lemma_extension
   have : (BetS F M G ∨ G = M ∨ BetS F G M) := by conclude lemma_ray1
-  sorry -- TODO: assert (BetS G F D).
-  rcases (show BetS F M G ∨ G = M ∨ BetS F G M by first | assumption | exact Classical.em _ | tauto | aesop) with c1 | c2 | c3
-  · have : BetS G M F := by conclude axiom_betweennesssymmetry
-    have : BetS G F D := by conclude lemma_3_7a
-    close
-  · have : BetS G F D := by conclude cn_equalitysub
-    close
-  · have : BetS M G F := by conclude axiom_betweennesssymmetry
-    have : BetS G F D := by conclude lemma_3_6a
-    close
+  have : BetS G F D := by
+      rcases (show BetS F M G ∨ G = M ∨ BetS F G M by first | assumption | exact Classical.em _ | tauto | aesop) with c1 | c2 | c3
+      · have : BetS G M F := by conclude axiom_betweennesssymmetry
+        have : BetS G F D := by conclude lemma_3_7a
+        close
+      · have : BetS G F D := by conclude cn_equalitysub
+        close
+      · have : BetS M G F := by conclude axiom_betweennesssymmetry
+        have : BetS G F D := by conclude lemma_3_6a
+        close
   have : BetS D F M := by conclude axiom_betweennesssymmetry
   have : BetS D F G := by conclude axiom_betweennesssymmetry
   have : ¬ BetS F M N := by
@@ -110,27 +110,27 @@ theorem lemma_together2 :
   have : Col F N M := by conclude lemma_collinear4
   have : Col M F N := by forward_using lemma_collinearorder
   have : (M = F ∨ M = N ∨ F = N ∨ BetS F M N ∨ BetS M F N ∨ BetS M N F) := by conclude_def Col
-  sorry -- TODO: assert (Out M F N).
-  rcases (show M = F ∨ M = N ∨ F = N ∨ BetS F M N ∨ BetS M F N ∨ BetS M N F by first | assumption | exact Classical.em _ | tauto | aesop) with c1 | c2 | c3 | c4 | c5 | c6
-  · have : ¬ ¬ Out M F N := by
-        intro h
-        contradict
-    close
-  · have : ¬ ¬ Out M F N := by
-        intro h
-        contradict
-    close
-  · have : N = F := by conclude lemma_equalitysymmetric
-    have : Out M F N := by conclude lemma_ray4
-    close
-  · have : ¬ ¬ Out M F N := by
-        intro h
-        contradict
-    close
-  · have : Out M F N := by conclude lemma_ray4
-    close
-  · have : Out M F N := by conclude lemma_ray4
-    close
+  have : Out M F N := by
+      rcases (show M = F ∨ M = N ∨ F = N ∨ BetS F M N ∨ BetS M F N ∨ BetS M N F by first | assumption | exact Classical.em _ | tauto | aesop) with c1 | c2 | c3 | c4 | c5 | c6
+      · have : ¬ ¬ Out M F N := by
+            intro h
+            contradict
+        close
+      · have : ¬ ¬ Out M F N := by
+            intro h
+            contradict
+        close
+      · have : N = F := by conclude lemma_equalitysymmetric
+        have : Out M F N := by conclude lemma_ray4
+        close
+      · have : ¬ ¬ Out M F N := by
+            intro h
+            contradict
+        close
+      · have : Out M F N := by conclude lemma_ray4
+        close
+      · have : Out M F N := by conclude lemma_ray4
+        close
   close
 
 end GeocoqTranslate.Elements
