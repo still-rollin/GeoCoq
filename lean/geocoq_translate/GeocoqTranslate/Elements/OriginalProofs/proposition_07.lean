@@ -39,47 +39,47 @@ theorem proposition_07 :
       contradict
   have : F ≠ C := by conclude lemma_inequalitysymmetric
   obtain ⟨E, _, _⟩ : ∃ E, (BetS C F E ∧ Cong F E F C) := by conclude lemma_extension
-  sorry -- TODO: assert (Cong A C A E).
-  rcases (show A = F ∨ A ≠ F by first | assumption | exact Classical.em _ | tauto | aesop) with c1 | c2
-  · have : Cong A E A C := by conclude cn_equalitysub
-    have : Cong A C A E := by conclude lemma_congruencesymmetric
-    close
-  · have : B ≠ A := by conclude lemma_inequalitysymmetric
-    have : Col B A F := by forward_using lemma_collinearorder
-    have : Col B A H := by forward_using lemma_collinearorder
-    have : Col A F H := by conclude lemma_collinear4
-    have : Col H F A := by forward_using lemma_collinearorder
-    have : Per A F C := by conclude lemma_collinearright
-    have : Per C F A := by conclude lemma_8_2
-    obtain ⟨P, _, _, _, _⟩ : ∃ P, (BetS C F P ∧ Cong C F P F ∧ Cong C A P A ∧ F ≠ A) := by conclude_def Per
-    have : Cong F E C F := by forward_using lemma_congruenceflip
-    have : Cong F E P F := by conclude lemma_congruencetransitive
-    have : Cong F E F P := by forward_using lemma_congruenceflip
-    have : E = P := by conclude lemma_extensionunique
-    have : Cong C A E A := by conclude cn_equalitysub
-    have : Cong A C A E := by forward_using lemma_congruenceflip
-    close
-  sorry -- TODO: assert (Cong B C B E).
-  rcases (show B = F ∨ B ≠ F by first | assumption | exact Classical.em _ | tauto | aesop) with c1 | c2
-  · have : Cong B E B C := by conclude cn_equalitysub
-    have : Cong B C B E := by conclude lemma_congruencesymmetric
-    close
-  · have : Col B A F := by forward_using lemma_collinearorder
-    have : Col B A H := by forward_using lemma_collinearorder
-    have : Col A B F := by forward_using lemma_collinearorder
-    have : Col A B H := by forward_using lemma_collinearorder
-    have : Col B F H := by conclude lemma_collinear4
-    have : Col H F B := by forward_using lemma_collinearorder
-    have : Per B F C := by conclude lemma_collinearright
-    have : Per C F B := by conclude lemma_8_2
-    obtain ⟨P, _, _, _, _⟩ : ∃ P, (BetS C F P ∧ Cong C F P F ∧ Cong C B P B ∧ F ≠ B) := by conclude_def Per
-    have : Cong F E C F := by forward_using lemma_congruenceflip
-    have : Cong F E P F := by conclude lemma_congruencetransitive
-    have : Cong F E F P := by forward_using lemma_congruenceflip
-    have : E = P := by conclude lemma_extensionunique
-    have : Cong C B E B := by conclude cn_equalitysub
-    have : Cong B C B E := by forward_using lemma_congruenceflip
-    close
+  have : Cong A C A E := by
+      rcases (show A = F ∨ A ≠ F by first | assumption | exact Classical.em _ | tauto | aesop) with c1 | c2
+      · have : Cong A E A C := by conclude cn_equalitysub
+        have : Cong A C A E := by conclude lemma_congruencesymmetric
+        close
+      · have : B ≠ A := by conclude lemma_inequalitysymmetric
+        have : Col B A F := by forward_using lemma_collinearorder
+        have : Col B A H := by forward_using lemma_collinearorder
+        have : Col A F H := by conclude lemma_collinear4
+        have : Col H F A := by forward_using lemma_collinearorder
+        have : Per A F C := by conclude lemma_collinearright
+        have : Per C F A := by conclude lemma_8_2
+        obtain ⟨P, _, _, _, _⟩ : ∃ P, (BetS C F P ∧ Cong C F P F ∧ Cong C A P A ∧ F ≠ A) := by conclude_def Per
+        have : Cong F E C F := by forward_using lemma_congruenceflip
+        have : Cong F E P F := by conclude lemma_congruencetransitive
+        have : Cong F E F P := by forward_using lemma_congruenceflip
+        have : E = P := by conclude lemma_extensionunique
+        have : Cong C A E A := by conclude cn_equalitysub
+        have : Cong A C A E := by forward_using lemma_congruenceflip
+        close
+  have : Cong B C B E := by
+      rcases (show B = F ∨ B ≠ F by first | assumption | exact Classical.em _ | tauto | aesop) with c1 | c2
+      · have : Cong B E B C := by conclude cn_equalitysub
+        have : Cong B C B E := by conclude lemma_congruencesymmetric
+        close
+      · have : Col B A F := by forward_using lemma_collinearorder
+        have : Col B A H := by forward_using lemma_collinearorder
+        have : Col A B F := by forward_using lemma_collinearorder
+        have : Col A B H := by forward_using lemma_collinearorder
+        have : Col B F H := by conclude lemma_collinear4
+        have : Col H F B := by forward_using lemma_collinearorder
+        have : Per B F C := by conclude lemma_collinearright
+        have : Per C F B := by conclude lemma_8_2
+        obtain ⟨P, _, _, _, _⟩ : ∃ P, (BetS C F P ∧ Cong C F P F ∧ Cong C B P B ∧ F ≠ B) := by conclude_def Per
+        have : Cong F E C F := by forward_using lemma_congruenceflip
+        have : Cong F E P F := by conclude lemma_congruencetransitive
+        have : Cong F E F P := by forward_using lemma_congruenceflip
+        have : E = P := by conclude lemma_extensionunique
+        have : Cong C B E B := by conclude cn_equalitysub
+        have : Cong B C B E := by forward_using lemma_congruenceflip
+        close
   have : TS C A B E := by conclude_def TS
   have : OS D C A B := by forward_using lemma_samesidesymmetric
   have : TS D A B E := by conclude lemma_planeseparation
@@ -94,145 +94,145 @@ theorem proposition_07 :
   have : Cong A G A G := by conclude cn_congruencereflexive
   have : Cong G B G B := by conclude cn_congruencereflexive
   have : (A = B ∨ A = G ∨ B = G ∨ BetS B A G ∨ BetS A B G ∨ BetS A G B) := by conclude_def Col
-  sorry -- TODO: assert (Cong G D G E).
-  rcases (show A = B ∨ A = G ∨ B = G ∨ BetS B A G ∨ BetS A B G ∨ BetS A G B by first | assumption | exact Classical.em _ | tauto | aesop) with c1 | c2 | c3 | c4 | c5 | c6
-  · have : ¬ ¬ Cong G D G E := by
-        intro h
-        contradict
-    close
-  · have : Cong A D A E := by conclude lemma_congruencesymmetric
-    have : Cong G D G E := by conclude cn_equalitysub
-    close
-  · have : Cong G D G E := by conclude cn_equalitysub
-    close
-  · have : Cong B A B A := by conclude cn_congruencereflexive
-    have : Cong A G A G := by conclude cn_congruencereflexive
-    have : Cong A D A E := by conclude lemma_congruencesymmetric
-    have : Cong D G E G := by pose proof (axiom_5_line B A G D B A G E
-    have : Cong G D G E := by forward_using lemma_congruenceflip
-    close
-  · have : Cong A B A B := by conclude cn_congruencereflexive
-    have : Cong B G B G := by conclude cn_congruencereflexive
-    have : Cong D G E G := by pose proof (axiom_5_line A B G D A B G E
-    have : Cong G D G E := by forward_using lemma_congruenceflip
-    close
-  · have : Cong A G A G := by conclude cn_congruencereflexive
-    have : Cong G B G B := by conclude cn_congruencereflexive
-    have : Cong G D G E := by conclude lemma_interior5
-    close
+  have : Cong G D G E := by
+      rcases (show A = B ∨ A = G ∨ B = G ∨ BetS B A G ∨ BetS A B G ∨ BetS A G B by first | assumption | exact Classical.em _ | tauto | aesop) with c1 | c2 | c3 | c4 | c5 | c6
+      · have : ¬ ¬ Cong G D G E := by
+            intro h
+            contradict
+        close
+      · have : Cong A D A E := by conclude lemma_congruencesymmetric
+        have : Cong G D G E := by conclude cn_equalitysub
+        close
+      · have : Cong G D G E := by conclude cn_equalitysub
+        close
+      · have : Cong B A B A := by conclude cn_congruencereflexive
+        have : Cong A G A G := by conclude cn_congruencereflexive
+        have : Cong A D A E := by conclude lemma_congruencesymmetric
+        have : Cong D G E G := by pose proof (axiom_5_line B A G D B A G E
+        have : Cong G D G E := by forward_using lemma_congruenceflip
+        close
+      · have : Cong A B A B := by conclude cn_congruencereflexive
+        have : Cong B G B G := by conclude cn_congruencereflexive
+        have : Cong D G E G := by pose proof (axiom_5_line A B G D A B G E
+        have : Cong G D G E := by forward_using lemma_congruenceflip
+        close
+      · have : Cong A G A G := by conclude cn_congruencereflexive
+        have : Cong G B G B := by conclude cn_congruencereflexive
+        have : Cong G D G E := by conclude lemma_interior5
+        close
   have : Cong D A E A := by forward_using lemma_congruenceflip
-  sorry -- TODO: assert (eq F G).
-  rcases (show A = G ∨ A ≠ G by first | assumption | exact Classical.em _ | tauto | aesop) with c1 | c2
-  · have : BetS E G D := by conclude axiom_betweennesssymmetry
-    have : Cong E G D G := by forward_using lemma_doublereverse
-    have : Cong E B D B := by forward_using lemma_doublereverse
-    have : ¬ G = B := by
-        intro h
-        have : A = B := by conclude cn_equalitysub
-        contradict
-    have : Per E G B := by conclude_def Per
-    have : BetS E F C := by conclude axiom_betweennesssymmetry
-    have : Cong E F C F := by forward_using lemma_doublereverse
-    have : Cong E B C B := by forward_using lemma_doublereverse
-    have : ¬ F = B := by
-        intro h
-        have : Cong A E A D := by forward_using lemma_congruenceflip
-        have : B ≠ A := by conclude lemma_inequalitysymmetric
-        have : BetS E A D := by conclude cn_equalitysub
-        have : Cong E A D A := by forward_using lemma_congruenceflip
-        have : Per E A B := by conclude_def Per
-        have : Per B A E := by conclude lemma_8_2
-        have : BetS E B C := by conclude cn_equalitysub
-        have : Per E B A := by conclude_def Per
-        obtain ⟨J, _, _⟩ : ∃ J, (BetS B A J ∧ Cong A J A B) := by conclude lemma_extension
-        have : Out B A J := by conclude lemma_ray4
-        have : Per E B J := by conclude lemma_8_3
-        have : Per J B E := by conclude lemma_8_2
-        have : Col A B J := by conclude_def Col
-        have : Col B A J := by forward_using lemma_collinearorder
-        have : Per B A E := by conclude lemma_8_2
-        have : A ≠ J := by forward_using lemma_betweennotequal
-        have : J ≠ A := by conclude lemma_inequalitysymmetric
-        have : Per J A E := by conclude lemma_collinearright
-        have : Col J A B := by forward_using lemma_collinearorder
-        have : A = B := by conclude lemma_droppedperpendicularunique
-        contradict
-    have : Per E F B := by conclude_def Per
-    have : Per B G E := by conclude lemma_8_2
-    have : Per B F E := by conclude lemma_8_2
-    have : Col B G F := by conclude lemma_collinear4
-    have : G = F := by conclude lemma_droppedperpendicularunique
-    have : F = G := by conclude lemma_equalitysymmetric
-    close
-  · sorry -- TODO: assert (eq F G).
-    rcases (show A = F ∨ A ≠ F by first | assumption | exact Classical.em _ | tauto | aesop) with c1 | c2
-    · have : F ≠ B := by conclude cn_equalitysub
-      have : Cong E F C F := by forward_using lemma_congruenceflip
-      have : Cong E B C B := by forward_using lemma_doublereverse
-      have : BetS E F C := by conclude axiom_betweennesssymmetry
-      have : Per E F B := by conclude_def Per
-      have : Per B F E := by conclude lemma_8_2
-      have : ¬ B = G := by
-          intro h
-          have : F = A := by conclude lemma_equalitysymmetric
-          have : Cong A E A C := by forward_using lemma_congruenceflip
-          have : Cong A C A D := by forward_using lemma_congruenceflip
-          have : Cong A E A D := by conclude lemma_congruencetransitive
-          have : Cong B E B D := by conclude lemma_congruencesymmetric
-          have : BetS E G D := by conclude axiom_betweennesssymmetry
-          have : BetS E B D := by conclude cn_equalitysub
-          have : Cong E B D B := by forward_using lemma_congruenceflip
-          have : Cong E A D A := by conclude lemma_congruencesymmetric
-          have : B ≠ A := by conclude lemma_inequalitysymmetric
-          have : Per E B A := by conclude_def Per
-          have : Per A B E := by conclude lemma_8_2
-          have : BetS E A C := by conclude cn_equalitysub
-          have : Per E A B := by conclude_def Per
-          have : Per B A E := by conclude lemma_8_2
-          obtain ⟨K, _, _⟩ : ∃ K, (BetS A B K ∧ Cong B K B A) := by conclude lemma_extension
-          have : Out A B K := by conclude lemma_ray4
-          have : Per E A K := by conclude lemma_8_3
-          have : Per K A E := by conclude lemma_8_2
-          have : Col B A K := by conclude_def Col
-          have : Col A B K := by forward_using lemma_collinearorder
-          have : Per A B E := by conclude lemma_8_2
-          have : B ≠ K := by forward_using lemma_betweennotequal
-          have : K ≠ B := by conclude lemma_inequalitysymmetric
-          have : Per K B E := by conclude lemma_collinearright
-          have : Col A B K := by conclude_def Col
-          have : Col K B A := by forward_using lemma_collinearorder
-          have : B = A := by conclude lemma_droppedperpendicularunique
-          have : B ≠ A := by conclude lemma_inequalitysymmetric
-          contradict
-      have : G ≠ B := by conclude lemma_inequalitysymmetric
-      have : Cong E G D G := by forward_using lemma_doublereverse
-      have : Cong E B D B := by forward_using lemma_doublereverse
-      have : BetS E G D := by conclude axiom_betweennesssymmetry
-      have : Per E G B := by conclude_def Per
-      have : Per B G E := by conclude lemma_8_2
-      have : Col F B G := by conclude cn_equalitysub
-      have : Col B G F := by forward_using lemma_collinearorder
-      have : G = F := by conclude lemma_droppedperpendicularunique
-      have : F = G := by conclude lemma_equalitysymmetric
-      close
-    · have : F ≠ A := by conclude lemma_inequalitysymmetric
-      have : Cong E F C F := by forward_using lemma_doublereverse
-      have : BetS E F C := by conclude axiom_betweennesssymmetry
-      have : Per E F A := by conclude_def Per
-      have : Per A F E := by conclude lemma_8_2
-      have : BetS E G D := by conclude axiom_betweennesssymmetry
-      have : Cong E G D G := by forward_using lemma_doublereverse
-      have : Cong E A D A := by conclude lemma_congruencesymmetric
-      have : G ≠ A := by conclude lemma_inequalitysymmetric
-      have : Per E G A := by conclude_def Per
-      have : Per A G E := by conclude lemma_8_2
-      have : Col B A F := by forward_using lemma_collinearorder
-      have : Col B A G := by forward_using lemma_collinearorder
-      have : B ≠ A := by conclude lemma_inequalitysymmetric
-      have : Col A F G := by conclude lemma_collinear4
-      have : F = G := by conclude lemma_droppedperpendicularunique
-      close
-    close
+  have : F = G := by
+      rcases (show A = G ∨ A ≠ G by first | assumption | exact Classical.em _ | tauto | aesop) with c1 | c2
+      · have : BetS E G D := by conclude axiom_betweennesssymmetry
+        have : Cong E G D G := by forward_using lemma_doublereverse
+        have : Cong E B D B := by forward_using lemma_doublereverse
+        have : ¬ G = B := by
+            intro h
+            have : A = B := by conclude cn_equalitysub
+            contradict
+        have : Per E G B := by conclude_def Per
+        have : BetS E F C := by conclude axiom_betweennesssymmetry
+        have : Cong E F C F := by forward_using lemma_doublereverse
+        have : Cong E B C B := by forward_using lemma_doublereverse
+        have : ¬ F = B := by
+            intro h
+            have : Cong A E A D := by forward_using lemma_congruenceflip
+            have : B ≠ A := by conclude lemma_inequalitysymmetric
+            have : BetS E A D := by conclude cn_equalitysub
+            have : Cong E A D A := by forward_using lemma_congruenceflip
+            have : Per E A B := by conclude_def Per
+            have : Per B A E := by conclude lemma_8_2
+            have : BetS E B C := by conclude cn_equalitysub
+            have : Per E B A := by conclude_def Per
+            obtain ⟨J, _, _⟩ : ∃ J, (BetS B A J ∧ Cong A J A B) := by conclude lemma_extension
+            have : Out B A J := by conclude lemma_ray4
+            have : Per E B J := by conclude lemma_8_3
+            have : Per J B E := by conclude lemma_8_2
+            have : Col A B J := by conclude_def Col
+            have : Col B A J := by forward_using lemma_collinearorder
+            have : Per B A E := by conclude lemma_8_2
+            have : A ≠ J := by forward_using lemma_betweennotequal
+            have : J ≠ A := by conclude lemma_inequalitysymmetric
+            have : Per J A E := by conclude lemma_collinearright
+            have : Col J A B := by forward_using lemma_collinearorder
+            have : A = B := by conclude lemma_droppedperpendicularunique
+            contradict
+        have : Per E F B := by conclude_def Per
+        have : Per B G E := by conclude lemma_8_2
+        have : Per B F E := by conclude lemma_8_2
+        have : Col B G F := by conclude lemma_collinear4
+        have : G = F := by conclude lemma_droppedperpendicularunique
+        have : F = G := by conclude lemma_equalitysymmetric
+        close
+      · have : F = G := by
+            rcases (show A = F ∨ A ≠ F by first | assumption | exact Classical.em _ | tauto | aesop) with c1 | c2
+            · have : F ≠ B := by conclude cn_equalitysub
+              have : Cong E F C F := by forward_using lemma_congruenceflip
+              have : Cong E B C B := by forward_using lemma_doublereverse
+              have : BetS E F C := by conclude axiom_betweennesssymmetry
+              have : Per E F B := by conclude_def Per
+              have : Per B F E := by conclude lemma_8_2
+              have : ¬ B = G := by
+                  intro h
+                  have : F = A := by conclude lemma_equalitysymmetric
+                  have : Cong A E A C := by forward_using lemma_congruenceflip
+                  have : Cong A C A D := by forward_using lemma_congruenceflip
+                  have : Cong A E A D := by conclude lemma_congruencetransitive
+                  have : Cong B E B D := by conclude lemma_congruencesymmetric
+                  have : BetS E G D := by conclude axiom_betweennesssymmetry
+                  have : BetS E B D := by conclude cn_equalitysub
+                  have : Cong E B D B := by forward_using lemma_congruenceflip
+                  have : Cong E A D A := by conclude lemma_congruencesymmetric
+                  have : B ≠ A := by conclude lemma_inequalitysymmetric
+                  have : Per E B A := by conclude_def Per
+                  have : Per A B E := by conclude lemma_8_2
+                  have : BetS E A C := by conclude cn_equalitysub
+                  have : Per E A B := by conclude_def Per
+                  have : Per B A E := by conclude lemma_8_2
+                  obtain ⟨K, _, _⟩ : ∃ K, (BetS A B K ∧ Cong B K B A) := by conclude lemma_extension
+                  have : Out A B K := by conclude lemma_ray4
+                  have : Per E A K := by conclude lemma_8_3
+                  have : Per K A E := by conclude lemma_8_2
+                  have : Col B A K := by conclude_def Col
+                  have : Col A B K := by forward_using lemma_collinearorder
+                  have : Per A B E := by conclude lemma_8_2
+                  have : B ≠ K := by forward_using lemma_betweennotequal
+                  have : K ≠ B := by conclude lemma_inequalitysymmetric
+                  have : Per K B E := by conclude lemma_collinearright
+                  have : Col A B K := by conclude_def Col
+                  have : Col K B A := by forward_using lemma_collinearorder
+                  have : B = A := by conclude lemma_droppedperpendicularunique
+                  have : B ≠ A := by conclude lemma_inequalitysymmetric
+                  contradict
+              have : G ≠ B := by conclude lemma_inequalitysymmetric
+              have : Cong E G D G := by forward_using lemma_doublereverse
+              have : Cong E B D B := by forward_using lemma_doublereverse
+              have : BetS E G D := by conclude axiom_betweennesssymmetry
+              have : Per E G B := by conclude_def Per
+              have : Per B G E := by conclude lemma_8_2
+              have : Col F B G := by conclude cn_equalitysub
+              have : Col B G F := by forward_using lemma_collinearorder
+              have : G = F := by conclude lemma_droppedperpendicularunique
+              have : F = G := by conclude lemma_equalitysymmetric
+              close
+            · have : F ≠ A := by conclude lemma_inequalitysymmetric
+              have : Cong E F C F := by forward_using lemma_doublereverse
+              have : BetS E F C := by conclude axiom_betweennesssymmetry
+              have : Per E F A := by conclude_def Per
+              have : Per A F E := by conclude lemma_8_2
+              have : BetS E G D := by conclude axiom_betweennesssymmetry
+              have : Cong E G D G := by forward_using lemma_doublereverse
+              have : Cong E A D A := by conclude lemma_congruencesymmetric
+              have : G ≠ A := by conclude lemma_inequalitysymmetric
+              have : Per E G A := by conclude_def Per
+              have : Per A G E := by conclude lemma_8_2
+              have : Col B A F := by forward_using lemma_collinearorder
+              have : Col B A G := by forward_using lemma_collinearorder
+              have : B ≠ A := by conclude lemma_inequalitysymmetric
+              have : Col A F G := by conclude lemma_collinear4
+              have : F = G := by conclude lemma_droppedperpendicularunique
+              close
+        close
   have : Cong A F A F := by conclude cn_congruencereflexive
   have : Cong B F B F := by conclude cn_congruencereflexive
   have : Cong A F A G := by conclude cn_equalitysub

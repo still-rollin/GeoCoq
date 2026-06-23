@@ -38,64 +38,64 @@ theorem proposition_36 :
       intro h
       have : CR E C B H := by conclude lemma_crisscross
       contradict
-  sorry -- TODO: assert (EF A B C D E F G H).
-  rcases (show CR E C B H ∨ CR E B H C by first | assumption | exact Classical.em _ | tauto | aesop) with c1 | c2
-  · obtain ⟨M, _, _⟩ : ∃ M, (BetS E M C ∧ BetS B M H) := by conclude_def CR
-    have : BetS H M B := by conclude axiom_betweennesssymmetry
-    have : (Par E B H C ∧ Cong E B H C) := by conclude proposition_33
-    have : Par E B C H := by forward_using lemma_parallelflip
-    have : PG E B C H := by conclude_def PG
-    have : EF A B C D E B C H := by conclude proposition_35
-    have : Col C F G := by conclude lemma_collinear4
-    have : Col G F C := by forward_using lemma_collinearorder
-    have : Col C B F := by forward_using lemma_collinearorder
-    have : Col C B G := by forward_using lemma_collinearorder
-    have : C ≠ B := by conclude lemma_inequalitysymmetric
-    have : Col B F G := by conclude lemma_collinear4
-    have : Col G F B := by forward_using lemma_collinearorder
-    have : Par F G E H := by conclude lemma_parallelsymmetric
-    have : Par G F H E := by forward_using lemma_parallelflip
-    have : Par E F G H := by conclude_def PG
-    have : Par G H E F := by conclude lemma_parallelsymmetric
-    have : PG G H E F := by conclude_def PG
-    have : Par C H E B := by conclude lemma_parallelsymmetric
-    have : Par B C E H := by conclude lemma_parallelsymmetric
-    have : Par C B H E := by forward_using lemma_parallelflip
-    have : PG C H E B := by conclude_def PG
-    have : EF G H E F C H E B := by conclude proposition_35
-    have : EF G H E F E B C H := by forward_using axiom_EFpermutation
-    have : EF E B C H G H E F := by conclude axiom_EFsymmetric
-    have : EF A B C D G H E F := by conclude axiom_EFtransitive
-    have : EF A B C D E F G H := by forward_using axiom_EFpermutation
-    close
-  · obtain ⟨M, _, _⟩ : ∃ M, (BetS E M B ∧ BetS H M C) := by conclude_def CR
-    have : Par H E B C := by forward_using lemma_parallelflip
-    have : Cong H E B C := by forward_using lemma_congruenceflip
-    have : (Par H B E C ∧ Cong H B E C) := by conclude proposition_33
-    have : Par H B C E := by forward_using lemma_parallelflip
-    have : PG H B C E := by conclude_def PG
-    have : EF A B C D H B C E := by conclude proposition_35
-    have : Col C G F := by conclude lemma_collinear4
-    have : Col F G C := by forward_using lemma_collinearorder
-    have : Col C B G := by forward_using lemma_collinearorder
-    have : Col C B F := by forward_using lemma_collinearorder
-    have : C ≠ B := by conclude lemma_inequalitysymmetric
-    have : Col B G F := by conclude lemma_collinear4
-    have : Col F G B := by forward_using lemma_collinearorder
-    have : Par H E F G := by forward_using lemma_parallelflip
-    have : Par F G H E := by conclude lemma_parallelsymmetric
-    have : Par F G E H := by forward_using lemma_parallelflip
-    have : Par F E H G := by forward_using lemma_parallelflip
-    have : PG F E H G := by conclude_def PG
-    have : Par C E H B := by conclude lemma_parallelsymmetric
-    have : Par C B E H := by forward_using lemma_parallelflip
-    have : PG C E H B := by conclude_def PG
-    have : EF F E H G C E H B := by conclude proposition_35
-    have : EF F E H G H B C E := by forward_using axiom_EFpermutation
-    have : EF H B C E F E H G := by conclude axiom_EFsymmetric
-    have : EF A B C D F E H G := by conclude axiom_EFtransitive
-    have : EF A B C D E F G H := by forward_using axiom_EFpermutation
-    close
+  have : EF A B C D E F G H := by
+      rcases (show CR E C B H ∨ CR E B H C by first | assumption | exact Classical.em _ | tauto | aesop) with c1 | c2
+      · obtain ⟨M, _, _⟩ : ∃ M, (BetS E M C ∧ BetS B M H) := by conclude_def CR
+        have : BetS H M B := by conclude axiom_betweennesssymmetry
+        have : (Par E B H C ∧ Cong E B H C) := by conclude proposition_33
+        have : Par E B C H := by forward_using lemma_parallelflip
+        have : PG E B C H := by conclude_def PG
+        have : EF A B C D E B C H := by conclude proposition_35
+        have : Col C F G := by conclude lemma_collinear4
+        have : Col G F C := by forward_using lemma_collinearorder
+        have : Col C B F := by forward_using lemma_collinearorder
+        have : Col C B G := by forward_using lemma_collinearorder
+        have : C ≠ B := by conclude lemma_inequalitysymmetric
+        have : Col B F G := by conclude lemma_collinear4
+        have : Col G F B := by forward_using lemma_collinearorder
+        have : Par F G E H := by conclude lemma_parallelsymmetric
+        have : Par G F H E := by forward_using lemma_parallelflip
+        have : Par E F G H := by conclude_def PG
+        have : Par G H E F := by conclude lemma_parallelsymmetric
+        have : PG G H E F := by conclude_def PG
+        have : Par C H E B := by conclude lemma_parallelsymmetric
+        have : Par B C E H := by conclude lemma_parallelsymmetric
+        have : Par C B H E := by forward_using lemma_parallelflip
+        have : PG C H E B := by conclude_def PG
+        have : EF G H E F C H E B := by conclude proposition_35
+        have : EF G H E F E B C H := by forward_using axiom_EFpermutation
+        have : EF E B C H G H E F := by conclude axiom_EFsymmetric
+        have : EF A B C D G H E F := by conclude axiom_EFtransitive
+        have : EF A B C D E F G H := by forward_using axiom_EFpermutation
+        close
+      · obtain ⟨M, _, _⟩ : ∃ M, (BetS E M B ∧ BetS H M C) := by conclude_def CR
+        have : Par H E B C := by forward_using lemma_parallelflip
+        have : Cong H E B C := by forward_using lemma_congruenceflip
+        have : (Par H B E C ∧ Cong H B E C) := by conclude proposition_33
+        have : Par H B C E := by forward_using lemma_parallelflip
+        have : PG H B C E := by conclude_def PG
+        have : EF A B C D H B C E := by conclude proposition_35
+        have : Col C G F := by conclude lemma_collinear4
+        have : Col F G C := by forward_using lemma_collinearorder
+        have : Col C B G := by forward_using lemma_collinearorder
+        have : Col C B F := by forward_using lemma_collinearorder
+        have : C ≠ B := by conclude lemma_inequalitysymmetric
+        have : Col B G F := by conclude lemma_collinear4
+        have : Col F G B := by forward_using lemma_collinearorder
+        have : Par H E F G := by forward_using lemma_parallelflip
+        have : Par F G H E := by conclude lemma_parallelsymmetric
+        have : Par F G E H := by forward_using lemma_parallelflip
+        have : Par F E H G := by forward_using lemma_parallelflip
+        have : PG F E H G := by conclude_def PG
+        have : Par C E H B := by conclude lemma_parallelsymmetric
+        have : Par C B E H := by forward_using lemma_parallelflip
+        have : PG C E H B := by conclude_def PG
+        have : EF F E H G C E H B := by conclude proposition_35
+        have : EF F E H G H B C E := by forward_using axiom_EFpermutation
+        have : EF H B C E F E H G := by conclude axiom_EFsymmetric
+        have : EF A B C D F E H G := by conclude axiom_EFtransitive
+        have : EF A B C D E F G H := by forward_using axiom_EFpermutation
+        close
   close
 
 end GeocoqTranslate.Elements

@@ -156,97 +156,97 @@ theorem proposition_30 :
   have : nCol f H K := by conclude lemma_NChelper
   have : nCol K H f := by forward_using lemma_NCorder
   have : Col K H H := by conclude_def Col
-  sorry -- TODO: assert (Par A b C d).
-  rcases (show CR A f G H ∨ CR A E G H by first | assumption | exact Classical.em _ | tauto | aesop) with c1 | c2
-  · have : TS A G H f := by forward_using lemma_crossimpliesopposite
-    sorry -- TODO: assert (Par A b C d).
-    rcases (show CR C f K H ∨ CR C E K H by first | assumption | exact Classical.em _ | tauto | aesop) with c1 | c2
-    · have : TS f H K C := by forward_using lemma_crossimpliesopposite
-      have : Par A b C d := by apply (proposition_30A _ _ _ _ E f G H K
-      close
-    · obtain ⟨M, _, _⟩ : ∃ M, (BetS C M E ∧ BetS K M H) := by conclude_def CR
-      have : Col K M H := by conclude_def Col
-      have : Col K H M := by forward_using lemma_collinearorder
-      have : BetS f H E := by conclude axiom_betweennesssymmetry
-      have : OS f C K H := by conclude_def OS
-      have : K = K := by conclude cn_equalityreflexive
-      have : Col K H K := by conclude_def Col
-      have : TS C K H d := by conclude_def TS
-      have : TS f K H d := by conclude lemma_planeseparation
-      obtain ⟨m, _, _, _⟩ : ∃ m, (BetS f m d ∧ Col K H m ∧ nCol K H f) := by conclude_def TS
-      have : Par f E C d := by conclude lemma_parallelsymmetric
-      have : ¬ Meet f E C d := by auto using parnotmeet
-      have : Col f H E := by forward_using lemma_collinearorder
-      have : f ≠ E := by forward_using lemma_betweennotequal
-      have : f ≠ H := by conclude lemma_inequalitysymmetric
-      have : K ≠ d := by forward_using lemma_betweennotequal
-      have : Col H K m := by forward_using lemma_collinearorder
-      have : BetS H m K := by conclude lemma_collinearbetween
-      have : BetS K m H := by conclude axiom_betweennesssymmetry
-      have : BetS d m f := by conclude axiom_betweennesssymmetry
-      have : CR d f K H := by conclude_def CR
-      have : nCol C K H := by forward_using lemma_NCorder
-      have : Col C K d := by conclude_def Col
-      have : d ≠ K := by conclude lemma_inequalitysymmetric
-      have : Col C K K := by conclude_def Col
-      have : nCol d K H := by conclude lemma_NChelper
-      have : TS d H K f := by forward_using lemma_crossimpliesopposite
-      have : Par d C E f := by forward_using lemma_parallelflip
-      have : BetS d K C := by conclude axiom_betweennesssymmetry
-      have : TS f H K d := by conclude lemma_oppositesidesymmetric
-      have : Par A b d C := by
-          intro h
-          sorry -- TODO: simple eapply proposition_30A.
-      have : Par A b C d := by forward_using lemma_parallelflip
-      close
-    close
-  · sorry -- TODO: assert (Par A b C d).
-    rcases (show CR C f K H ∨ CR C E K H by first | assumption | exact Classical.em _ | tauto | aesop) with c1 | c2
-    · obtain ⟨M, _, _⟩ : ∃ M, (BetS C M f ∧ BetS K M H) := by conclude_def CR
-      have : Col K M H := by conclude_def Col
-      have : Col K H M := by forward_using lemma_collinearorder
-      have : nCol K H E := by forward_using lemma_NCorder
-      have : nCol K H C := by forward_using lemma_NCorder
-      have : OS E C K H := by conclude_def OS
-      have : K = K := by conclude cn_equalityreflexive
-      have : Col K H K := by conclude_def Col
-      have : TS C K H d := by conclude_def TS
-      have : TS E K H d := by conclude lemma_planeseparation
-      obtain ⟨m, _, _, _⟩ : ∃ m, (BetS E m d ∧ Col K H m ∧ nCol K H E) := by conclude_def TS
-      have : Par E f C d := by conclude lemma_parallelsymmetric
-      have : ¬ Meet E f C d := by auto using parnotmeet
-      have : Col E H f := by forward_using lemma_collinearorder
-      have : E ≠ f := by forward_using lemma_betweennotequal
-      have : E ≠ H := by conclude lemma_inequalitysymmetric
-      have : K ≠ d := by forward_using lemma_betweennotequal
-      have : Col H K m := by forward_using lemma_collinearorder
-      have : BetS H m K := by conclude lemma_collinearbetween
-      have : BetS K m H := by conclude axiom_betweennesssymmetry
-      have : BetS d m E := by conclude axiom_betweennesssymmetry
-      have : CR d E K H := by conclude_def CR
-      have : nCol C K H := by forward_using lemma_NCorder
-      have : Col C K d := by conclude_def Col
-      have : d ≠ K := by conclude lemma_inequalitysymmetric
-      have : Col C K K := by conclude_def Col
-      have : nCol d K H := by conclude lemma_NChelper
-      have : TS d H K E := by forward_using lemma_crossimpliesopposite
-      have : Par d C f E := by forward_using lemma_parallelflip
-      have : BetS d K C := by conclude axiom_betweennesssymmetry
-      have : TS E H K d := by conclude lemma_oppositesidesymmetric
-      have : TS A G H E := by forward_using lemma_crossimpliesopposite
-      have : BetS f H E := by conclude axiom_betweennesssymmetry
-      have : Par A b d C := by conclude proposition_30A
-      have : Par A b C d := by forward_using lemma_parallelflip
-      close
-    · have : TS C H K E := by forward_using lemma_crossimpliesopposite
-      have : TS E H K C := by conclude lemma_oppositesidesymmetric
-      have : TS A G H E := by forward_using lemma_crossimpliesopposite
-      have : BetS f H E := by conclude axiom_betweennesssymmetry
-      have : Par A b C d := by
-          intro h
-          sorry -- TODO: simple eapply proposition_30A.
-      close
-    close
+  have : Par A b C d := by
+      rcases (show CR A f G H ∨ CR A E G H by first | assumption | exact Classical.em _ | tauto | aesop) with c1 | c2
+      · have : TS A G H f := by forward_using lemma_crossimpliesopposite
+        have : Par A b C d := by
+            rcases (show CR C f K H ∨ CR C E K H by first | assumption | exact Classical.em _ | tauto | aesop) with c1 | c2
+            · have : TS f H K C := by forward_using lemma_crossimpliesopposite
+              have : Par A b C d := by apply (proposition_30A _ _ _ _ E f G H K
+              close
+            · obtain ⟨M, _, _⟩ : ∃ M, (BetS C M E ∧ BetS K M H) := by conclude_def CR
+              have : Col K M H := by conclude_def Col
+              have : Col K H M := by forward_using lemma_collinearorder
+              have : BetS f H E := by conclude axiom_betweennesssymmetry
+              have : OS f C K H := by conclude_def OS
+              have : K = K := by conclude cn_equalityreflexive
+              have : Col K H K := by conclude_def Col
+              have : TS C K H d := by conclude_def TS
+              have : TS f K H d := by conclude lemma_planeseparation
+              obtain ⟨m, _, _, _⟩ : ∃ m, (BetS f m d ∧ Col K H m ∧ nCol K H f) := by conclude_def TS
+              have : Par f E C d := by conclude lemma_parallelsymmetric
+              have : ¬ Meet f E C d := by auto using parnotmeet
+              have : Col f H E := by forward_using lemma_collinearorder
+              have : f ≠ E := by forward_using lemma_betweennotequal
+              have : f ≠ H := by conclude lemma_inequalitysymmetric
+              have : K ≠ d := by forward_using lemma_betweennotequal
+              have : Col H K m := by forward_using lemma_collinearorder
+              have : BetS H m K := by conclude lemma_collinearbetween
+              have : BetS K m H := by conclude axiom_betweennesssymmetry
+              have : BetS d m f := by conclude axiom_betweennesssymmetry
+              have : CR d f K H := by conclude_def CR
+              have : nCol C K H := by forward_using lemma_NCorder
+              have : Col C K d := by conclude_def Col
+              have : d ≠ K := by conclude lemma_inequalitysymmetric
+              have : Col C K K := by conclude_def Col
+              have : nCol d K H := by conclude lemma_NChelper
+              have : TS d H K f := by forward_using lemma_crossimpliesopposite
+              have : Par d C E f := by forward_using lemma_parallelflip
+              have : BetS d K C := by conclude axiom_betweennesssymmetry
+              have : TS f H K d := by conclude lemma_oppositesidesymmetric
+              have : Par A b d C := by
+                  intro h
+                  sorry -- TODO: simple eapply proposition_30A.
+              have : Par A b C d := by forward_using lemma_parallelflip
+              close
+        close
+      · have : Par A b C d := by
+            rcases (show CR C f K H ∨ CR C E K H by first | assumption | exact Classical.em _ | tauto | aesop) with c1 | c2
+            · obtain ⟨M, _, _⟩ : ∃ M, (BetS C M f ∧ BetS K M H) := by conclude_def CR
+              have : Col K M H := by conclude_def Col
+              have : Col K H M := by forward_using lemma_collinearorder
+              have : nCol K H E := by forward_using lemma_NCorder
+              have : nCol K H C := by forward_using lemma_NCorder
+              have : OS E C K H := by conclude_def OS
+              have : K = K := by conclude cn_equalityreflexive
+              have : Col K H K := by conclude_def Col
+              have : TS C K H d := by conclude_def TS
+              have : TS E K H d := by conclude lemma_planeseparation
+              obtain ⟨m, _, _, _⟩ : ∃ m, (BetS E m d ∧ Col K H m ∧ nCol K H E) := by conclude_def TS
+              have : Par E f C d := by conclude lemma_parallelsymmetric
+              have : ¬ Meet E f C d := by auto using parnotmeet
+              have : Col E H f := by forward_using lemma_collinearorder
+              have : E ≠ f := by forward_using lemma_betweennotequal
+              have : E ≠ H := by conclude lemma_inequalitysymmetric
+              have : K ≠ d := by forward_using lemma_betweennotequal
+              have : Col H K m := by forward_using lemma_collinearorder
+              have : BetS H m K := by conclude lemma_collinearbetween
+              have : BetS K m H := by conclude axiom_betweennesssymmetry
+              have : BetS d m E := by conclude axiom_betweennesssymmetry
+              have : CR d E K H := by conclude_def CR
+              have : nCol C K H := by forward_using lemma_NCorder
+              have : Col C K d := by conclude_def Col
+              have : d ≠ K := by conclude lemma_inequalitysymmetric
+              have : Col C K K := by conclude_def Col
+              have : nCol d K H := by conclude lemma_NChelper
+              have : TS d H K E := by forward_using lemma_crossimpliesopposite
+              have : Par d C f E := by forward_using lemma_parallelflip
+              have : BetS d K C := by conclude axiom_betweennesssymmetry
+              have : TS E H K d := by conclude lemma_oppositesidesymmetric
+              have : TS A G H E := by forward_using lemma_crossimpliesopposite
+              have : BetS f H E := by conclude axiom_betweennesssymmetry
+              have : Par A b d C := by conclude proposition_30A
+              have : Par A b C d := by forward_using lemma_parallelflip
+              close
+            · have : TS C H K E := by forward_using lemma_crossimpliesopposite
+              have : TS E H K C := by conclude lemma_oppositesidesymmetric
+              have : TS A G H E := by forward_using lemma_crossimpliesopposite
+              have : BetS f H E := by conclude axiom_betweennesssymmetry
+              have : Par A b C d := by
+                  intro h
+                  sorry -- TODO: simple eapply proposition_30A.
+              close
+        close
   have : Par A b d C := by forward_using lemma_parallelflip
   have : Col d C D := by forward_using lemma_collinearorder
   have : D ≠ C := by conclude lemma_inequalitysymmetric

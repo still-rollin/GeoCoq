@@ -93,15 +93,15 @@ theorem proposition_35A :
       intro h
       have : D = E := by eapply ( axiom_connectivity) with A F;auto
       contradict
-  sorry -- TODO: assert (Out A D E).
-  rcases (show BetS A D E ∨ BetS A E D ∨ D = E by first | assumption | exact Classical.em _ | tauto | aesop) with c1 | c2 | c3
-  · have : Out A D E := by conclude lemma_ray4
-    close
-  · have : Out A D E := by conclude lemma_ray4
-    close
-  · have : Out A D D := by conclude lemma_ray4
-    have : Out A D E := by conclude cn_equalitysub
-    close
+  have : Out A D E := by
+      rcases (show BetS A D E ∨ BetS A E D ∨ D = E by first | assumption | exact Classical.em _ | tauto | aesop) with c1 | c2 | c3
+      · have : Out A D E := by conclude lemma_ray4
+        close
+      · have : Out A D E := by conclude lemma_ray4
+        close
+      · have : Out A D D := by conclude lemma_ray4
+        have : Out A D E := by conclude cn_equalitysub
+        close
   have : nCol A D B := by forward_using lemma_parallelNC
   have : nCol D A B := by forward_using lemma_NCorder
   have : CongA D A B D A B := by conclude lemma_equalanglesreflexive
@@ -109,22 +109,22 @@ theorem proposition_35A :
   have : CongA F D C E A B := by conclude lemma_equalanglestransitive
   have : Cong A B D C := by forward_using proposition_34
   have : Cong D E E D := by conclude cn_equalityreverse
-  sorry -- TODO: assert (Cong A E D F).
-  rcases (show BetS A D E ∨ BetS A E D ∨ D = E by first | assumption | exact Classical.em _ | tauto | aesop) with c1 | c2 | c3
-  · have : BetS D E F := by conclude lemma_3_6a
-    have : BetS F E D := by conclude axiom_betweennesssymmetry
-    have : Cong A E F D := by conclude cn_sumofparts
-    have : Cong A E D F := by forward_using lemma_congruenceflip
-    close
-  · have : BetS D E A := by conclude axiom_betweennesssymmetry
-    have : BetS E D F := by conclude lemma_3_6a
-    have : Cong D A E F := by forward_using lemma_congruenceflip
-    have : Cong E A D F := by conclude lemma_differenceofparts
-    have : Cong A E D F := by forward_using lemma_congruenceflip
-    close
-  · have : Cong A E E F := by conclude cn_equalitysub
-    have : Cong A E D F := by conclude cn_equalitysub
-    close
+  have : Cong A E D F := by
+      rcases (show BetS A D E ∨ BetS A E D ∨ D = E by first | assumption | exact Classical.em _ | tauto | aesop) with c1 | c2 | c3
+      · have : BetS D E F := by conclude lemma_3_6a
+        have : BetS F E D := by conclude axiom_betweennesssymmetry
+        have : Cong A E F D := by conclude cn_sumofparts
+        have : Cong A E D F := by forward_using lemma_congruenceflip
+        close
+      · have : BetS D E A := by conclude axiom_betweennesssymmetry
+        have : BetS E D F := by conclude lemma_3_6a
+        have : Cong D A E F := by forward_using lemma_congruenceflip
+        have : Cong E A D F := by conclude lemma_differenceofparts
+        have : Cong A E D F := by forward_using lemma_congruenceflip
+        close
+      · have : Cong A E E F := by conclude cn_equalitysub
+        have : Cong A E D F := by conclude cn_equalitysub
+        close
   have : Cong D F A E := by conclude lemma_congruencesymmetric
   have : Cong D C A B := by conclude lemma_congruencesymmetric
   have : (Cong F C E B ∧ CongA D F C A E B ∧ CongA D C F A B E) := by conclude proposition_04
@@ -135,188 +135,188 @@ theorem proposition_35A :
   have : Triangle F D C := by conclude_def Triangle
   have : Cong_3 F D C E A B := by conclude_def Cong_3
   have : ET F D C E A B := by conclude axiom_congruentequal
-  sorry -- TODO: assert (EF A B C D E B C F).
-  rcases (show BetS A D E ∨ BetS A E D ∨ D = E by first | assumption | exact Classical.em _ | tauto | aesop) with c1 | c2 | c3
-  · obtain ⟨M, _, _⟩ : ∃ M, (BetS A M C ∧ BetS B M D) := by conclude lemma_diagonalsmeet
-    have : BetS D M B := by conclude axiom_betweennesssymmetry
-    have : nCol A D B := by forward_using lemma_parallelNC
-    have : Col A D E := by conclude_def Col
-    have : Col A D A := by conclude_def Col
-    have : A ≠ E := by forward_using lemma_betweennotequal
-    have : nCol A E B := by conclude lemma_NChelper
-    have : BetS B M D := by conclude axiom_betweennesssymmetry
-    obtain ⟨H, _, _⟩ : ∃ H, (BetS B H E ∧ BetS A M H) := by conclude postulate_Pasch_outer
-    have : Col A M H := by conclude_def Col
-    have : Col A M C := by conclude_def Col
-    have : A ≠ M := by forward_using lemma_betweennotequal
-    have : M ≠ A := by conclude lemma_inequalitysymmetric
-    have : Col M A H := by forward_using lemma_collinearorder
-    have : Col M A C := by forward_using lemma_collinearorder
-    have : Col A H C := by conclude lemma_collinear4
-    have : BetS E H B := by conclude axiom_betweennesssymmetry
-    have : E ≠ A := by conclude lemma_inequalitysymmetric
-    have : ¬ B = C := by
-        intro h
-        have : Col A B C := by conclude_def Col
-        contradict
-    have : ¬ Meet A D B C := by conclude_def Par
-    have : ¬ Meet E A C B := by
-        intro h
-        obtain ⟨q, _, _, _, _⟩ : ∃ q, (E ≠ A ∧ C ≠ B ∧ Col E A q ∧ Col C B q) := by conclude_def Meet
-        have : B ≠ C := by conclude lemma_inequalitysymmetric
-        have : Col B C q := by forward_using lemma_collinearorder
-        have : Col A E q := by forward_using lemma_collinearorder
+  have : EF A B C D E B C F := by
+      rcases (show BetS A D E ∨ BetS A E D ∨ D = E by first | assumption | exact Classical.em _ | tauto | aesop) with c1 | c2 | c3
+      · obtain ⟨M, _, _⟩ : ∃ M, (BetS A M C ∧ BetS B M D) := by conclude lemma_diagonalsmeet
+        have : BetS D M B := by conclude axiom_betweennesssymmetry
+        have : nCol A D B := by forward_using lemma_parallelNC
         have : Col A D E := by conclude_def Col
-        have : Col E A D := by forward_using lemma_collinearorder
-        have : Col E A q := by forward_using lemma_collinearorder
-        have : A ≠ D := by forward_using lemma_betweennotequal
-        have : Col A D q := by conclude lemma_collinear4
-        have : Meet A D B C := by conclude_def Meet
-        contradict
-    have : Col A C H := by forward_using lemma_collinearorder
-    have : Col E A A := by conclude_def Col
-    have : Col C C B := by conclude_def Col
-    have : C ≠ B := by conclude lemma_inequalitysymmetric
-    have : BetS A H C := by conclude lemma_collinearbetween
-    have : BetS C H A := by conclude axiom_betweennesssymmetry
-    have : BetS E D A := by conclude axiom_betweennesssymmetry
-    have : nCol A D C := by forward_using lemma_parallelNC
-    have : Col A D E := by conclude_def Col
-    have : nCol A E C := by conclude lemma_NChelper
-    have : nCol C A E := by forward_using lemma_NCorder
-    obtain ⟨G, _, _⟩ : ∃ G, (BetS C G D ∧ BetS E G H) := by conclude postulate_Pasch_inner
-    have : BetS E G B := by conclude lemma_3_6b
-    have : BetS E G B := by conclude lemma_3_6b
-    have : Col E G B := by conclude_def Col
-    have : ¬ Col D E G := by
-        intro h
-        have : Col G E D := by forward_using lemma_collinearorder
-        have : Col G E B := by forward_using lemma_collinearorder
-        have : E ≠ G := by forward_using lemma_betweennotequal
-        have : G ≠ E := by conclude lemma_inequalitysymmetric
-        have : Col E D B := by conclude lemma_collinear4
-        have : Col B C B := by conclude_def Col
-        have : Col E D A := by forward_using lemma_collinearorder
-        have : Col E D D := by conclude_def Col
-        have : D ≠ E := by forward_using lemma_betweennotequal
-        have : E ≠ D := by conclude lemma_inequalitysymmetric
-        have : Col A D B := by conclude lemma_collinear5
-        have : Meet A D B C := by conclude_def Meet
-        contradict
-    have : Triangle D E G := by conclude_def Triangle
-    have : ET D E G D E G := by conclude lemma_ETreflexive
-    have : ET D E G E D G := by forward_using axiom_ETpermutation
-    have : ET F D C A E B := by forward_using axiom_ETpermutation
-    have : ET A E B F D C := by conclude axiom_ETsymmetric
-    have : BetS B G E := by conclude axiom_betweennesssymmetry
-    have : BetS D E F := by conclude lemma_3_6a
-    have : BetS F E D := by conclude axiom_betweennesssymmetry
-    have : EF A D G B F E G C := by conclude axiom_cutoff1
-    have : nCol E G D := by forward_using lemma_NCorder
-    have : G = G := by conclude cn_equalityreflexive
-    have : Col E G G := by conclude_def Col
-    have : G ≠ B := by forward_using lemma_betweennotequal
-    have : B ≠ G := by conclude lemma_inequalitysymmetric
-    have : nCol B G D := by conclude lemma_NChelper
-    have : nCol D G B := by forward_using lemma_NCorder
-    have : Col C G D := by conclude_def Col
-    have : Col D G C := by forward_using lemma_collinearorder
-    have : Col D G G := by conclude_def Col
-    have : C ≠ G := by forward_using lemma_betweennotequal
-    have : nCol C G B := by conclude lemma_NChelper
-    have : nCol G C B := by forward_using lemma_NCorder
-    have : Triangle G C B := by conclude_def Triangle
-    have : ET G C B G C B := by conclude lemma_ETreflexive
-    have : ET G C B G B C := by forward_using axiom_ETpermutation
-    have : BetS D G C := by conclude axiom_betweennesssymmetry
-    have : PG B C D A := by conclude lemma_PGrotate
-    have : PG D A B C := by conclude lemma_PGsymmetric
-    have : PG A D C B := by conclude lemma_PGflip
-    obtain ⟨q, _, _⟩ : ∃ q, (BetS A q C ∧ BetS D q B) := by conclude lemma_diagonalsmeet
-    have : PG B C F E := by conclude lemma_PGrotate
-    have : PG C F E B := by conclude lemma_PGrotate
-    have : PG F E B C := by conclude lemma_PGrotate
-    obtain ⟨m, _, _⟩ : ∃ m, (BetS F m B ∧ BetS E m C) := by conclude lemma_diagonalsmeet
-    have : EF A D C B F E B C := by conclude axiom_paste2
-    have : EF A D C B E B C F := by forward_using axiom_EFpermutation
-    have : EF E B C F A D C B := by conclude axiom_EFsymmetric
-    have : EF E B C F A B C D := by forward_using axiom_EFpermutation
-    have : EF A B C D E B C F := by conclude axiom_EFsymmetric
-    close
-  · have : ET E A B F D C := by conclude axiom_ETsymmetric
-    have : ET E A B D F C := by forward_using axiom_ETpermutation
-    obtain ⟨H, _, _⟩ : ∃ H, (BetS B H D ∧ BetS C H E) := by conclude lemma_trapezoiddiagonals
-    have : BetS E H C := by conclude axiom_betweennesssymmetry
-    have : ¬ Col B E D := by
-        intro h
-        have : Col A E D := by conclude_def Col
-        have : Col E D A := by forward_using lemma_collinearorder
-        have : Col E D B := by forward_using lemma_collinearorder
-        have : E ≠ D := by forward_using lemma_betweennotequal
-        have : Col D A B := by conclude lemma_collinear4
-        have : Col A D B := by forward_using lemma_collinearorder
-        have : B = B := by conclude cn_equalityreflexive
-        have : Col B C B := by conclude_def Col
-        have : A ≠ D := by conclude_def Par
-        have : B ≠ C := by conclude_def Par
-        have : Meet A D B C := by conclude_def Meet
+        have : Col A D A := by conclude_def Col
+        have : A ≠ E := by forward_using lemma_betweennotequal
+        have : nCol A E B := by conclude lemma_NChelper
+        have : BetS B M D := by conclude axiom_betweennesssymmetry
+        obtain ⟨H, _, _⟩ : ∃ H, (BetS B H E ∧ BetS A M H) := by conclude postulate_Pasch_outer
+        have : Col A M H := by conclude_def Col
+        have : Col A M C := by conclude_def Col
+        have : A ≠ M := by forward_using lemma_betweennotequal
+        have : M ≠ A := by conclude lemma_inequalitysymmetric
+        have : Col M A H := by forward_using lemma_collinearorder
+        have : Col M A C := by forward_using lemma_collinearorder
+        have : Col A H C := by conclude lemma_collinear4
+        have : BetS E H B := by conclude axiom_betweennesssymmetry
+        have : E ≠ A := by conclude lemma_inequalitysymmetric
+        have : ¬ B = C := by
+            intro h
+            have : Col A B C := by conclude_def Col
+            contradict
         have : ¬ Meet A D B C := by conclude_def Par
-        contradict
-    have : EF B E D C B E D C := by conclude lemma_EFreflexive
-    have : EF B E D C C D E B := by forward_using axiom_EFpermutation
-    have : EF C D E B B E D C := by conclude axiom_EFsymmetric
-    have : BetS D E A := by conclude axiom_betweennesssymmetry
-    have : BetS E D F := by conclude lemma_3_6a
-    have : PG C D A B := by conclude lemma_PGsymmetric
-    obtain ⟨p, _, _⟩ : ∃ p, (BetS C p A ∧ BetS D p B) := by conclude lemma_diagonalsmeet
-    have : PG B E F C := by conclude lemma_PGflip
-    obtain ⟨m, _, _⟩ : ∃ m, (BetS B m F ∧ BetS E m C) := by conclude lemma_diagonalsmeet
-    have : EF C D A B B E F C := by conclude axiom_paste2
-    have : EF C D A B E B C F := by forward_using axiom_EFpermutation
-    have : EF E B C F C D A B := by conclude axiom_EFsymmetric
-    have : EF E B C F A B C D := by forward_using axiom_EFpermutation
-    have : EF A B C D E B C F := by conclude axiom_EFsymmetric
-    close
-  · have : ET F D C B E A := by forward_using axiom_ETpermutation
-    have : ET B E A F D C := by conclude axiom_ETsymmetric
-    have : ET B E A C D F := by forward_using axiom_ETpermutation
-    have : nCol D B C := by forward_using lemma_parallelNC
-    have : nCol E B C := by conclude cn_equalitysub
-    have : nCol B E C := by forward_using lemma_NCorder
-    have : Triangle B E C := by conclude_def Triangle
-    have : ET B E C B E C := by conclude lemma_ETreflexive
-    have : ET B E C C E B := by forward_using axiom_ETpermutation
-    have : ET B E C C D B := by conclude cn_equalitysub
-    have : PG A B C E := by conclude cn_equalitysub
-    obtain ⟨M, _, _⟩ : ∃ M, (BetS A M C ∧ BetS B M E) := by conclude lemma_diagonalsmeet
-    have : BetS E M B := by conclude axiom_betweennesssymmetry
-    have : Col E M B := by conclude_def Col
-    have : Col B E M := by forward_using lemma_collinearorder
-    have : Par A E B C := by conclude_def PG
-    have : nCol A E B := by forward_using lemma_parallelNC
-    have : nCol B E A := by forward_using lemma_NCorder
-    have : TS A B E C := by conclude_def TS
-    have : PG D B C F := by conclude cn_equalitysub
-    have : nCol C D F := by forward_using lemma_NCorder
-    obtain ⟨m, _, _⟩ : ∃ m, (BetS D m C ∧ BetS B m F) := by conclude lemma_diagonalsmeet
-    have : BetS F m B := by conclude axiom_betweennesssymmetry
-    have : Col D m C := by conclude_def Col
-    have : Col C D m := by forward_using lemma_collinearorder
-    have : TS F C D B := by conclude_def TS
-    obtain ⟨J, _, _⟩ : ∃ J, (BetS A J C ∧ BetS B J D) := by conclude lemma_diagonalsmeet
-    have : BetS B J E := by conclude cn_equalitysub
-    obtain ⟨j, _, _⟩ : ∃ j, (BetS E j C ∧ BetS B j F) := by conclude lemma_diagonalsmeet
-    have : BetS D j C := by conclude cn_equalitysub
-    have : BetS C j D := by conclude axiom_betweennesssymmetry
-    have : BetS F j B := by conclude axiom_betweennesssymmetry
-    have : EF B A E C C F D B := by conclude axiom_paste3
-    have : EF B A E C D B C F := by forward_using axiom_EFpermutation
-    have : EF B A E C E B C F := by conclude cn_equalitysub
-    have : EF E B C F B A E C := by conclude axiom_EFsymmetric
-    have : EF E B C F A B C E := by forward_using axiom_EFpermutation
-    have : EF E B C F A B C D := by conclude cn_equalitysub
-    have : EF A B C D E B C F := by conclude axiom_EFsymmetric
-    close
+        have : ¬ Meet E A C B := by
+            intro h
+            obtain ⟨q, _, _, _, _⟩ : ∃ q, (E ≠ A ∧ C ≠ B ∧ Col E A q ∧ Col C B q) := by conclude_def Meet
+            have : B ≠ C := by conclude lemma_inequalitysymmetric
+            have : Col B C q := by forward_using lemma_collinearorder
+            have : Col A E q := by forward_using lemma_collinearorder
+            have : Col A D E := by conclude_def Col
+            have : Col E A D := by forward_using lemma_collinearorder
+            have : Col E A q := by forward_using lemma_collinearorder
+            have : A ≠ D := by forward_using lemma_betweennotequal
+            have : Col A D q := by conclude lemma_collinear4
+            have : Meet A D B C := by conclude_def Meet
+            contradict
+        have : Col A C H := by forward_using lemma_collinearorder
+        have : Col E A A := by conclude_def Col
+        have : Col C C B := by conclude_def Col
+        have : C ≠ B := by conclude lemma_inequalitysymmetric
+        have : BetS A H C := by conclude lemma_collinearbetween
+        have : BetS C H A := by conclude axiom_betweennesssymmetry
+        have : BetS E D A := by conclude axiom_betweennesssymmetry
+        have : nCol A D C := by forward_using lemma_parallelNC
+        have : Col A D E := by conclude_def Col
+        have : nCol A E C := by conclude lemma_NChelper
+        have : nCol C A E := by forward_using lemma_NCorder
+        obtain ⟨G, _, _⟩ : ∃ G, (BetS C G D ∧ BetS E G H) := by conclude postulate_Pasch_inner
+        have : BetS E G B := by conclude lemma_3_6b
+        have : BetS E G B := by conclude lemma_3_6b
+        have : Col E G B := by conclude_def Col
+        have : ¬ Col D E G := by
+            intro h
+            have : Col G E D := by forward_using lemma_collinearorder
+            have : Col G E B := by forward_using lemma_collinearorder
+            have : E ≠ G := by forward_using lemma_betweennotequal
+            have : G ≠ E := by conclude lemma_inequalitysymmetric
+            have : Col E D B := by conclude lemma_collinear4
+            have : Col B C B := by conclude_def Col
+            have : Col E D A := by forward_using lemma_collinearorder
+            have : Col E D D := by conclude_def Col
+            have : D ≠ E := by forward_using lemma_betweennotequal
+            have : E ≠ D := by conclude lemma_inequalitysymmetric
+            have : Col A D B := by conclude lemma_collinear5
+            have : Meet A D B C := by conclude_def Meet
+            contradict
+        have : Triangle D E G := by conclude_def Triangle
+        have : ET D E G D E G := by conclude lemma_ETreflexive
+        have : ET D E G E D G := by forward_using axiom_ETpermutation
+        have : ET F D C A E B := by forward_using axiom_ETpermutation
+        have : ET A E B F D C := by conclude axiom_ETsymmetric
+        have : BetS B G E := by conclude axiom_betweennesssymmetry
+        have : BetS D E F := by conclude lemma_3_6a
+        have : BetS F E D := by conclude axiom_betweennesssymmetry
+        have : EF A D G B F E G C := by conclude axiom_cutoff1
+        have : nCol E G D := by forward_using lemma_NCorder
+        have : G = G := by conclude cn_equalityreflexive
+        have : Col E G G := by conclude_def Col
+        have : G ≠ B := by forward_using lemma_betweennotequal
+        have : B ≠ G := by conclude lemma_inequalitysymmetric
+        have : nCol B G D := by conclude lemma_NChelper
+        have : nCol D G B := by forward_using lemma_NCorder
+        have : Col C G D := by conclude_def Col
+        have : Col D G C := by forward_using lemma_collinearorder
+        have : Col D G G := by conclude_def Col
+        have : C ≠ G := by forward_using lemma_betweennotequal
+        have : nCol C G B := by conclude lemma_NChelper
+        have : nCol G C B := by forward_using lemma_NCorder
+        have : Triangle G C B := by conclude_def Triangle
+        have : ET G C B G C B := by conclude lemma_ETreflexive
+        have : ET G C B G B C := by forward_using axiom_ETpermutation
+        have : BetS D G C := by conclude axiom_betweennesssymmetry
+        have : PG B C D A := by conclude lemma_PGrotate
+        have : PG D A B C := by conclude lemma_PGsymmetric
+        have : PG A D C B := by conclude lemma_PGflip
+        obtain ⟨q, _, _⟩ : ∃ q, (BetS A q C ∧ BetS D q B) := by conclude lemma_diagonalsmeet
+        have : PG B C F E := by conclude lemma_PGrotate
+        have : PG C F E B := by conclude lemma_PGrotate
+        have : PG F E B C := by conclude lemma_PGrotate
+        obtain ⟨m, _, _⟩ : ∃ m, (BetS F m B ∧ BetS E m C) := by conclude lemma_diagonalsmeet
+        have : EF A D C B F E B C := by conclude axiom_paste2
+        have : EF A D C B E B C F := by forward_using axiom_EFpermutation
+        have : EF E B C F A D C B := by conclude axiom_EFsymmetric
+        have : EF E B C F A B C D := by forward_using axiom_EFpermutation
+        have : EF A B C D E B C F := by conclude axiom_EFsymmetric
+        close
+      · have : ET E A B F D C := by conclude axiom_ETsymmetric
+        have : ET E A B D F C := by forward_using axiom_ETpermutation
+        obtain ⟨H, _, _⟩ : ∃ H, (BetS B H D ∧ BetS C H E) := by conclude lemma_trapezoiddiagonals
+        have : BetS E H C := by conclude axiom_betweennesssymmetry
+        have : ¬ Col B E D := by
+            intro h
+            have : Col A E D := by conclude_def Col
+            have : Col E D A := by forward_using lemma_collinearorder
+            have : Col E D B := by forward_using lemma_collinearorder
+            have : E ≠ D := by forward_using lemma_betweennotequal
+            have : Col D A B := by conclude lemma_collinear4
+            have : Col A D B := by forward_using lemma_collinearorder
+            have : B = B := by conclude cn_equalityreflexive
+            have : Col B C B := by conclude_def Col
+            have : A ≠ D := by conclude_def Par
+            have : B ≠ C := by conclude_def Par
+            have : Meet A D B C := by conclude_def Meet
+            have : ¬ Meet A D B C := by conclude_def Par
+            contradict
+        have : EF B E D C B E D C := by conclude lemma_EFreflexive
+        have : EF B E D C C D E B := by forward_using axiom_EFpermutation
+        have : EF C D E B B E D C := by conclude axiom_EFsymmetric
+        have : BetS D E A := by conclude axiom_betweennesssymmetry
+        have : BetS E D F := by conclude lemma_3_6a
+        have : PG C D A B := by conclude lemma_PGsymmetric
+        obtain ⟨p, _, _⟩ : ∃ p, (BetS C p A ∧ BetS D p B) := by conclude lemma_diagonalsmeet
+        have : PG B E F C := by conclude lemma_PGflip
+        obtain ⟨m, _, _⟩ : ∃ m, (BetS B m F ∧ BetS E m C) := by conclude lemma_diagonalsmeet
+        have : EF C D A B B E F C := by conclude axiom_paste2
+        have : EF C D A B E B C F := by forward_using axiom_EFpermutation
+        have : EF E B C F C D A B := by conclude axiom_EFsymmetric
+        have : EF E B C F A B C D := by forward_using axiom_EFpermutation
+        have : EF A B C D E B C F := by conclude axiom_EFsymmetric
+        close
+      · have : ET F D C B E A := by forward_using axiom_ETpermutation
+        have : ET B E A F D C := by conclude axiom_ETsymmetric
+        have : ET B E A C D F := by forward_using axiom_ETpermutation
+        have : nCol D B C := by forward_using lemma_parallelNC
+        have : nCol E B C := by conclude cn_equalitysub
+        have : nCol B E C := by forward_using lemma_NCorder
+        have : Triangle B E C := by conclude_def Triangle
+        have : ET B E C B E C := by conclude lemma_ETreflexive
+        have : ET B E C C E B := by forward_using axiom_ETpermutation
+        have : ET B E C C D B := by conclude cn_equalitysub
+        have : PG A B C E := by conclude cn_equalitysub
+        obtain ⟨M, _, _⟩ : ∃ M, (BetS A M C ∧ BetS B M E) := by conclude lemma_diagonalsmeet
+        have : BetS E M B := by conclude axiom_betweennesssymmetry
+        have : Col E M B := by conclude_def Col
+        have : Col B E M := by forward_using lemma_collinearorder
+        have : Par A E B C := by conclude_def PG
+        have : nCol A E B := by forward_using lemma_parallelNC
+        have : nCol B E A := by forward_using lemma_NCorder
+        have : TS A B E C := by conclude_def TS
+        have : PG D B C F := by conclude cn_equalitysub
+        have : nCol C D F := by forward_using lemma_NCorder
+        obtain ⟨m, _, _⟩ : ∃ m, (BetS D m C ∧ BetS B m F) := by conclude lemma_diagonalsmeet
+        have : BetS F m B := by conclude axiom_betweennesssymmetry
+        have : Col D m C := by conclude_def Col
+        have : Col C D m := by forward_using lemma_collinearorder
+        have : TS F C D B := by conclude_def TS
+        obtain ⟨J, _, _⟩ : ∃ J, (BetS A J C ∧ BetS B J D) := by conclude lemma_diagonalsmeet
+        have : BetS B J E := by conclude cn_equalitysub
+        obtain ⟨j, _, _⟩ : ∃ j, (BetS E j C ∧ BetS B j F) := by conclude lemma_diagonalsmeet
+        have : BetS D j C := by conclude cn_equalitysub
+        have : BetS C j D := by conclude axiom_betweennesssymmetry
+        have : BetS F j B := by conclude axiom_betweennesssymmetry
+        have : EF B A E C C F D B := by conclude axiom_paste3
+        have : EF B A E C D B C F := by forward_using axiom_EFpermutation
+        have : EF B A E C E B C F := by conclude cn_equalitysub
+        have : EF E B C F B A E C := by conclude axiom_EFsymmetric
+        have : EF E B C F A B C E := by forward_using axiom_EFpermutation
+        have : EF E B C F A B C D := by conclude cn_equalitysub
+        have : EF A B C D E B C F := by conclude axiom_EFsymmetric
+        close
   close
 
 end GeocoqTranslate.Elements

@@ -127,60 +127,60 @@ theorem lemma_35helper :
       contradict
   have : Col A F E := by forward_using lemma_collinearorder
   have : (A = F ∨ A = E ∨ F = E ∨ BetS F A E ∨ BetS A F E ∨ BetS A E F) := by conclude_def Col
-  sorry -- TODO: assert (BetS A E F).
-  rcases (show A = F ∨ A = E ∨ F = E ∨ BetS F A E ∨ BetS A F E ∨ BetS A E F by first | assumption | exact Classical.em _ | tauto | aesop) with c1 | c2 | c3 | c4 | c5 | c6
-  · have : ¬ ¬ BetS A E F := by
-        intro h
-        have : BetS A D A := by conclude cn_equalitysub
-        have : ¬ BetS A D A := by conclude axiom_betweennessidentity
-        contradict
-    close
-  · have : ¬ ¬ BetS A E F := by
-        intro h
-        contradict
-    close
-  · have : ¬ ¬ BetS A E F := by
-        intro h
-        have : E = F := by conclude lemma_equalitysymmetric
-        have : Col B E F := by conclude_def Col
-        have : Col E B F := by forward_using lemma_collinearorder
-        have : F = F := by conclude cn_equalityreflexive
-        have : Col F C F := by conclude_def Col
-        have : E ≠ B := by conclude_def Par
-        have : F ≠ C := by conclude_def Par
-        have : Meet E B F C := by conclude_def Meet
-        have : ¬ Meet E B F C := by conclude_def Par
-        contradict
-    close
-  · have : ¬ ¬ BetS A E F := by
-        intro h
-        have : BetS F D A := by conclude axiom_betweennesssymmetry
-        have : BetS D A E := by conclude lemma_3_6a
-        have : Cong D A D A := by conclude cn_congruencereflexive
-        have : Lt D A D E := by conclude_def Lt
-        have : Cong D A A D := by conclude cn_equalityreverse
-        have : Lt A D D E := by conclude lemma_lessthancongruence2
-        have : Cong D E E D := by conclude cn_equalityreverse
-        have : Lt A D E D := by conclude lemma_lessthancongruence
-        have : Cong A D A D := by conclude cn_congruencereflexive
-        have : Lt A D A F := by conclude_def Lt
-        have : Cong A D D A := by conclude cn_equalityreverse
-        have : Lt D A A F := by conclude lemma_lessthancongruence2
-        have : Cong A F F A := by conclude cn_equalityreverse
-        have : Lt D A F A := by conclude lemma_lessthancongruence
-        have : Cong F A F A := by conclude cn_congruencereflexive
-        have : Lt F A F E := by conclude_def Lt
-        have : Lt D A F E := by conclude lemma_lessthantransitive
-        have : Cong D A F E := by forward_using lemma_congruenceflip
-        have : Lt F E F E := by conclude lemma_lessthancongruence2
-        have : ¬ Lt F E F E := by conclude lemma_trichotomy2
-        contradict
-    close
-  · have : ¬ ¬ BetS A E F := by
-        intro h
-        contradict
-    close
-  · close
+  have : BetS A E F := by
+      rcases (show A = F ∨ A = E ∨ F = E ∨ BetS F A E ∨ BetS A F E ∨ BetS A E F by first | assumption | exact Classical.em _ | tauto | aesop) with c1 | c2 | c3 | c4 | c5 | c6
+      · have : ¬ ¬ BetS A E F := by
+            intro h
+            have : BetS A D A := by conclude cn_equalitysub
+            have : ¬ BetS A D A := by conclude axiom_betweennessidentity
+            contradict
+        close
+      · have : ¬ ¬ BetS A E F := by
+            intro h
+            contradict
+        close
+      · have : ¬ ¬ BetS A E F := by
+            intro h
+            have : E = F := by conclude lemma_equalitysymmetric
+            have : Col B E F := by conclude_def Col
+            have : Col E B F := by forward_using lemma_collinearorder
+            have : F = F := by conclude cn_equalityreflexive
+            have : Col F C F := by conclude_def Col
+            have : E ≠ B := by conclude_def Par
+            have : F ≠ C := by conclude_def Par
+            have : Meet E B F C := by conclude_def Meet
+            have : ¬ Meet E B F C := by conclude_def Par
+            contradict
+        close
+      · have : ¬ ¬ BetS A E F := by
+            intro h
+            have : BetS F D A := by conclude axiom_betweennesssymmetry
+            have : BetS D A E := by conclude lemma_3_6a
+            have : Cong D A D A := by conclude cn_congruencereflexive
+            have : Lt D A D E := by conclude_def Lt
+            have : Cong D A A D := by conclude cn_equalityreverse
+            have : Lt A D D E := by conclude lemma_lessthancongruence2
+            have : Cong D E E D := by conclude cn_equalityreverse
+            have : Lt A D E D := by conclude lemma_lessthancongruence
+            have : Cong A D A D := by conclude cn_congruencereflexive
+            have : Lt A D A F := by conclude_def Lt
+            have : Cong A D D A := by conclude cn_equalityreverse
+            have : Lt D A A F := by conclude lemma_lessthancongruence2
+            have : Cong A F F A := by conclude cn_equalityreverse
+            have : Lt D A F A := by conclude lemma_lessthancongruence
+            have : Cong F A F A := by conclude cn_congruencereflexive
+            have : Lt F A F E := by conclude_def Lt
+            have : Lt D A F E := by conclude lemma_lessthantransitive
+            have : Cong D A F E := by forward_using lemma_congruenceflip
+            have : Lt F E F E := by conclude lemma_lessthancongruence2
+            have : ¬ Lt F E F E := by conclude lemma_trichotomy2
+            contradict
+        close
+      · have : ¬ ¬ BetS A E F := by
+            intro h
+            contradict
+        close
+      · close
   close
 
 end GeocoqTranslate.Elements

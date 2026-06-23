@@ -132,21 +132,21 @@ theorem proposition_39A :
   have : Out B M E := by conclude lemma_ray4
   have : Out B D E := by conclude lemma_ray3
   have : (BetS B E D ∨ D = E ∨ BetS B D E) := by conclude lemma_ray1
-  sorry -- TODO: assert (Par A D B C).
-  rcases (show BetS B E D ∨ D = E ∨ BetS B D E by first | assumption | exact Classical.em _ | tauto | aesop) with c1 | c2 | c3
-  · have : ¬ ¬ Par A D B C := by
-        intro h
-        have : ¬ ET D B C E B C := by conclude axiom_deZolt1
-        contradict
-    close
-  · have : Par A D B C := by conclude cn_equalitysub
-    close
-  · have : ¬ ¬ Par A D B C := by
-        intro h
-        have : ¬ ET E B C D B C := by conclude axiom_deZolt1
-        have : ET E B C D B C := by conclude axiom_ETsymmetric
-        contradict
-    close
+  have : Par A D B C := by
+      rcases (show BetS B E D ∨ D = E ∨ BetS B D E by first | assumption | exact Classical.em _ | tauto | aesop) with c1 | c2 | c3
+      · have : ¬ ¬ Par A D B C := by
+            intro h
+            have : ¬ ET D B C E B C := by conclude axiom_deZolt1
+            contradict
+        close
+      · have : Par A D B C := by conclude cn_equalitysub
+        close
+      · have : ¬ ¬ Par A D B C := by
+            intro h
+            have : ¬ ET E B C D B C := by conclude axiom_deZolt1
+            have : ET E B C D B C := by conclude axiom_ETsymmetric
+            contradict
+        close
   close
 
 end GeocoqTranslate.Elements

@@ -27,38 +27,38 @@ theorem lemma_lessthantransitive :
   obtain ⟨K, _, _⟩ : ∃ K, (Out E H K ∧ Cong E K C G) := by conclude lemma_layoff
   have : Cong E K A B := by conclude lemma_congruencetransitive
   have : (BetS E K H ∨ H = K ∨ BetS E H K) := by conclude lemma_ray1
-  sorry -- TODO: assert (BetS E K H).
-  rcases (show BetS E K H ∨ H = K ∨ BetS E H K by first | assumption | exact Classical.em _ | tauto | aesop) with c1 | c2 | c3
-  · close
-  · have : Cong C G E K := by conclude lemma_congruencesymmetric
-    have : Cong C G E H := by conclude cn_equalitysub
-    have : Cong C G C D := by conclude lemma_congruencetransitive
-    have : Out C G D := by conclude lemma_ray4
-    have : G = G := by conclude cn_equalityreflexive
-    have : Out C G G := by conclude lemma_ray4
-    have : ¬ ¬ BetS E K H := by
-        intro h
-        have : G = D := by conclude lemma_layoffunique
-        have : G ≠ D := by forward_using lemma_betweennotequal
-        contradict
-    close
-  · have : Cong C D E H := by conclude lemma_congruencesymmetric
-    have : Cong C G E K := by conclude lemma_congruencesymmetric
-    have : C ≠ D := by forward_using lemma_betweennotequal
-    have : H ≠ K := by forward_using lemma_betweennotequal
-    obtain ⟨J, _, _⟩ : ∃ J, (BetS C D J ∧ Cong D J H K) := by conclude lemma_extension
-    have : Out C D J := by conclude lemma_ray4
-    have : Out C D G := by conclude lemma_ray4
-    have : Cong C J E K := by conclude cn_sumofparts
-    have : Cong C J C G := by conclude lemma_congruencetransitive
-    have : J = G := by conclude lemma_layoffunique
-    have : BetS G D J := by conclude lemma_3_6a
-    have : ¬ ¬ BetS E K H := by
-        intro h
-        have : G ≠ J := by forward_using lemma_betweennotequal
-        have : J ≠ G := by conclude lemma_inequalitysymmetric
-        contradict
-    close
+  have : BetS E K H := by
+      rcases (show BetS E K H ∨ H = K ∨ BetS E H K by first | assumption | exact Classical.em _ | tauto | aesop) with c1 | c2 | c3
+      · close
+      · have : Cong C G E K := by conclude lemma_congruencesymmetric
+        have : Cong C G E H := by conclude cn_equalitysub
+        have : Cong C G C D := by conclude lemma_congruencetransitive
+        have : Out C G D := by conclude lemma_ray4
+        have : G = G := by conclude cn_equalityreflexive
+        have : Out C G G := by conclude lemma_ray4
+        have : ¬ ¬ BetS E K H := by
+            intro h
+            have : G = D := by conclude lemma_layoffunique
+            have : G ≠ D := by forward_using lemma_betweennotequal
+            contradict
+        close
+      · have : Cong C D E H := by conclude lemma_congruencesymmetric
+        have : Cong C G E K := by conclude lemma_congruencesymmetric
+        have : C ≠ D := by forward_using lemma_betweennotequal
+        have : H ≠ K := by forward_using lemma_betweennotequal
+        obtain ⟨J, _, _⟩ : ∃ J, (BetS C D J ∧ Cong D J H K) := by conclude lemma_extension
+        have : Out C D J := by conclude lemma_ray4
+        have : Out C D G := by conclude lemma_ray4
+        have : Cong C J E K := by conclude cn_sumofparts
+        have : Cong C J C G := by conclude lemma_congruencetransitive
+        have : J = G := by conclude lemma_layoffunique
+        have : BetS G D J := by conclude lemma_3_6a
+        have : ¬ ¬ BetS E K H := by
+            intro h
+            have : G ≠ J := by forward_using lemma_betweennotequal
+            have : J ≠ G := by conclude lemma_inequalitysymmetric
+            contradict
+        close
   have : BetS E K F := by conclude lemma_3_6b
   have : Lt A B E F := by conclude_def Lt
   close

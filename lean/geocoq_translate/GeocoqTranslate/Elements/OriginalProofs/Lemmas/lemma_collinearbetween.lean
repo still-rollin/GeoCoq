@@ -100,31 +100,31 @@ theorem lemma_collinearbetween :
       have : Meet A B C D := by conclude_def Meet
       contradict
   have : (E = F ∨ E = H ∨ F = H ∨ BetS F E H ∨ BetS E F H ∨ BetS E H F) := by conclude_def Col
-  sorry -- TODO: assert (BetS E H F).
-  rcases (show E = F ∨ E = H ∨ F = H ∨ BetS F E H ∨ BetS E F H ∨ BetS E H F by first | assumption | exact Classical.em _ | tauto | aesop) with c1 | c2 | c3 | c4 | c5 | c6
-  · have : ¬ ¬ BetS E H F := by
-        intro h
-        contradict
-    close
-  · have : ¬ ¬ BetS E H F := by
-        intro h
-        have : E ≠ H := by conclude lemma_inequalitysymmetric
-        contradict
-    close
-  · have : ¬ ¬ BetS E H F := by
-        intro h
-        have : F ≠ H := by conclude lemma_inequalitysymmetric
-        contradict
-    close
-  · have : ¬ ¬ BetS E H F := by
-        intro h
-        contradict
-    close
-  · have : ¬ ¬ BetS E H F := by
-        intro h
-        contradict
-    close
-  · close
+  have : BetS E H F := by
+      rcases (show E = F ∨ E = H ∨ F = H ∨ BetS F E H ∨ BetS E F H ∨ BetS E H F by first | assumption | exact Classical.em _ | tauto | aesop) with c1 | c2 | c3 | c4 | c5 | c6
+      · have : ¬ ¬ BetS E H F := by
+            intro h
+            contradict
+        close
+      · have : ¬ ¬ BetS E H F := by
+            intro h
+            have : E ≠ H := by conclude lemma_inequalitysymmetric
+            contradict
+        close
+      · have : ¬ ¬ BetS E H F := by
+            intro h
+            have : F ≠ H := by conclude lemma_inequalitysymmetric
+            contradict
+        close
+      · have : ¬ ¬ BetS E H F := by
+            intro h
+            contradict
+        close
+      · have : ¬ ¬ BetS E H F := by
+            intro h
+            contradict
+        close
+      · close
   close
 
 end GeocoqTranslate.Elements

@@ -18,17 +18,17 @@ theorem lemma_ray4 :
       contradict
   obtain ⟨J, _, _⟩ : ∃ J, (BetS B A J ∧ Cong A J A B) := by conclude lemma_extension
   have : BetS J A B := by conclude axiom_betweennesssymmetry
-  sorry -- TODO: assert (Out A B E).
-  rcases (show BetS A E B ∨ E = B ∨ BetS A B E by first | assumption | exact Classical.em _ | tauto | aesop) with c1 | c2 | c3
-  · have : BetS J A E := by conclude axiom_innertransitivity
-    have : Out A B E := by conclude_def Out
-    close
-  · have : BetS J A E := by conclude cn_equalitysub
-    have : Out A B E := by conclude_def Out
-    close
-  · have : BetS J A E := by conclude lemma_3_7b
-    have : Out A B E := by conclude_def Out
-    close
+  have : Out A B E := by
+      rcases (show BetS A E B ∨ E = B ∨ BetS A B E by first | assumption | exact Classical.em _ | tauto | aesop) with c1 | c2 | c3
+      · have : BetS J A E := by conclude axiom_innertransitivity
+        have : Out A B E := by conclude_def Out
+        close
+      · have : BetS J A E := by conclude cn_equalitysub
+        have : Out A B E := by conclude_def Out
+        close
+      · have : BetS J A E := by conclude lemma_3_7b
+        have : Out A B E := by conclude_def Out
+        close
   close
 
 end GeocoqTranslate.Elements

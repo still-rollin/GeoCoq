@@ -36,14 +36,14 @@ theorem lemma_supplementinequality :
   have : BetS Q R P := by conclude axiom_betweennesssymmetry
   have : BetS F B A := by conclude axiom_betweennesssymmetry
   have : (BetS B P A ∨ A = P ∨ BetS B A P) := by conclude lemma_ray1
-  sorry -- TODO: assert (BetS F B P).
-  rcases (show BetS B P A ∨ A = P ∨ BetS B A P by first | assumption | exact Classical.em _ | tauto | aesop) with c1 | c2 | c3
-  · have : BetS F B P := by conclude axiom_innertransitivity
-    close
-  · have : BetS F B P := by conclude cn_equalitysub
-    close
-  · have : BetS F B P := by conclude lemma_3_7b
-    close
+  have : BetS F B P := by
+      rcases (show BetS B P A ∨ A = P ∨ BetS B A P by first | assumption | exact Classical.em _ | tauto | aesop) with c1 | c2 | c3
+      · have : BetS F B P := by conclude axiom_innertransitivity
+        close
+      · have : BetS F B P := by conclude cn_equalitysub
+        close
+      · have : BetS F B P := by conclude lemma_3_7b
+        close
   have : ¬ Col F P Q := by
       intro h
       have : Col B A P := by conclude lemma_rayimpliescollinear

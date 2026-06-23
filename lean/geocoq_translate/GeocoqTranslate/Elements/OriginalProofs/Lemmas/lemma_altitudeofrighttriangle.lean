@@ -81,60 +81,60 @@ theorem lemma_altitudeofrighttriangle :
       have : ¬ Lt C M B C := by conclude lemma_trichotomy2
       contradict
   have : (B = C ∨ B = M ∨ C = M ∨ BetS C B M ∨ BetS B C M ∨ BetS B M C) := by conclude_def Col
-  sorry -- TODO: assert (Out B C M).
-  rcases (show B = C ∨ B = M ∨ C = M ∨ BetS C B M ∨ BetS B C M ∨ BetS B M C by first | assumption | exact Classical.em _ | tauto | aesop) with c1 | c2 | c3 | c4 | c5 | c6
-  · have : ¬ ¬ Out B C M := by
-        intro h
-        contradict
-    close
-  · have : ¬ ¬ Out B C M := by
-        intro h
-        contradict
-    close
-  · have : ¬ ¬ Out B C M := by
-        intro h
-        contradict
-    close
-  · have : ¬ ¬ Out B C M := by
-        intro h
-        have : BetS M B C := by conclude axiom_betweennesssymmetry
-        contradict
-    close
-  · have : Out B C M := by conclude lemma_ray4
-    close
-  · have : Out B M C := by conclude lemma_ray4
-    have : Out B C M := by conclude lemma_ray5
-    close
+  have : Out B C M := by
+      rcases (show B = C ∨ B = M ∨ C = M ∨ BetS C B M ∨ BetS B C M ∨ BetS B M C by first | assumption | exact Classical.em _ | tauto | aesop) with c1 | c2 | c3 | c4 | c5 | c6
+      · have : ¬ ¬ Out B C M := by
+            intro h
+            contradict
+        close
+      · have : ¬ ¬ Out B C M := by
+            intro h
+            contradict
+        close
+      · have : ¬ ¬ Out B C M := by
+            intro h
+            contradict
+        close
+      · have : ¬ ¬ Out B C M := by
+            intro h
+            have : BetS M B C := by conclude axiom_betweennesssymmetry
+            contradict
+        close
+      · have : Out B C M := by conclude lemma_ray4
+        close
+      · have : Out B M C := by conclude lemma_ray4
+        have : Out B C M := by conclude lemma_ray5
+        close
   have : ¬ BetS B C M := by
       intro h
       have : Cong B C B C := by conclude cn_congruencereflexive
       have : Lt B C B M := by conclude_def Lt
       have : ¬ Lt B M B C := by conclude lemma_trichotomy2
       contradict
-  sorry -- TODO: assert (Out C B M).
-  rcases (show B = C ∨ B = M ∨ C = M ∨ BetS C B M ∨ BetS B C M ∨ BetS B M C by first | assumption | exact Classical.em _ | tauto | aesop) with c1 | c2 | c3 | c4 | c5 | c6
-  · have : ¬ ¬ Out C B M := by
-        intro h
-        contradict
-    close
-  · have : ¬ ¬ Out C B M := by
-        intro h
-        contradict
-    close
-  · have : ¬ ¬ Out C B M := by
-        intro h
-        contradict
-    close
-  · have : Out C B M := by conclude lemma_ray4
-    close
-  · have : ¬ ¬ Out C B M := by
-        intro h
-        contradict
-    close
-  · have : BetS C M B := by conclude axiom_betweennesssymmetry
-    have : Out C M B := by conclude lemma_ray4
-    have : Out C B M := by conclude lemma_ray5
-    close
+  have : Out C B M := by
+      rcases (show B = C ∨ B = M ∨ C = M ∨ BetS C B M ∨ BetS B C M ∨ BetS B M C by first | assumption | exact Classical.em _ | tauto | aesop) with c1 | c2 | c3 | c4 | c5 | c6
+      · have : ¬ ¬ Out C B M := by
+            intro h
+            contradict
+        close
+      · have : ¬ ¬ Out C B M := by
+            intro h
+            contradict
+        close
+      · have : ¬ ¬ Out C B M := by
+            intro h
+            contradict
+        close
+      · have : Out C B M := by conclude lemma_ray4
+        close
+      · have : ¬ ¬ Out C B M := by
+            intro h
+            contradict
+        close
+      · have : BetS C M B := by conclude axiom_betweennesssymmetry
+        have : Out C M B := by conclude lemma_ray4
+        have : Out C B M := by conclude lemma_ray5
+        close
   have : BetS B M C := by conclude lemma_tworays
   close
 

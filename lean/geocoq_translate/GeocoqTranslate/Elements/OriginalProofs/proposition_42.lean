@@ -270,52 +270,52 @@ theorem proposition_42 :
   have : (E = f ∨ E = F ∨ f = F ∨ BetS f E F ∨ BetS E f F ∨ BetS E F f) := by conclude_def Col
   have : F ≠ E := by forward_using lemma_NCdistinct
   have : E ≠ F := by conclude lemma_inequalitysymmetric
-  sorry -- TODO: assert (Out E F f).
-  rcases (show E = f ∨ E = F ∨ f = F ∨ BetS f E F ∨ BetS E f F ∨ BetS E F f by first | assumption | exact Classical.em _ | tauto | aesop) with c1 | c2 | c3 | c4 | c5 | c6
-  · have : ¬ ¬ Out E F f := by
-        intro h
-        contradict
-    close
-  · have : ¬ ¬ Out E F f := by
-        intro h
-        contradict
-    close
-  · have : F = F := by conclude cn_equalityreflexive
-    have : Out E F F := by conclude lemma_ray4
-    have : Out E F f := by conclude cn_equalitysub
-    close
-  · have : ¬ ¬ Out E F f := by
-        intro h
-        have : E = E := by conclude cn_equalityreflexive
-        have : Col E C E := by conclude_def Col
-        have : BetS F E f := by conclude axiom_betweennesssymmetry
-        have : nCol E C F := by forward_using lemma_NCorder
-        have : TS F E C f := by conclude_def TS
-        have : TS f E C F := by conclude lemma_oppositesidesymmetric
-        have : OS A f E C := by forward_using lemma_samesidesymmetric
-        have : TS A E C F := by conclude lemma_planeseparation
-        obtain ⟨j, _, _, _⟩ : ∃ j, (BetS A j F ∧ Col E C j ∧ nCol E C A) := by conclude_def TS
-        have : Col A j F := by conclude_def Col
-        have : P ≠ Q := by forward_using lemma_betweennotequal
-        have : Q ≠ P := by conclude lemma_inequalitysymmetric
-        have : Col Q A F := by conclude lemma_collinear4
-        have : Col A F Q := by forward_using lemma_collinearorder
-        have : Col Q P A := by forward_using lemma_collinearorder
-        have : Col Q P F := by forward_using lemma_collinearorder
-        have : Col P A F := by conclude lemma_collinear4
-        have : Col A F P := by forward_using lemma_collinearorder
-        have : Col A F j := by forward_using lemma_collinearorder
-        have : P ≠ Q := by forward_using lemma_betweennotequal
-        have : A ≠ F := by forward_using lemma_betweennotequal
-        have : Col P Q j := by conclude lemma_collinear5
-        have : Meet P Q E C := by conclude_def Meet
-        have : ¬ Meet P Q E C := by conclude_def Par
-        contradict
-    close
-  · have : Out E F f := by conclude lemma_ray4
-    close
-  · have : Out E F f := by conclude lemma_ray4
-    close
+  have : Out E F f := by
+      rcases (show E = f ∨ E = F ∨ f = F ∨ BetS f E F ∨ BetS E f F ∨ BetS E F f by first | assumption | exact Classical.em _ | tauto | aesop) with c1 | c2 | c3 | c4 | c5 | c6
+      · have : ¬ ¬ Out E F f := by
+            intro h
+            contradict
+        close
+      · have : ¬ ¬ Out E F f := by
+            intro h
+            contradict
+        close
+      · have : F = F := by conclude cn_equalityreflexive
+        have : Out E F F := by conclude lemma_ray4
+        have : Out E F f := by conclude cn_equalitysub
+        close
+      · have : ¬ ¬ Out E F f := by
+            intro h
+            have : E = E := by conclude cn_equalityreflexive
+            have : Col E C E := by conclude_def Col
+            have : BetS F E f := by conclude axiom_betweennesssymmetry
+            have : nCol E C F := by forward_using lemma_NCorder
+            have : TS F E C f := by conclude_def TS
+            have : TS f E C F := by conclude lemma_oppositesidesymmetric
+            have : OS A f E C := by forward_using lemma_samesidesymmetric
+            have : TS A E C F := by conclude lemma_planeseparation
+            obtain ⟨j, _, _, _⟩ : ∃ j, (BetS A j F ∧ Col E C j ∧ nCol E C A) := by conclude_def TS
+            have : Col A j F := by conclude_def Col
+            have : P ≠ Q := by forward_using lemma_betweennotequal
+            have : Q ≠ P := by conclude lemma_inequalitysymmetric
+            have : Col Q A F := by conclude lemma_collinear4
+            have : Col A F Q := by forward_using lemma_collinearorder
+            have : Col Q P A := by forward_using lemma_collinearorder
+            have : Col Q P F := by forward_using lemma_collinearorder
+            have : Col P A F := by conclude lemma_collinear4
+            have : Col A F P := by forward_using lemma_collinearorder
+            have : Col A F j := by forward_using lemma_collinearorder
+            have : P ≠ Q := by forward_using lemma_betweennotequal
+            have : A ≠ F := by forward_using lemma_betweennotequal
+            have : Col P Q j := by conclude lemma_collinear5
+            have : Meet P Q E C := by conclude_def Meet
+            have : ¬ Meet P Q E C := by conclude_def Par
+            contradict
+        close
+      · have : Out E F f := by conclude lemma_ray4
+        close
+      · have : Out E F f := by conclude lemma_ray4
+        close
   have : CongA C E F c E f := by conclude lemma_equalangleshelper
   have : CongA F E C f E c := by conclude lemma_equalanglesflip
   have : CongA F E C J D K := by conclude lemma_equalanglestransitive

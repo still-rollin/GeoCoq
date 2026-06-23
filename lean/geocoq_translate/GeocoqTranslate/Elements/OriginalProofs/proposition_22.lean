@@ -96,65 +96,65 @@ theorem proposition_22 :
   have : ¬ Col F G K := by
       intro h
       have : (F = G ∨ F = K ∨ G = K ∨ BetS G F K ∨ BetS F G K ∨ BetS F K G) := by conclude_def Col
-      sorry -- TODO: assert (nCol F G K).
-      rcases (show F = G ∨ F = K ∨ G = K ∨ BetS G F K ∨ BetS F G K ∨ BetS F K G by first | assumption | exact Classical.em _ | tauto | aesop) with c1 | c2 | c3 | c4 | c5 | c6
-      · have : ¬ Col F G K := by
-            intro h
-            contradict
-        close
-      · have : Cong A a F K := by conclude lemma_congruencesymmetric
-        have : ¬ Col F G K := by
-            intro h
-            have : F ≠ K := by conclude axiom_nocollapse
-            contradict
-        close
-      · have : Cong C c G K := by conclude lemma_congruencesymmetric
-        have : ¬ Col F G K := by
-            intro h
-            have : G ≠ K := by conclude axiom_nocollapse
-            contradict
-        close
-      · have : BetS K F G := by conclude axiom_betweennesssymmetry
-        have : Cong K F A a := by forward_using lemma_congruenceflip
-        obtain ⟨S, _, _, _⟩ : ∃ S, (BetS A a S ∧ Cong a S B b ∧ Lt C c A S) := by conclude_def TG
-        have : Cong A a K F := by conclude lemma_congruencesymmetric
-        have : Cong a S F G := by conclude lemma_congruencetransitive
-        have : Cong A S K G := by conclude cn_sumofparts
-        have : Cong A S G K := by forward_using lemma_congruenceflip
-        have : Lt C c G K := by conclude lemma_lessthancongruence
-        have : Cong C c G K := by conclude lemma_congruencesymmetric
-        have : Lt G K G K := by conclude lemma_lessthancongruence2
-        have : ¬ Col F G K := by
-            intro h
-            have : ¬ Lt G K G K := by conclude lemma_trichotomy2
-            contradict
-        close
-      · obtain ⟨S, _, _, _⟩ : ∃ S, (BetS B b S ∧ Cong b S C c ∧ Lt A a B S) := by conclude_def TG
-        have : Cong C c b S := by conclude lemma_congruencesymmetric
-        have : Cong G K b S := by conclude lemma_congruencetransitive
-        have : Cong F K B S := by conclude cn_sumofparts
-        have : Cong A a F K := by conclude lemma_congruencesymmetric
-        have : Lt F K B S := by conclude lemma_lessthancongruence2
-        have : Cong B S F K := by conclude lemma_congruencesymmetric
-        have : Lt F K F K := by conclude lemma_lessthancongruence
-        have : ¬ Col F G K := by
-            intro h
-            have : ¬ Lt F K F K := by conclude lemma_trichotomy2
-            contradict
-        close
-      · obtain ⟨S, _, _, _⟩ : ∃ S, (BetS A a S ∧ Cong a S C c ∧ Lt B b A S) := by conclude_def TG
-        have : Lt F G A S := by conclude lemma_lessthancongruence2
-        have : Cong C c a S := by conclude lemma_congruencesymmetric
-        have : Cong G K a S := by conclude lemma_congruencetransitive
-        have : Cong K G a S := by forward_using lemma_congruenceflip
-        have : Cong F G A S := by conclude cn_sumofparts
-        have : Cong A S F G := by conclude lemma_congruencesymmetric
-        have : Lt F G F G := by conclude lemma_lessthancongruence
-        have : ¬ Col F G K := by
-            intro h
-            have : ¬ Lt F G F G := by conclude lemma_trichotomy2
-            contradict
-        close
+      have : nCol F G K := by
+          rcases (show F = G ∨ F = K ∨ G = K ∨ BetS G F K ∨ BetS F G K ∨ BetS F K G by first | assumption | exact Classical.em _ | tauto | aesop) with c1 | c2 | c3 | c4 | c5 | c6
+          · have : ¬ Col F G K := by
+                intro h
+                contradict
+            close
+          · have : Cong A a F K := by conclude lemma_congruencesymmetric
+            have : ¬ Col F G K := by
+                intro h
+                have : F ≠ K := by conclude axiom_nocollapse
+                contradict
+            close
+          · have : Cong C c G K := by conclude lemma_congruencesymmetric
+            have : ¬ Col F G K := by
+                intro h
+                have : G ≠ K := by conclude axiom_nocollapse
+                contradict
+            close
+          · have : BetS K F G := by conclude axiom_betweennesssymmetry
+            have : Cong K F A a := by forward_using lemma_congruenceflip
+            obtain ⟨S, _, _, _⟩ : ∃ S, (BetS A a S ∧ Cong a S B b ∧ Lt C c A S) := by conclude_def TG
+            have : Cong A a K F := by conclude lemma_congruencesymmetric
+            have : Cong a S F G := by conclude lemma_congruencetransitive
+            have : Cong A S K G := by conclude cn_sumofparts
+            have : Cong A S G K := by forward_using lemma_congruenceflip
+            have : Lt C c G K := by conclude lemma_lessthancongruence
+            have : Cong C c G K := by conclude lemma_congruencesymmetric
+            have : Lt G K G K := by conclude lemma_lessthancongruence2
+            have : ¬ Col F G K := by
+                intro h
+                have : ¬ Lt G K G K := by conclude lemma_trichotomy2
+                contradict
+            close
+          · obtain ⟨S, _, _, _⟩ : ∃ S, (BetS B b S ∧ Cong b S C c ∧ Lt A a B S) := by conclude_def TG
+            have : Cong C c b S := by conclude lemma_congruencesymmetric
+            have : Cong G K b S := by conclude lemma_congruencetransitive
+            have : Cong F K B S := by conclude cn_sumofparts
+            have : Cong A a F K := by conclude lemma_congruencesymmetric
+            have : Lt F K B S := by conclude lemma_lessthancongruence2
+            have : Cong B S F K := by conclude lemma_congruencesymmetric
+            have : Lt F K F K := by conclude lemma_lessthancongruence
+            have : ¬ Col F G K := by
+                intro h
+                have : ¬ Lt F K F K := by conclude lemma_trichotomy2
+                contradict
+            close
+          · obtain ⟨S, _, _, _⟩ : ∃ S, (BetS A a S ∧ Cong a S C c ∧ Lt B b A S) := by conclude_def TG
+            have : Lt F G A S := by conclude lemma_lessthancongruence2
+            have : Cong C c a S := by conclude lemma_congruencesymmetric
+            have : Cong G K a S := by conclude lemma_congruencetransitive
+            have : Cong K G a S := by forward_using lemma_congruenceflip
+            have : Cong F G A S := by conclude cn_sumofparts
+            have : Cong A S F G := by conclude lemma_congruencesymmetric
+            have : Lt F G F G := by conclude lemma_lessthancongruence
+            have : ¬ Col F G K := by
+                intro h
+                have : ¬ Lt F G F G := by conclude lemma_trichotomy2
+                contradict
+            close
       contradict
   have : Triangle F G K := by conclude_def Triangle
   close

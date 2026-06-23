@@ -165,174 +165,174 @@ theorem proposition_35 :
       have : ¬ A = F := by
           intro h
           have : (F = D ∨ F = E ∨ D = E ∨ BetS D A E ∨ BetS A D E ∨ BetS A E D) := by conclude cn_equalitysub
-          sorry -- TODO: assert (neq A F).
-          rcases (show F = D ∨ F = E ∨ D = E ∨ BetS D A E ∨ BetS A D E ∨ BetS A E D by first | assumption | exact Classical.em _ | tauto | aesop) with c1 | c2 | c3 | c4 | c5 | c6
-          · have : A = D := by conclude cn_equalitysub
-            have : ¬ A = F := by
-                intro h
-                contradict
-            close
-          · have : ¬ A = F := by
-                intro h
-                have : F ≠ E := by conclude lemma_inequalitysymmetric
-                contradict
-            close
-          · have : ¬ A = F := by
-                intro h
-                obtain ⟨p, _, _⟩ : ∃ p, (BetS E p C ∧ BetS B p F) := by conclude lemma_diagonalsmeet
-                have : Col E p C := by conclude_def Col
-                have : Col B p F := by conclude_def Col
-                have : Col F B p := by forward_using lemma_collinearorder
-                have : Col E C p := by forward_using lemma_collinearorder
-                have : nCol E F C := by forward_using lemma_parallelNC
-                have : E ≠ C := by forward_using lemma_NCdistinct
-                have : nCol E F B := by forward_using lemma_parallelNC
-                have : F ≠ B := by forward_using lemma_NCdistinct
-                have : Meet E C F B := by conclude_def Meet
-                have : Meet D C F B := by conclude cn_equalitysub
-                have : Meet D C A B := by conclude cn_equalitysub
-                have : Par D C A B := by conclude lemma_parallelsymmetric
-                have : ¬ Meet D C A B := by conclude_def Par
-                contradict
-            close
-          · have : ¬ A = F := by
-                intro h
-                have : BetS E A D := by conclude axiom_betweennesssymmetry
-                contradict
-            close
-          · have : ¬ A = F := by
-                intro h
-                contradict
-            close
-          · have : ¬ A = F := by
-                intro h
-                have : Cong A E A E := by conclude cn_congruencereflexive
-                have : Cong F E A E := by conclude cn_equalitysub
-                have : Cong A E F E := by conclude lemma_congruencesymmetric
-                have : Lt F E A D := by conclude_def Lt
-                have : Lt F E E F := by conclude lemma_lessthancongruence
-                have : Cong E F F E := by conclude cn_equalityreverse
-                have : Lt F E F E := by conclude lemma_lessthancongruence
-                have : ¬ Lt F E F E := by conclude lemma_trichotomy2
-                contradict
-            close
+          have : A ≠ F := by
+              rcases (show F = D ∨ F = E ∨ D = E ∨ BetS D A E ∨ BetS A D E ∨ BetS A E D by first | assumption | exact Classical.em _ | tauto | aesop) with c1 | c2 | c3 | c4 | c5 | c6
+              · have : A = D := by conclude cn_equalitysub
+                have : ¬ A = F := by
+                    intro h
+                    contradict
+                close
+              · have : ¬ A = F := by
+                    intro h
+                    have : F ≠ E := by conclude lemma_inequalitysymmetric
+                    contradict
+                close
+              · have : ¬ A = F := by
+                    intro h
+                    obtain ⟨p, _, _⟩ : ∃ p, (BetS E p C ∧ BetS B p F) := by conclude lemma_diagonalsmeet
+                    have : Col E p C := by conclude_def Col
+                    have : Col B p F := by conclude_def Col
+                    have : Col F B p := by forward_using lemma_collinearorder
+                    have : Col E C p := by forward_using lemma_collinearorder
+                    have : nCol E F C := by forward_using lemma_parallelNC
+                    have : E ≠ C := by forward_using lemma_NCdistinct
+                    have : nCol E F B := by forward_using lemma_parallelNC
+                    have : F ≠ B := by forward_using lemma_NCdistinct
+                    have : Meet E C F B := by conclude_def Meet
+                    have : Meet D C F B := by conclude cn_equalitysub
+                    have : Meet D C A B := by conclude cn_equalitysub
+                    have : Par D C A B := by conclude lemma_parallelsymmetric
+                    have : ¬ Meet D C A B := by conclude_def Par
+                    contradict
+                close
+              · have : ¬ A = F := by
+                    intro h
+                    have : BetS E A D := by conclude axiom_betweennesssymmetry
+                    contradict
+                close
+              · have : ¬ A = F := by
+                    intro h
+                    contradict
+                close
+              · have : ¬ A = F := by
+                    intro h
+                    have : Cong A E A E := by conclude cn_congruencereflexive
+                    have : Cong F E A E := by conclude cn_equalitysub
+                    have : Cong A E F E := by conclude lemma_congruencesymmetric
+                    have : Lt F E A D := by conclude_def Lt
+                    have : Lt F E E F := by conclude lemma_lessthancongruence
+                    have : Cong E F F E := by conclude cn_equalityreverse
+                    have : Lt F E F E := by conclude lemma_lessthancongruence
+                    have : ¬ Lt F E F E := by conclude lemma_trichotomy2
+                    contradict
+                close
           contradict
       have : ¬ D = F := by
           intro h
           have : (A = F ∨ A = E ∨ F = E ∨ BetS D A E ∨ BetS A D E ∨ BetS A E D) := by conclude cn_equalitysub
-          sorry -- TODO: assert (neq D F).
-          rcases (show A = F ∨ A = E ∨ F = E ∨ BetS D A E ∨ BetS A D E ∨ BetS A E D by first | assumption | exact Classical.em _ | tauto | aesop) with c1 | c2 | c3 | c4 | c5 | c6
-          · have : ¬ D = F := by
-                intro h
-                contradict
-            close
-          · have : ¬ D = F := by
-                intro h
-                obtain ⟨M, _, _⟩ : ∃ M, (BetS A M C ∧ BetS B M D) := by conclude lemma_diagonalsmeet
-                have : ¬ Col A B C := by
+          have : D ≠ F := by
+              rcases (show A = F ∨ A = E ∨ F = E ∨ BetS D A E ∨ BetS A D E ∨ BetS A E D by first | assumption | exact Classical.em _ | tauto | aesop) with c1 | c2 | c3 | c4 | c5 | c6
+              · have : ¬ D = F := by
                     intro h
-                    have : C = C := by conclude cn_equalityreflexive
-                    have : Col C D C := by conclude_def Col
-                    have : A ≠ B := by conclude_def Par
-                    have : C ≠ D := by conclude_def Par
-                    have : Meet A B C D := by conclude_def Meet
-                    have : ¬ Meet A B C D := by conclude_def Par
                     contradict
-                have : EF A B C D A B C D := by conclude lemma_EFreflexive
-                have : EF A B C D E B C D := by conclude cn_equalitysub
-                have : EF A B C D E B C F := by conclude cn_equalitysub
+                close
+              · have : ¬ D = F := by
+                    intro h
+                    obtain ⟨M, _, _⟩ : ∃ M, (BetS A M C ∧ BetS B M D) := by conclude lemma_diagonalsmeet
+                    have : ¬ Col A B C := by
+                        intro h
+                        have : C = C := by conclude cn_equalityreflexive
+                        have : Col C D C := by conclude_def Col
+                        have : A ≠ B := by conclude_def Par
+                        have : C ≠ D := by conclude_def Par
+                        have : Meet A B C D := by conclude_def Meet
+                        have : ¬ Meet A B C D := by conclude_def Par
+                        contradict
+                    have : EF A B C D A B C D := by conclude lemma_EFreflexive
+                    have : EF A B C D E B C D := by conclude cn_equalitysub
+                    have : EF A B C D E B C F := by conclude cn_equalitysub
+                    contradict
+                close
+              · have : ¬ D = F := by
+                    intro h
+                    have : F = E := by conclude cn_equalitysub
+                    have : E = F := by conclude lemma_equalitysymmetric
+                    contradict
+                close
+              · have : ¬ D = F := by
+                    intro h
+                    have : BetS E A D := by conclude axiom_betweennesssymmetry
+                    contradict
+                close
+              · have : ¬ D = F := by
+                    intro h
+                    contradict
+                close
+              · have : ¬ D = F := by
+                    intro h
+                    have : BetS D E A := by conclude axiom_betweennesssymmetry
+                    have : Cong D E D E := by conclude cn_congruencereflexive
+                    have : Lt D E D A := by conclude_def Lt
+                    have : Cong D E F E := by conclude cn_equalitysub
+                    have : Lt F E D A := by conclude lemma_lessthancongruence2
+                    have : Cong F E E F := by conclude cn_equalityreverse
+                    have : Lt E F D A := by conclude lemma_lessthancongruence2
+                    have : Cong D A A D := by conclude cn_equalityreverse
+                    have : Lt E F A D := by conclude lemma_lessthancongruence
+                    have : Lt E F E F := by conclude lemma_lessthancongruence
+                    have : ¬ Lt E F E F := by conclude lemma_trichotomy2
+                    contradict
+                close
+          contradict
+      have : BetS A F D := by
+          rcases (show A = D ∨ A = F ∨ D = F ∨ BetS D A F ∨ BetS A D F ∨ BetS A F D by first | assumption | exact Classical.em _ | tauto | aesop) with c1 | c2 | c3 | c4 | c5 | c6
+          · have : ¬ ¬ BetS A F D := by
+                intro h
                 contradict
             close
-          · have : ¬ D = F := by
-                intro h
-                have : F = E := by conclude cn_equalitysub
-                have : E = F := by conclude lemma_equalitysymmetric
-                contradict
-            close
-          · have : ¬ D = F := by
-                intro h
-                have : BetS E A D := by conclude axiom_betweennesssymmetry
-                contradict
-            close
-          · have : ¬ D = F := by
+          · have : ¬ ¬ BetS A F D := by
                 intro h
                 contradict
             close
-          · have : ¬ D = F := by
+          · have : ¬ ¬ BetS A F D := by
                 intro h
-                have : BetS D E A := by conclude axiom_betweennesssymmetry
-                have : Cong D E D E := by conclude cn_congruencereflexive
-                have : Lt D E D A := by conclude_def Lt
-                have : Cong D E F E := by conclude cn_equalitysub
-                have : Lt F E D A := by conclude lemma_lessthancongruence2
-                have : Cong F E E F := by conclude cn_equalityreverse
-                have : Lt E F D A := by conclude lemma_lessthancongruence2
-                have : Cong D A A D := by conclude cn_equalityreverse
-                have : Lt E F A D := by conclude lemma_lessthancongruence
+                contradict
+            close
+          · have : ¬ ¬ BetS A F D := by
+                intro h
+                contradict
+            close
+          · have : ¬ ¬ BetS A F D := by
+                intro h
+                contradict
+            close
+          · close
+      have : BetS A E D := by
+          rcases (show A = D ∨ A = E ∨ D = E ∨ BetS D A E ∨ BetS A D E ∨ BetS A E D by first | assumption | exact Classical.em _ | tauto | aesop) with c1 | c2 | c3 | c4 | c5 | c6
+          · have : ¬ ¬ BetS A E D := by
+                intro h
+                contradict
+            close
+          · have : ¬ ¬ BetS A E D := by
+                intro h
+                have : Cong A F A F := by conclude cn_congruencereflexive
+                have : Cong A F E F := by conclude cn_equalitysub
+                have : Lt E F A D := by conclude_def Lt
                 have : Lt E F E F := by conclude lemma_lessthancongruence
                 have : ¬ Lt E F E F := by conclude lemma_trichotomy2
                 contradict
             close
-          contradict
-      sorry -- TODO: assert (BetS A F D).
-      rcases (show A = D ∨ A = F ∨ D = F ∨ BetS D A F ∨ BetS A D F ∨ BetS A F D by first | assumption | exact Classical.em _ | tauto | aesop) with c1 | c2 | c3 | c4 | c5 | c6
-      · have : ¬ ¬ BetS A F D := by
-            intro h
-            contradict
-        close
-      · have : ¬ ¬ BetS A F D := by
-            intro h
-            contradict
-        close
-      · have : ¬ ¬ BetS A F D := by
-            intro h
-            contradict
-        close
-      · have : ¬ ¬ BetS A F D := by
-            intro h
-            contradict
-        close
-      · have : ¬ ¬ BetS A F D := by
-            intro h
-            contradict
-        close
-      · close
-      sorry -- TODO: assert (BetS A E D).
-      rcases (show A = D ∨ A = E ∨ D = E ∨ BetS D A E ∨ BetS A D E ∨ BetS A E D by first | assumption | exact Classical.em _ | tauto | aesop) with c1 | c2 | c3 | c4 | c5 | c6
-      · have : ¬ ¬ BetS A E D := by
-            intro h
-            contradict
-        close
-      · have : ¬ ¬ BetS A E D := by
-            intro h
-            have : Cong A F A F := by conclude cn_congruencereflexive
-            have : Cong A F E F := by conclude cn_equalitysub
-            have : Lt E F A D := by conclude_def Lt
-            have : Lt E F E F := by conclude lemma_lessthancongruence
-            have : ¬ Lt E F E F := by conclude lemma_trichotomy2
-            contradict
-        close
-      · have : ¬ ¬ BetS A E D := by
-            intro h
-            have : BetS D F A := by conclude axiom_betweennesssymmetry
-            have : Cong D F D F := by conclude cn_congruencereflexive
-            have : Lt D F D A := by conclude_def Lt
-            have : Lt E F D A := by conclude cn_equalitysub
-            have : Cong D A E F := by forward_using lemma_congruenceflip
-            have : Lt E F E F := by conclude lemma_lessthancongruence
-            have : ¬ Lt E F E F := by conclude lemma_trichotomy2
-            contradict
-        close
-      · have : ¬ ¬ BetS A E D := by
-            intro h
-            have : BetS E A D := by conclude axiom_betweennesssymmetry
-            contradict
-        close
-      · have : ¬ ¬ BetS A E D := by
-            intro h
-            contradict
-        close
-      · close
+          · have : ¬ ¬ BetS A E D := by
+                intro h
+                have : BetS D F A := by conclude axiom_betweennesssymmetry
+                have : Cong D F D F := by conclude cn_congruencereflexive
+                have : Lt D F D A := by conclude_def Lt
+                have : Lt E F D A := by conclude cn_equalitysub
+                have : Cong D A E F := by forward_using lemma_congruenceflip
+                have : Lt E F E F := by conclude lemma_lessthancongruence
+                have : ¬ Lt E F E F := by conclude lemma_trichotomy2
+                contradict
+            close
+          · have : ¬ ¬ BetS A E D := by
+                intro h
+                have : BetS E A D := by conclude axiom_betweennesssymmetry
+                contradict
+            close
+          · have : ¬ ¬ BetS A E D := by
+                intro h
+                contradict
+            close
+          · close
       have : ¬ BetS A E F := by
           intro h
           have : BetS E F D := by conclude lemma_3_6a

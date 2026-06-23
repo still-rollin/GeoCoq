@@ -13,30 +13,30 @@ theorem lemma_tworays :
   intro A B C h1 h2
   have : (BetS A C B ∨ B = C ∨ BetS A B C) := by conclude lemma_ray1
   have : (BetS B C A ∨ A = C ∨ BetS B A C) := by conclude lemma_ray1
-  sorry -- TODO: assert (BetS A C B).
-  rcases (show BetS A C B ∨ B = C ∨ BetS A B C by first | assumption | exact Classical.em _ | tauto | aesop) with c1 | c2 | c3
-  · close
-  · have : ¬ ¬ BetS A C B := by
-        intro h
-        have : B ≠ C := by conclude lemma_raystrict
-        contradict
-    close
-  · sorry -- TODO: assert (BetS A C B).
-    rcases (show BetS B C A ∨ A = C ∨ BetS B A C by first | assumption | exact Classical.em _ | tauto | aesop) with c1 | c2 | c3
-    · have : BetS A C B := by conclude axiom_betweennesssymmetry
-      close
-    · have : ¬ ¬ BetS A C B := by
-          intro h
-          have : A ≠ C := by conclude lemma_raystrict
-          contradict
-      close
-    · have : ¬ ¬ BetS A C B := by
-          intro h
-          have : BetS A B A := by conclude axiom_innertransitivity
-          have : ¬ BetS A B A := by conclude axiom_betweennessidentity
-          contradict
-      close
-    close
+  have : BetS A C B := by
+      rcases (show BetS A C B ∨ B = C ∨ BetS A B C by first | assumption | exact Classical.em _ | tauto | aesop) with c1 | c2 | c3
+      · close
+      · have : ¬ ¬ BetS A C B := by
+            intro h
+            have : B ≠ C := by conclude lemma_raystrict
+            contradict
+        close
+      · have : BetS A C B := by
+            rcases (show BetS B C A ∨ A = C ∨ BetS B A C by first | assumption | exact Classical.em _ | tauto | aesop) with c1 | c2 | c3
+            · have : BetS A C B := by conclude axiom_betweennesssymmetry
+              close
+            · have : ¬ ¬ BetS A C B := by
+                  intro h
+                  have : A ≠ C := by conclude lemma_raystrict
+                  contradict
+              close
+            · have : ¬ ¬ BetS A C B := by
+                  intro h
+                  have : BetS A B A := by conclude axiom_innertransitivity
+                  have : ¬ BetS A B A := by conclude axiom_betweennessidentity
+                  contradict
+              close
+        close
   close
 
 end GeocoqTranslate.Elements

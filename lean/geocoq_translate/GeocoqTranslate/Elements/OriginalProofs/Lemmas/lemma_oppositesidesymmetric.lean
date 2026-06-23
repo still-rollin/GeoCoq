@@ -28,23 +28,23 @@ theorem lemma_oppositesidesymmetric :
       have : Q ≠ R := by forward_using lemma_betweennotequal
       have : Col R B P := by conclude lemma_collinear4
       have : Col R B A := by forward_using lemma_collinearorder
-      sorry -- TODO: assert (Col A P B).
-      rcases (show R = B ∨ R ≠ B by first | assumption | exact Classical.em _ | tauto | aesop) with c1 | c2
-      · have : Col P B Q := by conclude cn_equalitysub
-        have : Col B Q P := by forward_using lemma_collinearorder
-        have : Col B Q A := by forward_using lemma_collinearorder
-        have : R ≠ Q := by forward_using lemma_betweennotequal
-        have : B ≠ Q := by conclude cn_equalitysub
-        have : Col Q P A := by conclude lemma_collinear4
-        have : Col Q P B := by forward_using lemma_collinearorder
-        have : P ≠ Q := by forward_using lemma_betweennotequal
-        have : Q ≠ P := by conclude lemma_inequalitysymmetric
-        have : Col P A B := by conclude lemma_collinear4
-        have : Col A P B := by forward_using lemma_collinearorder
-        close
-      · have : Col B P A := by conclude lemma_collinear4
-        have : Col A P B := by forward_using lemma_collinearorder
-        close
+      have : Col A P B := by
+          rcases (show R = B ∨ R ≠ B by first | assumption | exact Classical.em _ | tauto | aesop) with c1 | c2
+          · have : Col P B Q := by conclude cn_equalitysub
+            have : Col B Q P := by forward_using lemma_collinearorder
+            have : Col B Q A := by forward_using lemma_collinearorder
+            have : R ≠ Q := by forward_using lemma_betweennotequal
+            have : B ≠ Q := by conclude cn_equalitysub
+            have : Col Q P A := by conclude lemma_collinear4
+            have : Col Q P B := by forward_using lemma_collinearorder
+            have : P ≠ Q := by forward_using lemma_betweennotequal
+            have : Q ≠ P := by conclude lemma_inequalitysymmetric
+            have : Col P A B := by conclude lemma_collinear4
+            have : Col A P B := by forward_using lemma_collinearorder
+            close
+          · have : Col B P A := by conclude lemma_collinear4
+            have : Col A P B := by forward_using lemma_collinearorder
+            close
       have : Col A B P := by forward_using lemma_collinearorder
       contradict
   have : TS Q A B P := by conclude_def TS

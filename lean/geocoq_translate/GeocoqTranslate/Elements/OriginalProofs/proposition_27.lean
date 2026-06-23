@@ -151,14 +151,14 @@ theorem proposition_27 :
           have : CongA E F D G E F := by conclude lemma_equalangleshelper
           have : BetS B E A := by conclude axiom_betweennesssymmetry
           have : (BetS E A G ∨ G = A ∨ BetS E G A) := by conclude lemma_ray1
-          sorry -- TODO: assert (BetS B E G).
-          rcases (show BetS E A G ∨ G = A ∨ BetS E G A by first | assumption | exact Classical.em _ | tauto | aesop) with c1 | c2 | c3
-          · have : BetS B E G := by conclude lemma_3_7b
-            close
-          · have : BetS B E G := by conclude cn_equalitysub
-            close
-          · have : BetS B E G := by conclude axiom_innertransitivity
-            close
+          have : BetS B E G := by
+              rcases (show BetS E A G ∨ G = A ∨ BetS E G A by first | assumption | exact Classical.em _ | tauto | aesop) with c1 | c2 | c3
+              · have : BetS B E G := by conclude lemma_3_7b
+                close
+              · have : BetS B E G := by conclude cn_equalitysub
+                close
+              · have : BetS B E G := by conclude axiom_innertransitivity
+                close
           have : BetS G E B := by conclude axiom_betweennesssymmetry
           have : E = E := by conclude cn_equalityreflexive
           have : Col E F E := by conclude_def Col
@@ -216,115 +216,115 @@ theorem proposition_27 :
           have : ¬ LtA E F D E F D := by conclude lemma_angletrichotomy
           contradict
       have : (A = E ∨ A = G ∨ E = G ∨ BetS E A G ∨ BetS A E G ∨ BetS A G E) := by conclude_def Col
-      sorry -- TODO: assert (~ Meet A B C D).
-      rcases (show A = E ∨ A = G ∨ E = G ∨ BetS E A G ∨ BetS A E G ∨ BetS A G E by first | assumption | exact Classical.em _ | tauto | aesop) with c1 | c2 | c3 | c4 | c5 | c6
-      · have : ¬ Meet A B C D := by
-            intro h
-            contradict
-        close
-      · have : ¬ H ≠ F := by
-            intro h
-            have : Col C D F := by forward_using lemma_collinearorder
-            have : Col D G F := by conclude lemma_collinear4
-            have : Col D A F := by conclude cn_equalitysub
-            have : Col A H D := by conclude_def Col
-            have : Col D A H := by forward_using lemma_collinearorder
-            have : A ≠ D := by forward_using lemma_betweennotequal
-            have : D ≠ A := by conclude lemma_inequalitysymmetric
-            have : Col A F H := by conclude lemma_collinear4
-            have : Col H F A := by forward_using lemma_collinearorder
-            have : Col H F E := by forward_using lemma_collinearorder
-            have : Col F A E := by conclude lemma_collinear4
-            have : Col E F A := by forward_using lemma_collinearorder
-            contradict
-        have : BetS A F D := by conclude cn_equalitysub
-        have : ¬ Col E A F := by
-            intro h
-            have : Col E F A := by forward_using lemma_collinearorder
-            contradict
-        have : Triangle E A F := by conclude_def Triangle
-        have : LtA A E F E F D := by conclude proposition_16
-        have : CongA E F D A E F := by conclude lemma_equalanglessymmetric
-        have : LtA E F D E F D := by conclude lemma_angleorderrespectscongruence2
-        have : ¬ Meet A B C D := by
-            intro h
-            have : ¬ LtA E F D E F D := by conclude lemma_angletrichotomy
-            contradict
-        close
-      · have : Col C D E := by conclude cn_equalitysub
-        have : Col C D F := by forward_using lemma_collinearorder
-        have : Col D E F := by conclude lemma_collinear4
-        have : Col E F D := by forward_using lemma_collinearorder
-        have : ¬ E ≠ F := by
-            intro h
-            have : Col F D H := by conclude lemma_collinear4
-            have : Col D H F := by forward_using lemma_collinearorder
-            have : Col A H D := by conclude_def Col
-            have : Col D H A := by forward_using lemma_collinearorder
-            have : H ≠ D := by forward_using lemma_betweennotequal
-            have : D ≠ H := by conclude lemma_inequalitysymmetric
-            have : Col H F A := by conclude lemma_collinear4
-            have : Col H F E := by forward_using lemma_collinearorder
-            have : ¬ H ≠ F := by
+      have : ¬ Meet A B C D := by
+          rcases (show A = E ∨ A = G ∨ E = G ∨ BetS E A G ∨ BetS A E G ∨ BetS A G E by first | assumption | exact Classical.em _ | tauto | aesop) with c1 | c2 | c3 | c4 | c5 | c6
+          · have : ¬ Meet A B C D := by
                 intro h
+                contradict
+            close
+          · have : ¬ H ≠ F := by
+                intro h
+                have : Col C D F := by forward_using lemma_collinearorder
+                have : Col D G F := by conclude lemma_collinear4
+                have : Col D A F := by conclude cn_equalitysub
+                have : Col A H D := by conclude_def Col
+                have : Col D A H := by forward_using lemma_collinearorder
+                have : A ≠ D := by forward_using lemma_betweennotequal
+                have : D ≠ A := by conclude lemma_inequalitysymmetric
+                have : Col A F H := by conclude lemma_collinear4
+                have : Col H F A := by forward_using lemma_collinearorder
+                have : Col H F E := by forward_using lemma_collinearorder
                 have : Col F A E := by conclude lemma_collinear4
                 have : Col E F A := by forward_using lemma_collinearorder
                 contradict
-            have : Col A H D := by conclude_def Col
-            have : Col A F D := by conclude cn_equalitysub
-            have : Col D F A := by forward_using lemma_collinearorder
-            have : Col D F C := by forward_using lemma_collinearorder
-            have : H ≠ D := by forward_using lemma_betweennotequal
-            have : D ≠ H := by conclude lemma_inequalitysymmetric
-            have : D ≠ F := by conclude cn_equalitysub
-            have : Col F A C := by conclude lemma_collinear4
-            have : Col C F A := by forward_using lemma_collinearorder
-            have : Col D C G := by forward_using lemma_collinearorder
-            have : Col C D F := by forward_using lemma_collinearorder
-            have : Col D C F := by forward_using lemma_collinearorder
-            have : D ≠ C := by conclude lemma_inequalitysymmetric
-            have : Col C G F := by conclude lemma_collinear4
-            have : Col C F G := by forward_using lemma_collinearorder
-            have : ¬ C ≠ F := by
+            have : BetS A F D := by conclude cn_equalitysub
+            have : ¬ Col E A F := by
                 intro h
-                have : Col F A G := by conclude lemma_collinear4
-                have : Col F A E := by conclude cn_equalitysub
                 have : Col E F A := by forward_using lemma_collinearorder
                 contradict
-            have : Col A H D := by conclude_def Col
-            have : Col A C D := by conclude cn_equalitysub
-            have : Col C D A := by forward_using lemma_collinearorder
-            have : Col F D A := by conclude cn_equalitysub
-            have : Col C D E := by conclude cn_equalitysub
-            have : Col F D E := by conclude cn_equalitysub
-            have : Col D F E := by forward_using lemma_collinearorder
-            have : Col D F A := by forward_using lemma_collinearorder
-            have : D ≠ F := by conclude cn_equalitysub
-            have : Col F E A := by conclude lemma_collinear4
-            have : Col E F A := by forward_using lemma_collinearorder
-            contradict
-        have : Col E F A := by conclude_def Col
-        have : ¬ Meet A B C D := by
-            intro h
-            contradict
-        close
-      · have : E ≠ A := by forward_using lemma_betweennotequal
-        have : Out E A G := by conclude lemma_ray4
-        have : ¬ Meet A B C D := by
-            intro h
-            contradict
-        close
-      · have : ¬ Meet A B C D := by
-            intro h
-            contradict
-        close
-      · have : BetS E G A := by conclude axiom_betweennesssymmetry
-        have : E ≠ A := by forward_using lemma_betweennotequal
-        have : Out E A G := by conclude lemma_ray4
-        have : ¬ Meet A B C D := by
-            intro h
-            contradict
-        close
+            have : Triangle E A F := by conclude_def Triangle
+            have : LtA A E F E F D := by conclude proposition_16
+            have : CongA E F D A E F := by conclude lemma_equalanglessymmetric
+            have : LtA E F D E F D := by conclude lemma_angleorderrespectscongruence2
+            have : ¬ Meet A B C D := by
+                intro h
+                have : ¬ LtA E F D E F D := by conclude lemma_angletrichotomy
+                contradict
+            close
+          · have : Col C D E := by conclude cn_equalitysub
+            have : Col C D F := by forward_using lemma_collinearorder
+            have : Col D E F := by conclude lemma_collinear4
+            have : Col E F D := by forward_using lemma_collinearorder
+            have : ¬ E ≠ F := by
+                intro h
+                have : Col F D H := by conclude lemma_collinear4
+                have : Col D H F := by forward_using lemma_collinearorder
+                have : Col A H D := by conclude_def Col
+                have : Col D H A := by forward_using lemma_collinearorder
+                have : H ≠ D := by forward_using lemma_betweennotequal
+                have : D ≠ H := by conclude lemma_inequalitysymmetric
+                have : Col H F A := by conclude lemma_collinear4
+                have : Col H F E := by forward_using lemma_collinearorder
+                have : ¬ H ≠ F := by
+                    intro h
+                    have : Col F A E := by conclude lemma_collinear4
+                    have : Col E F A := by forward_using lemma_collinearorder
+                    contradict
+                have : Col A H D := by conclude_def Col
+                have : Col A F D := by conclude cn_equalitysub
+                have : Col D F A := by forward_using lemma_collinearorder
+                have : Col D F C := by forward_using lemma_collinearorder
+                have : H ≠ D := by forward_using lemma_betweennotequal
+                have : D ≠ H := by conclude lemma_inequalitysymmetric
+                have : D ≠ F := by conclude cn_equalitysub
+                have : Col F A C := by conclude lemma_collinear4
+                have : Col C F A := by forward_using lemma_collinearorder
+                have : Col D C G := by forward_using lemma_collinearorder
+                have : Col C D F := by forward_using lemma_collinearorder
+                have : Col D C F := by forward_using lemma_collinearorder
+                have : D ≠ C := by conclude lemma_inequalitysymmetric
+                have : Col C G F := by conclude lemma_collinear4
+                have : Col C F G := by forward_using lemma_collinearorder
+                have : ¬ C ≠ F := by
+                    intro h
+                    have : Col F A G := by conclude lemma_collinear4
+                    have : Col F A E := by conclude cn_equalitysub
+                    have : Col E F A := by forward_using lemma_collinearorder
+                    contradict
+                have : Col A H D := by conclude_def Col
+                have : Col A C D := by conclude cn_equalitysub
+                have : Col C D A := by forward_using lemma_collinearorder
+                have : Col F D A := by conclude cn_equalitysub
+                have : Col C D E := by conclude cn_equalitysub
+                have : Col F D E := by conclude cn_equalitysub
+                have : Col D F E := by forward_using lemma_collinearorder
+                have : Col D F A := by forward_using lemma_collinearorder
+                have : D ≠ F := by conclude cn_equalitysub
+                have : Col F E A := by conclude lemma_collinear4
+                have : Col E F A := by forward_using lemma_collinearorder
+                contradict
+            have : Col E F A := by conclude_def Col
+            have : ¬ Meet A B C D := by
+                intro h
+                contradict
+            close
+          · have : E ≠ A := by forward_using lemma_betweennotequal
+            have : Out E A G := by conclude lemma_ray4
+            have : ¬ Meet A B C D := by
+                intro h
+                contradict
+            close
+          · have : ¬ Meet A B C D := by
+                intro h
+                contradict
+            close
+          · have : BetS E G A := by conclude axiom_betweennesssymmetry
+            have : E ≠ A := by forward_using lemma_betweennotequal
+            have : Out E A G := by conclude lemma_ray4
+            have : ¬ Meet A B C D := by
+                intro h
+                contradict
+            close
       contradict
   have : A = A := by conclude cn_equalityreflexive
   have : Col A B A := by conclude_def Col

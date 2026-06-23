@@ -129,170 +129,170 @@ theorem proposition_24 :
   have : isosceles A C H := by conclude_def isosceles
   have : CongA A C H A H C := by conclude proposition_05
   have : (BetS A H J ∨ J = H ∨ BetS A J H) := by conclude lemma_ray1
-  sorry -- TODO: assert (Lt H B C B).
-  rcases (show BetS A H J ∨ J = H ∨ BetS A J H by first | assumption | exact Classical.em _ | tauto | aesop) with c1 | c2 | c3
-  · have : ¬ Col C J H := by
-        intro h
-        have : Col A H J := by conclude_def Col
-        have : Col J H A := by forward_using lemma_collinearorder
-        have : Col J H C := by forward_using lemma_collinearorder
-        have : H ≠ J := by forward_using lemma_betweennotequal
-        have : J ≠ H := by conclude lemma_inequalitysymmetric
-        have : Col H A C := by conclude lemma_collinear4
-        have : Col A C H := by forward_using lemma_collinearorder
-        contradict
-    have : Triangle C J H := by conclude_def Triangle
-    have : BetS J H A := by conclude axiom_betweennesssymmetry
-    have : LtA J C H C H A := by conclude proposition_16
-    have : ¬ Col H C J := by
-        intro h
-        have : Col C J H := by forward_using lemma_collinearorder
-        contradict
-    have : CongA H C J J C H := by conclude lemma_ABCequalsCBA
-    have : LtA H C J C H A := by conclude lemma_angleorderrespectscongruence2
-    have : ¬ Col A H C := by
-        intro h
-        have : Col A C H := by forward_using lemma_collinearorder
-        contradict
-    have : CongA A H C C H A := by conclude lemma_ABCequalsCBA
-    have : LtA H C J A H C := by conclude lemma_angleorderrespectscongruence
-    have : Out H B B := by conclude lemma_ray4
-    have : C = C := by conclude cn_equalityreflexive
-    have : ¬ Col C H J := by
-        intro h
-        have : Col C J H := by forward_using lemma_collinearorder
-        contradict
-    have : ¬ C = H := by
-        intro h
-        have : Col C H J := by conclude_def Col
-        contradict
-    have : H ≠ C := by conclude lemma_inequalitysymmetric
-    have : Out H C C := by conclude lemma_ray4
-    have : CongA C H J C H J := by conclude lemma_equalanglesreflexive
-    have : C ≠ J := by forward_using lemma_angledistinct
-    have : C ≠ H := by forward_using lemma_angledistinct
-    have : LtA C H J C H B := by conclude_def LtA
-    have : ¬ Col C A H := by
-        intro h
-        have : Col A C H := by forward_using lemma_collinearorder
-        contradict
-    have : Triangle C A H := by conclude_def Triangle
-    have : LtA A C H C H J := by conclude proposition_16
-    have : LtA H C J A C H := by conclude lemma_angleorderrespectscongruence
-    have : LtA H C J C H J := by conclude lemma_angleordertransitive
-    have : LtA H C J C H B := by conclude lemma_angleordertransitive
-    have : H = H := by conclude cn_equalityreflexive
-    have : Out C H H := by conclude lemma_ray4
-    have : Out C J B := by conclude lemma_ray4
-    have : CongA H C J H C J := by conclude lemma_equalanglesreflexive
-    have : CongA H C J H C B := by conclude lemma_equalangleshelper
-    have : CongA H C B H C J := by conclude lemma_equalanglessymmetric
-    have : LtA H C B C H B := by conclude lemma_angleorderrespectscongruence2
-    have : ¬ Col B H C := by
-        intro h
-        have : Col C J B := by conclude_def Col
-        have : Col B C H := by forward_using lemma_collinearorder
-        have : Col B C J := by forward_using lemma_collinearorder
-        have : C ≠ B := by forward_using lemma_betweennotequal
-        have : B ≠ C := by conclude lemma_inequalitysymmetric
-        have : Col C H J := by conclude lemma_collinear4
-        contradict
-    have : Triangle B H C := by conclude_def Triangle
-    have : CongA B H C C H B := by conclude lemma_ABCequalsCBA
-    have : LtA H C B B H C := by conclude lemma_angleorderrespectscongruence
-    have : Lt B H B C := by conclude proposition_19
-    have : Cong B H H B := by conclude cn_equalityreverse
-    have : Lt H B B C := by conclude lemma_lessthancongruence2
-    have : Cong B C C B := by conclude cn_equalityreverse
-    have : Lt H B C B := by conclude lemma_lessthancongruence
-    close
-  · have : BetS C H B := by conclude cn_equalitysub
-    have : BetS B H C := by conclude axiom_betweennesssymmetry
-    have : Cong B H H B := by conclude cn_equalityreverse
-    have : Lt H B B C := by conclude_def Lt
-    have : Cong B C C B := by conclude cn_equalityreverse
-    have : Lt H B C B := by conclude lemma_lessthancongruence
-    close
-  · have : BetS H J A := by conclude axiom_betweennesssymmetry
-    have : ¬ Col C J H := by
-        intro h
-        have : Col A H J := by conclude_def Col
-        have : Col J H A := by forward_using lemma_collinearorder
-        have : Col J H C := by forward_using lemma_collinearorder
-        have : H ≠ J := by forward_using lemma_betweennotequal
-        have : J ≠ H := by conclude lemma_inequalitysymmetric
-        have : Col H A C := by conclude lemma_collinear4
-        have : Col A C H := by forward_using lemma_collinearorder
-        contradict
-    have : ¬ Col H C B := by
-        intro h
-        have : Col C J B := by conclude_def Col
-        have : Col B C J := by forward_using lemma_collinearorder
-        have : Col B C H := by forward_using lemma_collinearorder
-        have : C ≠ B := by forward_using lemma_betweennotequal
-        have : B ≠ C := by conclude lemma_inequalitysymmetric
-        have : Col C H J := by conclude lemma_collinear4
-        have : Col C J H := by forward_using lemma_collinearorder
-        contradict
-    have : H = H := by conclude cn_equalityreflexive
-    have : A = A := by conclude cn_equalityreflexive
-    have : ¬ C = H := by
-        intro h
-        have : Col C H B := by conclude_def Col
-        have : Col H C B := by forward_using lemma_collinearorder
-        contradict
-    have : Out C A A := by conclude lemma_ray4
-    have : CongA H C B H C B := by conclude lemma_equalanglesreflexive
-    have : Out C B J := by conclude lemma_ray4
-    have : Out C H H := by conclude lemma_ray4
-    have : CongA H C B H C J := by conclude lemma_equalangleshelper
-    have : BetS H J A := by conclude axiom_betweennesssymmetry
-    have : LtA H C B H C A := by conclude_def LtA
-    have : ¬ Col B C H := by
-        intro h
-        have : Col H C B := by forward_using lemma_collinearorder
-        contradict
-    have : CongA B C H H C B := by conclude lemma_ABCequalsCBA
-    have : LtA B C H H C A := by conclude lemma_angleorderrespectscongruence2
-    have : CongA A C H H C A := by conclude lemma_ABCequalsCBA
-    have : LtA B C H A C H := by conclude lemma_angleorderrespectscongruence
-    have : CongA A H C A C H := by conclude lemma_equalanglessymmetric
-    have : LtA B C H A H C := by conclude lemma_angleorderrespectscongruence
-    have : ¬ Col A H C := by
-        intro h
-        have : Col A C H := by forward_using lemma_collinearorder
-        contradict
-    have : CongA A H C C H A := by conclude lemma_ABCequalsCBA
-    have : C = C := by conclude cn_equalityreflexive
-    have : B = B := by conclude cn_equalityreflexive
-    have : H ≠ B := by forward_using lemma_angledistinct
-    have : H ≠ C := by forward_using lemma_angledistinct
-    have : H ≠ A := by forward_using lemma_angledistinct
-    have : Out H C C := by conclude lemma_ray4
-    have : Out H B B := by conclude lemma_ray4
-    have : Out H A J := by conclude lemma_ray4
-    have : CongA A H C C H J := by conclude lemma_equalangleshelper
-    have : LtA A H C C H B := by conclude_def LtA
-    have : ¬ Col B H C := by
-        intro h
-        have : Col H C B := by forward_using lemma_collinearorder
-        contradict
-    have : CongA B H C C H B := by conclude lemma_ABCequalsCBA
-    have : LtA A H C B H C := by conclude lemma_angleorderrespectscongruence
-    have : LtA B C H B H C := by conclude lemma_angleordertransitive
-    have : ¬ Col H C B := by
-        intro h
-        have : Col B H C := by forward_using lemma_collinearorder
-        contradict
-    have : CongA H C B B C H := by conclude lemma_ABCequalsCBA
-    have : LtA H C B B H C := by conclude lemma_angleorderrespectscongruence2
-    have : Triangle B H C := by conclude_def Triangle
-    have : Lt B H B C := by conclude proposition_19
-    have : Cong B H H B := by conclude cn_equalityreverse
-    have : Lt H B B C := by conclude lemma_lessthancongruence2
-    have : Cong B C C B := by conclude cn_equalityreverse
-    have : Lt H B C B := by conclude lemma_lessthancongruence
-    close
+  have : Lt H B C B := by
+      rcases (show BetS A H J ∨ J = H ∨ BetS A J H by first | assumption | exact Classical.em _ | tauto | aesop) with c1 | c2 | c3
+      · have : ¬ Col C J H := by
+            intro h
+            have : Col A H J := by conclude_def Col
+            have : Col J H A := by forward_using lemma_collinearorder
+            have : Col J H C := by forward_using lemma_collinearorder
+            have : H ≠ J := by forward_using lemma_betweennotequal
+            have : J ≠ H := by conclude lemma_inequalitysymmetric
+            have : Col H A C := by conclude lemma_collinear4
+            have : Col A C H := by forward_using lemma_collinearorder
+            contradict
+        have : Triangle C J H := by conclude_def Triangle
+        have : BetS J H A := by conclude axiom_betweennesssymmetry
+        have : LtA J C H C H A := by conclude proposition_16
+        have : ¬ Col H C J := by
+            intro h
+            have : Col C J H := by forward_using lemma_collinearorder
+            contradict
+        have : CongA H C J J C H := by conclude lemma_ABCequalsCBA
+        have : LtA H C J C H A := by conclude lemma_angleorderrespectscongruence2
+        have : ¬ Col A H C := by
+            intro h
+            have : Col A C H := by forward_using lemma_collinearorder
+            contradict
+        have : CongA A H C C H A := by conclude lemma_ABCequalsCBA
+        have : LtA H C J A H C := by conclude lemma_angleorderrespectscongruence
+        have : Out H B B := by conclude lemma_ray4
+        have : C = C := by conclude cn_equalityreflexive
+        have : ¬ Col C H J := by
+            intro h
+            have : Col C J H := by forward_using lemma_collinearorder
+            contradict
+        have : ¬ C = H := by
+            intro h
+            have : Col C H J := by conclude_def Col
+            contradict
+        have : H ≠ C := by conclude lemma_inequalitysymmetric
+        have : Out H C C := by conclude lemma_ray4
+        have : CongA C H J C H J := by conclude lemma_equalanglesreflexive
+        have : C ≠ J := by forward_using lemma_angledistinct
+        have : C ≠ H := by forward_using lemma_angledistinct
+        have : LtA C H J C H B := by conclude_def LtA
+        have : ¬ Col C A H := by
+            intro h
+            have : Col A C H := by forward_using lemma_collinearorder
+            contradict
+        have : Triangle C A H := by conclude_def Triangle
+        have : LtA A C H C H J := by conclude proposition_16
+        have : LtA H C J A C H := by conclude lemma_angleorderrespectscongruence
+        have : LtA H C J C H J := by conclude lemma_angleordertransitive
+        have : LtA H C J C H B := by conclude lemma_angleordertransitive
+        have : H = H := by conclude cn_equalityreflexive
+        have : Out C H H := by conclude lemma_ray4
+        have : Out C J B := by conclude lemma_ray4
+        have : CongA H C J H C J := by conclude lemma_equalanglesreflexive
+        have : CongA H C J H C B := by conclude lemma_equalangleshelper
+        have : CongA H C B H C J := by conclude lemma_equalanglessymmetric
+        have : LtA H C B C H B := by conclude lemma_angleorderrespectscongruence2
+        have : ¬ Col B H C := by
+            intro h
+            have : Col C J B := by conclude_def Col
+            have : Col B C H := by forward_using lemma_collinearorder
+            have : Col B C J := by forward_using lemma_collinearorder
+            have : C ≠ B := by forward_using lemma_betweennotequal
+            have : B ≠ C := by conclude lemma_inequalitysymmetric
+            have : Col C H J := by conclude lemma_collinear4
+            contradict
+        have : Triangle B H C := by conclude_def Triangle
+        have : CongA B H C C H B := by conclude lemma_ABCequalsCBA
+        have : LtA H C B B H C := by conclude lemma_angleorderrespectscongruence
+        have : Lt B H B C := by conclude proposition_19
+        have : Cong B H H B := by conclude cn_equalityreverse
+        have : Lt H B B C := by conclude lemma_lessthancongruence2
+        have : Cong B C C B := by conclude cn_equalityreverse
+        have : Lt H B C B := by conclude lemma_lessthancongruence
+        close
+      · have : BetS C H B := by conclude cn_equalitysub
+        have : BetS B H C := by conclude axiom_betweennesssymmetry
+        have : Cong B H H B := by conclude cn_equalityreverse
+        have : Lt H B B C := by conclude_def Lt
+        have : Cong B C C B := by conclude cn_equalityreverse
+        have : Lt H B C B := by conclude lemma_lessthancongruence
+        close
+      · have : BetS H J A := by conclude axiom_betweennesssymmetry
+        have : ¬ Col C J H := by
+            intro h
+            have : Col A H J := by conclude_def Col
+            have : Col J H A := by forward_using lemma_collinearorder
+            have : Col J H C := by forward_using lemma_collinearorder
+            have : H ≠ J := by forward_using lemma_betweennotequal
+            have : J ≠ H := by conclude lemma_inequalitysymmetric
+            have : Col H A C := by conclude lemma_collinear4
+            have : Col A C H := by forward_using lemma_collinearorder
+            contradict
+        have : ¬ Col H C B := by
+            intro h
+            have : Col C J B := by conclude_def Col
+            have : Col B C J := by forward_using lemma_collinearorder
+            have : Col B C H := by forward_using lemma_collinearorder
+            have : C ≠ B := by forward_using lemma_betweennotequal
+            have : B ≠ C := by conclude lemma_inequalitysymmetric
+            have : Col C H J := by conclude lemma_collinear4
+            have : Col C J H := by forward_using lemma_collinearorder
+            contradict
+        have : H = H := by conclude cn_equalityreflexive
+        have : A = A := by conclude cn_equalityreflexive
+        have : ¬ C = H := by
+            intro h
+            have : Col C H B := by conclude_def Col
+            have : Col H C B := by forward_using lemma_collinearorder
+            contradict
+        have : Out C A A := by conclude lemma_ray4
+        have : CongA H C B H C B := by conclude lemma_equalanglesreflexive
+        have : Out C B J := by conclude lemma_ray4
+        have : Out C H H := by conclude lemma_ray4
+        have : CongA H C B H C J := by conclude lemma_equalangleshelper
+        have : BetS H J A := by conclude axiom_betweennesssymmetry
+        have : LtA H C B H C A := by conclude_def LtA
+        have : ¬ Col B C H := by
+            intro h
+            have : Col H C B := by forward_using lemma_collinearorder
+            contradict
+        have : CongA B C H H C B := by conclude lemma_ABCequalsCBA
+        have : LtA B C H H C A := by conclude lemma_angleorderrespectscongruence2
+        have : CongA A C H H C A := by conclude lemma_ABCequalsCBA
+        have : LtA B C H A C H := by conclude lemma_angleorderrespectscongruence
+        have : CongA A H C A C H := by conclude lemma_equalanglessymmetric
+        have : LtA B C H A H C := by conclude lemma_angleorderrespectscongruence
+        have : ¬ Col A H C := by
+            intro h
+            have : Col A C H := by forward_using lemma_collinearorder
+            contradict
+        have : CongA A H C C H A := by conclude lemma_ABCequalsCBA
+        have : C = C := by conclude cn_equalityreflexive
+        have : B = B := by conclude cn_equalityreflexive
+        have : H ≠ B := by forward_using lemma_angledistinct
+        have : H ≠ C := by forward_using lemma_angledistinct
+        have : H ≠ A := by forward_using lemma_angledistinct
+        have : Out H C C := by conclude lemma_ray4
+        have : Out H B B := by conclude lemma_ray4
+        have : Out H A J := by conclude lemma_ray4
+        have : CongA A H C C H J := by conclude lemma_equalangleshelper
+        have : LtA A H C C H B := by conclude_def LtA
+        have : ¬ Col B H C := by
+            intro h
+            have : Col H C B := by forward_using lemma_collinearorder
+            contradict
+        have : CongA B H C C H B := by conclude lemma_ABCequalsCBA
+        have : LtA A H C B H C := by conclude lemma_angleorderrespectscongruence
+        have : LtA B C H B H C := by conclude lemma_angleordertransitive
+        have : ¬ Col H C B := by
+            intro h
+            have : Col B H C := by forward_using lemma_collinearorder
+            contradict
+        have : CongA H C B B C H := by conclude lemma_ABCequalsCBA
+        have : LtA H C B B H C := by conclude lemma_angleorderrespectscongruence2
+        have : Triangle B H C := by conclude_def Triangle
+        have : Lt B H B C := by conclude proposition_19
+        have : Cong B H H B := by conclude cn_equalityreverse
+        have : Lt H B B C := by conclude lemma_lessthancongruence2
+        have : Cong B C C B := by conclude cn_equalityreverse
+        have : Lt H B C B := by conclude lemma_lessthancongruence
+        close
   have : Cong F E E F := by conclude cn_equalityreverse
   have : Cong H B E F := by conclude lemma_congruencetransitive
   have : Lt E F C B := by conclude lemma_lessthancongruence2

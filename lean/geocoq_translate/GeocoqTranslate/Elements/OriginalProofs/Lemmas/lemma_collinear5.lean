@@ -12,13 +12,13 @@ theorem lemma_collinear5 :
   intro A B C D E h1 h2 h3 h4
   have : Col B C D := by conclude lemma_collinear4
   have : Col B C E := by conclude lemma_collinear4
-  sorry -- TODO: assert (Col C D E).
-  rcases (show B ≠ C ∨ B = C by first | assumption | exact Classical.em _ | tauto | aesop) with c1 | c2
-  · have : Col C D E := by conclude lemma_collinear4
-    close
-  · have : Col B D E := by conclude lemma_collinear4
-    have : Col C D E := by conclude cn_equalitysub
-    close
+  have : Col C D E := by
+      rcases (show B ≠ C ∨ B = C by first | assumption | exact Classical.em _ | tauto | aesop) with c1 | c2
+      · have : Col C D E := by conclude lemma_collinear4
+        close
+      · have : Col B D E := by conclude lemma_collinear4
+        have : Col C D E := by conclude cn_equalitysub
+        close
   close
 
 end GeocoqTranslate.Elements

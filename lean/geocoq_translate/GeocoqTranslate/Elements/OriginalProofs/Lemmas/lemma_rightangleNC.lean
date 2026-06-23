@@ -72,34 +72,34 @@ theorem lemma_rightangleNC :
       have : B ≠ A := by conclude lemma_inequalitysymmetric
       have : Col A C D := by conclude lemma_collinear4
       have : (A = C ∨ A = D ∨ C = D ∨ BetS C A D ∨ BetS A C D ∨ BetS A D C) := by conclude_def Col
-      sorry -- TODO: assert (nCol A B C).
-      rcases (show A = C ∨ A = D ∨ C = D ∨ BetS C A D ∨ BetS A C D ∨ BetS A D C by first | assumption | exact Classical.em _ | tauto | aesop) with c1 | c2 | c3 | c4 | c5 | c6
-      · have : ¬ Col A B C := by
-            intro h
-            have : A ≠ C := by conclude lemma_inequalitysymmetric
-            contradict
-        close
-      · have : ¬ Col A B C := by
-            intro h
-            have : A ≠ D := by forward_using lemma_betweennotequal
-            contradict
-        close
-      · have : ¬ Col A B C := by
-            intro h
-            contradict
-        close
-      · have : ¬ Col A B C := by
-            intro h
-            contradict
-        close
-      · have : ¬ Col A B C := by
-            intro h
-            contradict
-        close
-      · have : ¬ Col A B C := by
-            intro h
-            contradict
-        close
+      have : nCol A B C := by
+          rcases (show A = C ∨ A = D ∨ C = D ∨ BetS C A D ∨ BetS A C D ∨ BetS A D C by first | assumption | exact Classical.em _ | tauto | aesop) with c1 | c2 | c3 | c4 | c5 | c6
+          · have : ¬ Col A B C := by
+                intro h
+                have : A ≠ C := by conclude lemma_inequalitysymmetric
+                contradict
+            close
+          · have : ¬ Col A B C := by
+                intro h
+                have : A ≠ D := by forward_using lemma_betweennotequal
+                contradict
+            close
+          · have : ¬ Col A B C := by
+                intro h
+                contradict
+            close
+          · have : ¬ Col A B C := by
+                intro h
+                contradict
+            close
+          · have : ¬ Col A B C := by
+                intro h
+                contradict
+            close
+          · have : ¬ Col A B C := by
+                intro h
+                contradict
+            close
       contradict
   close
 

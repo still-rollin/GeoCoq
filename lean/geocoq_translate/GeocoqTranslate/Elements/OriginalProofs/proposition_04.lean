@@ -63,110 +63,110 @@ theorem proposition_04 :
       contradict
   have : C ≠ B := by conclude lemma_inequalitysymmetric
   have : (BetS A U B ∨ B = U ∨ BetS A B U) := by conclude lemma_ray1
-  sorry -- TODO: assert (Cong B V b v).
-  rcases (show BetS A U B ∨ B = U ∨ BetS A B U by first | assumption | exact Classical.em _ | tauto | aesop) with c1 | c2 | c3
-  · have : Cong A U A U := by conclude cn_congruencereflexive
-    have : Lt A U A B := by conclude_def Lt
-    have : Lt A U a b := by conclude lemma_lessthancongruence
-    obtain ⟨w, _, _⟩ : ∃ w, (BetS a w b ∧ Cong a w A U) := by conclude_def Lt
-    have : Cong a w a u := by conclude lemma_congruencetransitive
-    have : a ≠ b := by forward_using lemma_betweennotequal
-    have : Out a b w := by conclude lemma_ray4
-    have : Cong a w a u := by conclude lemma_congruencetransitive
-    have : w = u := by conclude lemma_layoffunique
-    have : BetS a u b := by conclude cn_equalitysub
-    have : Cong U B u b := by conclude lemma_differenceofparts
-    have : Cong V B v b := by eapply @axiom_5_line with (B:=U) (b:=u) (A:=A) (a:=a
-    have : Cong B V b v := by forward_using lemma_congruenceflip
-    close
-  · have : Cong B V u v := by conclude cn_equalitysub
-    have : Cong a b A B := by conclude lemma_congruencesymmetric
-    have : Cong A B A B := by conclude cn_congruencereflexive
-    have : Cong A B A U := by conclude cn_equalitysub
-    have : Cong a b A U := by conclude lemma_congruencetransitive
-    have : Cong a b a u := by conclude lemma_congruencetransitive
-    have : (BetS a u b ∨ b = u ∨ BetS a b u) := by conclude lemma_ray1
-    sorry -- TODO: assert (eq b u).
-    rcases (show BetS a u b ∨ b = u ∨ BetS a b u by first | assumption | exact Classical.em _ | tauto | aesop) with c1 | c2 | c3
-    · have : ¬ b ≠ u := by
-          intro h
-          have : ¬ Cong a u a b := by conclude lemma_partnotequalwhole
-          have : Cong a u a b := by conclude lemma_congruencesymmetric
-          contradict
-      close
-    · close
-    · have : ¬ b ≠ u := by
-          intro h
-          have : ¬ Cong a b a u := by conclude lemma_partnotequalwhole
-          have : Cong a b A B := by conclude lemma_congruencesymmetric
-          have : Cong A B A B := by conclude cn_congruencereflexive
-          have : Cong A B A U := by conclude cn_equalitysub
-          have : Cong A B a u := by conclude lemma_congruencetransitive
-          have : Cong a b a u := by conclude lemma_congruencetransitive
-          contradict
-      close
-    have : Cong B V b v := by conclude cn_equalitysub
-    close
-  · have : Cong A B A B := by conclude cn_congruencereflexive
-    have : Lt A B A U := by conclude_def Lt
-    have : Lt A B a u := by conclude lemma_lessthancongruence
-    obtain ⟨f, _, _⟩ : ∃ f, (BetS a f u ∧ Cong a f A B) := by conclude_def Lt
-    have : a ≠ u := by forward_using lemma_betweennotequal
-    have : Out a u f := by conclude lemma_ray4
-    have : Out a u b := by conclude lemma_ray5
-    have : Out a b f := by conclude lemma_ray3
-    have : Cong a f a b := by conclude lemma_congruencetransitive
-    have : f = b := by conclude lemma_layoffunique
-    have : BetS a b u := by conclude cn_equalitysub
-    have : Cong B U b u := by conclude lemma_differenceofparts
-    have : BetS a b u := by conclude lemma_betweennesspreserved
-    have : Cong B U b u := by conclude lemma_differenceofparts
-    have : Cong B V b v := by conclude lemma_interior5
-    close
+  have : Cong B V b v := by
+      rcases (show BetS A U B ∨ B = U ∨ BetS A B U by first | assumption | exact Classical.em _ | tauto | aesop) with c1 | c2 | c3
+      · have : Cong A U A U := by conclude cn_congruencereflexive
+        have : Lt A U A B := by conclude_def Lt
+        have : Lt A U a b := by conclude lemma_lessthancongruence
+        obtain ⟨w, _, _⟩ : ∃ w, (BetS a w b ∧ Cong a w A U) := by conclude_def Lt
+        have : Cong a w a u := by conclude lemma_congruencetransitive
+        have : a ≠ b := by forward_using lemma_betweennotequal
+        have : Out a b w := by conclude lemma_ray4
+        have : Cong a w a u := by conclude lemma_congruencetransitive
+        have : w = u := by conclude lemma_layoffunique
+        have : BetS a u b := by conclude cn_equalitysub
+        have : Cong U B u b := by conclude lemma_differenceofparts
+        have : Cong V B v b := by eapply @axiom_5_line with (B:=U) (b:=u) (A:=A) (a:=a
+        have : Cong B V b v := by forward_using lemma_congruenceflip
+        close
+      · have : Cong B V u v := by conclude cn_equalitysub
+        have : Cong a b A B := by conclude lemma_congruencesymmetric
+        have : Cong A B A B := by conclude cn_congruencereflexive
+        have : Cong A B A U := by conclude cn_equalitysub
+        have : Cong a b A U := by conclude lemma_congruencetransitive
+        have : Cong a b a u := by conclude lemma_congruencetransitive
+        have : (BetS a u b ∨ b = u ∨ BetS a b u) := by conclude lemma_ray1
+        have : b = u := by
+            rcases (show BetS a u b ∨ b = u ∨ BetS a b u by first | assumption | exact Classical.em _ | tauto | aesop) with c1 | c2 | c3
+            · have : ¬ b ≠ u := by
+                  intro h
+                  have : ¬ Cong a u a b := by conclude lemma_partnotequalwhole
+                  have : Cong a u a b := by conclude lemma_congruencesymmetric
+                  contradict
+              close
+            · close
+            · have : ¬ b ≠ u := by
+                  intro h
+                  have : ¬ Cong a b a u := by conclude lemma_partnotequalwhole
+                  have : Cong a b A B := by conclude lemma_congruencesymmetric
+                  have : Cong A B A B := by conclude cn_congruencereflexive
+                  have : Cong A B A U := by conclude cn_equalitysub
+                  have : Cong A B a u := by conclude lemma_congruencetransitive
+                  have : Cong a b a u := by conclude lemma_congruencetransitive
+                  contradict
+              close
+        have : Cong B V b v := by conclude cn_equalitysub
+        close
+      · have : Cong A B A B := by conclude cn_congruencereflexive
+        have : Lt A B A U := by conclude_def Lt
+        have : Lt A B a u := by conclude lemma_lessthancongruence
+        obtain ⟨f, _, _⟩ : ∃ f, (BetS a f u ∧ Cong a f A B) := by conclude_def Lt
+        have : a ≠ u := by forward_using lemma_betweennotequal
+        have : Out a u f := by conclude lemma_ray4
+        have : Out a u b := by conclude lemma_ray5
+        have : Out a b f := by conclude lemma_ray3
+        have : Cong a f a b := by conclude lemma_congruencetransitive
+        have : f = b := by conclude lemma_layoffunique
+        have : BetS a b u := by conclude cn_equalitysub
+        have : Cong B U b u := by conclude lemma_differenceofparts
+        have : BetS a b u := by conclude lemma_betweennesspreserved
+        have : Cong B U b u := by conclude lemma_differenceofparts
+        have : Cong B V b v := by conclude lemma_interior5
+        close
   have : (BetS A V C ∨ C = V ∨ BetS A C V) := by conclude lemma_ray1
-  sorry -- TODO: assert (Cong B C b c).
-  rcases (show BetS A V C ∨ C = V ∨ BetS A C V by first | assumption | exact Classical.em _ | tauto | aesop) with c1 | c2 | c3
-  · have : Cong A V A V := by conclude cn_congruencereflexive
-    have : Lt A V A C := by conclude_def Lt
-    have : Lt A V a c := by conclude lemma_lessthancongruence
-    obtain ⟨g, _, _⟩ : ∃ g, (BetS a g c ∧ Cong a g A V) := by conclude_def Lt
-    have : a ≠ g := by forward_using lemma_betweennotequal
-    have : Out a g c := by conclude lemma_ray4
-    have : Out a c g := by conclude lemma_ray5
-    have : Cong a g a v := by conclude lemma_congruencetransitive
-    have : g = v := by conclude lemma_layoffunique
-    have : BetS a v c := by conclude cn_equalitysub
-    have : Cong V C v c := by conclude lemma_differenceofparts
-    have : Cong V B v b := by forward_using lemma_congruenceflip
-    have : Cong B C b c := by epose proof (axiom_5_line _ _ _ _ _ _ _ _ H37 H H38
-    close
-  · have : Cong A C a v := by conclude cn_equalitysub
-    have : Cong a c A C := by conclude lemma_congruencesymmetric
-    have : Cong a c a v := by conclude lemma_congruencetransitive
-    have : a ≠ c := by conclude lemma_ray2
-    have : c = c := by conclude cn_equalityreflexive
-    have : Out a c c := by conclude lemma_ray4
-    have : c = v := by conclude lemma_layoffunique
-    have : Cong B C b v := by conclude cn_equalitysub
-    have : Cong B C b c := by conclude cn_equalitysub
-    close
-  · have : Cong A C A C := by conclude cn_congruencereflexive
-    have : Lt A C A V := by conclude_def Lt
-    have : Lt A C a v := by conclude lemma_lessthancongruence
-    obtain ⟨g, _, _⟩ : ∃ g, (BetS a g v ∧ Cong a g A C) := by conclude_def Lt
-    have : a ≠ g := by forward_using lemma_betweennotequal
-    have : Out a g v := by conclude lemma_ray4
-    have : Out a v g := by conclude lemma_ray5
-    have : Cong a g a c := by conclude lemma_congruencetransitive
-    have : Cong a c a g := by conclude lemma_congruencesymmetric
-    have : Out a v c := by conclude lemma_ray5
-    have : c = g := by conclude lemma_layoffunique
-    have : BetS a c v := by conclude cn_equalitysub
-    have : Cong C V c v := by conclude lemma_differenceofparts
-    have : Cong V B v b := by forward_using lemma_congruenceflip
-    have : Cong C B c b := by conclude lemma_interior5
-    have : Cong B C b c := by forward_using lemma_congruenceflip
-    close
+  have : Cong B C b c := by
+      rcases (show BetS A V C ∨ C = V ∨ BetS A C V by first | assumption | exact Classical.em _ | tauto | aesop) with c1 | c2 | c3
+      · have : Cong A V A V := by conclude cn_congruencereflexive
+        have : Lt A V A C := by conclude_def Lt
+        have : Lt A V a c := by conclude lemma_lessthancongruence
+        obtain ⟨g, _, _⟩ : ∃ g, (BetS a g c ∧ Cong a g A V) := by conclude_def Lt
+        have : a ≠ g := by forward_using lemma_betweennotequal
+        have : Out a g c := by conclude lemma_ray4
+        have : Out a c g := by conclude lemma_ray5
+        have : Cong a g a v := by conclude lemma_congruencetransitive
+        have : g = v := by conclude lemma_layoffunique
+        have : BetS a v c := by conclude cn_equalitysub
+        have : Cong V C v c := by conclude lemma_differenceofparts
+        have : Cong V B v b := by forward_using lemma_congruenceflip
+        have : Cong B C b c := by epose proof (axiom_5_line _ _ _ _ _ _ _ _ H37 H H38
+        close
+      · have : Cong A C a v := by conclude cn_equalitysub
+        have : Cong a c A C := by conclude lemma_congruencesymmetric
+        have : Cong a c a v := by conclude lemma_congruencetransitive
+        have : a ≠ c := by conclude lemma_ray2
+        have : c = c := by conclude cn_equalityreflexive
+        have : Out a c c := by conclude lemma_ray4
+        have : c = v := by conclude lemma_layoffunique
+        have : Cong B C b v := by conclude cn_equalitysub
+        have : Cong B C b c := by conclude cn_equalitysub
+        close
+      · have : Cong A C A C := by conclude cn_congruencereflexive
+        have : Lt A C A V := by conclude_def Lt
+        have : Lt A C a v := by conclude lemma_lessthancongruence
+        obtain ⟨g, _, _⟩ : ∃ g, (BetS a g v ∧ Cong a g A C) := by conclude_def Lt
+        have : a ≠ g := by forward_using lemma_betweennotequal
+        have : Out a g v := by conclude lemma_ray4
+        have : Out a v g := by conclude lemma_ray5
+        have : Cong a g a c := by conclude lemma_congruencetransitive
+        have : Cong a c a g := by conclude lemma_congruencesymmetric
+        have : Out a v c := by conclude lemma_ray5
+        have : c = g := by conclude lemma_layoffunique
+        have : BetS a c v := by conclude cn_equalitysub
+        have : Cong C V c v := by conclude lemma_differenceofparts
+        have : Cong V B v b := by forward_using lemma_congruenceflip
+        have : Cong C B c b := by conclude lemma_interior5
+        have : Cong B C b c := by forward_using lemma_congruenceflip
+        close
   have : A = A := by conclude cn_equalityreflexive
   have : C = C := by conclude cn_equalityreflexive
   have : a = a := by conclude cn_equalityreflexive

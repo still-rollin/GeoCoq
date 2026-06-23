@@ -22,47 +22,47 @@ theorem lemma_collinearitypreserved :
   have : Cong B A A B := by conclude lemma_congruencesymmetric
   have : Cong B A b a := by conclude lemma_congruencetransitive
   have : (A = B ∨ A = C ∨ B = C ∨ BetS B A C ∨ BetS A B C ∨ BetS A C B) := by conclude_def Col
-  sorry -- TODO: assert (Col a b c).
-  rcases (show A = B ∨ A = C ∨ B = C ∨ BetS B A C ∨ BetS A B C ∨ BetS A C B by first | assumption | exact Classical.em _ | tauto | aesop) with c1 | c2 | c3 | c4 | c5 | c6
-  · have : Cong A A a b := by conclude cn_equalitysub
-    have : Cong a b A A := by conclude lemma_congruencesymmetric
-    have : ¬ a ≠ b := by
-        intro h
-        have : A ≠ A := by conclude axiom_nocollapse
-        have : A = A := by conclude cn_equalityreflexive
-        contradict
-    have : a = b := by conclude cn_stability
-    have : Col a b c := by conclude_def Col
-    close
-  · have : Cong A A a c := by conclude cn_equalitysub
-    have : Cong a c A A := by conclude lemma_congruencesymmetric
-    have : ¬ a ≠ c := by
-        intro h
-        have : A ≠ A := by conclude axiom_nocollapse
-        have : A = A := by conclude cn_equalityreflexive
-        contradict
-    have : a = c := by conclude cn_stability
-    have : Col a b c := by conclude_def Col
-    close
-  · have : Cong B B b c := by conclude cn_equalitysub
-    have : Cong b c B B := by conclude lemma_congruencesymmetric
-    have : ¬ b ≠ c := by
-        intro h
-        have : B ≠ B := by conclude axiom_nocollapse
-        have : B = B := by conclude cn_equalityreflexive
-        contradict
-    have : b = c := by conclude cn_stability
-    have : Col a b c := by conclude_def Col
-    close
-  · have : BetS b a c := by conclude lemma_betweennesspreserved
-    have : Col a b c := by conclude_def Col
-    close
-  · have : BetS a b c := by conclude lemma_betweennesspreserved
-    have : Col a b c := by conclude_def Col
-    close
-  · have : BetS a c b := by conclude lemma_betweennesspreserved
-    have : Col a b c := by conclude_def Col
-    close
+  have : Col a b c := by
+      rcases (show A = B ∨ A = C ∨ B = C ∨ BetS B A C ∨ BetS A B C ∨ BetS A C B by first | assumption | exact Classical.em _ | tauto | aesop) with c1 | c2 | c3 | c4 | c5 | c6
+      · have : Cong A A a b := by conclude cn_equalitysub
+        have : Cong a b A A := by conclude lemma_congruencesymmetric
+        have : ¬ a ≠ b := by
+            intro h
+            have : A ≠ A := by conclude axiom_nocollapse
+            have : A = A := by conclude cn_equalityreflexive
+            contradict
+        have : a = b := by conclude cn_stability
+        have : Col a b c := by conclude_def Col
+        close
+      · have : Cong A A a c := by conclude cn_equalitysub
+        have : Cong a c A A := by conclude lemma_congruencesymmetric
+        have : ¬ a ≠ c := by
+            intro h
+            have : A ≠ A := by conclude axiom_nocollapse
+            have : A = A := by conclude cn_equalityreflexive
+            contradict
+        have : a = c := by conclude cn_stability
+        have : Col a b c := by conclude_def Col
+        close
+      · have : Cong B B b c := by conclude cn_equalitysub
+        have : Cong b c B B := by conclude lemma_congruencesymmetric
+        have : ¬ b ≠ c := by
+            intro h
+            have : B ≠ B := by conclude axiom_nocollapse
+            have : B = B := by conclude cn_equalityreflexive
+            contradict
+        have : b = c := by conclude cn_stability
+        have : Col a b c := by conclude_def Col
+        close
+      · have : BetS b a c := by conclude lemma_betweennesspreserved
+        have : Col a b c := by conclude_def Col
+        close
+      · have : BetS a b c := by conclude lemma_betweennesspreserved
+        have : Col a b c := by conclude_def Col
+        close
+      · have : BetS a c b := by conclude lemma_betweennesspreserved
+        have : Col a b c := by conclude_def Col
+        close
   close
 
 end GeocoqTranslate.Elements
