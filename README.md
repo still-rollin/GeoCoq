@@ -1,6 +1,12 @@
 # GeoCoq
 A formalization of geometry in Coq.
 
+> **This fork** additionally contains **GeoLean** — a structure-preserving translation of
+> the entire `Elements/OriginalProofs` library to **Lean 4** (234/234 lemmas, honest clean
+> rebuild). See **[GEOLEAN.md](GEOLEAN.md)** for the result, layout, and reproduction steps.
+
+---
+
 This library contains a formalization of geometry using the Coq proof assistant. It contains both proofs about the foundations of geometry and high-level proofs in the same style as in high-school.
 
 Details and installation instructions can be found [here](http://geocoq.github.io/GeoCoq/).

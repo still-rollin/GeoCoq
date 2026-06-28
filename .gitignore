@@ -12,3 +12,40 @@ Makefile.conf
 _build/
 *.install
 .DS_Store
+
+# Python orchestrator
+.venv/
+__pycache__/
+*.pyc
+orchestrator/experiment_outputs/
+.nia.cache
+
+# Lean / Lake build artifacts
+.lake/
+lakefile.olean
+
+# Editor/tooling local state
+.vscode/*.log
+
+# build/scratch artifacts (added at 234/234 milestone)
+geocoq-lean-translation.zip
+dpdgraph_out/
+*.dpd
+*.dot
+deps.txt
+deps_edges.dot
+all_files.txt
+
+# nested transpiler working repo + heavy Coq build (transpiler scripts are
+# vendored into transpiler/ in this repo instead)
+geocoq-lean/
+
+# Claude Code local config / generated dashboards
+.claude/
+dashboard/
+
+# scratch / experimental Lean files (not part of the corpus)
+lean/geocoq_translate/GeocoqTranslate/Scratch95aProf.lean
+lean/geocoq_translate/GeocoqTranslate/Elements/OriginalProofs/conclude_bounded_test.lean
+lean/geocoq_translate/test_unannotated.lean
+lean/geocoq_translate/GeocoqTranslate.lean.bak

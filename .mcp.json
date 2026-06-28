@@ -1,0 +1,21 @@
+{
+  "mcpServers": {
+    "rocq-mcp": {
+      "command": "/Users/ayaansiddiqui/GeoCoq/.venv/bin/rocq-mcp",
+      "args": [],
+      "env": {}
+    },
+    "lean-lsp-mcp": {
+      "command": "/Library/Frameworks/Python.framework/Versions/3.12/bin/uvx",
+      "args": ["lean-lsp-mcp"],
+      "env": {}
+    },
+    "geolean-oracle": {
+      "command": "/Library/Frameworks/Python.framework/Versions/3.12/bin/python3",
+      "args": ["/Users/ayaansiddiqui/GeoCoq/geolean_oracle/src/server.py"],
+      "env": {
+        "GEOCOQ_DIR": "/Users/ayaansiddiqui/GeoCoq"
+      }
+    }
+  }
+}

@@ -18,6 +18,8 @@ assert (~ ~ (BetS A P B \/ eq B P \/ BetS A B P)).
  contradict.
  }
 close.
+Show Proof.
+
 Qed.
 
 End Euclid.

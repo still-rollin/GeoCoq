@@ -1,0 +1,49 @@
+(fun (A B P : Point) (H : Out A B P) =>
+let H0 : ~ ~ (BetS A P B \/ eq B P \/ BetS A B P) :=
+  (fun H0 : ~ (BetS A P B \/ eq B P \/ BetS A B P) =>
+let H1 : neq P B :=
+  lemma_inequalitysymmetric B P
+  (let H1 : BetS A P B -> False :=
+  fun H1 : BetS A P B => H0 (or_introl H1) in
+let H2 : eq B P \/ BetS A B P -> False :=
+  fun H2 : eq B P \/ BetS A B P =>
+H0 (or_intror H2)
+  in
+let H3 : eq B P -> False :=
+  fun H3 : eq B P => H2 (or_introl H3) in
+let H4 : BetS A B P -> False :=
+  fun H4 : BetS A B P => H2 (or_intror H4) in
+H3)
+  in
+let H2 : BetS A B P :=
+  let b :
+  forall A0 B0 P0 : Point,
+Out A0 B0 P0 ->
+neq P0 B0 -> ~ BetS A0 P0 B0 -> BetS A0 B0 P0 :=
+  lemma_ray
+  in
+b A B P H H1
+  ((fun H2 : BetS A P B => H0 (or_introl H2)) :
+~ BetS A P B)
+  in
+H0 (or_intror (or_intror H2)))
+:
+~ ~ (BetS A P B \/ eq B P \/ BetS A B P)
+  in
+Classical_Prop.NNPP (BetS A P B \/ eq B P \/ BetS A B P)
+  ((fun H1 : ~ (BetS A P B \/ eq B P \/ BetS A B P) =>
+let H2 : False := H0 H1 in
+let H3 : BetS A P B -> False :=
+  fun H3 : BetS A P B => H1 (or_introl H3) in
+let H4 : eq B P \/ BetS A B P -> False :=
+  fun H4 : eq B P \/ BetS A B P => H1 (or_intror H4)
+  in
+let H5 : eq B P -> False :=
+  fun H5 : eq B P => H4 (or_introl H5) in
+let H6 : BetS A B P -> False :=
+  fun H6 : BetS A B P => H4 (or_intror H6) in
+False_ind False H2)
+:
+~ ~ (BetS A P B \/ eq B P \/ BetS A B P))
+:
+BetS A P B \/ eq B P \/ BetS A B P)
