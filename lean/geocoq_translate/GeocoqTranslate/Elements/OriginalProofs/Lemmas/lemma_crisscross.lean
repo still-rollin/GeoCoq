@@ -24,6 +24,7 @@ namespace GeocoqTranslate.Elements
 open euclidean_neutral_basis euclidean_neutral euclidean_neutral_ruler_compass
 variable {Point : Type} [euclidean_neutral_ruler_compass Point]
 
+set_option maxHeartbeats 800000 in
 theorem lemma_crisscross :
     ∀ (A B C D : Point), Par A C B D → ¬ CR A B C D → CR A D B C := by
   intro A B C D h1 h2
@@ -38,7 +39,7 @@ theorem lemma_crisscross :
   have : nCol A B D := by forward_using lemma_parallelNC
   have : nCol B D A := by forward_using lemma_NCorder
   have : OS C A B D := by forward_using lemma_samesidesymmetric
-  have : TS A B D E := by conclude_def TS
+  have : TS A B D E := by (try (have : nCol B D A := nCol_notCol _ _ _ (by assumption))); conclude_def TS
   have : TS C B D E := by conclude lemma_planeseparation
   obtain ⟨F, _, _, _⟩ : ∃ F, (BetS C F E ∧ Col B D F ∧ nCol B D C) := by conclude_def TS
   have : B ≠ D := by forward_using lemma_NCdistinct
@@ -53,7 +54,7 @@ theorem lemma_crisscross :
   have : B ≠ C := by conclude lemma_inequalitysymmetric
   have : (B = D ∨ B = F ∨ D = F ∨ BetS D B F ∨ BetS B D F ∨ BetS B F D) := by conclude_def Col
   have : CR A D B C := by
-      rcases (show B = D ∨ B = F ∨ D = F ∨ BetS D B F ∨ BetS B D F ∨ BetS B F D by first | assumption | exact Classical.em _ | tauto | aesop) with c1 | c2 | c3 | c4 | c5 | c6
+      rcases (show B = D ∨ B = F ∨ D = F ∨ BetS D B F ∨ BetS B D F ∨ BetS B F D by first | assumption | exact nCol_or_Col _ _ _ | exact Col_or_nCol _ _ _ | exact Classical.em _ | tauto | aesop) with c1 | c2 | c3 | c4 | c5 | c6
       · have : ¬ ¬ CR A D B C := by
             intro h
             contradict

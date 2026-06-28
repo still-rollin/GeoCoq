@@ -27,6 +27,7 @@ namespace GeocoqTranslate.Elements
 open euclidean_neutral_basis euclidean_neutral euclidean_neutral_ruler_compass
 variable {Point : Type} [euclidean_neutral_ruler_compass Point]
 
+set_option maxHeartbeats 800000 in
 theorem lemma_supplementinequality :
     ∀ (A B C D F a b c d f : Point), Supp A B C D F → Supp a b c d f → LtA a b c A B C → LtA D B F d b f := by
   intro A B C D F a b c d f h1 h2 h3
@@ -37,7 +38,7 @@ theorem lemma_supplementinequality :
   have : BetS F B A := by conclude axiom_betweennesssymmetry
   have : (BetS B P A ∨ A = P ∨ BetS B A P) := by conclude lemma_ray1
   have : BetS F B P := by
-      rcases (show BetS B P A ∨ A = P ∨ BetS B A P by first | assumption | exact Classical.em _ | tauto | aesop) with c1 | c2 | c3
+      rcases (show BetS B P A ∨ A = P ∨ BetS B A P by first | assumption | exact nCol_or_Col _ _ _ | exact Col_or_nCol _ _ _ | exact Classical.em _ | tauto | aesop) with c1 | c2 | c3
       · have : BetS F B P := by conclude axiom_innertransitivity
         close
       · have : BetS F B P := by conclude cn_equalitysub

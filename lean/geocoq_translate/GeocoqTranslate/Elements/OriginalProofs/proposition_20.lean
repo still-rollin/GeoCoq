@@ -4,12 +4,14 @@ import GeocoqTranslate.Elements.OriginalProofs.euclidean_tactics
 import GeocoqTranslate.Elements.OriginalProofs.Lemmas.lemma_inequalitysymmetric
 import GeocoqTranslate.Elements.OriginalProofs.Lemmas.lemma_extension
 import GeocoqTranslate.Elements.OriginalProofs.Lemmas.lemma_collinear4
+import GeocoqTranslate.Elements.OriginalProofs.proposition_05
 import GeocoqTranslate.Elements.OriginalProofs.Lemmas.lemma_ABCequalsCBA
 import GeocoqTranslate.Elements.OriginalProofs.Lemmas.lemma_equalanglestransitive
 import GeocoqTranslate.Elements.OriginalProofs.Lemmas.lemma_ray4
 import GeocoqTranslate.Elements.OriginalProofs.Lemmas.lemma_equalanglessymmetric
 import GeocoqTranslate.Elements.OriginalProofs.Lemmas.lemma_angleorderrespectscongruence2
 import GeocoqTranslate.Elements.OriginalProofs.Lemmas.lemma_angleorderrespectscongruence
+import GeocoqTranslate.Elements.OriginalProofs.proposition_19
 import GeocoqTranslate.Elements.OriginalProofs.Lemmas.lemma_collinearorder
 import GeocoqTranslate.Elements.OriginalProofs.Lemmas.lemma_betweennotequal
 import GeocoqTranslate.Elements.OriginalProofs.Lemmas.lemma_congruenceflip
@@ -18,6 +20,7 @@ namespace GeocoqTranslate.Elements
 open euclidean_neutral_basis euclidean_neutral euclidean_neutral_ruler_compass
 variable {Point : Type} [euclidean_neutral_ruler_compass Point]
 
+set_option maxHeartbeats 800000 in
 theorem proposition_20 :
     ∀ (A B C : Point), Triangle A B C → TG B A A C B C := by
   intro A B C h1
@@ -56,7 +59,7 @@ theorem proposition_20 :
       intro h
       have : Col A D C := by conclude_def Col
       contradict
-  have : Triangle A D C := by conclude_def Triangle
+  have : Triangle A D C := by (try (have : nCol A D C := nCol_notCol _ _ _ (by assumption))); conclude_def Triangle
   have : isosceles A D C := by conclude_def isosceles
   have : CongA A D C A C D := by conclude proposition_05
   have : ¬ Col A C D := by
@@ -82,7 +85,7 @@ theorem proposition_20 :
   have : Cong D B D B := by conclude cn_congruencereflexive
   have : Cong D C D C := by conclude cn_congruencereflexive
   have : Cong B C B C := by conclude cn_congruencereflexive
-  have : CongA A D C B D C := by conclude_def CongA
+  have : CongA A D C B D C := by (try (have : nCol A D C := nCol_notCol _ _ _ (by assumption))); conclude_def CongA
   have : CongA B D C A D C := by conclude lemma_equalanglessymmetric
   have : LtA B D C D C B := by conclude lemma_angleorderrespectscongruence2
   have : ¬ Col B C D := by
@@ -103,7 +106,7 @@ theorem proposition_20 :
   have : CongA B C D D C B := by conclude lemma_ABCequalsCBA
   have : LtA C D B D C B := by conclude lemma_angleorderrespectscongruence2
   have : LtA C D B B C D := by conclude lemma_angleorderrespectscongruence
-  have : Triangle B C D := by conclude_def Triangle
+  have : Triangle B C D := by (try (have : nCol B C D := nCol_notCol _ _ _ (by assumption))); conclude_def Triangle
   have : Lt B C B D := by conclude proposition_19
   have : TG B A A C B C := by conclude_def TG
   close

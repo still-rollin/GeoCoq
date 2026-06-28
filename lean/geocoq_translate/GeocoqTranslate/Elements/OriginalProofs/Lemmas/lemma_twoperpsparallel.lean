@@ -8,6 +8,7 @@ import GeocoqTranslate.Elements.OriginalProofs.Lemmas.lemma_collinearright
 import GeocoqTranslate.Elements.OriginalProofs.Lemmas.lemma_8_2
 import GeocoqTranslate.Elements.OriginalProofs.Lemmas.lemma_ray4
 import GeocoqTranslate.Elements.OriginalProofs.Lemmas.lemma_Euclid4
+import GeocoqTranslate.Elements.OriginalProofs.proposition_28C
 import GeocoqTranslate.Elements.OriginalProofs.Lemmas.lemma_parallelsymmetric
 import GeocoqTranslate.Elements.OriginalProofs.Lemmas.lemma_NCdistinct
 import GeocoqTranslate.Elements.OriginalProofs.Lemmas.lemma_betweennotequal
@@ -17,6 +18,7 @@ namespace GeocoqTranslate.Elements
 open euclidean_neutral_basis euclidean_neutral euclidean_neutral_ruler_compass
 variable {Point : Type} [euclidean_neutral_ruler_compass Point]
 
+set_option maxHeartbeats 800000 in
 theorem lemma_twoperpsparallel :
     ∀ (A B C D : Point), Per A B C → Per B C D → OS A D B C → Par A B C D := by
   intro A B C D h1 h2 h3

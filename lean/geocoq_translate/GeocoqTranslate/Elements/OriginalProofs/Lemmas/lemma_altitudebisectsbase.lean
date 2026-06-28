@@ -9,6 +9,7 @@ import GeocoqTranslate.Elements.OriginalProofs.Lemmas.lemma_extensionunique
 import GeocoqTranslate.Elements.OriginalProofs.Lemmas.lemma_rightangleNC
 import GeocoqTranslate.Elements.OriginalProofs.Lemmas.lemma_inequalitysymmetric
 import GeocoqTranslate.Elements.OriginalProofs.Lemmas.lemma_ray4
+import GeocoqTranslate.Elements.OriginalProofs.proposition_04
 import GeocoqTranslate.Elements.OriginalProofs.Lemmas.lemma_congruenceflip
 import GeocoqTranslate.Elements.OriginalProofs.Lemmas.lemma_betweennotequal
 import GeocoqTranslate.Elements.OriginalProofs.Lemmas.lemma_doublereverse
@@ -18,6 +19,7 @@ namespace GeocoqTranslate.Elements
 open euclidean_neutral_basis euclidean_neutral euclidean_neutral_ruler_compass
 variable {Point : Type} [euclidean_neutral_ruler_compass Point]
 
+set_option maxHeartbeats 800000 in
 theorem lemma_altitudebisectsbase :
     ∀ (A B M P : Point), BetS A M B → Cong A P B P → Per A M P → Midpoint A M B := by
   intro A B M P h1 h2 h3
@@ -73,7 +75,7 @@ theorem lemma_altitudebisectsbase :
       contradict
   have : Out P B B := by conclude lemma_ray4
   have : Out P M Q := by conclude lemma_ray4
-  have : CongA A P M B P M := by conclude_def CongA
+  have : CongA A P M B P M := by (try (have : nCol A P M := nCol_notCol _ _ _ (by assumption))); conclude_def CongA
   have : Cong P M P M := by conclude cn_congruencereflexive
   have : (Cong A M B M ∧ CongA P A M P B M ∧ CongA P M A P M B) := by conclude proposition_04
   have : Cong A M M B := by forward_using lemma_congruenceflip

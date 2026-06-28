@@ -4,10 +4,12 @@ import GeocoqTranslate.Elements.OriginalProofs.euclidean_tactics
 import GeocoqTranslate.Elements.OriginalProofs.Lemmas.lemma_inequalitysymmetric
 import GeocoqTranslate.Elements.OriginalProofs.Lemmas.lemma_extension
 import GeocoqTranslate.Elements.OriginalProofs.Lemmas.lemma_collinear4
+import GeocoqTranslate.Elements.OriginalProofs.proposition_31
 import GeocoqTranslate.Elements.OriginalProofs.Lemmas.lemma_3_6b
 import GeocoqTranslate.Elements.OriginalProofs.Lemmas.lemma_collinearparallel
 import GeocoqTranslate.Elements.OriginalProofs.Lemmas.lemma_parallelsymmetric
 import GeocoqTranslate.Elements.OriginalProofs.Lemmas.lemma_congruencetransitive
+import GeocoqTranslate.Elements.OriginalProofs.proposition_33
 import GeocoqTranslate.Elements.OriginalProofs.Lemmas.lemma_collinearparallel2
 import GeocoqTranslate.Elements.OriginalProofs.Lemmas.lemma_Playfair
 import GeocoqTranslate.Elements.OriginalProofs.Lemmas.lemma_parallelNC
@@ -22,6 +24,7 @@ namespace GeocoqTranslate.Elements
 open euclidean_neutral_basis euclidean_neutral euclidean_neutral_ruler_compass euclidean_euclidean
 variable {Point : Type} [euclidean_euclidean Point]
 
+set_option maxHeartbeats 800000 in
 theorem lemma_triangletoparallelogram :
     ∀ (A C D E F : Point), Par D C E F → Col E F A → ∃ X, PG A X C D ∧ Col E F X := by
   intro A C D E F h1 h2
@@ -75,7 +78,7 @@ theorem lemma_triangletoparallelogram :
   have : E = E := by conclude cn_equalityreflexive
   have : Col E F E := by conclude_def Col
   have : Col E F b := by
-      rcases (show A = F ∨ A ≠ F by first | assumption | exact Classical.em _ | tauto | aesop) with c1 | c2
+      rcases (show A = F ∨ A ≠ F by first | assumption | exact nCol_or_Col _ _ _ | exact Col_or_nCol _ _ _ | exact Classical.em _ | tauto | aesop) with c1 | c2
       · have : F ≠ E := by conclude lemma_inequalitysymmetric
         have : A ≠ E := by conclude cn_equalitysub
         have : Par D C A E := by conclude lemma_collinearparallel2

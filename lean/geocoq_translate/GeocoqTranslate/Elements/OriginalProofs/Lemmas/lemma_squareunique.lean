@@ -7,6 +7,7 @@ import GeocoqTranslate.Elements.OriginalProofs.Lemmas.lemma_rightangleNC
 import GeocoqTranslate.Elements.OriginalProofs.Lemmas.lemma_congruencesymmetric
 import GeocoqTranslate.Elements.OriginalProofs.Lemmas.lemma_congruencetransitive
 import GeocoqTranslate.Elements.OriginalProofs.Lemmas.lemma_Euclid4
+import GeocoqTranslate.Elements.OriginalProofs.proposition_04
 import GeocoqTranslate.Elements.OriginalProofs.Lemmas.lemma_equalanglessymmetric
 import GeocoqTranslate.Elements.OriginalProofs.Lemmas.lemma_layoff
 import GeocoqTranslate.Elements.OriginalProofs.Lemmas.lemma_ray4
@@ -26,6 +27,7 @@ namespace GeocoqTranslate.Elements
 open euclidean_neutral_basis euclidean_neutral euclidean_neutral_ruler_compass euclidean_euclidean
 variable {Point : Type} [euclidean_euclidean Point]
 
+set_option maxHeartbeats 800000 in
 theorem lemma_squareunique :
     ∀ (A B C D E : Point), SQ A B C D → SQ A B C E → E = D := by
   intro A B C D E h1 h2

@@ -24,6 +24,7 @@ namespace GeocoqTranslate.Elements
 open euclidean_neutral_basis euclidean_neutral euclidean_neutral_ruler_compass
 variable {Point : Type} [euclidean_neutral_ruler_compass Point]
 
+set_option maxHeartbeats 800000 in
 theorem proposition_04 :
     ∀ (A B C a b c : Point), Cong A B a b → Cong A C a c → CongA B A C b a c → Cong B C b c ∧ CongA A B C a b c ∧ CongA A C B a c b := by
   intro A B C a b c h1 h2 h3
@@ -64,7 +65,7 @@ theorem proposition_04 :
   have : C ≠ B := by conclude lemma_inequalitysymmetric
   have : (BetS A U B ∨ B = U ∨ BetS A B U) := by conclude lemma_ray1
   have : Cong B V b v := by
-      rcases (show BetS A U B ∨ B = U ∨ BetS A B U by first | assumption | exact Classical.em _ | tauto | aesop) with c1 | c2 | c3
+      rcases (show BetS A U B ∨ B = U ∨ BetS A B U by first | assumption | exact nCol_or_Col _ _ _ | exact Col_or_nCol _ _ _ | exact Classical.em _ | tauto | aesop) with c1 | c2 | c3
       · have : Cong A U A U := by conclude cn_congruencereflexive
         have : Lt A U A B := by conclude_def Lt
         have : Lt A U a b := by conclude lemma_lessthancongruence
@@ -76,7 +77,7 @@ theorem proposition_04 :
         have : w = u := by conclude lemma_layoffunique
         have : BetS a u b := by conclude cn_equalitysub
         have : Cong U B u b := by conclude lemma_differenceofparts
-        have : Cong V B v b := by eapply @axiom_5_line with (B:=U) (b:=u) (A:=A) (a:=a
+        have : Cong V B v b := by conclude axiom_5_line
         have : Cong B V b v := by forward_using lemma_congruenceflip
         close
       · have : Cong B V u v := by conclude cn_equalitysub
@@ -87,7 +88,7 @@ theorem proposition_04 :
         have : Cong a b a u := by conclude lemma_congruencetransitive
         have : (BetS a u b ∨ b = u ∨ BetS a b u) := by conclude lemma_ray1
         have : b = u := by
-            rcases (show BetS a u b ∨ b = u ∨ BetS a b u by first | assumption | exact Classical.em _ | tauto | aesop) with c1 | c2 | c3
+            rcases (show BetS a u b ∨ b = u ∨ BetS a b u by first | assumption | exact nCol_or_Col _ _ _ | exact Col_or_nCol _ _ _ | exact Classical.em _ | tauto | aesop) with c1 | c2 | c3
             · have : ¬ b ≠ u := by
                   intro h
                   have : ¬ Cong a u a b := by conclude lemma_partnotequalwhole
@@ -125,7 +126,7 @@ theorem proposition_04 :
         close
   have : (BetS A V C ∨ C = V ∨ BetS A C V) := by conclude lemma_ray1
   have : Cong B C b c := by
-      rcases (show BetS A V C ∨ C = V ∨ BetS A C V by first | assumption | exact Classical.em _ | tauto | aesop) with c1 | c2 | c3
+      rcases (show BetS A V C ∨ C = V ∨ BetS A C V by first | assumption | exact nCol_or_Col _ _ _ | exact Col_or_nCol _ _ _ | exact Classical.em _ | tauto | aesop) with c1 | c2 | c3
       · have : Cong A V A V := by conclude cn_congruencereflexive
         have : Lt A V A C := by conclude_def Lt
         have : Lt A V a c := by conclude lemma_lessthancongruence
@@ -138,7 +139,7 @@ theorem proposition_04 :
         have : BetS a v c := by conclude cn_equalitysub
         have : Cong V C v c := by conclude lemma_differenceofparts
         have : Cong V B v b := by forward_using lemma_congruenceflip
-        have : Cong B C b c := by epose proof (axiom_5_line _ _ _ _ _ _ _ _ H37 H H38
+        have : Cong B C b c := by conclude axiom_5_line
         close
       · have : Cong A C a v := by conclude cn_equalitysub
         have : Cong a c A C := by conclude lemma_congruencesymmetric
@@ -179,7 +180,7 @@ theorem proposition_04 :
   have : Out b a a := by conclude lemma_ray4
   have : Out b c c := by conclude lemma_ray4
   have : Cong B A b a := by forward_using lemma_congruenceflip
-  have : CongA A B C a b c := by conclude_def CongA
+  have : CongA A B C a b c := by (try (have : nCol A B C := nCol_notCol _ _ _ (by assumption))); conclude_def CongA
   have : Out C A A := by conclude lemma_ray4
   have : Out C B B := by conclude lemma_ray4
   have : Out c a a := by conclude lemma_ray4
@@ -190,7 +191,7 @@ theorem proposition_04 :
       intro h
       have : Col A B C := by forward_using lemma_collinearorder
       contradict
-  have : CongA A C B a c b := by conclude_def CongA
+  have : CongA A C B a c b := by (try (have : nCol A C B := nCol_notCol _ _ _ (by assumption))); conclude_def CongA
   close
 
 end GeocoqTranslate.Elements

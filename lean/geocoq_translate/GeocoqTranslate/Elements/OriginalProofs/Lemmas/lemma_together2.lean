@@ -28,6 +28,7 @@ namespace GeocoqTranslate.Elements
 open euclidean_neutral_basis euclidean_neutral euclidean_neutral_ruler_compass
 variable {Point : Type} [euclidean_neutral_ruler_compass Point]
 
+set_option maxHeartbeats 800000 in
 theorem lemma_together2 :
     ∀ (A B C F G M N a b c : Point), TG A a C c B b → Cong F G B b → Out F G M → Cong F M A a → Out G F N → Cong G N C c → Out M F N := by
   intro A B C F G M N a b c h1 h2 h3 h4 h5 h6
@@ -49,7 +50,7 @@ theorem lemma_together2 :
   obtain ⟨D, _, _⟩ : ∃ D, (BetS M F D ∧ Cong F D M F) := by conclude lemma_extension
   have : (BetS F M G ∨ G = M ∨ BetS F G M) := by conclude lemma_ray1
   have : BetS G F D := by
-      rcases (show BetS F M G ∨ G = M ∨ BetS F G M by first | assumption | exact Classical.em _ | tauto | aesop) with c1 | c2 | c3
+      rcases (show BetS F M G ∨ G = M ∨ BetS F G M by first | assumption | exact nCol_or_Col _ _ _ | exact Col_or_nCol _ _ _ | exact Classical.em _ | tauto | aesop) with c1 | c2 | c3
       · have : BetS G M F := by conclude axiom_betweennesssymmetry
         have : BetS G F D := by conclude lemma_3_7a
         close
@@ -111,7 +112,7 @@ theorem lemma_together2 :
   have : Col M F N := by forward_using lemma_collinearorder
   have : (M = F ∨ M = N ∨ F = N ∨ BetS F M N ∨ BetS M F N ∨ BetS M N F) := by conclude_def Col
   have : Out M F N := by
-      rcases (show M = F ∨ M = N ∨ F = N ∨ BetS F M N ∨ BetS M F N ∨ BetS M N F by first | assumption | exact Classical.em _ | tauto | aesop) with c1 | c2 | c3 | c4 | c5 | c6
+      rcases (show M = F ∨ M = N ∨ F = N ∨ BetS F M N ∨ BetS M F N ∨ BetS M N F by first | assumption | exact nCol_or_Col _ _ _ | exact Col_or_nCol _ _ _ | exact Classical.em _ | tauto | aesop) with c1 | c2 | c3 | c4 | c5 | c6
       · have : ¬ ¬ Out M F N := by
             intro h
             contradict

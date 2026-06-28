@@ -15,6 +15,7 @@ namespace GeocoqTranslate.Elements
 open euclidean_neutral_basis euclidean_neutral euclidean_neutral_ruler_compass
 variable {Point : Type} [euclidean_neutral_ruler_compass Point]
 
+set_option maxHeartbeats 800000 in
 theorem lemma_parallelcollinear2 :
     ∀ (A B C c d : Point), TP A B c d → BetS c C d → TP A B C d := by
   intro A B C c d h1 h2
@@ -93,7 +94,7 @@ theorem lemma_parallelcollinear2 :
               intro h
               have : Col p r B := by conclude lemma_collinear4
               have : Col A B F := by conclude lemma_collinear5
-              have : OS C d A B := by conclude_def OS
+              have : OS C d A B := by (try (have : nCol A B C := nCol_notCol _ _ _ (by assumption))); (try (have : nCol A B d := nCol_notCol _ _ _ (by assumption))); conclude_def OS
               contradict
           have : Col A r F := by conclude cn_equalitysub
           have : Col r A F := by forward_using lemma_collinearorder
@@ -106,7 +107,7 @@ theorem lemma_parallelcollinear2 :
               contradict
           have : Col A F B := by conclude lemma_collinear4
           have : Col A B F := by forward_using lemma_collinearorder
-          have : OS C d A B := by conclude_def OS
+          have : OS C d A B := by (try (have : nCol A B C := nCol_notCol _ _ _ (by assumption))); (try (have : nCol A B d := nCol_notCol _ _ _ (by assumption))); conclude_def OS
           contradict
       have : A ≠ p := by conclude cn_equalitysub
       have : Col A p B := by forward_using lemma_collinearorder
@@ -119,7 +120,7 @@ theorem lemma_parallelcollinear2 :
       have : Col p r B := by forward_using lemma_collinearorder
       have : Col p r A := by forward_using lemma_collinearorder
       have : Col A B F := by conclude lemma_collinear5
-      have : OS C d A B := by conclude_def OS
+      have : OS C d A B := by (try (have : nCol A B C := nCol_notCol _ _ _ (by assumption))); (try (have : nCol A B d := nCol_notCol _ _ _ (by assumption))); conclude_def OS
       contradict
   have : ¬ Meet A B C d := by
       intro h

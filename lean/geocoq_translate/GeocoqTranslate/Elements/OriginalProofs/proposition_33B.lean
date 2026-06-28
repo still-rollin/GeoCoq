@@ -3,6 +3,7 @@
 import GeocoqTranslate.Elements.OriginalProofs.euclidean_tactics
 import GeocoqTranslate.Elements.OriginalProofs.Lemmas.lemma_samenotopposite
 import GeocoqTranslate.Elements.OriginalProofs.Lemmas.lemma_crisscross
+import GeocoqTranslate.Elements.OriginalProofs.proposition_33
 import GeocoqTranslate.Elements.OriginalProofs.Lemmas.lemma_collinearorder
 import GeocoqTranslate.Elements.OriginalProofs.Lemmas.lemma_parallelNC
 import GeocoqTranslate.Elements.OriginalProofs.Lemmas.lemma_NCorder
@@ -11,6 +12,7 @@ namespace GeocoqTranslate.Elements
 open euclidean_neutral_basis euclidean_neutral euclidean_neutral_ruler_compass euclidean_euclidean
 variable {Point : Type} [euclidean_euclidean Point]
 
+set_option maxHeartbeats 800000 in
 theorem proposition_33B :
     ∀ (A B C D : Point), Par A B C D → Cong A B C D → OS A C B D → Par A C B D ∧ Cong A C B D := by
   intro A B C D h1 h2 h3
@@ -21,7 +23,7 @@ theorem proposition_33B :
       have : Col B D M := by forward_using lemma_collinearorder
       have : nCol A B D := by forward_using lemma_parallelNC
       have : nCol B D A := by forward_using lemma_NCorder
-      have : TS A B D C := by conclude_def TS
+      have : TS A B D C := by (try (have : nCol B D A := nCol_notCol _ _ _ (by assumption))); conclude_def TS
       have : ¬ TS A B D C := by conclude lemma_samenotopposite
       contradict
   have : CR A D C B := by conclude lemma_crisscross

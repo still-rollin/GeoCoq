@@ -8,13 +8,14 @@ namespace GeocoqTranslate.Elements
 open euclidean_neutral_basis euclidean_neutral euclidean_neutral_ruler_compass
 variable {Point : Type} [euclidean_neutral_ruler_compass Point]
 
+set_option maxHeartbeats 800000 in
 theorem lemma_tworays :
     ∀ (A B C : Point), Out A B C → Out B A C → BetS A C B := by
   intro A B C h1 h2
   have : (BetS A C B ∨ B = C ∨ BetS A B C) := by conclude lemma_ray1
   have : (BetS B C A ∨ A = C ∨ BetS B A C) := by conclude lemma_ray1
   have : BetS A C B := by
-      rcases (show BetS A C B ∨ B = C ∨ BetS A B C by first | assumption | exact Classical.em _ | tauto | aesop) with c1 | c2 | c3
+      rcases (show BetS A C B ∨ B = C ∨ BetS A B C by first | assumption | exact nCol_or_Col _ _ _ | exact Col_or_nCol _ _ _ | exact Classical.em _ | tauto | aesop) with c1 | c2 | c3
       · close
       · have : ¬ ¬ BetS A C B := by
             intro h
@@ -22,7 +23,7 @@ theorem lemma_tworays :
             contradict
         close
       · have : BetS A C B := by
-            rcases (show BetS B C A ∨ A = C ∨ BetS B A C by first | assumption | exact Classical.em _ | tauto | aesop) with c1 | c2 | c3
+            rcases (show BetS B C A ∨ A = C ∨ BetS B A C by first | assumption | exact nCol_or_Col _ _ _ | exact Col_or_nCol _ _ _ | exact Classical.em _ | tauto | aesop) with c1 | c2 | c3
             · have : BetS A C B := by conclude axiom_betweennesssymmetry
               close
             · have : ¬ ¬ BetS A C B := by

@@ -5,6 +5,7 @@ import GeocoqTranslate.Elements.OriginalProofs.Lemmas.lemma_inequalitysymmetric
 import GeocoqTranslate.Elements.OriginalProofs.Lemmas.lemma_congruencesymmetric
 import GeocoqTranslate.Elements.OriginalProofs.Lemmas.lemma_lessthancongruence
 import GeocoqTranslate.Elements.OriginalProofs.Lemmas.lemma_lessthancongruence2
+import GeocoqTranslate.Elements.OriginalProofs.proposition_03
 import GeocoqTranslate.Elements.OriginalProofs.Lemmas.lemma_ray4
 import GeocoqTranslate.Elements.OriginalProofs.Lemmas.lemma_3_7a
 import GeocoqTranslate.Elements.OriginalProofs.Lemmas.lemma_ray5
@@ -15,9 +16,11 @@ import GeocoqTranslate.Elements.OriginalProofs.Lemmas.lemma_outerconnectivity
 import GeocoqTranslate.Elements.OriginalProofs.Lemmas.lemma_congruencetransitive
 import GeocoqTranslate.Elements.OriginalProofs.Lemmas.lemma_extensionunique
 import GeocoqTranslate.Elements.OriginalProofs.Lemmas.lemma_3_6a
+import GeocoqTranslate.Elements.OriginalProofs.proposition_15
 import GeocoqTranslate.Elements.OriginalProofs.Lemmas.lemma_equalanglesNC
 import GeocoqTranslate.Elements.OriginalProofs.Lemmas.lemma_ABCequalsCBA
 import GeocoqTranslate.Elements.OriginalProofs.Lemmas.lemma_equalanglestransitive
+import GeocoqTranslate.Elements.OriginalProofs.proposition_04
 import GeocoqTranslate.Elements.OriginalProofs.Lemmas.lemma_betweennotequal
 import GeocoqTranslate.Elements.OriginalProofs.Lemmas.lemma_congruenceflip
 import GeocoqTranslate.Elements.OriginalProofs.Lemmas.lemma_doublereverse
@@ -26,16 +29,17 @@ namespace GeocoqTranslate.Elements
 open euclidean_neutral_basis euclidean_neutral euclidean_neutral_ruler_compass
 variable {Point : Type} [euclidean_neutral_ruler_compass Point]
 
+set_option maxHeartbeats 800000 in
 theorem lemma_pointreflectionisometry :
     ∀ (A B C P Q : Point), Midpoint A B C → Midpoint P B Q → A ≠ P → Cong A P C Q := by
   intro A B C P Q h1 h2 h3
   have : (BetS A B C ∧ Cong A B B C) := by conclude_def Midpoint
   have : (BetS P B Q ∧ Cong P B B Q) := by conclude_def Midpoint
   have : Cong A P C Q := by
-      rcases (show Col A B P ∨ nCol A B P by first | assumption | exact Classical.em _ | tauto | aesop) with c1 | c2
+      rcases (show Col A B P ∨ nCol A B P by first | assumption | exact nCol_or_Col _ _ _ | exact Col_or_nCol _ _ _ | exact Classical.em _ | tauto | aesop) with c1 | c2
       · have : (A = B ∨ A = P ∨ B = P ∨ BetS B A P ∨ BetS A B P ∨ BetS A P B) := by conclude_def Col
         have : Cong A P C Q := by
-            rcases (show A = B ∨ A = P ∨ B = P ∨ BetS B A P ∨ BetS A B P ∨ BetS A P B by first | assumption | exact Classical.em _ | tauto | aesop) with c1 | c2 | c3 | c4 | c5 | c6
+            rcases (show A = B ∨ A = P ∨ B = P ∨ BetS B A P ∨ BetS A B P ∨ BetS A P B by first | assumption | exact nCol_or_Col _ _ _ | exact Col_or_nCol _ _ _ | exact Classical.em _ | tauto | aesop) with c1 | c2 | c3 | c4 | c5 | c6
             · have : ¬ ¬ Cong A P C Q := by
                   intro h
                   have : BetS A B C := by conclude_def Midpoint

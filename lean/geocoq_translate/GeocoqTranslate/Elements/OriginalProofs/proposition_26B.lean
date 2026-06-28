@@ -5,12 +5,14 @@ import GeocoqTranslate.Elements.OriginalProofs.Lemmas.lemma_26helper
 import GeocoqTranslate.Elements.OriginalProofs.Lemmas.lemma_equalanglessymmetric
 import GeocoqTranslate.Elements.OriginalProofs.Lemmas.lemma_congruencesymmetric
 import GeocoqTranslate.Elements.OriginalProofs.Lemmas.lemma_trichotomy1
+import GeocoqTranslate.Elements.OriginalProofs.proposition_04
 import GeocoqTranslate.Elements.OriginalProofs.Lemmas.lemma_congruenceflip
 
 namespace GeocoqTranslate.Elements
 open euclidean_neutral_basis euclidean_neutral euclidean_neutral_ruler_compass
 variable {Point : Type} [euclidean_neutral_ruler_compass Point]
 
+set_option maxHeartbeats 800000 in
 theorem proposition_26B :
     ∀ (A B C D E F : Point), Triangle A B C → Triangle D E F → CongA A B C D E F → CongA B C A E F D → Cong A B D E → Cong B C E F ∧ Cong A C D F ∧ CongA B A C E D F := by
   intro A B C D E F h1 h2 h3 h4 h5

@@ -10,6 +10,7 @@ namespace GeocoqTranslate.Elements
 open euclidean_neutral_basis euclidean_neutral euclidean_neutral_ruler_compass
 variable {Point : Type} [euclidean_neutral_ruler_compass Point]
 
+set_option maxHeartbeats 800000 in
 theorem lemma_9_5a :
     ∀ (A B C P Q R : Point), TS P A B C → BetS R P Q → nCol R Q C → Col A B R → TS Q A B C := by
   intro A B C P Q R h1 h2 h3 h4
@@ -29,7 +30,7 @@ theorem lemma_9_5a :
   have : Col S B A := by forward_using lemma_collinearorder
   have : Col S B F := by forward_using lemma_collinearorder
   have : Col A B F := by
-      rcases (show S = B ∨ S ≠ B by first | assumption | exact Classical.em _ | tauto | aesop) with c1 | c2
+      rcases (show S = B ∨ S ≠ B by first | assumption | exact nCol_or_Col _ _ _ | exact Col_or_nCol _ _ _ | exact Classical.em _ | tauto | aesop) with c1 | c2
       · have : Col B A S := by forward_using lemma_collinearorder
         have : Col R S F := by conclude_def Col
         have : Col R B F := by conclude cn_equalitysub
@@ -52,7 +53,7 @@ theorem lemma_9_5a :
       have : Col B R Q := by forward_using lemma_collinearorder
       have : Col B R F := by conclude lemma_collinear4
       have : Col R Q F := by
-          rcases (show B = R ∨ B ≠ R by first | assumption | exact Classical.em _ | tauto | aesop) with c1 | c2
+          rcases (show B = R ∨ B ≠ R by first | assumption | exact nCol_or_Col _ _ _ | exact Col_or_nCol _ _ _ | exact Classical.em _ | tauto | aesop) with c1 | c2
           · have : ¬ A = R := by
                 intro h
                 have : A = B := by conclude cn_equalitysub
@@ -76,7 +77,7 @@ theorem lemma_9_5a :
       have : Col R Q C := by forward_using lemma_collinearorder
       contradict
   have : BetS Q F C := by conclude axiom_betweennesssymmetry
-  have : TS Q A B C := by conclude_def TS
+  have : TS Q A B C := by (try (have : nCol A B Q := nCol_notCol _ _ _ (by assumption))); conclude_def TS
   close
 
 end GeocoqTranslate.Elements

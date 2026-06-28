@@ -6,6 +6,8 @@ import GeocoqTranslate.Elements.OriginalProofs.Lemmas.lemma_triangletoparallelog
 import GeocoqTranslate.Elements.OriginalProofs.Lemmas.lemma_PGrotate
 import GeocoqTranslate.Elements.OriginalProofs.Lemmas.lemma_inequalitysymmetric
 import GeocoqTranslate.Elements.OriginalProofs.Lemmas.lemma_collinear4
+import GeocoqTranslate.Elements.OriginalProofs.proposition_35
+import GeocoqTranslate.Elements.OriginalProofs.proposition_34
 import GeocoqTranslate.Elements.OriginalProofs.Lemmas.lemma_diagonalsmeet
 import GeocoqTranslate.Elements.OriginalProofs.Lemmas.lemma_oppositesidesymmetric
 import GeocoqTranslate.Elements.OriginalProofs.Lemmas.lemma_parallelflip
@@ -18,6 +20,7 @@ namespace GeocoqTranslate.Elements
 open euclidean_neutral_basis euclidean_neutral euclidean_neutral_ruler_compass area
 variable {Point : Type} [area Point]
 
+set_option maxHeartbeats 800000 in
 theorem proposition_37 :
     ∀ (A B C D : Point), Par A D B C → ET A B C D B C := by
   intro A B C D h1
@@ -51,12 +54,12 @@ theorem proposition_37 :
   have : Par E B C A := by conclude_def PG
   have : nCol E B A := by forward_using lemma_parallelNC
   have : nCol B A E := by forward_using lemma_NCorder
-  have : TS E B A C := by conclude_def TS
+  have : TS E B A C := by (try (have : nCol B A E := nCol_notCol _ _ _ (by assumption))); conclude_def TS
   have : TS C B A E := by conclude lemma_oppositesidesymmetric
   have : Par D F B C := by conclude_def PG
   have : nCol D F B := by forward_using lemma_parallelNC
   have : nCol B D F := by forward_using lemma_NCorder
-  have : TS F B D C := by conclude_def TS
+  have : TS F B D C := by (try (have : nCol B D F := nCol_notCol _ _ _ (by assumption))); conclude_def TS
   have : TS C B D F := by conclude lemma_oppositesidesymmetric
   have : ET B E A A C B := by conclude axiom_congruentequal
   have : ET B E A C B A := by forward_using axiom_ETpermutation

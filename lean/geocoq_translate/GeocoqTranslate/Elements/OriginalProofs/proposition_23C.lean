@@ -5,6 +5,7 @@ import GeocoqTranslate.Elements.OriginalProofs.Lemmas.lemma_equalitysymmetric
 import GeocoqTranslate.Elements.OriginalProofs.Lemmas.lemma_extension
 import GeocoqTranslate.Elements.OriginalProofs.Lemmas.lemma_inequalitysymmetric
 import GeocoqTranslate.Elements.OriginalProofs.Lemmas.lemma_collinear4
+import GeocoqTranslate.Elements.OriginalProofs.proposition_23B
 import GeocoqTranslate.Elements.OriginalProofs.Lemmas.lemma_collinearorder
 import GeocoqTranslate.Elements.OriginalProofs.Lemmas.lemma_betweennotequal
 
@@ -12,6 +13,7 @@ namespace GeocoqTranslate.Elements
 open euclidean_neutral_basis euclidean_neutral euclidean_neutral_ruler_compass
 variable {Point : Type} [euclidean_neutral_ruler_compass Point]
 
+set_option maxHeartbeats 800000 in
 theorem proposition_23C :
     ∀ (A B C D E P : Point), A ≠ B → nCol D C E → nCol A B P → ∃ X Y, Out A B Y ∧ CongA X A Y D C E ∧ OS X P A B := by
   intro A B C D E P h1 h2 h3
@@ -34,7 +36,7 @@ theorem proposition_23C :
       contradict
   obtain ⟨F, G, _, _, _⟩ : ∃ F G, (Out A B G ∧ CongA F A G D C E ∧ TS F A B Q) := by conclude proposition_23B
   obtain ⟨J, _, _, _⟩ : ∃ J, (BetS F J Q ∧ Col A B J ∧ nCol A B F) := by conclude_def TS
-  have : OS F P A B := by conclude_def OS
+  have : OS F P A B := by (try (have : nCol A B F := nCol_notCol _ _ _ (by assumption))); (try (have : nCol A B P := nCol_notCol _ _ _ (by assumption))); conclude_def OS
   close
 
 end GeocoqTranslate.Elements

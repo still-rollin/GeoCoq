@@ -7,6 +7,7 @@ import GeocoqTranslate.Elements.OriginalProofs.Lemmas.lemma_raystrict
 import GeocoqTranslate.Elements.OriginalProofs.Lemmas.lemma_equalanglessymmetric
 import GeocoqTranslate.Elements.OriginalProofs.Lemmas.lemma_equalangleshelper
 import GeocoqTranslate.Elements.OriginalProofs.Lemmas.lemma_congruencesymmetric
+import GeocoqTranslate.Elements.OriginalProofs.proposition_04
 import GeocoqTranslate.Elements.OriginalProofs.Lemmas.lemma_congruencetransitive
 import GeocoqTranslate.Elements.OriginalProofs.Lemmas.lemma_ray4
 import GeocoqTranslate.Elements.OriginalProofs.Lemmas.lemma_angledistinct
@@ -15,6 +16,7 @@ namespace GeocoqTranslate.Elements
 open euclidean_neutral_basis euclidean_neutral euclidean_neutral_ruler_compass
 variable {Point : Type} [euclidean_neutral_ruler_compass Point]
 
+set_option maxHeartbeats 800000 in
 theorem lemma_equalanglestransitive :
     ∀ (A B C D E F P Q R : Point), CongA A B C D E F → CongA D E F P Q R → CongA A B C P Q R := by
   intro A B C D E F P Q R h1 h2
@@ -53,7 +55,7 @@ theorem lemma_equalanglestransitive :
   have : C = C := by conclude cn_equalityreflexive
   have : Out B A A := by conclude lemma_ray4
   have : Out B C C := by conclude lemma_ray4
-  have : CongA A B C P Q R := by conclude_def CongA
+  have : CongA A B C P Q R := by (try (have : nCol A B C := nCol_notCol _ _ _ (by assumption))); conclude_def CongA
   close
 
 end GeocoqTranslate.Elements

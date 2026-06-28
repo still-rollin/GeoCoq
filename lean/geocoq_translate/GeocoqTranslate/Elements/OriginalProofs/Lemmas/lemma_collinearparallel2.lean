@@ -13,6 +13,7 @@ namespace GeocoqTranslate.Elements
 open euclidean_neutral_basis euclidean_neutral euclidean_neutral_ruler_compass
 variable {Point : Type} [euclidean_neutral_ruler_compass Point]
 
+set_option maxHeartbeats 800000 in
 theorem lemma_collinearparallel2 :
     ∀ (A B C D E F : Point), Par A B C D → Col C D E → Col C D F → E ≠ F → Par A B E F := by
   intro A B C D E F h1 h2 h3 h4
@@ -26,7 +27,7 @@ theorem lemma_collinearparallel2 :
   have : Col C F E := by forward_using lemma_collinearorder
   have : Par A B D C := by forward_using lemma_parallelflip
   have : Par A B E F := by
-      rcases (show E = D ∨ E ≠ D by first | assumption | exact Classical.em _ | tauto | aesop) with c1 | c2
+      rcases (show E = D ∨ E ≠ D by first | assumption | exact nCol_or_Col _ _ _ | exact Col_or_nCol _ _ _ | exact Classical.em _ | tauto | aesop) with c1 | c2
       · have : D ≠ F := by conclude cn_equalitysub
         have : F ≠ D := by conclude lemma_inequalitysymmetric
         have : Par A B F D := by conclude lemma_collinearparallel
@@ -34,7 +35,7 @@ theorem lemma_collinearparallel2 :
         have : Col C F D := by forward_using lemma_collinearorder
         have : Col C F E := by forward_using lemma_collinearorder
         have : Col F D E := by
-            rcases (show C = F ∨ C ≠ F by first | assumption | exact Classical.em _ | tauto | aesop) with c1 | c2
+            rcases (show C = F ∨ C ≠ F by first | assumption | exact nCol_or_Col _ _ _ | exact Col_or_nCol _ _ _ | exact Classical.em _ | tauto | aesop) with c1 | c2
             · have : Col C D E := by forward_using lemma_collinearorder
               have : Col F D E := by conclude cn_equalitysub
               close

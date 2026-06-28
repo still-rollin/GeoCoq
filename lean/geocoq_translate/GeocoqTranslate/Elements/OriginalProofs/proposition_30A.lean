@@ -13,8 +13,10 @@ import GeocoqTranslate.Elements.OriginalProofs.Lemmas.lemma_equalanglestransitiv
 import GeocoqTranslate.Elements.OriginalProofs.Lemmas.lemma_NChelper
 import GeocoqTranslate.Elements.OriginalProofs.Lemmas.lemma_collinearbetween
 import GeocoqTranslate.Elements.OriginalProofs.Lemmas.lemma_planeseparation
+import GeocoqTranslate.Elements.OriginalProofs.proposition_29
 import GeocoqTranslate.Elements.OriginalProofs.Lemmas.lemma_collinear4
 import GeocoqTranslate.Elements.OriginalProofs.Lemmas.lemma_equalanglesNC
+import GeocoqTranslate.Elements.OriginalProofs.proposition_27
 import GeocoqTranslate.Elements.OriginalProofs.Lemmas.lemma_betweennotequal
 import GeocoqTranslate.Elements.OriginalProofs.Lemmas.lemma_NCorder
 import GeocoqTranslate.Elements.OriginalProofs.Lemmas.lemma_collinearorder
@@ -23,6 +25,7 @@ namespace GeocoqTranslate.Elements
 open euclidean_neutral_basis euclidean_neutral euclidean_neutral_ruler_compass euclidean_euclidean
 variable {Point : Type} [euclidean_euclidean Point]
 
+set_option maxHeartbeats 800000 in
 theorem proposition_30A :
     ∀ (A B C D E F G H K : Point), Par A B E F → Par C D E F → BetS G H K → BetS A G B → BetS E H F → BetS C K D → TS A G H F → TS F H K C → Par A B C D := by
   intro A B C D E F G H K h1 h2 h3 h4 h5 h6 h7 h8
@@ -89,10 +92,10 @@ theorem proposition_30A :
   have : H ≠ K := by forward_using lemma_betweennotequal
   have : nCol H K C := by conclude lemma_NChelper
   have : nCol H K E := by forward_using lemma_NCorder
-  have : OS E C H K := by conclude_def OS
+  have : OS E C H K := by (try (have : nCol H K E := nCol_notCol _ _ _ (by assumption))); (try (have : nCol H K C := nCol_notCol _ _ _ (by assumption))); conclude_def OS
   have : K = K := by conclude cn_equalityreflexive
   have : Col H K K := by conclude_def Col
-  have : TS C H K D := by conclude_def TS
+  have : TS C H K D := by (try (have : nCol H K C := nCol_notCol _ _ _ (by assumption))); conclude_def TS
   have : TS E H K D := by conclude lemma_planeseparation
   have : CongA G H F H K D := by conclude proposition_29
   have : nCol C K H := by forward_using lemma_NCorder
@@ -130,9 +133,9 @@ theorem proposition_30A :
   have : Col H K K := by conclude_def Col
   have : G ≠ K := by forward_using lemma_betweennotequal
   have : nCol G K C := by conclude lemma_NChelper
-  have : OS A C G K := by conclude_def OS
+  have : OS A C G K := by (try (have : nCol G K A := nCol_notCol _ _ _ (by assumption))); (try (have : nCol G K C := nCol_notCol _ _ _ (by assumption))); conclude_def OS
   have : Col G K K := by conclude_def Col
-  have : TS C G K D := by conclude_def TS
+  have : TS C G K D := by (try (have : nCol G K C := nCol_notCol _ _ _ (by assumption))); conclude_def TS
   have : TS A G K D := by conclude lemma_planeseparation
   have : Par A B C D := by conclude proposition_27
   close

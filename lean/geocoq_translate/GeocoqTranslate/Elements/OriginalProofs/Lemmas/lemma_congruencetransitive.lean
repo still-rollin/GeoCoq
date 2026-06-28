@@ -7,6 +7,7 @@ namespace GeocoqTranslate.Elements
 open euclidean_neutral_basis euclidean_neutral euclidean_neutral_ruler_compass
 variable {Point : Type} [euclidean_neutral Point]
 
+set_option maxHeartbeats 800000 in
 theorem lemma_congruencetransitive :
     ∀ (A B C D E F : Point), Cong A B C D → Cong C D E F → Cong A B E F := by
   intro A B C D E F h1 h2

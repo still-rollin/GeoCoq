@@ -4,6 +4,7 @@ import GeocoqTranslate.Elements.OriginalProofs.euclidean_tactics
 import GeocoqTranslate.Elements.OriginalProofs.Lemmas.lemma_congruencesymmetric
 import GeocoqTranslate.Elements.OriginalProofs.Lemmas.lemma_congruencetransitive
 import GeocoqTranslate.Elements.OriginalProofs.Lemmas.lemma_extensionunique
+import GeocoqTranslate.Elements.OriginalProofs.proposition_10
 import GeocoqTranslate.Elements.OriginalProofs.Lemmas.lemma_8_2
 import GeocoqTranslate.Elements.OriginalProofs.Lemmas.lemma_rightreverse
 import GeocoqTranslate.Elements.OriginalProofs.Lemmas.lemma_inequalitysymmetric
@@ -17,6 +18,7 @@ namespace GeocoqTranslate.Elements
 open euclidean_neutral_basis euclidean_neutral euclidean_neutral_ruler_compass
 variable {Point : Type} [euclidean_neutral_ruler_compass Point]
 
+set_option maxHeartbeats 800000 in
 theorem lemma_10_12 :
     ∀ (A B C H : Point), Per A B C → Per A B H → Cong B C B H → Cong A C A H := by
   intro A B C H h1 h2 h3
@@ -30,14 +32,14 @@ theorem lemma_10_12 :
   have : F = D := by conclude lemma_extensionunique
   have : Cong A H D H := by conclude cn_equalitysub
   have : Cong A C A H := by
-      rcases (show C = H ∨ C ≠ H by first | assumption | exact Classical.em _ | tauto | aesop) with c1 | c2
+      rcases (show C = H ∨ C ≠ H by first | assumption | exact nCol_or_Col _ _ _ | exact Col_or_nCol _ _ _ | exact Classical.em _ | tauto | aesop) with c1 | c2
       · have : Cong A C A C := by conclude cn_congruencereflexive
         have : Cong A C A H := by conclude cn_equalitysub
         close
       · obtain ⟨M, _, _⟩ : ∃ M, (BetS C M H ∧ Cong M C M H) := by conclude proposition_10
         have : Cong C B H B := by forward_using lemma_doublereverse
         have : Cong A C A H := by
-            rcases (show B = M ∨ B ≠ M by first | assumption | exact Classical.em _ | tauto | aesop) with c1 | c2
+            rcases (show B = M ∨ B ≠ M by first | assumption | exact nCol_or_Col _ _ _ | exact Col_or_nCol _ _ _ | exact Classical.em _ | tauto | aesop) with c1 | c2
             · have : Per C B A := by conclude lemma_8_2
               have : BetS C B H := by conclude cn_equalitysub
               have : Cong B C B H := by conclude cn_equalitysub

@@ -7,6 +7,7 @@ import GeocoqTranslate.Elements.OriginalProofs.Lemmas.lemma_8_3
 import GeocoqTranslate.Elements.OriginalProofs.Lemmas.lemma_congruencesymmetric
 import GeocoqTranslate.Elements.OriginalProofs.Lemmas.lemma_10_12
 import GeocoqTranslate.Elements.OriginalProofs.Lemmas.lemma_rightangleNC
+import GeocoqTranslate.Elements.OriginalProofs.proposition_07
 import GeocoqTranslate.Elements.OriginalProofs.Lemmas.lemma_ray5
 import GeocoqTranslate.Elements.OriginalProofs.Lemmas.lemma_congruenceflip
 
@@ -14,6 +15,7 @@ namespace GeocoqTranslate.Elements
 open euclidean_neutral_basis euclidean_neutral euclidean_neutral_ruler_compass
 variable {Point : Type} [euclidean_neutral_ruler_compass Point]
 
+set_option maxHeartbeats 800000 in
 theorem lemma_erectedperpendicularunique :
     ∀ (A B C E : Point), Per A B C → Per A B E → OS C E A B → Out B C E := by
   intro A B C E h1 h2 h3

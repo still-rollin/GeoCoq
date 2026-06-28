@@ -9,6 +9,7 @@ namespace GeocoqTranslate.Elements
 open euclidean_neutral_basis euclidean_neutral euclidean_neutral_ruler_compass
 variable {Point : Type} [euclidean_neutral Point]
 
+set_option maxHeartbeats 800000 in
 theorem lemma_tarskiparallelflip :
     ∀ (A B C D : Point), TP A B C D → TP B A C D ∧ TP A B D C ∧ TP B A D C := by
   intro A B C D h1

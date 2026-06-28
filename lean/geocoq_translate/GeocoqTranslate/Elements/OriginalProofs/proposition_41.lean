@@ -5,6 +5,7 @@ import GeocoqTranslate.Elements.OriginalProofs.Lemmas.lemma_ETreflexive
 import GeocoqTranslate.Elements.OriginalProofs.Lemmas.lemma_parallelsymmetric
 import GeocoqTranslate.Elements.OriginalProofs.Lemmas.lemma_inequalitysymmetric
 import GeocoqTranslate.Elements.OriginalProofs.Lemmas.lemma_collinearparallel
+import GeocoqTranslate.Elements.OriginalProofs.proposition_37
 import GeocoqTranslate.Elements.OriginalProofs.Lemmas.lemma_parallelNC
 import GeocoqTranslate.Elements.OriginalProofs.Lemmas.lemma_collinearorder
 import GeocoqTranslate.Elements.OriginalProofs.Lemmas.lemma_parallelflip
@@ -13,14 +14,15 @@ namespace GeocoqTranslate.Elements
 open euclidean_neutral_basis euclidean_neutral euclidean_neutral_ruler_compass area
 variable {Point : Type} [area Point]
 
+set_option maxHeartbeats 800000 in
 theorem proposition_41 :
     ∀ (A B C D E : Point), PG A B C D → Col A D E → ET A B C E B C := by
   intro A B C D E h1 h2
   have : Par A B C D := by conclude_def PG
   have : nCol A B C := by forward_using lemma_parallelNC
-  have : Triangle A B C := by conclude_def Triangle
+  have : Triangle A B C := by (try (have : nCol A B C := nCol_notCol _ _ _ (by assumption))); conclude_def Triangle
   have : ET A B C E B C := by
-      rcases (show A = E ∨ A ≠ E by first | assumption | exact Classical.em _ | tauto | aesop) with c1 | c2
+      rcases (show A = E ∨ A ≠ E by first | assumption | exact nCol_or_Col _ _ _ | exact Col_or_nCol _ _ _ | exact Classical.em _ | tauto | aesop) with c1 | c2
       · have : ET A B C A B C := by conclude lemma_ETreflexive
         have : ET A B C E B C := by conclude cn_equalitysub
         close

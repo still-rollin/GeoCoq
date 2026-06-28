@@ -26,6 +26,13 @@ namespace GeocoqTranslate.Elements
 open euclidean_neutral_basis euclidean_neutral euclidean_neutral_ruler_compass
 variable {Point : Type} [euclidean_neutral_ruler_compass Point]
 
+set_option maxHeartbeats 800000 in
+theorem lemma_togethera :
+    ∀ (A B C D F G P Q a b c : Point), TG A a B b C c → Cong D F A a → Cong F G B b → BetS D F G → Cong P Q C c → Lt P Q D G := by
+  intro A B C D F G P Q a b c h1 h2 h3 h4 h5
+  conclude lemma_together
+
+set_option maxHeartbeats 800000 in
 theorem proposition_22 :
     ∀ (A B C E F a b c : Point), TG A a B b C c → TG A a C c B b → TG B b C c A a → F ≠ E → ∃ X Y, Cong F X B b ∧ Cong F Y A a ∧ Cong X Y C c ∧ Out F E X ∧ Triangle F X Y := by
   intro A B C E F a b c h1 h2 h3 h4
@@ -97,7 +104,7 @@ theorem proposition_22 :
       intro h
       have : (F = G ∨ F = K ∨ G = K ∨ BetS G F K ∨ BetS F G K ∨ BetS F K G) := by conclude_def Col
       have : nCol F G K := by
-          rcases (show F = G ∨ F = K ∨ G = K ∨ BetS G F K ∨ BetS F G K ∨ BetS F K G by first | assumption | exact Classical.em _ | tauto | aesop) with c1 | c2 | c3 | c4 | c5 | c6
+          rcases (show F = G ∨ F = K ∨ G = K ∨ BetS G F K ∨ BetS F G K ∨ BetS F K G by first | assumption | exact nCol_or_Col _ _ _ | exact Col_or_nCol _ _ _ | exact Classical.em _ | tauto | aesop) with c1 | c2 | c3 | c4 | c5 | c6
           · have : ¬ Col F G K := by
                 intro h
                 contradict
@@ -156,7 +163,7 @@ theorem proposition_22 :
                 contradict
             close
       contradict
-  have : Triangle F G K := by conclude_def Triangle
+  have : Triangle F G K := by (try (have : nCol F G K := nCol_notCol _ _ _ (by assumption))); conclude_def Triangle
   close
 
 end GeocoqTranslate.Elements

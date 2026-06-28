@@ -17,11 +17,12 @@ namespace GeocoqTranslate.Elements
 open euclidean_neutral_basis euclidean_neutral euclidean_neutral_ruler_compass
 variable {Point : Type} [euclidean_neutral_ruler_compass Point]
 
+set_option maxHeartbeats 800000 in
 theorem lemma_sameside2 :
     ∀ (A B C E F G : Point), OS E F A C → Col A B C → Out B F G → OS E G A C := by
   intro A B C E F G h1 h2 h3
   obtain ⟨Q, U, V, _, _, _, _, _, _⟩ : ∃ Q U V, (Col A C U ∧ Col A C V ∧ BetS E U Q ∧ BetS F V Q ∧ nCol A C E ∧ nCol A C F) := by conclude_def OS
-  have : TS F A C Q := by conclude_def TS
+  have : TS F A C Q := by (try (have : nCol A C F := nCol_notCol _ _ _ (by assumption))); conclude_def TS
   have : Col A C B := by forward_using lemma_collinearorder
   have : ¬ A = C := by
       intro h
@@ -41,7 +42,7 @@ theorem lemma_sameside2 :
           have : BetS F B Q := by conclude cn_equalitysub
           have : (BetS B G F ∨ F = G ∨ BetS B F G) := by conclude lemma_ray1
           have : BetS G B Q := by
-              rcases (show BetS B G F ∨ F = G ∨ BetS B F G by first | assumption | exact Classical.em _ | tauto | aesop) with c1 | c2 | c3
+              rcases (show BetS B G F ∨ F = G ∨ BetS B F G by first | assumption | exact nCol_or_Col _ _ _ | exact Col_or_nCol _ _ _ | exact Classical.em _ | tauto | aesop) with c1 | c2 | c3
               · have : BetS F G B := by conclude axiom_betweennesssymmetry
                 have : BetS G B Q := by conclude lemma_3_6a
                 close
@@ -74,7 +75,7 @@ theorem lemma_sameside2 :
               have : Col A B F := by forward_using lemma_collinearorder
               have : Col A C F := by conclude cn_equalitysub
               contradict
-          have : TS G A C Q := by conclude_def TS
+          have : TS G A C Q := by (try (have : nCol A C G := nCol_notCol _ _ _ (by assumption))); conclude_def TS
           contradict
       have : ¬ Col Q F B := by
           intro h
@@ -109,7 +110,7 @@ theorem lemma_sameside2 :
           contradict
       have : (BetS B G F ∨ F = G ∨ BetS B F G) := by conclude lemma_ray1
       have : TS G A C Q := by
-          rcases (show BetS B G F ∨ F = G ∨ BetS B F G by first | assumption | exact Classical.em _ | tauto | aesop) with c1 | c2 | c3
+          rcases (show BetS B G F ∨ F = G ∨ BetS B F G by first | assumption | exact nCol_or_Col _ _ _ | exact Col_or_nCol _ _ _ | exact Classical.em _ | tauto | aesop) with c1 | c2 | c3
           · have : TS G A C Q := by conclude lemma_9_5b
             close
           · have : TS G A C Q := by conclude cn_equalitysub
@@ -127,7 +128,7 @@ theorem lemma_sameside2 :
             close
       contradict
   obtain ⟨H, _, _, _⟩ : ∃ H, (BetS G H Q ∧ Col A C H ∧ nCol A C G) := by conclude_def TS
-  have : OS E G A C := by conclude_def OS
+  have : OS E G A C := by (try (have : nCol A C E := nCol_notCol _ _ _ (by assumption))); (try (have : nCol A C G := nCol_notCol _ _ _ (by assumption))); conclude_def OS
   close
 
 end GeocoqTranslate.Elements

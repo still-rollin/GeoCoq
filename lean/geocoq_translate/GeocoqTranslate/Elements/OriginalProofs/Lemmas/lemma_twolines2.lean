@@ -10,6 +10,7 @@ namespace GeocoqTranslate.Elements
 open euclidean_neutral_basis euclidean_neutral euclidean_neutral_ruler_compass
 variable {Point : Type} [euclidean_neutral_ruler_compass Point]
 
+set_option maxHeartbeats 800000 in
 theorem lemma_twolines2 :
     ∀ (A B C D P Q : Point), A ≠ B → C ≠ D → Col P A B → Col P C D → Col Q A B → Col Q C D → ¬ (Col A C D ∧ Col B C D) → P = Q := by
   intro A B C D P Q h1 h2 h3 h4 h5 h6 h7

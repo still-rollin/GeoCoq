@@ -7,6 +7,7 @@ import GeocoqTranslate.Elements.OriginalProofs.Lemmas.lemma_rayimpliescollinear
 import GeocoqTranslate.Elements.OriginalProofs.Lemmas.lemma_raystrict
 import GeocoqTranslate.Elements.OriginalProofs.Lemmas.lemma_inequalitysymmetric
 import GeocoqTranslate.Elements.OriginalProofs.Lemmas.lemma_collinear4
+import GeocoqTranslate.Elements.OriginalProofs.proposition_10
 import GeocoqTranslate.Elements.OriginalProofs.Lemmas.lemma_congruencesymmetric
 import GeocoqTranslate.Elements.OriginalProofs.Lemmas.lemma_ray4
 import GeocoqTranslate.Elements.OriginalProofs.Lemmas.lemma_equalanglessymmetric
@@ -20,6 +21,7 @@ namespace GeocoqTranslate.Elements
 open euclidean_neutral_basis euclidean_neutral euclidean_neutral_ruler_compass
 variable {Point : Type} [euclidean_neutral_ruler_compass Point]
 
+set_option maxHeartbeats 800000 in
 theorem proposition_09 :
     ∀ (A B C : Point), nCol B A C → ∃ X, CongA B A X X A C ∧ InAngle B A C X := by
   intro A B C h1
@@ -73,7 +75,7 @@ theorem proposition_09 :
       have : Col B A F := by conclude_def Col
       contradict
   have : Out A F F := by conclude lemma_ray4
-  have : CongA B A F C A F := by conclude_def CongA
+  have : CongA B A F C A F := by (try (have : nCol B A F := nCol_notCol _ _ _ (by assumption))); conclude_def CongA
   have : CongA C A F B A F := by conclude lemma_equalanglessymmetric
   have : nCol C A F := by conclude_def CongA
   have : CongA C A F F A C := by conclude lemma_ABCequalsCBA

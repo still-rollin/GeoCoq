@@ -16,6 +16,7 @@ namespace GeocoqTranslate.Elements
 open euclidean_neutral_basis euclidean_neutral euclidean_neutral_ruler_compass
 variable {Point : Type} [euclidean_neutral_ruler_compass Point]
 
+set_option maxHeartbeats 800000 in
 theorem lemma_layoffunique :
     ∀ (A B C D : Point), Out A B C → Out A B D → Cong A C A D → C = D := by
   intro A B C D h1 h2 h3
@@ -27,9 +28,9 @@ theorem lemma_layoffunique :
   have : Cong C B C B := by conclude cn_congruencereflexive
   have : Cong A C A C := by conclude cn_congruencereflexive
   have : C = D := by
-      rcases (show BetS A C B ∨ B = C ∨ BetS A B C by first | assumption | exact Classical.em _ | tauto | aesop) with c1 | c2 | c3
+      rcases (show BetS A C B ∨ B = C ∨ BetS A B C by first | assumption | exact nCol_or_Col _ _ _ | exact Col_or_nCol _ _ _ | exact Classical.em _ | tauto | aesop) with c1 | c2 | c3
       · have : C = D := by
-            rcases (show BetS A D B ∨ B = D ∨ BetS A B D by first | assumption | exact Classical.em _ | tauto | aesop) with c1 | c2 | c3
+            rcases (show BetS A D B ∨ B = D ∨ BetS A B D by first | assumption | exact nCol_or_Col _ _ _ | exact Col_or_nCol _ _ _ | exact Classical.em _ | tauto | aesop) with c1 | c2 | c3
             · have : Cong C B D B := by conclude lemma_differenceofparts
               have : Cong B C B D := by forward_using lemma_congruenceflip
               have : Cong C C C D := by conclude lemma_interior5
@@ -56,7 +57,7 @@ theorem lemma_layoffunique :
       · have : Cong A B A D := by conclude cn_equalitysub
         have : Cong A D A B := by conclude lemma_congruencesymmetric
         have : C = D := by
-            rcases (show BetS A D B ∨ B = D ∨ BetS A B D by first | assumption | exact Classical.em _ | tauto | aesop) with c1 | c2 | c3
+            rcases (show BetS A D B ∨ B = D ∨ BetS A B D by first | assumption | exact nCol_or_Col _ _ _ | exact Col_or_nCol _ _ _ | exact Classical.em _ | tauto | aesop) with c1 | c2 | c3
             · have : ¬ C ≠ D := by
                   intro h
                   have : ¬ Cong A D A B := by conclude lemma_partnotequalwhole
@@ -74,7 +75,7 @@ theorem lemma_layoffunique :
               close
         close
       · have : C = D := by
-            rcases (show BetS A D B ∨ B = D ∨ BetS A B D by first | assumption | exact Classical.em _ | tauto | aesop) with c1 | c2 | c3
+            rcases (show BetS A D B ∨ B = D ∨ BetS A B D by first | assumption | exact nCol_or_Col _ _ _ | exact Col_or_nCol _ _ _ | exact Classical.em _ | tauto | aesop) with c1 | c2 | c3
             · have : BetS A D C := by conclude lemma_3_6b
               have : Cong A D A C := by conclude lemma_congruencesymmetric
               have : ¬ C ≠ D := by

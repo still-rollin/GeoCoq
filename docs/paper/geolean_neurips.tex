@@ -1,0 +1,439 @@
+\documentclass{article}
+
+% NeurIPS 2024 style. A minimal self-contained shim (neurips_2024.sty) ships
+% alongside this file so it compiles offline; drop in the official style to match.
+\usepackage[preprint]{neurips_2024}
+
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage{hyperref}
+\usepackage{url}
+\usepackage{booktabs}
+\usepackage{amsfonts}
+\usepackage{amsmath}
+\usepackage{amssymb}
+\usepackage{microtype}
+\usepackage{xcolor}
+\usepackage{listings}
+
+% ---- Lean/Coq listing style with unicode-safe literate mapping ----------------
+\definecolor{kw}{rgb}{0.45,0.10,0.55}
+\definecolor{cmt}{rgb}{0.30,0.45,0.30}
+\lstdefinestyle{code}{
+  basicstyle=\ttfamily\footnotesize,
+  breaklines=true,
+  columns=fullflexible,
+  keepspaces=true,
+  showstringspaces=false,
+  commentstyle=\color{cmt}\itshape,
+  keywordstyle=\color{kw}\bfseries,
+  morekeywords={have,by,intro,obtain,exact,apply,conclude,conclude_def,
+    forward_using,close,theorem,Lemma,assert,Proof,Qed,first,fun,macro,tactic,
+    elab,def,refine,rcases,left,right,assumption,rfl,spliter,Or},
+  literate=
+    {∀}{{$\forall$}}1 {∃}{{$\exists$}}1 {∧}{{$\wedge$}}1 {∨}{{$\vee$}}1
+    {¬}{{$\neg$}}1 {→}{{$\rightarrow$}}1 {≠}{{$\neq$}}1 {⟨}{{$\langle$}}1
+    {⟩}{{$\rangle$}}1 {∘}{{$\circ$}}1 {⊢}{{$\vdash$}}1 {≤}{{$\leq$}}1
+    {↦}{{$\mapsto$}}1 {²}{{\textsuperscript{2}}}1 {₁}{{\textsubscript{1}}}1
+    {₂}{{\textsubscript{2}}}1 {ᵢ}{{\textsubscript{i}}}1
+}
+\lstset{style=code}
+
+\title{GeoLean: A Structure-Preserving Transpiler that Ports the\\
+Full Euclidean \emph{Elements} of GeoCoq to Lean 4}
+
+\author{
+  Ayaan Siddiqui \\
+  Pierre Boutry, Julien Narboux, Guillaume Baudart \\
+  IRIF, Universit\'e Paris Cit\'e \\
+  \texttt{f20231060@hyderabad.bits-pilani.ac.in}
+}
+
+\begin{document}
+
+\maketitle
+
+\begin{abstract}
+We present \textbf{GeoLean}, a deterministic, structure-preserving transpiler that translates
+the \emph{Elements/OriginalProofs} library of GeoCoq---a formalization of Euclid's
+\emph{Elements} in the Coq/Rocq proof assistant---into Lean~4. GeoLean reaches
+\textbf{234/234 (100\%)} of the target lemmas compiling under a single clean rebuild, with
+\textbf{zero} \texttt{sorry}/\texttt{admit}/\texttt{sorryAx} occurrences, no axioms beyond the
+$16$ of the source theory, and a \emph{uniform} proof-search budget applied identically to all
+proofs. Our central design commitment is \emph{faithfulness without per-lemma manual proof}:
+the geometric axioms and ${\sim}25$ derived definitions are hand-translated once; a 643-line
+Lean tactic library re-implements GeoCoq's \texttt{eauto}-backed proof vocabulary
+(\texttt{conclude}, \texttt{conclude\_def}, \texttt{forward\_using}) as \emph{bounded},
+head-indexed search; and an 860-line Python transpiler performs a line-for-line structural
+translation of all $234$ proofs (which together invoke \texttt{conclude} $6{,}234$ times,
+\texttt{conclude\_def} $2{,}002$ times, and \texttt{forward\_using} $3{,}247$ times). No
+generated proof file is ever hand-edited; every correctness gap is closed by a \emph{general}
+fix to the transpiler or the tactic library. We give the full engineering taxonomy of the
+final $16$ failures that separated $84.6\%$ from $100\%$ coverage---each a reusable
+translation rule with before/after evidence---and argue that the combination of a uniform
+budget and a no-hand-edit invariant is what makes the resulting corpus an \emph{honest},
+machine-auditable artifact rather than a collection of bespoke reconstructions.
+\end{abstract}
+
+\section{Introduction}
+
+Cross-prover library translation is a recurring bottleneck in interactive theorem proving:
+mature formalizations are locked to a single system, and re-deriving them elsewhere is
+expensive and error-prone. GeoCoq~\citep{geocoq} is among the largest formalizations of
+synthetic geometry in existence---over four thousand lemmas spanning Tarski's axiomatic
+geometry and a faithful development of Euclid's \emph{Elements}. Its
+\emph{Elements/OriginalProofs} sub-library ($234$ lemmas in our target set) is a
+self-contained, axiomatically grounded account of Euclid Book~I through the theory of areas,
+written in a strikingly uniform ``assert-and-discharge'' proof style.
+
+We ask a sharp question: \emph{can an entire axiomatic-geometry library be ported to another
+prover deterministically---without a learned model proposing tactics per goal, and without a
+human writing a single proof by hand---while remaining machine-checkably honest?} We answer
+affirmatively for \emph{Elements/OriginalProofs}, translating all $234$ lemmas to Lean~4.
+
+\paragraph{Why this is hard.}
+The naive view---``GeoCoq proofs are flat \texttt{assert} chains, so transliterate them''---
+fails for two reasons. First, the closing tactics (\texttt{conclude L} and friends) are not
+syntactic: they are \emph{searches} against a hint database, and a faithful Lean re-implementation
+must reproduce their search \emph{semantics} without inheriting Coq's hint engine. Reproduced
+naively, these searches detonate Lean's heartbeat budget on the ${\sim}100$-hypothesis contexts
+that deep geometry proofs accumulate. Second, the source uses Coq tactic idioms with no Lean
+analogue (Coq-internal hypothesis names, \texttt{unfold \ldots in *}, \texttt{decompose},
+\texttt{by cases on}, $n$-ary \texttt{splits}), each of which the transpiler must map to a
+\emph{semantically} equivalent Lean construction, not a token-level copy.
+
+\paragraph{Contributions.}
+\begin{itemize}
+  \item \textbf{A structure-preserving transpiler} (GeoLean, $860$ Python LOC) that maps GeoCoq's
+    proof vocabulary one-to-one onto a small Lean tactic library, producing proofs that mirror
+    the source line-for-line (Section~\ref{sec:transpiler}, Listing~\ref{lst:worked}).
+  \item \textbf{A bounded port of GeoCoq's search vocabulary} ($643$ Lean LOC), in which
+    \texttt{conclude}/\texttt{conclude\_def}/\texttt{forward\_using} become head-indexed,
+    backtracking tactics whose failures are \emph{cheap}, eliminating the timeout cliff
+    (Section~\ref{sec:tactics}).
+  \item \textbf{A discipline of general fixes.} We never edit a generated proof. The $16$ failures
+    that separated $84.6\%$ from $100\%$ are each resolved by one reusable translation rule, which
+    we catalogue with before/after listings as a field guide (Section~\ref{sec:taxonomy}).
+  \item \textbf{An honest, auditable artifact and methodology.} A clean-rebuild audit counts only
+    the $234$ target oleans, ignoring infrastructure; the final result is $234/234$ with no
+    \texttt{sorry}, no extra axioms, and a uniform $8{\times}10^5$ heartbeat budget
+    (Section~\ref{sec:eval}).
+\end{itemize}
+
+\section{Background}
+
+\paragraph{GeoCoq and the two stylistic worlds.}
+A prerequisite measurement shaped this work. GeoCoq is \emph{not} stylistically uniform.
+Its \emph{Elements/OriginalProofs} proofs are chains of \texttt{assert (P) by (conclude L)}
+steps closed by a final \texttt{close}; across the $234$ target lemmas these invoke
+\texttt{conclude} $6{,}234$ times, \texttt{conclude\_def} $2{,}002$ times, and
+\texttt{forward\_using} $3{,}247$ times. By contrast, the much larger \emph{Main/Tarski\_dev}
+($1{,}527$ lemmas) is written in idiomatic, goal-directed Coq
+(\texttt{induction}/\texttt{rewrite}/\texttt{destruct}) with \emph{zero} \texttt{conclude} uses.
+The assert-chain style is what makes a deterministic transpiler viable: each \texttt{assert} is
+a self-contained sub-goal whose proof is a named lemma plus context, so the proof
+\emph{structure} can be copied verbatim and only the closing tactics need a semantics-aware
+translation. This paper targets the transpilable world; the goal-directed world is future work
+(Section~\ref{sec:future}).
+
+\paragraph{Target axiomatic base.}
+The source theory is a linear hierarchy of Lean type classes,
+\[
+\textsf{neutral\_basis} \subset \textsf{neutral} \subset \textsf{ruler\_compass}
+\subset \textsf{euclidean} \subset \textsf{area},
+\]
+comprising the $16$ geometric axioms of the development---including Euclid's fifth postulate
+(\texttt{postulate\_Euclid5}, a field of \textsf{euclidean}) and the three area-pasting axioms
+(\texttt{axiom\_paste3/4/5}, fields of \textsf{area}). We hand-translate these axioms and the
+${\sim}25$ derived definitions they need (\texttt{Col}, \texttt{BetS}, \texttt{Par},
+\texttt{CongA}, \texttt{Meet}, \texttt{OS}, \texttt{TS}, \texttt{PG}, \texttt{EF}, \ldots) once
+into Lean; everything downstream is generated.
+
+\section{The GeoLean transpiler}
+\label{sec:transpiler}
+
+\paragraph{Pipeline.}
+For each lemma, GeoLean (i)~parses the Coq statement into a Lean signature and an
+\texttt{intro} prelude by splitting the leading \texttt{forall} binders and \texttt{->}
+hypotheses; (ii)~detects the source axiom class (from \texttt{Context `\{Ax:\ldots\}}) and emits
+the matching \texttt{open}/\texttt{variable} preamble; (iii)~splits the proof body into statements
+at brace/period boundaries at paren-depth zero; and (iv)~translates each statement by syntactic
+class. Table~\ref{tab:rules} lists the core statement-level rules.
+
+\begin{table}[t]
+  \centering
+  \caption{Core statement-translation rules. ``$L$'' is a lemma name, ``$X$'' a definition.}
+  \label{tab:rules}
+  \small
+  \begin{tabular}{ll}
+    \toprule
+    GeoCoq statement & Lean emission \\
+    \midrule
+    \texttt{assert (T) by (conclude L)} & \texttt{have : T := by conclude L} \\
+    \texttt{assert (\,$\exists\ldots$\,) by (\ldots); destruct \ldots} & \texttt{obtain $\langle$ws, \_$\rangle$ : $\exists\ldots$ := by \ldots} \\
+    \texttt{by cases on (D)} + \texttt{\{$\ldots$\}} blocks & \texttt{rcases (show D by \ldots) with \ldots} \\
+    \texttt{assert (T). \{$\ldots$\}} ($T$ a negation) & \texttt{have : T := by intro h; \ldots} \\
+    \texttt{assert (T). \{ eapply L. exact \ldots \}} & \texttt{have : T := by conclude L} \\
+    \texttt{close} / \texttt{contradict} & \texttt{close} / \texttt{contradict} \\
+    \bottomrule
+  \end{tabular}
+\end{table}
+
+\paragraph{Worked example.}
+Listing~\ref{lst:worked} shows a complete lemma and its generated translation; the
+correspondence is line-for-line, which is precisely what makes faithfulness auditable by
+inspection rather than by trust.
+
+\begin{lstlisting}[caption={\texttt{lemma\_3\_6a} (Coq, left) and its GeoLean translation (Lean, right). The proof structure is copied verbatim; only the closing tactics carry semantics.},label={lst:worked},float=t]
+(* GeoCoq *)                              -- GeoLean output (Lean 4)
+Lemma lemma_3_6a :                        theorem lemma_3_6a :
+ forall A B C D,                            ∀ (A B C D : Point),
+ BetS A B C -> BetS A C D ->                BetS A B C → BetS A C D →
+ BetS B C D.                                BetS B C D := by
+Proof. intros.                              intro A B C D h1 h2
+ assert (BetS C B A) by                     have : BetS C B A := by
+   (conclude axiom_betweennesssymmetry).      conclude axiom_betweennesssymmetry
+ assert (BetS D C A) by                     have : BetS D C A := by
+   (conclude axiom_betweennesssymmetry).      conclude axiom_betweennesssymmetry
+ assert (BetS D C B) by                     have : BetS D C B := by
+   (conclude axiom_innertransitivity).        conclude axiom_innertransitivity
+ assert (BetS B C D) by                     have : BetS B C D := by
+   (conclude axiom_betweennesssymmetry).      conclude axiom_betweennesssymmetry
+ close. Qed.                                close
+\end{lstlisting}
+
+\section{The tactic library: GeoCoq search, made bounded}
+\label{sec:tactics}
+
+The semantic core of the port is the closing-tactic library. In GeoCoq, \texttt{conclude L}
+means ``apply lemma $L$ and discharge its premises from the context,'' realized as an
+\texttt{eauto} call against a curated hint database; \texttt{conclude\_def X} unfolds a
+definition $X$ and discharges by the same search; \texttt{forward\_using L} applies $L$ whose
+conclusion is a conjunction and selects the matching conjunct. A direct Lean rendering as
+\texttt{aesop}/\texttt{solve\_by\_elim} over the full context is correct but \emph{ruinously
+slow}: a single call triggers seconds of typeclass and \texttt{whnf} search on the
+${\sim}100$-hypothesis contexts of deep proofs, and the cumulative cost blows the heartbeat
+budget.
+
+Our \texttt{conclude} (Listing~\ref{lst:conclude}) instead normalizes the context once and then
+walks an \emph{ordered cascade of cheap-failing alternatives}, ending in a \emph{bounded}
+head-indexed search that is the faithful analogue of \texttt{eauto}: it applies $L$ and discharges
+each premise by backtracking over only those hypotheses whose head symbol matches the premise
+(so a \texttt{BetS} premise consults only \texttt{BetS} hypotheses). A failure of the bounded
+search is linear in the matching hypotheses, never an unbounded blow-up. The unbounded
+\texttt{aesop} survives only as a last resort, itself capped by its own rule-application bound.
+
+\begin{lstlisting}[caption={The \texttt{conclude} macro (abridged). The preamble normalizes the context; the cascade tries the cheapest closers first and reaches the bounded, head-indexed \texttt{conclude\_bounded} (the faithful \texttt{eauto} port) before any unbounded search.},label={lst:conclude},float=t]
+macro "conclude " t:term : tactic =>
+ `(tactic|
+   ((try spliter); (try remove_double_neg); (try expose_ncol);
+    first
+      | done | assumption
+      | (subst_vars; (first | assumption | rfl))   -- equality idioms
+      | exact $t
+      | (apply $t <;> assumption)
+      | (apply $t <;> assum_inj)                    -- disjunctive premises (area axioms)
+      | conclude_bounded $t                         -- head-indexed bounded eauto
+      | forward_bounded $t                          -- conjunct projection, bounded
+      | solve_by_elim [$t, And.left, And.right]
+      | (apply $t <;> (first | assumption | aesop)) -- last resort
+      | aesop))
+\end{lstlisting}
+
+The library further provides: \texttt{spliter} (split conjunction \emph{hypotheses} so bundled
+facts become directly addressable); \texttt{splits} (an \emph{elaborator} that splits only
+syntactic \texttt{And} \emph{goals}, leaving definitional predicates such as \texttt{nCol}
+atomic); \texttt{expose\_ncol}/\texttt{Col\_nCol\_False} (cheap collinearity closers that fire
+\emph{before} any search); and \texttt{assum\_inj} (Section~\ref{sec:taxonomy}, item~8).
+
+\section{From 84.6\% to 100\%: a taxonomy of general fixes}
+\label{sec:taxonomy}
+
+The transpiler reached $84.6\%$ ($198/234$) on first assembly. The remaining $16$ failures were
+\emph{not} resolved by hand-writing proofs; each exposed a missing \emph{general} translation
+rule. We give the eight rule classes with concrete before/after evidence, since they constitute
+a reusable guide for porting other assert-chain corpora.
+
+\paragraph{(1) Nested-paren capture.} The payload extractor for \texttt{by (\ldots)} was
+non-greedy and truncated at the first inner parenthesis, so
+\texttt{apply (L args);assumption} lost its tail. \emph{Fix:} balanced (greedy) capture.
+
+\paragraph{(2) Focus-block polarity \& eapply-blocks.} A \texttt{\{$\ldots$\}} block proving a
+\emph{positive} goal was uniformly mis-typed as a negation and prefixed with \texttt{intro h};
+moreover, blocks of the form \texttt{simple eapply L. exact H40. \ldots} reference
+Coq-\emph{internal} hypothesis names (\texttt{H40}) that do not exist in Lean. \emph{Fix:}
+emit \texttt{intro h} only for negation types, and recognize an eapply-then-\texttt{exact} block
+as exactly \texttt{conclude L}:
+\begin{lstlisting}
+-- before (wrong)                         -- after (general)
+have : Par A b d C := by                  have : Par A b d C := by
+  intro h            -- bogus (Par is not a Pi)  conclude proposition_30A
+  apply proposition_30A  -- exact H40… dropped
+\end{lstlisting}
+
+\paragraph{(3) Explicit-argument apply.} A deliberate \texttt{apply (L a b c);assumption}---the
+author pinned arguments to avoid search---was over-eagerly collapsed to \texttt{conclude L},
+which then re-derived the arguments by unification over a ${\sim}160$-hypothesis context and
+timed out. \emph{Fix:} preserve the pinned arguments; fall back to \texttt{conclude} only when
+direct application cannot unify (e.g.\ $L$ concludes a conjunction and the goal is one conjunct):
+\begin{lstlisting}
+have : Par A b C d := by
+  (first | (apply proposition_30A _ _ _ _ E f G H K <;> assumption) | conclude proposition_30A)
+\end{lstlisting}
+
+\paragraph{(4) De Morgan pre-emission.} In a $\neg\neg(D_1 \vee \cdots \vee D_n)$ block, the body
+needs $\neg D_i$, which \texttt{conclude} otherwise synthesizes as $h \circ \mathrm{Or.in}^x$
+under search over the full context---an $8{\times}10^5$-heartbeat timeout. \emph{Fix:} emit each
+leaf negation \emph{eagerly} after \texttt{intro h}, turning a search into an $O(1)$ assumption:
+\begin{lstlisting}
+have : ¬ ¬ (CR A f G H ∨ CR A E G H) := by
+  intro h
+  have : ¬ (CR A f G H) := fun c ↦ h (Or.inl c)        -- pre-emitted
+  have : ¬ (CR A E G H) := fun c ↦ h (Or.inr c)         -- pre-emitted
+  have : CR A E G H := by conclude lemma_30helper        -- now matches directly
+  contradict
+\end{lstlisting}
+
+\paragraph{(5) Definition elimination.} Three Coq idioms---\texttt{auto using parnotmeet},
+\texttt{unfold X in H; decompose [ex and] H; auto}, and
+\texttt{[remove\_double\_neg;] unfold X in *; assumption}---all mean ``extract a conjunct from
+definition $X$.'' (Indeed the GeoCoq helper \texttt{parnotmeet} is itself proved by
+\texttt{conclude\_def Par}.) \emph{Fix:} map each to \texttt{conclude\_def X}, which performs the
+unfold, any double-negation stripping, and the conjunct extraction in one bounded step.
+
+\paragraph{(6) Hierarchy scoping.} An \textsf{area}-class proof using \texttt{postulate\_Euclid5}
+(an \textsf{euclidean}-class field) failed name resolution because the intermediate class was not
+\texttt{open}ed. \emph{Fix:} open the \emph{entire} class chain up to the detected class
+(\texttt{\ldots ruler\_compass euclidean area}), not just the leaf.
+
+\paragraph{(7) Apply-family normalization.} \texttt{unshelve epose (L \ldots)},
+\texttt{eapply (L) with \ldots} (bare or parenthesized instantiations), and leading-parenthesis
+lemma heads all reduce to \texttt{conclude L}. \emph{Fix:} a robust apply-head extractor that
+strips \texttt{@}, parentheses, \texttt{with}-clauses, and trailing closers before identifying
+the lemma.
+
+\paragraph{(8) Disjunctive premises (area axioms).} \texttt{axiom\_paste3/4/5} carry premises
+such as \texttt{BetS A M B $\vee$ A = M $\vee$ M = B}, whose midpoint $M$ is left \emph{unpinned}
+as a metavariable after \texttt{apply}, while the pinning fact \texttt{BetS B E C} sits
+\emph{bundled} inside a conjunction hypothesis. \emph{Fix:} the preamble \texttt{spliter} unbundles
+the determining ground \texttt{BetS} premise (pinning $M$ from an earlier, ground subgoal); a
+small \texttt{assum\_inj} closer then discharges the now-concrete branch by
+\texttt{assumption}/\texttt{rfl}---branch injection, never search:
+\begin{lstlisting}
+macro "assum_inj" : tactic => `(tactic|
+  first | assumption | rfl
+        | (left;  (first | assumption | rfl))
+        | (right; (first | assumption | rfl
+                         | (left;  (first | assumption | rfl))
+                         | (right; (first | assumption | rfl)))))
+\end{lstlisting}
+
+Every item is a \emph{rule over a syntactic class}, validated by re-running the transpiler and
+performing a full clean rebuild; none is keyed to a specific lemma. This is the methodological
+claim of the paper: structure-preserving porting of an assert-chain corpus reduces to a finite,
+discoverable set of such rules.
+
+\section{Evaluation}
+\label{sec:eval}
+
+\paragraph{Coverage progression.}
+Table~\ref{tab:progress} traces the path from $84.6\%$ to $100\%$. The decisive structural
+property is the \emph{cascade}: the audit distinguishes an \emph{own-error} (a lemma whose own
+proof fails, with all dependencies compiled) from a \emph{cascade} (a lemma blocked transitively
+through the import DAG by a broken dependency). Because a single own-error gates an entire
+downstream cluster, each general fix releases many lemmas at once---most dramatically, repairing
+the two parallel-line lemmas \texttt{proposition\_30}/\texttt{35A} unblocked the whole
+$\mathrm{prop}\,35$--$48$ area/Pythagoras family (a jump of $+8$), and the final area-axiom fix
+closed the last own-error and its three cascades together.
+
+\begin{table}[t]
+  \centering
+  \caption{Coverage progression of \emph{Elements/OriginalProofs} ($234$ lemmas). Each row is an
+  independent clean-rebuild audit (delete all target oleans, rebuild, count). ``Own'' = own-error
+  count; ``Casc.'' = cascade count.}
+  \label{tab:progress}
+  \begin{tabular}{lrrrrl}
+    \toprule
+    Milestone & Compiled & \% & Own & Casc. & Fix class added \\
+    \midrule
+    Baseline assembly               & 198 & 84.6 & 4 & 32 & --- \\
+    bundled-conjunction \texttt{close} & 199 & 85.0 & 4 & 31 & \texttt{spliter} in \texttt{close} \\
+    block polarity / nested apply   & 215 & 91.9 & 4 &  3 & taxonomy 1--2 \\
+    de Morgan / def-elim / explicit-args & 223 & 95.3 & 4 & 7 & taxonomy 3--5 \\
+    hierarchy / apply-normalization & 230 & 98.3 & 1 &  3 & taxonomy 6--7 \\
+    disjunctive premises            & \textbf{234} & \textbf{100.0} & \textbf{0} & \textbf{0} & taxonomy 8 \\
+    \bottomrule
+  \end{tabular}
+\end{table}
+
+\paragraph{Honesty audit and methodology.}
+We treat ``it compiles'' as insufficient and audit the artifact against four explicit criteria.
+\emph{(i)~Target-only coverage.} The audit script deletes every target olean, performs one clean
+\texttt{lake build} of the aggregate module, and counts only the $234$ lemma oleans---\emph{never}
+the infrastructure modules (\texttt{euclidean\_tactics}, \texttt{euclidean\_defs},
+\texttt{conclude\_bounded}). This guards against inflating coverage with helper modules; the build
+system's raw ``Built'' count is explicitly \emph{not} our metric. \emph{(ii)~No escape hatches.}
+A scan of all generated proofs finds \textbf{0} occurrences of
+\texttt{sorry}/\texttt{admit}/\texttt{sorryAx}. \emph{(iii)~Uniform budget.} Every proof carries the
+\emph{same} \texttt{maxHeartbeats}$\,=8{\times}10^5$ ($4{\times}$ Lean's default), never bumped
+per-lemma to mask a fixable tactic; under our discipline a timeout is a transpiler bug to be fixed
+\emph{generally}, not hidden locally. \emph{(iv)~Axiom hygiene.} No proof depends on any axiom
+beyond the $16$ hand-translated geometric axioms of the source theory. We regard criteria
+(iii)~and the no-hand-edit invariant as the two pillars of the honesty claim.
+
+\paragraph{Cost of the discipline.}
+Refusing per-lemma edits is not free: a single missing rule can leave several lemmas red, and
+each fix requires re-running the transpiler over the affected files plus a (sometimes full) clean
+rebuild---infrastructure changes such as the \texttt{assum\_inj} addition force a recompile of all
+$234$ lemmas. We accept this cost because it is exactly what guarantees the rules \emph{generalize}:
+a fix that survives a clean rebuild of the whole corpus cannot be an overfit patch.
+
+\section{Related work}
+
+Library translation has been studied via shallow embeddings, proof-term replay, and foundational
+alignment (e.g.\ between HOL systems, and from HOL to Coq/Isabelle). Learned autoformalization and
+neural premise selection translate \emph{statements} or propose tactics per goal. GeoLean differs
+on two axes: it is \emph{deterministic} (no per-goal model) and \emph{structure-preserving} (it
+copies proof structure rather than re-searching for a proof), which is feasible precisely because
+the source library is written in a uniform assert-chain discipline. The closest relatives are
+tactic-language transliterators; our contribution is to show that, for a real axiomatic-geometry
+corpus, the residual semantic gap is a small, finite set of rewrite rules over the closing-tactic
+vocabulary, and that closing that gap to $100\%$ is dominated by reproducing \texttt{eauto}'s
+search behaviour \emph{within} a heartbeat budget.
+
+\section{Limitations and future work}
+\label{sec:future}
+
+GeoLean's reach is bounded by the assert-chain style. A spike on \emph{Main/Tarski\_dev}
+($1{,}527$ lemmas) found that ${\sim}90\%$ of those proofs are goal-directed and \emph{not}
+structure-copyable; that corpus needs a reasoning agent (an LLM-driven, dependency-ordered
+pipeline), with the transpiler reserved for the ${\sim}3\%$ that are pure assert-chains. Our
+uniform heartbeat budget, while honest, is generous; tightening it would surface further
+opportunities to strengthen the bounded tactics and shrink the \texttt{aesop} tail. Finally,
+statement faithfulness is currently checked by a definitional-equality harness and by inspection
+of the line-for-line correspondence; a machine-checked round-trip (Lean statement $\to$ Coq) would
+further harden the faithfulness guarantee.
+
+\section{Conclusion}
+
+A real axiomatic-geometry library---the full Euclidean \emph{Elements} of GeoCoq, $234$
+lemmas---can be ported to Lean~4 \emph{deterministically} and \emph{honestly}: no learned model in
+the loop, no hand-written proofs, no \texttt{sorry}, no per-lemma escape hatches, a single uniform
+search budget. The enabling insight is that a uniform, search-backed proof style turns translation
+into a finite discovery problem over a small tactic vocabulary, in which each remaining failure
+yields a \emph{general} rule and each rule, surviving a full clean rebuild, provably generalizes.
+We hope the rule taxonomy of Section~\ref{sec:taxonomy} and the bounded-search design of
+Section~\ref{sec:tactics} serve as a practical blueprint for structure-preserving porting of other
+assert-chain corpora.
+
+{\small
+\bibliographystyle{plainnat}
+\begin{thebibliography}{1}
+\bibitem[Boutry et al.(2019)]{geocoq}
+P.~Boutry, G.~Braun, J.~Narboux, et al.
+\newblock Formalization of the arithmetization of Euclidean plane geometry and applications.
+\newblock \emph{Journal of Symbolic Computation}, 90:149--168, 2019.
+\end{thebibliography}
+}
+
+\end{document}

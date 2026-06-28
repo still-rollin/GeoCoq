@@ -11,6 +11,7 @@ import GeocoqTranslate.Elements.OriginalProofs.Lemmas.lemma_supplements
 import GeocoqTranslate.Elements.OriginalProofs.Lemmas.lemma_equalanglesflip
 import GeocoqTranslate.Elements.OriginalProofs.Lemmas.lemma_planeseparation
 import GeocoqTranslate.Elements.OriginalProofs.Lemmas.lemma_collinear5
+import GeocoqTranslate.Elements.OriginalProofs.proposition_16
 import GeocoqTranslate.Elements.OriginalProofs.Lemmas.lemma_angleorderrespectscongruence
 import GeocoqTranslate.Elements.OriginalProofs.Lemmas.lemma_equalanglesreflexive
 import GeocoqTranslate.Elements.OriginalProofs.Lemmas.lemma_equalangleshelper
@@ -29,6 +30,7 @@ namespace GeocoqTranslate.Elements
 open euclidean_neutral_basis euclidean_neutral euclidean_neutral_ruler_compass
 variable {Point : Type} [euclidean_neutral_ruler_compass Point]
 
+set_option maxHeartbeats 800000 in
 theorem proposition_27 :
     ∀ (A B C D E F : Point), BetS A E B → BetS C F D → CongA A E F E F D → TS A E F D → Par A B C D := by
   intro A B C D E F h1 h2 h3 h4
@@ -90,7 +92,7 @@ theorem proposition_27 :
           have : F = F := by conclude cn_equalityreflexive
           have : Col E F F := by conclude_def Col
           have : BetS D F C := by conclude axiom_betweennesssymmetry
-          have : TS D E F C := by conclude_def TS
+          have : TS D E F C := by (try (have : nCol E F D := nCol_notCol _ _ _ (by assumption))); conclude_def TS
           have : TS G E F C := by conclude lemma_planeseparation
           obtain ⟨R, _, _, _⟩ : ∃ R, (BetS G R C ∧ Col E F R ∧ nCol E F G) := by conclude_def TS
           have : ¬ F ≠ R := by
@@ -123,7 +125,7 @@ theorem proposition_27 :
               intro h
               have : Col E F G := by forward_using lemma_collinearorder
               contradict
-          have : Triangle E G F := by conclude_def Triangle
+          have : Triangle E G F := by (try (have : nCol E G F := nCol_notCol _ _ _ (by assumption))); conclude_def Triangle
           have : LtA G E F E F C := by conclude proposition_16
           have : LtA G E F F E B := by conclude lemma_angleorderrespectscongruence
           have : F = F := by conclude cn_equalityreflexive
@@ -152,7 +154,7 @@ theorem proposition_27 :
           have : BetS B E A := by conclude axiom_betweennesssymmetry
           have : (BetS E A G ∨ G = A ∨ BetS E G A) := by conclude lemma_ray1
           have : BetS B E G := by
-              rcases (show BetS E A G ∨ G = A ∨ BetS E G A by first | assumption | exact Classical.em _ | tauto | aesop) with c1 | c2 | c3
+              rcases (show BetS E A G ∨ G = A ∨ BetS E G A by first | assumption | exact nCol_or_Col _ _ _ | exact Col_or_nCol _ _ _ | exact Classical.em _ | tauto | aesop) with c1 | c2 | c3
               · have : BetS B E G := by conclude lemma_3_7b
                 close
               · have : BetS B E G := by conclude cn_equalitysub
@@ -175,7 +177,7 @@ theorem proposition_27 :
               have : Col E A F := by conclude lemma_collinear4
               have : Col E F A := by forward_using lemma_collinearorder
               contradict
-          have : OS A G E F := by conclude_def OS
+          have : OS A G E F := by (try (have : nCol E F A := nCol_notCol _ _ _ (by assumption))); (try (have : nCol E F G := nCol_notCol _ _ _ (by assumption))); conclude_def OS
           have : OS G A E F := by forward_using lemma_samesidesymmetric
           have : TS G E F D := by conclude lemma_planeseparation
           obtain ⟨P, _, _, _⟩ : ∃ P, (BetS G P D ∧ Col E F P ∧ nCol E F G) := by conclude_def TS
@@ -210,14 +212,14 @@ theorem proposition_27 :
               intro h
               have : Col F E G := by forward_using lemma_collinearorder
               contradict
-          have : Triangle E G F := by conclude_def Triangle
+          have : Triangle E G F := by (try (have : nCol E G F := nCol_notCol _ _ _ (by assumption))); conclude_def Triangle
           have : LtA G E F E F D := by conclude proposition_16
           have : LtA E F D E F D := by conclude lemma_angleorderrespectscongruence2
           have : ¬ LtA E F D E F D := by conclude lemma_angletrichotomy
           contradict
       have : (A = E ∨ A = G ∨ E = G ∨ BetS E A G ∨ BetS A E G ∨ BetS A G E) := by conclude_def Col
       have : ¬ Meet A B C D := by
-          rcases (show A = E ∨ A = G ∨ E = G ∨ BetS E A G ∨ BetS A E G ∨ BetS A G E by first | assumption | exact Classical.em _ | tauto | aesop) with c1 | c2 | c3 | c4 | c5 | c6
+          rcases (show A = E ∨ A = G ∨ E = G ∨ BetS E A G ∨ BetS A E G ∨ BetS A G E by first | assumption | exact nCol_or_Col _ _ _ | exact Col_or_nCol _ _ _ | exact Classical.em _ | tauto | aesop) with c1 | c2 | c3 | c4 | c5 | c6
           · have : ¬ Meet A B C D := by
                 intro h
                 contradict
@@ -242,7 +244,7 @@ theorem proposition_27 :
                 intro h
                 have : Col E F A := by forward_using lemma_collinearorder
                 contradict
-            have : Triangle E A F := by conclude_def Triangle
+            have : Triangle E A F := by (try (have : nCol E A F := nCol_notCol _ _ _ (by assumption))); conclude_def Triangle
             have : LtA A E F E F D := by conclude proposition_16
             have : CongA E F D A E F := by conclude lemma_equalanglessymmetric
             have : LtA E F D E F D := by conclude lemma_angleorderrespectscongruence2

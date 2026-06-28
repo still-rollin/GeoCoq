@@ -9,6 +9,7 @@ namespace GeocoqTranslate.Elements
 open euclidean_neutral_basis euclidean_neutral euclidean_neutral_ruler_compass
 variable {Point : Type} [euclidean_neutral_ruler_compass Point]
 
+set_option maxHeartbeats 800000 in
 theorem lemma_collinearitypreserved :
     ∀ (A B C a b c : Point), Col A B C → Cong A B a b → Cong A C a c → Cong B C b c → Col a b c := by
   intro A B C a b c h1 h2 h3 h4
@@ -23,7 +24,7 @@ theorem lemma_collinearitypreserved :
   have : Cong B A b a := by conclude lemma_congruencetransitive
   have : (A = B ∨ A = C ∨ B = C ∨ BetS B A C ∨ BetS A B C ∨ BetS A C B) := by conclude_def Col
   have : Col a b c := by
-      rcases (show A = B ∨ A = C ∨ B = C ∨ BetS B A C ∨ BetS A B C ∨ BetS A C B by first | assumption | exact Classical.em _ | tauto | aesop) with c1 | c2 | c3 | c4 | c5 | c6
+      rcases (show A = B ∨ A = C ∨ B = C ∨ BetS B A C ∨ BetS A B C ∨ BetS A C B by first | assumption | exact nCol_or_Col _ _ _ | exact Col_or_nCol _ _ _ | exact Classical.em _ | tauto | aesop) with c1 | c2 | c3 | c4 | c5 | c6
       · have : Cong A A a b := by conclude cn_equalitysub
         have : Cong a b A A := by conclude lemma_congruencesymmetric
         have : ¬ a ≠ b := by

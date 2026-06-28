@@ -6,6 +6,7 @@ import GeocoqTranslate.Elements.OriginalProofs.Lemmas.lemma_layoff
 import GeocoqTranslate.Elements.OriginalProofs.Lemmas.lemma_equalanglessymmetric
 import GeocoqTranslate.Elements.OriginalProofs.Lemmas.lemma_equalanglestransitive
 import GeocoqTranslate.Elements.OriginalProofs.Lemmas.lemma_equalangleshelper
+import GeocoqTranslate.Elements.OriginalProofs.proposition_04
 import GeocoqTranslate.Elements.OriginalProofs.Lemmas.lemma_equalanglesflip
 import GeocoqTranslate.Elements.OriginalProofs.Lemmas.lemma_ray4
 import GeocoqTranslate.Elements.OriginalProofs.Lemmas.lemma_rayimpliescollinear
@@ -16,6 +17,7 @@ import GeocoqTranslate.Elements.OriginalProofs.Lemmas.lemma_oppositesidesymmetri
 import GeocoqTranslate.Elements.OriginalProofs.Lemmas.lemma_ray5
 import GeocoqTranslate.Elements.OriginalProofs.Lemmas.lemma_9_5
 import GeocoqTranslate.Elements.OriginalProofs.Lemmas.lemma_raystrict
+import GeocoqTranslate.Elements.OriginalProofs.proposition_14
 import GeocoqTranslate.Elements.OriginalProofs.Lemmas.lemma_congruencesymmetric
 import GeocoqTranslate.Elements.OriginalProofs.Lemmas.lemma_NCdistinct
 import GeocoqTranslate.Elements.OriginalProofs.Lemmas.lemma_collinearorder
@@ -26,6 +28,7 @@ namespace GeocoqTranslate.Elements
 open euclidean_neutral_basis euclidean_neutral euclidean_neutral_ruler_compass
 variable {Point : Type} [euclidean_neutral_ruler_compass Point]
 
+set_option maxHeartbeats 800000 in
 theorem lemma_angleaddition :
     ∀ (A B C D E F P Q R a b c d e f p q r : Point), SumA A B C D E F P Q R → CongA A B C a b c → CongA D E F d e f → SumA a b c d e f p q r → CongA P Q R p q r := by
   intro A B C D E F P Q R a b c d e f p q r h1 h2 h3 h4
@@ -73,7 +76,7 @@ theorem lemma_angleaddition :
   have : p ≠ q := by conclude lemma_inequalitysymmetric
   have : nCol p q H := by conclude lemma_NChelper
   have : nCol q H p := by forward_using lemma_NCorder
-  have : TS p q H r := by conclude_def TS
+  have : TS p q H r := by (try (have : nCol q H p := nCol_notCol _ _ _ (by assumption))); conclude_def TS
   have : TS r q H p := by conclude lemma_oppositesidesymmetric
   have : Col q H q := by conclude_def Col
   have : Out q K r := by conclude lemma_ray5
@@ -101,7 +104,7 @@ theorem lemma_angleaddition :
   have : Cong Q P q G := by conclude lemma_congruencesymmetric
   have : Cong Q R q K := by conclude lemma_congruencesymmetric
   have : Cong P R G K := by conclude lemma_congruencesymmetric
-  have : CongA P Q R p q r := by conclude_def CongA
+  have : CongA P Q R p q r := by (try (have : nCol P Q R := nCol_notCol _ _ _ (by assumption))); conclude_def CongA
   close
 
 end GeocoqTranslate.Elements

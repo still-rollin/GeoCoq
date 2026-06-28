@@ -7,7 +7,9 @@ import GeocoqTranslate.Elements.OriginalProofs.Lemmas.lemma_ray4
 import GeocoqTranslate.Elements.OriginalProofs.Lemmas.lemma_equalangleshelper
 import GeocoqTranslate.Elements.OriginalProofs.Lemmas.lemma_equalanglessymmetric
 import GeocoqTranslate.Elements.OriginalProofs.Lemmas.lemma_equalanglestransitive
+import GeocoqTranslate.Elements.OriginalProofs.proposition_04
 import GeocoqTranslate.Elements.OriginalProofs.Lemmas.lemma_collinear4
+import GeocoqTranslate.Elements.OriginalProofs.proposition_16
 import GeocoqTranslate.Elements.OriginalProofs.Lemmas.lemma_angleorderrespectscongruence2
 import GeocoqTranslate.Elements.OriginalProofs.Lemmas.lemma_ABCequalsCBA
 import GeocoqTranslate.Elements.OriginalProofs.Lemmas.lemma_angletrichotomy
@@ -20,6 +22,7 @@ namespace GeocoqTranslate.Elements
 open euclidean_neutral_basis euclidean_neutral euclidean_neutral_ruler_compass
 variable {Point : Type} [euclidean_neutral_ruler_compass Point]
 
+set_option maxHeartbeats 800000 in
 theorem lemma_26helper :
     ∀ (A B C D E F : Point), Triangle A B C → CongA A B C D E F → CongA B C A E F D → Cong A B D E → ¬ Lt E F B C := by
   intro A B C D E F h1 h2 h3 h4
@@ -53,7 +56,7 @@ theorem lemma_26helper :
           have : Col C A B := by conclude lemma_collinear4
           have : Col A B C := by forward_using lemma_collinearorder
           contradict
-      have : Triangle A C H := by conclude_def Triangle
+      have : Triangle A C H := by (try (have : nCol A C H := nCol_notCol _ _ _ (by assumption))); conclude_def Triangle
       have : BetS C H B := by conclude axiom_betweennesssymmetry
       have : LtA H C A A H B := by conclude proposition_16
       have : Out C B H := by conclude lemma_ray4

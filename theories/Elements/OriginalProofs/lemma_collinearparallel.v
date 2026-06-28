@@ -1,7 +1,7 @@
 Require Export GeoCoq.Elements.OriginalProofs.lemma_collinear4.
 
 Section Euclid.
-
+(* AYAAN_TEST_123 *)
 Context `{Ax:euclidean_neutral_ruler_compass}.
 
 Lemma lemma_collinearparallel : 

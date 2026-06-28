@@ -10,6 +10,7 @@ namespace GeocoqTranslate.Elements
 open euclidean_neutral_basis euclidean_neutral euclidean_neutral_ruler_compass
 variable {Point : Type} [euclidean_neutral_ruler_compass Point]
 
+set_option maxHeartbeats 800000 in
 theorem lemma_8_3 :
     ∀ (A B C D : Point), Per A B C → Out B C D → Per A B D := by
   intro A B C D h1 h2
@@ -20,7 +21,7 @@ theorem lemma_8_3 :
   have : Cong C A C E := by forward_using lemma_congruenceflip
   have : (BetS B D C ∨ C = D ∨ BetS B C D) := by conclude lemma_ray1
   have : Per A B D := by
-      rcases (show BetS B D C ∨ C = D ∨ BetS B C D by first | assumption | exact Classical.em _ | tauto | aesop) with c1 | c2 | c3
+      rcases (show BetS B D C ∨ C = D ∨ BetS B C D by first | assumption | exact nCol_or_Col _ _ _ | exact Col_or_nCol _ _ _ | exact Classical.em _ | tauto | aesop) with c1 | c2 | c3
       · have : Cong B D B D := by conclude cn_congruencereflexive
         have : Cong D C D C := by conclude cn_congruencereflexive
         have : Cong D A D E := by conclude lemma_interior5

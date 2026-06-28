@@ -21,6 +21,7 @@ namespace GeocoqTranslate.Elements
 open euclidean_neutral_basis euclidean_neutral euclidean_neutral_ruler_compass
 variable {Point : Type} [euclidean_neutral_ruler_compass Point]
 
+set_option maxHeartbeats 800000 in
 theorem lemma_lessthanadditive :
     ∀ (A B C D E F : Point), Lt A B C D → BetS A B E → BetS C D F → Cong B E D F → Lt A E C F := by
   intro A B C D E F h1 h2 h3 h4

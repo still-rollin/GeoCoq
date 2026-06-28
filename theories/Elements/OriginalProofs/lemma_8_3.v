@@ -40,7 +40,9 @@ by cases on (BetS B D C \/ eq C D \/ BetS B C D).
  close.
  }
 (** cases *)
+
 close.
+
 Qed.
 
 End Euclid.

@@ -10,6 +10,7 @@ import GeocoqTranslate.Elements.OriginalProofs.Lemmas.lemma_equalanglesNC
 import GeocoqTranslate.Elements.OriginalProofs.Lemmas.lemma_ABCequalsCBA
 import GeocoqTranslate.Elements.OriginalProofs.Lemmas.lemma_oppositesidesymmetric
 import GeocoqTranslate.Elements.OriginalProofs.Lemmas.lemma_planeseparation
+import GeocoqTranslate.Elements.OriginalProofs.proposition_27
 import GeocoqTranslate.Elements.OriginalProofs.Lemmas.lemma_samesidesymmetric
 import GeocoqTranslate.Elements.OriginalProofs.Lemmas.lemma_angledistinct
 import GeocoqTranslate.Elements.OriginalProofs.Lemmas.lemma_collinearorder
@@ -18,6 +19,7 @@ namespace GeocoqTranslate.Elements
 open euclidean_neutral_basis euclidean_neutral euclidean_neutral_ruler_compass
 variable {Point : Type} [euclidean_neutral_ruler_compass Point]
 
+set_option maxHeartbeats 800000 in
 theorem proposition_28B :
     ∀ (A B C D G H : Point), BetS A G B → BetS C H D → RT B G H G H D → OS B D G H → Par A B C D := by
   intro A B C D G H h1 h2 h3 h4
@@ -44,7 +46,7 @@ theorem proposition_28B :
       intro h
       have : Col A G H := by forward_using lemma_collinearorder
       contradict
-  have : TS A G H B := by conclude_def TS
+  have : TS A G H B := by (try (have : nCol G H A := nCol_notCol _ _ _ (by assumption))); conclude_def TS
   have : TS B G H A := by conclude lemma_oppositesidesymmetric
   have : TS D G H A := by conclude lemma_planeseparation
   have : TS A G H D := by conclude lemma_oppositesidesymmetric

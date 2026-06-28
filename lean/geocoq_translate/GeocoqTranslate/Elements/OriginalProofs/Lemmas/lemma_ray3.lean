@@ -9,6 +9,7 @@ namespace GeocoqTranslate.Elements
 open euclidean_neutral_basis euclidean_neutral euclidean_neutral_ruler_compass
 variable {Point : Type} [euclidean_neutral_ruler_compass Point]
 
+set_option maxHeartbeats 800000 in
 theorem lemma_ray3 :
     ∀ (B C D V : Point), Out B C D → Out B C V → Out B D V := by
   intro B C D V h1 h2

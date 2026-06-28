@@ -15,14 +15,15 @@ namespace GeocoqTranslate.Elements
 open euclidean_neutral_basis euclidean_neutral euclidean_neutral_ruler_compass
 variable {Point : Type} [euclidean_neutral_ruler_compass Point]
 
+set_option maxHeartbeats 800000 in
 theorem lemma_9_5 :
     ∀ (A B C P Q R : Point), TS P A B C → Out R Q P → Col A B R → TS Q A B C := by
   intro A B C P Q R h1 h2 h3
   have : (BetS R P Q ∨ Q = P ∨ BetS R Q P) := by conclude lemma_ray1
   have : TS Q A B C := by
-      rcases (show nCol C P R ∨ Col C P R by first | assumption | exact Classical.em _ | tauto | aesop) with c1 | c2
+      rcases (show nCol C P R ∨ Col C P R by first | assumption | exact nCol_or_Col _ _ _ | exact Col_or_nCol _ _ _ | exact Classical.em _ | tauto | aesop) with c1 | c2
       · have : TS Q A B C := by
-            rcases (show BetS R P Q ∨ Q = P ∨ BetS R Q P by first | assumption | exact Classical.em _ | tauto | aesop) with c1 | c2 | c3
+            rcases (show BetS R P Q ∨ Q = P ∨ BetS R Q P by first | assumption | exact nCol_or_Col _ _ _ | exact Col_or_nCol _ _ _ | exact Classical.em _ | tauto | aesop) with c1 | c2 | c3
             · have : ¬ Col R Q C := by
                   intro h
                   have : Col Q R C := by forward_using lemma_collinearorder
@@ -79,7 +80,7 @@ theorem lemma_9_5 :
         have : BetS P R C := by conclude cn_equalitysub
         have : BetS C R P := by conclude axiom_betweennesssymmetry
         have : BetS C R Q := by
-            rcases (show BetS R P Q ∨ Q = P ∨ BetS R Q P by first | assumption | exact Classical.em _ | tauto | aesop) with c1 | c2 | c3
+            rcases (show BetS R P Q ∨ Q = P ∨ BetS R Q P by first | assumption | exact nCol_or_Col _ _ _ | exact Col_or_nCol _ _ _ | exact Classical.em _ | tauto | aesop) with c1 | c2 | c3
             · have : BetS C R Q := by conclude lemma_3_7b
               close
             · have : BetS C R Q := by conclude cn_equalitysub
@@ -116,7 +117,7 @@ theorem lemma_9_5 :
             have : Col A P B := by conclude lemma_collinear4
             have : Col A B P := by forward_using lemma_collinearorder
             contradict
-        have : TS Q A B C := by conclude_def TS
+        have : TS Q A B C := by (try (have : nCol A B Q := nCol_notCol _ _ _ (by assumption))); conclude_def TS
         close
   close
 

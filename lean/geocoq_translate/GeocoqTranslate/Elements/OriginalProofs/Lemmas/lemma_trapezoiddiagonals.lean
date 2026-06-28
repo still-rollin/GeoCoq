@@ -12,6 +12,7 @@ namespace GeocoqTranslate.Elements
 open euclidean_neutral_basis euclidean_neutral euclidean_neutral_ruler_compass euclidean_euclidean
 variable {Point : Type} [euclidean_euclidean Point]
 
+set_option maxHeartbeats 800000 in
 theorem lemma_trapezoiddiagonals :
     ∀ (A B C D E : Point), PG A B C D → BetS A E D → ∃ X, BetS B X D ∧ BetS C X E := by
   intro A B C D E h1 h2

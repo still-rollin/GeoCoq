@@ -10,6 +10,7 @@ import GeocoqTranslate.Elements.OriginalProofs.Lemmas.lemma_equalanglesreflexive
 import GeocoqTranslate.Elements.OriginalProofs.Lemmas.lemma_equalangleshelper
 import GeocoqTranslate.Elements.OriginalProofs.Lemmas.lemma_equalanglestransitive
 import GeocoqTranslate.Elements.OriginalProofs.Lemmas.lemma_ray4
+import GeocoqTranslate.Elements.OriginalProofs.proposition_04
 import GeocoqTranslate.Elements.OriginalProofs.Lemmas.lemma_angleorderrespectscongruence
 import GeocoqTranslate.Elements.OriginalProofs.Lemmas.lemma_ray5
 import GeocoqTranslate.Elements.OriginalProofs.Lemmas.lemma_ray2
@@ -24,6 +25,7 @@ namespace GeocoqTranslate.Elements
 open euclidean_neutral_basis euclidean_neutral euclidean_neutral_ruler_compass
 variable {Point : Type} [euclidean_neutral_ruler_compass Point]
 
+set_option maxHeartbeats 800000 in
 theorem lemma_angleordertransitive :
     ∀ (A B C D E F P Q R : Point), LtA A B C D E F → LtA D E F P Q R → LtA A B C P Q R := by
   intro A B C D E F P Q R h1 h2
@@ -46,8 +48,8 @@ theorem lemma_angleordertransitive :
   have : CongA G E J U Q W := by conclude lemma_equalangleshelper
   have : nCol G E J := by conclude lemma_equalanglesNC
   have : nCol U Q W := by conclude lemma_equalanglesNC
-  have : Triangle G E J := by conclude_def Triangle
-  have : Triangle U Q W := by conclude_def Triangle
+  have : Triangle G E J := by (try (have : nCol G E J := nCol_notCol _ _ _ (by assumption))); conclude_def Triangle
+  have : Triangle U Q W := by (try (have : nCol U Q W := nCol_notCol _ _ _ (by assumption))); conclude_def Triangle
   have : Cong G J U W := by conclude proposition_04
   have : W = W := by conclude cn_equalityreflexive
   have : CongA D E F U Q W := by conclude lemma_equalangleshelper
@@ -62,7 +64,7 @@ theorem lemma_angleordertransitive :
   have : CongA A B C P Q H := by conclude lemma_equalangleshelper
   have : CongA D E F P Q T := by conclude lemma_equalangleshelper
   have : nCol P Q T := by conclude lemma_equalanglesNC
-  have : Triangle P Q T := by conclude_def Triangle
+  have : Triangle P Q T := by (try (have : nCol P Q T := nCol_notCol _ _ _ (by assumption))); conclude_def Triangle
   have : Q ≠ P := by conclude lemma_ray2
   have : Out Q T W := by conclude lemma_ray5
   have : ¬ Col S Q T := by
@@ -80,7 +82,7 @@ theorem lemma_angleordertransitive :
       have : Col Q T P := by conclude lemma_collinear4
       have : Col P Q T := by forward_using lemma_collinearorder
       contradict
-  have : Triangle S Q T := by conclude_def Triangle
+  have : Triangle S Q T := by (try (have : nCol S Q T := nCol_notCol _ _ _ (by assumption))); conclude_def Triangle
   have : Out Q S U := by conclude lemma_ray5
   obtain ⟨K, _, _⟩ : ∃ K, (Out Q H K ∧ BetS U K W) := by conclude lemma_crossbar
   have : BetS U K V := by conclude lemma_3_6b

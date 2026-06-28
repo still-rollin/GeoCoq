@@ -6,6 +6,7 @@ import GeocoqTranslate.Elements.OriginalProofs.Lemmas.lemma_congruencesymmetric
 import GeocoqTranslate.Elements.OriginalProofs.Lemmas.lemma_congruencetransitive
 import GeocoqTranslate.Elements.OriginalProofs.Lemmas.lemma_inequalitysymmetric
 import GeocoqTranslate.Elements.OriginalProofs.Lemmas.lemma_collinear4
+import GeocoqTranslate.Elements.OriginalProofs.proposition_35A
 import GeocoqTranslate.Elements.OriginalProofs.Lemmas.lemma_parallelPasch
 import GeocoqTranslate.Elements.OriginalProofs.Lemmas.lemma_NChelper
 import GeocoqTranslate.Elements.OriginalProofs.Lemmas.lemma_oppositesidesymmetric
@@ -21,6 +22,7 @@ import GeocoqTranslate.Elements.OriginalProofs.Lemmas.lemma_lessthancongruence2
 import GeocoqTranslate.Elements.OriginalProofs.Lemmas.lemma_3_6a
 import GeocoqTranslate.Elements.OriginalProofs.Lemmas.lemma_lessthantransitive
 import GeocoqTranslate.Elements.OriginalProofs.Lemmas.lemma_parallelflip
+import GeocoqTranslate.Elements.OriginalProofs.proposition_34
 import GeocoqTranslate.Elements.OriginalProofs.Lemmas.lemma_collinearorder
 import GeocoqTranslate.Elements.OriginalProofs.Lemmas.lemma_parallelNC
 import GeocoqTranslate.Elements.OriginalProofs.Lemmas.lemma_betweennotequal
@@ -32,6 +34,7 @@ namespace GeocoqTranslate.Elements
 open euclidean_neutral_basis euclidean_neutral euclidean_neutral_ruler_compass area
 variable {Point : Type} [area Point]
 
+set_option maxHeartbeats 800000 in
 theorem proposition_35 :
     ∀ (A B C D E F : Point), PG A B C D → PG E B C F → Col A D E → Col A D F → EF A B C D E B C F := by
   intro A B C D E F h1 h2 h3 h4
@@ -71,7 +74,7 @@ theorem proposition_35 :
           have : D ≠ E := by forward_using lemma_betweennotequal
           have : nCol D E B := by conclude lemma_NChelper
           have : nCol B E D := by forward_using lemma_NCorder
-          have : TS D B E C := by conclude_def TS
+          have : TS D B E C := by (try (have : nCol B E D := nCol_notCol _ _ _ (by assumption))); conclude_def TS
           have : TS C B E D := by conclude lemma_oppositesidesymmetric
           have : Par F C B E := by forward_using lemma_parallelflip
           have : Par B E F C := by conclude lemma_parallelsymmetric
@@ -132,7 +135,7 @@ theorem proposition_35 :
           have : A ≠ F := by forward_using lemma_betweennotequal
           have : nCol A F C := by conclude lemma_NChelper
           have : nCol C F A := by forward_using lemma_NCorder
-          have : TS A C F B := by conclude_def TS
+          have : TS A C F B := by (try (have : nCol C F A := nCol_notCol _ _ _ (by assumption))); conclude_def TS
           have : TS B C F A := by conclude lemma_oppositesidesymmetric
           have : Par E B C F := by forward_using lemma_parallelflip
           have : Par C F E B := by conclude lemma_parallelsymmetric
@@ -166,7 +169,7 @@ theorem proposition_35 :
           intro h
           have : (F = D ∨ F = E ∨ D = E ∨ BetS D A E ∨ BetS A D E ∨ BetS A E D) := by conclude cn_equalitysub
           have : A ≠ F := by
-              rcases (show F = D ∨ F = E ∨ D = E ∨ BetS D A E ∨ BetS A D E ∨ BetS A E D by first | assumption | exact Classical.em _ | tauto | aesop) with c1 | c2 | c3 | c4 | c5 | c6
+              rcases (show F = D ∨ F = E ∨ D = E ∨ BetS D A E ∨ BetS A D E ∨ BetS A E D by first | assumption | exact nCol_or_Col _ _ _ | exact Col_or_nCol _ _ _ | exact Classical.em _ | tauto | aesop) with c1 | c2 | c3 | c4 | c5 | c6
               · have : A = D := by conclude cn_equalitysub
                 have : ¬ A = F := by
                     intro h
@@ -221,7 +224,7 @@ theorem proposition_35 :
           intro h
           have : (A = F ∨ A = E ∨ F = E ∨ BetS D A E ∨ BetS A D E ∨ BetS A E D) := by conclude cn_equalitysub
           have : D ≠ F := by
-              rcases (show A = F ∨ A = E ∨ F = E ∨ BetS D A E ∨ BetS A D E ∨ BetS A E D by first | assumption | exact Classical.em _ | tauto | aesop) with c1 | c2 | c3 | c4 | c5 | c6
+              rcases (show A = F ∨ A = E ∨ F = E ∨ BetS D A E ∨ BetS A D E ∨ BetS A E D by first | assumption | exact nCol_or_Col _ _ _ | exact Col_or_nCol _ _ _ | exact Classical.em _ | tauto | aesop) with c1 | c2 | c3 | c4 | c5 | c6
               · have : ¬ D = F := by
                     intro h
                     contradict
@@ -275,7 +278,7 @@ theorem proposition_35 :
                 close
           contradict
       have : BetS A F D := by
-          rcases (show A = D ∨ A = F ∨ D = F ∨ BetS D A F ∨ BetS A D F ∨ BetS A F D by first | assumption | exact Classical.em _ | tauto | aesop) with c1 | c2 | c3 | c4 | c5 | c6
+          rcases (show A = D ∨ A = F ∨ D = F ∨ BetS D A F ∨ BetS A D F ∨ BetS A F D by first | assumption | exact nCol_or_Col _ _ _ | exact Col_or_nCol _ _ _ | exact Classical.em _ | tauto | aesop) with c1 | c2 | c3 | c4 | c5 | c6
           · have : ¬ ¬ BetS A F D := by
                 intro h
                 contradict
@@ -298,7 +301,7 @@ theorem proposition_35 :
             close
           · close
       have : BetS A E D := by
-          rcases (show A = D ∨ A = E ∨ D = E ∨ BetS D A E ∨ BetS A D E ∨ BetS A E D by first | assumption | exact Classical.em _ | tauto | aesop) with c1 | c2 | c3 | c4 | c5 | c6
+          rcases (show A = D ∨ A = E ∨ D = E ∨ BetS D A E ∨ BetS A D E ∨ BetS A E D by first | assumption | exact nCol_or_Col _ _ _ | exact Col_or_nCol _ _ _ | exact Classical.em _ | tauto | aesop) with c1 | c2 | c3 | c4 | c5 | c6
           · have : ¬ ¬ BetS A E D := by
                 intro h
                 contradict

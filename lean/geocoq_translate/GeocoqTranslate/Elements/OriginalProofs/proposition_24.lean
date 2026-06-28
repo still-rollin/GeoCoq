@@ -12,17 +12,21 @@ import GeocoqTranslate.Elements.OriginalProofs.Lemmas.lemma_ray4
 import GeocoqTranslate.Elements.OriginalProofs.Lemmas.lemma_equalangleshelper
 import GeocoqTranslate.Elements.OriginalProofs.Lemmas.lemma_equalanglessymmetric
 import GeocoqTranslate.Elements.OriginalProofs.Lemmas.lemma_equalanglesflip
+import GeocoqTranslate.Elements.OriginalProofs.proposition_04
 import GeocoqTranslate.Elements.OriginalProofs.Lemmas.lemma_ray5
 import GeocoqTranslate.Elements.OriginalProofs.Lemmas.lemma_ray2
 import GeocoqTranslate.Elements.OriginalProofs.Lemmas.lemma_crossbar
 import GeocoqTranslate.Elements.OriginalProofs.Lemmas.lemma_ray3
 import GeocoqTranslate.Elements.OriginalProofs.Lemmas.lemma_congruencesymmetric
+import GeocoqTranslate.Elements.OriginalProofs.proposition_05
 import GeocoqTranslate.Elements.OriginalProofs.Lemmas.lemma_ray1
+import GeocoqTranslate.Elements.OriginalProofs.proposition_16
 import GeocoqTranslate.Elements.OriginalProofs.Lemmas.lemma_ABCequalsCBA
 import GeocoqTranslate.Elements.OriginalProofs.Lemmas.lemma_angleorderrespectscongruence2
 import GeocoqTranslate.Elements.OriginalProofs.Lemmas.lemma_angleorderrespectscongruence
 import GeocoqTranslate.Elements.OriginalProofs.Lemmas.lemma_equalanglesreflexive
 import GeocoqTranslate.Elements.OriginalProofs.Lemmas.lemma_angleordertransitive
+import GeocoqTranslate.Elements.OriginalProofs.proposition_19
 import GeocoqTranslate.Elements.OriginalProofs.Lemmas.lemma_lessthancongruence2
 import GeocoqTranslate.Elements.OriginalProofs.Lemmas.lemma_lessthancongruence
 import GeocoqTranslate.Elements.OriginalProofs.Lemmas.lemma_collinearorder
@@ -33,6 +37,7 @@ namespace GeocoqTranslate.Elements
 open euclidean_neutral_basis euclidean_neutral euclidean_neutral_ruler_compass
 variable {Point : Type} [euclidean_neutral_ruler_compass Point]
 
+set_option maxHeartbeats 800000 in
 theorem proposition_24 :
     ∀ (A B C D E F : Point), Triangle A B C → Triangle D E F → Cong A B D E → Cong A C D F → LtA E D F B A C → Lt E F B C := by
   intro A B C D E F h1 h2 h3 h4 h5
@@ -100,7 +105,7 @@ theorem proposition_24 :
       have : P ≠ A := by conclude lemma_inequalitysymmetric
       have : Col A B C := by conclude lemma_collinear4
       contradict
-  have : Triangle Q A P := by conclude_def Triangle
+  have : Triangle Q A P := by (try (have : nCol Q A P := nCol_notCol _ _ _ (by assumption))); conclude_def Triangle
   have : BetS Q T P := by conclude axiom_betweennesssymmetry
   obtain ⟨J, _, _⟩ : ∃ J, (Out A T J ∧ BetS C J B) := by conclude lemma_crossbar
   have : Out A J H := by conclude lemma_ray3
@@ -125,12 +130,12 @@ theorem proposition_24 :
       have : Col A T B := by conclude lemma_collinear4
       have : Col B A T := by forward_using lemma_collinearorder
       contradict
-  have : Triangle A C H := by conclude_def Triangle
+  have : Triangle A C H := by (try (have : nCol A C H := nCol_notCol _ _ _ (by assumption))); conclude_def Triangle
   have : isosceles A C H := by conclude_def isosceles
   have : CongA A C H A H C := by conclude proposition_05
   have : (BetS A H J ∨ J = H ∨ BetS A J H) := by conclude lemma_ray1
   have : Lt H B C B := by
-      rcases (show BetS A H J ∨ J = H ∨ BetS A J H by first | assumption | exact Classical.em _ | tauto | aesop) with c1 | c2 | c3
+      rcases (show BetS A H J ∨ J = H ∨ BetS A J H by first | assumption | exact nCol_or_Col _ _ _ | exact Col_or_nCol _ _ _ | exact Classical.em _ | tauto | aesop) with c1 | c2 | c3
       · have : ¬ Col C J H := by
             intro h
             have : Col A H J := by conclude_def Col
@@ -141,7 +146,7 @@ theorem proposition_24 :
             have : Col H A C := by conclude lemma_collinear4
             have : Col A C H := by forward_using lemma_collinearorder
             contradict
-        have : Triangle C J H := by conclude_def Triangle
+        have : Triangle C J H := by (try (have : nCol C J H := nCol_notCol _ _ _ (by assumption))); conclude_def Triangle
         have : BetS J H A := by conclude axiom_betweennesssymmetry
         have : LtA J C H C H A := by conclude proposition_16
         have : ¬ Col H C J := by
@@ -176,7 +181,7 @@ theorem proposition_24 :
             intro h
             have : Col A C H := by forward_using lemma_collinearorder
             contradict
-        have : Triangle C A H := by conclude_def Triangle
+        have : Triangle C A H := by (try (have : nCol C A H := nCol_notCol _ _ _ (by assumption))); conclude_def Triangle
         have : LtA A C H C H J := by conclude proposition_16
         have : LtA H C J A C H := by conclude lemma_angleorderrespectscongruence
         have : LtA H C J C H J := by conclude lemma_angleordertransitive
@@ -197,7 +202,7 @@ theorem proposition_24 :
             have : B ≠ C := by conclude lemma_inequalitysymmetric
             have : Col C H J := by conclude lemma_collinear4
             contradict
-        have : Triangle B H C := by conclude_def Triangle
+        have : Triangle B H C := by (try (have : nCol B H C := nCol_notCol _ _ _ (by assumption))); conclude_def Triangle
         have : CongA B H C C H B := by conclude lemma_ABCequalsCBA
         have : LtA H C B B H C := by conclude lemma_angleorderrespectscongruence
         have : Lt B H B C := by conclude proposition_19
@@ -286,7 +291,7 @@ theorem proposition_24 :
             contradict
         have : CongA H C B B C H := by conclude lemma_ABCequalsCBA
         have : LtA H C B B H C := by conclude lemma_angleorderrespectscongruence2
-        have : Triangle B H C := by conclude_def Triangle
+        have : Triangle B H C := by (try (have : nCol B H C := nCol_notCol _ _ _ (by assumption))); conclude_def Triangle
         have : Lt B H B C := by conclude proposition_19
         have : Cong B H H B := by conclude cn_equalityreverse
         have : Lt H B B C := by conclude lemma_lessthancongruence2

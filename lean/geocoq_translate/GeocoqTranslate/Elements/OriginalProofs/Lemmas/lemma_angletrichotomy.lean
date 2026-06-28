@@ -11,6 +11,7 @@ import GeocoqTranslate.Elements.OriginalProofs.Lemmas.lemma_raystrict
 import GeocoqTranslate.Elements.OriginalProofs.Lemmas.lemma_collinear4
 import GeocoqTranslate.Elements.OriginalProofs.Lemmas.lemma_ray3
 import GeocoqTranslate.Elements.OriginalProofs.Lemmas.lemma_sameside2
+import GeocoqTranslate.Elements.OriginalProofs.proposition_07
 import GeocoqTranslate.Elements.OriginalProofs.Lemmas.lemma_betweennotequal
 import GeocoqTranslate.Elements.OriginalProofs.Lemmas.lemma_collinearorder
 import GeocoqTranslate.Elements.OriginalProofs.Lemmas.lemma_samesidesymmetric
@@ -20,6 +21,7 @@ namespace GeocoqTranslate.Elements
 open euclidean_neutral_basis euclidean_neutral euclidean_neutral_ruler_compass
 variable {Point : Type} [euclidean_neutral_ruler_compass Point]
 
+set_option maxHeartbeats 800000 in
 theorem lemma_angletrichotomy :
     ∀ (A B C D E F : Point), LtA A B C D E F → ¬ LtA D E F A B C := by
   intro A B C D E F h1
@@ -52,7 +54,7 @@ theorem lemma_angletrichotomy :
           have : Col B A C := by conclude lemma_collinear4
           have : Col A B C := by forward_using lemma_collinearorder
           contradict
-      have : TS J B A P := by conclude_def TS
+      have : TS J B A P := by (try (have : nCol B A J := nCol_notCol _ _ _ (by assumption))); conclude_def TS
       have : ¬ Col B U H := by
           intro h
           have : Col B A U := by conclude lemma_rayimpliescollinear
@@ -89,7 +91,7 @@ theorem lemma_angletrichotomy :
       have : Out B G U := by conclude lemma_ray3
       have : Col B G U := by conclude lemma_rayimpliescollinear
       have : Col B U G := by forward_using lemma_collinearorder
-      have : TS H B U P := by conclude_def TS
+      have : TS H B U P := by (try (have : nCol B U H := nCol_notCol _ _ _ (by assumption))); conclude_def TS
       have : BetS J H G := by conclude axiom_betweennesssymmetry
       have : BetS J G P := by conclude lemma_3_7a
       have : ¬ Col B U J := by
@@ -110,7 +112,7 @@ theorem lemma_angletrichotomy :
           have : Col B C A := by conclude lemma_collinear4
           have : Col A B C := by forward_using lemma_collinearorder
           contradict
-      have : OS J H B U := by conclude_def OS
+      have : OS J H B U := by (try (have : nCol B U J := nCol_notCol _ _ _ (by assumption))); (try (have : nCol B U H := nCol_notCol _ _ _ (by assumption))); conclude_def OS
       have : OS H J B U := by forward_using lemma_samesidesymmetric
       have : Out B J V := by conclude lemma_ray3
       have : B = B := by conclude cn_equalityreflexive
