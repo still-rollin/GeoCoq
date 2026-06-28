@@ -35,7 +35,17 @@ dpdgraph_out/
 deps.txt
 deps_edges.dot
 all_files.txt
-geocoq-lean/theories/
-geocoq-lean/_build/
-geocoq-lean/**/*.vo
-geocoq-lean/**/*.glob
+
+# nested transpiler working repo + heavy Coq build (transpiler scripts are
+# vendored into transpiler/ in this repo instead)
+geocoq-lean/
+
+# Claude Code local config / generated dashboards
+.claude/
+dashboard/
+
+# scratch / experimental Lean files (not part of the corpus)
+lean/geocoq_translate/GeocoqTranslate/Scratch95aProf.lean
+lean/geocoq_translate/GeocoqTranslate/Elements/OriginalProofs/conclude_bounded_test.lean
+lean/geocoq_translate/test_unannotated.lean
+lean/geocoq_translate/GeocoqTranslate.lean.bak
