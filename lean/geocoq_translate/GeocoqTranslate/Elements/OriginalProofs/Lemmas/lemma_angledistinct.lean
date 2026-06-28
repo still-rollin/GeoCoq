@@ -7,6 +7,7 @@ namespace GeocoqTranslate.Elements
 open euclidean_neutral_basis euclidean_neutral euclidean_neutral_ruler_compass
 variable {Point : Type} [euclidean_neutral_ruler_compass Point]
 
+set_option maxHeartbeats 800000 in
 theorem lemma_angledistinct :
     ∀ (A B C a b c : Point), CongA A B C a b c → A ≠ B ∧ B ≠ C ∧ A ≠ C ∧ a ≠ b ∧ b ≠ c ∧ a ≠ c := by
   intro A B C a b c h1

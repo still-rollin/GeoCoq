@@ -17,6 +17,7 @@ namespace GeocoqTranslate.Elements
 open euclidean_neutral_basis euclidean_neutral euclidean_neutral_ruler_compass
 variable {Point : Type} [euclidean_neutral_ruler_compass Point]
 
+set_option maxHeartbeats 800000 in
 theorem lemma_parallelPasch :
     ∀ (A B C D E : Point), PG A B C D → BetS A D E → ∃ X, BetS B X E ∧ BetS C X D := by
   intro A B C D E h1 h2
@@ -35,7 +36,7 @@ theorem lemma_parallelPasch :
   have : Col C D D := by conclude_def Col
   have : nCol A C D := by forward_using lemma_parallelNC
   have : nCol C D A := by forward_using lemma_NCorder
-  have : TS A C D E := by conclude_def TS
+  have : TS A C D E := by (try (have : nCol C D A := nCol_notCol _ _ _ (by assumption))); conclude_def TS
   have : TS B C D E := by conclude lemma_planeseparation
   obtain ⟨H, _, _, _⟩ : ∃ H, (BetS B H E ∧ Col C D H ∧ nCol C D B) := by conclude_def TS
   have : BetS E H B := by conclude axiom_betweennesssymmetry

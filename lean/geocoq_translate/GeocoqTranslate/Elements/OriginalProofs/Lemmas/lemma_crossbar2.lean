@@ -15,8 +15,10 @@ import GeocoqTranslate.Elements.OriginalProofs.Lemmas.lemma_equalanglesreflexive
 import GeocoqTranslate.Elements.OriginalProofs.Lemmas.lemma_ray5
 import GeocoqTranslate.Elements.OriginalProofs.Lemmas.lemma_equalangleshelper
 import GeocoqTranslate.Elements.OriginalProofs.Lemmas.lemma_equalanglestransitive
+import GeocoqTranslate.Elements.OriginalProofs.proposition_04
 import GeocoqTranslate.Elements.OriginalProofs.Lemmas.lemma_sameside2
 import GeocoqTranslate.Elements.OriginalProofs.Lemmas.lemma_congruencesymmetric
+import GeocoqTranslate.Elements.OriginalProofs.proposition_07
 import GeocoqTranslate.Elements.OriginalProofs.Lemmas.lemma_equalitysymmetric
 import GeocoqTranslate.Elements.OriginalProofs.Lemmas.lemma_collinearorder
 import GeocoqTranslate.Elements.OriginalProofs.Lemmas.lemma_angledistinct
@@ -28,6 +30,7 @@ namespace GeocoqTranslate.Elements
 open euclidean_neutral_basis euclidean_neutral euclidean_neutral_ruler_compass
 variable {Point : Type} [euclidean_neutral_ruler_compass Point]
 
+set_option maxHeartbeats 800000 in
 theorem lemma_crossbar2 :
     ∀ (A G H P S T : Point), LtA H G A H G P → OS A P G H → Out G H S → Out G P T → ∃ X, BetS T X S ∧ Out G A X := by
   intro A G H P S T h1 h2 h3 h4
@@ -48,7 +51,7 @@ theorem lemma_crossbar2 :
       have : J ≠ G := by conclude lemma_inequalitysymmetric
       have : Col G H P := by conclude lemma_collinear4
       contradict
-  have : Triangle L G J := by conclude_def Triangle
+  have : Triangle L G J := by (try (have : nCol L G J := nCol_notCol _ _ _ (by assumption))); conclude_def Triangle
   have : Out G J T := by conclude lemma_ray3
   have : Out G L S := by conclude lemma_ray3
   obtain ⟨M, _, _⟩ : ∃ M, (Out G K M ∧ BetS S M T) := by conclude lemma_crossbar

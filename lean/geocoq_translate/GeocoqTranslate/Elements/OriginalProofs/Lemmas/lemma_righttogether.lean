@@ -9,6 +9,7 @@ import GeocoqTranslate.Elements.OriginalProofs.Lemmas.lemma_equalanglesreflexive
 import GeocoqTranslate.Elements.OriginalProofs.Lemmas.lemma_collinearright
 import GeocoqTranslate.Elements.OriginalProofs.Lemmas.lemma_Euclid4
 import GeocoqTranslate.Elements.OriginalProofs.Lemmas.lemma_oppositesidesymmetric
+import GeocoqTranslate.Elements.OriginalProofs.proposition_14
 import GeocoqTranslate.Elements.OriginalProofs.Lemmas.lemma_NCorder
 import GeocoqTranslate.Elements.OriginalProofs.Lemmas.lemma_betweennotequal
 
@@ -16,6 +17,7 @@ namespace GeocoqTranslate.Elements
 open euclidean_neutral_basis euclidean_neutral euclidean_neutral_ruler_compass
 variable {Point : Type} [euclidean_neutral_ruler_compass Point]
 
+set_option maxHeartbeats 800000 in
 theorem lemma_righttogether :
     ∀ (A B C G : Point), Per G A B → Per B A C → TS G B A C → RT G A B B A C ∧ BetS G A C := by
   intro A B C G h1 h2 h3

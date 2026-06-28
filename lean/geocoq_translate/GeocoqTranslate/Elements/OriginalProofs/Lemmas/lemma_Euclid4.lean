@@ -6,7 +6,9 @@ import GeocoqTranslate.Elements.OriginalProofs.Lemmas.lemma_layoff
 import GeocoqTranslate.Elements.OriginalProofs.Lemmas.lemma_8_3
 import GeocoqTranslate.Elements.OriginalProofs.Lemmas.lemma_8_2
 import GeocoqTranslate.Elements.OriginalProofs.Lemmas.lemma_rightangleNC
+import GeocoqTranslate.Elements.OriginalProofs.proposition_20
 import GeocoqTranslate.Elements.OriginalProofs.Lemmas.lemma_TGsymmetric
+import GeocoqTranslate.Elements.OriginalProofs.proposition_22
 import GeocoqTranslate.Elements.OriginalProofs.Lemmas.lemma_ray4
 import GeocoqTranslate.Elements.OriginalProofs.Lemmas.lemma_congruencetransitive
 import GeocoqTranslate.Elements.OriginalProofs.Lemmas.lemma_layoffunique
@@ -26,6 +28,7 @@ namespace GeocoqTranslate.Elements
 open euclidean_neutral_basis euclidean_neutral euclidean_neutral_ruler_compass
 variable {Point : Type} [euclidean_neutral_ruler_compass Point]
 
+set_option maxHeartbeats 800000 in
 theorem lemma_Euclid4 :
     ∀ (A B C a b c : Point), Per A B C → Per a b c → CongA A B C a b c := by
   intro A B C a b c h1 h2
@@ -52,9 +55,9 @@ theorem lemma_Euclid4 :
       intro h
       have : Col p b q := by forward_using lemma_collinearorder
       contradict
-  have : Triangle p b q := by conclude_def Triangle
-  have : Triangle b q p := by conclude_def Triangle
-  have : Triangle q p b := by conclude_def Triangle
+  have : Triangle p b q := by (try (have : nCol p b q := nCol_notCol _ _ _ (by assumption))); conclude_def Triangle
+  have : Triangle b q p := by (try (have : nCol b q p := nCol_notCol _ _ _ (by assumption))); conclude_def Triangle
+  have : Triangle q p b := by (try (have : nCol q p b := nCol_notCol _ _ _ (by assumption))); conclude_def Triangle
   have : TG b p p q b q := by conclude proposition_20
   have : TG q b b p q p := by conclude proposition_20
   have : TG p q q b p b := by conclude proposition_20
@@ -112,7 +115,7 @@ theorem lemma_Euclid4 :
   have : Out B A A := by conclude lemma_ray4
   have : Cong B A B A := by conclude cn_congruencereflexive
   have : nCol A B C := by conclude lemma_rightangleNC
-  have : CongA A B C A B F := by conclude_def CongA
+  have : CongA A B C A B F := by (try (have : nCol A B C := nCol_notCol _ _ _ (by assumption))); conclude_def CongA
   have : CongA A B C A B C := by conclude lemma_equalanglesreflexive
   have : CongA A B C A B F := by conclude lemma_equalanglestransitive
   have : p = p := by conclude cn_equalityreflexive
@@ -124,7 +127,7 @@ theorem lemma_Euclid4 :
   have : Cong B A b p := by conclude lemma_congruencesymmetric
   have : Cong B A p b := by forward_using lemma_congruenceflip
   have : nCol A B F := by conclude lemma_rightangleNC
-  have : CongA A B F p b q := by conclude_def CongA
+  have : CongA A B F p b q := by (try (have : nCol A B F := nCol_notCol _ _ _ (by assumption))); conclude_def CongA
   have : CongA A B C p b q := by conclude lemma_equalanglestransitive
   have : nCol a b c := by conclude lemma_rightangleNC
   have : Out b p p := by conclude lemma_ray4
@@ -132,7 +135,7 @@ theorem lemma_Euclid4 :
   have : Cong b p b p := by conclude cn_congruencereflexive
   have : Cong b q b q := by conclude cn_congruencereflexive
   have : Cong p q p q := by conclude cn_congruencereflexive
-  have : CongA a b c p b q := by conclude_def CongA
+  have : CongA a b c p b q := by (try (have : nCol a b c := nCol_notCol _ _ _ (by assumption))); conclude_def CongA
   have : CongA p b q a b c := by conclude lemma_equalanglessymmetric
   have : CongA A B C a b c := by conclude lemma_equalanglestransitive
   close

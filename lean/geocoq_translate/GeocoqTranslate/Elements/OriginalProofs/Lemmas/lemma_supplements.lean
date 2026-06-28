@@ -21,6 +21,7 @@ namespace GeocoqTranslate.Elements
 open euclidean_neutral_basis euclidean_neutral euclidean_neutral_ruler_compass
 variable {Point : Type} [euclidean_neutral_ruler_compass Point]
 
+set_option maxHeartbeats 800000 in
 theorem lemma_supplements :
     ∀ (A B C D F a b c d f : Point), CongA A B C a b c → Supp A B C D F → Supp a b c d f → CongA D B F d b f := by
   intro A B C D F a b c d f h1 h2 h3
@@ -43,7 +44,7 @@ theorem lemma_supplements :
   have : Cong V W v w := by conclude axiom_5_line
   have : (BetS B U A ∨ A = U ∨ BetS B A U) := by conclude lemma_ray1
   have : BetS A B W := by
-      rcases (show BetS B U A ∨ A = U ∨ BetS B A U by first | assumption | exact Classical.em _ | tauto | aesop) with c1 | c2 | c3
+      rcases (show BetS B U A ∨ A = U ∨ BetS B A U by first | assumption | exact nCol_or_Col _ _ _ | exact Col_or_nCol _ _ _ | exact Classical.em _ | tauto | aesop) with c1 | c2 | c3
       · have : BetS A U B := by conclude axiom_betweennesssymmetry
         have : BetS A B W := by conclude lemma_3_7a
         close
@@ -55,7 +56,7 @@ theorem lemma_supplements :
   have : Out B F W := by conclude_def Out
   have : (BetS B W F ∨ F = W ∨ BetS B F W) := by conclude lemma_ray1
   have : BetS U B F := by
-      rcases (show BetS B W F ∨ F = W ∨ BetS B F W by first | assumption | exact Classical.em _ | tauto | aesop) with c1 | c2 | c3
+      rcases (show BetS B W F ∨ F = W ∨ BetS B F W by first | assumption | exact nCol_or_Col _ _ _ | exact Col_or_nCol _ _ _ | exact Classical.em _ | tauto | aesop) with c1 | c2 | c3
       · have : BetS U B F := by conclude lemma_3_7b
         close
       · have : BetS U B F := by conclude cn_equalitysub
@@ -66,7 +67,7 @@ theorem lemma_supplements :
   have : Out B F W := by conclude_def Out
   have : (BetS b u a ∨ a = u ∨ BetS b a u) := by conclude lemma_ray1
   have : BetS a b w := by
-      rcases (show BetS b u a ∨ a = u ∨ BetS b a u by first | assumption | exact Classical.em _ | tauto | aesop) with c1 | c2 | c3
+      rcases (show BetS b u a ∨ a = u ∨ BetS b a u by first | assumption | exact nCol_or_Col _ _ _ | exact Col_or_nCol _ _ _ | exact Classical.em _ | tauto | aesop) with c1 | c2 | c3
       · have : BetS a u b := by conclude axiom_betweennesssymmetry
         have : BetS a b w := by conclude lemma_3_7a
         close
@@ -78,7 +79,7 @@ theorem lemma_supplements :
   have : Out b f w := by conclude_def Out
   have : (BetS b w f ∨ f = w ∨ BetS b f w) := by conclude lemma_ray1
   have : BetS u b f := by
-      rcases (show BetS b w f ∨ f = w ∨ BetS b f w by first | assumption | exact Classical.em _ | tauto | aesop) with c1 | c2 | c3
+      rcases (show BetS b w f ∨ f = w ∨ BetS b f w by first | assumption | exact nCol_or_Col _ _ _ | exact Col_or_nCol _ _ _ | exact Classical.em _ | tauto | aesop) with c1 | c2 | c3
       · have : BetS u b f := by conclude lemma_3_7b
         close
       · have : BetS u b f := by conclude cn_equalitysub
@@ -108,7 +109,7 @@ theorem lemma_supplements :
       contradict
   have : Out B D V := by conclude lemma_ray3
   have : Out b d v := by conclude lemma_ray3
-  have : CongA D B F d b f := by conclude_def CongA
+  have : CongA D B F d b f := by (try (have : nCol D B F := nCol_notCol _ _ _ (by assumption))); conclude_def CongA
   close
 
 end GeocoqTranslate.Elements

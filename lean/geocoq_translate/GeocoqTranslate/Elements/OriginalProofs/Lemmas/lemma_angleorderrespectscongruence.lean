@@ -7,6 +7,8 @@ import GeocoqTranslate.Elements.OriginalProofs.Lemmas.lemma_layoff
 import GeocoqTranslate.Elements.OriginalProofs.Lemmas.lemma_equalanglessymmetric
 import GeocoqTranslate.Elements.OriginalProofs.Lemmas.lemma_equalangleshelper
 import GeocoqTranslate.Elements.OriginalProofs.Lemmas.lemma_congruencesymmetric
+import GeocoqTranslate.Elements.OriginalProofs.proposition_04
+import GeocoqTranslate.Elements.OriginalProofs.proposition_03
 import GeocoqTranslate.Elements.OriginalProofs.Lemmas.lemma_ray4
 import GeocoqTranslate.Elements.OriginalProofs.Lemmas.lemma_equalanglesNC
 import GeocoqTranslate.Elements.OriginalProofs.Lemmas.lemma_ABCequalsCBA
@@ -23,6 +25,7 @@ namespace GeocoqTranslate.Elements
 open euclidean_neutral_basis euclidean_neutral euclidean_neutral_ruler_compass
 variable {Point : Type} [euclidean_neutral_ruler_compass Point]
 
+set_option maxHeartbeats 800000 in
 theorem lemma_angleorderrespectscongruence :
     ∀ (A B C D E F P Q R : Point), LtA A B C D E F → CongA P Q R D E F → LtA A B C P Q R := by
   intro A B C D E F P Q R h1 h2

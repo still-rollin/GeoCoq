@@ -5,9 +5,12 @@ import GeocoqTranslate.Elements.OriginalProofs.Lemmas.lemma_samesideflip
 import GeocoqTranslate.Elements.OriginalProofs.Lemmas.lemma_inequalitysymmetric
 import GeocoqTranslate.Elements.OriginalProofs.Lemmas.lemma_ray4
 import GeocoqTranslate.Elements.OriginalProofs.Lemmas.lemma_crossbar2
+import GeocoqTranslate.Elements.OriginalProofs.proposition_39A
 import GeocoqTranslate.Elements.OriginalProofs.Lemmas.lemma_angletrichotomy2
 import GeocoqTranslate.Elements.OriginalProofs.Lemmas.lemma_equalanglessymmetric
 import GeocoqTranslate.Elements.OriginalProofs.Lemmas.lemma_equalanglesflip
+import GeocoqTranslate.Elements.OriginalProofs.proposition_26A
+import GeocoqTranslate.Elements.OriginalProofs.proposition_07
 import GeocoqTranslate.Elements.OriginalProofs.Lemmas.lemma_samesidesymmetric
 import GeocoqTranslate.Elements.OriginalProofs.Lemmas.lemma_NCdistinct
 import GeocoqTranslate.Elements.OriginalProofs.Lemmas.lemma_parallelflip
@@ -17,6 +20,7 @@ namespace GeocoqTranslate.Elements
 open euclidean_neutral_basis euclidean_neutral euclidean_neutral_ruler_compass area
 variable {Point : Type} [area Point]
 
+set_option maxHeartbeats 800000 in
 theorem proposition_39 :
     ∀ (A B C D : Point), Triangle A B C → Triangle D B C → OS A D B C → ET A B C D B C → A ≠ D → Par A D B C := by
   intro A B C D h1 h2 h3 h4 h5
@@ -63,9 +67,9 @@ theorem proposition_39 :
           have : LtA C B D C B A := by conclude lemma_angletrichotomy2
           contradict
       have : nCol A C B := by forward_using lemma_NCorder
-      have : Triangle A C B := by conclude_def Triangle
+      have : Triangle A C B := by (try (have : nCol A C B := nCol_notCol _ _ _ (by assumption))); conclude_def Triangle
       have : nCol D C B := by forward_using lemma_NCorder
-      have : Triangle D C B := by conclude_def Triangle
+      have : Triangle D C B := by (try (have : nCol D C B := nCol_notCol _ _ _ (by assumption))); conclude_def Triangle
       have : OS A D C B := by conclude lemma_samesideflip
       have : ET A B C D C B := by forward_using axiom_ETpermutation
       have : ET D C B A B C := by conclude axiom_ETsymmetric

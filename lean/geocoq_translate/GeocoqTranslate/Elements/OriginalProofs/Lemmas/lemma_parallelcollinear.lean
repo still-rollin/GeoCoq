@@ -10,13 +10,14 @@ namespace GeocoqTranslate.Elements
 open euclidean_neutral_basis euclidean_neutral euclidean_neutral_ruler_compass
 variable {Point : Type} [euclidean_neutral_ruler_compass Point]
 
+set_option maxHeartbeats 800000 in
 theorem lemma_parallelcollinear :
     ∀ (A B C c d : Point), TP A B c d → Col c d C → C ≠ d → TP A B C d := by
   intro A B C c d h1 h2 h3
   have : (A ≠ B ∧ c ≠ d ∧ ¬ Meet A B c d ∧ OS c d A B) := by conclude_def TP
   have : (c = d ∨ c = C ∨ d = C ∨ BetS d c C ∨ BetS c d C ∨ BetS c C d) := by conclude_def Col
   have : TP A B C d := by
-      rcases (show c = d ∨ c = C ∨ d = C ∨ BetS d c C ∨ BetS c d C ∨ BetS c C d by first | assumption | exact Classical.em _ | tauto | aesop) with c1 | c2 | c3 | c4 | c5 | c6
+      rcases (show c = d ∨ c = C ∨ d = C ∨ BetS d c C ∨ BetS c d C ∨ BetS c C d by first | assumption | exact nCol_or_Col _ _ _ | exact Col_or_nCol _ _ _ | exact Classical.em _ | tauto | aesop) with c1 | c2 | c3 | c4 | c5 | c6
       · have : ¬ ¬ TP A B C d := by
             intro h
             contradict

@@ -8,6 +8,7 @@ namespace GeocoqTranslate.Elements
 open euclidean_neutral_basis euclidean_neutral euclidean_neutral_ruler_compass euclidean_euclidean
 variable {Point : Type} [euclidean_euclidean Point]
 
+set_option maxHeartbeats 800000 in
 theorem lemma_squarerectangle :
     ∀ (A B C D : Point), SQ A B C D → RE A B C D := by
   intro A B C D h1

@@ -4,12 +4,14 @@ import GeocoqTranslate.Elements.OriginalProofs.euclidean_tactics
 import GeocoqTranslate.Elements.OriginalProofs.Lemmas.lemma_inequalitysymmetric
 import GeocoqTranslate.Elements.OriginalProofs.Lemmas.lemma_extension
 import GeocoqTranslate.Elements.OriginalProofs.Lemmas.lemma_NChelper
+import GeocoqTranslate.Elements.OriginalProofs.proposition_11B
 import GeocoqTranslate.Elements.OriginalProofs.Lemmas.lemma_layoff
 import GeocoqTranslate.Elements.OriginalProofs.Lemmas.lemma_ray5
 import GeocoqTranslate.Elements.OriginalProofs.Lemmas.lemma_collinear4
 import GeocoqTranslate.Elements.OriginalProofs.Lemmas.lemma_9_5
 import GeocoqTranslate.Elements.OriginalProofs.Lemmas.lemma_rayimpliescollinear
 import GeocoqTranslate.Elements.OriginalProofs.Lemmas.lemma_ray2
+import GeocoqTranslate.Elements.OriginalProofs.proposition_31short
 import GeocoqTranslate.Elements.OriginalProofs.Lemmas.lemma_collinearparallel
 import GeocoqTranslate.Elements.OriginalProofs.Lemmas.lemma_parallelsymmetric
 import GeocoqTranslate.Elements.OriginalProofs.Lemmas.lemma_triangletoparallelogram
@@ -23,6 +25,7 @@ import GeocoqTranslate.Elements.OriginalProofs.Lemmas.lemma_oppositesidesymmetri
 import GeocoqTranslate.Elements.OriginalProofs.Lemmas.lemma_samenotopposite
 import GeocoqTranslate.Elements.OriginalProofs.Lemmas.lemma_3_7a
 import GeocoqTranslate.Elements.OriginalProofs.Lemmas.lemma_3_6a
+import GeocoqTranslate.Elements.OriginalProofs.proposition_34
 import GeocoqTranslate.Elements.OriginalProofs.Lemmas.lemma_congruencetransitive
 import GeocoqTranslate.Elements.OriginalProofs.Lemmas.lemma_equalanglessymmetric
 import GeocoqTranslate.Elements.OriginalProofs.Lemmas.lemma_PGsymmetric
@@ -38,6 +41,7 @@ namespace GeocoqTranslate.Elements
 open euclidean_neutral_basis euclidean_neutral euclidean_neutral_ruler_compass euclidean_euclidean
 variable {Point : Type} [euclidean_euclidean Point]
 
+set_option maxHeartbeats 800000 in
 theorem proposition_46 :
     ∀ (A B R : Point), A ≠ B → nCol A B R → ∃ X Y, SQ A B X Y ∧ TS Y A B R ∧ PG A B X Y := by
   intro A B R h1 h2
@@ -69,7 +73,7 @@ theorem proposition_46 :
   have : F ≠ B := by conclude lemma_inequalitysymmetric
   have : Col B A q := by conclude lemma_collinear4
   have : Col A B q := by forward_using lemma_collinearorder
-  have : TS C A B R := by conclude_def TS
+  have : TS C A B R := by (try (have : nCol A B C := nCol_notCol _ _ _ (by assumption))); conclude_def TS
   have : TS D A B R := by conclude lemma_9_5
   have : nCol C A B := by forward_using lemma_NCorder
   have : A = A := by conclude cn_equalityreflexive
@@ -108,7 +112,7 @@ theorem proposition_46 :
   have : BetS B M G := by conclude axiom_betweennesssymmetry
   have : Col D M A := by conclude_def Col
   have : Col D A M := by forward_using lemma_collinearorder
-  have : TS B D A G := by conclude_def TS
+  have : TS B D A G := by (try (have : nCol D A B := nCol_notCol _ _ _ (by assumption))); conclude_def TS
   have : TS E D A G := by conclude lemma_planeseparation
   have : nCol D A E := by conclude_def TS
   have : TS G D A E := by conclude lemma_oppositesidesymmetric
@@ -126,12 +130,12 @@ theorem proposition_46 :
       intro h
       have : BetS E G D := by conclude axiom_betweennesssymmetry
       have : BetS E D e := by conclude lemma_3_7a
-      have : OS E G D A := by conclude_def OS
+      have : OS E G D A := by (try (have : nCol D A E := nCol_notCol _ _ _ (by assumption))); (try (have : nCol D A G := nCol_notCol _ _ _ (by assumption))); conclude_def OS
       contradict
   have : ¬ BetS G E D := by
       intro h
       have : BetS E D e := by conclude lemma_3_6a
-      have : OS E G D A := by conclude_def OS
+      have : OS E G D A := by (try (have : nCol D A E := nCol_notCol _ _ _ (by assumption))); (try (have : nCol D A G := nCol_notCol _ _ _ (by assumption))); conclude_def OS
       contradict
   have : Col e G D := by forward_using lemma_collinearorder
   have : Col e G E := by forward_using lemma_collinearorder
@@ -141,7 +145,7 @@ theorem proposition_46 :
   have : Col G D E := by conclude lemma_collinear4
   have : (G = D ∨ G = E ∨ D = E ∨ BetS D G E ∨ BetS G D E ∨ BetS G E D) := by conclude_def Col
   have : BetS G D E := by
-      rcases (show G = D ∨ G = E ∨ D = E ∨ BetS D G E ∨ BetS G D E ∨ BetS G E D by first | assumption | exact Classical.em _ | tauto | aesop) with c1 | c2 | c3 | c4 | c5 | c6
+      rcases (show G = D ∨ G = E ∨ D = E ∨ BetS D G E ∨ BetS G D E ∨ BetS G E D by first | assumption | exact nCol_or_Col _ _ _ | exact Col_or_nCol _ _ _ | exact Classical.em _ | tauto | aesop) with c1 | c2 | c3 | c4 | c5 | c6
       · have : ¬ ¬ BetS G D E := by
             intro h
             contradict

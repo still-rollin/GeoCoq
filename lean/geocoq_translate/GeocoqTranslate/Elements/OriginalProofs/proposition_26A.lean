@@ -6,6 +6,7 @@ import GeocoqTranslate.Elements.OriginalProofs.Lemmas.lemma_lessthancongruence
 import GeocoqTranslate.Elements.OriginalProofs.Lemmas.lemma_ray4
 import GeocoqTranslate.Elements.OriginalProofs.Lemmas.lemma_equalanglessymmetric
 import GeocoqTranslate.Elements.OriginalProofs.Lemmas.lemma_equalanglestransitive
+import GeocoqTranslate.Elements.OriginalProofs.proposition_04
 import GeocoqTranslate.Elements.OriginalProofs.Lemmas.lemma_angletrichotomy
 import GeocoqTranslate.Elements.OriginalProofs.Lemmas.lemma_raystrict
 import GeocoqTranslate.Elements.OriginalProofs.Lemmas.lemma_congruencesymmetric
@@ -20,6 +21,7 @@ namespace GeocoqTranslate.Elements
 open euclidean_neutral_basis euclidean_neutral euclidean_neutral_ruler_compass
 variable {Point : Type} [euclidean_neutral_ruler_compass Point]
 
+set_option maxHeartbeats 800000 in
 theorem proposition_26A :
     ∀ (A B C D E F : Point), Triangle A B C → Triangle D E F → CongA A B C D E F → CongA B C A E F D → Cong B C E F → Cong A B D E ∧ Cong A C D F ∧ CongA B A C E D F := by
   intro A B C D E F h1 h2 h3 h4 h5
@@ -55,7 +57,7 @@ theorem proposition_26A :
       have : Out B G G := by conclude lemma_ray4
       have : Cong B G B G := by conclude cn_congruencereflexive
       have : Cong B C B C := by conclude cn_congruencereflexive
-      have : CongA A B C G B C := by conclude_def CongA
+      have : CongA A B C G B C := by (try (have : nCol A B C := nCol_notCol _ _ _ (by assumption))); conclude_def CongA
       have : CongA G B C A B C := by conclude lemma_equalanglessymmetric
       have : CongA G B C D E F := by conclude lemma_equalanglestransitive
       have : (Cong G C D F ∧ CongA B G C E D F ∧ CongA B C G E F D) := by conclude proposition_04
@@ -91,7 +93,7 @@ theorem proposition_26A :
       have : Out E G G := by conclude lemma_ray4
       have : Cong E G E G := by conclude cn_congruencereflexive
       have : Cong E F E F := by conclude cn_congruencereflexive
-      have : CongA D E F G E F := by conclude_def CongA
+      have : CongA D E F G E F := by (try (have : nCol D E F := nCol_notCol _ _ _ (by assumption))); conclude_def CongA
       have : CongA G E F D E F := by conclude lemma_equalanglessymmetric
       have : CongA D E F A B C := by conclude lemma_equalanglessymmetric
       have : CongA G E F A B C := by conclude lemma_equalanglestransitive

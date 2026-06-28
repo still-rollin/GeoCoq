@@ -3,6 +3,7 @@
 import GeocoqTranslate.Elements.OriginalProofs.euclidean_tactics
 import GeocoqTranslate.Elements.OriginalProofs.Lemmas.lemma_oppositesidesymmetric
 import GeocoqTranslate.Elements.OriginalProofs.Lemmas.lemma_NChelper
+import GeocoqTranslate.Elements.OriginalProofs.proposition_31
 import GeocoqTranslate.Elements.OriginalProofs.Lemmas.lemma_inequalitysymmetric
 import GeocoqTranslate.Elements.OriginalProofs.Lemmas.lemma_ray4
 import GeocoqTranslate.Elements.OriginalProofs.Lemmas.lemma_equalanglessymmetric
@@ -20,6 +21,7 @@ import GeocoqTranslate.Elements.OriginalProofs.Lemmas.lemma_supplementinequality
 import GeocoqTranslate.Elements.OriginalProofs.Lemmas.lemma_planeseparation
 import GeocoqTranslate.Elements.OriginalProofs.Lemmas.lemma_congruencesymmetric
 import GeocoqTranslate.Elements.OriginalProofs.Lemmas.lemma_angletrichotomy2
+import GeocoqTranslate.Elements.OriginalProofs.proposition_15
 import GeocoqTranslate.Elements.OriginalProofs.Lemmas.lemma_equalanglesreflexive
 import GeocoqTranslate.Elements.OriginalProofs.Lemmas.lemma_supplementsymmetric
 import GeocoqTranslate.Elements.OriginalProofs.Lemmas.lemma_betweennotequal
@@ -32,6 +34,7 @@ namespace GeocoqTranslate.Elements
 open euclidean_neutral_basis euclidean_neutral euclidean_neutral_ruler_compass euclidean_euclidean
 variable {Point : Type} [euclidean_euclidean Point]
 
+set_option maxHeartbeats 800000 in
 theorem proposition_29 :
     ∀ (A B C D E G H : Point), Par A B C D → BetS A G B → BetS C H D → BetS E G H → TS A G H D → CongA A G H G H D ∧ CongA E G B G H D ∧ RT B G H G H D := by
   intro A B C D E G H h1 h2 h3 h4 h5
@@ -63,7 +66,7 @@ theorem proposition_29 :
   have : CongA G H D P G H := by conclude lemma_equalanglessymmetric
   have : nCol P G H := by conclude lemma_equalanglesNC
   have : nCol G H P := by forward_using lemma_NCorder
-  have : OS A P G H := by conclude_def OS
+  have : OS A P G H := by (try (have : nCol G H A := nCol_notCol _ _ _ (by assumption))); (try (have : nCol G H P := nCol_notCol _ _ _ (by assumption))); conclude_def OS
   have : H = H := by conclude cn_equalityreflexive
   have : G ≠ H := by forward_using lemma_betweennotequal
   have : Out G H H := by conclude lemma_ray4
@@ -132,9 +135,9 @@ theorem proposition_29 :
           have : Col G A H := by conclude lemma_collinear4
           have : Col H G A := by forward_using lemma_collinearorder
           contradict
-      have : TS B G H A := by conclude_def TS
+      have : TS B G H A := by (try (have : nCol G H B := nCol_notCol _ _ _ (by assumption))); conclude_def TS
       have : TS A G H B := by conclude lemma_oppositesidesymmetric
-      have : OS A P G H := by conclude_def OS
+      have : OS A P G H := by (try (have : nCol G H A := nCol_notCol _ _ _ (by assumption))); (try (have : nCol G H P := nCol_notCol _ _ _ (by assumption))); conclude_def OS
       have : OS P A G H := by forward_using lemma_samesidesymmetric
       have : TS P G H B := by conclude lemma_planeseparation
       obtain ⟨L, _, _, _⟩ : ∃ L, (BetS P L B ∧ Col G H L ∧ nCol G H P) := by conclude_def TS
@@ -146,7 +149,7 @@ theorem proposition_29 :
           have : Col H G Q := by forward_using lemma_collinearorder
           contradict
       have : BetS Q G P := by conclude axiom_betweennesssymmetry
-      have : OS B Q G H := by conclude_def OS
+      have : OS B Q G H := by (try (have : nCol G H B := nCol_notCol _ _ _ (by assumption))); (try (have : nCol G H Q := nCol_notCol _ _ _ (by assumption))); conclude_def OS
       have : Q = Q := by conclude cn_equalityreflexive
       have : Q ≠ G := by forward_using lemma_betweennotequal
       have : G ≠ Q := by conclude lemma_inequalitysymmetric

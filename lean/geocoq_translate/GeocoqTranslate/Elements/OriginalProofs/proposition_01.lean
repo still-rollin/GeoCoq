@@ -12,6 +12,7 @@ namespace GeocoqTranslate.Elements
 open euclidean_neutral_basis euclidean_neutral euclidean_neutral_ruler_compass
 variable {Point : Type} [euclidean_neutral_ruler_compass Point]
 
+set_option maxHeartbeats 800000 in
 theorem proposition_01 :
     ∀ (A B : Point), A ≠ B → ∃ X, equilateral A B X ∧ Triangle A B X := by
   intro A B h1
@@ -66,7 +67,7 @@ theorem proposition_01 :
       have : A ≠ C := by conclude lemma_inequalitysymmetric
       have : (A = B ∨ A = C ∨ B = C ∨ BetS B A C ∨ BetS A B C ∨ BetS A C B) := by conclude_def Col
       contradict
-  have : Triangle A B C := by conclude_def Triangle
+  have : Triangle A B C := by (try (have : nCol A B C := nCol_notCol _ _ _ (by assumption))); conclude_def Triangle
   close
 
 end GeocoqTranslate.Elements

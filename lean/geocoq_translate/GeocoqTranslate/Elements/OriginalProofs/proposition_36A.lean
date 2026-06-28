@@ -5,11 +5,14 @@ import GeocoqTranslate.Elements.OriginalProofs.Lemmas.lemma_congruencesymmetric
 import GeocoqTranslate.Elements.OriginalProofs.Lemmas.lemma_congruencetransitive
 import GeocoqTranslate.Elements.OriginalProofs.Lemmas.lemma_parallelsymmetric
 import GeocoqTranslate.Elements.OriginalProofs.Lemmas.lemma_collinearparallel2
+import GeocoqTranslate.Elements.OriginalProofs.proposition_33
+import GeocoqTranslate.Elements.OriginalProofs.proposition_35
 import GeocoqTranslate.Elements.OriginalProofs.Lemmas.lemma_PGsymmetric
 import GeocoqTranslate.Elements.OriginalProofs.Lemmas.lemma_inequalitysymmetric
 import GeocoqTranslate.Elements.OriginalProofs.Lemmas.lemma_collinear4
 import GeocoqTranslate.Elements.OriginalProofs.Lemmas.lemma_parallelNC
 import GeocoqTranslate.Elements.OriginalProofs.Lemmas.lemma_NCdistinct
+import GeocoqTranslate.Elements.OriginalProofs.proposition_34
 import GeocoqTranslate.Elements.OriginalProofs.Lemmas.lemma_parallelflip
 import GeocoqTranslate.Elements.OriginalProofs.Lemmas.lemma_congruenceflip
 import GeocoqTranslate.Elements.OriginalProofs.Lemmas.lemma_collinearorder
@@ -18,6 +21,7 @@ namespace GeocoqTranslate.Elements
 open euclidean_neutral_basis euclidean_neutral euclidean_neutral_ruler_compass area
 variable {Point : Type} [area Point]
 
+set_option maxHeartbeats 800000 in
 theorem proposition_36A :
     ∀ (A B C D E F G H M : Point), PG A B C D → PG E F G H → Col A D E → Col A D H → Col B C F → Col B C G → Cong B C F G → BetS B M H → BetS C M E → EF A B C D E F G H := by
   intro A B C D E F G H M h1 h2 h3 h4 h5 h6 h7 h8 h9

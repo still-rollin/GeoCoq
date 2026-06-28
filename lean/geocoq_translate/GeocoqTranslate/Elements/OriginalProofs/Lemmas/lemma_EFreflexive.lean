@@ -12,6 +12,7 @@ namespace GeocoqTranslate.Elements
 open euclidean_neutral_basis euclidean_neutral euclidean_neutral_ruler_compass area
 variable {Point : Type} [area Point]
 
+set_option maxHeartbeats 800000 in
 theorem lemma_EFreflexive :
     ∀ (a b c d p : Point), BetS a p c → BetS b p d → nCol a b c → EF a b c d a b c d := by
   intro a b c d p h1 h2 h3
@@ -34,15 +35,15 @@ theorem lemma_EFreflexive :
       have : Col c b a := by conclude lemma_collinear4
       have : Col a b c := by forward_using lemma_collinearorder
       contradict
-  have : Triangle a c d := by conclude_def Triangle
-  have : Triangle a c b := by conclude_def Triangle
+  have : Triangle a c d := by (try (have : nCol a c d := nCol_notCol _ _ _ (by assumption))); conclude_def Triangle
+  have : Triangle a c b := by (try (have : nCol a c b := nCol_notCol _ _ _ (by assumption))); conclude_def Triangle
   have : Cong_3 a c d a c d := by conclude lemma_TCreflexive
   have : Cong_3 a c b a c b := by conclude lemma_TCreflexive
   have : ET a c d a c d := by conclude axiom_congruentequal
   have : ET a c b a c b := by conclude axiom_congruentequal
   have : Col a c p := by conclude_def Col
   have : nCol a c b := by forward_using lemma_NCorder
-  have : TS b a c d := by conclude_def TS
+  have : TS b a c d := by (try (have : nCol a c b := nCol_notCol _ _ _ (by assumption))); conclude_def TS
   have : EF a b c d a b c d := by conclude axiom_paste3
   close
 

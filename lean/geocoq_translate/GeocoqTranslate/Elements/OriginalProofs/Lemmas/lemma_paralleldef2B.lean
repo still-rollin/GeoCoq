@@ -15,6 +15,7 @@ namespace GeocoqTranslate.Elements
 open euclidean_neutral_basis euclidean_neutral euclidean_neutral_ruler_compass
 variable {Point : Type} [euclidean_neutral_ruler_compass Point]
 
+set_option maxHeartbeats 800000 in
 theorem lemma_paralleldef2B :
     ∀ (A B C D : Point), Par A B C D → TP A B C D := by
   intro A B C D h1
@@ -30,7 +31,7 @@ theorem lemma_paralleldef2B :
       have : Col a B R := by conclude lemma_collinear4
       have : Col a B A := by forward_using lemma_collinearorder
       have : Col A B R := by
-          rcases (show a ≠ B ∨ a = B by first | assumption | exact Classical.em _ | tauto | aesop) with c1 | c2
+          rcases (show a ≠ B ∨ a = B by first | assumption | exact nCol_or_Col _ _ _ | exact Col_or_nCol _ _ _ | exact Classical.em _ | tauto | aesop) with c1 | c2
           · have : Col B R A := by conclude lemma_collinear4
             have : Col A B R := by forward_using lemma_collinearorder
             close
@@ -110,7 +111,7 @@ theorem lemma_paralleldef2B :
   have : Col a B M := by conclude lemma_collinear4
   have : Col a B A := by forward_using lemma_collinearorder
   have : Col A B M := by
-      rcases (show a ≠ B ∨ a = B by first | assumption | exact Classical.em _ | tauto | aesop) with c1 | c2
+      rcases (show a ≠ B ∨ a = B by first | assumption | exact nCol_or_Col _ _ _ | exact Col_or_nCol _ _ _ | exact Classical.em _ | tauto | aesop) with c1 | c2
       · have : Col B M A := by conclude lemma_collinear4
         have : Col A B M := by forward_using lemma_collinearorder
         close
@@ -133,7 +134,7 @@ theorem lemma_paralleldef2B :
       intro h
       have : Meet A B C D := by conclude_def Meet
       contradict
-  have : OS c d A B := by conclude_def OS
+  have : OS c d A B := by (try (have : nCol A B c := nCol_notCol _ _ _ (by assumption))); (try (have : nCol A B d := nCol_notCol _ _ _ (by assumption))); conclude_def OS
   have : ¬ Meet A B c d := by
       intro h
       obtain ⟨R, _, _, _, _⟩ : ∃ R, (A ≠ B ∧ c ≠ d ∧ Col A B R ∧ Col c d R) := by conclude_def Meet

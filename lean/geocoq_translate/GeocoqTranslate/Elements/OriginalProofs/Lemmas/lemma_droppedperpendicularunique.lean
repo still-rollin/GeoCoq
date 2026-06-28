@@ -18,6 +18,7 @@ namespace GeocoqTranslate.Elements
 open euclidean_neutral_basis euclidean_neutral euclidean_neutral_ruler_compass
 variable {Point : Type} [euclidean_neutral_ruler_compass Point]
 
+set_option maxHeartbeats 800000 in
 theorem lemma_droppedperpendicularunique :
     ∀ (A J M P : Point), Per A M P → Per A J P → Col A M J → M = J := by
   intro A J M P h1 h2 h3

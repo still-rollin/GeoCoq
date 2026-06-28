@@ -10,6 +10,7 @@ namespace GeocoqTranslate.Elements
 open euclidean_neutral_basis euclidean_neutral euclidean_neutral_ruler_compass
 variable {Point : Type} [euclidean_neutral_ruler_compass Point]
 
+set_option maxHeartbeats 800000 in
 theorem lemma_collinearbetween :
     ∀ (A B C D E F H : Point), Col A E B → Col C F D → A ≠ B → C ≠ D → A ≠ E → F ≠ D → ¬ Meet A B C D → BetS A H D → Col E F H → BetS E H F := by
   intro A B C D E F H h1 h2 h3 h4 h5 h6 h7 h8 h9
@@ -101,7 +102,7 @@ theorem lemma_collinearbetween :
       contradict
   have : (E = F ∨ E = H ∨ F = H ∨ BetS F E H ∨ BetS E F H ∨ BetS E H F) := by conclude_def Col
   have : BetS E H F := by
-      rcases (show E = F ∨ E = H ∨ F = H ∨ BetS F E H ∨ BetS E F H ∨ BetS E H F by first | assumption | exact Classical.em _ | tauto | aesop) with c1 | c2 | c3 | c4 | c5 | c6
+      rcases (show E = F ∨ E = H ∨ F = H ∨ BetS F E H ∨ BetS E F H ∨ BetS E H F by first | assumption | exact nCol_or_Col _ _ _ | exact Col_or_nCol _ _ _ | exact Classical.em _ | tauto | aesop) with c1 | c2 | c3 | c4 | c5 | c6
       · have : ¬ ¬ BetS E H F := by
             intro h
             contradict

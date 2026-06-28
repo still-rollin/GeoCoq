@@ -26,3 +26,16 @@ lakefile.olean
 
 # Editor/tooling local state
 .vscode/*.log
+
+# build/scratch artifacts (added at 234/234 milestone)
+geocoq-lean-translation.zip
+dpdgraph_out/
+*.dpd
+*.dot
+deps.txt
+deps_edges.dot
+all_files.txt
+geocoq-lean/theories/
+geocoq-lean/_build/
+geocoq-lean/**/*.vo
+geocoq-lean/**/*.glob

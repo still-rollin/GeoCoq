@@ -3,6 +3,7 @@
 import GeocoqTranslate.Elements.OriginalProofs.euclidean_tactics
 import GeocoqTranslate.Elements.OriginalProofs.Lemmas.lemma_inequalitysymmetric
 import GeocoqTranslate.Elements.OriginalProofs.Lemmas.lemma_extension
+import GeocoqTranslate.Elements.OriginalProofs.proposition_28B
 import GeocoqTranslate.Elements.OriginalProofs.Lemmas.lemma_collinearparallel
 import GeocoqTranslate.Elements.OriginalProofs.Lemmas.lemma_parallelsymmetric
 import GeocoqTranslate.Elements.OriginalProofs.Lemmas.lemma_NCdistinct
@@ -12,6 +13,7 @@ namespace GeocoqTranslate.Elements
 open euclidean_neutral_basis euclidean_neutral euclidean_neutral_ruler_compass
 variable {Point : Type} [euclidean_neutral_ruler_compass Point]
 
+set_option maxHeartbeats 800000 in
 theorem proposition_28C :
     ∀ (B D G H : Point), RT B G H G H D → OS B D G H → Par G B H D := by
   intro B D G H h1 h2

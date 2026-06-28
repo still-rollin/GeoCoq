@@ -10,6 +10,7 @@ namespace GeocoqTranslate.Elements
 open euclidean_neutral_basis euclidean_neutral euclidean_neutral_ruler_compass
 variable {Point : Type} [euclidean_neutral_ruler_compass Point]
 
+set_option maxHeartbeats 800000 in
 theorem lemma_oppositesidesymmetric :
     ∀ (A B P Q : Point), TS P A B Q → TS Q A B P := by
   intro A B P Q h1
@@ -29,7 +30,7 @@ theorem lemma_oppositesidesymmetric :
       have : Col R B P := by conclude lemma_collinear4
       have : Col R B A := by forward_using lemma_collinearorder
       have : Col A P B := by
-          rcases (show R = B ∨ R ≠ B by first | assumption | exact Classical.em _ | tauto | aesop) with c1 | c2
+          rcases (show R = B ∨ R ≠ B by first | assumption | exact nCol_or_Col _ _ _ | exact Col_or_nCol _ _ _ | exact Classical.em _ | tauto | aesop) with c1 | c2
           · have : Col P B Q := by conclude cn_equalitysub
             have : Col B Q P := by forward_using lemma_collinearorder
             have : Col B Q A := by forward_using lemma_collinearorder
@@ -47,7 +48,7 @@ theorem lemma_oppositesidesymmetric :
             close
       have : Col A B P := by forward_using lemma_collinearorder
       contradict
-  have : TS Q A B P := by conclude_def TS
+  have : TS Q A B P := by (try (have : nCol A B Q := nCol_notCol _ _ _ (by assumption))); conclude_def TS
   close
 
 end GeocoqTranslate.Elements

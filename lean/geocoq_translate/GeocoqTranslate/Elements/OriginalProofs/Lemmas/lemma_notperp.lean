@@ -4,9 +4,11 @@ import GeocoqTranslate.Elements.OriginalProofs.euclidean_tactics
 import GeocoqTranslate.Elements.OriginalProofs.Lemmas.lemma_inequalitysymmetric
 import GeocoqTranslate.Elements.OriginalProofs.Lemmas.lemma_extension
 import GeocoqTranslate.Elements.OriginalProofs.Lemmas.lemma_collinear4
+import GeocoqTranslate.Elements.OriginalProofs.proposition_10
 import GeocoqTranslate.Elements.OriginalProofs.Lemmas.lemma_samesidereflexive
 import GeocoqTranslate.Elements.OriginalProofs.Lemmas.lemma_ray4
 import GeocoqTranslate.Elements.OriginalProofs.Lemmas.lemma_sameside2
+import GeocoqTranslate.Elements.OriginalProofs.proposition_12
 import GeocoqTranslate.Elements.OriginalProofs.Lemmas.lemma_8_2
 import GeocoqTranslate.Elements.OriginalProofs.Lemmas.lemma_collinearright
 import GeocoqTranslate.Elements.OriginalProofs.Lemmas.lemma_8_7
@@ -20,6 +22,7 @@ namespace GeocoqTranslate.Elements
 open euclidean_neutral_basis euclidean_neutral euclidean_neutral_ruler_compass
 variable {Point : Type} [euclidean_neutral_ruler_compass Point]
 
+set_option maxHeartbeats 800000 in
 theorem lemma_notperp :
     ∀ (A B C P : Point), BetS A C B → nCol A B P → ∃ X, nCol A B X ∧ OS X P A B ∧ ¬ Per A C X := by
   intro A B C P h1 h2
@@ -137,6 +140,6 @@ theorem lemma_notperp :
       have : Per M C Q := by conclude lemma_8_2
       have : ¬ Per Q M C := by conclude lemma_8_7
       contradict
-  sorry -- TODO: exists M;close.
+  exact ⟨M, by close⟩
 
 end GeocoqTranslate.Elements

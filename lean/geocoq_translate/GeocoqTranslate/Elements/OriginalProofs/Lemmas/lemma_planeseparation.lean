@@ -12,6 +12,7 @@ import GeocoqTranslate.Elements.OriginalProofs.Lemmas.lemma_3_7b
 import GeocoqTranslate.Elements.OriginalProofs.Lemmas.lemma_3_7a
 import GeocoqTranslate.Elements.OriginalProofs.Lemmas.lemma_collinear5
 import GeocoqTranslate.Elements.OriginalProofs.Lemmas.lemma_3_6b
+import GeocoqTranslate.Elements.OriginalProofs.proposition_10
 import GeocoqTranslate.Elements.OriginalProofs.Lemmas.lemma_betweennotequal
 import GeocoqTranslate.Elements.OriginalProofs.Lemmas.lemma_collinearorder
 
@@ -19,6 +20,7 @@ namespace GeocoqTranslate.Elements
 open euclidean_neutral_basis euclidean_neutral euclidean_neutral_ruler_compass
 variable {Point : Type} [euclidean_neutral_ruler_compass Point]
 
+set_option maxHeartbeats 800000 in
 theorem lemma_planeseparation :
     ∀ (A B C D E : Point), OS C D A B → TS D A B E → TS C A B E := by
   intro A B C D E h1 h2
@@ -33,7 +35,7 @@ theorem lemma_planeseparation :
   have : G ≠ C := by conclude lemma_inequalitysymmetric
   have : G ≠ Q := by forward_using lemma_betweennotequal
   have : TS C A B E := by
-      rcases (show Col C Q D ∨ nCol C Q D by first | assumption | exact Classical.em _ | tauto | aesop) with c1 | c2
+      rcases (show Col C Q D ∨ nCol C Q D by first | assumption | exact nCol_or_Col _ _ _ | exact Col_or_nCol _ _ _ | exact Classical.em _ | tauto | aesop) with c1 | c2
       · have : ¬ ¬ TS C A B E := by
             intro h
             have : Col Q C D := by forward_using lemma_collinearorder
@@ -156,13 +158,13 @@ theorem lemma_planeseparation :
                 intro h
                 have : BetS E G C := by conclude lemma_3_7b
                 have : BetS C G E := by conclude axiom_betweennesssymmetry
-                have : TS C A B E := by conclude_def TS
+                have : TS C A B E := by (try (have : nCol A B C := nCol_notCol _ _ _ (by assumption))); conclude_def TS
                 contradict
             have : ¬ BetS G C D := by
                 intro h
                 have : BetS E G C := by conclude axiom_innertransitivity
                 have : BetS C G E := by conclude axiom_betweennesssymmetry
-                have : TS C A B E := by conclude_def TS
+                have : TS C A B E := by (try (have : nCol A B C := nCol_notCol _ _ _ (by assumption))); conclude_def TS
                 contradict
             have : ¬ BetS C G D := by
                 intro h
@@ -197,7 +199,7 @@ theorem lemma_planeseparation :
             have : Col G C D := by forward_using lemma_collinearorder
             have : (G = C ∨ G = D ∨ C = D ∨ BetS C G D ∨ BetS G C D ∨ BetS G D C) := by conclude_def Col
             have : TS C A B E := by
-                rcases (show G = C ∨ G = D ∨ C = D ∨ BetS C G D ∨ BetS G C D ∨ BetS G D C by first | assumption | exact Classical.em _ | tauto | aesop) with c1 | c2 | c3 | c4 | c5 | c6
+                rcases (show G = C ∨ G = D ∨ C = D ∨ BetS C G D ∨ BetS G C D ∨ BetS G D C by first | assumption | exact nCol_or_Col _ _ _ | exact Col_or_nCol _ _ _ | exact Classical.em _ | tauto | aesop) with c1 | c2 | c3 | c4 | c5 | c6
                 · have : ¬ ¬ TS C A B E := by
                       intro h
                       have : Col A B C := by conclude cn_equalitysub
@@ -246,7 +248,7 @@ theorem lemma_planeseparation :
                     have : Col W B G := by forward_using lemma_collinearorder
                     have : Col W B A := by forward_using lemma_collinearorder
                     have : Col B G A := by
-                        rcases (show W = B ∨ W ≠ B by first | assumption | exact Classical.em _ | tauto | aesop) with c1 | c2
+                        rcases (show W = B ∨ W ≠ B by first | assumption | exact nCol_or_Col _ _ _ | exact Col_or_nCol _ _ _ | exact Classical.em _ | tauto | aesop) with c1 | c2
                         · have : Col B A G := by forward_using lemma_collinearorder
                           have : Col B A W := by forward_using lemma_collinearorder
                           have : Col A G W := by conclude lemma_collinear4
@@ -323,7 +325,7 @@ theorem lemma_planeseparation :
                 have : Col G B M := by forward_using lemma_collinearorder
                 have : Col G B A := by forward_using lemma_collinearorder
                 have : Col A B M := by
-                    rcases (show B = G ∨ B ≠ G by first | assumption | exact Classical.em _ | tauto | aesop) with c1 | c2
+                    rcases (show B = G ∨ B ≠ G by first | assumption | exact nCol_or_Col _ _ _ | exact Col_or_nCol _ _ _ | exact Classical.em _ | tauto | aesop) with c1 | c2
                     · have : Col B A H := by forward_using lemma_collinearorder
                       have : Col B A G := by forward_using lemma_collinearorder
                       have : Col A H G := by conclude lemma_collinear4
@@ -337,7 +339,7 @@ theorem lemma_planeseparation :
                       have : Col A B M := by forward_using lemma_collinearorder
                       close
                 have : BetS C M E := by conclude axiom_betweennesssymmetry
-                have : TS C A B E := by conclude_def TS
+                have : TS C A B E := by (try (have : nCol A B C := nCol_notCol _ _ _ (by assumption))); conclude_def TS
                 contradict
             have : TS F A B E := by conclude lemma_9_5b
             have : ¬ G = H := by
@@ -444,7 +446,7 @@ theorem lemma_planeseparation :
                 have : BetS E H F := by conclude cn_equalitysub
                 have : BetS F H E := by conclude axiom_betweennesssymmetry
                 have : BetS C H E := by conclude lemma_3_7a
-                have : TS C A B E := by conclude_def TS
+                have : TS C A B E := by (try (have : nCol A B C := nCol_notCol _ _ _ (by assumption))); conclude_def TS
                 contradict
             have : TS C A B E := by conclude lemma_9_5a
             contradict

@@ -3,6 +3,7 @@
 import GeocoqTranslate.Elements.OriginalProofs.euclidean_tactics
 import GeocoqTranslate.Elements.OriginalProofs.Lemmas.lemma_extension
 import GeocoqTranslate.Elements.OriginalProofs.Lemmas.lemma_NChelper
+import GeocoqTranslate.Elements.OriginalProofs.proposition_16
 import GeocoqTranslate.Elements.OriginalProofs.Lemmas.lemma_ABCequalsCBA
 import GeocoqTranslate.Elements.OriginalProofs.Lemmas.lemma_angleorderrespectscongruence2
 import GeocoqTranslate.Elements.OriginalProofs.Lemmas.lemma_ray5
@@ -23,6 +24,7 @@ namespace GeocoqTranslate.Elements
 open euclidean_neutral_basis euclidean_neutral euclidean_neutral_ruler_compass
 variable {Point : Type} [euclidean_neutral_ruler_compass Point]
 
+set_option maxHeartbeats 800000 in
 theorem proposition_17 :
     ∀ (A B C : Point), Triangle A B C → ∃ X Y Z, SumA A B C B C A X Y Z := by
   intro A B C h1
@@ -59,7 +61,7 @@ theorem proposition_17 :
   have : nCol C a d := by conclude lemma_NChelper
   have : nCol a C d := by forward_using lemma_NCorder
   have : nCol D A C := by forward_using lemma_NCorder
-  have : Triangle a C d := by conclude_def Triangle
+  have : Triangle a C d := by (try (have : nCol a C d := nCol_notCol _ _ _ (by assumption))); conclude_def Triangle
   obtain ⟨E, _, _⟩ : ∃ E, (Out C e E ∧ BetS A E D) := by conclude lemma_crossbar
   have : Out C E e := by conclude lemma_ray5
   have : Col A E D := by conclude_def Col

@@ -9,6 +9,7 @@ namespace GeocoqTranslate.Elements
 open euclidean_neutral_basis euclidean_neutral euclidean_neutral_ruler_compass
 variable {Point : Type} [euclidean_neutral_ruler_compass Point]
 
+set_option maxHeartbeats 800000 in
 theorem lemma_collinearparallel :
     ∀ (A B C c d : Point), Par A B c d → Col c d C → C ≠ d → Par A B C d := by
   intro A B C c d h1 h2 h3

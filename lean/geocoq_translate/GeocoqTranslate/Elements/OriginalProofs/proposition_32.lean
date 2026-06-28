@@ -4,12 +4,14 @@ import GeocoqTranslate.Elements.OriginalProofs.euclidean_tactics
 import GeocoqTranslate.Elements.OriginalProofs.Lemmas.lemma_inequalitysymmetric
 import GeocoqTranslate.Elements.OriginalProofs.Lemmas.lemma_extension
 import GeocoqTranslate.Elements.OriginalProofs.Lemmas.lemma_NChelper
+import GeocoqTranslate.Elements.OriginalProofs.proposition_31short
 import GeocoqTranslate.Elements.OriginalProofs.Lemmas.lemma_collinearparallel
 import GeocoqTranslate.Elements.OriginalProofs.Lemmas.lemma_collinear4
 import GeocoqTranslate.Elements.OriginalProofs.Lemmas.lemma_collinearbetween
 import GeocoqTranslate.Elements.OriginalProofs.Lemmas.lemma_3_5b
 import GeocoqTranslate.Elements.OriginalProofs.Lemmas.lemma_oppositesidesymmetric
 import GeocoqTranslate.Elements.OriginalProofs.Lemmas.lemma_equalanglesflip
+import GeocoqTranslate.Elements.OriginalProofs.proposition_29
 import GeocoqTranslate.Elements.OriginalProofs.Lemmas.lemma_ABCequalsCBA
 import GeocoqTranslate.Elements.OriginalProofs.Lemmas.lemma_equalanglestransitive
 import GeocoqTranslate.Elements.OriginalProofs.Lemmas.lemma_3_6a
@@ -26,6 +28,7 @@ namespace GeocoqTranslate.Elements
 open euclidean_neutral_basis euclidean_neutral euclidean_neutral_ruler_compass euclidean_euclidean
 variable {Point : Type} [euclidean_euclidean Point]
 
+set_option maxHeartbeats 800000 in
 theorem proposition_32 :
     ∀ (A B C D : Point), Triangle A B C → BetS B C D → SumA C A B A B C A C D := by
   intro A B C D h1 h2
@@ -161,7 +164,7 @@ theorem proposition_32 :
   have : Col B T C := by conclude_def Col
   have : Col C B T := by forward_using lemma_collinearorder
   have : nCol C B A := by forward_using lemma_NCorder
-  have : TS A C B H := by conclude_def TS
+  have : TS A C B H := by (try (have : nCol C B A := nCol_notCol _ _ _ (by assumption))); conclude_def TS
   have : TS H C B A := by conclude lemma_oppositesidesymmetric
   have : Par H E M A := by forward_using lemma_parallelflip
   have : CongA A C E B A C := by conclude lemma_equalanglesflip

@@ -4,6 +4,7 @@ import GeocoqTranslate.Elements.OriginalProofs.euclidean_tactics
 import GeocoqTranslate.Elements.OriginalProofs.Lemmas.lemma_diagonalsmeet
 import GeocoqTranslate.Elements.OriginalProofs.Lemmas.lemma_inequalitysymmetric
 import GeocoqTranslate.Elements.OriginalProofs.Lemmas.lemma_collinear4
+import GeocoqTranslate.Elements.OriginalProofs.proposition_29B
 import GeocoqTranslate.Elements.OriginalProofs.Lemmas.lemma_equalanglesreflexive
 import GeocoqTranslate.Elements.OriginalProofs.Lemmas.lemma_ray4
 import GeocoqTranslate.Elements.OriginalProofs.Lemmas.lemma_equalangleshelper
@@ -12,11 +13,13 @@ import GeocoqTranslate.Elements.OriginalProofs.Lemmas.lemma_equalanglestransitiv
 import GeocoqTranslate.Elements.OriginalProofs.Lemmas.lemma_NChelper
 import GeocoqTranslate.Elements.OriginalProofs.Lemmas.lemma_ABCequalsCBA
 import GeocoqTranslate.Elements.OriginalProofs.Lemmas.lemma_equalanglesflip
+import GeocoqTranslate.Elements.OriginalProofs.proposition_26A
 import GeocoqTranslate.Elements.OriginalProofs.Lemmas.lemma_betweennotequal
 import GeocoqTranslate.Elements.OriginalProofs.Lemmas.lemma_parallelflip
 import GeocoqTranslate.Elements.OriginalProofs.Lemmas.lemma_parallelNC
 import GeocoqTranslate.Elements.OriginalProofs.Lemmas.lemma_crossimpliesopposite
 import GeocoqTranslate.Elements.OriginalProofs.Lemmas.lemma_NCorder
+import GeocoqTranslate.Elements.OriginalProofs.proposition_34
 import GeocoqTranslate.Elements.OriginalProofs.Lemmas.lemma_congruenceflip
 import GeocoqTranslate.Elements.OriginalProofs.Lemmas.lemma_collinearorder
 import GeocoqTranslate.Elements.OriginalProofs.Lemmas.lemma_NCdistinct
@@ -25,6 +28,7 @@ namespace GeocoqTranslate.Elements
 open euclidean_neutral_basis euclidean_neutral euclidean_neutral_ruler_compass euclidean_euclidean
 variable {Point : Type} [euclidean_euclidean Point]
 
+set_option maxHeartbeats 800000 in
 theorem lemma_diagonalsbisect :
     ∀ (A B C D : Point), PG A B C D → ∃ X, Midpoint A X C ∧ Midpoint B X D := by
   intro A B C D h1
@@ -55,7 +59,7 @@ theorem lemma_diagonalsbisect :
       have : Col A B C := by conclude lemma_collinear4
       have : nCol A B C := by forward_using lemma_parallelNC
       contradict
-  have : Triangle M A B := by conclude_def Triangle
+  have : Triangle M A B := by (try (have : nCol M A B := nCol_notCol _ _ _ (by assumption))); conclude_def Triangle
   have : ¬ Col M C D := by
       intro h
       have : Col A M C := by conclude_def Col
@@ -65,7 +69,7 @@ theorem lemma_diagonalsbisect :
       have : Col A C D := by forward_using lemma_collinearorder
       have : nCol A C D := by forward_using lemma_parallelNC
       contradict
-  have : Triangle M C D := by conclude_def Triangle
+  have : Triangle M C D := by (try (have : nCol M C D := nCol_notCol _ _ _ (by assumption))); conclude_def Triangle
   have : Par B A C D := by forward_using lemma_parallelflip
   have : CongA B A C A C D := by conclude proposition_29B
   have : CongA B A C B A C := by conclude lemma_equalanglesreflexive

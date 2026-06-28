@@ -4,6 +4,7 @@ import GeocoqTranslate.Elements.OriginalProofs.euclidean_tactics
 import GeocoqTranslate.Elements.OriginalProofs.Lemmas.lemma_rightangleNC
 import GeocoqTranslate.Elements.OriginalProofs.Lemmas.lemma_extension
 import GeocoqTranslate.Elements.OriginalProofs.Lemmas.lemma_NChelper
+import GeocoqTranslate.Elements.OriginalProofs.proposition_46
 import GeocoqTranslate.Elements.OriginalProofs.Lemmas.lemma_collinearright
 import GeocoqTranslate.Elements.OriginalProofs.Lemmas.lemma_8_2
 import GeocoqTranslate.Elements.OriginalProofs.Lemmas.lemma_oppositesideflip
@@ -13,6 +14,7 @@ import GeocoqTranslate.Elements.OriginalProofs.Lemmas.lemma_congruencetransitive
 import GeocoqTranslate.Elements.OriginalProofs.Lemmas.lemma_ray4
 import GeocoqTranslate.Elements.OriginalProofs.Lemmas.lemma_layoffunique
 import GeocoqTranslate.Elements.OriginalProofs.Lemmas.lemma_Euclid4
+import GeocoqTranslate.Elements.OriginalProofs.proposition_04
 import GeocoqTranslate.Elements.OriginalProofs.Lemmas.lemma_diagonalsbisect
 import GeocoqTranslate.Elements.OriginalProofs.Lemmas.lemma_equalanglessymmetric
 import GeocoqTranslate.Elements.OriginalProofs.Lemmas.lemma_collinear4
@@ -28,6 +30,7 @@ namespace GeocoqTranslate.Elements
 open euclidean_neutral_basis euclidean_neutral euclidean_neutral_ruler_compass euclidean_euclidean
 variable {Point : Type} [euclidean_euclidean Point]
 
+set_option maxHeartbeats 800000 in
 theorem lemma_squareparallelogram :
     ∀ (A B C D : Point), SQ A B C D → PG A B C D := by
   intro A B C D h1

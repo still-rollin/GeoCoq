@@ -9,6 +9,7 @@ namespace GeocoqTranslate.Elements
 open euclidean_neutral_basis euclidean_neutral euclidean_neutral_ruler_compass
 variable {Point : Type} [euclidean_neutral_ruler_compass Point]
 
+set_option maxHeartbeats 800000 in
 theorem lemma_ray4 :
     ∀ (A B E : Point), (BetS A E B ∨ E = B ∨ BetS A B E) → A ≠ B → Out A B E := by
   intro A B E h1 h2
@@ -19,7 +20,7 @@ theorem lemma_ray4 :
   obtain ⟨J, _, _⟩ : ∃ J, (BetS B A J ∧ Cong A J A B) := by conclude lemma_extension
   have : BetS J A B := by conclude axiom_betweennesssymmetry
   have : Out A B E := by
-      rcases (show BetS A E B ∨ E = B ∨ BetS A B E by first | assumption | exact Classical.em _ | tauto | aesop) with c1 | c2 | c3
+      rcases (show BetS A E B ∨ E = B ∨ BetS A B E by first | assumption | exact nCol_or_Col _ _ _ | exact Col_or_nCol _ _ _ | exact Classical.em _ | tauto | aesop) with c1 | c2 | c3
       · have : BetS J A E := by conclude axiom_innertransitivity
         have : Out A B E := by conclude_def Out
         close

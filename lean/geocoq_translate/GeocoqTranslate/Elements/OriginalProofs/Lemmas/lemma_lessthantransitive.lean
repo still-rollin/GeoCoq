@@ -17,6 +17,7 @@ namespace GeocoqTranslate.Elements
 open euclidean_neutral_basis euclidean_neutral euclidean_neutral_ruler_compass
 variable {Point : Type} [euclidean_neutral_ruler_compass Point]
 
+set_option maxHeartbeats 800000 in
 theorem lemma_lessthantransitive :
     ∀ (A B C D E F : Point), Lt A B C D → Lt C D E F → Lt A B E F := by
   intro A B C D E F h1 h2
@@ -28,7 +29,7 @@ theorem lemma_lessthantransitive :
   have : Cong E K A B := by conclude lemma_congruencetransitive
   have : (BetS E K H ∨ H = K ∨ BetS E H K) := by conclude lemma_ray1
   have : BetS E K H := by
-      rcases (show BetS E K H ∨ H = K ∨ BetS E H K by first | assumption | exact Classical.em _ | tauto | aesop) with c1 | c2 | c3
+      rcases (show BetS E K H ∨ H = K ∨ BetS E H K by first | assumption | exact nCol_or_Col _ _ _ | exact Col_or_nCol _ _ _ | exact Classical.em _ | tauto | aesop) with c1 | c2 | c3
       · close
       · have : Cong C G E K := by conclude lemma_congruencesymmetric
         have : Cong C G E H := by conclude cn_equalitysub

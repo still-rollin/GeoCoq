@@ -8,6 +8,7 @@ namespace GeocoqTranslate.Elements
 open euclidean_neutral_basis euclidean_neutral euclidean_neutral_ruler_compass
 variable {Point : Type} [euclidean_neutral Point]
 
+set_option maxHeartbeats 800000 in
 theorem lemma_collinearorder :
     ∀ (A B C : Point), Col A B C → Col B A C ∧ Col B C A ∧ Col C A B ∧ Col A C B ∧ Col C B A := by
   intro A B C h1

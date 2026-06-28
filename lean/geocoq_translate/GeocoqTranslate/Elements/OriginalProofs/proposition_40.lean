@@ -4,9 +4,12 @@ import GeocoqTranslate.Elements.OriginalProofs.euclidean_tactics
 import GeocoqTranslate.Elements.OriginalProofs.Lemmas.lemma_inequalitysymmetric
 import GeocoqTranslate.Elements.OriginalProofs.Lemmas.lemma_extension
 import GeocoqTranslate.Elements.OriginalProofs.Lemmas.lemma_NChelper
+import GeocoqTranslate.Elements.OriginalProofs.proposition_31short
 import GeocoqTranslate.Elements.OriginalProofs.Lemmas.lemma_collinearparallel
 import GeocoqTranslate.Elements.OriginalProofs.Lemmas.lemma_congruencesymmetric
 import GeocoqTranslate.Elements.OriginalProofs.Lemmas.lemma_collinear4
+import GeocoqTranslate.Elements.OriginalProofs.proposition_38
+import GeocoqTranslate.Elements.OriginalProofs.proposition_39
 import GeocoqTranslate.Elements.OriginalProofs.Lemmas.lemma_NCdistinct
 import GeocoqTranslate.Elements.OriginalProofs.Lemmas.lemma_NCorder
 import GeocoqTranslate.Elements.OriginalProofs.Lemmas.lemma_collinearorder
@@ -16,6 +19,7 @@ namespace GeocoqTranslate.Elements
 open euclidean_neutral_basis euclidean_neutral euclidean_neutral_ruler_compass area
 variable {Point : Type} [area Point]
 
+set_option maxHeartbeats 800000 in
 theorem proposition_40 :
     ∀ (A B C D E H : Point), Cong B C H E → ET A B C D H E → Triangle A B C → Triangle D H E → Col B C H → Col B C E → OS A D B C → A ≠ D → Par A D B C := by
   intro A B C D E H h1 h2 h3 h4 h5 h6 h7 h8
@@ -53,7 +57,7 @@ theorem proposition_40 :
   have : nCol H E D := by forward_using lemma_NCorder
   have : nCol B C D := by conclude lemma_NChelper
   have : nCol D B C := by forward_using lemma_NCorder
-  have : Triangle D B C := by conclude_def Triangle
+  have : Triangle D B C := by (try (have : nCol D B C := nCol_notCol _ _ _ (by assumption))); conclude_def Triangle
   have : Par A D B C := by conclude proposition_39
   close
 

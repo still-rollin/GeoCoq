@@ -15,6 +15,7 @@ assert (BetS D C A) by (conclude axiom_betweennesssymmetry).
 assert (BetS D C B) by (conclude axiom_innertransitivity).
 assert (BetS B C D) by (conclude axiom_betweennesssymmetry).
 close.
+Show Proof.
 Qed.
 
 End Euclid.

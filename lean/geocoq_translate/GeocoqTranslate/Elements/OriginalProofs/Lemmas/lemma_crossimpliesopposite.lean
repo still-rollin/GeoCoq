@@ -9,6 +9,7 @@ namespace GeocoqTranslate.Elements
 open euclidean_neutral_basis euclidean_neutral euclidean_neutral_ruler_compass
 variable {Point : Type} [euclidean_neutral_ruler_compass Point]
 
+set_option maxHeartbeats 800000 in
 theorem lemma_crossimpliesopposite :
     ∀ (A B C D : Point), CR A B C D → nCol A C D → TS A C D B ∧ TS A D C B ∧ TS B C D A ∧ TS B D C A := by
   intro A B C D h1 h2
@@ -17,9 +18,9 @@ theorem lemma_crossimpliesopposite :
   have : Col C D M := by forward_using lemma_collinearorder
   have : nCol C D A := by forward_using lemma_NCorder
   have : nCol D C A := by forward_using lemma_NCorder
-  have : TS A C D B := by conclude_def TS
+  have : TS A C D B := by (try (have : nCol C D A := nCol_notCol _ _ _ (by assumption))); conclude_def TS
   have : Col D C M := by forward_using lemma_collinearorder
-  have : TS A D C B := by conclude_def TS
+  have : TS A D C B := by (try (have : nCol D C A := nCol_notCol _ _ _ (by assumption))); conclude_def TS
   have : TS B C D A := by conclude lemma_oppositesidesymmetric
   have : TS B D C A := by conclude lemma_oppositesidesymmetric
   close

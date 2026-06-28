@@ -14,6 +14,7 @@ namespace GeocoqTranslate.Elements
 open euclidean_neutral_basis euclidean_neutral euclidean_neutral_ruler_compass
 variable {Point : Type} [euclidean_neutral_ruler_compass Point]
 
+set_option maxHeartbeats 800000 in
 theorem lemma_ABCequalsCBA :
     ∀ (A B C : Point), nCol A B C → CongA A B C C B A := by
   intro A B C h1
@@ -43,7 +44,7 @@ theorem lemma_ABCequalsCBA :
   have : Cong E F F E := by conclude cn_equalityreverse
   have : Out B A E := by conclude lemma_ray4
   have : Out B C F := by conclude lemma_ray4
-  have : CongA A B C C B A := by conclude_def CongA
+  have : CongA A B C C B A := by (try (have : nCol A B C := nCol_notCol _ _ _ (by assumption))); conclude_def CongA
   close
 
 end GeocoqTranslate.Elements

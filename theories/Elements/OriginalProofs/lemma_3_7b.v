@@ -15,6 +15,7 @@ assert (BetS D C B) by (conclude axiom_betweennesssymmetry).
 assert (BetS D B A) by (conclude lemma_3_7a).
 assert (BetS A B D) by (conclude axiom_betweennesssymmetry).
 close.
+Show Proof.
 Qed.
 
 End Euclid.

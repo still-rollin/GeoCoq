@@ -16,6 +16,7 @@ namespace GeocoqTranslate.Elements
 open euclidean_neutral_basis euclidean_neutral euclidean_neutral_ruler_compass
 variable {Point : Type} [euclidean_neutral_ruler_compass Point]
 
+set_option maxHeartbeats 800000 in
 theorem lemma_collinearright :
     ∀ (A B C D : Point), Per A B D → Col A B C → C ≠ B → Per C B D := by
   intro A B C D h1 h2 h3
@@ -30,7 +31,7 @@ theorem lemma_collinearright :
       contradict
   have : Per D B A := by conclude lemma_8_2
   have : Per D B C := by
-      rcases (show A = B ∨ A = C ∨ B = C ∨ BetS B A C ∨ BetS A B C ∨ BetS A C B by first | assumption | exact Classical.em _ | tauto | aesop) with c1 | c2 | c3 | c4 | c5 | c6
+      rcases (show A = B ∨ A = C ∨ B = C ∨ BetS B A C ∨ BetS A B C ∨ BetS A C B by first | assumption | exact nCol_or_Col _ _ _ | exact Col_or_nCol _ _ _ | exact Classical.em _ | tauto | aesop) with c1 | c2 | c3 | c4 | c5 | c6
       · have : ¬ ¬ Per D B C := by
             intro h
             have : Col A B D := by conclude_def Col

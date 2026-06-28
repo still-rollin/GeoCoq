@@ -8,6 +8,7 @@ namespace GeocoqTranslate.Elements
 open euclidean_neutral_basis euclidean_neutral euclidean_neutral_ruler_compass
 variable {Point : Type} [euclidean_neutral_ruler_compass Point]
 
+set_option maxHeartbeats 800000 in
 theorem lemma_samesidereflexive :
     ∀ (A B P : Point), nCol A B P → OS P P A B := by
   intro A B P h1
@@ -20,7 +21,7 @@ theorem lemma_samesidereflexive :
   have : A ≠ P := by conclude lemma_inequalitysymmetric
   obtain ⟨C, _, _⟩ : ∃ C, (BetS P A C ∧ Cong A C A P) := by conclude lemma_extension
   have : Col A B A := by conclude_def Col
-  have : OS P P A B := by conclude_def OS
+  have : OS P P A B := by (try (have : nCol A B P := nCol_notCol _ _ _ (by assumption))); (try (have : nCol A B P := nCol_notCol _ _ _ (by assumption))); conclude_def OS
   close
 
 end GeocoqTranslate.Elements

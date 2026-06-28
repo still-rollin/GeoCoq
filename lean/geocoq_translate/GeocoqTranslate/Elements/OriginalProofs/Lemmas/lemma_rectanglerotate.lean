@@ -6,6 +6,7 @@ namespace GeocoqTranslate.Elements
 open euclidean_neutral_basis euclidean_neutral euclidean_neutral_ruler_compass area
 variable {Point : Type} [area Point]
 
+set_option maxHeartbeats 800000 in
 theorem lemma_rectanglerotate :
     ∀ (A B C D : Point), RE A B C D → RE B C D A := by
   intro A B C D h1

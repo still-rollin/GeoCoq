@@ -15,6 +15,7 @@ import GeocoqTranslate.Elements.OriginalProofs.Lemmas.lemma_3_6a
 import GeocoqTranslate.Elements.OriginalProofs.Lemmas.lemma_lessthancongruence
 import GeocoqTranslate.Elements.OriginalProofs.Lemmas.lemma_lessthantransitive
 import GeocoqTranslate.Elements.OriginalProofs.Lemmas.lemma_parallelflip
+import GeocoqTranslate.Elements.OriginalProofs.proposition_34
 import GeocoqTranslate.Elements.OriginalProofs.Lemmas.lemma_collinearorder
 import GeocoqTranslate.Elements.OriginalProofs.Lemmas.lemma_betweennotequal
 import GeocoqTranslate.Elements.OriginalProofs.Lemmas.lemma_parallelNC
@@ -26,6 +27,7 @@ namespace GeocoqTranslate.Elements
 open euclidean_neutral_basis euclidean_neutral euclidean_neutral_ruler_compass euclidean_euclidean
 variable {Point : Type} [euclidean_euclidean Point]
 
+set_option maxHeartbeats 800000 in
 theorem lemma_35helper :
     ∀ (A B C D E F : Point), PG A B C D → PG E B C F → BetS A D F → Col A E F → BetS A E F := by
   intro A B C D E F h1 h2 h3 h4
@@ -128,7 +130,7 @@ theorem lemma_35helper :
   have : Col A F E := by forward_using lemma_collinearorder
   have : (A = F ∨ A = E ∨ F = E ∨ BetS F A E ∨ BetS A F E ∨ BetS A E F) := by conclude_def Col
   have : BetS A E F := by
-      rcases (show A = F ∨ A = E ∨ F = E ∨ BetS F A E ∨ BetS A F E ∨ BetS A E F by first | assumption | exact Classical.em _ | tauto | aesop) with c1 | c2 | c3 | c4 | c5 | c6
+      rcases (show A = F ∨ A = E ∨ F = E ∨ BetS F A E ∨ BetS A F E ∨ BetS A E F by first | assumption | exact nCol_or_Col _ _ _ | exact Col_or_nCol _ _ _ | exact Classical.em _ | tauto | aesop) with c1 | c2 | c3 | c4 | c5 | c6
       · have : ¬ ¬ BetS A E F := by
             intro h
             have : BetS A D A := by conclude cn_equalitysub

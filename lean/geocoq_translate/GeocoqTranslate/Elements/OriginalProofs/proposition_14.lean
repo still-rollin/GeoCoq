@@ -9,7 +9,9 @@ import GeocoqTranslate.Elements.OriginalProofs.Lemmas.lemma_equalanglestransitiv
 import GeocoqTranslate.Elements.OriginalProofs.Lemmas.lemma_inequalitysymmetric
 import GeocoqTranslate.Elements.OriginalProofs.Lemmas.lemma_NChelper
 import GeocoqTranslate.Elements.OriginalProofs.Lemmas.lemma_rayimpliescollinear
+import GeocoqTranslate.Elements.OriginalProofs.proposition_04
 import GeocoqTranslate.Elements.OriginalProofs.Lemmas.lemma_oppositesidesymmetric
+import GeocoqTranslate.Elements.OriginalProofs.proposition_07
 import GeocoqTranslate.Elements.OriginalProofs.Lemmas.lemma_NCdistinct
 import GeocoqTranslate.Elements.OriginalProofs.Lemmas.lemma_betweennotequal
 import GeocoqTranslate.Elements.OriginalProofs.Lemmas.lemma_NCorder
@@ -20,6 +22,7 @@ namespace GeocoqTranslate.Elements
 open euclidean_neutral_basis euclidean_neutral euclidean_neutral_ruler_compass
 variable {Point : Type} [euclidean_neutral_ruler_compass Point]
 
+set_option maxHeartbeats 800000 in
 theorem proposition_14 :
     ∀ (A B C D E : Point), RT A B C D B E → Out B C D → TS E D B A → Supp A B C D E ∧ BetS A B E := by
   intro A B C D E h1 h2 h3
@@ -58,7 +61,7 @@ theorem proposition_14 :
   obtain ⟨m, _, _, _⟩ : ∃ m, (BetS A m E ∧ Col D B m ∧ nCol D B A) := by conclude_def TS
   have : BetS E m A := by conclude axiom_betweennesssymmetry
   have : BetS T B A := by conclude axiom_betweennesssymmetry
-  have : OS T E D B := by conclude_def OS
+  have : OS T E D B := by (try (have : nCol D B T := nCol_notCol _ _ _ (by assumption))); (try (have : nCol D B E := nCol_notCol _ _ _ (by assumption))); conclude_def OS
   have : B ≠ C := by forward_using lemma_NCdistinct
   have : C ≠ B := by conclude lemma_inequalitysymmetric
   have : T = E := by conclude proposition_07

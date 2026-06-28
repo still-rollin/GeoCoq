@@ -6,6 +6,7 @@ namespace GeocoqTranslate.Elements
 open euclidean_neutral_basis euclidean_neutral euclidean_neutral_ruler_compass
 variable {Point : Type} [euclidean_neutral Point]
 
+set_option maxHeartbeats 800000 in
 theorem lemma_TCreflexive :
     ∀ (A B C : Point), Triangle A B C → Cong_3 A B C A B C := by
   intro A B C h1

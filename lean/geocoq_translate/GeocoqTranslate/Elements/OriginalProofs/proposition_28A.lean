@@ -4,9 +4,11 @@ import GeocoqTranslate.Elements.OriginalProofs.euclidean_tactics
 import GeocoqTranslate.Elements.OriginalProofs.Lemmas.lemma_inequalitysymmetric
 import GeocoqTranslate.Elements.OriginalProofs.Lemmas.lemma_collinear4
 import GeocoqTranslate.Elements.OriginalProofs.Lemmas.lemma_oppositesidesymmetric
+import GeocoqTranslate.Elements.OriginalProofs.proposition_15
 import GeocoqTranslate.Elements.OriginalProofs.Lemmas.lemma_equalanglessymmetric
 import GeocoqTranslate.Elements.OriginalProofs.Lemmas.lemma_equalanglestransitive
 import GeocoqTranslate.Elements.OriginalProofs.Lemmas.lemma_planeseparation
+import GeocoqTranslate.Elements.OriginalProofs.proposition_27
 import GeocoqTranslate.Elements.OriginalProofs.Lemmas.lemma_samesidesymmetric
 import GeocoqTranslate.Elements.OriginalProofs.Lemmas.lemma_collinearorder
 import GeocoqTranslate.Elements.OriginalProofs.Lemmas.lemma_betweennotequal
@@ -15,6 +17,7 @@ namespace GeocoqTranslate.Elements
 open euclidean_neutral_basis euclidean_neutral euclidean_neutral_ruler_compass
 variable {Point : Type} [euclidean_neutral_ruler_compass Point]
 
+set_option maxHeartbeats 800000 in
 theorem proposition_28A :
     ∀ (A B C D E G H : Point), BetS A G B → BetS C H D → BetS E G H → CongA E G B G H D → OS B D G H → Par A B C D := by
   intro A B C D E G H h1 h2 h3 h4 h5
@@ -36,7 +39,7 @@ theorem proposition_28A :
       have : Col G E B := by conclude lemma_collinear4
       have : Col E G B := by forward_using lemma_collinearorder
       contradict
-  have : TS A G H B := by conclude_def TS
+  have : TS A G H B := by (try (have : nCol G H A := nCol_notCol _ _ _ (by assumption))); conclude_def TS
   have : TS B G H A := by conclude lemma_oppositesidesymmetric
   have : BetS B G A := by conclude axiom_betweennesssymmetry
   have : CongA E G B A G H := by conclude proposition_15a

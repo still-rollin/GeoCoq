@@ -3,6 +3,7 @@
 import GeocoqTranslate.Elements.OriginalProofs.euclidean_tactics
 import GeocoqTranslate.Elements.OriginalProofs.Lemmas.lemma_rectangleparallelogram
 import GeocoqTranslate.Elements.OriginalProofs.Lemmas.lemma_diagonalsmeet
+import GeocoqTranslate.Elements.OriginalProofs.proposition_34
 import GeocoqTranslate.Elements.OriginalProofs.Lemmas.lemma_oppositesidesymmetric
 import GeocoqTranslate.Elements.OriginalProofs.Lemmas.lemma_parallelsymmetric
 import GeocoqTranslate.Elements.OriginalProofs.Lemmas.lemma_collinearparallel
@@ -24,6 +25,7 @@ namespace GeocoqTranslate.Elements
 open euclidean_neutral_basis euclidean_neutral euclidean_neutral_ruler_compass area
 variable {Point : Type} [area Point]
 
+set_option maxHeartbeats 800000 in
 theorem lemma_paste5 :
     ∀ (B C D E L M b c d e l m : Point), EF B M L D b m l d → EF M C E L m c e l → BetS B M C → BetS b m c → BetS E L D → BetS e l d → RE M C E L → RE m c e l → EF B C E D b c e d := by
   intro B C D E L M b c d e l m h1 h2 h3 h4 h5 h6 h7 h8

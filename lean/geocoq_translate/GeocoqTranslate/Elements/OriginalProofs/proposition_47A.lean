@@ -6,6 +6,7 @@ import GeocoqTranslate.Elements.OriginalProofs.Lemmas.lemma_rightangleNC
 import GeocoqTranslate.Elements.OriginalProofs.Lemmas.lemma_inequalitysymmetric
 import GeocoqTranslate.Elements.OriginalProofs.Lemmas.lemma_squareparallelogram
 import GeocoqTranslate.Elements.OriginalProofs.Lemmas.lemma_collinear4
+import GeocoqTranslate.Elements.OriginalProofs.proposition_12
 import GeocoqTranslate.Elements.OriginalProofs.Lemmas.lemma_collinearright
 import GeocoqTranslate.Elements.OriginalProofs.Lemmas.lemma_8_7
 import GeocoqTranslate.Elements.OriginalProofs.Lemmas.lemma_parallelsymmetric
@@ -20,6 +21,7 @@ import GeocoqTranslate.Elements.OriginalProofs.Lemmas.lemma_planeseparation
 import GeocoqTranslate.Elements.OriginalProofs.Lemmas.lemma_ray5
 import GeocoqTranslate.Elements.OriginalProofs.Lemmas.lemma_8_3
 import GeocoqTranslate.Elements.OriginalProofs.Lemmas.lemma_twoperpsparallel
+import GeocoqTranslate.Elements.OriginalProofs.proposition_29C
 import GeocoqTranslate.Elements.OriginalProofs.Lemmas.lemma_equaltorightisright
 import GeocoqTranslate.Elements.OriginalProofs.Lemmas.lemma_altitudeofrighttriangle
 import GeocoqTranslate.Elements.OriginalProofs.Lemmas.lemma_Playfair
@@ -31,11 +33,13 @@ import GeocoqTranslate.Elements.OriginalProofs.Lemmas.lemma_parallelflip
 import GeocoqTranslate.Elements.OriginalProofs.Lemmas.lemma_samesidesymmetric
 import GeocoqTranslate.Elements.OriginalProofs.Lemmas.lemma_NCorder
 import GeocoqTranslate.Elements.OriginalProofs.Lemmas.lemma_parallelNC
+import GeocoqTranslate.Elements.OriginalProofs.proposition_34
 
 namespace GeocoqTranslate.Elements
 open euclidean_neutral_basis euclidean_neutral euclidean_neutral_ruler_compass area
 variable {Point : Type} [area Point]
 
+set_option maxHeartbeats 800000 in
 theorem proposition_47A :
     ∀ (A B C D E : Point), Triangle A B C → Per B A C → SQ B C E D → TS D C B A → ∃ X Y, PG B X Y D ∧ BetS B X C ∧ PG X C E Y ∧ BetS D Y E ∧ BetS Y X A ∧ Per D Y A := by
   intro A B C D E h1 h2 h3 h4
@@ -133,7 +137,7 @@ theorem proposition_47A :
   have : OS L D B C := by conclude_def TP
   have : nCol B C D := by forward_using lemma_parallelNC
   have : Col B C N := by forward_using lemma_collinearorder
-  have : TS D B C A := by conclude_def TS
+  have : TS D B C A := by (try (have : nCol B C D := nCol_notCol _ _ _ (by assumption))); conclude_def TS
   have : TS L B C A := by conclude lemma_planeseparation
   obtain ⟨M, _, _, _⟩ : ∃ M, (BetS L M A ∧ Col B C M ∧ nCol B C L) := by conclude_def TS
   have : D ≠ E := by forward_using lemma_NCdistinct

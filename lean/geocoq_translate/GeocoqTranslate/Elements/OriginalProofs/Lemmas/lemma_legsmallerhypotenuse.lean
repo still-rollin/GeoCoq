@@ -3,11 +3,13 @@
 import GeocoqTranslate.Elements.OriginalProofs.euclidean_tactics
 import GeocoqTranslate.Elements.OriginalProofs.Lemmas.lemma_8_2
 import GeocoqTranslate.Elements.OriginalProofs.Lemmas.lemma_rightangleNC
+import GeocoqTranslate.Elements.OriginalProofs.proposition_16
 import GeocoqTranslate.Elements.OriginalProofs.Lemmas.lemma_ray4
 import GeocoqTranslate.Elements.OriginalProofs.Lemmas.lemma_inequalitysymmetric
 import GeocoqTranslate.Elements.OriginalProofs.Lemmas.lemma_collinear4
 import GeocoqTranslate.Elements.OriginalProofs.Lemmas.lemma_equalanglessymmetric
 import GeocoqTranslate.Elements.OriginalProofs.Lemmas.lemma_angleorderrespectscongruence
+import GeocoqTranslate.Elements.OriginalProofs.proposition_19
 import GeocoqTranslate.Elements.OriginalProofs.Lemmas.lemma_ABCequalsCBA
 import GeocoqTranslate.Elements.OriginalProofs.Lemmas.lemma_angleorderrespectscongruence2
 import GeocoqTranslate.Elements.OriginalProofs.Lemmas.lemma_lessthancongruence2
@@ -20,18 +22,19 @@ namespace GeocoqTranslate.Elements
 open euclidean_neutral_basis euclidean_neutral euclidean_neutral_ruler_compass
 variable {Point : Type} [euclidean_neutral_ruler_compass Point]
 
+set_option maxHeartbeats 800000 in
 theorem lemma_legsmallerhypotenuse :
     ∀ (A B C : Point), Per A B C → Lt A B A C ∧ Lt B C A C := by
   intro A B C h1
   have : Per C B A := by conclude lemma_8_2
   obtain ⟨D, _, _, _, _⟩ : ∃ D, (BetS C B D ∧ Cong C B D B ∧ Cong C A D A ∧ B ≠ A) := by conclude_def Per
   have : nCol A B C := by conclude lemma_rightangleNC
-  have : Triangle A B C := by conclude_def Triangle
+  have : Triangle A B C := by (try (have : nCol A B C := nCol_notCol _ _ _ (by assumption))); conclude_def Triangle
   have : ¬ Col A C B := by
       intro h
       have : Col A B C := by forward_using lemma_collinearorder
       contradict
-  have : Triangle A C B := by conclude_def Triangle
+  have : Triangle A C B := by (try (have : nCol A C B := nCol_notCol _ _ _ (by assumption))); conclude_def Triangle
   have : (LtA C A B A B D ∧ LtA B C A A B D) := by conclude proposition_16
   have : A = A := by conclude cn_equalityreflexive
   have : C = C := by conclude cn_equalityreflexive
@@ -57,7 +60,7 @@ theorem lemma_legsmallerhypotenuse :
       have : Col B C A := by conclude lemma_collinear4
       have : Col A B C := by forward_using lemma_collinearorder
       contradict
-  have : CongA A B D A B C := by conclude_def CongA
+  have : CongA A B D A B C := by (try (have : nCol A B D := nCol_notCol _ _ _ (by assumption))); conclude_def CongA
   have : CongA A B C A B D := by conclude lemma_equalanglessymmetric
   have : LtA B C A A B C := by conclude lemma_angleorderrespectscongruence
   have : Lt A B A C := by conclude proposition_19
@@ -72,7 +75,7 @@ theorem lemma_legsmallerhypotenuse :
       intro h
       have : Col A B C := by forward_using lemma_collinearorder
       contradict
-  have : Triangle C B A := by conclude_def Triangle
+  have : Triangle C B A := by (try (have : nCol C B A := nCol_notCol _ _ _ (by assumption))); conclude_def Triangle
   have : CongA C B A A B C := by conclude lemma_ABCequalsCBA
   have : LtA B A C C B A := by conclude lemma_angleorderrespectscongruence
   have : Lt C B C A := by conclude proposition_19

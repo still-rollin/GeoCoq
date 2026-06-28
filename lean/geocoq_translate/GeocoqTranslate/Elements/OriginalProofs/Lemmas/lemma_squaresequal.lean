@@ -5,6 +5,7 @@ import GeocoqTranslate.Elements.OriginalProofs.Lemmas.lemma_Euclid4
 import GeocoqTranslate.Elements.OriginalProofs.Lemmas.lemma_congruencesymmetric
 import GeocoqTranslate.Elements.OriginalProofs.Lemmas.lemma_congruencetransitive
 import GeocoqTranslate.Elements.OriginalProofs.Lemmas.lemma_squareparallelogram
+import GeocoqTranslate.Elements.OriginalProofs.proposition_04
 import GeocoqTranslate.Elements.OriginalProofs.Lemmas.lemma_squarerectangle
 import GeocoqTranslate.Elements.OriginalProofs.Lemmas.lemma_parallelNC
 import GeocoqTranslate.Elements.OriginalProofs.Lemmas.lemma_congruenceflip
@@ -13,6 +14,7 @@ namespace GeocoqTranslate.Elements
 open euclidean_neutral_basis euclidean_neutral euclidean_neutral_ruler_compass area
 variable {Point : Type} [area Point]
 
+set_option maxHeartbeats 800000 in
 theorem lemma_squaresequal :
     ∀ (A B C D a b c d : Point), Cong A B a b → SQ A B C D → SQ a b c d → EF A B C D a b c d := by
   intro A B C D a b c d h1 h2 h3
@@ -33,7 +35,7 @@ theorem lemma_squaresequal :
   have : Cong A D a d := by forward_using lemma_congruenceflip
   have : Cong D B d b := by conclude proposition_04
   have : Cong B D b d := by forward_using lemma_congruenceflip
-  have : Triangle A B D := by conclude_def Triangle
+  have : Triangle A B D := by (try (have : nCol A B D := nCol_notCol _ _ _ (by assumption))); conclude_def Triangle
   have : Cong_3 A B D a b d := by conclude_def Cong_3
   have : ET A B D a b d := by conclude axiom_congruentequal
   have : ET A B D b d a := by forward_using axiom_ETpermutation
@@ -51,7 +53,7 @@ theorem lemma_squaresequal :
   have : Cong C D a b := by conclude lemma_congruencetransitive
   have : Cong C D c d := by conclude lemma_congruencetransitive
   have : nCol B C D := by forward_using lemma_parallelNC
-  have : Triangle B C D := by conclude_def Triangle
+  have : Triangle B C D := by (try (have : nCol B C D := nCol_notCol _ _ _ (by assumption))); conclude_def Triangle
   have : Cong_3 B C D b c d := by conclude_def Cong_3
   have : ET B C D b c d := by conclude axiom_congruentequal
   have : ET B C D b d c := by forward_using axiom_ETpermutation

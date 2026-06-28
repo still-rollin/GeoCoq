@@ -11,6 +11,7 @@ namespace GeocoqTranslate.Elements
 open euclidean_neutral_basis euclidean_neutral euclidean_neutral_ruler_compass
 variable {Point : Type} [euclidean_neutral_ruler_compass Point]
 
+set_option maxHeartbeats 800000 in
 theorem lemma_parallelbetween :
     ∀ (B H K L M : Point), BetS H B K → Par M B H L → Col L M K → BetS L M K := by
   intro B H K L M h1 h2 h3
@@ -39,7 +40,7 @@ theorem lemma_parallelbetween :
   have : nCol H M K := by forward_using lemma_NCorder
   have : (L = M ∨ L = K ∨ M = K ∨ BetS M L K ∨ BetS L M K ∨ BetS L K M) := by conclude_def Col
   have : BetS L M K := by
-      rcases (show L = M ∨ L = K ∨ M = K ∨ BetS M L K ∨ BetS L M K ∨ BetS L K M by first | assumption | exact Classical.em _ | tauto | aesop) with c1 | c2 | c3 | c4 | c5 | c6
+      rcases (show L = M ∨ L = K ∨ M = K ∨ BetS M L K ∨ BetS L M K ∨ BetS L K M by first | assumption | exact nCol_or_Col _ _ _ | exact Col_or_nCol _ _ _ | exact Classical.em _ | tauto | aesop) with c1 | c2 | c3 | c4 | c5 | c6
       · have : ¬ ¬ BetS L M K := by
             intro h
             have : Col M B M := by conclude_def Col

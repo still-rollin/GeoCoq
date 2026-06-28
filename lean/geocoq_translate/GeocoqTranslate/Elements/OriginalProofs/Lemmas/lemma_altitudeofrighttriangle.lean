@@ -21,6 +21,7 @@ namespace GeocoqTranslate.Elements
 open euclidean_neutral_basis euclidean_neutral euclidean_neutral_ruler_compass
 variable {Point : Type} [euclidean_neutral_ruler_compass Point]
 
+set_option maxHeartbeats 800000 in
 theorem lemma_altitudeofrighttriangle :
     ∀ (A B C M p : Point), Per B A C → Per A M p → Col B C p → Col B C M → BetS B M C := by
   intro A B C M p h1 h2 h3 h4
@@ -82,7 +83,7 @@ theorem lemma_altitudeofrighttriangle :
       contradict
   have : (B = C ∨ B = M ∨ C = M ∨ BetS C B M ∨ BetS B C M ∨ BetS B M C) := by conclude_def Col
   have : Out B C M := by
-      rcases (show B = C ∨ B = M ∨ C = M ∨ BetS C B M ∨ BetS B C M ∨ BetS B M C by first | assumption | exact Classical.em _ | tauto | aesop) with c1 | c2 | c3 | c4 | c5 | c6
+      rcases (show B = C ∨ B = M ∨ C = M ∨ BetS C B M ∨ BetS B C M ∨ BetS B M C by first | assumption | exact nCol_or_Col _ _ _ | exact Col_or_nCol _ _ _ | exact Classical.em _ | tauto | aesop) with c1 | c2 | c3 | c4 | c5 | c6
       · have : ¬ ¬ Out B C M := by
             intro h
             contradict
@@ -112,7 +113,7 @@ theorem lemma_altitudeofrighttriangle :
       have : ¬ Lt B M B C := by conclude lemma_trichotomy2
       contradict
   have : Out C B M := by
-      rcases (show B = C ∨ B = M ∨ C = M ∨ BetS C B M ∨ BetS B C M ∨ BetS B M C by first | assumption | exact Classical.em _ | tauto | aesop) with c1 | c2 | c3 | c4 | c5 | c6
+      rcases (show B = C ∨ B = M ∨ C = M ∨ BetS C B M ∨ BetS B C M ∨ BetS B M C by first | assumption | exact nCol_or_Col _ _ _ | exact Col_or_nCol _ _ _ | exact Classical.em _ | tauto | aesop) with c1 | c2 | c3 | c4 | c5 | c6
       · have : ¬ ¬ Out C B M := by
             intro h
             contradict

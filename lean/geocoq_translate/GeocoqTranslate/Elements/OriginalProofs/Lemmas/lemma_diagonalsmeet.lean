@@ -18,6 +18,7 @@ namespace GeocoqTranslate.Elements
 open euclidean_neutral_basis euclidean_neutral euclidean_neutral_ruler_compass
 variable {Point : Type} [euclidean_neutral_ruler_compass Point]
 
+set_option maxHeartbeats 800000 in
 theorem lemma_diagonalsmeet :
     ∀ (A B C D : Point), PG A B C D → ∃ X, BetS A X C ∧ BetS B X D := by
   intro A B C D h1
@@ -45,7 +46,7 @@ theorem lemma_diagonalsmeet :
       have : Meet A B C D := by conclude_def Meet
       have : ¬ Meet A B C D := by conclude_def Par
       contradict
-  have : TS A D C E := by conclude_def TS
+  have : TS A D C E := by (try (have : nCol D C A := nCol_notCol _ _ _ (by assumption))); conclude_def TS
   have : OS B A D C := by forward_using lemma_samesidesymmetric
   have : TS B D C E := by conclude lemma_planeseparation
   obtain ⟨F, _, _, _⟩ : ∃ F, (BetS B F E ∧ Col D C F ∧ nCol D C B) := by conclude_def TS
@@ -71,7 +72,7 @@ theorem lemma_diagonalsmeet :
       have : Col B C S := by conclude_def Col
       have : Col S B C := by forward_using lemma_collinearorder
       have : Col B C R := by
-          rcases (show B = R ∨ B ≠ R by first | assumption | exact Classical.em _ | tauto | aesop) with c1 | c2
+          rcases (show B = R ∨ B ≠ R by first | assumption | exact nCol_or_Col _ _ _ | exact Col_or_nCol _ _ _ | exact Classical.em _ | tauto | aesop) with c1 | c2
           · have : Col B C R := by conclude_def Col
             close
           · have : Col B R C := by conclude lemma_collinear4

@@ -11,6 +11,7 @@ namespace GeocoqTranslate.Elements
 open euclidean_neutral_basis euclidean_neutral euclidean_neutral_ruler_compass euclidean_euclidean
 variable {Point : Type} [euclidean_euclidean Point]
 
+set_option maxHeartbeats 800000 in
 theorem lemma_Playfair :
     ∀ (A B C D E : Point), Par A B C D → Par A B C E → Col C D E := by
   intro A B C D E h1 h2
@@ -27,7 +28,7 @@ theorem lemma_Playfair :
       have : CR A C B D := by conclude_def CR
       contradict
   have : Col C D E := by
-      rcases (show CR A D B C ∨ CR A C B D by first | assumption | exact Classical.em _ | tauto | aesop) with c1 | c2
+      rcases (show CR A D B C ∨ CR A C B D by first | assumption | exact nCol_or_Col _ _ _ | exact Col_or_nCol _ _ _ | exact Classical.em _ | tauto | aesop) with c1 | c2
       · have : Col C D E := by conclude lemma_Playfairhelper2
         close
       · obtain ⟨p, _, _⟩ : ∃ p, (BetS A p C ∧ BetS B p D) := by conclude_def CR

@@ -10,12 +10,13 @@ namespace GeocoqTranslate.Elements
 open euclidean_neutral_basis euclidean_neutral euclidean_neutral_ruler_compass
 variable {Point : Type} [euclidean_neutral_ruler_compass Point]
 
+set_option maxHeartbeats 800000 in
 theorem lemma_fiveline :
     ∀ (A B C D a b c d : Point), Col A B C → Cong A B a b → Cong B C b c → Cong A D a d → Cong C D c d → Cong A C a c → A ≠ C → Cong B D b d := by
   intro A B C D a b c d h1 h2 h3 h4 h5 h6 h7
   have : (A = B ∨ A = C ∨ B = C ∨ BetS B A C ∨ BetS A B C ∨ BetS A C B) := by conclude_def Col
   have : Cong B D b d := by
-      rcases (show A = B ∨ B = C ∨ BetS B A C ∨ BetS A B C ∨ BetS A C B by first | assumption | exact Classical.em _ | tauto | aesop) with c1 | c2 | c3 | c4 | c5
+      rcases (show A = B ∨ B = C ∨ BetS B A C ∨ BetS A B C ∨ BetS A C B by first | assumption | exact nCol_or_Col _ _ _ | exact Col_or_nCol _ _ _ | exact Classical.em _ | tauto | aesop) with c1 | c2 | c3 | c4 | c5
       · have : Cong B B a b := by conclude cn_equalitysub
         have : Cong a b B B := by conclude lemma_congruencesymmetric
         have : ¬ a ≠ b := by

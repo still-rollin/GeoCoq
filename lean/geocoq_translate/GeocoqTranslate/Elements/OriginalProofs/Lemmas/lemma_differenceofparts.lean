@@ -11,11 +11,12 @@ namespace GeocoqTranslate.Elements
 open euclidean_neutral_basis euclidean_neutral euclidean_neutral_ruler_compass
 variable {Point : Type} [euclidean_neutral_ruler_compass Point]
 
+set_option maxHeartbeats 800000 in
 theorem lemma_differenceofparts :
     ∀ (A B C a b c : Point), Cong A B a b → Cong A C a c → BetS A B C → BetS a b c → Cong B C b c := by
   intro A B C a b c h1 h2 h3 h4
   have : Cong B C b c := by
-      rcases (show B = A ∨ B ≠ A by first | assumption | exact Classical.em _ | tauto | aesop) with c1 | c2
+      rcases (show B = A ∨ B ≠ A by first | assumption | exact nCol_or_Col _ _ _ | exact Col_or_nCol _ _ _ | exact Classical.em _ | tauto | aesop) with c1 | c2
       · have : Cong A A a b := by conclude cn_equalitysub
         have : Cong a b A A := by conclude lemma_congruencesymmetric
         have : ¬ a ≠ b := by

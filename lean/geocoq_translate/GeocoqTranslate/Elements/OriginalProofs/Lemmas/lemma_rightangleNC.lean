@@ -16,6 +16,7 @@ namespace GeocoqTranslate.Elements
 open euclidean_neutral_basis euclidean_neutral euclidean_neutral_ruler_compass
 variable {Point : Type} [euclidean_neutral_ruler_compass Point]
 
+set_option maxHeartbeats 800000 in
 theorem lemma_rightangleNC :
     ∀ (A B C : Point), Per A B C → nCol A B C := by
   intro A B C h1
@@ -73,7 +74,7 @@ theorem lemma_rightangleNC :
       have : Col A C D := by conclude lemma_collinear4
       have : (A = C ∨ A = D ∨ C = D ∨ BetS C A D ∨ BetS A C D ∨ BetS A D C) := by conclude_def Col
       have : nCol A B C := by
-          rcases (show A = C ∨ A = D ∨ C = D ∨ BetS C A D ∨ BetS A C D ∨ BetS A D C by first | assumption | exact Classical.em _ | tauto | aesop) with c1 | c2 | c3 | c4 | c5 | c6
+          rcases (show A = C ∨ A = D ∨ C = D ∨ BetS C A D ∨ BetS A C D ∨ BetS A D C by first | assumption | exact nCol_or_Col _ _ _ | exact Col_or_nCol _ _ _ | exact Classical.em _ | tauto | aesop) with c1 | c2 | c3 | c4 | c5 | c6
           · have : ¬ Col A B C := by
                 intro h
                 have : A ≠ C := by conclude lemma_inequalitysymmetric

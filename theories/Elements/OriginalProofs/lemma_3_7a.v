@@ -19,6 +19,7 @@ assert (BetS B C E) by (conclude lemma_3_6a).
 assert (eq D E) by (conclude lemma_extensionunique).
 assert (BetS A C D) by (conclude cn_equalitysub).
 close.
+Show Proof.
 Qed.
 
 End Euclid.
