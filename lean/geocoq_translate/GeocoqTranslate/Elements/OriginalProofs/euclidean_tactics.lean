@@ -182,6 +182,46 @@ macro "auto" : tactic => `(tactic|
 theorem Col_or_nCol (A B C : Point) : Col A B C ∨ nCol A B C :=
   (nCol_or_Col A B C).symm
 
+/-! ### Permutation-modulo reasoning — foundational `*_cases` lemmas.
+
+    These are the single source of truth for argument-permutation symmetry of the
+    Elements predicates, proved from the DEFINITIONS (`Col`/`nCol`) and the CLASS
+    AXIOMS (`axiom_betweennesssymmetry`, the `cn_*` congruence axioms) ONLY — so
+    they live in the engine layer with no dependency on the derived `lemma_*`
+    files (which would be circular). `Par_cases` is the sole exception: `Par`'s
+    symmetry is a genuine derived lemma, so it is layered on downstream in
+    `perm_tactics.lean`. Mirrors GeoCoq's `Col_cases`/`Cong_cases`/… . -/
+
+/-- Betweenness symmetry as an iff, for `simp`-driven permutation closing. -/
+theorem betS_symm_iff (A B C : Point) : BetS A B C ↔ BetS C B A :=
+  ⟨axiom_betweennesssymmetry A B C, axiom_betweennesssymmetry C B A⟩
+
+theorem Col_cases (A B C : Point)
+    (h : Col A B C ∨ Col A C B ∨ Col B A C ∨ Col B C A ∨ Col C A B ∨ Col C B A) :
+    Col A B C := by
+  unfold euclidean_neutral_basis.Col at *
+  rcases h with h|h|h|h|h|h <;> rcases h with h|h|h|h|h|h <;>
+    simp_all [eq_comm, betS_symm_iff]
+
+theorem nCol_cases (A B C : Point)
+    (h : nCol A B C ∨ nCol A C B ∨ nCol B A C ∨ nCol B C A ∨ nCol C A B ∨ nCol C B A) :
+    nCol A B C := by
+  unfold euclidean_neutral_basis.nCol at *
+  rcases h with h|h|h|h|h|h <;> simp_all [eq_comm, betS_symm_iff]
+
+theorem BetS_cases (A B C : Point) (h : BetS A B C ∨ BetS C B A) : BetS A B C := by
+  rcases h with h | h
+  · exact h
+  · exact axiom_betweennesssymmetry C B A h
+
+theorem Cong_cases (A B C D : Point)
+    (h : Cong A B C D ∨ Cong A B D C ∨ Cong B A C D ∨ Cong B A D C ∨
+         Cong C D A B ∨ Cong C D B A ∨ Cong D C A B ∨ Cong D C B A) :
+    Cong A B C D := by
+  rcases h with h|h|h|h|h|h|h|h <;>
+    solve_by_elim (config := { maxDepth := 6 })
+      [cn_congruencetransitive, cn_congruencereflexive, cn_equalityreverse, h]
+
 /-- Meta helper used by `forward_using`: additively expose the positive `Col A B C`
     from every `¬ nCol A B C` hypothesis (GeoCoq's implicit `¬nCol ⟹ Col` collapse).
     A robust replacement for the macro `have := not_nCol_Col _ _ _ (by assumption)`,
@@ -574,6 +614,43 @@ macro "forward_using " t:term : tactic =>
        | aesop (add unsafe 90% forward ($t))
        | aesop))
 
+/-! ### Permutation-aware tactics (GeoCoq `try_or` / `permutation_intro_in_goal`
+    / the hypothesis-side `perm_close`). Built on the foundational `*_cases`
+    lemmas above, so they are available to the engine itself (e.g. `contradict`)
+    without any circular dependency on the derived `lemma_*` files. -/
+
+/-- GeoCoq's `try_or T`: walk a nested `∨` goal, committing (with backtracking)
+    to one disjunct, then run `t` on the resulting atomic goal. -/
+syntax "perm_branch " tacticSeq : tactic
+macro_rules
+  | `(tactic| perm_branch $t) =>
+      `(tactic| first
+          | $t
+          | (left;  perm_branch $t)
+          | (right; perm_branch $t))
+
+/-- GeoCoq's `permutation_intro_in_goal`: dispatch on the goal's head predicate
+    to the matching foundational `*_cases` lemma (Col / nCol / BetS / Cong),
+    turning the goal into the disjunction of its permutations. (`Par` is added
+    downstream in `perm_tactics.lean`.) -/
+macro "permutation_intro_in_goal" : tactic => `(tactic|
+  first
+    | apply Col_cases
+    | apply nCol_cases
+    | apply BetS_cases
+    | apply Cong_cases)
+
+/-- Permutation-aware closer (hypothesis-side analogue of GeoCoq's `finish`).
+    Bounded by construction: expand the goal into its permutations via the
+    matching `*_cases` lemma (6 / 8 / 2 branches), then try `assumption` on each.
+    No open-ended search, so FAILURE is cheap. `≠` symmetry via `Ne.symm`. -/
+macro "perm_close" : tactic => `(tactic|
+  first
+    | assumption
+    | (permutation_intro_in_goal
+       perm_branch assumption)
+    | (apply Ne.symm; assumption))
+
 /-- GeoCoq `contradict`: derive `False` from a collinearity/non-collinearity
     clash or any direct contradiction in the context.
 
@@ -599,6 +676,21 @@ macro "contradict" : tactic =>
       -- lemma `Col_nCol_False` finds the matching triple from context in a few steps.
       | (exfalso;
          solve_by_elim (config := { maxDepth := 4 }) [Col_nCol_False])
+      -- PERMUTATION-AWARE clash, before the expensive `aesop`: a `Col`/`nCol`
+      -- pair that clash only *modulo argument permutation* (e.g. `Col A C B` vs
+      -- `nCol A B C`). `apply Col_nCol_False` leaves `nCol ?` (closed by the
+      -- context `nCol`, fixing the orientation) and `Col ?` in that orientation
+      -- (closed by `perm_close` from the permuted `Col` hypothesis). This deletes
+      -- the explicit `forward_using lemma_collinearorder` reorder steps that used
+      -- to massage the hypothesis into the matching orientation by hand.
+      | (exfalso; exact Col_nCol_False _ _ _ ‹nCol _ _ _› (by perm_close))
+      -- ...and the same clash where the negative side is a plain `¬ Col X Y Z`
+      -- hypothesis (from an earlier `~ Col` block) rather than a folded `nCol`:
+      -- prove its `Col X Y Z` from the permuted `Col` hypothesis via `perm_close`.
+      -- This is the form most `forward_using lemma_collinearorder` reorder steps
+      -- were feeding, so handling it cheaply here ALSO keeps heavy proofs off the
+      -- expensive `aesop` fallback (which times out on their large contexts).
+      | (exfalso; exact ‹¬ Col _ _ _› (by perm_close))
       | (exfalso; aesop)
       | tauto
       | (exfalso;
