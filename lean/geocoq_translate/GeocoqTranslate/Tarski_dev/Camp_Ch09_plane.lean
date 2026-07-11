@@ -1,0 +1,11 @@
+import GeocoqTranslate.Tarski_dev.Ch05Bet
+import GeocoqTranslate.Tarski_dev.Ch04Cong
+
+namespace GeocoqTranslate.Tarski.Base
+open Tarski_neutral_dimensionless
+open Tarski_neutral_dimensionless_with_decidable_point_equality
+
+variable {Tpoint : Type} [Tarski_neutral_dimensionless_with_decidable_point_equality Tpoint]
+
+
+end GeocoqTranslate.Tarski.Base

@@ -1,0 +1,3536 @@
+{
+  "BetSEq_c": {
+    "file": "Tarski_dev/Ch03.lean",
+    "line": 200,
+    "signature": "theorem BetSEq_c (A B C : Tpoint) :\n    BetS A B C ↔ Bet A B C ∧ A ≠ B ∧ A ≠ C ∧ B ≠ C",
+    "sorry": false
+  },
+  "Bet_cases_c": {
+    "file": "Tarski_dev/Ch03.lean",
+    "line": 29,
+    "signature": "theorem Bet_cases_c (A B C : Tpoint) (h : Bet A B C ∨ Bet C B A) : Bet A B C",
+    "sorry": false
+  },
+  "Bet_perm_c": {
+    "file": "Tarski_dev/Ch03.lean",
+    "line": 35,
+    "signature": "theorem Bet_perm_c (A B C : Tpoint) (h : Bet A B C) : Bet A B C ∧ Bet C B A",
+    "sorry": false
+  },
+  "Col_cases_c": {
+    "file": "Tarski_dev/Ch04.lean",
+    "line": 64,
+    "signature": "theorem Col_cases_c (A B C : Tpoint)\n    (h : Col A B C ∨ Col A C B ∨ Col B A C ∨\n         Col B C A ∨ Col C A B ∨ Col C B A) : Col A B C",
+    "sorry": false
+  },
+  "Col_perm_c": {
+    "file": "Tarski_dev/Ch04.lean",
+    "line": 75,
+    "signature": "theorem Col_perm_c (A B C : Tpoint) (h : Col A B C) :\n    Col A B C ∧ Col A C B ∧ Col B A C ∧\n    Col B C A ∧ Col C A B ∧ Col C B A",
+    "sorry": false
+  },
+  "Cong_cases_c": {
+    "file": "Tarski_dev/Ch02.lean",
+    "line": 164,
+    "signature": "theorem Cong_cases_c (A B C D : Tpoint)\n    (h : Cong A B C D ∨ Cong A B D C ∨ Cong B A C D ∨ Cong B A D C ∨\n         Cong C D A B ∨ Cong C D B A ∨ Cong D C A B ∨ Cong D C B A) :\n    Cong A B C D",
+    "sorry": false
+  },
+  "Cong_perm_c": {
+    "file": "Tarski_dev/Ch02.lean",
+    "line": 185,
+    "signature": "theorem Cong_perm_c (A B C D : Tpoint) (h : Cong A B C D) :\n    Cong A B C D ∧ Cong A B D C ∧ Cong B A C D ∧ Cong B A D C ∧\n    Cong C D A B ∧ Cong C D B A ∧ Cong D C A B ∧ Cong D C B A",
+    "sorry": false
+  },
+  "Le_cases_c": {
+    "file": "Tarski_dev/Ch05.lean",
+    "line": 467,
+    "signature": "theorem Le_cases_c (A B C D : Tpoint)\n    (h : Le A B C D ∨ Le B A C D ∨ Le A B D C ∨ Le B A D C) :\n    Le A B C D",
+    "sorry": false
+  },
+  "Lt_cases_c": {
+    "file": "Tarski_dev/Ch05.lean",
+    "line": 478,
+    "signature": "theorem Lt_cases_c (A B C D : Tpoint)\n    (h : Lt A B C D ∨ Lt B A C D ∨ Lt A B D C ∨ Lt B A D C) :\n    Lt A B C D",
+    "sorry": false
+  },
+  "Mid_cases_c": {
+    "file": "Tarski_dev/Ch07.lean",
+    "line": 183,
+    "signature": "theorem Mid_cases_c (A B C : Tpoint) (h : Midpoint A B C ∨ Midpoint A C B) :\n    Midpoint A B C",
+    "sorry": false
+  },
+  "Mid_perm_c": {
+    "file": "Tarski_dev/Ch07.lean",
+    "line": 190,
+    "signature": "theorem Mid_perm_c (A B C : Tpoint) (h : Midpoint A B C) :\n    Midpoint A B C ∧ Midpoint A C B",
+    "sorry": false
+  },
+  "NCol_cases_c": {
+    "file": "Tarski_dev/Ch04.lean",
+    "line": 145,
+    "signature": "theorem NCol_cases_c (A B C : Tpoint)\n    (h : ¬ Col A B C ∨ ¬ Col A C B ∨ ¬ Col B A C ∨\n         ¬ Col B C A ∨ ¬ Col C A B ∨ ¬ Col C B A) : ¬ Col A B C",
+    "sorry": false
+  },
+  "NCol_perm_c": {
+    "file": "Tarski_dev/Ch04.lean",
+    "line": 161,
+    "signature": "theorem NCol_perm_c (A B C : Tpoint) (h : ¬ Col A B C) :\n    ¬ Col A B C ∧ ¬ Col A C B ∧ ¬ Col B A C ∧\n    ¬ Col B C A ∧ ¬ Col C A B ∧ ¬ Col C B A",
+    "sorry": false
+  },
+  "Out_cases_c": {
+    "file": "Tarski_dev/Ch06.lean",
+    "line": 708,
+    "signature": "theorem Out_cases_c (A B C : Tpoint) (h : Out A B C ∨ Out A C B) : Out A B C",
+    "sorry": false
+  },
+  "Per_cases_c": {
+    "file": "Tarski_dev/Ch08.lean",
+    "line": 31,
+    "signature": "theorem Per_cases_c (A B C : Tpoint) (h : Per A B C ∨ Per C B A) : Per A B C",
+    "sorry": false
+  },
+  "Per_perm_c": {
+    "file": "Tarski_dev/Ch08.lean",
+    "line": 37,
+    "signature": "theorem Per_perm_c (A B C : Tpoint) (h : Per A B C) : Per A B C ∧ Per C B A",
+    "sorry": false
+  },
+  "Perp_cases_c": {
+    "file": "Tarski_dev/Ch08.lean",
+    "line": 446,
+    "signature": "theorem Perp_cases_c (A B C D : Tpoint)\n    (h : Perp A B C D ∨ Perp B A C D ∨ Perp A B D C ∨ Perp B A D C ∨\n         Perp C D A B ∨ Perp C D B A ∨ Perp D C A B ∨ Perp D C B A) :\n    Perp A B C D",
+    "sorry": false
+  },
+  "Perp_in_cases_c": {
+    "file": "Tarski_dev/Ch08.lean",
+    "line": 472,
+    "signature": "theorem Perp_in_cases_c (X A B C D : Tpoint)\n    (h : Perp_at X A B C D ∨ Perp_at X B A C D ∨ Perp_at X A B D C ∨\n         Perp_at X B A D C ∨ Perp_at X C D A B ∨ Perp_at X C D B A ∨\n         Perp_at X D C A B ∨ Perp_at X D C B A) : Perp_at X A B C D",
+    "sorry": false
+  },
+  "Perp_in_perm_c": {
+    "file": "Tarski_dev/Ch08.lean",
+    "line": 493,
+    "signature": "theorem Perp_in_perm_c (X A B C D : Tpoint) (h : Perp_at X A B C D) :\n    Perp_at X A B C D ∧ Perp_at X B A C D ∧ Perp_at X A B D C ∧\n    Perp_at X B A D C ∧ Perp_at X C D A B ∧ Perp_at X C D B A ∧\n    Perp_at X D C A B ∧ Perp_at X D C B A",
+    "sorry": false
+  },
+  "Perp_perm_c": {
+    "file": "Tarski_dev/Ch08.lean",
+    "line": 467,
+    "signature": "theorem Perp_perm_c (A B C D : Tpoint) (h : Perp A B C D) :\n    Perp A B C D ∧ Perp B A C D ∧ Perp A B D C ∧ Perp B A D C ∧\n    Perp C D A B ∧ Perp C D B A ∧ Perp D C A B ∧ Perp D C B A",
+    "sorry": false
+  },
+  "absorbOne_ok": [
+    {
+      "file": "Tarski_dev/CongR.lean",
+      "line": 112,
+      "signature": "theorem absorbOne_ok [CongTheory P Cong] {interp : PointId → P} {s : SegClass}\n    (hs : SegClassOk Cong interp s) :\n    ∀ {rest m rest'}, SegClassesOk Cong interp rest →\n      absorbOne s rest = some (m, rest') →\n      SegClassOk Cong interp m ∧ SegClassesOk Cong interp rest'",
+      "sorry": false
+    },
+    {
+      "file": "Tarski_dev/ColR.lean",
+      "line": 136,
+      "signature": "theorem absorbOne_ok [ColTheory P Col] {interp : PointId → P}\n    {diff : List (PointId × PointId)} {s : List PointId}\n    (hs : LineOk Col interp s) (hsp : SPok interp diff) :\n    ∀ {rest m rest'}, LinesOk Col interp rest →\n      absorbOne diff s rest = some (m, rest') →\n      LineOk Col interp m ∧ LinesOk Col interp rest'",
+      "sorry": false
+    }
+  ],
+  "another_point_c": {
+    "file": "Tarski_dev/Ch03.lean",
+    "line": 156,
+    "signature": "theorem another_point_c (A : Tpoint) : ∃ B, A ≠ B",
+    "sorry": false
+  },
+  "bet2__out_c": {
+    "file": "Tarski_dev/Ch06.lean",
+    "line": 579,
+    "signature": "theorem bet2__out_c (A B C B' : Tpoint)\n    (hAB : A ≠ B) (hAB' : A ≠ B')\n    (h₁ : Bet A B C) (h₂ : Bet A B' C) : Out A B B'",
+    "sorry": false
+  },
+  "bet2_le2__le1245_c": {
+    "file": "Tarski_dev/Ch06.lean",
+    "line": 439,
+    "signature": "theorem bet2_le2__le1245_c (A B C A' B' C' : Tpoint)\n    (h₁ : Bet A B C) (h₂ : Bet A' B' C')\n    (h₃ : Le B C B' C') (h₄ : Le A' C' A C) : Le A' B' A B",
+    "sorry": false
+  },
+  "bet2_le2__le1346_c": {
+    "file": "Tarski_dev/Ch06.lean",
+    "line": 345,
+    "signature": "theorem bet2_le2__le1346_c (A B C A' B' C' : Tpoint)\n    (h₁ : Bet A B C) (h₂ : Bet A' B' C')\n    (h₃ : Le A B A' B') (h₄ : Le B C B' C') : Le A C A' C'",
+    "sorry": false
+  },
+  "bet2_le2__le2356_c": {
+    "file": "Tarski_dev/Ch06.lean",
+    "line": 397,
+    "signature": "theorem bet2_le2__le2356_c (A B C A' B' C' : Tpoint)\n    (h₁ : Bet A B C) (h₂ : Bet A' B' C')\n    (h₃ : Le A B A' B') (h₄ : Le A' C' A C) : Le B' C' B C",
+    "sorry": false
+  },
+  "bet2_le2__le_c": {
+    "file": "Tarski_dev/Ch05.lean",
+    "line": 414,
+    "signature": "theorem bet2_le2__le_c (O o A B a b : Tpoint)\n    (h₁ : Bet a o b) (h₂ : Bet A O B)\n    (h₃ : Le o a O A) (h₄ : Le o b O B) : Le a b A B",
+    "sorry": false
+  },
+  "bet2_lt2__lt_c": {
+    "file": "Tarski_dev/Ch07.lean",
+    "line": 744,
+    "signature": "theorem bet2_lt2__lt_c (O o A B a b : Tpoint)\n    (h₁ : Bet a o b) (h₂ : Bet A O B)\n    (h₃ : Lt o a O A) (h₄ : Lt o b O B) : Lt a b A B",
+    "sorry": false
+  },
+  "bet2_lt_le__lt_c": {
+    "file": "Tarski_dev/Ch07.lean",
+    "line": 799,
+    "signature": "theorem bet2_lt_le__lt_c (O o A B a b : Tpoint)\n    (h₁ : Bet a o b) (h₂ : Bet A O B)\n    (h₃ : Cong o a O A) (h₄ : Lt o b O B) : Lt a b A B",
+    "sorry": false
+  },
+  "bet2_out_out_c": {
+    "file": "Tarski_dev/Ch06.lean",
+    "line": 558,
+    "signature": "theorem bet2_out_out_c (A B C B' C' : Tpoint)\n    (hBA : B ≠ A) (hB'A : B' ≠ A) (h₁ : Out A C C')\n    (h₂ : Bet A B C) (h₃ : Bet A B' C') : Out A B B'",
+    "sorry": false
+  },
+  "bet3__bet_c": {
+    "file": "Tarski_dev/Ch05.lean",
+    "line": 39,
+    "signature": "theorem bet3__bet_c (A B C D E : Tpoint)\n    (h₁ : Bet A B E) (h₂ : Bet A D E) (h₃ : Bet B C D) : Bet A C E",
+    "sorry": false
+  },
+  "bet__le1213_c": {
+    "file": "Tarski_dev/Ch05.lean",
+    "line": 306,
+    "signature": "theorem bet__le1213_c (A B C : Tpoint) (h : Bet A B C) : Le A B A C",
+    "sorry": false
+  },
+  "bet__le2313_c": {
+    "file": "Tarski_dev/Ch05.lean",
+    "line": 311,
+    "signature": "theorem bet__le2313_c (A B C : Tpoint) (h : Bet A B C) : Le B C A C",
+    "sorry": false
+  },
+  "bet__lt1213_c": {
+    "file": "Tarski_dev/Ch05.lean",
+    "line": 316,
+    "signature": "theorem bet__lt1213_c (A B C : Tpoint) (hBC : B ≠ C) (h : Bet A B C) :\n    Lt A B A C",
+    "sorry": false
+  },
+  "bet__lt2313_c": {
+    "file": "Tarski_dev/Ch05.lean",
+    "line": 320,
+    "signature": "theorem bet__lt2313_c (A B C : Tpoint) (hAB : A ≠ B) (h : Bet A B C) :\n    Lt B C A C",
+    "sorry": false
+  },
+  "bet__ts_c": {
+    "file": "Tarski_dev/Ch09.lean",
+    "line": 1107,
+    "signature": "theorem bet__ts_c (A B X Y : Tpoint)\n    (hAY : A ≠ Y) (hNCol : ¬ Col A B X) (hBet : Bet X A Y) : TS A B X Y",
+    "sorry": false
+  },
+  "bet_col1_c": {
+    "file": "Tarski_dev/Ch07.lean",
+    "line": 377,
+    "signature": "theorem bet_col1_c (A B C D : Tpoint) (h₁ : Bet A B D) (h₂ : Bet A C D) :\n    Col A B C",
+    "sorry": false
+  },
+  "bet_col_c": {
+    "file": "Tarski_dev/Ch03.lean",
+    "line": 9,
+    "signature": "theorem bet_col_c (A B C : Tpoint) (h : Bet A B C) : Col A B C",
+    "sorry": false
+  },
+  "bet_cong3_c": {
+    "file": "Tarski_dev/Ch02.lean",
+    "line": 146,
+    "signature": "theorem bet_cong3_c (A B C A' B' : Tpoint)\n    (h1 : Bet A B C) (h2 : Cong A B A' B') : ∃ C', Cong_3 A B C A' B' C'",
+    "sorry": false
+  },
+  "bet_cong_eq_c": {
+    "file": "Tarski_dev/Ch05.lean",
+    "line": 213,
+    "signature": "theorem bet_cong_eq_c (A B C D : Tpoint)\n    (h₁ : Bet A B C) (h₂ : Bet A C D) (h₃ : Cong B C A D) : C = D ∧ A = B",
+    "sorry": false
+  },
+  "bet_cop2__cop_c": {
+    "file": "Tarski_dev/Ch09.lean",
+    "line": 1737,
+    "signature": "theorem bet_cop2__cop_c (A B C U V W : Tpoint)\n    (h₁ : Coplanar A B C U) (h₂ : Coplanar A B C W) (hBet : Bet U V W) :\n    Coplanar A B C V",
+    "sorry": false
+  },
+  "bet_cop__cop_c": {
+    "file": "Tarski_dev/Ch09.lean",
+    "line": 1685,
+    "signature": "theorem bet_cop__cop_c (A B C D E : Tpoint)\n    (hCop : Coplanar A B C E) (hBet : Bet C D E) : Coplanar A B C D",
+    "sorry": false
+  },
+  "bet_cop__tsp_c": {
+    "file": "Tarski_dev/Ch09.lean",
+    "line": 2493,
+    "signature": "theorem bet_cop__tsp_c (A B C X Y P : Tpoint)\n    (hNCop : ¬ Coplanar A B C X) (hPY : P ≠ Y)\n    (hCop : Coplanar A B C P) (hBet : Bet X P Y) : TSP A B C X Y",
+    "sorry": false
+  },
+  "bet_dec_c": {
+    "file": "Tarski_dev/Ch05.lean",
+    "line": 157,
+    "signature": "theorem bet_dec_c (A B C : Tpoint) : Bet A B C ∨ ¬ Bet A B C",
+    "sorry": false
+  },
+  "bet_dec_eq_dec_b_c": {
+    "file": "Tarski_dev/Ch03.lean",
+    "line": 189,
+    "signature": "theorem bet_dec_eq_dec_b_c (Bet_stability : ∀ A B C : Tpoint, ¬ ¬ Bet A B C → Bet A B C)\n    (A B : Tpoint) (h : ¬ A ≠ B) : A = B",
+    "sorry": false
+  },
+  "bet_le_eq_c": {
+    "file": "Tarski_dev/Ch05.lean",
+    "line": 342,
+    "signature": "theorem bet_le_eq_c (A B C : Tpoint)\n    (hBet : Bet A B C) (hLe : Le A C B C) : A = B",
+    "sorry": false
+  },
+  "bet_neq12__neq": {
+    "file": "Tarski_dev/BetweenOutBase.lean",
+    "line": 69,
+    "signature": "theorem bet_neq12__neq {A B C : Tpoint} (h : Bet A B C) (hAB : A ≠ B) : A ≠ C",
+    "sorry": false
+  },
+  "bet_neq12__neq_c": {
+    "file": "Tarski_dev/Ch03.lean",
+    "line": 63,
+    "signature": "theorem bet_neq12__neq_c (A B C : Tpoint) (h : Bet A B C) (hAB : A ≠ B) : A ≠ C",
+    "sorry": false
+  },
+  "bet_neq21__neq": {
+    "file": "Tarski_dev/BetweenOutBase.lean",
+    "line": 72,
+    "signature": "theorem bet_neq21__neq {A B C : Tpoint} (h : Bet A B C) (hBA : B ≠ A) : A ≠ C",
+    "sorry": false
+  },
+  "bet_neq21__neq_c": {
+    "file": "Tarski_dev/Ch03.lean",
+    "line": 68,
+    "signature": "theorem bet_neq21__neq_c (A B C : Tpoint) (h : Bet A B C) (hBA : B ≠ A) : A ≠ C",
+    "sorry": false
+  },
+  "bet_neq23__neq": {
+    "file": "Tarski_dev/BetweenOutBase.lean",
+    "line": 75,
+    "signature": "theorem bet_neq23__neq {A B C : Tpoint} (h : Bet A B C) (hBC : B ≠ C) : A ≠ C",
+    "sorry": false
+  },
+  "bet_neq23__neq_c": {
+    "file": "Tarski_dev/Ch03.lean",
+    "line": 71,
+    "signature": "theorem bet_neq23__neq_c (A B C : Tpoint) (h : Bet A B C) (hBC : B ≠ C) : A ≠ C",
+    "sorry": false
+  },
+  "bet_neq32__neq": {
+    "file": "Tarski_dev/BetweenOutBase.lean",
+    "line": 79,
+    "signature": "theorem bet_neq32__neq {A B C : Tpoint} (h : Bet A B C) (hCB : C ≠ B) : A ≠ C",
+    "sorry": false
+  },
+  "bet_neq32__neq_c": {
+    "file": "Tarski_dev/Ch03.lean",
+    "line": 76,
+    "signature": "theorem bet_neq32__neq_c (A B C : Tpoint) (h : Bet A B C) (hCB : C ≠ B) : A ≠ C",
+    "sorry": false
+  },
+  "bet_out": {
+    "file": "Tarski_dev/BetweenOutBase.lean",
+    "line": 96,
+    "signature": "theorem bet_out {A B C : Tpoint} (hBA : B ≠ A) (h : Bet A B C) : Out A B C",
+    "sorry": false
+  },
+  "bet_out_1": {
+    "file": "Tarski_dev/BetweenOutBase.lean",
+    "line": 100,
+    "signature": "theorem bet_out_1 {A B C : Tpoint} (hBA : B ≠ A) (h : Bet C B A) : Out A B C",
+    "sorry": false
+  },
+  "bet_out_1_c": {
+    "file": "Tarski_dev/Ch06.lean",
+    "line": 15,
+    "signature": "theorem bet_out_1_c (A B C : Tpoint) (hBA : B ≠ A) (h : Bet C B A) : Out A B C",
+    "sorry": false
+  },
+  "bet_out__bet_c": {
+    "file": "Tarski_dev/Ch06.lean",
+    "line": 69,
+    "signature": "theorem bet_out__bet_c (A B C P : Tpoint) (h₁ : Bet A P C) (h₂ : Out P A B) :\n    Bet B P C",
+    "sorry": false
+  },
+  "bet_out_c": {
+    "file": "Tarski_dev/Ch06.lean",
+    "line": 9,
+    "signature": "theorem bet_out_c (A B C : Tpoint) (hBA : B ≠ A) (h : Bet A B C) : Out A B C",
+    "sorry": false
+  },
+  "bet_out_out_bet_c": {
+    "file": "Tarski_dev/Ch06.lean",
+    "line": 148,
+    "signature": "theorem bet_out_out_bet_c (A B C A' C' : Tpoint)\n    (h₁ : Bet A B C) (h₂ : Out B A A') (h₃ : Out B C C') : Bet A' B C'",
+    "sorry": false
+  },
+  "bet_ts__os_c": {
+    "file": "Tarski_dev/Ch09.lean",
+    "line": 1132,
+    "signature": "theorem bet_ts__os_c (A B X Y Z : Tpoint) (h₁ : TS A B X Y) (h₂ : Bet X Y Z) :\n    OS A B Y Z",
+    "sorry": false
+  },
+  "bet_ts__ts_c": {
+    "file": "Tarski_dev/Ch09.lean",
+    "line": 1111,
+    "signature": "theorem bet_ts__ts_c (A B X Y Z : Tpoint) (h₁ : TS A B X Y) (h₂ : Bet X Y Z) :\n    TS A B X Z",
+    "sorry": false
+  },
+  "between_cong_2_c": {
+    "file": "Tarski_dev/Ch05.lean",
+    "line": 105,
+    "signature": "theorem between_cong_2_c (A B D E : Tpoint)\n    (h₁ : Bet A D B) (h₂ : Bet A E B) (h₃ : Cong A D A E) : D = E",
+    "sorry": false
+  },
+  "between_cong_3_c": {
+    "file": "Tarski_dev/Ch05.lean",
+    "line": 109,
+    "signature": "theorem between_cong_3_c (A B D E : Tpoint) (hAB : A ≠ B)\n    (h₁ : Bet A B D) (h₂ : Bet A B E) (h₃ : Cong B D B E) : D = E",
+    "sorry": false
+  },
+  "between_cong_c": {
+    "file": "Tarski_dev/Ch05.lean",
+    "line": 95,
+    "signature": "theorem between_cong_c (A B C : Tpoint) (hBet : Bet A C B) (hCong : Cong A C A B) :\n    C = B",
+    "sorry": false
+  },
+  "between_equality": {
+    "file": "Tarski_dev/BetweenOutBase.lean",
+    "line": 43,
+    "signature": "theorem between_equality {A B C : Tpoint} (h1 : Bet A B C) (h2 : Bet B A C) : A = B",
+    "sorry": false
+  },
+  "between_equality_2": {
+    "file": "Tarski_dev/BetweenOutBase.lean",
+    "line": 50,
+    "signature": "theorem between_equality_2 {A B C : Tpoint} (h1 : Bet A B C) (h2 : Bet A C B) : B = C",
+    "sorry": false
+  },
+  "between_equality_2_c": {
+    "file": "Tarski_dev/Ch03.lean",
+    "line": 50,
+    "signature": "theorem between_equality_2_c (A B C : Tpoint)\n    (h₁ : Bet A B C) (h₂ : Bet A C B) : B = C",
+    "sorry": false
+  },
+  "between_equality_c": {
+    "file": "Tarski_dev/Ch03.lean",
+    "line": 41,
+    "signature": "theorem between_equality_c (A B C : Tpoint)\n    (h₁ : Bet A B C) (h₂ : Bet B A C) : A = B",
+    "sorry": false
+  },
+  "between_exchange2": {
+    "file": "Tarski_dev/SegmentCone.lean",
+    "line": 38,
+    "signature": "theorem between_exchange2 {A B C D : Tpoint} (h1 : Bet A B D) (h2 : Bet B C D) :\n    Bet A C D",
+    "sorry": false
+  },
+  "between_exchange2_c": {
+    "file": "Tarski_dev/Ch03.lean",
+    "line": 103,
+    "signature": "theorem between_exchange2_c (A B C D : Tpoint)\n    (h₁ : Bet A B D) (h₂ : Bet B C D) : Bet A C D",
+    "sorry": false
+  },
+  "between_exchange3": {
+    "file": "Tarski_dev/BetweenOutBase.lean",
+    "line": 54,
+    "signature": "theorem between_exchange3 {A B C D : Tpoint} (h1 : Bet A B C) (h2 : Bet A C D) :\n    Bet B C D",
+    "sorry": false
+  },
+  "between_exchange3_c": {
+    "file": "Tarski_dev/Ch03.lean",
+    "line": 54,
+    "signature": "theorem between_exchange3_c (A B C D : Tpoint)\n    (h₁ : Bet A B C) (h₂ : Bet A C D) : Bet B C D",
+    "sorry": false
+  },
+  "between_exchange4": {
+    "file": "Tarski_dev/SegmentCone.lean",
+    "line": 51,
+    "signature": "theorem between_exchange4 {A B C D : Tpoint} (h1 : Bet A B C) (h2 : Bet A C D) :\n    Bet A B D",
+    "sorry": false
+  },
+  "between_exchange4_c": {
+    "file": "Tarski_dev/Ch03.lean",
+    "line": 115,
+    "signature": "theorem between_exchange4_c (A B C D : Tpoint)\n    (h₁ : Bet A B C) (h₂ : Bet A C D) : Bet A B D",
+    "sorry": false
+  },
+  "between_inner_transitivity": {
+    "file": "Tarski_dev/BetweenOutBase.lean",
+    "line": 61,
+    "signature": "theorem between_inner_transitivity {A B C D : Tpoint} (h1 : Bet A B D) (h2 : Bet B C D) :\n    Bet A B C",
+    "sorry": false
+  },
+  "between_inner_transitivity_c": {
+    "file": "Tarski_dev/Ch03.lean",
+    "line": 85,
+    "signature": "theorem between_inner_transitivity_c (A B C D : Tpoint)\n    (h₁ : Bet A B D) (h₂ : Bet B C D) : Bet A B C",
+    "sorry": false
+  },
+  "between_symmetry": {
+    "file": "Tarski_dev/BetweenOutBase.lean",
+    "line": 33,
+    "signature": "theorem between_symmetry {A B C : Tpoint} (h : Bet A B C) : Bet C B A",
+    "sorry": false
+  },
+  "between_symmetry_c": {
+    "file": "Tarski_dev/Ch03.lean",
+    "line": 20,
+    "signature": "theorem between_symmetry_c (A B C : Tpoint) (h : Bet A B C) : Bet C B A",
+    "sorry": false
+  },
+  "between_trivial": {
+    "file": "Tarski_dev/BetweenOutBase.lean",
+    "line": 26,
+    "signature": "theorem between_trivial (A B : Tpoint) : Bet A B B",
+    "sorry": false
+  },
+  "between_trivial2": {
+    "file": "Tarski_dev/BetweenOutBase.lean",
+    "line": 39,
+    "signature": "theorem between_trivial2 (A B : Tpoint) : Bet A A B",
+    "sorry": false
+  },
+  "between_trivial2_c": {
+    "file": "Tarski_dev/Ch03.lean",
+    "line": 38,
+    "signature": "theorem between_trivial2_c (A B : Tpoint) : Bet A A B",
+    "sorry": false
+  },
+  "between_trivial_c": {
+    "file": "Tarski_dev/Ch03.lean",
+    "line": 12,
+    "signature": "theorem between_trivial_c (A B : Tpoint) : Bet A B B",
+    "sorry": false
+  },
+  "col123__nos_c": {
+    "file": "Tarski_dev/Ch09.lean",
+    "line": 1254,
+    "signature": "theorem col123__nos_c (A B P Q : Tpoint) (h : Col P Q A) : ¬ OS P Q A B",
+    "sorry": false
+  },
+  "col124__nos_c": {
+    "file": "Tarski_dev/Ch09.lean",
+    "line": 1257,
+    "signature": "theorem col124__nos_c (A B P Q : Tpoint) (h : Col P Q B) : ¬ OS P Q A B",
+    "sorry": false
+  },
+  "col2__eq_c": {
+    "file": "Tarski_dev/Ch06.lean",
+    "line": 284,
+    "signature": "theorem col2__eq_c (A B X Y : Tpoint)\n    (h₁ : Col A X Y) (h₂ : Col B X Y) (h₃ : ¬ Col A X B) : X = Y",
+    "sorry": false
+  },
+  "col2_cop2__eq_c": {
+    "file": "Tarski_dev/Ch09.lean",
+    "line": 2148,
+    "signature": "theorem col2_cop2__eq_c (A B C U V P Q : Tpoint)\n    (hNCop : ¬ Coplanar A B C U) (hUV : U ≠ V)\n    (h₁ : Coplanar A B C P) (h₂ : Coplanar A B C Q)\n    (h₃ : Col U V P) (h₄ : Col U V Q) : P = Q",
+    "sorry": false
+  },
+  "col2_cop__cop_c": {
+    "file": "Tarski_dev/Ch09.lean",
+    "line": 1695,
+    "signature": "theorem col2_cop__cop_c (A B C D E F : Tpoint)\n    (hCop : Coplanar A B C D) (hCD : C ≠ D)\n    (h₁ : Col C D E) (h₂ : Col C D F) : Coplanar A B E F",
+    "sorry": false
+  },
+  "col2_os__os_c": {
+    "file": "Tarski_dev/Ch09.lean",
+    "line": 1260,
+    "signature": "theorem col2_os__os_c (A B C D X Y : Tpoint)\n    (hCD : C ≠ D) (h₁ : Col A B C) (h₂ : Col A B D) (h₃ : OS A B X Y) :\n    OS C D X Y",
+    "sorry": false
+  },
+  "col3_c": {
+    "file": "Tarski_dev/Ch06.lean",
+    "line": 314,
+    "signature": "theorem col3_c (X Y A B C : Tpoint) (hXY : X ≠ Y)\n    (h₁ : Col X Y A) (h₂ : Col X Y B) (h₃ : Col X Y C) : Col A B C",
+    "sorry": false
+  },
+  "col3_real": {
+    "file": "Tarski_dev/ColCongInstances.lean",
+    "line": 36,
+    "signature": "theorem col3_real (X Y A B C : Tpoint) (hXY : X ≠ Y)\n    (hA : Col X Y A) (hB : Col X Y B) (hC : Col X Y C) : Col A B C",
+    "sorry": false
+  },
+  "col__coplanar_c": {
+    "file": "Tarski_dev/Ch09.lean",
+    "line": 9,
+    "signature": "theorem col__coplanar_c (A B C D : Tpoint) (H : Col A B C) : Coplanar A B C D",
+    "sorry": false
+  },
+  "col__image_spec_c": {
+    "file": "Tarski_dev/Ch10.lean",
+    "line": 429,
+    "signature": "theorem col__image_spec_c (A B X : Tpoint) (h : Col A B X) :\n    ReflectL X X A B",
+    "sorry": false
+  },
+  "col__refl_c": {
+    "file": "Tarski_dev/Ch10.lean",
+    "line": 194,
+    "signature": "theorem col__refl_c (A B P : Tpoint) (h : Col P A B) : ReflectL P P A B",
+    "sorry": false
+  },
+  "col_bet2_cong1_c": {
+    "file": "Tarski_dev/Ch07.lean",
+    "line": 734,
+    "signature": "theorem col_bet2_cong1_c (A B C D : Tpoint)\n    (hCol : Col A B D) (hBet : Bet A C B)\n    (h₁ : Cong A B C D) (h₂ : Bet C B D) : Cong A C D B",
+    "sorry": false
+  },
+  "col_bet2_cong2_c": {
+    "file": "Tarski_dev/Ch07.lean",
+    "line": 739,
+    "signature": "theorem col_bet2_cong2_c (A B C D : Tpoint)\n    (hCol : Col A B D) (hBet : Bet A C B)\n    (h₁ : Cong A B C D) (h₂ : Bet C A D) : Cong D A B C",
+    "sorry": false
+  },
+  "col_col_per_per_c": {
+    "file": "Tarski_dev/Ch08.lean",
+    "line": 151,
+    "signature": "theorem col_col_per_per_c (A X C U V : Tpoint)\n    (hAX : A ≠ X) (hCX : C ≠ X)\n    (h₁ : Col U A X) (h₂ : Col V C X) (h₃ : Per A X C) : Per U X V",
+    "sorry": false
+  },
+  "col_cong2_bet1_c": {
+    "file": "Tarski_dev/Ch07.lean",
+    "line": 666,
+    "signature": "theorem col_cong2_bet1_c (A B C D : Tpoint)\n    (hCol : Col A B D) (hBet : Bet A C B)\n    (h₁ : Cong A B C D) (h₂ : Cong A C B D) : Bet C B D",
+    "sorry": false
+  },
+  "col_cong2_bet2_c": {
+    "file": "Tarski_dev/Ch07.lean",
+    "line": 685,
+    "signature": "theorem col_cong2_bet2_c (A B C D : Tpoint)\n    (hCol : Col A B D) (hBet : Bet A C B)\n    (h₁ : Cong A B C D) (h₂ : Cong A D B C) : Bet C A D",
+    "sorry": false
+  },
+  "col_cong2_bet3_c": {
+    "file": "Tarski_dev/Ch07.lean",
+    "line": 703,
+    "signature": "theorem col_cong2_bet3_c (A B C D : Tpoint)\n    (hCol : Col A B D) (hBet : Bet A B C)\n    (h₁ : Cong A B C D) (h₂ : Cong A C B D) : Bet B C D",
+    "sorry": false
+  },
+  "col_cong2_bet4_c": {
+    "file": "Tarski_dev/Ch07.lean",
+    "line": 720,
+    "signature": "theorem col_cong2_bet4_c (A B C D : Tpoint)\n    (hCol : Col A B C) (hBet : Bet A B D)\n    (h₁ : Cong A B C D) (h₂ : Cong A D B C) : Bet B D C",
+    "sorry": false
+  },
+  "col_cong_3_cong_3_eq_c": {
+    "file": "Tarski_dev/Ch04.lean",
+    "line": 166,
+    "signature": "theorem col_cong_3_cong_3_eq_c (A B C A' B' C₁ C₂ : Tpoint)\n    (hAB : A ≠ B) (hCol : Col A B C)\n    (h₁ : Cong_3 A B C A' B' C₁) (h₂ : Cong_3 A B C A' B' C₂) : C₁ = C₂",
+    "sorry": false
+  },
+  "col_cong_bet_c": {
+    "file": "Tarski_dev/Ch07.lean",
+    "line": 610,
+    "signature": "theorem col_cong_bet_c (A B C D : Tpoint)\n    (hCol : Col A B D) (hCong : Cong A B C D) (hBet : Bet A C B) :\n    Bet C A D ∨ Bet C B D",
+    "sorry": false
+  },
+  "col_cop2__cop_c": {
+    "file": "Tarski_dev/Ch09.lean",
+    "line": 1706,
+    "signature": "theorem col_cop2__cop_c (A B C U V P : Tpoint)\n    (hUV : U ≠ V) (h₁ : Coplanar A B C U) (h₂ : Coplanar A B C V)\n    (hCol : Col U V P) : Coplanar A B C P",
+    "sorry": false
+  },
+  "col_cop__cop_c": {
+    "file": "Tarski_dev/Ch09.lean",
+    "line": 1672,
+    "signature": "theorem col_cop__cop_c (A B C D E : Tpoint)\n    (hCop : Coplanar A B C D) (hCD : C ≠ D) (hCol : Col C D E) :\n    Coplanar A B C E",
+    "sorry": false
+  },
+  "col_dec_c": {
+    "file": "Tarski_dev/Ch05.lean",
+    "line": 169,
+    "signature": "theorem col_dec_c (A B C : Tpoint) : Col A B C ∨ ¬ Col A B C",
+    "sorry": false
+  },
+  "col_image_spec__eq_c": {
+    "file": "Tarski_dev/Ch10.lean",
+    "line": 456,
+    "signature": "theorem col_image_spec__eq_c (A B P P' : Tpoint)\n    (h₁ : Col A B P) (h₂ : ReflectL P P' A B) : P = P'",
+    "sorry": false
+  },
+  "col_one_side_c": {
+    "file": "Tarski_dev/Ch09.lean",
+    "line": 1060,
+    "signature": "theorem col_one_side_c (A B C P Q : Tpoint)\n    (hCol : Col A B C) (hAC : A ≠ C) (h : OS A B P Q) : OS A C P Q",
+    "sorry": false
+  },
+  "col_one_side_out_c": {
+    "file": "Tarski_dev/Ch09.lean",
+    "line": 1309,
+    "signature": "theorem col_one_side_out_c (A B X Y : Tpoint) (hCol : Col A X Y) (h : OS A B X Y) :\n    Out A X Y",
+    "sorry": false
+  },
+  "col_out2_col_c": {
+    "file": "Tarski_dev/Ch06.lean",
+    "line": 531,
+    "signature": "theorem col_out2_col_c (A B C AA CC : Tpoint)\n    (h₁ : Col A B C) (h₂ : Out B A AA) (h₃ : Out B C CC) : Col AA B CC",
+    "sorry": false
+  },
+  "col_per2__per_c": {
+    "file": "Tarski_dev/Ch08.lean",
+    "line": 1350,
+    "signature": "theorem col_per2__per_c (A B C P X : Tpoint)\n    (hAB : A ≠ B) (hCol : Col A B C)\n    (h₁ : Per A X P) (h₂ : Per B X P) : Per C X P",
+    "sorry": false
+  },
+  "col_per2_cases_c": {
+    "file": "Tarski_dev/Ch08.lean",
+    "line": 711,
+    "signature": "theorem col_per2_cases_c (A B C D B' : Tpoint)\n    (hBC : B ≠ C) (hB'C : B' ≠ C) (hCD : C ≠ D)\n    (hCol : Col B C D) (h₁ : Per A B C) (h₂ : Per A B' C) :\n    B = B' ∨ ¬ Col B' C D",
+    "sorry": false
+  },
+  "col_per_perp_c": {
+    "file": "Tarski_dev/Ch08.lean",
+    "line": 634,
+    "signature": "theorem col_per_perp_c (A B C D : Tpoint)\n    (hAB : A ≠ B) (hBC : B ≠ C) (hDB : D ≠ B) (hDC : D ≠ C)\n    (hCol : Col B C D) (h : Per A B C) : Perp C D A B",
+    "sorry": false
+  },
+  "col_permutation_1_c": {
+    "file": "Tarski_dev/Ch04.lean",
+    "line": 9,
+    "signature": "theorem col_permutation_1_c (A B C : Tpoint) (h : Col A B C) : Col B C A",
+    "sorry": false
+  },
+  "col_permutation_2_c": {
+    "file": "Tarski_dev/Ch04.lean",
+    "line": 16,
+    "signature": "theorem col_permutation_2_c (A B C : Tpoint) (h : Col A B C) : Col C A B",
+    "sorry": false
+  },
+  "col_permutation_3_c": {
+    "file": "Tarski_dev/Ch04.lean",
+    "line": 23,
+    "signature": "theorem col_permutation_3_c (A B C : Tpoint) (h : Col A B C) : Col C B A",
+    "sorry": false
+  },
+  "col_permutation_4_c": {
+    "file": "Tarski_dev/Ch04.lean",
+    "line": 30,
+    "signature": "theorem col_permutation_4_c (A B C : Tpoint) (h : Col A B C) : Col B A C",
+    "sorry": false
+  },
+  "col_permutation_5_c": {
+    "file": "Tarski_dev/Ch04.lean",
+    "line": 37,
+    "signature": "theorem col_permutation_5_c (A B C : Tpoint) (h : Col A B C) : Col A C B",
+    "sorry": false
+  },
+  "col_preserves_two_sides_c": {
+    "file": "Tarski_dev/Ch09.lean",
+    "line": 398,
+    "signature": "theorem col_preserves_two_sides_c (A B C D X Y : Tpoint)\n    (hCD : C ≠ D) (h₁ : Col A B C) (h₂ : Col A B D) (h : TS A B X Y) :\n    TS C D X Y",
+    "sorry": false
+  },
+  "col_transitivity_1_c": {
+    "file": "Tarski_dev/Ch06.lean",
+    "line": 252,
+    "signature": "theorem col_transitivity_1_c (P Q A B : Tpoint) (hPQ : P ≠ Q)\n    (h₁ : Col P Q A) (h₂ : Col P Q B) : Col P A B",
+    "sorry": false
+  },
+  "col_transitivity_2_c": {
+    "file": "Tarski_dev/Ch06.lean",
+    "line": 260,
+    "signature": "theorem col_transitivity_2_c (P Q A B : Tpoint) (hPQ : P ≠ Q)\n    (h₁ : Col P Q A) (h₂ : Col P Q B) : Col Q A B",
+    "sorry": false
+  },
+  "col_trivial_1_c": {
+    "file": "Tarski_dev/Ch04.lean",
+    "line": 81,
+    "signature": "theorem col_trivial_1_c (A B : Tpoint) : Col A A B",
+    "sorry": false
+  },
+  "col_trivial_2_c": {
+    "file": "Tarski_dev/Ch04.lean",
+    "line": 84,
+    "signature": "theorem col_trivial_2_c (A B : Tpoint) : Col A B B",
+    "sorry": false
+  },
+  "col_trivial_3_c": {
+    "file": "Tarski_dev/Ch04.lean",
+    "line": 87,
+    "signature": "theorem col_trivial_3_c (A B : Tpoint) : Col A B A",
+    "sorry": false
+  },
+  "col_two_sides_bet_c": {
+    "file": "Tarski_dev/Ch09.lean",
+    "line": 1325,
+    "signature": "theorem col_two_sides_bet_c (A B X Y : Tpoint)\n    (hCol : Col A X Y) (h : TS A B X Y) : Bet X A Y",
+    "sorry": false
+  },
+  "col_two_sides_c": {
+    "file": "Tarski_dev/Ch09.lean",
+    "line": 1040,
+    "signature": "theorem col_two_sides_c (A B C P Q : Tpoint)\n    (hCol : Col A B C) (hAC : A ≠ C) (h : TS A B P Q) : TS A C P Q",
+    "sorry": false
+  },
+  "colx_c": {
+    "file": "Tarski_dev/Ch06.lean",
+    "line": 323,
+    "signature": "theorem colx_c (A B C X Y : Tpoint) (hAB : A ≠ B)\n    (h₁ : Col X Y A) (h₂ : Col X Y B) (h₃ : Col A B C) : Col X Y C",
+    "sorry": false
+  },
+  "cong2_lt__lt_c": {
+    "file": "Tarski_dev/Ch05.lean",
+    "line": 276,
+    "signature": "theorem cong2_lt__lt_c (A B C D A' B' C' D' : Tpoint)\n    (h₁ : Lt A B C D) (h₂ : Cong A B A' B') (h₃ : Cong C D C' D') :\n    Lt A' B' C' D'",
+    "sorry": false
+  },
+  "cong3_bet_eq_c": {
+    "file": "Tarski_dev/Ch04.lean",
+    "line": 278,
+    "signature": "theorem cong3_bet_eq_c (A B C X : Tpoint)\n    (hBet : Bet A B C) (hCong : Cong_3 A B C A X C) : X = B",
+    "sorry": false
+  },
+  "cong3_cop2__col_c": {
+    "file": "Tarski_dev/Ch09.lean",
+    "line": 2159,
+    "signature": "theorem cong3_cop2__col_c (A B C P Q : Tpoint)\n    (h₁ : Coplanar A B C P) (h₂ : Coplanar A B C Q) (hPQ : P ≠ Q)\n    (h₃ : Cong A P A Q) (h₄ : Cong B P B Q) (h₅ : Cong C P C Q) :\n    Col A B C",
+    "sorry": false
+  },
+  "cong3_symmetry_c": {
+    "file": "Tarski_dev/Ch05.lean",
+    "line": 99,
+    "signature": "theorem cong3_symmetry_c (A B C A' B' C' : Tpoint) (h : Cong_3 A B C A' B' C') :\n    Cong_3 A' B' C' A B C",
+    "sorry": false
+  },
+  "cong3_transitivity_c": {
+    "file": "Tarski_dev/Ch02.lean",
+    "line": 117,
+    "signature": "theorem cong3_transitivity_c (A0 B0 C0 A1 B1 C1 A2 B2 C2 : Tpoint)\n    (h1 : Cong_3 A0 B0 C0 A1 B1 C1) (h2 : Cong_3 A1 B1 C1 A2 B2 C2) :\n    Cong_3 A0 B0 C0 A2 B2 C2",
+    "sorry": false
+  },
+  "congClassOk_of_cong": {
+    "file": "Tarski_dev/CongR.lean",
+    "line": 209,
+    "signature": "theorem congClassOk_of_cong [CongTheory P Cong] {interp : PointId → P}\n    {a b c d : PointId} (h : Cong (interp a) (interp b) (interp c) (interp d)) :\n    SegClassOk Cong interp [(a, b), (b, a), (c, d), (d, c)]",
+    "sorry": false
+  },
+  "cong_3421_c": {
+    "file": "Tarski_dev/Ch02.lean",
+    "line": 28,
+    "signature": "theorem cong_3421_c (A B C D : Tpoint) (h : Cong A B C D) : Cong C D B A",
+    "sorry": false
+  },
+  "cong_3_swap_2_c": {
+    "file": "Tarski_dev/Ch02.lean",
+    "line": 111,
+    "signature": "theorem cong_3_swap_2_c (A B C A' B' C' : Tpoint) (h : Cong_3 A B C A' B' C') :\n    Cong_3 A C B A' C' B'",
+    "sorry": false
+  },
+  "cong_3_swap_c": {
+    "file": "Tarski_dev/Ch02.lean",
+    "line": 105,
+    "signature": "theorem cong_3_swap_c (A B C A' B' C' : Tpoint) (h : Cong_3 A B C A' B' C') :\n    Cong_3 B A C B' A' C'",
+    "sorry": false
+  },
+  "cong_3_sym_c": {
+    "file": "Tarski_dev/Ch02.lean",
+    "line": 99,
+    "signature": "theorem cong_3_sym_c (A B C A' B' C' : Tpoint) (h : Cong_3 A B C A' B' C') :\n    Cong_3 A' B' C' A B C",
+    "sorry": false
+  },
+  "cong_4312_c": {
+    "file": "Tarski_dev/Ch02.lean",
+    "line": 31,
+    "signature": "theorem cong_4312_c (A B C D : Tpoint) (h : Cong A B C D) : Cong D C A B",
+    "sorry": false
+  },
+  "cong_4321_c": {
+    "file": "Tarski_dev/Ch02.lean",
+    "line": 34,
+    "signature": "theorem cong_4321_c (A B C D : Tpoint) (h : Cong A B C D) : Cong D C B A",
+    "sorry": false
+  },
+  "cong__le3412_c": {
+    "file": "Tarski_dev/Ch05.lean",
+    "line": 228,
+    "signature": "theorem cong__le3412_c (A B C D : Tpoint) (h : Cong A B C D) : Le C D A B",
+    "sorry": false
+  },
+  "cong__le_c": {
+    "file": "Tarski_dev/Ch05.lean",
+    "line": 225,
+    "signature": "theorem cong__le_c (A B C D : Tpoint) (h : Cong A B C D) : Le A B C D",
+    "sorry": false
+  },
+  "cong__nlt_c": {
+    "file": "Tarski_dev/Ch05.lean",
+    "line": 388,
+    "signature": "theorem cong__nlt_c (A B C D : Tpoint) (h : Cong A B C D) : ¬ Lt A B C D",
+    "sorry": false
+  },
+  "cong_col_mid_c": {
+    "file": "Tarski_dev/Ch07.lean",
+    "line": 238,
+    "signature": "theorem cong_col_mid_c (A B C : Tpoint) (hAC : A ≠ C)\n    (hCol : Col A B C) (hCong : Cong A B B C) : Midpoint B A C",
+    "sorry": false
+  },
+  "cong_commutativity": {
+    "file": "Tarski_dev/CongBase.lean",
+    "line": 40,
+    "signature": "theorem cong_commutativity {A B C D : Tpoint} (h : Cong A B C D) : Cong B A D C",
+    "sorry": false
+  },
+  "cong_commutativity_c": {
+    "file": "Tarski_dev/Ch02.lean",
+    "line": 46,
+    "signature": "theorem cong_commutativity_c (A B C D : Tpoint) (h : Cong A B C D) : Cong B A D C",
+    "sorry": false
+  },
+  "cong_cong_half_1_c": {
+    "file": "Tarski_dev/Ch07.lean",
+    "line": 527,
+    "signature": "theorem cong_cong_half_1_c (A M B A' M' B' : Tpoint)\n    (h₁ : Midpoint M A B) (h₂ : Midpoint M' A' B')\n    (h₃ : Cong A B A' B') : Cong A M A' M'",
+    "sorry": false
+  },
+  "cong_cong_half_2_c": {
+    "file": "Tarski_dev/Ch07.lean",
+    "line": 546,
+    "signature": "theorem cong_cong_half_2_c (A M B A' M' B' : Tpoint)\n    (h₁ : Midpoint M A B) (h₂ : Midpoint M' A' B')\n    (h₃ : Cong A B A' B') : Cong B M B' M'",
+    "sorry": false
+  },
+  "cong_dec_c": {
+    "file": "Tarski_dev/Ch05.lean",
+    "line": 131,
+    "signature": "theorem cong_dec_c (A B C D : Tpoint) : Cong A B C D ∨ ¬ Cong A B C D",
+    "sorry": false
+  },
+  "cong_dec_eq_dec_b_c": {
+    "file": "Tarski_dev/Ch03.lean",
+    "line": 179,
+    "signature": "theorem cong_dec_eq_dec_b_c (Cong_stability : ∀ A B C D : Tpoint, ¬ ¬ Cong A B C D → Cong A B C D)\n    (A B : Tpoint) (h : ¬ A ≠ B) : A = B",
+    "sorry": false
+  },
+  "cong_diff": {
+    "file": "Tarski_dev/CongBase.lean",
+    "line": 54,
+    "signature": "theorem cong_diff {A B C D : Tpoint} (hAB : A ≠ B) (h : Cong A B C D) : C ≠ D",
+    "sorry": false
+  },
+  "cong_diff_2_c": {
+    "file": "Tarski_dev/Ch02.lean",
+    "line": 84,
+    "signature": "theorem cong_diff_2_c (A B C D : Tpoint) (hBA : B ≠ A) (h : Cong A B C D) : C ≠ D",
+    "sorry": false
+  },
+  "cong_diff_3_c": {
+    "file": "Tarski_dev/Ch02.lean",
+    "line": 89,
+    "signature": "theorem cong_diff_3_c (A B C D : Tpoint) (hCD : C ≠ D) (h : Cong A B C D) : A ≠ B",
+    "sorry": false
+  },
+  "cong_diff_4_c": {
+    "file": "Tarski_dev/Ch02.lean",
+    "line": 94,
+    "signature": "theorem cong_diff_4_c (A B C D : Tpoint) (hDC : D ≠ C) (h : Cong A B C D) : A ≠ B",
+    "sorry": false
+  },
+  "cong_diff_c": {
+    "file": "Tarski_dev/Ch02.lean",
+    "line": 79,
+    "signature": "theorem cong_diff_c (A B C D : Tpoint) (hAB : A ≠ B) (h : Cong A B C D) : C ≠ D",
+    "sorry": false
+  },
+  "cong_left_commutativity": {
+    "file": "Tarski_dev/CongBase.lean",
+    "line": 32,
+    "signature": "theorem cong_left_commutativity {A B C D : Tpoint} (h : Cong A B C D) : Cong B A C D",
+    "sorry": false
+  },
+  "cong_left_commutativity_c": {
+    "file": "Tarski_dev/Ch02.lean",
+    "line": 20,
+    "signature": "theorem cong_left_commutativity_c (A B C D : Tpoint)\n    (h : Cong A B C D) : Cong B A C D",
+    "sorry": false
+  },
+  "cong_mid2__cong_c": {
+    "file": "Tarski_dev/Ch07.lean",
+    "line": 551,
+    "signature": "theorem cong_mid2__cong_c (A M B A' M' B' : Tpoint)\n    (h₁ : Midpoint M A B) (h₂ : Midpoint M' A' B')\n    (h₃ : Cong A M A' M') : Cong A B A' B'",
+    "sorry": false
+  },
+  "cong_midpoint__image_c": {
+    "file": "Tarski_dev/Ch10.lean",
+    "line": 439,
+    "signature": "theorem cong_midpoint__image_c (A B X Y : Tpoint)\n    (h₁ : Cong A X A Y) (h₂ : Midpoint B X Y) : Reflect Y X A B",
+    "sorry": false
+  },
+  "cong_perp_or_mid_c": {
+    "file": "Tarski_dev/Ch08.lean",
+    "line": 684,
+    "signature": "theorem cong_perp_or_mid_c (A B M X : Tpoint)\n    (hAB : A ≠ B) (hM : Midpoint M A B) (h : Cong A X B X) :\n    X = M ∨ ¬ Col A B X ∧ Perp_at M X M A B",
+    "sorry": false
+  },
+  "cong_preserves_bet_c": {
+    "file": "Tarski_dev/Ch06.lean",
+    "line": 444,
+    "signature": "theorem cong_preserves_bet_c (B A' A0 E D' D0 : Tpoint)\n    (h₁ : Bet B A' A0) (h₂ : Cong B A' E D') (h₃ : Cong B A0 E D0)\n    (h₄ : Out E D' D0) : Bet E D' D0",
+    "sorry": false
+  },
+  "cong_reflexivity": {
+    "file": "Tarski_dev/CongBase.lean",
+    "line": 19,
+    "signature": "theorem cong_reflexivity (A B : Tpoint) : Cong A B A B",
+    "sorry": false
+  },
+  "cong_reflexivity_c": {
+    "file": "Tarski_dev/Ch02.lean",
+    "line": 10,
+    "signature": "theorem cong_reflexivity_c (A B : Tpoint) : Cong A B A B",
+    "sorry": false
+  },
+  "cong_reverse_identity": {
+    "file": "Tarski_dev/CongBase.lean",
+    "line": 50,
+    "signature": "theorem cong_reverse_identity {A C D : Tpoint} (h : Cong A A C D) : C = D",
+    "sorry": false
+  },
+  "cong_reverse_identity_c": {
+    "file": "Tarski_dev/Ch02.lean",
+    "line": 43,
+    "signature": "theorem cong_reverse_identity_c (A C D : Tpoint) (h : Cong A A C D) : C = D",
+    "sorry": false
+  },
+  "cong_right_commutativity": {
+    "file": "Tarski_dev/CongBase.lean",
+    "line": 36,
+    "signature": "theorem cong_right_commutativity {A B C D : Tpoint} (h : Cong A B C D) : Cong A B D C",
+    "sorry": false
+  },
+  "cong_right_commutativity_c": {
+    "file": "Tarski_dev/Ch02.lean",
+    "line": 24,
+    "signature": "theorem cong_right_commutativity_c (A B C D : Tpoint)\n    (h : Cong A B C D) : Cong A B D C",
+    "sorry": false
+  },
+  "cong_symmetry": {
+    "file": "Tarski_dev/CongBase.lean",
+    "line": 23,
+    "signature": "theorem cong_symmetry {A B C D : Tpoint} (h : Cong A B C D) : Cong C D A B",
+    "sorry": false
+  },
+  "cong_symmetry_c": {
+    "file": "Tarski_dev/Ch02.lean",
+    "line": 13,
+    "signature": "theorem cong_symmetry_c (A B C D : Tpoint) (h : Cong A B C D) : Cong C D A B",
+    "sorry": false
+  },
+  "cong_transitivity": {
+    "file": "Tarski_dev/CongBase.lean",
+    "line": 27,
+    "signature": "theorem cong_transitivity {A B C D E F : Tpoint}\n    (h1 : Cong A B C D) (h2 : Cong C D E F) : Cong A B E F",
+    "sorry": false
+  },
+  "cong_transitivity_c": {
+    "file": "Tarski_dev/Ch02.lean",
+    "line": 16,
+    "signature": "theorem cong_transitivity_c (A B C D E F : Tpoint)\n    (h1 : Cong A B C D) (h2 : Cong C D E F) : Cong A B E F",
+    "sorry": false
+  },
+  "cong_trivial_identity": {
+    "file": "Tarski_dev/CongBase.lean",
+    "line": 44,
+    "signature": "theorem cong_trivial_identity (A B : Tpoint) : Cong A A B B",
+    "sorry": false
+  },
+  "cong_trivial_identity_c": {
+    "file": "Tarski_dev/Ch02.lean",
+    "line": 37,
+    "signature": "theorem cong_trivial_identity_c (A B : Tpoint) : Cong A A B B",
+    "sorry": false
+  },
+  "construction_uniqueness": {
+    "file": "Tarski_dev/SegmentCone.lean",
+    "line": 21,
+    "signature": "theorem construction_uniqueness {Q A B C X Y : Tpoint} (hQA : Q ≠ A)\n    (hX : Bet Q A X) (hcX : Cong A X B C) (hY : Bet Q A Y) (hcY : Cong A Y B C) : X = Y",
+    "sorry": false
+  },
+  "construction_uniqueness_c": {
+    "file": "Tarski_dev/Ch02.lean",
+    "line": 154,
+    "signature": "theorem construction_uniqueness_c (Q A B C X Y : Tpoint)\n    (hQA : Q ≠ A) (hBet1 : Bet Q A X) (hCong1 : Cong A X B C)\n    (hBet2 : Bet Q A Y) (hCong2 : Cong A Y B C) : X = Y",
+    "sorry": false
+  },
+  "cop2_os__osp_c": {
+    "file": "Tarski_dev/Ch09.lean",
+    "line": 2561,
+    "signature": "theorem cop2_os__osp_c (A B C D E X Y : Tpoint)\n    (hNCop : ¬ Coplanar A B C X)\n    (h₁ : Coplanar A B C D) (h₂ : Coplanar A B C E)\n    (h₃ : OS D E X Y) : OSP A B C X Y",
+    "sorry": false
+  },
+  "cop2_ts__tsp_c": {
+    "file": "Tarski_dev/Ch09.lean",
+    "line": 2544,
+    "signature": "theorem cop2_ts__tsp_c (A B C D E X Y : Tpoint)\n    (hNCop : ¬ Coplanar A B C X)\n    (h₁ : Coplanar A B C D) (h₂ : Coplanar A B C E)\n    (h₃ : TS D E X Y) : TSP A B C X Y",
+    "sorry": false
+  },
+  "cop3_osp__os_c": {
+    "file": "Tarski_dev/Ch09.lean",
+    "line": 2579,
+    "signature": "theorem cop3_osp__os_c (A B C D E X Y : Tpoint)\n    (hDE : D ≠ E)\n    (h₁ : Coplanar A B C D) (h₂ : Coplanar A B C E)\n    (h₃ : Coplanar D E X Y) (h₄ : OSP A B C X Y) : OS D E X Y",
+    "sorry": false
+  },
+  "cop3_osp__osp_c": {
+    "file": "Tarski_dev/Ch09.lean",
+    "line": 2329,
+    "signature": "theorem cop3_osp__osp_c (A B C D E F P Q : Tpoint)\n    (hNCol : ¬ Col D E F)\n    (h₁ : Coplanar A B C D) (h₂ : Coplanar A B C E) (h₃ : Coplanar A B C F)\n    (h₄ : OSP A B C P Q) : OSP D E F P Q",
+    "sorry": false
+  },
+  "cop3_tsp__ts_c": {
+    "file": "Tarski_dev/Ch09.lean",
+    "line": 2573,
+    "signature": "theorem cop3_tsp__ts_c (A B C D E X Y : Tpoint)\n    (hDE : D ≠ E)\n    (h₁ : Coplanar A B C D) (h₂ : Coplanar A B C E)\n    (h₃ : Coplanar D E X Y) (h₄ : TSP A B C X Y) : TS D E X Y",
+    "sorry": false
+  },
+  "cop3_tsp__tsp_c": {
+    "file": "Tarski_dev/Ch09.lean",
+    "line": 2306,
+    "signature": "theorem cop3_tsp__tsp_c (A B C D E F P Q : Tpoint)\n    (hNCol : ¬ Col D E F)\n    (h₁ : Coplanar A B C D) (h₂ : Coplanar A B C E) (h₃ : Coplanar A B C F)\n    (h₄ : TSP A B C P Q) : TSP D E F P Q",
+    "sorry": false
+  },
+  "cop__one_or_two_sides_c": {
+    "file": "Tarski_dev/Ch09.lean",
+    "line": 1553,
+    "signature": "theorem cop__one_or_two_sides_c (A B C D : Tpoint)\n    (hCop : Coplanar A B C D) (hNC1 : ¬ Col C A B) (hNC2 : ¬ Col D A B) :\n    TS A B C D ∨ OS A B C D",
+    "sorry": false
+  },
+  "cop_dec_c": {
+    "file": "Tarski_dev/Ch09.lean",
+    "line": 2107,
+    "signature": "theorem cop_dec_c (A B C D : Tpoint) : Coplanar A B C D ∨ ¬ Coplanar A B C D",
+    "sorry": false
+  },
+  "cop_nos__ts_c": {
+    "file": "Tarski_dev/Ch09.lean",
+    "line": 2090,
+    "signature": "theorem cop_nos__ts_c (A B C D : Tpoint)\n    (hCop : Coplanar A B C D) (hNC1 : ¬ Col C A B) (hNC2 : ¬ Col D A B)\n    (hNOS : ¬ OS A B C D) : TS A B C D",
+    "sorry": false
+  },
+  "cop_nts__os_c": {
+    "file": "Tarski_dev/Ch09.lean",
+    "line": 2082,
+    "signature": "theorem cop_nts__os_c (A B C D : Tpoint)\n    (hCop : Coplanar A B C D) (hNC1 : ¬ Col C A B) (hNC2 : ¬ Col D A B)\n    (hNTS : ¬ TS A B C D) : OS A B C D",
+    "sorry": false
+  },
+  "cop_osp__ex_cop2_c": {
+    "file": "Tarski_dev/Ch09.lean",
+    "line": 2605,
+    "signature": "theorem cop_osp__ex_cop2_c (A B C D E P : Tpoint)\n    (hCop : Coplanar A B C P) (h : OSP A B C D E) :\n    ∃ Q, Coplanar A B C Q ∧ Coplanar D E P Q ∧ P ≠ Q",
+    "sorry": false
+  },
+  "cop_out__osp_c": {
+    "file": "Tarski_dev/Ch09.lean",
+    "line": 2505,
+    "signature": "theorem cop_out__osp_c (A B C X Y P : Tpoint)\n    (hNCop : ¬ Coplanar A B C X) (hCop : Coplanar A B C P)\n    (hOut : Out P X Y) : OSP A B C X Y",
+    "sorry": false
+  },
+  "cop_per2__col_c": {
+    "file": "Tarski_dev/Ch09.lean",
+    "line": 1809,
+    "signature": "theorem cop_per2__col_c (A X Y Z : Tpoint)\n    (hCop : Coplanar A X Y Z) (hAZ : A ≠ Z)\n    (h₁ : Per X Z A) (h₂ : Per Y Z A) : Col X Y Z",
+    "sorry": false
+  },
+  "cop_perp2__col_c": {
+    "file": "Tarski_dev/Ch09.lean",
+    "line": 1937,
+    "signature": "theorem cop_perp2__col_c (X Y Z A B : Tpoint)\n    (hCop : Coplanar A B Y Z) (h₁ : Perp X Y A B) (h₂ : Perp X Z A B) :\n    Col X Y Z",
+    "sorry": false
+  },
+  "cop_tsp__ex_cop2_c": {
+    "file": "Tarski_dev/Ch09.lean",
+    "line": 2585,
+    "signature": "theorem cop_tsp__ex_cop2_c (A B C D E P : Tpoint)\n    (hCop : Coplanar A B C P) (h : TSP A B C D E) :\n    ∃ Q, Coplanar A B C Q ∧ Coplanar D E P Q ∧ P ≠ Q",
+    "sorry": false
+  },
+  "coplanar_perm_12_c": {
+    "file": "Tarski_dev/Ch09.lean",
+    "line": 102,
+    "signature": "theorem coplanar_perm_12_c (A B C D : Tpoint) (H : Coplanar A B C D) : Coplanar C A B D",
+    "sorry": false
+  },
+  "coplanar_perm_16_c": {
+    "file": "Tarski_dev/Ch09.lean",
+    "line": 114,
+    "signature": "theorem coplanar_perm_16_c (A B C D : Tpoint) (H : Coplanar A B C D) : Coplanar C D A B",
+    "sorry": false
+  },
+  "coplanar_perm_17_c": {
+    "file": "Tarski_dev/Ch09.lean",
+    "line": 126,
+    "signature": "theorem coplanar_perm_17_c (A B C D : Tpoint) (H : Coplanar A B C D) : Coplanar C D B A",
+    "sorry": false
+  },
+  "coplanar_perm_18_c": {
+    "file": "Tarski_dev/Ch09.lean",
+    "line": 138,
+    "signature": "theorem coplanar_perm_18_c (A B C D : Tpoint) (H : Coplanar A B C D) : Coplanar D A B C",
+    "sorry": false
+  },
+  "coplanar_perm_19_c": {
+    "file": "Tarski_dev/Ch09.lean",
+    "line": 150,
+    "signature": "theorem coplanar_perm_19_c (A B C D : Tpoint) (H : Coplanar A B C D) : Coplanar D A C B",
+    "sorry": false
+  },
+  "coplanar_perm_1_c": {
+    "file": "Tarski_dev/Ch09.lean",
+    "line": 30,
+    "signature": "theorem coplanar_perm_1_c (A B C D : Tpoint) (H : Coplanar A B C D) : Coplanar A B D C",
+    "sorry": false
+  },
+  "coplanar_perm_21_c": {
+    "file": "Tarski_dev/Ch09.lean",
+    "line": 162,
+    "signature": "theorem coplanar_perm_21_c (A B C D : Tpoint) (H : Coplanar A B C D) : Coplanar D B C A",
+    "sorry": false
+  },
+  "coplanar_perm_2_c": {
+    "file": "Tarski_dev/Ch09.lean",
+    "line": 42,
+    "signature": "theorem coplanar_perm_2_c (A B C D : Tpoint) (H : Coplanar A B C D) : Coplanar A C B D",
+    "sorry": false
+  },
+  "coplanar_perm_4_c": {
+    "file": "Tarski_dev/Ch09.lean",
+    "line": 54,
+    "signature": "theorem coplanar_perm_4_c (A B C D : Tpoint) (H : Coplanar A B C D) : Coplanar A D B C",
+    "sorry": false
+  },
+  "coplanar_perm_6_c": {
+    "file": "Tarski_dev/Ch09.lean",
+    "line": 66,
+    "signature": "theorem coplanar_perm_6_c (A B C D : Tpoint) (H : Coplanar A B C D) : Coplanar B A C D",
+    "sorry": false
+  },
+  "coplanar_perm_8_c": {
+    "file": "Tarski_dev/Ch09.lean",
+    "line": 78,
+    "signature": "theorem coplanar_perm_8_c (A B C D : Tpoint) (H : Coplanar A B C D) : Coplanar B C A D",
+    "sorry": false
+  },
+  "coplanar_perm_9_c": {
+    "file": "Tarski_dev/Ch09.lean",
+    "line": 90,
+    "signature": "theorem coplanar_perm_9_c (A B C D : Tpoint) (H : Coplanar A B C D) : Coplanar B C D A",
+    "sorry": false
+  },
+  "coplanar_pseudo_trans_c": {
+    "file": "Tarski_dev/Ch09.lean",
+    "line": 1748,
+    "signature": "theorem coplanar_pseudo_trans_c (A B C D P Q R : Tpoint)\n    (hNCol : ¬ Col P Q R)\n    (h₁ : Coplanar P Q R A) (h₂ : Coplanar P Q R B)\n    (h₃ : Coplanar P Q R C) (h₄ : Coplanar P Q R D) :\n    Coplanar A B C D",
+    "sorry": false
+  },
+  "coplanar_trans_1_c": {
+    "file": "Tarski_dev/Ch09.lean",
+    "line": 1644,
+    "signature": "theorem coplanar_trans_1_c (P Q R A B : Tpoint)\n    (hNCol : ¬ Col P Q R)\n    (h₁ : Coplanar P Q R A) (h₂ : Coplanar P Q R B) :\n    Coplanar Q R A B",
+    "sorry": false
+  },
+  "decideCol_sound": {
+    "file": "Tarski_dev/ColR.lean",
+    "line": 225,
+    "signature": "theorem decideCol_sound [ColTheory P Col] (interp : PointId → P) (st : ColState)\n    (hss : LinesOk Col interp st.lines) (hsp : SPok interp st.diff)\n    {a b c : PointId} (h : decideCol st a b c) :\n    Col (interp a) (interp b) (interp c)",
+    "sorry": false
+  },
+  "decideCong_sound": {
+    "file": "Tarski_dev/CongR.lean",
+    "line": 195,
+    "signature": "theorem decideCong_sound [CongTheory P Cong] (interp : PointId → P)\n    (classes : List SegClass) (hss : SegClassesOk Cong interp classes)\n    {a b c d : PointId} (h : decideCong classes a b c d) :\n    Cong (interp a) (interp b) (interp c) (interp d)",
+    "sorry": false
+  },
+  "diff_bet_ex3_c": {
+    "file": "Tarski_dev/Ch06.lean",
+    "line": 639,
+    "signature": "theorem diff_bet_ex3_c (A B C : Tpoint) (h : Bet A B C) :\n    ∃ D, A ≠ D ∧ B ≠ D ∧ C ≠ D ∧ Col A B D",
+    "sorry": false
+  },
+  "diff_col_ex3_c": {
+    "file": "Tarski_dev/Ch06.lean",
+    "line": 669,
+    "signature": "theorem diff_col_ex3_c (A B C : Tpoint) (h : Col A B C) :\n    ∃ D, A ≠ D ∧ B ≠ D ∧ C ≠ D ∧ Col A B D",
+    "sorry": false
+  },
+  "diff_col_ex_c": {
+    "file": "Tarski_dev/Ch06.lean",
+    "line": 627,
+    "signature": "theorem diff_col_ex_c (A B : Tpoint) : ∃ C, A ≠ C ∧ B ≠ C ∧ Col A B C",
+    "sorry": false
+  },
+  "diff_per_diff_c": {
+    "file": "Tarski_dev/Ch08.lean",
+    "line": 557,
+    "signature": "theorem diff_per_diff_c (A B P R : Tpoint)\n    (hAB : A ≠ B) (h₁ : Cong A P B R) (h₂ : Per B A P) (h₃ : Per A B R) :\n    P ≠ R",
+    "sorry": false
+  },
+  "distinct_c": {
+    "file": "Tarski_dev/Ch02.lean",
+    "line": 128,
+    "signature": "theorem distinct_c (P Q R : Tpoint) (hPQ : P ≠ Q) : R ≠ P ∨ R ≠ Q",
+    "sorry": false
+  },
+  "eq_dec_points_c": {
+    "file": "Tarski_dev/Ch02.lean",
+    "line": 126,
+    "signature": "theorem eq_dec_points_c (A B : Tpoint) : A = B ∨ A ≠ B",
+    "sorry": false
+  },
+  "ex_diff_cop_c": {
+    "file": "Tarski_dev/Ch09.lean",
+    "line": 2119,
+    "signature": "theorem ex_diff_cop_c (A B C D : Tpoint) :\n    ∃ E, Coplanar A B C E ∧ D ≠ E",
+    "sorry": false
+  },
+  "ex_ncol_cop2_c": {
+    "file": "Tarski_dev/Ch09.lean",
+    "line": 2142,
+    "signature": "theorem ex_ncol_cop2_c (A B C D : Tpoint) :\n    ∃ E F, Coplanar A B C E ∧ Coplanar A B C F ∧ ¬ Col D E F",
+    "sorry": false
+  },
+  "ex_ncol_cop_c": {
+    "file": "Tarski_dev/Ch09.lean",
+    "line": 2130,
+    "signature": "theorem ex_ncol_cop_c (A B C D E : Tpoint) (hDE : D ≠ E) :\n    ∃ F, Coplanar A B C F ∧ ¬ Col D E F",
+    "sorry": false
+  },
+  "ex_per_cong_c": {
+    "file": "Tarski_dev/Ch10.lean",
+    "line": 525,
+    "signature": "theorem ex_per_cong_c (A B C D X Y : Tpoint)\n    (hAB : A ≠ B) (hXY : X ≠ Y) (hCol : Col A B C) (hNCol : ¬ Col A B D) :\n    ∃ P, Per P C A ∧ Cong P C X Y ∧ OS A B P D",
+    "sorry": false
+  },
+  "ex_sym1_c": {
+    "file": "Tarski_dev/Ch10.lean",
+    "line": 32,
+    "signature": "theorem ex_sym1_c (A B X : Tpoint) (hAB : A ≠ B) :\n    ∃ Y, (Perp A B X Y ∨ X = Y) ∧\n         (∃ M, Col A B M ∧ Midpoint M X Y ∧ Reflect X Y A B)",
+    "sorry": false
+  },
+  "ex_sym_c": {
+    "file": "Tarski_dev/Ch10.lean",
+    "line": 9,
+    "signature": "theorem ex_sym_c (A B X : Tpoint) :\n    ∃ Y, (Perp A B X Y ∨ X = Y) ∧\n         (∃ M, Col A B M ∧ Midpoint M X Y)",
+    "sorry": false
+  },
+  "exists_cong_per_c": {
+    "file": "Tarski_dev/Ch10.lean",
+    "line": 547,
+    "signature": "theorem exists_cong_per_c (A B X Y : Tpoint) :\n    ∃ C, Per A B C ∧ Cong B C X Y",
+    "sorry": false
+  },
+  "five_segment_with_def": {
+    "file": "Tarski_dev/CongBase.lean",
+    "line": 60,
+    "signature": "theorem five_segment_with_def {A B C D A' B' C' D' : Tpoint}\n    (h : OFSC A B C D A' B' C' D') (hAB : A ≠ B) : Cong C D C' D'",
+    "sorry": false
+  },
+  "five_segment_with_def_c": {
+    "file": "Tarski_dev/Ch02.lean",
+    "line": 70,
+    "signature": "theorem five_segment_with_def_c (A B C D A' B' C' D' : Tpoint)\n    (h : OFSC A B C D A' B' C' D') (hAB : A ≠ B) : Cong C D C' D'",
+    "sorry": false
+  },
+  "fourth_point_c": {
+    "file": "Tarski_dev/Ch05.lean",
+    "line": 282,
+    "signature": "theorem fourth_point_c (A B C P : Tpoint)\n    (hAB : A ≠ B) (hBC : B ≠ C) (hCol : Col A B P) (hBet : Bet A B C) :\n    Bet P A B ∨ Bet A P B ∨ Bet B P C ∨ Bet B C P",
+    "sorry": false
+  },
+  "ge_comm_c": {
+    "file": "Tarski_dev/Ch05.lean",
+    "line": 249,
+    "signature": "theorem ge_comm_c (A B C D : Tpoint) (h : Ge A B C D) : Ge B A D C",
+    "sorry": false
+  },
+  "ge_left_comm_c": {
+    "file": "Tarski_dev/Ch05.lean",
+    "line": 243,
+    "signature": "theorem ge_left_comm_c (A B C D : Tpoint) (h : Ge A B C D) : Ge B A C D",
+    "sorry": false
+  },
+  "ge_right_comm_c": {
+    "file": "Tarski_dev/Ch05.lean",
+    "line": 246,
+    "signature": "theorem ge_right_comm_c (A B C D : Tpoint) (h : Ge A B C D) : Ge A B D C",
+    "sorry": false
+  },
+  "gt_comm_c": {
+    "file": "Tarski_dev/Ch05.lean",
+    "line": 273,
+    "signature": "theorem gt_comm_c (A B C D : Tpoint) (h : Gt A B C D) : Gt B A D C",
+    "sorry": false
+  },
+  "gt_left_comm_c": {
+    "file": "Tarski_dev/Ch05.lean",
+    "line": 267,
+    "signature": "theorem gt_left_comm_c (A B C D : Tpoint) (h : Gt A B C D) : Gt B A C D",
+    "sorry": false
+  },
+  "gt_right_comm_c": {
+    "file": "Tarski_dev/Ch05.lean",
+    "line": 270,
+    "signature": "theorem gt_right_comm_c (A B C D : Tpoint) (h : Gt A B C D) : Gt A B D C",
+    "sorry": false
+  },
+  "image__midpoint_c": {
+    "file": "Tarski_dev/Ch10.lean",
+    "line": 466,
+    "signature": "theorem image__midpoint_c (A P P' : Tpoint) (h : Reflect P P' A A) :\n    Midpoint A P' P",
+    "sorry": false
+  },
+  "image_id_c": {
+    "file": "Tarski_dev/Ch10.lean",
+    "line": 224,
+    "signature": "theorem image_id_c (A B T T' : Tpoint) (hAB : A ≠ B)\n    (hCol : Col A B T) (hRefl : Reflect T T' A B) : T = T'",
+    "sorry": false
+  },
+  "image_image_in_c": {
+    "file": "Tarski_dev/Ch10.lean",
+    "line": 300,
+    "signature": "theorem image_image_in_c (A B P P' M : Tpoint) (hPP' : P ≠ P')\n    (h₁ : ReflectL P P' A B) (h₂ : Col A B M) (h₃ : Col P M P') :\n    ReflectL_at M P P' A B",
+    "sorry": false
+  },
+  "image_in_col_c": {
+    "file": "Tarski_dev/Ch10.lean",
+    "line": 319,
+    "signature": "theorem image_in_col_c (A B P P' Y : Tpoint)\n    (h : ReflectL_at Y P P' A B) : Col P P' Y",
+    "sorry": false
+  },
+  "image_in_gen_is_image_c": {
+    "file": "Tarski_dev/Ch10.lean",
+    "line": 260,
+    "signature": "theorem image_in_gen_is_image_c (M A B P P' : Tpoint)\n    (h : Reflect_at M P P' A B) : Reflect P P' A B",
+    "sorry": false
+  },
+  "image_in_is_image_spec_c": {
+    "file": "Tarski_dev/Ch10.lean",
+    "line": 254,
+    "signature": "theorem image_in_is_image_spec_c (M A B P P' : Tpoint)\n    (h : ReflectL_at M P P' A B) : ReflectL P P' A B",
+    "sorry": false
+  },
+  "image_spec__eq_c": {
+    "file": "Tarski_dev/Ch10.lean",
+    "line": 463,
+    "signature": "theorem image_spec__eq_c (A P P' : Tpoint) (h : ReflectL P P' A A) : P = P'",
+    "sorry": false
+  },
+  "image_spec_triv_c": {
+    "file": "Tarski_dev/Ch10.lean",
+    "line": 460,
+    "signature": "theorem image_spec_triv_c (A B : Tpoint) : ReflectL A A B B",
+    "sorry": false
+  },
+  "image_triv_c": {
+    "file": "Tarski_dev/Ch10.lean",
+    "line": 433,
+    "signature": "theorem image_triv_c (A B : Tpoint) : Reflect A A A B",
+    "sorry": false
+  },
+  "invert_one_side_c": {
+    "file": "Tarski_dev/Ch09.lean",
+    "line": 767,
+    "signature": "theorem invert_one_side_c (A B P Q : Tpoint) (h : OS A B P Q) : OS B A P Q",
+    "sorry": false
+  },
+  "is_image_col_cong_c": {
+    "file": "Tarski_dev/Ch10.lean",
+    "line": 218,
+    "signature": "theorem is_image_col_cong_c (A B P P' X : Tpoint) (hAB : A ≠ B)\n    (h₁ : Reflect P P' A B) (h₂ : Col A B X) : Cong P X P' X",
+    "sorry": false
+  },
+  "is_image_is_image_spec_c": {
+    "file": "Tarski_dev/Ch10.lean",
+    "line": 28,
+    "signature": "theorem is_image_is_image_spec_c (P P' A B : Tpoint) (hAB : A ≠ B) :\n    Reflect P' P A B ↔ ReflectL P' P A B",
+    "sorry": false
+  },
+  "is_image_rev_c": {
+    "file": "Tarski_dev/Ch10.lean",
+    "line": 334,
+    "signature": "theorem is_image_rev_c (P P' A B : Tpoint)\n    (h : Reflect P P' A B) : Reflect P P' B A",
+    "sorry": false
+  },
+  "is_image_spec_col_cong_c": {
+    "file": "Tarski_dev/Ch10.lean",
+    "line": 197,
+    "signature": "theorem is_image_spec_col_cong_c (A B P P' X : Tpoint)\n    (h₁ : ReflectL P P' A B) (h₂ : Col A B X) : Cong P X P' X",
+    "sorry": false
+  },
+  "is_image_spec_dec_c": {
+    "file": "Tarski_dev/Ch10.lean",
+    "line": 474,
+    "signature": "theorem is_image_spec_dec_c (A B C D : Tpoint) :\n    ReflectL A B C D ∨ ¬ ReflectL A B C D",
+    "sorry": false
+  },
+  "is_image_spec_rev_c": {
+    "file": "Tarski_dev/Ch10.lean",
+    "line": 326,
+    "signature": "theorem is_image_spec_rev_c (P P' A B : Tpoint)\n    (h : ReflectL P P' A B) : ReflectL P P' B A",
+    "sorry": false
+  },
+  "is_midpoint_id_2_c": {
+    "file": "Tarski_dev/Ch07.lean",
+    "line": 23,
+    "signature": "theorem is_midpoint_id_2_c (A B : Tpoint) (h : Midpoint A B A) : A = B",
+    "sorry": false
+  },
+  "is_midpoint_id_c": {
+    "file": "Tarski_dev/Ch07.lean",
+    "line": 16,
+    "signature": "theorem is_midpoint_id_c (A B : Tpoint) (h : Midpoint A A B) : A = B",
+    "sorry": false
+  },
+  "l10_14_c": {
+    "file": "Tarski_dev/Ch10.lean",
+    "line": 272,
+    "signature": "theorem l10_14_c (P P' A B : Tpoint) (hPP' : P ≠ P') (hAB : A ≠ B)\n    (h : Reflect P P' A B) : TS A B P P'",
+    "sorry": false
+  },
+  "l10_15_c": {
+    "file": "Tarski_dev/Ch10.lean",
+    "line": 496,
+    "signature": "theorem l10_15_c (A B C P : Tpoint)\n    (hCol : Col A B C) (hNCol : ¬ Col A B P) :\n    ∃ Q, Perp A B Q C ∧ OS A B P Q",
+    "sorry": false
+  },
+  "l10_2_existence_c": {
+    "file": "Tarski_dev/Ch10.lean",
+    "line": 131,
+    "signature": "theorem l10_2_existence_c (A B P : Tpoint) :\n    ∃ P', Reflect P' P A B",
+    "sorry": false
+  },
+  "l10_2_existence_spec_c": {
+    "file": "Tarski_dev/Ch10.lean",
+    "line": 114,
+    "signature": "theorem l10_2_existence_spec_c (A B P : Tpoint) :\n    ∃ P', ReflectL P' P A B",
+    "sorry": false
+  },
+  "l10_2_uniqueness_c": {
+    "file": "Tarski_dev/Ch10.lean",
+    "line": 104,
+    "signature": "theorem l10_2_uniqueness_c (A B P P1 P2 : Tpoint)\n    (h₁ : Reflect P1 P A B) (h₂ : Reflect P2 P A B) : P1 = P2",
+    "sorry": false
+  },
+  "l10_2_uniqueness_spec_c": {
+    "file": "Tarski_dev/Ch10.lean",
+    "line": 55,
+    "signature": "theorem l10_2_uniqueness_spec_c (A B P P1 P2 : Tpoint)\n    (h₁ : ReflectL P1 P A B) (h₂ : ReflectL P2 P A B) : P1 = P2",
+    "sorry": false
+  },
+  "l10_4_c": {
+    "file": "Tarski_dev/Ch10.lean",
+    "line": 149,
+    "signature": "theorem l10_4_c (A B P P' : Tpoint) (h : Reflect P P' A B) :\n    Reflect P' P A B",
+    "sorry": false
+  },
+  "l10_4_spec_c": {
+    "file": "Tarski_dev/Ch10.lean",
+    "line": 141,
+    "signature": "theorem l10_4_spec_c (A B P P' : Tpoint) (h : ReflectL P P' A B) :\n    ReflectL P' P A B",
+    "sorry": false
+  },
+  "l10_5_c": {
+    "file": "Tarski_dev/Ch10.lean",
+    "line": 155,
+    "signature": "theorem l10_5_c (A B P P' P'' : Tpoint)\n    (h₁ : Reflect P' P A B) (h₂ : Reflect P'' P' A B) : P = P''",
+    "sorry": false
+  },
+  "l10_6_existence_c": {
+    "file": "Tarski_dev/Ch10.lean",
+    "line": 173,
+    "signature": "theorem l10_6_existence_c (A B P' : Tpoint) :\n    ∃ P, Reflect P' P A B",
+    "sorry": false
+  },
+  "l10_6_existence_spec_c": {
+    "file": "Tarski_dev/Ch10.lean",
+    "line": 167,
+    "signature": "theorem l10_6_existence_spec_c (A B P' : Tpoint) (hAB : A ≠ B) :\n    ∃ P, ReflectL P' P A B",
+    "sorry": false
+  },
+  "l10_6_uniqueness_c": {
+    "file": "Tarski_dev/Ch10.lean",
+    "line": 159,
+    "signature": "theorem l10_6_uniqueness_c (A B P P1 P2 : Tpoint)\n    (h₁ : Reflect P P1 A B) (h₂ : Reflect P P2 A B) : P1 = P2",
+    "sorry": false
+  },
+  "l10_6_uniqueness_spec_c": {
+    "file": "Tarski_dev/Ch10.lean",
+    "line": 163,
+    "signature": "theorem l10_6_uniqueness_spec_c (A B P P1 P2 : Tpoint)\n    (h₁ : ReflectL P P1 A B) (h₂ : ReflectL P P2 A B) : P1 = P2",
+    "sorry": false
+  },
+  "l10_7_c": {
+    "file": "Tarski_dev/Ch10.lean",
+    "line": 179,
+    "signature": "theorem l10_7_c (A B P P' Q Q' : Tpoint)\n    (h₁ : Reflect P' P A B) (h₂ : Reflect Q' Q A B) (h₃ : P' = Q') : P = Q",
+    "sorry": false
+  },
+  "l10_8_c": {
+    "file": "Tarski_dev/Ch10.lean",
+    "line": 184,
+    "signature": "theorem l10_8_c (A B P : Tpoint) (h : Reflect P P A B) : Col P A B",
+    "sorry": false
+  },
+  "l2_11": {
+    "file": "Tarski_dev/CongBase.lean",
+    "line": 68,
+    "signature": "theorem l2_11 {A B C A' B' C' : Tpoint}\n    (h1 : Bet A B C) (h2 : Bet A' B' C')\n    (hab : Cong A B A' B') (hbc : Cong B C B' C') : Cong A C A' C'",
+    "sorry": false
+  },
+  "l2_11_b_c": {
+    "file": "Tarski_dev/Ch03.lean",
+    "line": 162,
+    "signature": "theorem l2_11_b_c (Cong_stability : ∀ A B C D : Tpoint, ¬ ¬ Cong A B C D → Cong A B C D)\n    (A B C A' B' C' : Tpoint)\n    (h₁ : Bet A B C) (h₂ : Bet A' B' C')\n    (h₃ : Cong A B A' B') (h₄ : Cong B C B' C') : Cong A C A' C'",
+    "sorry": false
+  },
+  "l2_11_c": {
+    "file": "Tarski_dev/Ch02.lean",
+    "line": 135,
+    "signature": "theorem l2_11_c (A B C A' B' C' : Tpoint)\n    (h1 : Bet A B C) (h2 : Bet A' B' C')\n    (h3 : Cong A B A' B') (h4 : Cong B C B' C') : Cong A C A' C'",
+    "sorry": false
+  },
+  "l3_17_c": {
+    "file": "Tarski_dev/Ch03.lean",
+    "line": 126,
+    "signature": "theorem l3_17_c (A B C A' B' P : Tpoint)\n    (h₁ : Bet A B C) (h₂ : Bet A' B' C) (h₃ : Bet A P A') :\n    ∃ Q, Bet P Q C ∧ Bet B Q B'",
+    "sorry": false
+  },
+  "l3_9_4_c": {
+    "file": "Tarski_dev/Ch03.lean",
+    "line": 119,
+    "signature": "theorem l3_9_4_c (A₁ A₂ A₃ A₄ : Tpoint) (h : Bet_4 A₁ A₂ A₃ A₄) :\n    Bet_4 A₄ A₃ A₂ A₁",
+    "sorry": false
+  },
+  "l4_13_c": {
+    "file": "Tarski_dev/Ch04.lean",
+    "line": 90,
+    "signature": "theorem l4_13_c (A B C A' B' C' : Tpoint)\n    (h₁ : Col A B C)\n    (h₂ : Cong_3 A B C A' B' C') :\n    Col A' B' C'",
+    "sorry": false
+  },
+  "l4_14_c": {
+    "file": "Tarski_dev/Ch04.lean",
+    "line": 101,
+    "signature": "theorem l4_14_c (A B C A' B' : Tpoint)\n    (h₁ : Col A B C) (h₂ : Cong A B A' B') :\n    ∃ C', Cong_3 A B C A' B' C'",
+    "sorry": false
+  },
+  "l4_16": {
+    "file": "Tarski_dev/Ch04Cong.lean",
+    "line": 87,
+    "signature": "theorem l4_16 {A B C D A' B' C' D' : Tpoint} (h : FSC A B C D A' B' C' D') (hAB : A ≠ B) :\n    Cong C D C' D'",
+    "sorry": false
+  },
+  "l4_16_c": {
+    "file": "Tarski_dev/Ch04.lean",
+    "line": 255,
+    "signature": "theorem l4_16_c (A B C D A' B' C' D' : Tpoint)\n    (h₁ : FSC A B C D A' B' C' D') (hAB : A ≠ B) : Cong C D C' D'",
+    "sorry": false
+  },
+  "l4_17": {
+    "file": "Tarski_dev/Ch04Cong.lean",
+    "line": 108,
+    "signature": "theorem l4_17 {A B C P Q : Tpoint} (hAB : A ≠ B) (hcol : Col A B C)\n    (hAP : Cong A P A Q) (hBP : Cong B P B Q) : Cong C P C Q",
+    "sorry": false
+  },
+  "l4_17_c": {
+    "file": "Tarski_dev/Ch04.lean",
+    "line": 272,
+    "signature": "theorem l4_17_c (A B C P Q : Tpoint)\n    (hAB : A ≠ B) (hCol : Col A B C)\n    (h₁ : Cong A P A Q) (h₂ : Cong B P B Q) : Cong C P C Q",
+    "sorry": false
+  },
+  "l4_18_c": {
+    "file": "Tarski_dev/Ch04.lean",
+    "line": 119,
+    "signature": "theorem l4_18_c (A B C C' : Tpoint)\n    (hAB : A ≠ B) (hCol : Col A B C)\n    (h₁ : Cong A C A C') (h₂ : Cong B C B C') : C = C'",
+    "sorry": false
+  },
+  "l4_19_c": {
+    "file": "Tarski_dev/Ch04.lean",
+    "line": 124,
+    "signature": "theorem l4_19_c (A B C C' : Tpoint)\n    (hBet : Bet A C B)\n    (h₁ : Cong A C A C') (h₂ : Cong B C B C') : C = C'",
+    "sorry": false
+  },
+  "l4_2": {
+    "file": "Tarski_dev/Ch04Cong.lean",
+    "line": 26,
+    "signature": "theorem l4_2 {A B C D A' B' C' D' : Tpoint} (h : IFSC A B C D A' B' C' D') :\n    Cong B D B' D'",
+    "sorry": false
+  },
+  "l4_2_c": {
+    "file": "Tarski_dev/Ch04.lean",
+    "line": 177,
+    "signature": "theorem l4_2_c (A B C D A' B' C' D' : Tpoint)\n    (h : IFSC A B C D A' B' C' D') : Cong B D B' D'",
+    "sorry": false
+  },
+  "l4_3": {
+    "file": "Tarski_dev/Ch04Cong.lean",
+    "line": 50,
+    "signature": "theorem l4_3 {A B C A' B' C' : Tpoint} (h1 : Bet A B C) (h2 : Bet A' B' C')\n    (hAC : Cong A C A' C') (hBC : Cong B C B' C') : Cong A B A' B'",
+    "sorry": false
+  },
+  "l4_3_1": {
+    "file": "Tarski_dev/Ch04Cong.lean",
+    "line": 56,
+    "signature": "theorem l4_3_1 {A B C A' B' C' : Tpoint} (h1 : Bet A B C) (h2 : Bet A' B' C')\n    (hAB : Cong A B A' B') (hAC : Cong A C A' C') : Cong B C B' C'",
+    "sorry": false
+  },
+  "l4_3_1_c": {
+    "file": "Tarski_dev/Ch04.lean",
+    "line": 209,
+    "signature": "theorem l4_3_1_c (A B C A' B' C' : Tpoint)\n    (h₁ : Bet A B C) (h₂ : Bet A' B' C')\n    (h₃ : Cong A B A' B') (h₄ : Cong A C A' C') : Cong B C B' C'",
+    "sorry": false
+  },
+  "l4_3_c": {
+    "file": "Tarski_dev/Ch04.lean",
+    "line": 204,
+    "signature": "theorem l4_3_c (A B C A' B' C' : Tpoint)\n    (h₁ : Bet A B C) (h₂ : Bet A' B' C')\n    (h₃ : Cong A C A' C') (h₄ : Cong B C B' C') : Cong A B A' B'",
+    "sorry": false
+  },
+  "l4_5": {
+    "file": "Tarski_dev/Ch04Cong.lean",
+    "line": 61,
+    "signature": "theorem l4_5 {A B C A' C' : Tpoint} (h : Bet A B C) (hAC : Cong A C A' C') :\n    ∃ B', Bet A' B' C' ∧ Cong_3 A B C A' B' C'",
+    "sorry": false
+  },
+  "l4_5_c": {
+    "file": "Tarski_dev/Ch04.lean",
+    "line": 214,
+    "signature": "theorem l4_5_c (A B C A' C' : Tpoint)\n    (hBet : Bet A B C) (hCong : Cong A C A' C') :\n    ∃ B', Bet A' B' C' ∧ Cong_3 A B C A' B' C'",
+    "sorry": false
+  },
+  "l4_6": {
+    "file": "Tarski_dev/Ch04Cong.lean",
+    "line": 75,
+    "signature": "theorem l4_6 {A B C A' B' C' : Tpoint} (h : Bet A B C) (hc3 : Cong_3 A B C A' B' C') :\n    Bet A' B' C'",
+    "sorry": false
+  },
+  "l4_6_c": {
+    "file": "Tarski_dev/Ch04.lean",
+    "line": 231,
+    "signature": "theorem l4_6_c (A B C A' B' C' : Tpoint)\n    (hBet : Bet A B C) (hCong : Cong_3 A B C A' B' C') : Bet A' B' C'",
+    "sorry": false
+  },
+  "l5_1": {
+    "file": "Tarski_dev/Ch05Bet.lean",
+    "line": 18,
+    "signature": "theorem l5_1 {A B C D : Tpoint} (hAB : A ≠ B) (hABC : Bet A B C) (hABD : Bet A B D) :\n    Bet A C D ∨ Bet A D C",
+    "sorry": false
+  },
+  "l5_12_a_c": {
+    "file": "Tarski_dev/Ch05.lean",
+    "line": 303,
+    "signature": "theorem l5_12_a_c (A B C : Tpoint) (h : Bet A B C) : Le A B A C ∧ Le B C A C",
+    "sorry": false
+  },
+  "l5_12_b_c": {
+    "file": "Tarski_dev/Ch05.lean",
+    "line": 324,
+    "signature": "theorem l5_12_b_c (A B C : Tpoint)\n    (hCol : Col A B C) (h₁ : Le A B A C) (h₂ : Le B C A C) : Bet A B C",
+    "sorry": false
+  },
+  "l5_1_c": {
+    "file": "Tarski_dev/Ch05.lean",
+    "line": 9,
+    "signature": "theorem l5_1_c (A B C D : Tpoint) (hAB : A ≠ B)\n    (h₁ : Bet A B C) (h₂ : Bet A B D) : Bet A C D ∨ Bet A D C",
+    "sorry": false
+  },
+  "l5_2": {
+    "file": "Tarski_dev/Ch05Bet.lean",
+    "line": 134,
+    "signature": "theorem l5_2 {A B C D : Tpoint} (hAB : A ≠ B) (hABC : Bet A B C) (hABD : Bet A B D) :\n    Bet B C D ∨ Bet B D C",
+    "sorry": false
+  },
+  "l5_2_c": {
+    "file": "Tarski_dev/Ch05.lean",
+    "line": 13,
+    "signature": "theorem l5_2_c (A B C D : Tpoint) (hAB : A ≠ B)\n    (h₁ : Bet A B C) (h₂ : Bet A B D) : Bet B C D ∨ Bet B D C",
+    "sorry": false
+  },
+  "l5_3": {
+    "file": "Tarski_dev/Ch05Bet.lean",
+    "line": 141,
+    "signature": "theorem l5_3 {A B C D : Tpoint} (h1 : Bet A B D) (h2 : Bet A C D) :\n    Bet A B C ∨ Bet A C B",
+    "sorry": false
+  },
+  "l5_3_c": {
+    "file": "Tarski_dev/Ch05.lean",
+    "line": 30,
+    "signature": "theorem l5_3_c (A B C D : Tpoint)\n    (h₁ : Bet A B D) (h₂ : Bet A C D) : Bet A B C ∨ Bet A C B",
+    "sorry": false
+  },
+  "l5_5_1_c": {
+    "file": "Tarski_dev/Ch05.lean",
+    "line": 52,
+    "signature": "theorem l5_5_1_c (A B C D : Tpoint) (h : Le A B C D) :\n    ∃ x, Bet A B x ∧ Cong A x C D",
+    "sorry": false
+  },
+  "l5_5_2_c": {
+    "file": "Tarski_dev/Ch05.lean",
+    "line": 61,
+    "signature": "theorem l5_5_2_c (A B C D : Tpoint)\n    (h : ∃ x, Bet A B x ∧ Cong A x C D) : Le A B C D",
+    "sorry": false
+  },
+  "l5_6_c": {
+    "file": "Tarski_dev/Ch05.lean",
+    "line": 72,
+    "signature": "theorem l5_6_c (A B C D A' B' C' D' : Tpoint)\n    (h₁ : Le A B C D) (h₂ : Cong A B A' B') (h₃ : Cong C D C' D') :\n    Le A' B' C' D'",
+    "sorry": false
+  },
+  "l6_11_existence_c": {
+    "file": "Tarski_dev/Ch06.lean",
+    "line": 201,
+    "signature": "theorem l6_11_existence_c (A B C R : Tpoint) (hRA : R ≠ A) (hBC : B ≠ C) :\n    ∃ X, Out A X R ∧ Cong A X B C",
+    "sorry": false
+  },
+  "l6_11_uniqueness_c": {
+    "file": "Tarski_dev/Ch06.lean",
+    "line": 181,
+    "signature": "theorem l6_11_uniqueness_c (A B C R X Y : Tpoint)\n    (h₁ : Out A X R) (h₂ : Cong A X B C)\n    (h₃ : Out A Y R) (h₄ : Cong A Y B C) : X = Y",
+    "sorry": false
+  },
+  "l6_13_1_c": {
+    "file": "Tarski_dev/Ch06.lean",
+    "line": 215,
+    "signature": "theorem l6_13_1_c (P A B : Tpoint) (h₁ : Out P A B) (h₂ : Le P A P B) :\n    Bet P A B",
+    "sorry": false
+  },
+  "l6_13_2_c": {
+    "file": "Tarski_dev/Ch06.lean",
+    "line": 233,
+    "signature": "theorem l6_13_2_c (P A B : Tpoint) (h₁ : Out P A B) (h₂ : Bet P A B) :\n    Le P A P B",
+    "sorry": false
+  },
+  "l6_16_1_c": {
+    "file": "Tarski_dev/Ch06.lean",
+    "line": 237,
+    "signature": "theorem l6_16_1_c (P Q S X : Tpoint) (hPQ : P ≠ Q)\n    (h₁ : Col S P Q) (h₂ : Col X P Q) : Col X P S",
+    "sorry": false
+  },
+  "l6_21_c": {
+    "file": "Tarski_dev/Ch06.lean",
+    "line": 264,
+    "signature": "theorem l6_21_c (A B C D P Q : Tpoint)\n    (hNCol : ¬ Col A B C) (hCD : C ≠ D)\n    (h₁ : Col A B P) (h₂ : Col A B Q)\n    (h₃ : Col C D P) (h₄ : Col C D Q) : P = Q",
+    "sorry": false
+  },
+  "l6_2_c": {
+    "file": "Tarski_dev/Ch06.lean",
+    "line": 49,
+    "signature": "theorem l6_2_c (A B C P : Tpoint)\n    (hAP : A ≠ P) (hBP : B ≠ P) (hCP : C ≠ P) (h : Bet A P C) :\n    Bet B P C ↔ Out P A B",
+    "sorry": false
+  },
+  "l6_3_1_c": {
+    "file": "Tarski_dev/Ch06.lean",
+    "line": 77,
+    "signature": "theorem l6_3_1_c (A B P : Tpoint) (h : Out P A B) :\n    A ≠ P ∧ B ≠ P ∧ ∃ C, C ≠ P ∧ Bet A P C ∧ Bet B P C",
+    "sorry": false
+  },
+  "l6_3_2_c": {
+    "file": "Tarski_dev/Ch06.lean",
+    "line": 89,
+    "signature": "theorem l6_3_2_c (A B P : Tpoint)\n    (h : A ≠ P ∧ B ≠ P ∧ ∃ C, C ≠ P ∧ Bet A P C ∧ Bet B P C) :\n    Out P A B",
+    "sorry": false
+  },
+  "l6_4_1_c": {
+    "file": "Tarski_dev/Ch06.lean",
+    "line": 99,
+    "signature": "theorem l6_4_1_c (A B P : Tpoint) (h : Out P A B) : Col A P B ∧ ¬ Bet A P B",
+    "sorry": false
+  },
+  "l6_4_2_c": {
+    "file": "Tarski_dev/Ch06.lean",
+    "line": 106,
+    "signature": "theorem l6_4_2_c (A B P : Tpoint) (h : Col A P B ∧ ¬ Bet A P B) : Out P A B",
+    "sorry": false
+  },
+  "l6_6": {
+    "file": "Tarski_dev/BetweenOutBase.lean",
+    "line": 91,
+    "signature": "theorem l6_6 {P A B : Tpoint} (h : Out P A B) : Out P B A",
+    "sorry": false
+  },
+  "l6_6_c": {
+    "file": "Tarski_dev/Ch06.lean",
+    "line": 129,
+    "signature": "theorem l6_6_c (P A B : Tpoint) (h : Out P A B) : Out P B A",
+    "sorry": false
+  },
+  "l6_7_c": {
+    "file": "Tarski_dev/Ch06.lean",
+    "line": 136,
+    "signature": "theorem l6_7_c (P A B C : Tpoint) (h₁ : Out P A B) (h₂ : Out P B C) : Out P A C",
+    "sorry": false
+  },
+  "l7_13_c": {
+    "file": "Tarski_dev/Ch07.lean",
+    "line": 84,
+    "signature": "theorem l7_13_c (A P Q P' Q' : Tpoint)\n    (h₁ : Midpoint A P' P) (h₂ : Midpoint A Q' Q) : Cong P Q P' Q'",
+    "sorry": false
+  },
+  "l7_15_c": {
+    "file": "Tarski_dev/Ch07.lean",
+    "line": 166,
+    "signature": "theorem l7_15_c (P Q R P' Q' R' A : Tpoint)\n    (h₁ : Midpoint A P P') (h₂ : Midpoint A Q Q') (h₃ : Midpoint A R R')\n    (h₄ : Bet P Q R) : Bet P' Q' R'",
+    "sorry": false
+  },
+  "l7_16_c": {
+    "file": "Tarski_dev/Ch07.lean",
+    "line": 171,
+    "signature": "theorem l7_16_c (P Q R S P' Q' R' S' A : Tpoint)\n    (h₁ : Midpoint A P P') (h₂ : Midpoint A Q Q')\n    (h₃ : Midpoint A R R') (h₄ : Midpoint A S S')\n    (h₅ : Cong P Q R S) : Cong P' Q' R' S'",
+    "sorry": false
+  },
+  "l7_17_bis_c": {
+    "file": "Tarski_dev/Ch07.lean",
+    "line": 212,
+    "signature": "theorem l7_17_bis_c (P P' A B : Tpoint)\n    (h₁ : Midpoint A P P') (h₂ : Midpoint B P' P) : A = B",
+    "sorry": false
+  },
+  "l7_17_c": {
+    "file": "Tarski_dev/Ch07.lean",
+    "line": 195,
+    "signature": "theorem l7_17_c (P P' A B : Tpoint) (h₁ : Midpoint A P P') (h₂ : Midpoint B P P') :\n    A = B",
+    "sorry": false
+  },
+  "l7_20_bis_c": {
+    "file": "Tarski_dev/Ch07.lean",
+    "line": 230,
+    "signature": "theorem l7_20_bis_c (M A B : Tpoint) (hAB : A ≠ B)\n    (hCol : Col A M B) (hCong : Cong M A M B) : Midpoint M A B",
+    "sorry": false
+  },
+  "l7_20_c": {
+    "file": "Tarski_dev/Ch07.lean",
+    "line": 216,
+    "signature": "theorem l7_20_c (M A B : Tpoint) (hCol : Col A M B) (hCong : Cong M A M B) :\n    A = B ∨ Midpoint M A B",
+    "sorry": false
+  },
+  "l7_21_c": {
+    "file": "Tarski_dev/Ch07.lean",
+    "line": 246,
+    "signature": "theorem l7_21_c (A B C D P : Tpoint)\n    (hNCol : ¬ Col A B C) (hBD : B ≠ D)\n    (h₁ : Cong A B C D) (h₂ : Cong B C D A)\n    (h₃ : Col A P C) (h₄ : Col B P D) :\n    Midpoint P A C ∧ Midpoint P B D",
+    "sorry": false
+  },
+  "l7_22_aux_c": {
+    "file": "Tarski_dev/Ch07.lean",
+    "line": 283,
+    "signature": "theorem l7_22_aux_c (A₁ A₂ B₁ B₂ C M₁ M₂ : Tpoint)\n    (h₁ : Bet A₁ C A₂) (h₂ : Bet B₁ C B₂)\n    (h₃ : Cong C A₁ C B₁) (h₄ : Cong C A₂ C B₂)\n    (h₅ : Midpoint M₁ A₁ B₁) (h₆ : Midpoint M₂ A₂ B₂)\n    (h₇ : Le C A₁ C A₂) : Bet M₁ C M₂",
+    "sorry": false
+  },
+  "l7_22_c": {
+    "file": "Tarski_dev/Ch07.lean",
+    "line": 368,
+    "signature": "theorem l7_22_c (A₁ A₂ B₁ B₂ C M₁ M₂ : Tpoint)\n    (h₁ : Bet A₁ C A₂) (h₂ : Bet B₁ C B₂)\n    (h₃ : Cong C A₁ C B₁) (h₄ : Cong C A₂ C B₂)\n    (h₅ : Midpoint M₁ A₁ B₁) (h₆ : Midpoint M₂ A₂ B₂) : Bet M₁ C M₂",
+    "sorry": false
+  },
+  "l7_25_c": {
+    "file": "Tarski_dev/Ch07.lean",
+    "line": 384,
+    "signature": "theorem l7_25_c (A B C : Tpoint) (h : Cong C A C B) : ∃ X, Midpoint X A B",
+    "sorry": false
+  },
+  "l7_2_c": {
+    "file": "Tarski_dev/Ch07.lean",
+    "line": 28,
+    "signature": "theorem l7_2_c (M A B : Tpoint) (h : Midpoint M A B) : Midpoint M B A",
+    "sorry": false
+  },
+  "l7_3_2_c": {
+    "file": "Tarski_dev/Ch07.lean",
+    "line": 38,
+    "signature": "theorem l7_3_2_c (A : Tpoint) : Midpoint A A A",
+    "sorry": false
+  },
+  "l7_3_c": {
+    "file": "Tarski_dev/Ch07.lean",
+    "line": 32,
+    "signature": "theorem l7_3_c (M A : Tpoint) (h : Midpoint M A A) : M = A",
+    "sorry": false
+  },
+  "l7_9_bis_c": {
+    "file": "Tarski_dev/Ch07.lean",
+    "line": 76,
+    "signature": "theorem l7_9_bis_c (P Q A X : Tpoint) (h₁ : Midpoint A P X) (h₂ : Midpoint A X Q) :\n    P = Q",
+    "sorry": false
+  },
+  "l7_9_c": {
+    "file": "Tarski_dev/Ch07.lean",
+    "line": 62,
+    "signature": "theorem l7_9_c (P Q A X : Tpoint) (h₁ : Midpoint A P X) (h₂ : Midpoint A Q X) :\n    P = Q",
+    "sorry": false
+  },
+  "l8_10_c": {
+    "file": "Tarski_dev/Ch08.lean",
+    "line": 122,
+    "signature": "theorem l8_10_c (A B C A' B' C' : Tpoint)\n    (h₁ : Per A B C) (h₂ : Cong_3 A B C A' B' C') : Per A' B' C'",
+    "sorry": false
+  },
+  "l8_12_c": {
+    "file": "Tarski_dev/Ch08.lean",
+    "line": 227,
+    "signature": "theorem l8_12_c (A B C D X : Tpoint) (h : Perp_at X A B C D) :\n    Perp_at X C D A B",
+    "sorry": false
+  },
+  "l8_13_2_c": {
+    "file": "Tarski_dev/Ch08.lean",
+    "line": 272,
+    "signature": "theorem l8_13_2_c (A B C D X : Tpoint)\n    (hAB : A ≠ B) (hCD : C ≠ D) (hCol1 : Col X A B) (hCol2 : Col X C D)\n    (h : ∃ U V : Tpoint, Col U A B ∧ Col V C D ∧ U ≠ X ∧ V ≠ X ∧ Per U X V) :\n    Perp_at X A B C D",
+    "sorry": false
+  },
+  "l8_14_1_c": {
+    "file": "Tarski_dev/Ch08.lean",
+    "line": 284,
+    "signature": "theorem l8_14_1_c (A B : Tpoint) : ¬ Perp A B A B",
+    "sorry": false
+  },
+  "l8_14_2_1a_c": {
+    "file": "Tarski_dev/Ch08.lean",
+    "line": 297,
+    "signature": "theorem l8_14_2_1a_c (X A B C D : Tpoint) (h : Perp_at X A B C D) :\n    Perp A B C D",
+    "sorry": false
+  },
+  "l8_14_2_1b_bis_c": {
+    "file": "Tarski_dev/Ch08.lean",
+    "line": 314,
+    "signature": "theorem l8_14_2_1b_bis_c (A B C D X : Tpoint)\n    (h₁ : Perp A B C D) (h₂ : Col X A B) (h₃ : Col X C D) :\n    Perp_at X A B C D",
+    "sorry": false
+  },
+  "l8_14_2_1b_c": {
+    "file": "Tarski_dev/Ch08.lean",
+    "line": 305,
+    "signature": "theorem l8_14_2_1b_c (X A B C D Y : Tpoint)\n    (h₁ : Perp_at X A B C D) (h₂ : Col Y A B) (h₃ : Col Y C D) : X = Y",
+    "sorry": false
+  },
+  "l8_14_2_2_c": {
+    "file": "Tarski_dev/Ch08.lean",
+    "line": 322,
+    "signature": "theorem l8_14_2_2_c (X A B C D : Tpoint)\n    (h₁ : Perp A B C D)\n    (h₂ : ∀ Y, Col Y A B → Col Y C D → X = Y) : Perp_at X A B C D",
+    "sorry": false
+  },
+  "l8_14_3_c": {
+    "file": "Tarski_dev/Ch08.lean",
+    "line": 338,
+    "signature": "theorem l8_14_3_c (A B C D X Y : Tpoint)\n    (h₁ : Perp_at X A B C D) (h₂ : Perp_at Y A B C D) : X = Y",
+    "sorry": false
+  },
+  "l8_15_1_c": {
+    "file": "Tarski_dev/Ch08.lean",
+    "line": 347,
+    "signature": "theorem l8_15_1_c (A B C X : Tpoint) (hCol : Col A B X) (h : Perp A B C X) :\n    Perp_at X A B C X",
+    "sorry": false
+  },
+  "l8_15_2_c": {
+    "file": "Tarski_dev/Ch08.lean",
+    "line": 351,
+    "signature": "theorem l8_15_2_c (A B C X : Tpoint) (hCol : Col A B X) (h : Perp_at X A B C X) :\n    Perp A B C X",
+    "sorry": false
+  },
+  "l8_16_1_c": {
+    "file": "Tarski_dev/Ch08.lean",
+    "line": 723,
+    "signature": "theorem l8_16_1_c (A B C U X : Tpoint)\n    (hX : Col A B X) (hU : Col A B U) (h : Perp A B C X) :\n    ¬ Col A B C ∧ Per C X U",
+    "sorry": false
+  },
+  "l8_16_2_c": {
+    "file": "Tarski_dev/Ch08.lean",
+    "line": 744,
+    "signature": "theorem l8_16_2_c (A B C U X : Tpoint)\n    (hX : Col A B X) (hU : Col A B U) (hUX : U ≠ X)\n    (hNCol : ¬ Col A B C) (h : Per C X U) : Perp A B C X",
+    "sorry": false
+  },
+  "l8_18_existence_c": {
+    "file": "Tarski_dev/Ch08.lean",
+    "line": 854,
+    "signature": "theorem l8_18_existence_c (A B C : Tpoint) (hNCol : ¬ Col A B C) :\n    ∃ X, Col A B X ∧ Perp A B C X",
+    "sorry": false
+  },
+  "l8_18_uniqueness_c": {
+    "file": "Tarski_dev/Ch08.lean",
+    "line": 765,
+    "signature": "theorem l8_18_uniqueness_c (A B C X Y : Tpoint)\n    (hNCol : ¬ Col A B C)\n    (h₁ : Col A B X) (h₂ : Perp A B C X)\n    (h₃ : Col A B Y) (h₄ : Perp A B C Y) : X = Y",
+    "sorry": false
+  },
+  "l8_20_1_c": {
+    "file": "Tarski_dev/Ch08.lean",
+    "line": 786,
+    "signature": "theorem l8_20_1_c (A B C C' D P : Tpoint)\n    (h₁ : Per A B C) (h₂ : Midpoint P C' D)\n    (h₃ : Midpoint A C' C) (h₄ : Midpoint B D C) : Per B A P",
+    "sorry": false
+  },
+  "l8_20_2_c": {
+    "file": "Tarski_dev/Ch08.lean",
+    "line": 829,
+    "signature": "theorem l8_20_2_c (A B C C' D P : Tpoint)\n    (h₁ : Per A B C) (h₂ : Midpoint P C' D)\n    (h₃ : Midpoint A C' C) (h₄ : Midpoint B D C)\n    (hBC : B ≠ C) : A ≠ P",
+    "sorry": false
+  },
+  "l8_21_aux_c": {
+    "file": "Tarski_dev/Ch08.lean",
+    "line": 973,
+    "signature": "theorem l8_21_aux_c (A B C : Tpoint) (hNCol : ¬ Col A B C) :\n    ∃ P T, Perp A B P A ∧ Col A B T ∧ Bet C T P",
+    "sorry": false
+  },
+  "l8_21_bis_c": {
+    "file": "Tarski_dev/Ch09.lean",
+    "line": 1434,
+    "signature": "theorem l8_21_bis_c (A B C X Y : Tpoint)\n    (hXY : X ≠ Y) (hNCol : ¬ Col C A B) :\n    ∃ P : Tpoint, Cong A P X Y ∧ Perp A B P A ∧ TS A B C P",
+    "sorry": false
+  },
+  "l8_21_c": {
+    "file": "Tarski_dev/Ch08.lean",
+    "line": 1035,
+    "signature": "theorem l8_21_c (A B C : Tpoint) (hAB : A ≠ B) :\n    ∃ P T, Perp A B P A ∧ Col A B T ∧ Bet C T P",
+    "sorry": false
+  },
+  "l8_22_bis_c": {
+    "file": "Tarski_dev/Ch08.lean",
+    "line": 1266,
+    "signature": "theorem l8_22_bis_c (A B P R X : Tpoint)\n    (hAB : A ≠ B) (hAP : A ≠ P)\n    (h₁ : Perp A B P A) (h₂ : Perp A B R B) (h₃ : Cong A P B R)\n    (hCol : Col A B X) (hBet : Bet P X R) :\n    Cong A R P B ∧ Midpoint X A B ∧ Midpoint X P R",
+    "sorry": false
+  },
+  "l8_22_c": {
+    "file": "Tarski_dev/Ch08.lean",
+    "line": 1247,
+    "signature": "theorem l8_22_c (A B P R X : Tpoint)\n    (hAB : A ≠ B) (hAP : A ≠ P)\n    (h₁ : Per B A P) (h₂ : Per A B R) (h₃ : Cong A P B R)\n    (hCol : Col A B X) (hBet : Bet P X R) :\n    Cong A R P B ∧ Midpoint X A B ∧ Midpoint X P R",
+    "sorry": false
+  },
+  "l8_24_c": {
+    "file": "Tarski_dev/Ch08.lean",
+    "line": 1292,
+    "signature": "theorem l8_24_c (A B P Q R T : Tpoint)\n    (h₁ : Perp P A A B) (h₂ : Perp Q B A B)\n    (h₃ : Col A B T) (h₄ : Bet P T Q) (h₅ : Bet B R Q) (h₆ : Cong A P B R) :\n    ∃ X, Midpoint X A B ∧ Midpoint X P R",
+    "sorry": false
+  },
+  "l8_2_c": {
+    "file": "Tarski_dev/Ch08.lean",
+    "line": 24,
+    "signature": "theorem l8_2_c (A B C : Tpoint) (h : Per A B C) : Per C B A",
+    "sorry": false
+  },
+  "l8_3_c": {
+    "file": "Tarski_dev/Ch08.lean",
+    "line": 40,
+    "signature": "theorem l8_3_c (A B C A' : Tpoint)\n    (h₁ : Per A B C) (hAB : A ≠ B) (hCol : Col B A A') : Per A' B C",
+    "sorry": false
+  },
+  "l8_4_c": {
+    "file": "Tarski_dev/Ch08.lean",
+    "line": 54,
+    "signature": "theorem l8_4_c (A B C C' : Tpoint) (h₁ : Per A B C) (h₂ : Midpoint B C C') :\n    Per A B C'",
+    "sorry": false
+  },
+  "l8_5_c": {
+    "file": "Tarski_dev/Ch08.lean",
+    "line": 65,
+    "signature": "theorem l8_5_c (A B : Tpoint) : Per A B B",
+    "sorry": false
+  },
+  "l8_6_c": {
+    "file": "Tarski_dev/Ch08.lean",
+    "line": 68,
+    "signature": "theorem l8_6_c (A B C A' : Tpoint)\n    (h₁ : Per A B C) (h₂ : Per A' B C) (h₃ : Bet A C A') : B = C",
+    "sorry": false
+  },
+  "l8_7_c": {
+    "file": "Tarski_dev/Ch08.lean",
+    "line": 80,
+    "signature": "theorem l8_7_c (A B C : Tpoint) (h₁ : Per A B C) (h₂ : Per A C B) : B = C",
+    "sorry": false
+  },
+  "l8_8_c": {
+    "file": "Tarski_dev/Ch08.lean",
+    "line": 102,
+    "signature": "theorem l8_8_c (A B : Tpoint) (h : Per A B A) : A = B",
+    "sorry": false
+  },
+  "l8_9_c": {
+    "file": "Tarski_dev/Ch08.lean",
+    "line": 116,
+    "signature": "theorem l8_9_c (A B C : Tpoint) (h₁ : Per A B C) (hCol : Col A B C) :\n    A = B ∨ C = B",
+    "sorry": false
+  },
+  "l9_10_c": {
+    "file": "Tarski_dev/Ch09.lean",
+    "line": 883,
+    "signature": "theorem l9_10_c (P Q A : Tpoint) (hNCol : ¬ Col A P Q) : ∃ C, TS P Q A C",
+    "sorry": false
+  },
+  "l9_17_c": {
+    "file": "Tarski_dev/Ch09.lean",
+    "line": 934,
+    "signature": "theorem l9_17_c (A B C P Q : Tpoint) (h₁ : OS P Q A C) (h₂ : Bet A B C) :\n    OS P Q A B",
+    "sorry": false
+  },
+  "l9_18_3_c": {
+    "file": "Tarski_dev/Ch09.lean",
+    "line": 2473,
+    "signature": "theorem l9_18_3_c (A B C X Y P : Tpoint)\n    (hCop : Coplanar A B C P) (hCol : Col X Y P) :\n    TSP A B C X Y ↔ Bet X P Y ∧ ¬ Coplanar A B C X ∧ ¬ Coplanar A B C Y",
+    "sorry": false
+  },
+  "l9_18_c": {
+    "file": "Tarski_dev/Ch09.lean",
+    "line": 964,
+    "signature": "theorem l9_18_c (X Y A B P : Tpoint) (h₁ : Col X Y P) (h₂ : Col A B P) :\n    TS X Y A B ↔ (Bet A P B ∧ ¬ Col X Y A ∧ ¬ Col X Y B)",
+    "sorry": false
+  },
+  "l9_19_3_c": {
+    "file": "Tarski_dev/Ch09.lean",
+    "line": 2528,
+    "signature": "theorem l9_19_3_c (A B C X Y P : Tpoint)\n    (hCop : Coplanar A B C P) (hCol : Col X Y P) :\n    OSP A B C X Y ↔ Out P X Y ∧ ¬ Coplanar A B C X",
+    "sorry": false
+  },
+  "l9_19_c": {
+    "file": "Tarski_dev/Ch09.lean",
+    "line": 996,
+    "signature": "theorem l9_19_c (X Y A B P : Tpoint) (h₁ : Col X Y P) (h₂ : Col A B P) :\n    OS X Y A B ↔ (Out P A B ∧ ¬ Col X Y A)",
+    "sorry": false
+  },
+  "l9_2_c": {
+    "file": "Tarski_dev/Ch09.lean",
+    "line": 190,
+    "signature": "theorem l9_2_c (A B P Q : Tpoint) (h : TS A B P Q) : TS A B Q P",
+    "sorry": false
+  },
+  "l9_30_c": {
+    "file": "Tarski_dev/Ch09.lean",
+    "line": 1786,
+    "signature": "theorem l9_30_c (A B C D E F P X Y Z : Tpoint)\n    (hNCopP : ¬ Coplanar A B C P) (hNColDEF : ¬ Col D E F)\n    (hCopDEF_P : Coplanar D E F P)\n    (h₁ : Coplanar A B C X) (h₂ : Coplanar A B C Y) (h₃ : Coplanar A B C Z)\n    (h₄ : Coplanar D E F X) (h₅ : Coplanar D E F Y) (h₆ : Coplanar D E F Z) :\n    Col X Y Z",
+    "sorry": false
+  },
+  "l9_31_c": {
+    "file": "Tarski_dev/Ch09.lean",
+    "line": 1136,
+    "signature": "theorem l9_31_c (A X Y Z : Tpoint) (h₁ : OS A X Y Z) (h₂ : OS A Z Y X) :\n    TS A Y X Z",
+    "sorry": false
+  },
+  "l9_38_c": {
+    "file": "Tarski_dev/Ch09.lean",
+    "line": 2197,
+    "signature": "theorem l9_38_c (A B C P Q : Tpoint) (h : TSP A B C P Q) : TSP A B C Q P",
+    "sorry": false
+  },
+  "l9_39_c": {
+    "file": "Tarski_dev/Ch09.lean",
+    "line": 2201,
+    "signature": "theorem l9_39_c (A B C D P Q R : Tpoint)\n    (h₁ : TSP A B C P R) (hCop : Coplanar A B C D) (hOut : Out D P Q) :\n    TSP A B C Q R",
+    "sorry": false
+  },
+  "l9_3_c": {
+    "file": "Tarski_dev/Ch09.lean",
+    "line": 464,
+    "signature": "theorem l9_3_c (P Q A C M R B : Tpoint)\n    (h₁ : TS P Q A C) (hM : Col M P Q)\n    (hMid : Midpoint M A C) (hR : Col R P Q)\n    (hOut : Out R A B) : TS P Q B C",
+    "sorry": false
+  },
+  "l9_41_1_c": {
+    "file": "Tarski_dev/Ch09.lean",
+    "line": 2230,
+    "signature": "theorem l9_41_1_c (A B C P Q R : Tpoint)\n    (h₁ : TSP A B C P R) (h₂ : TSP A B C Q R) : OSP A B C P Q",
+    "sorry": false
+  },
+  "l9_41_2_c": {
+    "file": "Tarski_dev/Ch09.lean",
+    "line": 2234,
+    "signature": "theorem l9_41_2_c (A B C P Q R : Tpoint)\n    (h₁ : TSP A B C P R) (h₂ : OSP A B C P Q) : TSP A B C Q R",
+    "sorry": false
+  },
+  "l9_4_1_aux_c": {
+    "file": "Tarski_dev/Ch09.lean",
+    "line": 241,
+    "signature": "theorem l9_4_1_aux_c (P Q A C R S M : Tpoint)\n    (hLe : Le S C R A) (h₁ : TS P Q A C)\n    (hR : Col R P Q) (hPerpA : Perp P Q A R)\n    (hS : Col S P Q) (hPerpC : Perp P Q C S)\n    (hMid : Midpoint M R S) :\n    ∀ U C', Midpoint M U C' → (Out R U A ↔ Out S C C')",
+    "sorry": false
+  },
+  "l9_4_1_c": {
+    "file": "Tarski_dev/Ch09.lean",
+    "line": 362,
+    "signature": "theorem l9_4_1_c (P Q A C R S M : Tpoint)\n    (h₁ : TS P Q A C)\n    (hR : Col R P Q) (hPerpA : Perp P Q A R)\n    (hS : Col S P Q) (hPerpC : Perp P Q C S)\n    (hMid : Midpoint M R S) :\n    ∀ U C', Midpoint M U C' → (Out R U A ↔ Out S C C')",
+    "sorry": false
+  },
+  "l9_4_2_aux_c": {
+    "file": "Tarski_dev/Ch09.lean",
+    "line": 531,
+    "signature": "theorem l9_4_2_aux_c (P Q A C R S U V : Tpoint)\n    (hLe : Le S C R A) (h₁ : TS P Q A C)\n    (hR : Col R P Q) (hPerpA : Perp P Q A R)\n    (hS : Col S P Q) (hPerpC : Perp P Q C S)\n    (hOutU : Out R U A) (hOutV : Out S V C) : TS P Q U V",
+    "sorry": false
+  },
+  "l9_4_2_c": {
+    "file": "Tarski_dev/Ch09.lean",
+    "line": 601,
+    "signature": "theorem l9_4_2_c (P Q A C R S U V : Tpoint)\n    (h₁ : TS P Q A C)\n    (hR : Col R P Q) (hPerpA : Perp P Q A R)\n    (hS : Col S P Q) (hPerpC : Perp P Q C S)\n    (hOutU : Out R U A) (hOutV : Out S V C) : TS P Q U V",
+    "sorry": false
+  },
+  "l9_5_c": {
+    "file": "Tarski_dev/Ch09.lean",
+    "line": 611,
+    "signature": "theorem l9_5_c (P Q A C R B : Tpoint)\n    (h₁ : TS P Q A C) (hR : Col R P Q) (hOut : Out R A B) : TS P Q B C",
+    "sorry": false
+  },
+  "l9_8_1_c": {
+    "file": "Tarski_dev/Ch09.lean",
+    "line": 777,
+    "signature": "theorem l9_8_1_c (P Q A B C : Tpoint) (h₁ : TS P Q A C) (h₂ : TS P Q B C) :\n    OS P Q A B",
+    "sorry": false
+  },
+  "l9_8_2_c": {
+    "file": "Tarski_dev/Ch09.lean",
+    "line": 781,
+    "signature": "theorem l9_8_2_c (P Q A B C : Tpoint) (h₁ : TS P Q A C) (h₂ : OS P Q A B) :\n    TS P Q B C",
+    "sorry": false
+  },
+  "l9_9_bis_c": {
+    "file": "Tarski_dev/Ch09.lean",
+    "line": 868,
+    "signature": "theorem l9_9_bis_c (P Q A B : Tpoint) (h : OS P Q A B) : ¬ TS P Q A B",
+    "sorry": false
+  },
+  "l9_9_c": {
+    "file": "Tarski_dev/Ch09.lean",
+    "line": 864,
+    "signature": "theorem l9_9_c (P Q A B : Tpoint) (h : TS P Q A B) : ¬ OS P Q A B",
+    "sorry": false
+  },
+  "le1221_c": {
+    "file": "Tarski_dev/Ch05.lean",
+    "line": 231,
+    "signature": "theorem le1221_c (A B : Tpoint) : Le A B B A",
+    "sorry": false
+  },
+  "le1234_lt__lt_c": {
+    "file": "Tarski_dev/Ch05.lean",
+    "line": 363,
+    "signature": "theorem le1234_lt__lt_c (A B C D E F : Tpoint)\n    (h₁ : Le A B C D) (h₂ : Lt C D E F) : Lt A B E F",
+    "sorry": false
+  },
+  "le3456_lt__lt_c": {
+    "file": "Tarski_dev/Ch05.lean",
+    "line": 368,
+    "signature": "theorem le3456_lt__lt_c (A B C D E F : Tpoint)\n    (h₁ : Lt A B C D) (h₂ : Le C D E F) : Lt A B E F",
+    "sorry": false
+  },
+  "le__nlt_c": {
+    "file": "Tarski_dev/Ch05.lean",
+    "line": 383,
+    "signature": "theorem le__nlt_c (A B C D : Tpoint) (h : Le A B C D) : ¬ Lt C D A B",
+    "sorry": false
+  },
+  "le_anti_symmetry_c": {
+    "file": "Tarski_dev/Ch05.lean",
+    "line": 116,
+    "signature": "theorem le_anti_symmetry_c (A B C D : Tpoint)\n    (h₁ : Le A B C D) (h₂ : Le C D A B) : Cong A B C D",
+    "sorry": false
+  },
+  "le_bet_c": {
+    "file": "Tarski_dev/Ch05.lean",
+    "line": 46,
+    "signature": "theorem le_bet_c (A B C D : Tpoint) (h : Le C D A B) :\n    ∃ X, Bet A X B ∧ Cong A X C D",
+    "sorry": false
+  },
+  "le_cases_c": {
+    "file": "Tarski_dev/Ch05.lean",
+    "line": 181,
+    "signature": "theorem le_cases_c (A B C D : Tpoint) : Le A B C D ∨ Le C D A B",
+    "sorry": false
+  },
+  "le_comm_c": {
+    "file": "Tarski_dev/Ch05.lean",
+    "line": 240,
+    "signature": "theorem le_comm_c (A B C D : Tpoint) (h : Le A B C D) : Le B A D C",
+    "sorry": false
+  },
+  "le_diff_c": {
+    "file": "Tarski_dev/Ch05.lean",
+    "line": 200,
+    "signature": "theorem le_diff_c (A B C D : Tpoint) (hAB : A ≠ B) (h : Le A B C D) : C ≠ D",
+    "sorry": false
+  },
+  "le_left_comm_c": {
+    "file": "Tarski_dev/Ch05.lean",
+    "line": 234,
+    "signature": "theorem le_left_comm_c (A B C D : Tpoint) (h : Le A B C D) : Le B A C D",
+    "sorry": false
+  },
+  "le_mid2__le12_c": {
+    "file": "Tarski_dev/Ch07.lean",
+    "line": 572,
+    "signature": "theorem le_mid2__le12_c (A M B A' M' B' : Tpoint)\n    (h₁ : Midpoint M A B) (h₂ : Midpoint M' A' B')\n    (h₃ : Le A B A' B') : Le A M A' M'",
+    "sorry": false
+  },
+  "le_mid2__le13_c": {
+    "file": "Tarski_dev/Ch07.lean",
+    "line": 565,
+    "signature": "theorem le_mid2__le13_c (A M B A' M' B' : Tpoint)\n    (h₁ : Midpoint M A B) (h₂ : Midpoint M' A' B')\n    (h₃ : Le A M A' M') : Le A B A' B'",
+    "sorry": false
+  },
+  "le_reflexivity_c": {
+    "file": "Tarski_dev/Ch05.lean",
+    "line": 84,
+    "signature": "theorem le_reflexivity_c (A B : Tpoint) : Le A B A B",
+    "sorry": false
+  },
+  "le_right_comm_c": {
+    "file": "Tarski_dev/Ch05.lean",
+    "line": 237,
+    "signature": "theorem le_right_comm_c (A B C D : Tpoint) (h : Le A B C D) : Le A B D C",
+    "sorry": false
+  },
+  "le_transitivity_c": {
+    "file": "Tarski_dev/Ch05.lean",
+    "line": 87,
+    "signature": "theorem le_transitivity_c (A B C D E F : Tpoint)\n    (h₁ : Le A B C D) (h₂ : Le C D E F) : Le A B E F",
+    "sorry": false
+  },
+  "le_trivial_c": {
+    "file": "Tarski_dev/Ch05.lean",
+    "line": 178,
+    "signature": "theorem le_trivial_c (A C D : Tpoint) : Le A A C D",
+    "sorry": false
+  },
+  "le_zero_c": {
+    "file": "Tarski_dev/Ch05.lean",
+    "line": 193,
+    "signature": "theorem le_zero_c (A B C : Tpoint) (h : Le A B C C) : A = B",
+    "sorry": false
+  },
+  "lineOk_append": {
+    "file": "Tarski_dev/ColR.lean",
+    "line": 120,
+    "signature": "theorem lineOk_append [ColTheory P Col] {interp : PointId → P}\n    {s t : List PointId} {diff : List (PointId × PointId)}\n    (hs : LineOk Col interp s) (ht : LineOk Col interp t)\n    (hsp : SPok interp diff) (hshare : sharesDiffPair diff s t) :\n    LineOk Col interp (s ++ t)",
+    "sorry": false
+  },
+  "lineOk_of_col": {
+    "file": "Tarski_dev/ColR.lean",
+    "line": 240,
+    "signature": "theorem lineOk_of_col [ColTheory P Col] {interp : PointId → P} {a b c : PointId}\n    (h : Col (interp a) (interp b) (interp c)) : LineOk Col interp [a, b, c]",
+    "sorry": false
+  },
+  "lower_dim_ex": {
+    "file": "Tarski_dev/SegmentCone.lean",
+    "line": 58,
+    "signature": "theorem lower_dim_ex : ∃ A B C : Tpoint, ¬ (Bet A B C ∨ Bet B C A ∨ Bet C A B)",
+    "sorry": false
+  },
+  "lower_dim_ex_c": {
+    "file": "Tarski_dev/Ch03.lean",
+    "line": 137,
+    "signature": "theorem lower_dim_ex_c :\n    ∃ A B C : Tpoint, ¬ (Bet A B C ∨ Bet B C A ∨ Bet C A B)",
+    "sorry": false
+  },
+  "lt1123_c": {
+    "file": "Tarski_dev/Ch05.lean",
+    "line": 409,
+    "signature": "theorem lt1123_c (A B C : Tpoint) (hBC : B ≠ C) : Lt A A B C",
+    "sorry": false
+  },
+  "lt__le_c": {
+    "file": "Tarski_dev/Ch05.lean",
+    "line": 359,
+    "signature": "theorem lt__le_c (A B C D : Tpoint) (h : Lt A B C D) : Le A B C D",
+    "sorry": false
+  },
+  "lt__nle_c": {
+    "file": "Tarski_dev/Ch05.lean",
+    "line": 400,
+    "signature": "theorem lt__nle_c (A B C D : Tpoint) (h : Lt A B C D) : ¬ Le C D A B",
+    "sorry": false
+  },
+  "lt_comm_c": {
+    "file": "Tarski_dev/Ch05.lean",
+    "line": 264,
+    "signature": "theorem lt_comm_c (A B C D : Tpoint) (h : Lt A B C D) : Lt B A D C",
+    "sorry": false
+  },
+  "lt_diff_c": {
+    "file": "Tarski_dev/Ch05.lean",
+    "line": 205,
+    "signature": "theorem lt_diff_c (A B C D : Tpoint) (h : Lt A B C D) : C ≠ D",
+    "sorry": false
+  },
+  "lt_left_comm_c": {
+    "file": "Tarski_dev/Ch05.lean",
+    "line": 256,
+    "signature": "theorem lt_left_comm_c (A B C D : Tpoint) (h : Lt A B C D) : Lt B A C D",
+    "sorry": false
+  },
+  "lt_mid2__lt12_c": {
+    "file": "Tarski_dev/Ch07.lean",
+    "line": 586,
+    "signature": "theorem lt_mid2__lt12_c (A M B A' M' B' : Tpoint)\n    (h₁ : Midpoint M A B) (h₂ : Midpoint M' A' B')\n    (h₃ : Lt A B A' B') : Lt A M A' M'",
+    "sorry": false
+  },
+  "lt_mid2__lt13_c": {
+    "file": "Tarski_dev/Ch07.lean",
+    "line": 580,
+    "signature": "theorem lt_mid2__lt13_c (A M B A' M' B' : Tpoint)\n    (h₁ : Midpoint M A B) (h₂ : Midpoint M' A' B')\n    (h₃ : Lt A M A' M') : Lt A B A' B'",
+    "sorry": false
+  },
+  "lt_right_comm_c": {
+    "file": "Tarski_dev/Ch05.lean",
+    "line": 252,
+    "signature": "theorem lt_right_comm_c (A B C D : Tpoint) (h : Lt A B C D) : Lt A B D C",
+    "sorry": false
+  },
+  "lt_transitivity_c": {
+    "file": "Tarski_dev/Ch05.lean",
+    "line": 373,
+    "signature": "theorem lt_transitivity_c (A B C D E F : Tpoint)\n    (h₁ : Lt A B C D) (h₂ : Lt C D E F) : Lt A B E F",
+    "sorry": false
+  },
+  "mid__lt_c": {
+    "file": "Tarski_dev/Ch07.lean",
+    "line": 558,
+    "signature": "theorem mid__lt_c (A M B : Tpoint) (hAB : A ≠ B) (h : Midpoint M A B) :\n    Lt A M A B",
+    "sorry": false
+  },
+  "mid_preserves_col_c": {
+    "file": "Tarski_dev/Ch09.lean",
+    "line": 195,
+    "signature": "theorem mid_preserves_col_c (A B C M A' B' C' : Tpoint)\n    (hCol : Col A B C) (h₁ : Midpoint M A A')\n    (h₂ : Midpoint M B B') (h₃ : Midpoint M C C') : Col A' B' C'",
+    "sorry": false
+  },
+  "mid_two_sides_c": {
+    "file": "Tarski_dev/Ch09.lean",
+    "line": 376,
+    "signature": "theorem mid_two_sides_c (A B M X Y : Tpoint)\n    (h₁ : Midpoint M A B) (hNCol : ¬ Col A B X) (h₂ : Midpoint M X Y) :\n    TS A B X Y",
+    "sorry": false
+  },
+  "midpoint_bet_c": {
+    "file": "Tarski_dev/Ch07.lean",
+    "line": 489,
+    "signature": "theorem midpoint_bet_c (A B C : Tpoint) (h : Midpoint B A C) : Bet A B C",
+    "sorry": false
+  },
+  "midpoint_col_c": {
+    "file": "Tarski_dev/Ch07.lean",
+    "line": 493,
+    "signature": "theorem midpoint_col_c (A M B : Tpoint) (h : Midpoint M A B) : Col M A B",
+    "sorry": false
+  },
+  "midpoint_cong_c": {
+    "file": "Tarski_dev/Ch07.lean",
+    "line": 496,
+    "signature": "theorem midpoint_cong_c (A B C : Tpoint) (h : Midpoint B A C) : Cong A B B C",
+    "sorry": false
+  },
+  "midpoint_dec_c": {
+    "file": "Tarski_dev/Ch07.lean",
+    "line": 9,
+    "signature": "theorem midpoint_dec_c (I A B : Tpoint) : Midpoint I A B ∨ ¬ Midpoint I A B",
+    "sorry": false
+  },
+  "midpoint_def_c": {
+    "file": "Tarski_dev/Ch07.lean",
+    "line": 485,
+    "signature": "theorem midpoint_def_c (A B C : Tpoint) (h₁ : Bet A B C) (h₂ : Cong A B B C) :\n    Midpoint B A C",
+    "sorry": false
+  },
+  "midpoint_distinct_1_c": {
+    "file": "Tarski_dev/Ch07.lean",
+    "line": 447,
+    "signature": "theorem midpoint_distinct_1_c (I A B : Tpoint) (hAB : A ≠ B) (h : Midpoint I A B) :\n    I ≠ A ∧ I ≠ B",
+    "sorry": false
+  },
+  "midpoint_distinct_2_c": {
+    "file": "Tarski_dev/Ch07.lean",
+    "line": 463,
+    "signature": "theorem midpoint_distinct_2_c (I A B : Tpoint) (hIA : I ≠ A) (h : Midpoint I A B) :\n    A ≠ B ∧ I ≠ B",
+    "sorry": false
+  },
+  "midpoint_distinct_3_c": {
+    "file": "Tarski_dev/Ch07.lean",
+    "line": 474,
+    "signature": "theorem midpoint_distinct_3_c (I A B : Tpoint) (hIB : I ≠ B) (h : Midpoint I A B) :\n    A ≠ B ∧ I ≠ A",
+    "sorry": false
+  },
+  "midpoint_distinct_c": {
+    "file": "Tarski_dev/Ch08.lean",
+    "line": 775,
+    "signature": "theorem midpoint_distinct_c (A B X C C' : Tpoint)\n    (hNCol : ¬ Col A B C) (hCol : Col A B X) (h : Midpoint X C C') :\n    C ≠ C'",
+    "sorry": false
+  },
+  "midpoint_existence_aux_c": {
+    "file": "Tarski_dev/Ch08.lean",
+    "line": 1182,
+    "signature": "theorem midpoint_existence_aux_c (A B P Q T : Tpoint)\n    (hAB : A ≠ B)\n    (h₁ : Perp A B Q B) (h₂ : Perp A B P A)\n    (h₃ : Col A B T) (h₄ : Bet Q T P) (h₅ : Le A P B Q) :\n    ∃ X : Tpoint, Midpoint X A B",
+    "sorry": false
+  },
+  "midpoint_existence_c": {
+    "file": "Tarski_dev/Ch08.lean",
+    "line": 1228,
+    "signature": "theorem midpoint_existence_c (A B : Tpoint) : ∃ X, Midpoint X A B",
+    "sorry": false
+  },
+  "midpoint_not_midpoint_c": {
+    "file": "Tarski_dev/Ch07.lean",
+    "line": 512,
+    "signature": "theorem midpoint_not_midpoint_c (I A B : Tpoint) (hAB : A ≠ B) (h : Midpoint I A B) :\n    ¬ Midpoint B A I",
+    "sorry": false
+  },
+  "midpoint_out_1_c": {
+    "file": "Tarski_dev/Ch07.lean",
+    "line": 508,
+    "signature": "theorem midpoint_out_1_c (A B C : Tpoint) (hAC : A ≠ C) (h : Midpoint B A C) :\n    Out C A B",
+    "sorry": false
+  },
+  "midpoint_out_c": {
+    "file": "Tarski_dev/Ch07.lean",
+    "line": 500,
+    "signature": "theorem midpoint_out_c (A B C : Tpoint) (hAC : A ≠ C) (h : Midpoint B A C) :\n    Out A B C",
+    "sorry": false
+  },
+  "midpoint_preserves_image_c": {
+    "file": "Tarski_dev/Ch10.lean",
+    "line": 353,
+    "signature": "theorem midpoint_preserves_image_c (A B P P' Q Q' M : Tpoint)\n    (hAB : A ≠ B) (hCol : Col A B M) (hRefl : Reflect P P' A B)\n    (h₁ : Midpoint M P Q) (h₂ : Midpoint M P' Q') : Reflect Q Q' A B",
+    "sorry": false
+  },
+  "midpoint_preserves_out_c": {
+    "file": "Tarski_dev/Ch07.lean",
+    "line": 592,
+    "signature": "theorem midpoint_preserves_out_c (A B C A' B' C' M : Tpoint)\n    (h₀ : Out A B C)\n    (h₁ : Midpoint M A A') (h₂ : Midpoint M B B') (h₃ : Midpoint M C C') :\n    Out A' B' C'",
+    "sorry": false
+  },
+  "midpoint_preserves_per_c": {
+    "file": "Tarski_dev/Ch10.lean",
+    "line": 343,
+    "signature": "theorem midpoint_preserves_per_c (A B C A1 B1 C1 M : Tpoint)\n    (hPer : Per A B C)\n    (h₁ : Midpoint M A A1) (h₂ : Midpoint M B B1) (h₃ : Midpoint M C C1) :\n    Per A1 B1 C1",
+    "sorry": false
+  },
+  "ncop__ncol_c": {
+    "file": "Tarski_dev/Ch09.lean",
+    "line": 12,
+    "signature": "theorem ncop__ncol_c (A B C D : Tpoint) (H : ¬ Coplanar A B C D) : ¬ Col A B C",
+    "sorry": false
+  },
+  "ncop_distincts_c": {
+    "file": "Tarski_dev/Ch09.lean",
+    "line": 2337,
+    "signature": "theorem ncop_distincts_c (A B C D : Tpoint) (h : ¬ Coplanar A B C D) :\n    A ≠ B ∧ A ≠ C ∧ A ≠ D ∧ B ≠ C ∧ B ≠ D ∧ C ≠ D",
+    "sorry": false
+  },
+  "nle__lt_c": {
+    "file": "Tarski_dev/Ch05.lean",
+    "line": 403,
+    "signature": "theorem nle__lt_c (A B C D : Tpoint) (h : ¬ Le A B C D) : Lt C D A B",
+    "sorry": false
+  },
+  "nlt__le_c": {
+    "file": "Tarski_dev/Ch05.lean",
+    "line": 391,
+    "signature": "theorem nlt__le_c (A B C D : Tpoint) (h : ¬ Lt A B C D) : Le C D A B",
+    "sorry": false
+  },
+  "nlt_c": {
+    "file": "Tarski_dev/Ch05.lean",
+    "line": 381,
+    "signature": "theorem nlt_c (A B : Tpoint) : ¬ Lt A B A B",
+    "sorry": false
+  },
+  "not_and_lt_c": {
+    "file": "Tarski_dev/Ch05.lean",
+    "line": 377,
+    "signature": "theorem not_and_lt_c (A B C D : Tpoint) : ¬ (Lt A B C D ∧ Lt C D A B)",
+    "sorry": false
+  },
+  "not_bet_and_out_c": {
+    "file": "Tarski_dev/Ch06.lean",
+    "line": 500,
+    "signature": "theorem not_bet_and_out_c (A B C : Tpoint) : ¬ (Bet A B C ∧ Out B A C)",
+    "sorry": false
+  },
+  "not_bet_distincts_c": {
+    "file": "Tarski_dev/Ch03.lean",
+    "line": 79,
+    "signature": "theorem not_bet_distincts_c (A B C : Tpoint) (h : ¬ Bet A B C) :\n    A ≠ B ∧ B ≠ C",
+    "sorry": false
+  },
+  "not_bet_out_c": {
+    "file": "Tarski_dev/Ch06.lean",
+    "line": 491,
+    "signature": "theorem not_bet_out_c (A B C : Tpoint) (h₁ : Col A B C) (h₂ : ¬ Bet A B C) :\n    Out B A C",
+    "sorry": false
+  },
+  "not_col_distincts_c": {
+    "file": "Tarski_dev/Ch04.lean",
+    "line": 138,
+    "signature": "theorem not_col_distincts_c (A B C : Tpoint) (h : ¬ Col A B C) :\n    ¬ Col A B C ∧ A ≠ B ∧ B ≠ C ∧ A ≠ C",
+    "sorry": false
+  },
+  "not_col_exists_c": {
+    "file": "Tarski_dev/Ch06.lean",
+    "line": 295,
+    "signature": "theorem not_col_exists_c (A B : Tpoint) (hAB : A ≠ B) : ∃ C, ¬ Col A B C",
+    "sorry": false
+  },
+  "not_col_permutation_1_c": {
+    "file": "Tarski_dev/Ch04.lean",
+    "line": 44,
+    "signature": "theorem not_col_permutation_1_c (A B C : Tpoint) (h : ¬ Col A B C) :\n    ¬ Col B C A",
+    "sorry": false
+  },
+  "not_col_permutation_2_c": {
+    "file": "Tarski_dev/Ch04.lean",
+    "line": 48,
+    "signature": "theorem not_col_permutation_2_c (A B C : Tpoint) (h : ¬ Col A B C) :\n    ¬ Col C A B",
+    "sorry": false
+  },
+  "not_col_permutation_3_c": {
+    "file": "Tarski_dev/Ch04.lean",
+    "line": 52,
+    "signature": "theorem not_col_permutation_3_c (A B C : Tpoint) (h : ¬ Col A B C) :\n    ¬ Col C B A",
+    "sorry": false
+  },
+  "not_col_permutation_4_c": {
+    "file": "Tarski_dev/Ch04.lean",
+    "line": 56,
+    "signature": "theorem not_col_permutation_4_c (A B C : Tpoint) (h : ¬ Col A B C) :\n    ¬ Col B A C",
+    "sorry": false
+  },
+  "not_col_permutation_5_c": {
+    "file": "Tarski_dev/Ch04.lean",
+    "line": 60,
+    "signature": "theorem not_col_permutation_5_c (A B C : Tpoint) (h : ¬ Col A B C) :\n    ¬ Col A C B",
+    "sorry": false
+  },
+  "not_cong_1243_c": {
+    "file": "Tarski_dev/Ch02.lean",
+    "line": 52,
+    "signature": "theorem not_cong_1243_c (A B C D : Tpoint) (h : ¬ Cong A B C D) : ¬ Cong A B D C",
+    "sorry": false
+  },
+  "not_cong_2134_c": {
+    "file": "Tarski_dev/Ch02.lean",
+    "line": 49,
+    "signature": "theorem not_cong_2134_c (A B C D : Tpoint) (h : ¬ Cong A B C D) : ¬ Cong B A C D",
+    "sorry": false
+  },
+  "not_cong_2143_c": {
+    "file": "Tarski_dev/Ch02.lean",
+    "line": 55,
+    "signature": "theorem not_cong_2143_c (A B C D : Tpoint) (h : ¬ Cong A B C D) : ¬ Cong B A D C",
+    "sorry": false
+  },
+  "not_cong_3412_c": {
+    "file": "Tarski_dev/Ch02.lean",
+    "line": 58,
+    "signature": "theorem not_cong_3412_c (A B C D : Tpoint) (h : ¬ Cong A B C D) : ¬ Cong C D A B",
+    "sorry": false
+  },
+  "not_cong_3421_c": {
+    "file": "Tarski_dev/Ch02.lean",
+    "line": 64,
+    "signature": "theorem not_cong_3421_c (A B C D : Tpoint) (h : ¬ Cong A B C D) : ¬ Cong C D B A",
+    "sorry": false
+  },
+  "not_cong_4312_c": {
+    "file": "Tarski_dev/Ch02.lean",
+    "line": 61,
+    "signature": "theorem not_cong_4312_c (A B C D : Tpoint) (h : ¬ Cong A B C D) : ¬ Cong D C A B",
+    "sorry": false
+  },
+  "not_cong_4321_c": {
+    "file": "Tarski_dev/Ch02.lean",
+    "line": 67,
+    "signature": "theorem not_cong_4321_c (A B C D : Tpoint) (h : ¬ Cong A B C D) : ¬ Cong D C B A",
+    "sorry": false
+  },
+  "not_out_bet_c": {
+    "file": "Tarski_dev/Ch06.lean",
+    "line": 469,
+    "signature": "theorem not_out_bet_c (A B C : Tpoint) (h₁ : Col A B C) (h₂ : ¬ Out B A C) :\n    Bet A B C",
+    "sorry": false
+  },
+  "not_two_sides_id_c": {
+    "file": "Tarski_dev/Ch09.lean",
+    "line": 665,
+    "signature": "theorem not_two_sides_id_c (A P Q : Tpoint) : ¬ TS P Q A A",
+    "sorry": false
+  },
+  "one_or_two_sides_aux_c": {
+    "file": "Tarski_dev/Ch09.lean",
+    "line": 1494,
+    "signature": "theorem one_or_two_sides_aux_c (A B C D X : Tpoint)\n    (hNC1 : ¬ Col C A B) (hNC2 : ¬ Col D A B)\n    (h₁ : Col A C X) (h₂ : Col B D X) : TS A B C D ∨ OS A B C D",
+    "sorry": false
+  },
+  "one_side_chara_c": {
+    "file": "Tarski_dev/Ch09.lean",
+    "line": 876,
+    "signature": "theorem one_side_chara_c (P Q A B : Tpoint) (h : OS P Q A B) :\n    ∀ X, Col X P Q → ¬ Bet A X B",
+    "sorry": false
+  },
+  "one_side_dec_c": {
+    "file": "Tarski_dev/Ch09.lean",
+    "line": 2098,
+    "signature": "theorem one_side_dec_c (A B C D : Tpoint) : OS A B C D ∨ ¬ OS A B C D",
+    "sorry": false
+  },
+  "one_side_not_col123_c": {
+    "file": "Tarski_dev/Ch09.lean",
+    "line": 1025,
+    "signature": "theorem one_side_not_col123_c (A B X Y : Tpoint) (h : OS A B X Y) :\n    ¬ Col A B X",
+    "sorry": false
+  },
+  "one_side_not_col124_c": {
+    "file": "Tarski_dev/Ch09.lean",
+    "line": 1036,
+    "signature": "theorem one_side_not_col124_c (A B X Y : Tpoint) (h : OS A B X Y) :\n    ¬ Col A B Y",
+    "sorry": false
+  },
+  "one_side_reflexivity_c": {
+    "file": "Tarski_dev/Ch09.lean",
+    "line": 903,
+    "signature": "theorem one_side_reflexivity_c (P Q A : Tpoint) (hNCol : ¬ Col A P Q) :\n    OS P Q A A",
+    "sorry": false
+  },
+  "one_side_symmetry_c": {
+    "file": "Tarski_dev/Ch09.lean",
+    "line": 920,
+    "signature": "theorem one_side_symmetry_c (P Q A B : Tpoint) (h : OS P Q A B) :\n    OS P Q B A",
+    "sorry": false
+  },
+  "one_side_transitivity_c": {
+    "file": "Tarski_dev/Ch09.lean",
+    "line": 926,
+    "signature": "theorem one_side_transitivity_c (P Q A B C : Tpoint)\n    (h₁ : OS P Q A B) (h₂ : OS P Q B C) : OS P Q A C",
+    "sorry": false
+  },
+  "or_bet_out_c": {
+    "file": "Tarski_dev/Ch06.lean",
+    "line": 482,
+    "signature": "theorem or_bet_out_c (A B C : Tpoint) : Bet A B C ∨ Out B A C ∨ ¬ Col A B C",
+    "sorry": false
+  },
+  "or_lt_cong_gt_c": {
+    "file": "Tarski_dev/Ch05.lean",
+    "line": 346,
+    "signature": "theorem or_lt_cong_gt_c (A B C D : Tpoint) :\n    Lt A B C D ∨ Gt A B C D ∨ Cong A B C D",
+    "sorry": false
+  },
+  "os__coplanar_c": {
+    "file": "Tarski_dev/Ch09.lean",
+    "line": 1574,
+    "signature": "theorem os__coplanar_c (A B C D : Tpoint) (h : OS A B C D) :\n    Coplanar A B C D",
+    "sorry": false
+  },
+  "os_distincts_c": {
+    "file": "Tarski_dev/Ch09.lean",
+    "line": 758,
+    "signature": "theorem os_distincts_c (A B X Y : Tpoint) (h : OS A B X Y) :\n    A ≠ B ∧ A ≠ X ∧ A ≠ Y ∧ B ≠ X ∧ B ≠ Y",
+    "sorry": false
+  },
+  "os_out_os_c": {
+    "file": "Tarski_dev/Ch09.lean",
+    "line": 1066,
+    "signature": "theorem os_out_os_c (A B C D C' P : Tpoint)\n    (hCol : Col A B P) (h₁ : OS A B C D) (h₂ : Out P C C') :\n    OS A B C' D",
+    "sorry": false
+  },
+  "os_ts1324__os_c": {
+    "file": "Tarski_dev/Ch09.lean",
+    "line": 1355,
+    "signature": "theorem os_ts1324__os_c (A X Y Z : Tpoint)\n    (h₁ : OS A X Y Z) (h₂ : TS A Y X Z) : OS A Z X Y",
+    "sorry": false
+  },
+  "osp__ncop1_c": {
+    "file": "Tarski_dev/Ch09.lean",
+    "line": 2390,
+    "signature": "theorem osp__ncop1_c (A B C P Q : Tpoint) (h : OSP A B C P Q) :\n    ¬ Coplanar A B C P",
+    "sorry": false
+  },
+  "osp__ncop2_c": {
+    "file": "Tarski_dev/Ch09.lean",
+    "line": 2395,
+    "signature": "theorem osp__ncop2_c (A B C P Q : Tpoint) (h : OSP A B C P Q) :\n    ¬ Coplanar A B C Q",
+    "sorry": false
+  },
+  "osp__ntsp_c": {
+    "file": "Tarski_dev/Ch09.lean",
+    "line": 2408,
+    "signature": "theorem osp__ntsp_c (A B C P Q : Tpoint) (h : OSP A B C P Q) :\n    ¬ TSP A B C P Q",
+    "sorry": false
+  },
+  "osp_bet__osp_c": {
+    "file": "Tarski_dev/Ch09.lean",
+    "line": 2411,
+    "signature": "theorem osp_bet__osp_c (A B C P Q R : Tpoint)\n    (h₁ : OSP A B C P R) (h₂ : Bet P Q R) : OSP A B C P Q",
+    "sorry": false
+  },
+  "osp_distincts_c": {
+    "file": "Tarski_dev/Ch09.lean",
+    "line": 2367,
+    "signature": "theorem osp_distincts_c (A B C P Q : Tpoint) (h : OSP A B C P Q) :\n    A ≠ B ∧ A ≠ C ∧ B ≠ C ∧\n    A ≠ P ∧ B ≠ P ∧ C ≠ P ∧\n    A ≠ Q ∧ B ≠ Q ∧ C ≠ Q",
+    "sorry": false
+  },
+  "osp_reflexivity_c": {
+    "file": "Tarski_dev/Ch09.lean",
+    "line": 2291,
+    "signature": "theorem osp_reflexivity_c (A B C P : Tpoint) (hNCop : ¬ Coplanar A B C P) :\n    OSP A B C P P",
+    "sorry": false
+  },
+  "osp_symmetry_c": {
+    "file": "Tarski_dev/Ch09.lean",
+    "line": 2296,
+    "signature": "theorem osp_symmetry_c (A B C P Q : Tpoint) (h : OSP A B C P Q) :\n    OSP A B C Q P",
+    "sorry": false
+  },
+  "osp_transitivity_c": {
+    "file": "Tarski_dev/Ch09.lean",
+    "line": 2301,
+    "signature": "theorem osp_transitivity_c (A B C P Q R : Tpoint)\n    (h₁ : OSP A B C P Q) (h₂ : OSP A B C Q R) : OSP A B C P R",
+    "sorry": false
+  },
+  "osym_not_col_c": {
+    "file": "Tarski_dev/Ch10.lean",
+    "line": 243,
+    "signature": "theorem osym_not_col_c (A B P P' : Tpoint)\n    (h₁ : Reflect P P' A B) (h₂ : ¬ Col A B P) : ¬ Col A B P'",
+    "sorry": false
+  },
+  "out2__bet_c": {
+    "file": "Tarski_dev/Ch06.lean",
+    "line": 336,
+    "signature": "theorem out2__bet_c (A B C : Tpoint) (h₁ : Out A B C) (h₂ : Out C A B) : Bet A B C",
+    "sorry": false
+  },
+  "out2_bet_out_c": {
+    "file": "Tarski_dev/Ch06.lean",
+    "line": 166,
+    "signature": "theorem out2_bet_out_c (A B C X P : Tpoint)\n    (h₁ : Out B A C) (h₂ : Out B X P) (h₃ : Bet A X C) :\n    Out B A P ∧ Out B C P",
+    "sorry": false
+  },
+  "out_bet__out_c": {
+    "file": "Tarski_dev/Ch06.lean",
+    "line": 601,
+    "signature": "theorem out_bet__out_c (A B P Q : Tpoint) (h₁ : Bet P Q A) (h₂ : Out Q A B) :\n    Out P A B",
+    "sorry": false
+  },
+  "out_bet_out_1_c": {
+    "file": "Tarski_dev/Ch06.lean",
+    "line": 584,
+    "signature": "theorem out_bet_out_1_c (A B C P : Tpoint) (h₁ : Out P A C) (h₂ : Bet A B C) :\n    Out P A B",
+    "sorry": false
+  },
+  "out_bet_out_2_c": {
+    "file": "Tarski_dev/Ch06.lean",
+    "line": 597,
+    "signature": "theorem out_bet_out_2_c (A B C P : Tpoint) (h₁ : Out P A C) (h₂ : Bet A B C) :\n    Out P B C",
+    "sorry": false
+  },
+  "out_col": {
+    "file": "Tarski_dev/BetweenOutBase.lean",
+    "line": 85,
+    "signature": "theorem out_col {A B C : Tpoint} (h : Out A B C) : Col A B C",
+    "sorry": false
+  },
+  "out_col_c": {
+    "file": "Tarski_dev/Ch06.lean",
+    "line": 42,
+    "signature": "theorem out_col_c (A B C : Tpoint) (h : Out A B C) : Col A B C",
+    "sorry": false
+  },
+  "out_cong_cong_c": {
+    "file": "Tarski_dev/Ch06.lean",
+    "line": 458,
+    "signature": "theorem out_cong_cong_c (B A A0 E D D0 : Tpoint)\n    (h₁ : Out B A A0) (h₂ : Out E D D0)\n    (h₃ : Cong B A E D) (h₄ : Cong B A0 E D0) : Cong A A0 D D0",
+    "sorry": false
+  },
+  "out_dec_c": {
+    "file": "Tarski_dev/Ch06.lean",
+    "line": 18,
+    "signature": "theorem out_dec_c (P A B : Tpoint) : Out P A B ∨ ¬ Out P A B",
+    "sorry": false
+  },
+  "out_diff1": {
+    "file": "Tarski_dev/BetweenOutBase.lean",
+    "line": 108,
+    "signature": "theorem out_diff1 {A B C : Tpoint} (h : Out A B C) : B ≠ A",
+    "sorry": false
+  },
+  "out_diff1_c": {
+    "file": "Tarski_dev/Ch06.lean",
+    "line": 29,
+    "signature": "theorem out_diff1_c (A B C : Tpoint) (h : Out A B C) : B ≠ A",
+    "sorry": false
+  },
+  "out_diff2": {
+    "file": "Tarski_dev/BetweenOutBase.lean",
+    "line": 111,
+    "signature": "theorem out_diff2 {A B C : Tpoint} (h : Out A B C) : C ≠ A",
+    "sorry": false
+  },
+  "out_diff2_c": {
+    "file": "Tarski_dev/Ch06.lean",
+    "line": 34,
+    "signature": "theorem out_diff2_c (A B C : Tpoint) (h : Out A B C) : C ≠ A",
+    "sorry": false
+  },
+  "out_distinct_c": {
+    "file": "Tarski_dev/Ch06.lean",
+    "line": 39,
+    "signature": "theorem out_distinct_c (A B C : Tpoint) (h : Out A B C) : B ≠ A ∧ C ≠ A",
+    "sorry": false
+  },
+  "out_one_side_1_c": {
+    "file": "Tarski_dev/Ch09.lean",
+    "line": 1391,
+    "signature": "theorem out_one_side_1_c (A B C D X : Tpoint)\n    (hNCol : ¬ Col A B C) (hCol : Col A B X) (hOut : Out X C D) :\n    OS A B C D",
+    "sorry": false
+  },
+  "out_one_side_c": {
+    "file": "Tarski_dev/Ch09.lean",
+    "line": 1098,
+    "signature": "theorem out_one_side_c (A B X Y : Tpoint)\n    (h₁ : ¬ Col A B X ∨ ¬ Col A B Y) (h₂ : Out A X Y) : OS A B X Y",
+    "sorry": false
+  },
+  "out_out_one_side_c": {
+    "file": "Tarski_dev/Ch09.lean",
+    "line": 1093,
+    "signature": "theorem out_out_one_side_c (A B X Y Z : Tpoint)\n    (h₁ : OS A B X Y) (h₂ : Out A Y Z) : OS A B X Z",
+    "sorry": false
+  },
+  "out_out_two_sides_c": {
+    "file": "Tarski_dev/Ch09.lean",
+    "line": 417,
+    "signature": "theorem out_out_two_sides_c (A B X Y U V I : Tpoint)\n    (hAB : A ≠ B) (h₁ : TS A B X Y)\n    (hCol1 : Col I A B) (hCol2 : Col I X Y)\n    (hOut1 : Out I X U) (hOut2 : Out I Y V) : TS A B U V",
+    "sorry": false
+  },
+  "out_to_bet_c": {
+    "file": "Tarski_dev/Ch06.lean",
+    "line": 511,
+    "signature": "theorem out_to_bet_c (A B C A' B' C' : Tpoint)\n    (h₁ : Col A' B' C')\n    (h₂ : Out B A C ↔ Out B' A' C')\n    (h₃ : Bet A B C) : Bet A' B' C'",
+    "sorry": false
+  },
+  "out_trivial": {
+    "file": "Tarski_dev/BetweenOutBase.lean",
+    "line": 104,
+    "signature": "theorem out_trivial {P A : Tpoint} (h : A ≠ P) : Out P A A",
+    "sorry": false
+  },
+  "out_trivial_c": {
+    "file": "Tarski_dev/Ch06.lean",
+    "line": 126,
+    "signature": "theorem out_trivial_c (P A : Tpoint) (hAP : A ≠ P) : Out P A A",
+    "sorry": false
+  },
+  "out_two_sides_two_sides_c": {
+    "file": "Tarski_dev/Ch09.lean",
+    "line": 1416,
+    "signature": "theorem out_two_sides_two_sides_c (A B X Y P PX : Tpoint)\n    (hA_PX : A ≠ PX) (hCol : Col A B PX) (hOut : Out PX X P)\n    (h : TS A B P Y) : TS A B X Y",
+    "sorry": false
+  },
+  "outer_pasch_c": {
+    "file": "Tarski_dev/Ch09.lean",
+    "line": 675,
+    "signature": "theorem outer_pasch_c (A B C P Q : Tpoint) (h₁ : Bet A C P) (h₂ : Bet B Q C) :\n    ∃ X, Bet A X B ∧ Bet P Q X",
+    "sorry": false
+  },
+  "outer_transitivity_between": {
+    "file": "Tarski_dev/SegmentCone.lean",
+    "line": 45,
+    "signature": "theorem outer_transitivity_between {A B C D : Tpoint}\n    (h1 : Bet A B C) (h2 : Bet B C D) (hBC : B ≠ C) : Bet A B D",
+    "sorry": false
+  },
+  "outer_transitivity_between2": {
+    "file": "Tarski_dev/SegmentCone.lean",
+    "line": 30,
+    "signature": "theorem outer_transitivity_between2 {A B C D : Tpoint}\n    (h1 : Bet A B C) (h2 : Bet B C D) (hBC : B ≠ C) : Bet A C D",
+    "sorry": false
+  },
+  "outer_transitivity_between2_c": {
+    "file": "Tarski_dev/Ch03.lean",
+    "line": 94,
+    "signature": "theorem outer_transitivity_between2_c (A B C D : Tpoint)\n    (h₁ : Bet A B C) (h₂ : Bet B C D) (hBC : B ≠ C) : Bet A C D",
+    "sorry": false
+  },
+  "outer_transitivity_between_c": {
+    "file": "Tarski_dev/Ch03.lean",
+    "line": 111,
+    "signature": "theorem outer_transitivity_between_c (A B C D : Tpoint)\n    (h₁ : Bet A B C) (h₂ : Bet B C D) (hBC : B ≠ C) : Bet A B D",
+    "sorry": false
+  },
+  "per_col_c": {
+    "file": "Tarski_dev/Ch08.lean",
+    "line": 235,
+    "signature": "theorem per_col_c (A B C D : Tpoint)\n    (hBC : B ≠ C) (h₁ : Per A B C) (hCol : Col B C D) : Per A B D",
+    "sorry": false
+  },
+  "per_col_eq_c": {
+    "file": "Tarski_dev/Ch09.lean",
+    "line": 350,
+    "signature": "theorem per_col_eq_c (A B C : Tpoint)\n    (h₁ : Per A B C) (hCol : Col A B C) (hBC : B ≠ C) : A = B",
+    "sorry": false
+  },
+  "per_cong_c": {
+    "file": "Tarski_dev/Ch08.lean",
+    "line": 1049,
+    "signature": "theorem per_cong_c (A B P R X : Tpoint)\n    (hAB : A ≠ B) (hAP : A ≠ P)\n    (h₁ : Per B A P) (h₂ : Per A B R) (h₃ : Cong A P B R)\n    (hCol : Col A B X) (hBet : Bet P X R) : Cong A R P B",
+    "sorry": false
+  },
+  "per_cong_mid_c": {
+    "file": "Tarski_dev/Ch08.lean",
+    "line": 645,
+    "signature": "theorem per_cong_mid_c (A B C H : Tpoint)\n    (hBC : B ≠ C) (h₁ : Bet A B C) (h₂ : Cong A H C H) (h₃ : Per H B C) :\n    Midpoint B A C",
+    "sorry": false
+  },
+  "per_dec_c": {
+    "file": "Tarski_dev/Ch08.lean",
+    "line": 9,
+    "signature": "theorem per_dec_c (A B C : Tpoint) : Per A B C ∨ ¬ Per A B C",
+    "sorry": false
+  },
+  "per_distinct_1_c": {
+    "file": "Tarski_dev/Ch08.lean",
+    "line": 110,
+    "signature": "theorem per_distinct_1_c (A B C : Tpoint) (h : Per A B C) (hBC : B ≠ C) :\n    A ≠ C",
+    "sorry": false
+  },
+  "per_distinct_c": {
+    "file": "Tarski_dev/Ch08.lean",
+    "line": 105,
+    "signature": "theorem per_distinct_c (A B C : Tpoint) (h : Per A B C) (hAB : A ≠ B) : A ≠ C",
+    "sorry": false
+  },
+  "per_double_cong_c": {
+    "file": "Tarski_dev/Ch08.lean",
+    "line": 676,
+    "signature": "theorem per_double_cong_c (A B C C' : Tpoint)\n    (h₁ : Per A B C) (h₂ : Midpoint B C C') : Cong A C A C'",
+    "sorry": false
+  },
+  "per_mid_per_c": {
+    "file": "Tarski_dev/Ch09.lean",
+    "line": 207,
+    "signature": "theorem per_mid_per_c (A B X Y M : Tpoint)\n    (hAB : A ≠ B) (h₁ : Per X A B)\n    (h₂ : Midpoint M A B) (h₃ : Midpoint M X Y) :\n    Cong A X B Y ∧ Per Y B A",
+    "sorry": false
+  },
+  "per_not_col_c": {
+    "file": "Tarski_dev/Ch08.lean",
+    "line": 569,
+    "signature": "theorem per_not_col_c (A B C : Tpoint)\n    (hAB : A ≠ B) (hBC : B ≠ C) (h : Per A B C) : ¬ Col A B C",
+    "sorry": false
+  },
+  "per_not_colp_c": {
+    "file": "Tarski_dev/Ch08.lean",
+    "line": 564,
+    "signature": "theorem per_not_colp_c (A B P R : Tpoint)\n    (hAB : A ≠ B) (hAP : A ≠ P) (hBR : B ≠ R)\n    (h₁ : Per B A P) (h₂ : Per A B R) : ¬ Col P A R",
+    "sorry": false
+  },
+  "per_perp_c": {
+    "file": "Tarski_dev/Ch08.lean",
+    "line": 384,
+    "signature": "theorem per_perp_c (A B C : Tpoint) (hAB : A ≠ B) (hBC : B ≠ C) (h : Per A B C) :\n    Perp A B B C",
+    "sorry": false
+  },
+  "per_perp_in_c": {
+    "file": "Tarski_dev/Ch08.lean",
+    "line": 380,
+    "signature": "theorem per_perp_in_c (A B C : Tpoint) (hAB : A ≠ B) (hBC : B ≠ C) (h : Per A B C) :\n    Perp_at B A B B C",
+    "sorry": false
+  },
+  "perp__coplanar_c": {
+    "file": "Tarski_dev/Ch09.lean",
+    "line": 22,
+    "signature": "theorem perp__coplanar_c (A B C D : Tpoint) (H : Perp A B C D) : Coplanar A B C D",
+    "sorry": false
+  },
+  "perp_col0_c": {
+    "file": "Tarski_dev/Ch08.lean",
+    "line": 366,
+    "signature": "theorem perp_col0_c (A B C D X Y : Tpoint)\n    (h₁ : Perp A B C D) (hXY : X ≠ Y) (hX : Col A B X) (hY : Col A B Y) :\n    Perp C D X Y",
+    "sorry": false
+  },
+  "perp_col1_c": {
+    "file": "Tarski_dev/Ch08.lean",
+    "line": 841,
+    "signature": "theorem perp_col1_c (A B C D X : Tpoint)\n    (hCX : C ≠ X) (h₁ : Perp A B C D) (h₂ : Col C D X) : Perp A B C X",
+    "sorry": false
+  },
+  "perp_col2_bis_c": {
+    "file": "Tarski_dev/Ch08.lean",
+    "line": 612,
+    "signature": "theorem perp_col2_bis_c (A B C D P Q : Tpoint)\n    (h₁ : Perp A B C D) (h₂ : Col C D P) (h₃ : Col C D Q) (hPQ : P ≠ Q) :\n    Perp A B P Q",
+    "sorry": false
+  },
+  "perp_col2_c": {
+    "file": "Tarski_dev/Ch08.lean",
+    "line": 526,
+    "signature": "theorem perp_col2_c (A B C D X Y : Tpoint)\n    (h₁ : Perp A B X Y) (hCD : C ≠ D) (hC : Col A B C) (hD : Col A B D) :\n    Perp C D X Y",
+    "sorry": false
+  },
+  "perp_col4_c": {
+    "file": "Tarski_dev/Ch08.lean",
+    "line": 538,
+    "signature": "theorem perp_col4_c (A B C D P Q R S : Tpoint)\n    (hPQ : P ≠ Q) (hRS : R ≠ S)\n    (h₁ : Col A B P) (h₂ : Col A B Q) (h₃ : Col C D R) (h₄ : Col C D S)\n    (h : Perp A B C D) : Perp P Q R S",
+    "sorry": false
+  },
+  "perp_col_c": {
+    "file": "Tarski_dev/Ch08.lean",
+    "line": 522,
+    "signature": "theorem perp_col_c (A B C D E : Tpoint)\n    (hAE : A ≠ E) (h₁ : Perp A B C D) (h₂ : Col A B E) : Perp A E C D",
+    "sorry": false
+  },
+  "perp_comm_c": {
+    "file": "Tarski_dev/Ch08.lean",
+    "line": 419,
+    "signature": "theorem perp_comm_c (A B C D : Tpoint) (h : Perp A B C D) : Perp B A D C",
+    "sorry": false
+  },
+  "perp_cong_c": {
+    "file": "Tarski_dev/Ch08.lean",
+    "line": 1161,
+    "signature": "theorem perp_cong_c (A B P R X : Tpoint)\n    (hAB : A ≠ B) (hAP : A ≠ P)\n    (h₁ : Perp A B P A) (h₂ : Perp A B R B) (h₃ : Cong A P B R)\n    (hCol : Col A B X) (hBet : Bet P X R) : Cong A R P B",
+    "sorry": false
+  },
+  "perp_distinct_c": {
+    "file": "Tarski_dev/Ch08.lean",
+    "line": 218,
+    "signature": "theorem perp_distinct_c (A B C D : Tpoint) (h : Perp A B C D) :\n    A ≠ B ∧ C ≠ D",
+    "sorry": false
+  },
+  "perp_exists_c": {
+    "file": "Tarski_dev/Ch08.lean",
+    "line": 1167,
+    "signature": "theorem perp_exists_c (O A B : Tpoint) (hAB : A ≠ B) : ∃ X, Perp O X A B",
+    "sorry": false
+  },
+  "perp_in_col_c": {
+    "file": "Tarski_dev/Ch08.lean",
+    "line": 499,
+    "signature": "theorem perp_in_col_c (A B C D X : Tpoint) (h : Perp_at X A B C D) :\n    Col A B X ∧ Col C D X",
+    "sorry": false
+  },
+  "perp_in_col_perp_in_c": {
+    "file": "Tarski_dev/Ch08.lean",
+    "line": 599,
+    "signature": "theorem perp_in_col_perp_in_c (A B C D E P : Tpoint)\n    (hCE : C ≠ E) (hCol : Col C D E) (h : Perp_at P A B C D) :\n    Perp_at P A B C E",
+    "sorry": false
+  },
+  "perp_in_comm_c": {
+    "file": "Tarski_dev/Ch08.lean",
+    "line": 442,
+    "signature": "theorem perp_in_comm_c (A B C D X : Tpoint) (h : Perp_at X A B C D) :\n    Perp_at X B A D C",
+    "sorry": false
+  },
+  "perp_in_dec_c": {
+    "file": "Tarski_dev/Ch08.lean",
+    "line": 156,
+    "signature": "theorem perp_in_dec_c (X A B C D : Tpoint) :\n    Perp_at X A B C D ∨ ¬ Perp_at X A B C D",
+    "sorry": false
+  },
+  "perp_in_distinct_c": {
+    "file": "Tarski_dev/Ch08.lean",
+    "line": 301,
+    "signature": "theorem perp_in_distinct_c (X A B C D : Tpoint) (h : Perp_at X A B C D) :\n    A ≠ B ∧ C ≠ D",
+    "sorry": false
+  },
+  "perp_in_id_c": {
+    "file": "Tarski_dev/Ch08.lean",
+    "line": 1244,
+    "signature": "theorem perp_in_id_c (A B C X : Tpoint) (h : Perp_at X A B C A) : X = A",
+    "sorry": false
+  },
+  "perp_in_left_comm_c": {
+    "file": "Tarski_dev/Ch08.lean",
+    "line": 430,
+    "signature": "theorem perp_in_left_comm_c (A B C D X : Tpoint) (h : Perp_at X A B C D) :\n    Perp_at X B A C D",
+    "sorry": false
+  },
+  "perp_in_per_1_c": {
+    "file": "Tarski_dev/Ch08.lean",
+    "line": 1357,
+    "signature": "theorem perp_in_per_1_c (A B C D X : Tpoint) (h : Perp_at X A B C D) :\n    Per A X C",
+    "sorry": false
+  },
+  "perp_in_per_2_c": {
+    "file": "Tarski_dev/Ch08.lean",
+    "line": 1366,
+    "signature": "theorem perp_in_per_2_c (A B C D X : Tpoint) (h : Perp_at X A B C D) :\n    Per A X D",
+    "sorry": false
+  },
+  "perp_in_per_3_c": {
+    "file": "Tarski_dev/Ch08.lean",
+    "line": 1375,
+    "signature": "theorem perp_in_per_3_c (A B C D X : Tpoint) (h : Perp_at X A B C D) :\n    Per B X C",
+    "sorry": false
+  },
+  "perp_in_per_4_c": {
+    "file": "Tarski_dev/Ch08.lean",
+    "line": 1384,
+    "signature": "theorem perp_in_per_4_c (A B C D X : Tpoint) (h : Perp_at X A B C D) :\n    Per B X D",
+    "sorry": false
+  },
+  "perp_in_per_c": {
+    "file": "Tarski_dev/Ch08.lean",
+    "line": 355,
+    "signature": "theorem perp_in_per_c (A B C : Tpoint) (h : Perp_at B A B B C) : Per A B C",
+    "sorry": false
+  },
+  "perp_in_perp_bis_c": {
+    "file": "Tarski_dev/Ch08.lean",
+    "line": 617,
+    "signature": "theorem perp_in_perp_bis_c (A B C D X : Tpoint) (h : Perp_at X A B C D) :\n    Perp X B C D ∨ Perp A X C D",
+    "sorry": false
+  },
+  "perp_in_perp_c": {
+    "file": "Tarski_dev/Ch08.lean",
+    "line": 1273,
+    "signature": "theorem perp_in_perp_c (A B C D X : Tpoint) (h : Perp_at X A B C D) :\n    Perp A B C D",
+    "sorry": false
+  },
+  "perp_in_right_comm_c": {
+    "file": "Tarski_dev/Ch08.lean",
+    "line": 438,
+    "signature": "theorem perp_in_right_comm_c (A B C D X : Tpoint) (h : Perp_at X A B C D) :\n    Perp_at X A B D C",
+    "sorry": false
+  },
+  "perp_in_sym_c": {
+    "file": "Tarski_dev/Ch08.lean",
+    "line": 422,
+    "signature": "theorem perp_in_sym_c (A B C D X : Tpoint) (h : Perp_at X A B C D) :\n    Perp_at X C D A B",
+    "sorry": false
+  },
+  "perp_left_comm_c": {
+    "file": "Tarski_dev/Ch08.lean",
+    "line": 388,
+    "signature": "theorem perp_left_comm_c (A B C D : Tpoint) (h : Perp A B C D) :\n    Perp B A C D",
+    "sorry": false
+  },
+  "perp_not_col2_c": {
+    "file": "Tarski_dev/Ch08.lean",
+    "line": 582,
+    "signature": "theorem perp_not_col2_c (A B C D : Tpoint) (h : Perp A B C D) :\n    ¬ Col A B C ∨ ¬ Col A B D",
+    "sorry": false
+  },
+  "perp_not_col_c": {
+    "file": "Tarski_dev/Ch08.lean",
+    "line": 589,
+    "signature": "theorem perp_not_col_c (A B P : Tpoint) (h : Perp A B P A) : ¬ Col A B P",
+    "sorry": false
+  },
+  "perp_not_eq_1_c": {
+    "file": "Tarski_dev/Ch08.lean",
+    "line": 544,
+    "signature": "theorem perp_not_eq_1_c (A B C D : Tpoint) (h : Perp A B C D) : A ≠ B",
+    "sorry": false
+  },
+  "perp_not_eq_2_c": {
+    "file": "Tarski_dev/Ch08.lean",
+    "line": 554,
+    "signature": "theorem perp_not_eq_2_c (A B C D : Tpoint) (h : Perp A B C D) : C ≠ D",
+    "sorry": false
+  },
+  "perp_per_1_c": {
+    "file": "Tarski_dev/Ch08.lean",
+    "line": 511,
+    "signature": "theorem perp_per_1_c (A B C : Tpoint) (h : Perp A B C A) : Per B A C",
+    "sorry": false
+  },
+  "perp_per_2_c": {
+    "file": "Tarski_dev/Ch08.lean",
+    "line": 519,
+    "signature": "theorem perp_per_2_c (A B C : Tpoint) (h : Perp A B A C) : Per B A C",
+    "sorry": false
+  },
+  "perp_perp_in_c": {
+    "file": "Tarski_dev/Ch08.lean",
+    "line": 507,
+    "signature": "theorem perp_perp_in_c (A B C : Tpoint) (h : Perp A B C A) : Perp_at A A B C A",
+    "sorry": false
+  },
+  "perp_proj_c": {
+    "file": "Tarski_dev/Ch08.lean",
+    "line": 1277,
+    "signature": "theorem perp_proj_c (A B C D : Tpoint) (h₁ : Perp A B C D) (hNCol : ¬ Col A C D) :\n    ∃ X, Col A B X ∧ Perp A X C D",
+    "sorry": false
+  },
+  "perp_right_comm_c": {
+    "file": "Tarski_dev/Ch08.lean",
+    "line": 403,
+    "signature": "theorem perp_right_comm_c (A B C D : Tpoint) (h : Perp A B C D) :\n    Perp A B D C",
+    "sorry": false
+  },
+  "perp_sym_c": {
+    "file": "Tarski_dev/Ch08.lean",
+    "line": 362,
+    "signature": "theorem perp_sym_c (A B C D : Tpoint) (h : Perp A B C D) : Perp C D A B",
+    "sorry": false
+  },
+  "perp_vector_c": {
+    "file": "Tarski_dev/Ch08.lean",
+    "line": 1178,
+    "signature": "theorem perp_vector_c (A B : Tpoint) (hAB : A ≠ B) : ∃ X Y, Perp A B X Y",
+    "sorry": false
+  },
+  "point_construction_different": {
+    "file": "Tarski_dev/SegmentCone.lean",
+    "line": 69,
+    "signature": "theorem point_construction_different (A B : Tpoint) : ∃ C, Bet A B C ∧ B ≠ C",
+    "sorry": false
+  },
+  "point_construction_different_c": {
+    "file": "Tarski_dev/Ch03.lean",
+    "line": 147,
+    "signature": "theorem point_construction_different_c (A B : Tpoint) :\n    ∃ C, Bet A B C ∧ B ≠ C",
+    "sorry": false
+  },
+  "sac__coplanar_c": {
+    "file": "Tarski_dev/Ch09.lean",
+    "line": 2642,
+    "signature": "theorem sac__coplanar_c (A B C D : Tpoint) (h : Saccheri A B C D) :\n    Coplanar A B C D",
+    "sorry": false
+  },
+  "saturate_ok": [
+    {
+      "file": "Tarski_dev/CongR.lean",
+      "line": 179,
+      "signature": "theorem saturate_ok [CongTheory P Cong] {interp : PointId → P} :\n    ∀ (fuel : Nat) {L}, SegClassesOk Cong interp L →\n      SegClassesOk Cong interp (saturate L fuel)",
+      "sorry": false
+    },
+    {
+      "file": "Tarski_dev/ColR.lean",
+      "line": 207,
+      "signature": "theorem saturate_ok [ColTheory P Col] {interp : PointId → P}\n    {diff : List (PointId × PointId)} (hsp : SPok interp diff) :\n    ∀ (fuel : Nat) {L}, LinesOk Col interp L →\n      LinesOk Col interp (saturate diff L fuel)",
+      "sorry": false
+    }
+  ],
+  "segClassOk_append": {
+    "file": "Tarski_dev/CongR.lean",
+    "line": 99,
+    "signature": "theorem segClassOk_append [CongTheory P Cong] {interp : PointId → P}\n    {s t : SegClass} (hs : SegClassOk Cong interp s) (ht : SegClassOk Cong interp t)\n    (hshare : sharesSeg s t) : SegClassOk Cong interp (s ++ t)",
+    "sorry": false
+  },
+  "segment_construction_2_c": {
+    "file": "Tarski_dev/Ch05.lean",
+    "line": 20,
+    "signature": "theorem segment_construction_2_c (A Q B C : Tpoint) (hAQ : A ≠ Q) :\n    ∃ X, (Bet Q A X ∨ Bet Q X A) ∧ Cong Q X B C",
+    "sorry": false
+  },
+  "segment_construction_3_c": {
+    "file": "Tarski_dev/Ch06.lean",
+    "line": 210,
+    "signature": "theorem segment_construction_3_c (A B X Y : Tpoint) (hAB : A ≠ B) (hXY : X ≠ Y) :\n    ∃ C, Out A B C ∧ Cong A C X Y",
+    "sorry": false
+  },
+  "segment_reverse_c": {
+    "file": "Tarski_dev/Ch06.lean",
+    "line": 613,
+    "signature": "theorem segment_reverse_c (A B C : Tpoint) (h : Bet A B C) :\n    ∃ B', Bet A B' C ∧ Cong C B' A B",
+    "sorry": false
+  },
+  "stepMerge_ok": [
+    {
+      "file": "Tarski_dev/CongR.lean",
+      "line": 146,
+      "signature": "theorem stepMerge_ok [CongTheory P Cong] {interp : PointId → P} :\n    ∀ {L L'}, SegClassesOk Cong interp L → stepMerge L = some L' →\n      SegClassesOk Cong interp L'",
+      "sorry": false
+    },
+    {
+      "file": "Tarski_dev/ColR.lean",
+      "line": 173,
+      "signature": "theorem stepMerge_ok [ColTheory P Col] {interp : PointId → P}\n    {diff : List (PointId × PointId)} (hsp : SPok interp diff) :\n    ∀ {L L'}, LinesOk Col interp L → stepMerge diff L = some L' →\n      LinesOk Col interp L'",
+      "sorry": false
+    }
+  ],
+  "swap_diff_c": {
+    "file": "Tarski_dev/Ch07.lean",
+    "line": 524,
+    "signature": "theorem swap_diff_c (A B : Tpoint) (h : A ≠ B) : B ≠ A",
+    "sorry": false
+  },
+  "sym_preserve_diff_c": {
+    "file": "Tarski_dev/Ch09.lean",
+    "line": 233,
+    "signature": "theorem sym_preserve_diff_c (A B M A' B' : Tpoint)\n    (hAB : A ≠ B) (h₁ : Midpoint M A A') (h₂ : Midpoint M B B') :\n    A' ≠ B'",
+    "sorry": false
+  },
+  "symmetric_point_construction_c": {
+    "file": "Tarski_dev/Ch07.lean",
+    "line": 41,
+    "signature": "theorem symmetric_point_construction_c (P A : Tpoint) : ∃ P', Midpoint A P P'",
+    "sorry": false
+  },
+  "symmetric_point_uniqueness_c": {
+    "file": "Tarski_dev/Ch07.lean",
+    "line": 47,
+    "signature": "theorem symmetric_point_uniqueness_c (A P P₁ P₂ : Tpoint)\n    (h₁ : Midpoint P A P₁) (h₂ : Midpoint P A P₂) : P₁ = P₂",
+    "sorry": false
+  },
+  "symmetry_preserves_midpoint_c": {
+    "file": "Tarski_dev/Ch07.lean",
+    "line": 177,
+    "signature": "theorem symmetry_preserves_midpoint_c (A B C D E F Z : Tpoint)\n    (h₁ : Midpoint Z A D) (h₂ : Midpoint Z B E)\n    (h₃ : Midpoint Z C F) (h₄ : Midpoint B A C) : Midpoint E D F",
+    "sorry": false
+  },
+  "third_point_c": {
+    "file": "Tarski_dev/Ch05.lean",
+    "line": 295,
+    "signature": "theorem third_point_c (A B P : Tpoint) (h : Col A B P) :\n    Bet P A B ∨ Bet A P B ∨ Bet A B P",
+    "sorry": false
+  },
+  "ts2__ex_bet2_c": {
+    "file": "Tarski_dev/Ch09.lean",
+    "line": 1377,
+    "signature": "theorem ts2__ex_bet2_c (A B C D : Tpoint) (h₁ : TS A C B D) (h₂ : TS B D A C) :\n    ∃ X, Bet A X C ∧ Bet B X D",
+    "sorry": false
+  },
+  "ts__coplanar_c": {
+    "file": "Tarski_dev/Ch09.lean",
+    "line": 15,
+    "signature": "theorem ts__coplanar_c (A B C D : Tpoint) (H : TS A B C D) : Coplanar A B C D",
+    "sorry": false
+  },
+  "ts__ncol_c": {
+    "file": "Tarski_dev/Ch09.lean",
+    "line": 1470,
+    "signature": "theorem ts__ncol_c (A B X Y : Tpoint) (h : TS A B X Y) :\n    ¬ Col A X Y ∨ ¬ Col B X Y",
+    "sorry": false
+  },
+  "ts_distincts_c": {
+    "file": "Tarski_dev/Ch09.lean",
+    "line": 174,
+    "signature": "theorem ts_distincts_c (A B P Q : Tpoint) (h : TS A B P Q) :\n    A ≠ B ∧ A ≠ P ∧ A ≠ Q ∧ B ≠ P ∧ B ≠ Q ∧ P ≠ Q",
+    "sorry": false
+  },
+  "ts_ts_os_c": {
+    "file": "Tarski_dev/Ch09.lean",
+    "line": 1266,
+    "signature": "theorem ts_ts_os_c (A B C D : Tpoint) (h₁ : TS A B C D) (h₂ : TS C D A B) :\n    OS A C B D",
+    "sorry": false
+  },
+  "tsp__ncop1_c": {
+    "file": "Tarski_dev/Ch09.lean",
+    "line": 2378,
+    "signature": "theorem tsp__ncop1_c (A B C P Q : Tpoint) (h : TSP A B C P Q) :\n    ¬ Coplanar A B C P",
+    "sorry": false
+  },
+  "tsp__ncop2_c": {
+    "file": "Tarski_dev/Ch09.lean",
+    "line": 2384,
+    "signature": "theorem tsp__ncop2_c (A B C P Q : Tpoint) (h : TSP A B C P Q) :\n    ¬ Coplanar A B C Q",
+    "sorry": false
+  },
+  "tsp__nosp_c": {
+    "file": "Tarski_dev/Ch09.lean",
+    "line": 2400,
+    "signature": "theorem tsp__nosp_c (A B C P Q : Tpoint) (h : TSP A B C P Q) :\n    ¬ OSP A B C P Q",
+    "sorry": false
+  },
+  "tsp_distincts_c": {
+    "file": "Tarski_dev/Ch09.lean",
+    "line": 2353,
+    "signature": "theorem tsp_distincts_c (A B C P Q : Tpoint) (h : TSP A B C P Q) :\n    A ≠ B ∧ A ≠ C ∧ B ≠ C ∧\n    A ≠ P ∧ B ≠ P ∧ C ≠ P ∧\n    A ≠ Q ∧ B ≠ Q ∧ C ≠ Q ∧ P ≠ Q",
+    "sorry": false
+  },
+  "tsp_exists_c": {
+    "file": "Tarski_dev/Ch09.lean",
+    "line": 2279,
+    "signature": "theorem tsp_exists_c (A B C P : Tpoint) (hNCop : ¬ Coplanar A B C P) :\n    ∃ Q, TSP A B C P Q",
+    "sorry": false
+  },
+  "two_distinct_points": {
+    "file": "Tarski_dev/SegmentCone.lean",
+    "line": 62,
+    "signature": "theorem two_distinct_points : ∃ X Y : Tpoint, X ≠ Y",
+    "sorry": false
+  },
+  "two_distinct_points_c": {
+    "file": "Tarski_dev/Ch03.lean",
+    "line": 141,
+    "signature": "theorem two_distinct_points_c : ∃ X Y : Tpoint, X ≠ Y",
+    "sorry": false
+  },
+  "two_sides_dec_c": {
+    "file": "Tarski_dev/Ch09.lean",
+    "line": 1982,
+    "signature": "theorem two_sides_dec_c (A B C D : Tpoint) : TS A B C D ∨ ¬ TS A B C D",
+    "sorry": false
+  },
+  "two_sides_not_col_c": {
+    "file": "Tarski_dev/Ch09.lean",
+    "line": 1302,
+    "signature": "theorem two_sides_not_col_c (A B X Y : Tpoint) (h : TS A B X Y) :\n    ¬ Col A B X",
+    "sorry": false
+  }
+}
