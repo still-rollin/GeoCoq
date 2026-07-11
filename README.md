@@ -1,9 +1,13 @@
 # GeoCoq
 A formalization of geometry in Coq.
 
-> **This fork** additionally contains **GeoLean** — a structure-preserving translation of
-> the entire `Elements/OriginalProofs` library to **Lean 4** (234/234 lemmas, honest clean
-> rebuild). See **[GEOLEAN.md](GEOLEAN.md)** for the result, layout, and reproduction steps.
+> **This fork** additionally contains **GeoLean** — a Lean 4 port of GeoCoq built two
+> ways: a deterministic, structure-preserving **transpiler** for `Elements/OriginalProofs`
+> (234/234 lemmas, honest clean rebuild — see **[GEOLEAN.md](GEOLEAN.md)**), and a
+> proof-term **transliteration pipeline** for the goal-directed `Tarski_dev` corpus
+> (Ch02–Ch10 foundations complete at 538/538 lemmas; Ch11 onward in progress — see
+> **[docs/TARSKI_STATUS.md](docs/TARSKI_STATUS.md)**). Verified, ready-to-browse copies of
+> both completed datasets live in **[proven/](proven/)**.
 
 ---
 

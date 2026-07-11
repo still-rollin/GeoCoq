@@ -16,12 +16,12 @@ and a **uniform** `maxHeartbeats = 800000` applied identically to every proof.
 ```
 lean/geocoq_translate/          Lean 4 project (lake)
   GeocoqTranslate/
+    FreshElements.lean           aggregate module importing all 234 lemmas
     Euclidean/Axioms.lean         16 hand-translated axioms (the trusted base)
     Elements/OriginalProofs/
       euclidean_defs.lean         ~25 hand-translated definitions
       euclidean_tactics.lean      bounded tactic library (conclude, conclude_def, …)
       conclude_bounded.lean       head-indexed bounded search (the eauto port)
-      FreshElements.lean          aggregate module importing all 234 lemmas
       proposition_*.lean          234 TRANSPILER-GENERATED proofs
       Lemmas/lemma_*.lean
 theories/Elements/OriginalProofs/ original Coq sources (for faithfulness comparison)
@@ -44,7 +44,7 @@ lake exe cache get          # fetch prebuilt Mathlib oleans
 
 # clean rebuild + honest audit (counts ONLY the 234 target oleans)
 find .lake/build/lib/lean/GeocoqTranslate/Elements -name '*.olean' -delete
-lake build GeocoqTranslate.Elements.OriginalProofs.FreshElements > /tmp/build.log 2>&1
+lake build GeocoqTranslate.FreshElements > /tmp/build.log 2>&1
 cd ../..
 python3 transpiler/audit_true_coverage.py /tmp/build.log
 # expected: COMPILED (olean) : 234 (100%), own-error 0, cascade 0
@@ -70,7 +70,12 @@ python3 transpiler/geolean_transpile.py \
 
 ## Scope
 
-This covers `Elements/OriginalProofs` (the assert-chain proof style). The larger,
-goal-directed `Tarski_dev` corpus is out of scope here (future work — paper §8).
+This covers `Elements/OriginalProofs` (the assert-chain proof style), transpiled
+deterministically. The larger, goal-directed `Tarski_dev` corpus needs a different
+approach — a proof-*term* transliteration pipeline rather than a tactic-script
+transpiler — and is now in progress; see **[docs/TARSKI_STATUS.md](docs/TARSKI_STATUS.md)**
+for current chapter-by-chapter status. Verified, ready-to-browse copies of both
+completed datasets (this 234/234 corpus and the completed `Tarski_dev` foundations,
+Ch02–Ch10) live in **[proven/](proven/)**.
 
 Contact: Ayaan Siddiqui — `f20231060@hyderabad.bits-pilani.ac.in`.

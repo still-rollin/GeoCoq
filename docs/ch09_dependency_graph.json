@@ -1,0 +1,82 @@
+{
+  "meta": {
+    "source": "theories/Main/Tarski_dev/Ch09_plane.v",
+    "target": "lean/geocoq_translate/GeocoqTranslate/Tarski_dev/Ch09.lean",
+    "generated": "2026-07-11, updated architecture after this session's closures",
+    "baseline_before_session": "454/527 (49 remaining holes in Ch09)",
+    "current": "473/527 (36 remaining holes in Ch09)",
+    "closed_this_session": [
+      "outer_pasch", "l9_8_2", "l9_17", "l9_19", "out_out_one_side",
+      "out_one_side_1", "col_two_sides_bet", "l9_9", "out_one_side",
+      "ts2__ex_bet2", "out_two_sides_two_sides", "col_one_side_out", "ts_ts_os"
+    ],
+    "method": "same as before: for each of the 36 remaining `sorry` theorems, extracted its Lemma..Qed body from the real Coq source and grepped for identifier-boundary occurrences of every other remaining pool member's base name",
+    "node_count": 36
+  },
+  "graph": {
+    "l9_31": [],
+    "os_ts1324__os": [],
+    "l8_21_bis": [],
+    "one_or_two_sides_aux": [],
+    "os__coplanar": ["l9_31"],
+    "coplanar_trans_1": ["os__coplanar"],
+    "col_cop__cop": ["coplanar_trans_1"],
+    "col2_cop__cop": ["col_cop__cop"],
+    "col_cop2__cop": ["coplanar_trans_1", "col_cop__cop"],
+    "coplanar_pseudo_trans": ["coplanar_trans_1", "col_cop__cop", "col_cop2__cop"],
+    "l9_30": ["coplanar_pseudo_trans"],
+    "cop_per2__col": [],
+    "cop_perp2__col": ["col_cop__cop", "cop_per2__col"],
+    "two_sides_dec": ["cop_perp2__col"],
+    "one_side_dec": ["two_sides_dec"],
+    "cop_dec": ["os__coplanar", "two_sides_dec", "one_side_dec"],
+    "col2_cop2__eq": ["col_cop2__cop"],
+    "cong3_cop2__col": ["coplanar_trans_1", "col_cop__cop", "cop_per2__col"],
+    "l9_39": ["col_cop2__cop"],
+    "l9_41_2": ["col2_cop2__eq", "l9_39"],
+    "tsp_exists": ["col_cop2__cop"],
+    "osp_reflexivity": ["tsp_exists"],
+    "osp_transitivity": ["l9_41_2"],
+    "cop3_tsp__tsp": ["coplanar_pseudo_trans"],
+    "cop3_osp__osp": ["cop3_tsp__tsp"],
+    "tsp__nosp": ["l9_41_2"],
+    "osp__ntsp": ["tsp__nosp"],
+    "osp_bet__osp": ["col_cop2__cop", "col2_cop2__eq", "l9_39"],
+    "l9_18_3": ["col2_cop2__eq"],
+    "bet_cop__tsp": ["col_cop2__cop", "l9_18_3"],
+    "cop_out__osp": ["col_cop2__cop"],
+    "l9_19_3": ["osp__ntsp", "cop_out__osp"],
+    "cop2_ts__tsp": ["col_cop2__cop"],
+    "cop2_os__osp": ["cop2_ts__tsp"],
+    "cop_osp__ex_cop2": ["coplanar_trans_1", "l9_41_2", "bet_cop__tsp"],
+    "sac__coplanar": ["os__coplanar"]
+  },
+  "leaves_no_deps": ["cop_per2__col", "l8_21_bis", "l9_31", "one_or_two_sides_aux", "os_ts1324__os"],
+  "transitive_unlock_reach": {
+    "l9_31": 31,
+    "cop_per2__col": 5,
+    "l8_21_bis": 0,
+    "one_or_two_sides_aux": 0,
+    "os_ts1324__os": 0
+  },
+  "in_degree_top": {
+    "col_cop2__cop": 8,
+    "coplanar_trans_1": 5,
+    "col_cop__cop": 5,
+    "os__coplanar": 3,
+    "col2_cop2__eq": 3,
+    "l9_41_2": 3
+  },
+  "waves": [
+    ["cop_per2__col", "l8_21_bis", "l9_31", "one_or_two_sides_aux", "os_ts1324__os"],
+    ["os__coplanar"],
+    ["coplanar_trans_1", "sac__coplanar"],
+    ["col_cop__cop"],
+    ["col2_cop__cop", "col_cop2__cop", "cong3_cop2__col", "cop_perp2__col"],
+    ["col2_cop2__eq", "cop2_ts__tsp", "cop_out__osp", "coplanar_pseudo_trans", "l9_39", "tsp_exists", "two_sides_dec"],
+    ["cop2_os__osp", "cop3_tsp__tsp", "l9_18_3", "l9_30", "l9_41_2", "one_side_dec", "osp_bet__osp", "osp_reflexivity"],
+    ["bet_cop__tsp", "cop3_osp__osp", "cop_dec", "osp_transitivity", "tsp__nosp"],
+    ["cop_osp__ex_cop2", "osp__ntsp"],
+    ["l9_19_3"]
+  ]
+}
