@@ -192,9 +192,8 @@ theorem Col_or_nCol (A B C : Point) : Col A B C ∨ nCol A B C :=
     symmetry is a genuine derived lemma, so it is layered on downstream in
     `perm_tactics.lean`. Mirrors GeoCoq's `Col_cases`/`Cong_cases`/… . -/
 
-/-- Betweenness symmetry as an iff, for `simp`-driven permutation closing. -/
-theorem betS_symm_iff (A B C : Point) : BetS A B C ↔ BetS C B A :=
-  ⟨axiom_betweennesssymmetry A B C, axiom_betweennesssymmetry C B A⟩
+-- `betS_symm_iff` is provided by `perm_core` (imported transitively via
+-- `conclude_bounded`); the `*_cases` proofs below reuse it.
 
 theorem Col_cases (A B C : Point)
     (h : Col A B C ∨ Col A C B ∨ Col B A C ∨ Col B C A ∨ Col C A B ∨ Col C B A) :

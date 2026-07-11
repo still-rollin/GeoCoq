@@ -122,8 +122,26 @@ def translate_type(t: str) -> str:
     """Translate a Coq proposition string to Lean. Predicate names (BetS, Cong,
     Col, …) are preserved verbatim — only logical syntax changes."""
     t = t.strip()
+    # Coq sigma/subset types `{C | P}` / `{C : T | P}` (constructive existence
+    # witness) — simplified to a plain `exists` for statement-stub purposes.
+    t = re.sub(r"\{\s*(\w[\w']*)\s*(?::[^|]+)?\|\s*(.+?)\s*\}", r"exists \1, \2", t)
+    # Coq pair/sig projections used point-free in later definitions.
+    t = re.sub(r"\bfst\s+(\w[\w']*)", r"\1.1", t)
+    t = re.sub(r"\bsnd\s+(\w[\w']*)", r"\1.2", t)
+    t = re.sub(r"\bproj1_sig\s+(\w[\w']*)", r"\1.1", t)
+    t = re.sub(r"\bproj2_sig\s+(\w[\w']*)", r"\1.2", t)
+    # local notations (Ch13_2_length: `l1 =l= l2` := EqL l1 l2)
+    t = re.sub(r"(\w[\w']*)\s*=l=\s*(\w[\w']*)", r"EqL \1 \2", t)
+    # Ch16_coordinates_with_functions: `l1 =F= l2` (F-field equality) — F's
+    # predicate is a Prop, so Lean's proof-irrelevance makes native `=` agree.
+    t = re.sub(r"(\S)\s*=F=\s*", r"\1 = ", t)
+    # Coq `let (A, B) := E in BODY` -> Lean `let (A, B) := E; BODY` (term-mode
+    # `let` uses `;`, not `in`). Non-greedy so consecutive/nested lets each
+    # stop at THEIR OWN `in`, chaining correctly left-to-right.
+    t = re.sub(r"\blet\b(.+?)\s+\bin\b\s+", r"let\1; ", t)
     # connectives (longest first)
     t = t.replace("<->", " ↔ ")
+    t = t.replace("<>", " ≠ ")
     t = t.replace("->", " → ")
     t = t.replace("/\\", " ∧ ")
     t = t.replace("\\/", " ∨ ")
@@ -147,13 +165,25 @@ def translate_type(t: str) -> str:
 # reimplemented as Lean macros in euclidean_tactics.lean).
 _PORTED = ("conclude_def", "conclude", "forward_using", "contradict", "close")
 
+# Pure-permutation `have` steps that the perm-aware `conclude` engine makes
+# redundant (see the note at the end of `parse_proof`). Only the argument-order
+# lemmas whose predicate the matcher covers (Col/nCol/Cong) — NOT derivations
+# like `lemma_betweennotequal` (BetS→neq) or `lemma_parallelflip` (Par, uncovered).
+_PERM_STEP = re.compile(
+    r"^have : .+ := by forward_using "
+    r"lemma_(collinearorder|NCorder)\b")
+
 # Per-theorem elaboration budget. GeoCoq proofs translate to LONG bounded-tactic
 # chains (some lemmas are 30+ asserts over a 30-fact context); these are genuine,
 # `sorry`-free, kernel-checked proofs that simply need more than Lean's default
 # 200k heartbeats. Raising the budget is honest (it never makes a wrong proof pass)
 # — it only trades build time for headroom. Emitted as a visible `set_option … in`
 # before each theorem rather than hidden globally, so the cost is auditable.
-_MAXHB = "set_option maxHeartbeats 800000 in"
+# `maxRecDepth` is raised alongside it: the perm-aware `conclude` engine recurses
+# deeper (on-demand premise reconstruction adds backtracking depth), and the
+# default 512 overflows on dense proofs. Like the heartbeat budget this is honest
+# — a deeper recursion limit never makes a wrong proof pass.
+_MAXHB = "set_option maxHeartbeats 800000 in set_option maxRecDepth 8000 in"
 
 # Definitions whose body contains positive `nCol` leaf(s). When `conclude_def D`
 # BUILDS such a definition, the leaf must be discharged as a positive `nCol`,
@@ -632,7 +662,65 @@ def parse_proof(body: str, warn) -> list[Step]:
         warn(f"unhandled statement: {s!r}")
         steps.append(Step("raw", f"sorry -- TODO: {s}", False))
         i += 1
+
+    # Permutation-step elimination. The bounded `conclude` engine now discharges
+    # Col / nCol / BetS / Cong premises MODULO argument permutation (perm_core's
+    # `*_perm` lemmas + `conclude_bounded`'s `permProof`), and every consumer
+    # (`conclude` / `close` / `conclude_def` / `contradict` / `forward_using`)
+    # routes through that perm-aware matcher. So an explicit
+    #   `have : X := by forward_using lemma_(collinearorder|NCorder|
+    #                                        congruenceflip|congruencesymmetric)`
+    # that only REORIENTS an already-derived fact is redundant — the matcher
+    # reconstructs X from the original orientation wherever it is needed. Drop
+    # these pure-permutation steps (applies at every nesting level, since
+    # `parse_proof` recurses into focus blocks).
+    #
+    # EXCEPTION — substitution feeders. A perm-`have` whose fact is consumed by a
+    # later `conclude cn_equalitysub` (equals-for-equals substitution) must STAY:
+    # `cn_equalitysub`'s `apply` does higher-order unification, and with the
+    # ready-oriented fact removed from context it spins in `whnf` instead of
+    # reconstructing (the matcher never gets to run — the blow-up is in the apply,
+    # not premise discharge). The feed is recognised structurally: the substitution
+    # target shares all-but-one point with the perm fact (one point substituted).
+    # This is GeoCoq-faithful — GeoCoq itself keeps explicit steps where its own
+    # automation doesn't reach — and general (a uniform structural rule, no
+    # per-file logic). Over-approximates slightly (keeps a few safe haves), which
+    # is the safe direction.
+    steps = [st for st in steps
+             if not (_PERM_STEP.match(st.lean.strip())
+                     and not _feeds_cn_equalitysub(st.lean.strip(), steps))]
     return steps
+
+
+# Substitution-target `have`s: `conclude cn_equalitysub` proving a Col/nCol atom.
+_SUBST_TARGET = re.compile(
+    r"have : (Col|nCol) (.+?) := by conclude cn_equalitysub\b")
+# The perm-`have`'s own predicate + points (to compare against substitution targets).
+_PERM_FACT = re.compile(
+    r"^have : (Col|nCol) (.+?) := by forward_using "
+    r"lemma_(?:collinearorder|NCorder)\b")
+
+
+def _feeds_cn_equalitysub(perm_line: str, steps: list[Step]) -> bool:
+    """True if `perm_line`'s Col/nCol fact is consumed by SOME later
+    `conclude cn_equalitysub` in the proof (its target shares all-but-one point
+    — the substitution replaces exactly one point). Scans every step's emitted
+    Lean, including nested focus/neg-block sub-steps."""
+    m = _PERM_FACT.match(perm_line)
+    if not m:
+        return False
+    head, pts = m.group(1), set(m.group(2).split())
+    for st in steps:
+        for ln in st.lean.splitlines():
+            t = _SUBST_TARGET.search(ln.strip())
+            if not t:
+                continue
+            if t.group(1) != head:
+                continue
+            tp = t.group(2).split()
+            if len(tp) == len(pts) and len(pts & set(tp)) == len(pts) - 1:
+                return True
+    return False
 
 
 # ---------------------------------------------------------------------------
@@ -644,30 +732,138 @@ def parse_context_class(coq_text: str) -> str:
     return m.group(1) if m else "euclidean_neutral_ruler_compass"
 
 
+# Known predicates whose arguments are themselves congruence-classes ("line" =
+# Tpoint -> Tpoint -> Prop, "angle" = Tpoint -> Tpoint -> Tpoint -> Prop)
+# rather than bare Points, keyed to the 0-indexed argument positions that are
+# class-typed. Used to infer a quantified variable's type when it only ever
+# appears as an ARGUMENT (e.g. `Ang A B C a1`), never applied directly as its
+# own predicate (`a1 X Y Z`).
+_CLASS_ARG_POSITIONS = {
+    "Q_Cong": {0: 2}, "Q_Cong_Null": {0: 2}, "Len": {2: 2}, "EqL": {0: 2, 1: 2},
+    "Q_CongA": {0: 3}, "Ang": {3: 3}, "Ang_Flat": {0: 3}, "EqA": {0: 3, 1: 3},
+    "Q_CongA_Acute": {0: 3}, "Ang_Acute": {3: 3}, "Q_CongA_nNull": {0: 3},
+    "Q_CongA_nFlat": {0: 3}, "Q_CongA_Null": {0: 3}, "Q_CongA_Null_Acute": {0: 3},
+    "is_null_anga'": {0: 3}, "Q_CongA_nNull_Acute": {0: 3},
+    "Lcos": {0: 2, 1: 2, 2: 3}, "Eq_Lcos": {0: 2, 1: 3, 2: 2, 3: 3},
+    "Lcos2": {0: 2, 1: 2, 2: 3, 3: 3}, "Eq_Lcos2": {0: 2, 1: 3, 2: 3, 3: 2, 4: 3, 5: 3},
+    "Lcos3": {0: 2, 1: 2, 2: 3, 3: 3, 4: 3},
+    "Eq_Lcos3": {0: 2, 1: 3, 2: 3, 3: 3, 4: 2, 5: 3, 6: 3, 7: 3},
+}
+
+
+def _rest_fragments(rest: str) -> list[list[str]]:
+    """Split a proposition body (Coq OR already-Lean-translated syntax) at its
+    top-level connectives/punctuation into fragments, each tokenized — so
+    `head arg1 arg2 …` applications can be read off positionally without being
+    confused by neighbouring clauses."""
+    frags = re.split(r"/\\|\\/|<->|->|~|[(),]|∧|∨|↔|→|¬|∀|∃", rest)
+    return [f.split() for f in frags if f.split()]
+
+
+def _infer_var_type(var: str, rest: str) -> str:
+    """Most GeoCoq-quantified variables are Points, but Ch13+ also quantifies
+    over *congruence classes* — a "line" (segment-length class) applied to 2
+    points, or an "angle" applied to 3 points. Two detection passes:
+    (1) the variable is itself applied as a predicate (`l A B`, `a X Y Z`);
+    (2) the variable only appears as an argument of a KNOWN class-typed
+    predicate (`Ang A B C a1`) — looked up via `_CLASS_ARG_POSITIONS`."""
+    for toks in _rest_fragments(rest):
+        if toks[0] == var:
+            n = 0
+            for t in toks[1:]:
+                if re.match(r"^[A-Z]\w*'?$", t):
+                    n += 1
+                else:
+                    break
+            if n >= 3:
+                return "Tpoint → Tpoint → Tpoint → Prop"
+            if n >= 2:
+                return "Tpoint → Tpoint → Prop"
+        elif toks[0] in _CLASS_ARG_POSITIONS:
+            for i, t in enumerate(toks[1:]):
+                if t == var and i in _CLASS_ARG_POSITIONS[toks[0]]:
+                    arity = _CLASS_ARG_POSITIONS[toks[0]][i]
+                    return ("Tpoint → Tpoint → Tpoint → Prop" if arity == 3
+                            else "Tpoint → Tpoint → Prop")
+    return "Tpoint"
+
+
+def _statement_text(coq_lemma: str) -> str:
+    """Isolate the `Lemma foo : <statement>.` text, ending at the first
+    paren-depth-0 period after the `:` — NOT `.split("Proof")` followed by a
+    greedy regex to the LAST period, which silently swallows the whole proof
+    body into "the statement" for lemmas that omit the `Proof.` keyword and
+    go straight into tactics (a real, occurring GeoCoq style)."""
+    ci = coq_lemma.find(":")
+    if ci < 0:
+        return coq_lemma
+    depth = 0
+    for i in range(ci + 1, len(coq_lemma)):
+        c = coq_lemma[i]
+        if c in "([{":
+            depth += 1
+        elif c in ")]}":
+            depth -= 1
+        elif c == "." and depth <= 0:
+            return coq_lemma[ci + 1:i]
+    return coq_lemma[ci + 1:]
+
+
 def translate_statement(coq_lemma: str) -> tuple[str, str]:
     """Return (lean_signature_after_colon, intro_line). Splits the leading
     `forall …,` binders and `->` hypotheses to build an `intro` line."""
-    m = re.search(r":\s*(?P<stmt>.*?)\.\s*$", coq_lemma.split("Proof")[0], re.DOTALL)
-    stmt = m.group("stmt").strip() if m else coq_lemma
+    stmt = _statement_text(coq_lemma).strip()
     # leading binders
     # leading binders — accept an optional explicit type annotation
     # (`forall A B C : Point, …`), not just the bare `forall A B C, …` form.
-    fm = re.match(r"^forall\s+(?P<vars>[\w\s]+?)\s*(?::\s*\w+\s*)?,\s*(?P<rest>.*)$",
+    fm = re.match(r"^forall\s+(?P<vars>[\w\s']+?)\s*(?::\s*\w+\s*)?,\s*(?P<rest>.*)$",
                   stmt, re.DOTALL)
     intro_names: list[str] = []
     if fm:
         vs = fm.group("vars").split()
         rest = fm.group("rest")
         intro_names += vs
-        # GeoCoq quantified variables are all Points; annotate so the
-        # typeclass instance for the geometry predicates can resolve.
-        lean_stmt = f"∀ ({' '.join(vs)} : Point), " + translate_type(rest)
+        # GeoCoq quantified variables are usually Points, but some (Ch13+)
+        # are line/angle congruence-classes — infer per-variable arity from
+        # how each is actually applied in the body, and group same-type vars
+        # into one binder each so mixed foralls type-check.
+        groups: list[tuple[str, list[str]]] = []
+        for v in vs:
+            ty = _infer_var_type(v, rest)
+            if groups and groups[-1][0] == ty:
+                groups[-1][1].append(v)
+            else:
+                groups.append((ty, [v]))
+        binders = " ".join(f"({' '.join(names)} : {ty})" for ty, names in groups)
+        lean_stmt = f"∀ {binders}, " + translate_type(rest)
     else:
         rest = stmt
         lean_stmt = translate_type(stmt)
     n_hyp = _depth_split_count(rest, "->")
     intro_names += [f"h{k+1}" for k in range(n_hyp)]
     intro = "intro " + " ".join(intro_names) if intro_names else ""
+    # Any OTHER bare `∀ v1 v2 …,` left over — nested inside an `↔`/`∧`/deeper
+    # scope, or the top-level one when the statement doesn't start with a bare
+    # `forall` (e.g. `(forall …) <-> (forall …)`) — needs its own type
+    # annotation too, or Lean's elaborator gets stuck on an unconstrained
+    # metavariable. All such GeoCoq-quantified variables are bare Points; the
+    # line/angle cases are only ever the outermost per-lemma binder, already
+    # handled above.
+    def _annotate_bare(m: re.Match) -> str:
+        kind, vars_str = m.group(1), m.group(2)
+        vs = vars_str.split()
+        body = lean_stmt[m.end():]           # best-effort lookahead scope
+        groups: list[tuple[str, list[str]]] = []
+        for v in vs:
+            ty = _infer_var_type(v, body)
+            if groups and groups[-1][0] == ty:
+                groups[-1][1].append(v)
+            else:
+                groups.append((ty, [v]))
+        binders = " ".join(f"({' '.join(names)} : {ty})" for ty, names in groups)
+        return f"{kind} {binders},"
+    lean_stmt = re.sub(r"(∀|∃) ((?:[A-Za-z][\w']*\s+)*[A-Za-z][\w']*),",
+                        _annotate_bare, lean_stmt)
     return lean_stmt, intro
 
 

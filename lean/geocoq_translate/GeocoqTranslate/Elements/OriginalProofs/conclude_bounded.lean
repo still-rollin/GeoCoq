@@ -16,6 +16,7 @@ backtracking), as suggested by J. Narboux.
   the way the `aesop` fallback does.
 -/
 import Lean
+import GeocoqTranslate.Elements.OriginalProofs.perm_core
 
 namespace GeocoqTranslate.Tactics
 open Lean Lean.Meta Lean.Elab.Tactic
@@ -36,6 +37,83 @@ private def headKey (ty : Expr) : Option Name :=
 private def mvarCount (e : Expr) : MetaM Nat := do
   return (← instantiateMVars e).collectMVars {} |>.result.size
 
+/-- For a symmetric geometric head, the `*_perm` lemma (one oriented fact →
+    conjunction of ALL its argument permutations) and the head's point-argument
+    count. This is the permutation "hint database" the premise-matcher consults. -/
+private def permInfoFor (hd : Name) : Option (Name × Nat × Array (Array Nat)) :=
+  -- perm tables list the conjuncts of each `*_perm` lemma IN ORDER, each as the
+  -- index-permutation applied to the hypothesis's points. They MUST match the
+  -- conjunct order in `perm_core.lean` exactly (that ordering is the contract).
+  let s3 : Array (Array Nat) :=
+    #[#[0,1,2], #[0,2,1], #[1,0,2], #[1,2,0], #[2,0,1], #[2,1,0]]
+  if hd == ``euclidean_neutral_basis.Col then some (``GeocoqTranslate.Elements.Col_perm, 3, s3)
+  else if hd == ``euclidean_neutral_basis.nCol then some (``GeocoqTranslate.Elements.nCol_perm, 3, s3)
+  else if hd == ``euclidean_neutral_basis.BetS then
+    some (``GeocoqTranslate.Elements.BetS_perm, 3, #[#[0,1,2], #[2,1,0]])
+  else if hd == ``euclidean_neutral_basis.Cong then
+    some (``GeocoqTranslate.Elements.Cong_perm, 4,
+      #[#[0,1,2,3], #[0,1,3,2], #[1,0,2,3], #[1,0,3,2],
+        #[2,3,0,1], #[2,3,1,0], #[3,2,0,1], #[3,2,1,0]])
+  else none
+
+/-- Cheap permutation guard: do `a` and `b` (a hypothesis's and the premise's
+    point arguments) hold the SAME multiset of points? Skips the expensive
+    `mkAppM`/`searchConj` for every non-permutation candidate — the difference
+    between one perm-match and one whole-context scan per premise. -/
+private def samePointMultiset (a b : Array Expr) : Bool :=
+  a.size == b.size &&
+    a.all (fun x => (a.filter (· == x)).size == (b.filter (· == x)).size)
+
+/-- Project conjunct `i` (0-based) out of a right-nested `∧`-tree of `n` leaves:
+    `And.right` `i` times, then `And.left` unless `i` is the last leaf. No type
+    inference or `isDefEq` walk — the caller already knows which conjunct it wants,
+    so this is a handful of cheap term applications, not a whnf search. -/
+private def projectConj (proof : Expr) (i n : Nat) : MetaM Expr := do
+  let mut p := proof
+  for _ in [0:i] do p ← mkAppM ``And.right #[p]
+  if i + 1 < n then p ← mkAppM ``And.left #[p]
+  return p
+
+/-- Prove atom `ty` from context MODULO argument permutation: find a same-head
+    hypothesis, expand ALL its permutations with the `*_perm` lemma, and project
+    the conjunct definitionally equal to `ty`. This is the perm-aware analogue of
+    the direct `assumption` in `closeAtom`/`discharge`; it deletes the explicit
+    `forward_using lemma_collinearorder` reorder steps that used to feed premises.
+    Must be called inside the goal's local context. Returns the proof, or none. -/
+private def permProof (ty : Expr) : MetaM (Option Expr) := do
+  let some hd := ty.getAppFn.constName? | return none
+  let some (lem, arity, perms) := permInfoFor hd | return none
+  let tyArgs := ty.getAppArgs
+  if tyArgs.size < arity then return none
+  let tyPts := tyArgs.extract (tyArgs.size - arity) tyArgs.size
+  for d in (← getLCtx) do
+    if d.isImplementationDetail then continue
+    let hty ← instantiateMVars d.type
+    if hty.getAppFn.constName? != some hd then continue
+    let hArgs := hty.getAppArgs
+    if hArgs.size != tyArgs.size then continue
+    let points := hArgs.extract (hArgs.size - arity) hArgs.size
+    -- cheap guard first: only a same-point-multiset hypothesis can be a
+    -- permutation of the premise — skip the costly proof build otherwise.
+    unless samePointMultiset tyPts points do continue
+    -- find WHICH conjunct matches by cheap point-`isDefEq` (points are usually the
+    -- same local fvars), so we build and project exactly one conjunct — no whnf
+    -- walk over the full 6-/8-way conjunction per candidate.
+    let s ← saveState
+    let mut idx : Option Nat := none
+    for i in [0:perms.size] do
+      let p := perms[i]!
+      if ← (List.range arity).allM (fun j => isDefEq points[p[j]!]! tyPts[j]!) then
+        idx := some i; break
+    match idx with
+    | none => s.restore
+    | some i =>
+      let conj ← mkAppM lem (points.push d.toExpr)
+      let pf ← projectConj conj i perms.size
+      if ← isDefEq (← inferType pf) ty then return some pf
+      s.restore
+  return none
+
 /-- Close an ATOM goal `ty` (no top-level `∨`/`∧`) from the local context:
     a head-indexed `assumption`, with `rfl` as a fall-back for reflexive
     equalities (`X = X` disjuncts that the proof never asserted as a hypothesis). -/
@@ -48,6 +126,9 @@ private def closeAtom (g : MVarId) (ty : Expr) : MetaM Bool := g.withContext do
       if ← isDefEq ty (← inferType d.toExpr) then
         g.assign d.toExpr; return true
       s.restore
+  -- permutation-modulo fallback: a `Col`/`nCol`/`BetS`/`Cong` atom matches a
+  -- context hypothesis that is a permutation of it (deletes explicit reorders).
+  if let some pf ← permProof ty then g.assign pf; return true
   -- reflexive equality leaf (e.g. a `B = B` disjunct)
   try g.refl; return true catch _ => return false
 
@@ -181,6 +262,13 @@ private partial def discharge (gs : List MVarId) : MetaM Bool := do
           else
             pure false)
         if ok then return true
+        s.restore
+      -- permutation-modulo fallback: discharge the premise from a PERMUTED hyp,
+      -- then continue with the rest (backtracks if the rest cannot be closed).
+      if let some pf ← permProof ty then
+        let s ← saveState
+        g.assign pf
+        if ← discharge rest then return true
         s.restore
       -- atom with no working head-match: bounded leaf (reflexive equalities, …)
       viaStruct
