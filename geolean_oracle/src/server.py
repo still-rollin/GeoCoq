@@ -37,11 +37,13 @@ if __package__ in (None, ""):
         extract_resolved_calls,
         extract_resolved_calls_for_file,
     )
+    from src.port_map import get_lean_signature as _get_lean_signature  # type: ignore
 else:
     from .oracle import (
         extract_resolved_calls,
         extract_resolved_calls_for_file,
     )
+    from .port_map import get_lean_signature as _get_lean_signature
 
 
 def _build_server():
@@ -104,6 +106,33 @@ def _build_server():
         """
         coq_file = _resolve(coq_file)
         return extract_resolved_calls_for_file(coq_file)
+
+    @mcp.tool()
+    def get_lean_signature(coq_name: str) -> dict:
+        """
+        Given a GeoCoq lemma name, return the ported Lean lemma(s): name,
+        file:line, and verbatim signature (binders + type). Use to emit
+        `exact`/`apply` with the correct Lean argument shape (implicit `{}`
+        vs explicit `()` vs instance `[]`, and order) instead of copying
+        Coq's positional args — the #1 translation error.
+
+        Args:
+          coq_name: the Coq/GeoCoq lemma name (the port keeps names verbatim)
+
+        Returns:
+          {
+            "coq_name": "l4_2",
+            "ported": true,
+            "matches": [
+              {"lean_name": "l4_2", "file": ".../Ch04Cong.lean", "line": 26,
+               "signature": "theorem l4_2 {A B C D A' B' C' D' : Tpoint} (h : IFSC …) : Cong B D B' D'"}
+            ]
+          }
+
+        `matches` empty  => not ported yet (stop / queue it).
+        multiple matches => disambiguate by file (e.g. cone files vs older).
+        """
+        return _get_lean_signature(coq_name)
 
     return mcp
 

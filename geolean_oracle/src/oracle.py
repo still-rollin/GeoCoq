@@ -98,6 +98,44 @@ def _extract_section_header(coq_path: str) -> str:
     return "\n".join(lines)
 
 
+def _extract_prefix_admitted(coq_path: str, lemma_name: str) -> str:
+    """
+    Everything from the top of the file up to (but not including) the target
+    lemma, with:
+      * `Require ...` sentences removed (added separately, one per chunk), and
+      * every `Proof. ... Qed./Defined.` replaced by `Admitted.` so the
+        preceding lemmas' tactics do NOT re-run — we only need their
+        statements in scope so the target's `Show Proof.` resolves names.
+
+    This makes the oracle work on ANY lemma in the file (not just the first),
+    and it preserves `Section`/`Context`/`Ltac`/`Definition`/`Hint`
+    declarations verbatim so multi-section files and intra-file lemma
+    dependencies both resolve.
+    """
+    with open(coq_path) as f:
+        content = f.read()
+    content = re.sub(r"\(\*.*?\*\)", "", content, flags=re.DOTALL)
+    pat = (
+        r"(?:Lemma|Theorem|Corollary|Proposition|Remark|Fact)\s+"
+        + re.escape(lemma_name)
+        + r"\b"
+    )
+    m = re.search(pat, content)
+    if not m:
+        raise ValueError(f"lemma {lemma_name!r} not found in {coq_path}")
+    prefix = content[: m.start()]
+    # Drop Require sentences — they are emitted as their own chunks.
+    prefix = re.sub(r"(?m)^\s*Require\b.*?\.[ \t]*$", "", prefix)
+    # Replace every proof body with `Admitted.` (non-greedy, per proof).
+    prefix = re.sub(
+        r"Proof\s*\..*?\b(?:Qed|Defined)\s*\.",
+        "Admitted.",
+        prefix,
+        flags=re.DOTALL,
+    )
+    return prefix.strip()
+
+
 def _strip_trailing_qed(lemma_src: str) -> tuple[str, str]:
     """
     Split lemma source into (body_without_qed, 'Qed.' | 'Defined.').
@@ -123,18 +161,20 @@ def run_proof(coq_path: str, lemma_name: str, q_paths: list[tuple[str, str]]) ->
     We let sertop do the sentence splitting: one big Add per chunk.
     """
     requires = extract_requires(coq_path)
-    section_header = _extract_section_header(coq_path)
+    prefix = _extract_prefix_admitted(coq_path, lemma_name)
     lemma_src = extract_lemma_source(coq_path, lemma_name)
     body, closer = _strip_trailing_qed(lemma_src)
 
     chunks: list[str] = [
         # Each Require is its own Add — fastest to fail-locate.
         *requires,
-        section_header,
+        prefix,           # Section/Context + all preceding lemmas as `Admitted.`
         body,             # statement + Proof. + tactics ... + close.
         "Show Proof.",
         closer,
-        "End Euclid.",
+        # No `End <section>.` — the proof term is already captured by
+        # `Show Proof.` above; closing the section is unnecessary and its
+        # name varies per file (T6_1, T6_2, ...).
     ]
 
     proof_text_parts: list[str] = []
@@ -223,9 +263,51 @@ def _split_proof_for_show(lemma_src: str) -> _ProofSplit:
 
 _IDENT_PREFIXES = ("lemma_", "axiom_", "cn_", "proposition_")
 
+# Populated once (per process) with every GeoCoq Lemma/Theorem name so the
+# parser can recognise real applications (`between_symmetry`, `l5_2`, ...) in
+# `Show Proof.` output. Empty → fall back to the `lemma_`-prefix heuristic.
+_KNOWN_NAMES: set[str] = set()
+
 
 def is_oracle_identifier(name: str) -> bool:
+    if _KNOWN_NAMES:
+        return name in _KNOWN_NAMES
     return any(name.startswith(p) for p in _IDENT_PREFIXES)
+
+
+_DECL_NAME_RE = re.compile(
+    r"(?m)^\s*(?:Lemma|Theorem|Corollary|Proposition|Fact|Remark)\s+"
+    r"([A-Za-z_][A-Za-z0-9_']*)"  # Coq idents may contain primes (`Col'__Col`)
+)
+
+
+def collect_geocoq_lemma_names(theories_dir: str) -> set[str]:
+    """All Lemma/Theorem/Corollary/Proposition names across the theories tree.
+
+    Deliberately excludes `Definition`s (Col, Bet, Out, ...) so type
+    annotations in the proof term are not mistaken for lemma applications.
+    """
+    names: set[str] = set()
+    for root, _dirs, files in os.walk(theories_dir):
+        for fn in files:
+            if not fn.endswith(".v"):
+                continue
+            try:
+                with open(os.path.join(root, fn)) as f:
+                    content = f.read()
+            except OSError:
+                continue
+            content = re.sub(r"\(\*.*?\*\)", "", content, flags=re.DOTALL)
+            names.update(_DECL_NAME_RE.findall(content))
+    return names
+
+
+def _ensure_known_names() -> None:
+    global _KNOWN_NAMES
+    if not _KNOWN_NAMES:
+        _KNOWN_NAMES = collect_geocoq_lemma_names(
+            os.path.join(os.getcwd(), "theories")
+        )
 
 
 _TOKEN_RE = re.compile(
@@ -426,6 +508,7 @@ def extract_resolved_calls(
     `Show Proof.` output, parse it for resolved lemma applications.
     """
     qp = q_paths or default_q_paths()
+    _ensure_known_names()
     coq_source = extract_lemma_source(coq_file, lemma_name)
     proof_term = run_proof(coq_file, lemma_name, qp)
     calls = parse_resolved_calls(proof_term)
@@ -442,7 +525,8 @@ def extract_resolved_calls(
 # ---------------------------------------------------------------------------
 
 _LEMMA_NAME_RE = re.compile(
-    r"^\s*(?:Lemma|Theorem|Corollary|Proposition|Remark|Fact)\s+(\w+)\b",
+    r"^\s*(?:Lemma|Theorem|Corollary|Proposition|Remark|Fact)\s+"
+    r"([A-Za-z_][A-Za-z0-9_']*)",
     re.MULTILINE,
 )
 
