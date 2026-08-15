@@ -58,6 +58,21 @@ def _skip_type_to(p, stops, opens="([{", closes=")]}"):
         elif v in closes: depth-=1
         p.eat()
 
+def _capture_type_to(p, stops, opens="([{", closes=")]}"):
+    """Like `_skip_type_to` but returns the consumed tokens instead of
+    discarding them -- used for `let NAME : T := ...` so a caller can try to
+    render T (needed to ascribe a `(by cong_r)`/`(by colr)` collapse, which
+    elaborates against an unconstrained goal -- and always fails -- without
+    an expected type)."""
+    depth=0; toks=[]
+    while p.peek() is not None:
+        v=p.peek()
+        if depth==0 and v in stops: return toks
+        if v in opens: depth+=1
+        elif v in closes: depth-=1
+        toks.append(p.eat())
+    return toks
+
 def parse_fun(p):
     p.eat("fun"); binders=[]
     while p.peek()!="=>":
@@ -79,15 +94,16 @@ def parse_fun(p):
 
 def parse_let(p, stop):
     p.eat("let"); name=p.eat()
+    ty=None
     if p.peek()==":":
-        p.eat(":"); _skip_type_to(p, {":="})
+        p.eat(":"); ty=_capture_type_to(p, {":="})
     p.eat(":=")
     val=parse_term(p, stop={"in"})
     if p.peek()==":":                 # value-level cast: `:= t : T in …` (Show Proof cast printing)
         p.eat(":"); _skip_type_to(p, {"in"})
     p.eat("in")
     body=parse_term(p, stop)
-    return ("let", name, val, body)
+    return ("let", name, val, body, ty)
 
 def parse_match(p, stop):
     """`match S [as x] [in T] [return T] with | ctor v.. => body .. end`."""
@@ -253,7 +269,6 @@ NAME_MAP={"eq_dec_points":"point_equality_decidability"}
 # (confirmed empirically), so `not_col_permutation_*` is deliberately excluded.
 COL_FAMILY={"col_permutation_1","col_permutation_2","col_permutation_3",
     "col_permutation_4","col_permutation_5",
-    "col_trivial_1","col_trivial_2","col_trivial_3",
     "col_transitivity_1","col_transitivity_2","l6_16_1","colx",
     # ColR's own internal reflective machinery (ColR.v: collect_diffs/collect_cols
     # build up the SS/SP witness sets, test_col_ok consumes them) -- these leak into
@@ -308,6 +323,82 @@ def choose_variant(name, ncoq, prefer_cone=True):
 
 BARE={"eq_refl":"rfl"}       # Coq constants with a Lean name when they appear UN-applied
 
+_TYPE_KEYWORDS={"exists","forall","let","match","fun","fix","cofix",
+    "/\\","\\/","->","~","<>","(",")",":"}
+
+def _simple_type_str(ty_toks, subst):
+    """Render a captured `let NAME : T := …` type as Lean text, IF T is a flat
+    `Head arg1 arg2 …` predicate application (the only shape Cong/Col-family
+    conclusions and `conj`/`ex_intro` results take here) -- else None. Used
+    only to ascribe a `let`-value that emit() renders as a bare `(by …)`
+    tactic block or `⟨…⟩` anonymous constructor (see _needs_expected_type):
+    both elaborate against the *expected* type, and a `have NAME := <that>`
+    with no annotation gives them an unconstrained metavariable instead --
+    which always fails, regardless of whether the underlying fact is true.
+    A non-flat/unparsed type just falls back to today's unascribed
+    (equally-broken-for-this-case) behavior instead of risking a bad emit."""
+    if not ty_toks: return None
+    if any(t in _TYPE_KEYWORDS for t in ty_toks): return None
+    head, *rest = ty_toks
+    if not (head[0].isalpha() or head[0] == "_"): return None
+    args=[subst.get(t, BARE.get(t, t)) for t in rest]
+    return head + ("".join(" "+a for a in args) if args else "")
+
+def _needs_expected_type(node):
+    """True if emit(node) will produce a `(by …)` tactic block (cong_r/colr
+    collapse) or a bare `⟨…⟩` anonymous constructor (conj/ex_intro) at its
+    OUTERMOST layer -- both need a known expected type to elaborate, so
+    `have NAME := <that>` with no ascription always fails to typecheck."""
+    n=_unparen(node)
+    if n[0]!="app": return False
+    h=n[1]
+    if h[0]!="var": return False
+    f=h[1]; args=n[2]
+    if f in COL_FAMILY or f in CONG_FAMILY: return True
+    if f=="conj" and len(args)>=2: return True
+    if f=="ex_intro" and len(args)>=3: return True
+    if f in TACTIC_HEADS: return True   # ex_ind/and_ind/or_ind/eq_ind_r/eq_ind at the outermost
+    return False                        # layer also collapse to a nested (by ...) block (see emit()'s
+                                         # TACTIC_HEADS branch) whose final `exact <term>` needs a known
+                                         # expected type just like the conj/ex_intro/Col/Cong cases above --
+                                         # this was the missing case: a `have`d nested case-split ending in
+                                         # an anonymous constructor failed with "expected type could not be
+                                         # determined" because this function didn't recognize that shape.
+
+def _collapse_hides_real_lemma(node):
+    """True if node's subtree contains a call to a lemma OUTSIDE the pure
+    permutation/symmetry/transitivity closure that colr/cong_r's decision
+    procedures can re-derive on their own -- i.e. a call doing REAL geometric
+    work (e.g. l2_11, which derives a NEW Cong fact from Bet+Cong hypotheses,
+    not just recombines already-known ones). Collapsing such a subtree to a
+    bare `(by colr)`/`(by cong_r)` throws away exactly the derivation the
+    decision procedure can't reconstruct -- confirmed live, 2026-07-15:
+    `cong_right_commutativity (l2_11 ...)` collapsed to `(by cong_r)`, and
+    the kernel's own `decide` proved that specific congruence FALSE for the
+    reflective procedure's closure (not merely unproven) because it needs
+    l2_11's Bet+Cong reasoning, not algebraic recombination of Cong facts
+    already in context. `choose_variant` succeeding is used as the "is this
+    a real, ported lemma" test -- cheap and already the source of truth the
+    normal (non-collapsed) emit path relies on for exactly these calls."""
+    node = _unparen(node)
+    if node[0] == "app":
+        head, args = node[1], node[2]
+        if head[0] == "var":
+            f = head[1]
+            if (f not in COL_FAMILY and f not in CONG_FAMILY and f not in PRIM
+                    and f not in NAME_MAP and f not in ALLOW_AXIOMS
+                    and f not in ("conj", "ex_intro", "or_introl", "or_intror",
+                                  "proj1", "proj2")
+                    and choose_variant(f, len(args)) is not None):
+                return True
+        return _collapse_hides_real_lemma(head) or any(_collapse_hides_real_lemma(a) for a in args)
+    if node[0] == "let":
+        return _collapse_hides_real_lemma(node[2]) or _collapse_hides_real_lemma(node[3])
+    if node[0] == "fun":
+        return _collapse_hides_real_lemma(node[2])
+    return False
+
+
 def emit(node, subst, notes):
     k=node[0]
     if k=="var":
@@ -316,8 +407,12 @@ def emit(node, subst, notes):
     if k=="paren":
         return "(" + emit(node[1], subst, notes) + ")"
     if k=="let":
-        _,name,val,body=node
-        return f"(let {name} := {emit(val,subst,notes)}; {emit(body,subst,notes)})"
+        _,name,val,body,ty=node
+        v=emit(val,subst,notes)
+        if _needs_expected_type(val):
+            asc=_simple_type_str(ty,subst)
+            if asc: name=f"{name} : {asc}"
+        return f"(let {name} := {v}; {emit(body,subst,notes)})"
     if k=="fun":                                     # S2: lambda in term position
         _,bs,bd=node                                 # e.g. negation proof `fun H0 => H (…)`
         ns=dict(subst)
@@ -347,10 +442,14 @@ def emit(node, subst, notes):
                 return core + (" " + " ".join(emit(a,subst,notes) for a in rest) if rest else "")
             if f in ("proj1","proj2") and args:          # And-projection: proj1 … H -> (H).1
                 return "(" + emit(args[-1],subst,notes) + ")." + ("1" if f=="proj1" else "2")
-            if f in COL_FAMILY:                 # Col/Cong closure family -> the reflective
+            if f in COL_FAMILY and not _collapse_hides_real_lemma(node):
                 return "(by colr)"              # tactic re-derives it from context; args unneeded
-            if f in CONG_FAMILY:
+            if f in CONG_FAMILY and not _collapse_hides_real_lemma(node):
                 return "(by cong_r)"
+            # else: a REAL lemma (e.g. l2_11) is nested inside this permutation/
+            # commutativity wrapper -- colr/cong_r can't reconstruct that derivation,
+            # so fall through to the normal named-lemma path below instead of
+            # discarding it (see _collapse_hides_real_lemma's docstring).
             if f in PRIM:                       # S3: drop leading implicit args by arity
                 lean,k=PRIM[f]
                 kept = args[-k:] if (k and len(args)>=k) else ([] if k==0 else args)
@@ -432,8 +531,12 @@ def emit_tactic(node, subst, notes, ind=1):
         for b in node[1]: ns.pop(b, None)                #  the `fun H => match H …` body of an eq_ind rewrite)
         return [f"{pad}intro {' '.join(node[1])}"] + emit_tactic(node[2], ns, notes, ind)
     if node[0]=="let":                                   # let H := e in body -> have H := e
-        _,name,val,body=node
-        return [f"{pad}have {name} := {emit(val,subst,notes)}"] + emit_tactic(body,subst,notes,ind)
+        _,name,val,body,ty=node
+        v=emit(val,subst,notes)
+        if _needs_expected_type(val):
+            asc=_simple_type_str(ty,subst)
+            if asc: name=f"{name} : {asc}"
+        return [f"{pad}have {name} := {v}"] + emit_tactic(body,subst,notes,ind)
     if node[0]=="app" and _unparen(node[1])[0]=="fun" and 1<=len(node[2])<=len(_unparen(node[1])[1]):
         fn=_unparen(node[1]); args=node[2]                # beta-redex (fun x y.. => body) a b.. (N args)
         if len(args)==len(fn[1]):
@@ -450,7 +553,14 @@ def emit_tactic(node, subst, notes, ind=1):
             body=prf[2]
         else:
             body=prf
-        return [f"{pad}subst {eq_s}"] + emit_tactic(body,ns,notes,ind)
+        # `subst` unconditionally eliminates the RHS variable of the equality when
+        # both sides are eligible (confirmed empirically) -- for InAngle's recurring
+        # `X = B` witness-disjunction shape (fresh witness on the left, an outer/
+        # important binder on the right), that silently eliminates the WRONG side,
+        # breaking every later reference to the outer binder ("unknown identifier").
+        # `rw [...] at *` rewrites occurrences both ways without eliminating either
+        # variable's name, sidestepping the direction question entirely.
+        return [f"{pad}rw [{eq_s}] at *"] + emit_tactic(body,ns,notes,ind)
     if node[0]=="app" and node[1][0]=="var" and node[1][1]=="eq_ind" and len(node[2])>=5:
         args=node[2]                                      # [x, motive, px, y, eq, *rest] (forward rewrite)
         eq_s=emit(args[4],subst,notes)                    # the equality hyp `x = y`
@@ -461,7 +571,7 @@ def emit_tactic(node, subst, notes, ind=1):
             body=prf[2]
         else:
             body=prf
-        return [f"{pad}subst {eq_s}"] + emit_tactic(body,ns,notes,ind)
+        return [f"{pad}rw [{eq_s}] at *"] + emit_tactic(body,ns,notes,ind)  # see eq_ind_r case above
     if node[0]=="app" and node[1][0]=="var" and node[1][1] in ELIMS:
         f=node[1][1]; args=node[2]; scrut=emit(args[-1],subst,notes)
         if f in ("ex_ind","and_ind"):

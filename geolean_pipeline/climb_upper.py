@@ -6,10 +6,15 @@ as a sibling to `climb.py` (which does the same job for Ch02..Ch10).
 Per chapter, in dependency order:
   1. DETERMINISTIC pass: oracle (Show Proof) + translit.py transliterates
      every `:= sorry` hole into a real Lean proof attempt. No LLM, no cost.
-  2. REPAIR LOOP: fold attempts into the chapter file, `lake build`, demote
-     any lemma whose body doesn't compile back to a tracked `:= sorry`,
-     repeat until the file is error-free (bounded, with an explicit
-     non-convergence report instead of silently giving up).
+  2. REPAIR LOOP: fold attempts into the chapter file (in small batches --
+     `BATCH_SIZE`), `lake build`, and on error re-verify each flagged name in
+     its OWN isolated scratch file (`isolate_verify`/`triage_bad`) before
+     demoting it back to a tracked `:= sorry` -- Lean's error recovery can
+     emit spurious diagnostics on unrelated declarations after a genuinely
+     broken one, and demoting on that naive line-bisection alone silently
+     wipes correct proofs (see `fold_and_verify`'s docstring). Repeat until
+     the file is error-free (bounded, with an explicit non-convergence
+     report instead of silently giving up).
   3. KERNEL GATE: `lake env lean` + `#print axioms` classifies every
      attempted lemma as clean (no sorryAx) or tainted (compiles, but
      depends on a hole) — never trust "compiles" alone.
@@ -28,9 +33,10 @@ Usage:
   python geolean_pipeline/climb_upper.py Ch11             # deterministic only, one chapter
   python geolean_pipeline/climb_upper.py Ch11 llm         # + LLM on the deterministic residue
   python geolean_pipeline/climb_upper.py --resume         # skip chapters already in the ledger
+  python geolean_pipeline/climb_upper.py Ch11 --no-isolate  # A/B: old unsafe demote-on-faith path
 """
 from __future__ import annotations
-import os, sys, re, json, subprocess, time
+import os, sys, re, json, subprocess, time, glob
 
 REPO = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
@@ -158,11 +164,24 @@ def parse_all_blocks(lean_path: str) -> dict[str, str]:
     `theorem name_c :` in the file. Used so write_chapter can carry already-
     solved entries forward VERBATIM: it regenerates the whole file from
     scratch every call, so anything not explicitly re-supplied is lost --
-    this is what silently dropped 31 already-solved theorems on 2026-07-10."""
+    this is what silently dropped 31 already-solved theorems on 2026-07-10.
+
+    Must also split on `^#print axioms` (matching demote()'s boundary set),
+    not just `^theorem ... :` -- otherwise the LAST theorem in the file has
+    no following boundary until EOF, so its captured block silently swallows
+    the entire trailing print-axioms epilogue and the file's real `end`
+    statement. If that block later gets cached into `preserved` (name was
+    transiently clean/tainted at the time) and outlives a subsequent
+    demote() of that same name (demote rewrites the file on disk but never
+    invalidates this already-cached dict entry), the next write_chapter call
+    re-emits the embedded epilogue+end in the middle of the file, on top of
+    write_chapter's own fresh one -- a dangling second `end` with no matching
+    scope, breaking the whole module's build. Confirmed root cause of the
+    double-epilogue corruption in Ch11.lean, 2026-07-14."""
     if not os.path.exists(lean_path):
         return {}
     text = open(lean_path).read()
-    blocks = re.split(r"(?=^theorem \w+_c :)", text, flags=re.M)
+    blocks = re.split(r"(?=^theorem \w+_c :)|(?=^#print axioms)", text, flags=re.M)
     out = {}
     for b in blocks:
         m = re.match(r"theorem (\w+)_c :", b)
@@ -171,7 +190,8 @@ def parse_all_blocks(lean_path: str) -> dict[str, str]:
     return out
 
 
-def write_chapter(out_path, prev_lean, tier, coq_names, stub_blocks, bodies, preserved, ambient=""):
+def write_chapter(out_path, prev_lean, tier, coq_names, stub_blocks, bodies, preserved, ambient="",
+                   extra_imports=()):
     """coq_names: full chapter name list in original file order (drives
     output order -- must match so within-chapter forward/backward refs still
     resolve top-to-bottom like Lean requires). preserved: {name: raw block
@@ -179,8 +199,17 @@ def write_chapter(out_path, prev_lean, tier, coq_names, stub_blocks, bodies, pre
     call -- never silently dropped, unlike a plain `names`-only regenerate.
     ambient: Section-level `variable`/`def` lines (see ambient_prelude) that
     must be re-emitted every time -- dropping them silently breaks every
-    later theorem that mentions an ambient point like Ch14+'s O/E/E'."""
-    out = [f"import GeocoqTranslate.Tarski_dev.{prev_lean}", "",
+    later theorem that mentions an ambient point like Ch14+'s O/E/E'.
+    extra_imports: bare module names (no `import ` prefix) the file needs
+    beyond the single `prev_lean` one this function always writes -- e.g.
+    `GeocoqTranslate.Tarski_dev.TarskiFinish`, needed for `Tfinish`/`colr`/
+    `cong_r`. climb_chapter discovers these once from the file's CURRENT
+    content and threads them through here so a regenerate never silently
+    drops them (this is exactly what broke every Tfinish-using theorem in
+    Ch11 the first time this ran without the fix -- see 2026-07-14 incident)."""
+    out = [f"import GeocoqTranslate.Tarski_dev.{prev_lean}"]
+    out += [f"import {imp}" for imp in extra_imports]
+    out += ["",
            "namespace GeocoqTranslate.Tarski.Base",
            "open Tarski_neutral_dimensionless",
            "open Tarski_neutral_dimensionless_with_decidable_point_equality", "",
@@ -201,17 +230,57 @@ def write_chapter(out_path, prev_lean, tier, coq_names, stub_blocks, bodies, pre
         bnames = " ".join(f"b{i}" for i in range(nb))
         if b.startswith("by\n"):
             out.append(f"theorem {n}_c :\n    {stmt} := by")
-            if nb:
+            rest = b[3:]
+            # Mirror verify_one's guard: an LLM tactic-mode proof asked to write its OWN
+            # `intro` (UNBOUND_RULE, meaningful names) already binds everything -- prepending
+            # another synthesized `intro b0 b1 ..` unconditionally here (as this used to do)
+            # double-introduces and Lean's introN rejects it with "no additional binders to
+            # introduce", silently demoting an already verify_one-CONFIRMED-clean proof back
+            # to sorry on the real-file fold. det_attempt's own bodies never hit this (they're
+            # generated using the b0/b1/.. names this line supplies, never their own intro),
+            # which is why this asymmetry was invisible before the LLM tier existed.
+            if nb and not re.match(r"\s*intro\b", rest):
                 out.append(f"  intro {bnames}")
-            out.append(b[3:])
+            out.append(rest)
             out.append("")
         else:
             out.append(f"theorem {n}_c :\n    {stmt} :=")
-            out.append(f"  fun {bnames} =>\n  {b}\n" if nb else f"  {b}\n")
+            # Same double-binder bug as the tactic-mode branch above, mirror image: an LLM
+            # term-mode proof asked to self-bind (UNBOUND_RULE) already opens with its own
+            # `fun A1 A2 .. =>`; unconditionally wrapping another `fun b0 b1 .. =>` around it
+            # (as this used to do) changes the term's type from `T1 -> .. -> Concl` to
+            # `T1 -> .. -> (T1 -> .. -> Concl)` -- a real arity/type mismatch, not a cosmetic
+            # issue -- silently demoting an already verify_one-CONFIRMED-clean proof back to
+            # sorry on the real-file fold (confirmed live: inter__npar clean in the ledger
+            # twice, still `sorry` in Ch12b.lean both times, 2026-07-14). det_attempt's bodies
+            # never hit this for the same reason as the tactic-mode case: they're built with
+            # the b0/b1/.. names this line supplies, never their own leading `fun`.
+            if nb and not re.match(r"\s*fun\b", b):
+                out.append(f"  fun {bnames} =>\n  {b}\n")
+            else:
+                out.append(f"  {b}\n")
     for n in all_names:
         out.append(f"#print axioms GeocoqTranslate.Tarski.Base.{n}_c")
     out.append("end GeocoqTranslate.Tarski.Base")
     open(out_path, "w").write("\n".join(out))
+
+
+def _resolve_coq_name(lean_name: str, coq_names: list[str]) -> str:
+    """Coq source names can use GeoCoq's `P__Q` double-underscore convention
+    (e.g. `inter__npar`); the Lean stub generator collapses that to a single
+    `_` (`inter_npar_c`). run_proof/oracle calls need the RAW Coq name or they
+    raise "lemma not found" -- silently and PERMANENTLY blocking both det_attempt
+    and the LLM tier for every such lemma, no matter how many sweep rounds run
+    (confirmed live 2026-07-15: `inter_npar_c` never closed across 3+ full Ch12b
+    passes for exactly this reason -- every attempt's exception was swallowed by
+    `_one`'s broad `except Exception: body = None`). Falls back to lean_name
+    itself when no double-underscore variant exists (the common case)."""
+    if lean_name in coq_names:
+        return lean_name
+    for cn in coq_names:
+        if cn.replace("__", "_") == lean_name:
+            return cn
+    return lean_name
 
 
 def _module_of(out_path: str) -> str:
@@ -299,18 +368,116 @@ def kernel_check(out_path: str, names: list[str]) -> dict[str, str]:
     return ax
 
 
-def fold_and_verify(lean_path, prev_lean, tier, coq_names, stub_blocks, bodies, preserved, ambient=""):
+def _isolate_path(lean_path: str, name: str | None = None) -> str:
+    """name=None: the legacy single shared scratch path (still used by the
+    two best-effort startup/shutdown cleanup calls). name=<candidate>: a
+    PER-CANDIDATE path -- required for triage_bad's isolate_verify calls to
+    run concurrently (ThreadPoolExecutor); the old single shared path meant
+    two candidates isolated at once would race to write/build the SAME
+    file, corrupting both checks."""
+    base = lean_path[:-len(".lean")] + "__isolate"
+    return f"{base}_{name}.lean" if name else f"{base}.lean"
+
+
+def isolate_verify(lean_path, prev_lean, tier, coq_names, stub_blocks,
+                    name, body, preserved, ambient="", extra_imports=()):
+    """Build a scratch file containing `name`'s real attempted `body` as the
+    ONLY non-inert, not-yet-verified content: every other declaration is
+    either already-`preserved` (real code, kernel-checked earlier) or an
+    inert `:= sorry` stub (write_chapter's existing entry-is-None fallback,
+    which also keeps every OTHER name's real statement type in scope so
+    same-chapter references -- forward or backward -- still resolve exactly
+    as they do in the shared batch file). A bare `sorry` has no tactic
+    content and cannot itself be the source of a parser-recovery cascade,
+    and `preserved` blocks were already proven correct in an earlier
+    isolated/batch check -- so `name` is the ONLY thing in this file that
+    can be at fault. Any build error anywhere in it is unambiguously `name`'s,
+    with no line-bisection/owner() guesswork needed and no way to blame an
+    innocent neighbor, because there are no other live candidates present to
+    misattribute onto.
+    Returns ("broken" | "clean" | "tainted" | "hole", axioms_str_or_None).
+    Propagates UpstreamBuildError untouched -- an isolated build can still be
+    blocked by a genuinely broken upstream file, and that must never be
+    misread as "this candidate is broken."
+    """
+    iso_path = _isolate_path(lean_path, name)
+    write_chapter(iso_path, prev_lean, tier, coq_names, stub_blocks, {name: body}, preserved, ambient,
+                  extra_imports)
+    try:
+        module = _module_of(iso_path)
+        r = subprocess.run(["lake", "build", module], cwd="lean/geocoq_translate",
+                            capture_output=True, text=True, timeout=900)
+        log = r.stdout + r.stderr
+        rel = iso_path.split(f"{LEAN}/")[-1]
+        own_prefix = f"GeocoqTranslate/Tarski_dev/{rel}"
+        all_err_lines = re.findall(r"^error: (GeocoqTranslate/Tarski_dev/[^:\s]+):(\d+):", log, re.M)
+        foreign = [f"{path}:{ln}" for path, ln in all_err_lines if path != own_prefix]
+        if foreign and r.returncode != 0:
+            raise UpstreamBuildError(sorted(set(foreign)))
+        if any(path == own_prefix for path, _ln in all_err_lines):
+            return "broken", None
+        ax = kernel_check(iso_path, [name])
+        if name not in ax:
+            return "hole", None
+        return ("tainted", ax[name]) if "sorryAx" in ax[name] else ("clean", ax[name])
+    finally:
+        try:
+            os.remove(iso_path)   # per-candidate scratch file -- unlike the old
+        except OSError:            # single shared path, these don't get overwritten
+            pass                    # by the next call, so must be cleaned up here
+
+
+def triage_bad(lean_path, prev_lean, tier, coq_names, stub_blocks,
+                bad, bodies, preserved, ambient="", extra_imports=()):
+    """Isolate every name in `bad` independently against the same `preserved`
+    baseline (order between them doesn't matter -- each check is self-
+    contained). Returns (broken, innocent): `innocent` names were cascade
+    victims of a genuinely broken batch-mate, not broken themselves, and
+    their real body in `bodies` is still correct and must not be discarded.
+
+    Parallelized: each isolate_verify call now writes/builds its OWN uniquely-
+    named scratch file (`_isolate_path(lean_path, name)`), so concurrent calls
+    for different names can no longer race on a shared file the way they
+    would have under the old single fixed `__isolate.lean` path -- this was
+    previously the single biggest observed wall-clock cost in a repair round
+    (one full-file `lake build` per flagged candidate, strictly sequential)."""
+    import concurrent.futures as cf
+    broken, innocent = set(), set()
+    to_check = [n for n in bad if bodies.get(n) is not None]
+    # names with body=None: already `sorry` / no real attempt -- can't be
+    # "broken" and nothing to rescue, skip without spending a build on them.
+    MAX_ISOLATE_WORKERS = 6
+
+    def _one(n):
+        status, _ax = isolate_verify(lean_path, prev_lean, tier, coq_names, stub_blocks,
+                                      n, bodies[n], preserved, ambient, extra_imports)
+        return n, status
+
+    with cf.ThreadPoolExecutor(max_workers=MAX_ISOLATE_WORKERS) as ex:
+        for n, status in ex.map(_one, to_check):
+            (broken if status == "broken" else innocent).add(n)
+    return broken, innocent
+
+
+def fold_and_verify(lean_path, prev_lean, tier, coq_names, stub_blocks, bodies, preserved,
+                     ambient="", isolate=True, extra_imports=()):
     """Write `bodies` into the chapter file (plus `preserved` carried forward
     verbatim), repair-loop to an error-free build, then kernel-gate over
     EVERY declaration in the file (preserved + freshly attempted), not just
     this round's subset -- otherwise already-solved entries silently drop
     out of the reported clean/tainted counts too.
-    Returns (clean, tainted, hole, rounds_or_None). `rounds is None` means
-    the repair loop did NOT converge — the file is left in its last
+    Returns (clean, tainted, hole, rounds_or_None, rescued). `rounds is None`
+    means the repair loop did NOT converge — the file is left in its last
     (still-erroring) state for manual follow-up rather than silently
-    reporting a wrong zero."""
-    write_chapter(lean_path, prev_lean, tier, coq_names, stub_blocks, bodies, preserved, ambient)
+    reporting a wrong zero. `rescued` counts names that build_errors' naive
+    line-bisection flagged as suspects but isolate_verify (when `isolate`
+    is True) confirmed were innocent cascade victims, not actually broken --
+    directly measuring how many the OLD (pre-isolation) code would have
+    wrongly wiped."""
+    write_chapter(lean_path, prev_lean, tier, coq_names, stub_blocks, bodies, preserved, ambient,
+                  extra_imports)
     all_names = [n for n in coq_names if n in preserved or n in stub_blocks]
+    rescued = 0
 
     for rounds in range(1, MAX_REPAIR_ROUNDS + 1):
         bad_raw = build_errors(lean_path, all_names)
@@ -326,17 +493,41 @@ def fold_and_verify(lean_path, prev_lean, tier, coq_names, stub_blocks, bodies, 
             clean = [n for n in all_names if n in ax and "sorryAx" not in ax[n]]
             tainted = [n for n in all_names if n in ax and "sorryAx" in ax[n]]
             hole = [n for n in all_names if n not in clean and n not in tainted]
-            return clean, tainted, hole, rounds
-        demote(lean_path, bad)
-        for n in bad:
+            return clean, tainted, hole, rounds, rescued
+        if not bad:
+            # Every flagged line lands on an already-`preserved` name and nothing new was
+            # attempted this round that could explain it (a stray/unattributable diagnostic,
+            # or two individually-fine preserved entries only conflicting together). There is
+            # no live candidate left to demote, so looping again changes nothing -- report the
+            # current state instead of burning rounds against a phantom.
+            ax = kernel_check(lean_path, all_names)
+            clean = [n for n in all_names if n in ax and "sorryAx" not in ax[n]]
+            tainted = [n for n in all_names if n in ax and "sorryAx" in ax[n]]
+            hole = [n for n in all_names if n not in clean and n not in tainted]
+            print(f"WARNING: unattributed build error(s) landed only on preserved name(s) "
+                  f"{sorted(bad_raw)} -- no live candidate to blame, stopping here", flush=True)
+            return clean, tainted, hole, rounds, rescued
+        if isolate:
+            broken, innocent = triage_bad(lean_path, prev_lean, tier, coq_names,
+                                           stub_blocks, bad, bodies, preserved, ambient, extra_imports)
+        else:
+            broken, innocent = bad, set()
+        rescued += len(innocent)
+        demote(lean_path, broken)
+        for n in broken:
             bodies[n] = None
-    return [], [], list(all_names), None
+    return [], [], list(all_names), None, rescued
 
 
 def climb_chapter(coq_stem: str, lean_stem: str, tier: str, prev_lean: str,
-                   use_llm: bool = False) -> dict:
+                   use_llm: bool = False, isolate: bool = True) -> dict:
     coq_path = f"{COQ_ROOT}/{coq_stem}.v"
     lean_path = f"{LEAN}/{lean_stem}.lean"
+    for stale in glob.glob(_isolate_path(lean_path, "*")) + [_isolate_path(lean_path)]:
+        if os.path.exists(stale):
+            os.remove(stale)   # best-effort: drop any stale scratch file(s) from a
+                                 # previous interrupted run -- per-candidate isolate
+                                 # files (glob) as well as the legacy shared one
     stub_blocks = parse_stub_blocks(lean_path)
     for name, stmt in stub_blocks.items():
         T.LOCAL_SIGS.setdefault(name, T.lean_binder_kinds(f"theorem {name}_c : {stmt}"))
@@ -347,12 +538,43 @@ def climb_chapter(coq_stem: str, lean_stem: str, tier: str, prev_lean: str,
     # process invocation; without this, each additional run only knows about the
     # current round's still-sorry stubs and progressively loses visibility into
     # everything a prior run already solved.
+    # Discover any hand-added `import ...` lines beyond the single `prev_lean` one
+    # write_chapter always writes (e.g. `import ...TarskiFinish`, needed for
+    # `Tfinish`/`colr`/`cong_r`) -- a regenerate must carry these forward verbatim,
+    # never silently drop them (same "preserved, not regenerated from a narrower
+    # assumption" principle as the theorem-body preservation below). Confirmed by a
+    # 2026-07-14 incident: without this, a det-only run on Ch11 silently dropped the
+    # TarskiFinish import and broke every Tfinish-using theorem in the file, including
+    # ones untouched by that round's attempts.
+    extra_imports = []
     if os.path.exists(lean_path):
-        for m in re.finditer(r"(?ms)^theorem (\w+)_c\s*:\s*\n?(.*?):=", open(lean_path).read()):
+        lean_text_now = open(lean_path).read()
+        expected_import = f"GeocoqTranslate.Tarski_dev.{prev_lean}"
+        for m in re.finditer(r"^import (\S+)\s*$", lean_text_now, re.M):
+            if m.group(1) != expected_import:
+                extra_imports.append(m.group(1))
+        for m in re.finditer(r"(?ms)^theorem (\w+)_c\s*:\s*\n?(.*?):=", lean_text_now):
             T.LOCAL_SIGS.setdefault(m.group(1), T.lean_binder_kinds(f"theorem {m.group(1)}_c : {m.group(2)}"))
 
     coq_text = open(coq_path).read()
-    coq_names = re.findall(r"^[ \t]*(?:Lemma|Theorem|Corollary|Proposition)[ \t]+(\w[\w']*)", coq_text, re.M)
+    # GeoCoq source names can use the `P__Q` double-underscore convention (e.g.
+    # `out2__conga`); the Lean stub generator collapses that to a single `_`
+    # (`out2_conga_c`). Every downstream set-membership check below (`n in
+    # stub_blocks`, `n in preserved`, `n in all_blocks`) compares against Lean-
+    # side (collapsed) keys -- if `coq_names` keeps the raw double-underscore
+    # form, any such lemma matches NEITHER `preserved` NOR `stub_blocks` and
+    # silently vanishes from `all_names` (write_chapter's own emission list),
+    # even though it's declared and (possibly) already solved. Confirmed live,
+    # 2026-07-15: this is exactly what dropped 15 already-declared Ch11
+    # theorems from the file entirely (not just reverted to sorry -- GONE),
+    # while stale call sites elsewhere (inside `preserved`, protected from
+    # blame/demotion by design) kept referencing them, breaking the whole
+    # chapter's build and cascading to block every later chapter in the import
+    # chain. `coq_names_raw` keeps the original form for oracle/run_proof
+    # calls (`_resolve_coq_name` reverses the collapse there); `coq_names`
+    # itself is now normalized so every match against Lean-side dicts works.
+    coq_names_raw = re.findall(r"^[ \t]*(?:Lemma|Theorem|Corollary|Proposition)[ \t]+(\w[\w']*)", coq_text, re.M)
+    coq_names = [n.replace("__", "_") for n in coq_names_raw]
     ambient = ambient_prelude(coq_path)
     all_blocks = parse_all_blocks(lean_path)
     names = [n for n in coq_names if n in stub_blocks]                 # freshly attempted this round
@@ -367,7 +589,7 @@ def climb_chapter(coq_stem: str, lean_stem: str, tier: str, prev_lean: str,
     # --- phase 1: deterministic transliteration attempts ---------------
     bodies: dict[str, tuple[str, int] | None] = {}
     for name in names:
-        bodies[name] = det_attempt(coq_path, name)
+        bodies[name] = det_attempt(coq_path, _resolve_coq_name(name, coq_names_raw))
         if bodies[name] is not None:
             T.LOCAL_SIGS[name] = T.lean_binder_kinds(f"theorem {name}_c : {stub_blocks[name]}")
 
@@ -375,21 +597,24 @@ def climb_chapter(coq_stem: str, lean_stem: str, tier: str, prev_lean: str,
     # Folding every fresh attempt into ONE giant build lets a single genuinely-broken
     # lemma's error cascade (Lean's error recovery emitting spurious diagnostics on
     # UNRELATED later declarations) get mis-attributed by build_errors' naive line-
-    # bisection to innocent neighbors, which then get wrongly demoted -- and since
-    # demote() never retries anything, they stay wrongly `sorry` for the rest of the
-    # run (confirmed empirically: 69/100 textually-clean Ch11 attempts were getting
-    # collaterally demoted this way, and reran deterministically the same every time).
-    # Processing `names` in small batches contains each bad lemma's blast radius to
-    # its own batch instead of the whole chapter.
+    # bisection to innocent neighbors. `BATCH_SIZE` alone only contains the blast
+    # radius to a 15-lemma window; it was NOT sufficient on its own (confirmed
+    # empirically: 69/100 textually-clean Ch11 attempts were getting collaterally
+    # demoted this way even with batching, and reran deterministically the same every
+    # time). `isolate=True` (the default) is what actually makes this safe now:
+    # fold_and_verify re-checks every flagged name in its own scratch file before
+    # trusting the blame (see isolate_verify/triage_bad), so BATCH_SIZE is purely a
+    # throughput knob at this point, not a correctness one.
     BATCH_SIZE = 15
     cur_preserved = dict(preserved)
-    batch_clean, batch_tainted, total_rounds = [], [], 0
+    batch_clean, batch_tainted, total_rounds, total_rescued = [], [], 0, 0
     for i in range(0, len(names), BATCH_SIZE):
         batch = names[i:i + BATCH_SIZE]
         batch_bodies = {n: bodies[n] for n in batch}
         try:
-            clean, tainted, hole, rounds = fold_and_verify(
-                lean_path, prev_lean, tier, coq_names, stub_blocks, batch_bodies, cur_preserved, ambient)
+            clean, tainted, hole, rounds, rescued = fold_and_verify(
+                lean_path, prev_lean, tier, coq_names, stub_blocks, batch_bodies, cur_preserved,
+                ambient, isolate=isolate, extra_imports=extra_imports)
         except UpstreamBuildError as e:
             rec = dict(chapter=lean_stem, phase="det", total=None, clean=0, tainted=0, hole=None,
                         error=f"BLOCKED by broken upstream file(s), not this chapter's own bug: "
@@ -398,6 +623,7 @@ def climb_chapter(coq_stem: str, lean_stem: str, tier: str, prev_lean: str,
             print(f"{lean_stem}: BLOCKED -- upstream file(s) broken, not attempted: "
                   f"{'; '.join(e.foreign_errors[:3])}", flush=True)
             return rec
+        total_rescued += rescued
         if rounds is None:
             print(f"{lean_stem}: batch {i // BATCH_SIZE + 1} did not converge in "
                   f"{MAX_REPAIR_ROUNDS} rounds -- its names stay sorry", flush=True)
@@ -410,26 +636,26 @@ def climb_chapter(coq_stem: str, lean_stem: str, tier: str, prev_lean: str,
         batch_clean += [n for n in clean if n in batch]
         batch_tainted += [n for n in tainted if n in batch]
 
-    # Final aggregate pass: every batch converged (build_errors == empty) on its own,
-    # but re-check the WHOLE file once more before trusting that -- cheap, and catches
-    # any cross-batch interaction the per-batch checks couldn't see.
-    all_names = [n for n in coq_names if n in cur_preserved or n in stub_blocks]
+    # Final aggregate pass: every batch converged on its own, but re-check the WHOLE
+    # file once more before trusting that -- cheap, and catches any cross-batch
+    # interaction the per-batch checks couldn't see. Routed through fold_and_verify
+    # (bodies={}, nothing new attempted) rather than a hand-rolled build_errors/demote
+    # pair, so this pass gets the SAME preserved-protection and isolation-on-ambiguity
+    # guarantees as every other round -- the old hand-rolled version here had NEITHER,
+    # making it actually less safe than the per-batch loop above it.
     try:
-        bad_final = build_errors(lean_path, all_names)
+        clean, tainted, hole, rounds, rescued = fold_and_verify(
+            lean_path, prev_lean, tier, coq_names, stub_blocks, {}, cur_preserved,
+            ambient, isolate=isolate, extra_imports=extra_imports)
     except UpstreamBuildError as e:
         rec = dict(chapter=lean_stem, phase="det", total=None, clean=0, tainted=0, hole=None,
                     error=f"BLOCKED by broken upstream file(s) during final pass: "
                           f"{'; '.join(e.foreign_errors[:5])}")
         _log(rec)
         return rec
-    if bad_final:
-        demote(lean_path, bad_final)
-    ax = kernel_check(lean_path, all_names)
-    clean = [n for n in all_names if n in ax and "sorryAx" not in ax[n]]
-    tainted = [n for n in all_names if n in ax and "sorryAx" in ax[n]]
-    hole = [n for n in all_names if n not in clean and n not in tainted]
+    total_rescued += rescued
     preserved = cur_preserved
-    rounds = total_rounds
+    rounds = total_rounds if rounds is not None else None
 
     for n in clean:
         T.LOCAL_SIGS[n] = T.lean_binder_kinds(f"theorem {n}_c : {stub_blocks[n]}") if n in stub_blocks \
@@ -438,34 +664,120 @@ def climb_chapter(coq_stem: str, lean_stem: str, tier: str, prev_lean: str,
     new_clean = len([n for n in clean if n in names])   # of what THIS round attempted, how many landed clean
     rec = dict(chapter=lean_stem, phase="det", total=len(clean) + len(tainted) + len(hole),
                clean=len(clean), tainted=len(tainted), hole=len(hole),
-               new_clean_this_round=new_clean, attempted_this_round=len(names), rounds=rounds)
+               new_clean_this_round=new_clean, attempted_this_round=len(names), rounds=rounds,
+               cascade_rescued=total_rescued, isolate=isolate)
     _log(rec)
     print(f"{lean_stem}: det clean={len(clean)}/{len(clean)+len(tainted)+len(hole)} "
           f"tainted={len(tainted)} hole={len(hole)} "
-          f"(+{new_clean} new this round, rounds={rounds})", flush=True)
+          f"(+{new_clean} new this round, rounds={rounds}, cascade_rescued={total_rescued})", flush=True)
 
     # --- phase 4: LLM on the residue (opt-in) ----------------------------
-    if use_llm and hole:
-        import llm_path as L
+    # `hole` (fold_and_verify's return) means "name absent from the axiom-check
+    # output entirely" -- on any successfully-converged build EVERY declared
+    # name gets axiom-checked, including untouched `:= sorry` ones (sorry
+    # itself prints `sorryAx`), so they land in `tainted`, never `hole`. Gating
+    # phase 4 on `hole` meant it essentially never fired through normal
+    # climb_chapter/main() usage -- confirmed empirically 2026-07-14: a det+llm
+    # run produced identical output to a det-only run, no "llm folded" line at
+    # all, on a chapter with 4 real remaining sorries. The correct residue is
+    # whatever is STILL a literal stub in the file right now.
+    still_sorry = set(parse_stub_blocks(lean_path))
+    if use_llm and still_sorry:
+        import llm_path as L   # `glob` is now a module-level import (see top of file) --
+        import concurrent.futures as cf   # a local `import glob` here would shadow it for
+                                            # this WHOLE function (Python makes any name
+                                            # imported/assigned anywhere in a function local
+                                            # to the entire function), breaking the earlier
+                                            # glob.glob(...) call in the cleanup block above.
+        # _sig_of()'s authoritative-signature lookup (the mechanism that stops the
+        # LLM guessing wrong `_c` arg order) only ever reads Climb_All.lean, a
+        # frozen Ch02-10 snapshot -- without this, every Ch11+ dependency falls
+        # through to a content-free placeholder hint. Cheap (once per chapter run,
+        # not per lemma); harmless to include Ch02-10 files too (last-write-wins,
+        # names are unique across the codebase).
+        L.seed_upper_sigs(sorted(glob.glob(f"{LEAN}/*.lean")))
+        climb_mod = _module_of(lean_path)          # this chapter's own module --
+                                                     # not the hardcoded Ch10 default,
+                                                     # so same-chapter/earlier-upper-
+                                                     # chapter deps are actually in scope
         llm_bodies = dict(bodies)
         attempted = 0
-        for n in hole:
-            attempted += 1
+
+        def _one(n):
+            # Ch11+ stubs are an UNBOUND Pi-type (`stub_blocks[n]` has no colon --
+            # parse_stub_blocks' regex consumes it before capture starts -- and
+            # nothing is pre-bound as a theorem parameter, unlike Ch02-10). Both
+            # llm_path's prompt and verify_one need the colon back and the real
+            # binder count (nb) -- same source det_attempt already uses (count the
+            # elaborated proof term's outer `fun` binders), computed independently
+            # here since det_attempt returned None for exactly these holes.
+            nb = 0
+            coq_name = _resolve_coq_name(n, coq_names_raw)   # coq_names itself is now
+                                                                # normalized (collapsed __ -> _,
+                                                                # see its definition above) so it
+                                                                # can no longer recover the raw
+                                                                # double-underscore form -- must
+                                                                # search coq_names_raw instead
             try:
-                body, _mode = L.llm_translate(coq_path, n, stub_blocks[n], [], retries=2)
+                pt = run_proof(coq_path, coq_name, default_q_paths())
+                ast = T.parse_term(T.P(T.tok(pt)), stop={None})
+                while ast[0] == "paren":
+                    ast = ast[1]
+                if ast[0] == "fun":
+                    nb = len(ast[1])
+            except Exception:
+                nb = 0
+            try:
+                body, _attempts, _mode = L.llm_translate(
+                    coq_path, coq_name, ":" + stub_blocks[n], [], retries=2,
+                    climb_mod=climb_mod, nb=nb, source="upper",
+                    tier_var=TIER_VARS[tier], try_julien_first=True)
             except Exception:
                 body = None
-            llm_bodies[n] = (body, 0) if body else None
+            return n, (body, nb) if body else None
 
-        clean2, tainted2, hole2, rounds2 = fold_and_verify(
-            lean_path, prev_lean, tier, coq_names, stub_blocks, llm_bodies, preserved, ambient)
+        # Parallelized: each call is subprocess-isolated end to end -- `call_claude`
+        # shells out per-call, `verify_one` writes a per-NAME scratch file
+        # (`LLMTry_{name}.lean`, never shared across names) and its own `lake env
+        # lean` subprocess, and `run_proof` opens its own `SerAPI`/sertop process
+        # per call (see geolean_oracle/src/oracle.py's `with SerAPI(...) as s:`).
+        # No file-level collision is possible between concurrent names. The one
+        # shared mutable state is `T.LOCAL_SIGS` (a plain dict); worst case under
+        # a race is a redundant/overwritten cache entry, never corruption -- the
+        # GIL keeps individual dict ops atomic. LLM round-trips dominate wall-
+        # clock (10-20s each per the pilot ledger), so this is the highest-
+        # leverage place to parallelize given real time pressure: sequential over
+        # a chapter's full hole-set could otherwise run for hours.
+        MAX_LLM_WORKERS = 6
+        with cf.ThreadPoolExecutor(max_workers=MAX_LLM_WORKERS) as ex:
+            for n, result in ex.map(_one, still_sorry):
+                attempted += 1
+                llm_bodies[n] = result
+
+        # try_julien_first=True (above) means accepted proofs may reference Tfinish/
+        # TfinishA -- only 3 of 15 upper chapters happen to already import those
+        # themselves, so guarantee them here too (dedup: write_chapter just emits
+        # whatever's in this list, a harmless repeat if the chapter already had one).
+        # TarskiConA imports Ch11 -- adding it to Ch11's OWN extra_imports is a genuine
+        # circular import (confirmed live: this exact bug crashed Ch11's build across
+        # an entire overnight sweep, 2026-07-15, before being caught the next morning).
+        # Safe for every OTHER upper chapter (Ch12+), which already transitively import
+        # Ch11 and so can't cycle back through it.
+        julien_extras = ["GeocoqTranslate.Tarski_dev.TarskiFinish"]
+        if lean_stem != "Ch11":
+            julien_extras.append("GeocoqTranslate.Tarski_dev.TarskiConA")
+        llm_extra_imports = list(dict.fromkeys(list(extra_imports) + julien_extras))
+        clean2, tainted2, hole2, rounds2, rescued2 = fold_and_verify(
+            lean_path, prev_lean, tier, coq_names, stub_blocks, llm_bodies, preserved,
+            ambient, isolate=isolate, extra_imports=llm_extra_imports)
         if rounds2 is not None:
             for n in clean2:
                 T.LOCAL_SIGS[n] = T.lean_binder_kinds(f"theorem {n}_c : {stub_blocks[n]}") if n in stub_blocks \
                     else T.LOCAL_SIGS.get(n)
             folded = len(clean2) - len(clean)
             rec2 = dict(chapter=lean_stem, phase="llm", attempted=attempted,
-                        folded=folded, total_clean=len(clean2), total=len(clean2)+len(tainted2)+len(hole2))
+                        folded=folded, total_clean=len(clean2), total=len(clean2)+len(tainted2)+len(hole2),
+                        cascade_rescued=rescued2, isolate=isolate)
             _log(rec2)
             print(f"{lean_stem}: llm folded {folded} more -> "
                   f"clean={len(clean2)}/{len(clean2)+len(tainted2)+len(hole2)}", flush=True)
@@ -474,6 +786,10 @@ def climb_chapter(coq_stem: str, lean_stem: str, tier: str, prev_lean: str,
                         error="post-LLM repair loop did not converge")
             _log(rec2)
 
+    for stale in glob.glob(_isolate_path(lean_path, "*")) + [_isolate_path(lean_path)]:
+        if os.path.exists(stale):
+            os.remove(stale)   # best-effort scratch-file cleanup (glob covers any
+                                 # per-candidate isolate files a crashed round left behind)
     return rec
 
 
@@ -483,6 +799,13 @@ def main():
     args = [a for a in args if a != "--resume"]
     use_llm = "llm" in args
     args = [a for a in args if a != "llm"]
+    # --no-isolate: disable per-lemma isolated re-verification of build_errors'
+    # blame before demoting (see isolate_verify/triage_bad) -- reverts to the old,
+    # faster-but-unsafe behavior. Only meant for A/B measurement of the fix, e.g.:
+    #   python climb_upper.py Ch11 --no-isolate   then   python climb_upper.py Ch11
+    # and diff the `clean`/`cascade_rescued` fields of the two logged ledger records.
+    no_isolate = "--no-isolate" in args
+    args = [a for a in args if a != "--no-isolate"]
     only = args[0] if args else None
 
     done = set()
@@ -504,7 +827,7 @@ def main():
             print(f"{lean_stem}: skipping (already in ledger)", flush=True)
             prev_lean = lean_stem
             continue
-        climb_chapter(coq_stem, lean_stem, tier, prev_lean, use_llm=use_llm)
+        climb_chapter(coq_stem, lean_stem, tier, prev_lean, use_llm=use_llm, isolate=not no_isolate)
         prev_lean = lean_stem
         if only:
             break

@@ -31,7 +31,28 @@ Two small files close gaps the original chapter boundaries left uncovered:
 | File | Lemmas | Status |
 |---|---:|---|
 | `CoplanarPermExtra.lean` | 17 | **All clean.** 11 `coplanar_perm_N` permutation facts + 4 coplanarity lemmas (`reflect__coplanar`, `inangle__coplanar`, ...) that GeoCoq's own chapter split never grouped into one file. |
-| `Ch10Line2Extra.lean` | 31 | **All currently `sorry`** (declared with correct signatures, file builds clean). Covers `Ch10_line_reflexivity_2.v`, a continuation of Ch10 that neither the base pipeline nor the upper-chapter stub generator had ever ported. Declaring these (even unproven) was enough to unblock 5 previously name-unresolved dependencies in Ch11 — see below. Proving them for real is future work. |
+| `Ch10Line2Extra.lean` | 31 | **1 clean, 2 tainted, 28 `sorry`.** Covers `Ch10_line_reflexivity_2.v`, a continuation of Ch10 that neither the base pipeline nor the upper-chapter stub generator had ever ported. Declaring these (even unproven) was enough to unblock 5 previously name-unresolved dependencies in Ch11 — see below. `ex_perp_cop` is fully proven; `l10_12` and `cop_not_par_same_side` have real, complete proofs but stay tainted until sibling `sorry`s in this same file (`l10_10`, `image_preserves_per`, `not_par_two_sides`, `cop_nos__ts`) are closed. The rest is future work. |
+
+**Two general transliterator bugs found and fixed while closing 3 of these** (both apply to every
+future chapter's deterministic pass, not just this file):
+1. `emit_tactic`'s `let`-case emitted `have NAME := (by cong_r)` / `(by colr)` / `⟨...⟩` with no type
+   ascription. Lean then elaborates the reflective tactic (or anonymous constructor) against an
+   *unconstrained* metavariable, which always fails regardless of whether the underlying fact is
+   true — this was the real "cong_r misfire" seen in `l10_12`. Fixed by capturing the Coq `let`'s
+   type annotation (`Show Proof` always prints it, `translit.py` previously discarded it) and
+   ascribing it whenever the emitted value collapses to a bare `(by ...)`/`⟨...⟩`
+   (`_capture_type_to`, `_simple_type_str`, `_needs_expected_type`).
+2. `col_trivial_1/2/3` (`Col A A B` / `Col A B B` / `Col A B A` — true for *any* two points, no
+   hypothesis needed) were in `COL_FAMILY`, so every use collapsed to `(by colr)`. But `colr` only
+   derives facts reachable from `Col`/`≠` hypotheses already in local context, and a genuinely
+   context-free trivial fact isn't always reachable that way — exactly what broke `ex_perp_cop`.
+   Removed them from `COL_FAMILY` so they resolve to the direct, unconditionally-valid
+   `col_trivial_N_c` lemma call instead — strictly safer, can never newly fail where the old
+   collapse used to succeed.
+
+Regression-checked with the project's `kernel_check` (`lake env lean`, not `lake build` — the latter
+under-reports on an incremental rebuild): Ch11 remains exactly 58/278 clean, unchanged, after both
+fixes.
 
 ## Ch11 — angles
 
