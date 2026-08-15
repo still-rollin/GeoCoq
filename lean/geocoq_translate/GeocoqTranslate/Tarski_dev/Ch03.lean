@@ -60,21 +60,21 @@ theorem between_exchange3_c (A B C D : Tpoint)
   subst H5
   exact H4
 
-theorem bet_neq12__neq_c (A B C : Tpoint) (h : Bet A B C) (hAB : A ≠ B) : A ≠ C := by
+theorem bet_neq12_neq_c (A B C : Tpoint) (h : Bet A B C) (hAB : A ≠ B) : A ≠ C := by
   intro Heq
   subst Heq
   exact hAB (between_identity A B h)
 
-theorem bet_neq21__neq_c (A B C : Tpoint) (h : Bet A B C) (hBA : B ≠ A) : A ≠ C :=
-  bet_neq12__neq h (Ne.symm hBA)
+theorem bet_neq21_neq_c (A B C : Tpoint) (h : Bet A B C) (hBA : B ≠ A) : A ≠ C :=
+  bet_neq12_neq h (Ne.symm hBA)
 
-theorem bet_neq23__neq_c (A B C : Tpoint) (h : Bet A B C) (hBC : B ≠ C) : A ≠ C := by
+theorem bet_neq23_neq_c (A B C : Tpoint) (h : Bet A B C) (hBC : B ≠ C) : A ≠ C := by
   intro Heq
   subst Heq
   exact hBC (Eq.symm (between_identity A B h))
 
-theorem bet_neq32__neq_c (A B C : Tpoint) (h : Bet A B C) (hCB : C ≠ B) : A ≠ C :=
-  bet_neq23__neq h (Ne.symm hCB)
+theorem bet_neq32_neq_c (A B C : Tpoint) (h : Bet A B C) (hCB : C ≠ B) : A ≠ C :=
+  bet_neq23_neq h (Ne.symm hCB)
 
 theorem not_bet_distincts_c (A B C : Tpoint) (h : ¬ Bet A B C) :
     A ≠ B ∧ B ≠ C := by
@@ -214,10 +214,10 @@ theorem BetSEq_c (A B C : Tpoint) :
 #print axioms GeocoqTranslate.Tarski.Base.between_equality_c
 #print axioms GeocoqTranslate.Tarski.Base.between_equality_2_c
 #print axioms GeocoqTranslate.Tarski.Base.between_exchange3_c
-#print axioms GeocoqTranslate.Tarski.Base.bet_neq12__neq_c
-#print axioms GeocoqTranslate.Tarski.Base.bet_neq21__neq_c
-#print axioms GeocoqTranslate.Tarski.Base.bet_neq23__neq_c
-#print axioms GeocoqTranslate.Tarski.Base.bet_neq32__neq_c
+#print axioms GeocoqTranslate.Tarski.Base.bet_neq12_neq_c
+#print axioms GeocoqTranslate.Tarski.Base.bet_neq21_neq_c
+#print axioms GeocoqTranslate.Tarski.Base.bet_neq23_neq_c
+#print axioms GeocoqTranslate.Tarski.Base.bet_neq32_neq_c
 #print axioms GeocoqTranslate.Tarski.Base.not_bet_distincts_c
 #print axioms GeocoqTranslate.Tarski.Base.between_inner_transitivity_c
 #print axioms GeocoqTranslate.Tarski.Base.outer_transitivity_between2_c

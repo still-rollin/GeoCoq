@@ -351,7 +351,7 @@ theorem l8_24 (A B P Q R T : Tpoint)
     (h₃ : Col A B T) (h₄ : Bet P T Q) (h₅ : Bet B R Q) (h₆ : Cong A P B R) :
     ∃ X, Midpoint X A B ∧ Midpoint X P R := sorry
 
-theorem col_per2__per (A B C P X : Tpoint)
+theorem col_per2_per (A B C P X : Tpoint)
     (hAB : A ≠ B) (hCol : Col A B C)
     (h₁ : Per A X P) (h₂ : Per B X P) : Per C X P := sorry
 

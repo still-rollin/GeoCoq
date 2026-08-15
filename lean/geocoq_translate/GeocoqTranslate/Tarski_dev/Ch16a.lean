@@ -35,7 +35,7 @@ theorem exists_grid_c :
   obtain ⟨_, H4⟩ := H3
   obtain ⟨H5, H6⟩ := H4
   obtain ⟨_, _⟩ := H6
-  have e0 := ex_per_cong_c x1 x x x3 x x1 (Ne.symm H5) H5 ((by colr)) (not_col_permutation_5_c x1 x3 x (not_col_permutation_1_c x x1 x3 H1))
+  have e0 := ex_per_cong_c x1 x x x3 x x1 (Ne.symm H5) H5 (col_trivial_2_c x1 x) (not_col_permutation_5_c x1 x3 x (not_col_permutation_1_c x x1 x3 H1))
   obtain ⟨x5, x6⟩ := e0
   obtain ⟨H7, H8⟩ := x6
   obtain ⟨H9, _⟩ := H8
@@ -48,14 +48,18 @@ theorem exists_grid_spec_c :
   obtain ⟨_, H2⟩ := H1
   obtain ⟨H3, H4⟩ := H2
   obtain ⟨_, _⟩ := H4
-  have e := ex_per_cong_c PB PA PA PC PA PB (Ne.symm H3) H3 ((by colr)) (not_col_permutation_5_c PB PC PA (not_col_permutation_1_c PA PB PC H))
+  have e := ex_per_cong_c PB PA PA PC PA PB (Ne.symm H3) H3 (col_trivial_2_c PB PA) (not_col_permutation_5_c PB PC PA (not_col_permutation_1_c PA PB PC H))
   obtain ⟨x, x0⟩ := e
   obtain ⟨H5, H6⟩ := x0
   obtain ⟨H7, _⟩ := H6
   exact ⟨PA, (⟨PB, (⟨x, (⟨H3, (⟨(le_anti_symmetry_c PA PB PA PB (le_reflexivity_c PA PB) (le_reflexivity_c PA PB)), (⟨(cong_3421_c x PA PA PB H7), (l8_2_c x PA PB H5)⟩)⟩)⟩)⟩)⟩)⟩
 theorem coord_exchange_axes_c :
-    ∀ (O E S U1 U2 P X Y : Tpoint), Cd O E S U1 U2 P X Y → Cd O E S U2 U1 P Y X := sorry
-
+    ∀ (O E S U1 U2 P X Y : Tpoint), Cd O E S U1 U2 P X Y → Cd O E S U2 U1 P Y X := by
+  intro b0 b1 b2 b3 b4 b5 b6 b7 b8
+  obtain ⟨x, x0⟩ := b8
+  obtain ⟨x1, x2⟩ := x0
+  obtain ⟨x3, x4⟩ := x2
+  exact ⟨(grid_exchange_axes_c b0 b1 b2 b3 b4 x), (⟨(all_coplanar_c b5 b2 b4 b3), (⟨x4, x3⟩)⟩)⟩
 theorem Cd_Col_c :
     ∀ (O E S U1 U2 P X Y : Tpoint), Cd O E S U1 U2 P X Y → Col O E X ∧ Col O E Y := by
   intro b0 b1 b2 b3 b4 b5 b6 b7 b8
@@ -78,13 +82,13 @@ theorem Cd_Col_c :
   · obtain ⟨H6, _⟩ := H5
     exact H6
   · obtain ⟨H6, H7⟩ := H5
-    subst H7
+    rw [H7] at *
     exact H6)) (cong_3_sym_c b0 b1 b6 b2 b3 x5 HCong1)), (l4_13_c b2 b4 x7 b0 b1 b7 ((by
   rcases x16 with H5 | H5
   · obtain ⟨H6, _⟩ := H5
     exact H6
   · obtain ⟨H6, H7⟩ := H5
-    subst H7
+    rw [H7] at *
     exact H6)) (cong_3_sym_c b0 b1 b7 b2 b4 x7 HCong2))⟩)) x14))) x10))) x4
 theorem exists_projp_c :
     ∀ (A B P : Tpoint), A ≠ B → ∃ (P' : Tpoint), Projp P P' A B := by
@@ -105,20 +109,55 @@ theorem exists_coord_c :
   · obtain ⟨H1, _⟩ := H0
     exact H1
   · obtain ⟨H1, H2⟩ := H0
-    subst H2
+    rw [H2] at *
     exact H1)
   have e0 := l4_14_c b2 b3 x b0 b1 HCol ((by cong_r))
   obtain ⟨x1, x2⟩ := e0
   exact ⟨x, (⟨x1, (⟨x0, (cong_3_sym_c b2 b3 x b0 b1 x1 x2)⟩)⟩)⟩
 theorem coordinates_of_point_c :
-    ∀ (O E S U1 U2 P : Tpoint), Cs O E S U1 U2 → ∃ (X : Tpoint), ∃ (Y : Tpoint), Cd O E S U1 U2 P X Y := sorry
-
+    ∀ (O E S U1 U2 P : Tpoint), Cs O E S U1 U2 → ∃ (X : Tpoint), ∃ (Y : Tpoint), Cd O E S U1 U2 P X Y := by
+  intro b0 b1 b2 b3 b4 b5 b6
+  have H := b6
+  obtain ⟨x, x0⟩ := H
+  obtain ⟨x1, x2⟩ := x0
+  obtain ⟨x3, x4⟩ := x2
+  have HSU1 := (let H2 := cong_diff x x3; (let H3 := cong_diff x x1; H3))
+  have HSU2 := (let H2 := cong_diff x x3; H2)
+  have e := exists_coord_c b0 b1 b2 b3 b5 HSU1 x1
+  obtain ⟨x5, x6⟩ := e
+  obtain ⟨x7, x8⟩ := x6
+  have e0 := exists_coord_c b0 b1 b2 b4 b5 HSU2 x3
+  obtain ⟨x9, x10⟩ := e0
+  obtain ⟨x11, x12⟩ := x10
+  exact ⟨x7, (⟨x11, (⟨b6, (⟨(all_coplanar_c b5 b2 b3 b4), (⟨(⟨x5, x8⟩), (⟨x9, x12⟩)⟩)⟩)⟩)⟩)⟩
 theorem point_of_coordinates_origin_c :
-    ∀ (O E S U1 U2 : Tpoint), Cs O E S U1 U2 → Cd O E S U1 U2 S O O := sorry
-
+    ∀ (O E S U1 U2 : Tpoint), Cs O E S U1 U2 → Cd O E S U1 U2 S O O := by
+  intro b0 b1 b2 b3 b4 b5
+  exact ⟨b5, (⟨(all_coplanar_c b2 b2 b3 b4), (by
+  obtain ⟨x, x0⟩ := b5
+  obtain ⟨x1, x2⟩ := x0
+  obtain ⟨x3, x4⟩ := x2
+  have H := cong_diff x x3
+  have H2 := cong_diff x x1
+  exact ⟨(⟨b2, (⟨(⟨H2, (Or.inr (⟨(col_trivial_3_c b2 b3), rfl⟩))⟩), (⟨x1, (⟨(cong_trivial_identity b0 b2), ((by cong_r))⟩)⟩)⟩)⟩), (⟨b2, (⟨(⟨H, (Or.inr (⟨(col_trivial_3_c b2 b4), rfl⟩))⟩), (⟨x3, (⟨(cong_trivial_identity b0 b2), ((by cong_r))⟩)⟩)⟩)⟩)⟩)⟩)⟩
 theorem point_of_coordinates_on_an_axis_c :
-    ∀ (O E S U1 U2 X : Tpoint), Cs O E S U1 U2 → Col O E X → O ≠ X → ∃ (P : Tpoint), Cd O E S U1 U2 P X O := sorry
-
+    ∀ (O E S U1 U2 X : Tpoint), Cs O E S U1 U2 → Col O E X → O ≠ X → ∃ (P : Tpoint), Cd O E S U1 U2 P X O := by
+  intro b0 b1 b2 b3 b4 b5 b6 b7 b8
+  have H := b6
+  obtain ⟨x, x0⟩ := H
+  obtain ⟨x1, x2⟩ := x0
+  obtain ⟨x3, x4⟩ := x2
+  have e := l4_14_c b0 b1 b5 b2 b3 b7 x1
+  obtain ⟨x5, x6⟩ := e
+  exact ⟨x5, (⟨b6, (by
+  obtain ⟨x7, x8⟩ := b6
+  obtain ⟨x9, x10⟩ := x8
+  obtain ⟨x11, x12⟩ := x10
+  exact ⟨(all_coplanar_c x5 b2 b3 b4), ((let H4 := cong_diff x x3; (let H5 := cong_diff x x1; (let H6 := per_distinct_c b3 b2 b4 x12 (swap_diff_c b2 b3 H5); ⟨(⟨x5, (⟨(⟨H5, (Or.inr (⟨(l4_13_c b0 b1 b5 b2 b3 x5 b7 x6), rfl⟩))⟩), x6⟩)⟩), (⟨b2, (⟨(⟨H4, (Or.inl (⟨(col_trivial_3_c b2 b4), ((let HPer0 := per_perp_c b3 b2 b4 (Ne.symm H5) H4 x12; perp_col0_c b2 b3 b2 b4 x5 b2 (perp_comm_c b3 b2 b4 b2 (perp_comm_c b2 b3 b2 b4 (perp_comm_c b3 b2 b4 b2 (perp_right_comm_c b3 b2 b2 b4 HPer0)))) ((by
+  obtain ⟨_, H7⟩ := x6
+  obtain ⟨H8, _⟩ := H7
+  have H9 := cong_diff b8 H8
+  exact Ne.symm H9)) (l4_13_c b0 b1 b5 b2 b3 x5 b7 x6) (col_trivial_3_c b2 b3)))⟩))⟩), (⟨x3, (⟨(cong_trivial_identity b0 b2), ((by cong_r))⟩)⟩)⟩)⟩)⟩))))⟩)⟩)⟩
 theorem point_of_coordinates_c :
     ∀ (O E S U1 U2 X Y : Tpoint), Cs O E S U1 U2 → Col O E X → Col O E Y → ∃ (P : Tpoint), Cd O E S U1 U2 P X Y := sorry
 
@@ -154,29 +193,8 @@ theorem length_eq_or_opp_c :
   exact x0))) b8)
   · exact Or.inl (l16_9_1_c b0 b1 b2 b3 b4 b5 b6 HColA HColB (Or.inl b7) HLe b8)
 theorem l16_9_2_c :
-    ∀ (O E E' X Y XY XMY XY2 XMY2 : Tpoint), Col O E X → Col O E Y → Is_length O E E' X Y XY → Diff O E E' X Y XMY → Prod O E E' XY XY XY2 → Prod O E E' XMY XMY XMY2 → XY2 = XMY2 := by
-  intro b0 b1 b2 b3 b4 b5 b6 b7 b8 b9 b10 b11 b12 b13 b14
-  have HNC := (let HXMY0 := diff_ar2_c b0 b1 b2 b3 b4 b6 b12; (by
-  obtain ⟨H, H0⟩ := HXMY0
-  obtain ⟨_, H1⟩ := H0
-  obtain ⟨_, _⟩ := H1
-  exact H))
-  have H := b11
-  rcases H with HXY' | HXY'
-  · rcases (length_eq_or_opp_c b0 b1 b2 b3 b4 b5 b6 HXY' b12) with HOpp1 | HOpp1
-    · subst HOpp1
-      exact prod_uniqueness_c b5 b5 b7 b8 b13 b14
-    · exact prod_uniqueness_c b5 b5 b7 b8 b13 ((let e := opp_exists_c b1 ((by colr)); (by
-  obtain ⟨x, x0⟩ := e
-  exact prod_assoc1_c b1 b2 b6 x b5 b5 b6 b8 (opp_prod_c b0 b1 b2 x b6 b5 x0 (opp_comm_c b5 b6 HOpp1)) (prod_comm_c b0 b1 b2 b5 x b6 (opp_prod_c b0 b1 b2 x b5 b6 x0 HOpp1)) b14)))
-  · obtain ⟨H0, _⟩ := HXY'
-    have H1 := not_col_distincts_c b0 b1 b2 HNC
-    have H2 := H1
-    obtain ⟨_, H3⟩ := H2
-    obtain ⟨H4, H5⟩ := H3
-    obtain ⟨_, _⟩ := H5
-    have H6 := H4 H0
-    exact (H6).elim
+    ∀ (O E E' X Y XY XMY XY2 XMY2 : Tpoint), Col O E X → Col O E Y → Is_length O E E' X Y XY → Diff O E E' X Y XMY → Prod O E E' XY XY XY2 → Prod O E E' XMY XMY XMY2 → XY2 = XMY2 := sorry
+
 theorem cong_3_2_cong_4_c :
     ∀ (O E I J S U X Y : Tpoint), O ≠ E → Col O E I → Col O E J → Cong_3 O E I S U X → Cong_3 O E J S U Y → Cong_4 O E I J S U X Y := by
   intro b0 b1 b2 b3 b4 b5 b6 b7 b8 b9 b10 b11 b12

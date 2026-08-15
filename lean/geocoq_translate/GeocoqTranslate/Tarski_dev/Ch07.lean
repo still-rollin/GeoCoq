@@ -138,7 +138,7 @@ theorem l7_13_c (A P Q P' Q' : Tpoint)
     have hCongXX'Y'Y : Cong X X' Y' Y :=
       l2_11_c X A X' Y' A Y hBetXAX' (between_symmetry_c Y A Y' hBetYAY')
         hCongXAY'A hCongAX'AY
-    have hAX : A ≠ X := bet_neq12__neq_c A P X hBetAPX (Ne.symm hPA)
+    have hAX : A ≠ X := bet_neq12_neq_c A P X hBetAPX (Ne.symm hPA)
     have hFSC : FSC X A X' Y' Y' A Y X :=
       ⟨bet_col_c X A X' hBetXAX', ⟨hCongXAY'A, hCongXX'Y'Y, hCongAX'AY⟩,
        cong_pseudo_reflexivity X Y',
@@ -548,46 +548,46 @@ theorem cong_cong_half_2_c (A M B A' M' B' : Tpoint)
     (h₃ : Cong A B A' B') : Cong B M B' M' :=
   cong_cong_half_1_c B M A B' M' A' (l7_2_c M A B h₁) (l7_2_c M' A' B' h₂) (cong_symmetry (cong_symmetry (cong_commutativity h₃)))
 
-theorem cong_mid2__cong_c (A M B A' M' B' : Tpoint)
+theorem cong_mid2_cong_c (A M B A' M' B' : Tpoint)
     (h₁ : Midpoint M A B) (h₂ : Midpoint M' A' B')
     (h₃ : Cong A M A' M') : Cong A B A' B' := by
   obtain ⟨x, x0⟩ := h₁
   obtain ⟨x1, x2⟩ := h₂
   exact l2_11 x x1 h₃ (cong_transitivity (cong_transitivity (cong_symmetry x0) h₃) x2)
 
-theorem mid__lt_c (A M B : Tpoint) (hAB : A ≠ B) (h : Midpoint M A B) :
+theorem mid_lt_c (A M B : Tpoint) (hAB : A ≠ B) (h : Midpoint M A B) :
     Lt A M A B := by
   have a := midpoint_distinct_1_c M A B hAB h
   obtain ⟨x, x0⟩ := a
   obtain ⟨x1, x2⟩ := h
   exact ⟨(⟨M, (⟨x1, (cong_reflexivity A M)⟩)⟩), ((fun H1 => x0 (between_cong_c A B M x1 H1)))⟩
 
-theorem le_mid2__le13_c (A M B A' M' B' : Tpoint)
+theorem le_mid2_le13_c (A M B A' M' B' : Tpoint)
     (h₁ : Midpoint M A B) (h₂ : Midpoint M' A' B')
     (h₃ : Le A M A' M') : Le A B A' B' := by
   obtain ⟨x, x0⟩ := h₁
   obtain ⟨x1, x2⟩ := h₂
-  exact bet2_le2__le1346_c A M B A' M' B' x x1 h₃ (l5_6_c A M A' M' M B M' B' h₃ x0 x2)
+  exact bet2_le2_le1346_c A M B A' M' B' x x1 h₃ (l5_6_c A M A' M' M B M' B' h₃ x0 x2)
 
-theorem le_mid2__le12_c (A M B A' M' B' : Tpoint)
+theorem le_mid2_le12_c (A M B A' M' B' : Tpoint)
     (h₁ : Midpoint M A B) (h₂ : Midpoint M' A' B')
     (h₃ : Le A B A' B') : Le A M A' M' := by
   rcases (le_cases_c A M A' M') with H | H
   · exact H
-  · have H0 := le_mid2__le13_c A' M' B' A M B h₂ h₁ H
-    exact cong__le_c A M A' M' (cong_cong_half_1_c A M B A' M' B' h₁ h₂ (le_anti_symmetry_c A B A' B' h₃ H0))
+  · have H0 := le_mid2_le13_c A' M' B' A M B h₂ h₁ H
+    exact cong_le_c A M A' M' (cong_cong_half_1_c A M B A' M' B' h₁ h₂ (le_anti_symmetry_c A B A' B' h₃ H0))
 
-theorem lt_mid2__lt13_c (A M B A' M' B' : Tpoint)
+theorem lt_mid2_lt13_c (A M B A' M' B' : Tpoint)
     (h₁ : Midpoint M A B) (h₂ : Midpoint M' A' B')
     (h₃ : Lt A M A' M') : Lt A B A' B' := by
   obtain ⟨x, x0⟩ := h₃
-  exact ⟨(le_mid2__le13_c A M B A' M' B' h₁ h₂ x), ((fun H0 => x0 (cong_cong_half_1_c A M B A' M' B' h₁ h₂ H0)))⟩
+  exact ⟨(le_mid2_le13_c A M B A' M' B' h₁ h₂ x), ((fun H0 => x0 (cong_cong_half_1_c A M B A' M' B' h₁ h₂ H0)))⟩
 
-theorem lt_mid2__lt12_c (A M B A' M' B' : Tpoint)
+theorem lt_mid2_lt12_c (A M B A' M' B' : Tpoint)
     (h₁ : Midpoint M A B) (h₂ : Midpoint M' A' B')
     (h₃ : Lt A B A' B') : Lt A M A' M' := by
   obtain ⟨x, x0⟩ := h₃
-  exact ⟨(le_mid2__le12_c A M B A' M' B' h₁ h₂ x), ((fun H0 => x0 (cong_mid2__cong_c A M B A' M' B' h₁ h₂ H0)))⟩
+  exact ⟨(le_mid2_le12_c A M B A' M' B' h₁ h₂ x), ((fun H0 => x0 (cong_mid2_cong_c A M B A' M' B' h₁ h₂ H0)))⟩
 
 theorem midpoint_preserves_out_c (A B C A' B' C' M : Tpoint)
     (h₀ : Out A B C)
@@ -741,10 +741,10 @@ theorem col_bet2_cong2_c (A B C D : Tpoint)
     (h₁ : Cong A B C D) (h₂ : Bet C A D) : Cong D A B C :=
   l4_3 (between_symmetry h₂) (between_symmetry hBet) (cong_symmetry (cong_symmetry (cong_4321_c A B C D h₁))) (cong_symmetry (cong_symmetry (cong_right_commutativity (cong_reflexivity A C))))
 
-theorem bet2_lt2__lt_c (O o A B a b : Tpoint)
+theorem bet2_lt2_lt_c (O o A B a b : Tpoint)
     (h₁ : Bet a o b) (h₂ : Bet A O B)
     (h₃ : Lt o a O A) (h₄ : Lt o b O B) : Lt a b A B := by
-  refine ⟨bet2_le2__le_c O o A B a b h₁ h₂ h₃.1 h₄.1, ?_⟩
+  refine ⟨bet2_le2_le_c O o A B a b h₁ h₂ h₃.1 h₄.1, ?_⟩
   intro hCong
   rcases eq_dec_points_c O A with hOA | hOA
   · rw [hOA] at h₃
@@ -796,13 +796,13 @@ theorem bet2_lt2__lt_c (O o A B a b : Tpoint)
             exact hBb' (between_equality_c b' B a'
               (between_symmetry_c a' B b' hc2) hBetBb'a').symm
 
-theorem bet2_lt_le__lt_c (O o A B a b : Tpoint)
+theorem bet2_lt_le_lt_c (O o A B a b : Tpoint)
     (h₁ : Bet a o b) (h₂ : Bet A O B)
     (h₃ : Cong o a O A) (h₄ : Lt o b O B) : Lt a b A B := by
   obtain ⟨h_le, h_ncong⟩ := h₄
   constructor
   · have h_le_oa : Le o a O A := ⟨A, between_trivial_c O A, h₃⟩
-    exact bet2_le2__le_c O o A B a b h₁ h₂ h_le_oa h_le
+    exact bet2_le2_le_c O o A B a b h₁ h₂ h_le_oa h_le
   · intro h_cong_ab
     obtain ⟨b', hb'_bet, hb'_cong⟩ := segment_construction A O o b
     apply h_ncong
@@ -848,12 +848,12 @@ theorem bet2_lt_le__lt_c (O o A B a b : Tpoint)
 #print axioms GeocoqTranslate.Tarski.Base.swap_diff_c
 #print axioms GeocoqTranslate.Tarski.Base.cong_cong_half_1_c
 #print axioms GeocoqTranslate.Tarski.Base.cong_cong_half_2_c
-#print axioms GeocoqTranslate.Tarski.Base.cong_mid2__cong_c
-#print axioms GeocoqTranslate.Tarski.Base.mid__lt_c
-#print axioms GeocoqTranslate.Tarski.Base.le_mid2__le13_c
-#print axioms GeocoqTranslate.Tarski.Base.le_mid2__le12_c
-#print axioms GeocoqTranslate.Tarski.Base.lt_mid2__lt13_c
-#print axioms GeocoqTranslate.Tarski.Base.lt_mid2__lt12_c
+#print axioms GeocoqTranslate.Tarski.Base.cong_mid2_cong_c
+#print axioms GeocoqTranslate.Tarski.Base.mid_lt_c
+#print axioms GeocoqTranslate.Tarski.Base.le_mid2_le13_c
+#print axioms GeocoqTranslate.Tarski.Base.le_mid2_le12_c
+#print axioms GeocoqTranslate.Tarski.Base.lt_mid2_lt13_c
+#print axioms GeocoqTranslate.Tarski.Base.lt_mid2_lt12_c
 #print axioms GeocoqTranslate.Tarski.Base.midpoint_preserves_out_c
 #print axioms GeocoqTranslate.Tarski.Base.col_cong_bet_c
 #print axioms GeocoqTranslate.Tarski.Base.col_cong2_bet1_c
@@ -862,7 +862,7 @@ theorem bet2_lt_le__lt_c (O o A B a b : Tpoint)
 #print axioms GeocoqTranslate.Tarski.Base.col_cong2_bet4_c
 #print axioms GeocoqTranslate.Tarski.Base.col_bet2_cong1_c
 #print axioms GeocoqTranslate.Tarski.Base.col_bet2_cong2_c
-#print axioms GeocoqTranslate.Tarski.Base.bet2_lt2__lt_c
-#print axioms GeocoqTranslate.Tarski.Base.bet2_lt_le__lt_c
+#print axioms GeocoqTranslate.Tarski.Base.bet2_lt2_lt_c
+#print axioms GeocoqTranslate.Tarski.Base.bet2_lt_le_lt_c
 
 end GeocoqTranslate.Tarski.Base

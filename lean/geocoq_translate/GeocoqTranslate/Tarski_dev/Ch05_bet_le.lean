@@ -33,7 +33,7 @@ theorem segment_construction_2 (A Q B C : Tpoint) (hAQ : A ≠ Q) :
 theorem l5_3 (A B C D : Tpoint)
     (h₁ : Bet A B D) (h₂ : Bet A C D) : Bet A B C ∨ Bet A C B := sorry
 
-theorem bet3__bet (A B C D E : Tpoint)
+theorem bet3_bet (A B C D E : Tpoint)
     (h₁ : Bet A B E) (h₂ : Bet A D E) (h₃ : Bet B C D) : Bet A C E := sorry
 
 theorem le_bet (A B C D : Tpoint) (h : Le C D A B) :
@@ -88,9 +88,9 @@ theorem lt_diff (A B C D : Tpoint) (h : Lt A B C D) : C ≠ D := sorry
 theorem bet_cong_eq (A B C D : Tpoint)
     (h₁ : Bet A B C) (h₂ : Bet A C D) (h₃ : Cong B C A D) : C = D ∧ A = B := sorry
 
-theorem cong__le (A B C D : Tpoint) (h : Cong A B C D) : Le A B C D := sorry
+theorem cong_le (A B C D : Tpoint) (h : Cong A B C D) : Le A B C D := sorry
 
-theorem cong__le3412 (A B C D : Tpoint) (h : Cong A B C D) : Le C D A B := sorry
+theorem cong_le3412 (A B C D : Tpoint) (h : Cong A B C D) : Le C D A B := sorry
 
 theorem le1221 (A B : Tpoint) : Le A B B A := sorry
 
@@ -118,7 +118,7 @@ theorem gt_right_comm (A B C D : Tpoint) (h : Gt A B C D) : Gt A B D C := sorry
 
 theorem gt_comm (A B C D : Tpoint) (h : Gt A B C D) : Gt B A D C := sorry
 
-theorem cong2_lt__lt (A B C D A' B' C' D' : Tpoint)
+theorem cong2_lt_lt (A B C D A' B' C' D' : Tpoint)
     (h₁ : Lt A B C D) (h₂ : Cong A B A' B') (h₃ : Cong C D C' D') :
     Lt A' B' C' D' := sorry
 
@@ -131,14 +131,14 @@ theorem third_point (A B P : Tpoint) (h : Col A B P) :
 
 theorem l5_12_a (A B C : Tpoint) (h : Bet A B C) : Le A B A C ∧ Le B C A C := sorry
 
-theorem bet__le1213 (A B C : Tpoint) (h : Bet A B C) : Le A B A C := sorry
+theorem bet_le1213 (A B C : Tpoint) (h : Bet A B C) : Le A B A C := sorry
 
-theorem bet__le2313 (A B C : Tpoint) (h : Bet A B C) : Le B C A C := sorry
+theorem bet_le2313 (A B C : Tpoint) (h : Bet A B C) : Le B C A C := sorry
 
-theorem bet__lt1213 (A B C : Tpoint) (hBC : B ≠ C) (h : Bet A B C) :
+theorem bet_lt1213 (A B C : Tpoint) (hBC : B ≠ C) (h : Bet A B C) :
     Lt A B A C := sorry
 
-theorem bet__lt2313 (A B C : Tpoint) (hAB : A ≠ B) (h : Bet A B C) :
+theorem bet_lt2313 (A B C : Tpoint) (hAB : A ≠ B) (h : Bet A B C) :
     Lt B C A C := sorry
 
 theorem l5_12_b (A B C : Tpoint)
@@ -150,12 +150,12 @@ theorem bet_le_eq (A B C : Tpoint)
 theorem or_lt_cong_gt (A B C D : Tpoint) :
     Lt A B C D ∨ Gt A B C D ∨ Cong A B C D := sorry
 
-theorem lt__le (A B C D : Tpoint) (h : Lt A B C D) : Le A B C D := sorry
+theorem lt_le (A B C D : Tpoint) (h : Lt A B C D) : Le A B C D := sorry
 
-theorem le1234_lt__lt (A B C D E F : Tpoint)
+theorem le1234_lt_lt (A B C D E F : Tpoint)
     (h₁ : Le A B C D) (h₂ : Lt C D E F) : Lt A B E F := sorry
 
-theorem le3456_lt__lt (A B C D E F : Tpoint)
+theorem le3456_lt_lt (A B C D E F : Tpoint)
     (h₁ : Lt A B C D) (h₂ : Le C D E F) : Lt A B E F := sorry
 
 theorem lt_transitivity (A B C D E F : Tpoint)
@@ -165,19 +165,19 @@ theorem not_and_lt (A B C D : Tpoint) : ¬ (Lt A B C D ∧ Lt C D A B) := sorry
 
 theorem nlt (A B : Tpoint) : ¬ Lt A B A B := sorry
 
-theorem le__nlt (A B C D : Tpoint) (h : Le A B C D) : ¬ Lt C D A B := sorry
+theorem le_nlt (A B C D : Tpoint) (h : Le A B C D) : ¬ Lt C D A B := sorry
 
-theorem cong__nlt (A B C D : Tpoint) (h : Cong A B C D) : ¬ Lt A B C D := sorry
+theorem cong_nlt (A B C D : Tpoint) (h : Cong A B C D) : ¬ Lt A B C D := sorry
 
-theorem nlt__le (A B C D : Tpoint) (h : ¬ Lt A B C D) : Le C D A B := sorry
+theorem nlt_le (A B C D : Tpoint) (h : ¬ Lt A B C D) : Le C D A B := sorry
 
-theorem lt__nle (A B C D : Tpoint) (h : Lt A B C D) : ¬ Le C D A B := sorry
+theorem lt_nle (A B C D : Tpoint) (h : Lt A B C D) : ¬ Le C D A B := sorry
 
-theorem nle__lt (A B C D : Tpoint) (h : ¬ Le A B C D) : Lt C D A B := sorry
+theorem nle_lt (A B C D : Tpoint) (h : ¬ Le A B C D) : Lt C D A B := sorry
 
 theorem lt1123 (A B C : Tpoint) (hBC : B ≠ C) : Lt A A B C := sorry
 
-theorem bet2_le2__le (O o A B a b : Tpoint)
+theorem bet2_le2_le (O o A B a b : Tpoint)
     (h₁ : Bet a o b) (h₂ : Bet A O B)
     (h₃ : Le o a O A) (h₄ : Le o b O B) : Le a b A B := sorry
 

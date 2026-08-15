@@ -25,7 +25,7 @@ theorem l11_3_c :
   obtain ⟨H22, H23⟩ := H21
   obtain ⟨H24, H25⟩ := H23
   obtain ⟨H26, H27⟩ := H25
-  exact ⟨A', (⟨C', (⟨D', (⟨F', ((let H28 := bet_neq21__neq H24 H6; (let H29 := bet_neq21__neq H20 H4; (let H30 := bet_neq21__neq H16 H2; (let H31 := bet_neq21__neq H12 H0; (let H32 := cong_diff_4_c b2 C' b4 b5 H6 H18; (let H33 := cong_diff_4_c b0 A' b4 b3 H4 H14; (let H34 := cong_diff_4_c b5 F' b1 b2 H2 H26; (let H35 := cong_diff_4_c b3 D' b1 b0 H0 H22; ⟨(⟨(Ne.symm H31), (⟨H0, (Or.inr H12)⟩)⟩), (⟨(⟨H2, (⟨(Ne.symm H30), (Or.inl H16)⟩)⟩), (⟨(⟨(Ne.symm H29), (⟨H4, (Or.inr H20)⟩)⟩), (⟨(⟨H6, (⟨(Ne.symm H28), (Or.inl H24)⟩)⟩), (⟨(cong_left_commutativity (l2_11 H12 (between_symmetry H20) (cong_symmetry (cong_symmetry (cong_3421_c b3 D' b1 b0 H22))) (cong_symmetry (cong_symmetry (cong_right_commutativity H14))))), (⟨H27, (cong_left_commutativity (l2_11 (between_symmetry H16) H24 (cong_symmetry (cong_symmetry (cong_left_commutativity H18))) (cong_symmetry (cong_symmetry (cong_4312_c b5 F' b1 b2 H26)))))⟩)⟩)⟩)⟩)⟩)⟩)))))))))⟩)⟩)⟩)⟩
+  exact ⟨A', (⟨C', (⟨D', (⟨F', ((let H28 := bet_neq21_neq H24 H6; (let H29 := bet_neq21__neq H20 H4; (let H30 := bet_neq21__neq H16 H2; (let H31 := bet_neq21__neq H12 H0; (let H32 := cong_diff_4_c b2 C' b4 b5 H6 H18; (let H33 := cong_diff_4_c b0 A' b4 b3 H4 H14; (let H34 := cong_diff_4_c b5 F' b1 b2 H2 H26; (let H35 := cong_diff_4_c b3 D' b1 b0 H0 H22; ⟨(⟨(Ne.symm H31), (⟨H0, (Or.inr H12)⟩)⟩), (⟨(⟨H2, (⟨(Ne.symm H30), (Or.inl H16)⟩)⟩), (⟨(⟨(Ne.symm H29), (⟨H4, (Or.inr H20)⟩)⟩), (⟨(⟨H6, (⟨(Ne.symm H28), (Or.inl H24)⟩)⟩), (⟨(cong_left_commutativity (l2_11 H12 (between_symmetry H20) (cong_symmetry (cong_symmetry (cong_3421_c b3 D' b1 b0 H22))) (cong_symmetry (cong_symmetry (cong_right_commutativity H14))))), (⟨H27, (cong_left_commutativity (l2_11 (between_symmetry H16) H24 (cong_symmetry (cong_symmetry (cong_left_commutativity H18))) (cong_symmetry (cong_symmetry (cong_4312_c b5 F' b1 b2 H26)))))⟩)⟩)⟩)⟩)⟩)⟩)))))))))⟩)⟩)⟩)⟩
 
 theorem l11_aux_c :
     ∀ (B A A' A0 E D D' D0 : Tpoint), Out B A A' → Out E D D' → Cong B A' E D' → Bet B A A0 → Bet E D D0 → Cong A A0 E D → Cong D D0 B A → Cong B A0 E D0 ∧ Cong A' A0 D' D0 := sorry
@@ -34,7 +34,35 @@ theorem l11_3_bis_c :
     ∀ (A B C D E F : Tpoint), (∃ (A' : Tpoint), ∃ (C' : Tpoint), ∃ (D' : Tpoint), ∃ (F' : Tpoint), Out B A' A ∧ Out B C' C ∧ Out E D' D ∧ Out E F' F ∧ Cong_3 A' B C' D' E F') → CongA A B C D E F := sorry
 
 theorem l11_4_1_c :
-    ∀ (A B C D E F : Tpoint), CongA A B C D E F → A ≠ B ∧ C ≠ B ∧ D ≠ E ∧ F ≠ E ∧ (∀ (A' C' D' F' : Tpoint), Out B A' A ∧ Out B C' C ∧ Out E D' D ∧ Out E F' F ∧ Cong B A' E D' ∧ Cong B C' E F' → Cong A' C' D' F') := sorry
+    ∀ (A B C D E F : Tpoint), CongA A B C D E F → A ≠ B ∧ C ≠ B ∧ D ≠ E ∧ F ≠ E ∧ (∀ (A' C' D' F' : Tpoint), Out B A' A ∧ Out B C' C ∧ Out E D' D ∧ Out E F' F ∧ Cong B A' E D' ∧ Cong B C' E F' → Cong A' C' D' F') := by
+  intro A B C D E F hCongA
+  obtain ⟨hAB, hCB, hDE, hFE, _⟩ := hCongA
+  obtain ⟨A0, C0, D0, F0, hOutBA0A, hOutBCC0, hOutED0D, hOutEFF0, hCong3⟩ := l11_3_c A B C D E F hCongA
+  obtain ⟨hCongA0BD0E, hCongA0C0D0F0, hCongBC0EF0⟩ := hCong3
+  refine ⟨hAB, hCB, hDE, hFE, ?_⟩
+  rintro A1 C1 D1 F1 ⟨hOutBA1A, hOutBC1C, hOutED1D, hOutEF1F, hCongBA1ED1, hCongBC1EF1⟩
+  have hOutBA1A0 : Out B A1 A0 := l6_7_c B A1 A A0 hOutBA1A (l6_6_c B A0 A hOutBA0A)
+  have hOutED1D0 : Out E D1 D0 := l6_7_c E D1 D D0 hOutED1D (l6_6_c E D0 D hOutED0D)
+  have hCongBA0ED0 : Cong B A0 E D0 := cong_right_commutativity_c B A0 D0 E (cong_left_commutativity_c A0 B D0 E hCongA0BD0E)
+  have hCongA1A0D1D0 : Cong A1 A0 D1 D0 := out_cong_cong_c B A1 A0 E D1 D0 hOutBA1A0 hOutED1D0 hCongBA1ED1 hCongBA0ED0
+  have hCongA0A1D0D1 : Cong A0 A1 D0 D1 := cong_right_commutativity_c A0 A1 D1 D0 (cong_left_commutativity_c A1 A0 D1 D0 hCongA1A0D1D0)
+  have hColBA0A1 : Col B A0 A1 := col_permutation_5_c B A1 A0 (out_col_c B A1 A0 hOutBA1A0)
+  have hA0B : B ≠ A0 := Ne.symm hOutBA0A.1
+  have hCongA1C0D1F0 : Cong A1 C0 D1 F0 :=
+    l4_16_c B A0 A1 C0 E D0 D1 F0 ⟨hColBA0A1, ⟨hCongBA0ED0, hCongBA1ED1, hCongA0A1D0D1⟩, hCongBC0EF0, hCongA0C0D0F0⟩ hA0B
+  have hOutBC1C0 : Out B C1 C0 := l6_7_c B C1 C C0 hOutBC1C hOutBCC0
+  have hOutEF1F0 : Out E F1 F0 := l6_7_c E F1 F F0 hOutEF1F hOutEFF0
+  have hCongC1C0F1F0 : Cong C1 C0 F1 F0 := out_cong_cong_c B C1 C0 E F1 F0 hOutBC1C0 hOutEF1F0 hCongBC1EF1 hCongBC0EF0
+  have hColBC0C1 : Col B C0 C1 := col_permutation_5_c B C1 C0 (out_col_c B C1 C0 hOutBC1C0)
+  have hB0C : B ≠ C0 := Ne.symm hOutBCC0.1
+  have hCongC0C1F0F1 : Cong C0 C1 F0 F1 :=
+    cong_right_commutativity_c C0 C1 F1 F0 (cong_left_commutativity_c C1 C0 F1 F0 hCongC1C0F1F0)
+  have hCongC0A1F0D1 : Cong C0 A1 F0 D1 :=
+    cong_right_commutativity_c C0 A1 D1 F0 (cong_left_commutativity_c A1 C0 D1 F0 hCongA1C0D1F0)
+  have hCongC1A1F1D1 : Cong C1 A1 F1 D1 :=
+    l4_16_c B C0 C1 A1 E F0 F1 D1
+      ⟨hColBC0C1, ⟨hCongBC0EF0, hCongBC1EF1, hCongC0C1F0F1⟩, hCongBA1ED1, hCongC0A1F0D1⟩ hB0C
+  exact cong_right_commutativity_c A1 C1 D1 F1 (cong_left_commutativity_c C1 A1 F1 D1 hCongC1A1F1D1)
 
 theorem l11_4_2_c :
     ∀ (A B C D E F : Tpoint), (A ≠ B ∧ C ≠ B ∧ D ≠ E ∧ F ≠ E ∧ (∀ (A' C' D' F' : Tpoint), Out B A' A ∧ Out B C' C ∧ Out E D' D ∧ Out E F' F ∧ Cong B A' E D' ∧ Cong B C' E F' → Cong A' C' D' F')) → CongA A B C D E F := sorry
@@ -62,7 +90,14 @@ theorem conga_sym_c :
   exact ⟨H4, (⟨H6, (⟨H0, (⟨H2, (⟨D0, (⟨F0, (⟨A0, (⟨C0, (⟨H20, (⟨H22, (⟨H24, (⟨H26, (⟨H12, (⟨H14, (⟨H16, (⟨H18, (cong_symmetry H27)⟩)⟩)⟩)⟩)⟩)⟩)⟩)⟩)⟩)⟩)⟩)⟩)⟩)⟩)⟩)⟩
 
 theorem l11_10_c :
-    ∀ (A B C D E F A' C' D' F' : Tpoint), CongA A B C D E F → Out B A' A → Out B C' C → Out E D' D → Out E F' F → CongA A' B C' D' E F' := sorry
+    ∀ (A B C D E F A' C' D' F' : Tpoint), CongA A B C D E F → Out B A' A → Out B C' C → Out E D' D → Out E F' F → CongA A' B C' D' E F' := by
+  intro A B C D E F A' C' D' F' hCongA hOutA' hOutC' hOutD' hOutF'
+  obtain ⟨hAB, hCB, hDE, hFE, hBound⟩ := l11_4_1_c A B C D E F hCongA
+  apply l11_4_2_c A' B C' D' E F'
+  refine ⟨hOutA'.1, hOutC'.1, hOutD'.1, hOutF'.1, ?_⟩
+  rintro A1 C1 D1 F1 ⟨h1, h2, h3, h4, h5, h6⟩
+  exact hBound A1 C1 D1 F1 ⟨l6_7_c B A1 A' A h1 hOutA', l6_7_c B C1 C' C h2 hOutC', l6_7_c E D1 D' D h3 hOutD', l6_7_c E F1 F' F h4 hOutF', h5, h6⟩
+
 theorem out2__conga_c :
     ∀ (A B C A' C' : Tpoint), Out B A' A → Out B C' C → CongA A B C A' B C' := sorry
 theorem cong3_diff_c :

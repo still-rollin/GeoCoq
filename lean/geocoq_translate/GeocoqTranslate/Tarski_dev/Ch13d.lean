@@ -8,31 +8,30 @@ variable {Tpoint : Type} [Tarski_neutral_dimensionless_with_decidable_point_equa
 
 theorem l13_6_c :
     ∀ (a : Tpoint → Tpoint → Tpoint → Prop) (lc ld l : Tpoint → Tpoint → Prop), Lcos lc l a → Lcos ld l a → EqL lc ld := sorry
+
 theorem null_lcos_eql_c :
     ∀ (lp l : Tpoint → Tpoint → Prop) (a : Tpoint → Tpoint → Tpoint → Prop), Lcos lp l a → Q_CongA_Null_Acute a → EqL l lp := sorry
+
 theorem eql_lcos_null_c :
     ∀ (l lp : Tpoint → Tpoint → Prop) (a : Tpoint → Tpoint → Tpoint → Prop), Lcos l lp a → EqL l lp → Q_CongA_Null_Acute a := sorry
+
 theorem lcos_lg_not_null_c :
     ∀ (l lp : Tpoint → Tpoint → Prop) (a : Tpoint → Tpoint → Tpoint → Prop), Lcos l lp a → ¬ Q_Cong_Null l ∧ ¬ Q_Cong_Null lp := sorry
+
 theorem perp_acute_out_c :
     ∀ (A B C C' : Tpoint), Acute A B C → Perp A B C C' → Col A B C' → Out B A C' :=
   fun b0 b1 b2 b3 b4 b5 b6 =>
-  l6_6 (acute_col_perp__out_c b2 b1 b0 b3 (acute_sym_c b0 b1 b2 b4) ((by colr)) (perp_comm_c b0 b1 b3 b2 (perp_comm_c b1 b0 b2 b3 (perp_comm_c b0 b1 b3 b2 (perp_right_comm_c b0 b1 b2 b3 b5)))))
-
-theorem perp_out__acute_c :
-    ∀ (A B C C' : Tpoint), Perp A B C C' → Col A B C' → (Acute A B C ↔ Out B A C') :=
-  fun b0 b1 b2 b3 b4 b5 =>
-  ⟨(fun H1 => perp_acute_out_c b0 b1 b2 b3 H1 b4 b5), (fun H1 => perp_out_acute_c b0 b1 b2 b3 H1 b4)⟩
-
+  l6_6 (acute_col_perp_out_c b2 b1 b0 b3 (acute_sym_c b0 b1 b2 b4) ((by colr)) (perp_comm_c b0 b1 b3 b2 (perp_comm_c b1 b0 b2 b3 (perp_comm_c b0 b1 b3 b2 (perp_right_comm_c b0 b1 b2 b3 b5)))))
 theorem obtuse_not_acute_c :
     ∀ (A B C : Tpoint), Obtuse A B C → ¬ Acute A B C := sorry
+
 theorem acute_not_obtuse_c :
     ∀ (A B C : Tpoint), Acute A B C → ¬ Obtuse A B C :=
   fun b0 b1 b2 b3 =>
   (fun H0 => (let H1 := obtuse_not_acute_c b0 b1 b2 H0; ((H1 b3)).elim))
-
 theorem perp_obtuse_bet_c :
     ∀ (A B C C' : Tpoint), Perp A B C C' → Col A B C' → Obtuse A B C → Bet A B C' := sorry
+
 theorem lcos_const0_c :
     ∀ (l lp : Tpoint → Tpoint → Prop) (a : Tpoint → Tpoint → Tpoint → Prop), Lcos lp l a → Q_CongA_Null_Acute a → ∃ (A : Tpoint), ∃ (B : Tpoint), ∃ (C : Tpoint), l A B ∧ lp B C ∧ a A B C := by
   intro b0 b1 b2 b3 b4
@@ -47,9 +46,9 @@ theorem lcos_const0_c :
   obtain ⟨H9, H10⟩ := H8
   obtain ⟨H11, H12⟩ := H10
   exact ⟨C, (⟨A, (⟨B, (⟨(lg_sym_c b0 A C H3 H11), (⟨H9, (anga_sym_c b2 B A C H5 H12)⟩)⟩)⟩)⟩)⟩
-
 theorem lcos_const1_c :
     ∀ (l lp : Tpoint → Tpoint → Prop) (a : Tpoint → Tpoint → Tpoint → Prop) (P : Tpoint), Lcos lp l a → ¬ Q_CongA_Null_Acute a → ∃ (A : Tpoint), ∃ (B : Tpoint), ∃ (C : Tpoint), ¬ Col A B P ∧ OS A B C P ∧ l A B ∧ lp B C ∧ a A B C := sorry
+
 theorem lcos_const_c :
     ∀ (lp l : Tpoint → Tpoint → Prop) (a : Tpoint → Tpoint → Tpoint → Prop), Lcos lp l a → ∃ (A : Tpoint), ∃ (B : Tpoint), ∃ (C : Tpoint), lp A B ∧ l B C ∧ a A B C := by
   intro b0 b1 b2 b3
@@ -63,15 +62,41 @@ theorem lcos_const_c :
   obtain ⟨H8, H9⟩ := H7
   obtain ⟨H10, H11⟩ := H9
   exact ⟨B, (⟨A, (⟨C, (⟨(lg_sym_c b0 A B H0 H8), (⟨H10, H11⟩)⟩)⟩)⟩)⟩
-
 theorem lcos_lg_distincts_c :
-    ∀ (lp l : Tpoint → Tpoint → Prop) (a : Tpoint → Tpoint → Tpoint → Prop) (A B C : Tpoint), Lcos lp l a → l A B → lp B C → a A B C → A ≠ B ∧ C ≠ B := sorry
+    ∀ (lp l : Tpoint → Tpoint → Prop) (a : Tpoint → Tpoint → Tpoint → Prop) (A B C : Tpoint), Lcos lp l a → l A B → lp B C → a A B C → A ≠ B ∧ C ≠ B := by
+  intro b0 b1 b2 b3 b4 b5 b6 b7 b8 b9
+  have HH := lcos_lg_not_null_c b0 b1 b2 b6
+  obtain ⟨H3, H4⟩ := HH
+  exact ⟨((fun H5 => (by
+  rw [H5] at *
+  exact H4 (⟨((by
+  obtain ⟨H7, H8⟩ := b6
+  obtain ⟨H9, H10⟩ := H8
+  obtain ⟨_, _⟩ := H10
+  have H11 := fun H11 H12 => H3 (⟨H11, H12⟩)
+  have H12 := H11 H7
+  have H13 := fun H13 H14 => H4 (⟨H13, H14⟩)
+  have H14 := H13 H9
+  exact H9)), (⟨b3, b7⟩)⟩)))), ((fun H5 => (by
+  rw [H5] at *
+  exact H3 (⟨((by
+  obtain ⟨H7, H8⟩ := b6
+  obtain ⟨H9, H10⟩ := H8
+  obtain ⟨_, _⟩ := H10
+  have H11 := fun H11 H12 => H3 (⟨H11, H12⟩)
+  have H12 := H11 H7
+  have H13 := fun H13 H14 => H4 (⟨H13, H14⟩)
+  have H14 := H13 H9
+  exact H7)), (⟨b4, b8⟩)⟩))))⟩
 theorem lcos_const_a_c :
     ∀ (lp l : Tpoint → Tpoint → Prop) (a : Tpoint → Tpoint → Tpoint → Prop) (B : Tpoint), Lcos lp l a → ∃ (A : Tpoint), ∃ (C : Tpoint), l A B ∧ lp B C ∧ a A B C := sorry
+
 theorem lcos_const_ab_c :
     ∀ (lp l : Tpoint → Tpoint → Prop) (a : Tpoint → Tpoint → Tpoint → Prop) (B A : Tpoint), Lcos lp l a → l A B → ∃ (C : Tpoint), lp B C ∧ a A B C := sorry
+
 theorem lcos_const_cb_c :
     ∀ (lp l : Tpoint → Tpoint → Prop) (a : Tpoint → Tpoint → Tpoint → Prop) (B C : Tpoint), Lcos lp l a → lp B C → ∃ (A : Tpoint), l A B ∧ a A B C := sorry
+
 theorem lcos_lg_anga_c :
     ∀ (l lp : Tpoint → Tpoint → Prop) (a : Tpoint → Tpoint → Tpoint → Prop), Lcos lp l a → Lcos lp l a ∧ Q_Cong l ∧ Q_Cong lp ∧ Q_CongA_Acute a := by
   intro b0 b1 b2 b3
@@ -80,9 +105,9 @@ theorem lcos_lg_anga_c :
   obtain ⟨H2, H3⟩ := H1
   obtain ⟨H4, _⟩ := H3
   exact ⟨H2, (⟨H0, H4⟩)⟩))⟩
-
 theorem lcos_eql_lcos_c :
     ∀ (lp1 l1 lp2 l2 : Tpoint → Tpoint → Prop) (a : Tpoint → Tpoint → Tpoint → Prop), EqL lp1 lp2 → EqL l1 l2 → Lcos lp1 l1 a → Lcos lp2 l2 a := sorry
+
 theorem lcos_not_lg_null_c :
     ∀ (lp l : Tpoint → Tpoint → Prop) (a : Tpoint → Tpoint → Tpoint → Prop), Lcos lp l a → ¬ Q_Cong_Null lp := sorry
 
@@ -214,7 +239,6 @@ theorem lcos2_eq_lcos3_eq_c :
 #print axioms GeocoqTranslate.Tarski.Base.eql_lcos_null_c
 #print axioms GeocoqTranslate.Tarski.Base.lcos_lg_not_null_c
 #print axioms GeocoqTranslate.Tarski.Base.perp_acute_out_c
-#print axioms GeocoqTranslate.Tarski.Base.perp_out__acute_c
 #print axioms GeocoqTranslate.Tarski.Base.obtuse_not_acute_c
 #print axioms GeocoqTranslate.Tarski.Base.acute_not_obtuse_c
 #print axioms GeocoqTranslate.Tarski.Base.perp_obtuse_bet_c

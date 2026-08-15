@@ -72,7 +72,7 @@ theorem l10_7 (A B P P' Q Q' : Tpoint)
 
 theorem l10_8 (A B P : Tpoint) (h : Reflect P P A B) : Col P A B := sorry
 
-theorem col__refl (A B P : Tpoint) (h : Col P A B) : ReflectL P P A B := sorry
+theorem col_refl (A B P : Tpoint) (h : Col P A B) : ReflectL P P A B := sorry
 
 theorem is_image_col_cong (A B P P' X : Tpoint) (hAB : A ≠ B)
     (h₁ : Reflect P P' A B) (h₂ : Col A B X) : Cong P X P' X := sorry
@@ -119,15 +119,15 @@ theorem midpoint_preserves_per (A B C A1 B1 C1 M : Tpoint)
     (h₁ : Midpoint M A A1) (h₂ : Midpoint M B B1) (h₃ : Midpoint M C C1) :
     Per A1 B1 C1 := sorry
 
-theorem col__image_spec (A B X : Tpoint) (h : Col A B X) :
+theorem col_image_spec (A B X : Tpoint) (h : Col A B X) :
     ReflectL X X A B := sorry
 
 theorem image_triv (A B : Tpoint) : Reflect A A A B := sorry
 
-theorem cong_midpoint__image (A B X Y : Tpoint)
+theorem cong_midpoint_image (A B X Y : Tpoint)
     (h₁ : Cong A X A Y) (h₂ : Midpoint B X Y) : Reflect Y X A B := sorry
 
-theorem col_image_spec__eq (A B P P' : Tpoint)
+theorem col_image_spec_eq (A B P P' : Tpoint)
     (h₁ : Col A B P) (h₂ : ReflectL P P' A B) : P = P' := sorry
 
 theorem image_spec_triv (A B : Tpoint) : ReflectL A A B B := by
@@ -135,9 +135,9 @@ theorem image_spec_triv (A B : Tpoint) : ReflectL A A B B := by
   · exact ⟨between_trivial A A, cong_reflexivity A A⟩
   · exact Or.inl (between_trivial2 B A)
 
-theorem image_spec__eq (A P P' : Tpoint) (h : ReflectL P P' A A) : P = P' := sorry
+theorem image_spec_eq (A P P' : Tpoint) (h : ReflectL P P' A A) : P = P' := sorry
 
-theorem image__midpoint (A P P' : Tpoint) (h : Reflect P P' A A) :
+theorem image_midpoint (A P P' : Tpoint) (h : Reflect P P' A A) :
     Midpoint A P' P := by
   rcases h with ⟨hNE, _⟩ | ⟨_, hMid⟩
   · exact absurd rfl hNE

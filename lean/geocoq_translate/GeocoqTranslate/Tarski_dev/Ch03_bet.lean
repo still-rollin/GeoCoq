@@ -72,21 +72,21 @@ theorem between_exchange3 (A B C D : Tpoint)
   have hCx : C = x := between_identity C x hCxC
   rwa [← hCx] at hBxD
 
-theorem bet_neq12__neq (A B C : Tpoint) (h : Bet A B C) (hAB : A ≠ B) : A ≠ C := by
+theorem bet_neq12_neq (A B C : Tpoint) (h : Bet A B C) (hAB : A ≠ B) : A ≠ C := by
   intro hAC
   rw [← hAC] at h
   exact hAB (between_identity A B h)
 
-theorem bet_neq21__neq (A B C : Tpoint) (h : Bet A B C) (hBA : B ≠ A) : A ≠ C :=
-  bet_neq12__neq A B C h (fun hAB => hBA hAB.symm)
+theorem bet_neq21_neq (A B C : Tpoint) (h : Bet A B C) (hBA : B ≠ A) : A ≠ C :=
+  bet_neq12_neq A B C h (fun hAB => hBA hAB.symm)
 
-theorem bet_neq23__neq (A B C : Tpoint) (h : Bet A B C) (hBC : B ≠ C) : A ≠ C := by
+theorem bet_neq23_neq (A B C : Tpoint) (h : Bet A B C) (hBC : B ≠ C) : A ≠ C := by
   intro hAC
   rw [hAC] at h
   exact hBC (between_identity C B h).symm
 
-theorem bet_neq32__neq (A B C : Tpoint) (h : Bet A B C) (hCB : C ≠ B) : A ≠ C :=
-  bet_neq23__neq A B C h (fun hBC => hCB hBC.symm)
+theorem bet_neq32_neq (A B C : Tpoint) (h : Bet A B C) (hCB : C ≠ B) : A ≠ C :=
+  bet_neq23_neq A B C h (fun hBC => hCB hBC.symm)
 
 theorem not_bet_distincts (A B C : Tpoint) (h : ¬ Bet A B C) :
     A ≠ B ∧ B ≠ C := by

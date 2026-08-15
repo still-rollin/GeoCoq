@@ -64,20 +64,20 @@ theorem between_inner_transitivity {A B C D : Tpoint} (h1 : Bet A B D) (h2 : Bet
   have hx : B = x := between_identity B x hBxB
   subst hx; exact between_symmetry hCxA
 
-/-! ### Distinctness from betweenness (GeoCoq `bet_neq*__neq`) -/
+/-! ### Distinctness from betweenness (GeoCoq `bet_neq*_neq`) -/
 
-theorem bet_neq12__neq {A B C : Tpoint} (h : Bet A B C) (hAB : A ≠ B) : A ≠ C := by
+theorem bet_neq12_neq {A B C : Tpoint} (h : Bet A B C) (hAB : A ≠ B) : A ≠ C := by
   intro heq; rw [← heq] at h; exact hAB (between_identity A B h)
 
-theorem bet_neq21__neq {A B C : Tpoint} (h : Bet A B C) (hBA : B ≠ A) : A ≠ C :=
-  bet_neq12__neq h (Ne.symm hBA)
+theorem bet_neq21_neq {A B C : Tpoint} (h : Bet A B C) (hBA : B ≠ A) : A ≠ C :=
+  bet_neq12_neq h (Ne.symm hBA)
 
-theorem bet_neq23__neq {A B C : Tpoint} (h : Bet A B C) (hBC : B ≠ C) : A ≠ C := by
+theorem bet_neq23_neq {A B C : Tpoint} (h : Bet A B C) (hBC : B ≠ C) : A ≠ C := by
   intro heq; rw [← heq] at h
   exact hBC ((between_identity A B h).symm.trans heq)
 
-theorem bet_neq32__neq {A B C : Tpoint} (h : Bet A B C) (hCB : C ≠ B) : A ≠ C :=
-  bet_neq23__neq h (Ne.symm hCB)
+theorem bet_neq32_neq {A B C : Tpoint} (h : Bet A B C) (hCB : C ≠ B) : A ≠ C :=
+  bet_neq23_neq h (Ne.symm hCB)
 
 /-! ## `Out` base (Ch06, from the betweenness base) -/
 
@@ -94,7 +94,7 @@ theorem l6_6 {P A B : Tpoint} (h : Out P A B) : Out P B A := by
 
 /-- `B ≠ A → Bet A B C → Out A B C` (GeoCoq `bet_out`). -/
 theorem bet_out {A B C : Tpoint} (hBA : B ≠ A) (h : Bet A B C) : Out A B C :=
-  ⟨hBA, Ne.symm (bet_neq21__neq h hBA), Or.inl h⟩
+  ⟨hBA, Ne.symm (bet_neq21_neq h hBA), Or.inl h⟩
 
 /-- `B ≠ A → Bet C B A → Out A B C` (GeoCoq `bet_out_1`). -/
 theorem bet_out_1 {A B C : Tpoint} (hBA : B ≠ A) (h : Bet C B A) : Out A B C :=

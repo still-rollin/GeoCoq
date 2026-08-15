@@ -327,14 +327,14 @@ theorem Fmult_integral_c :
 theorem PythFOk_c :
     ∀ (A B : @F Tpoint _), (PythF A B) * (PythF A B) = A * A + B * B := sorry
 
-theorem subF__eq0_c :
+theorem subF_eq0_c :
     ∀ (x y : @F Tpoint _), x - y = 0 ↔ x = y :=
   fun b0 b1 =>
   ⟨(fun H => psos_r1b b0 b1 ((((let B := _ - _ (b0 - b1) 0; (let B0 := zero; (let B1 := _ - _ b0 b1; (let B2 := zero; fun H0 => (let p21 := PEsub (PEX Z 1) (PEX Z 2); (let lp21 := PEsub (PEsub (PEX Z 1) (PEX Z 2)) (PEc 0 % Z); (let lci := nil; (let lq := PEc 1 % Z; (let q := PEmul (PEc 1 % Z) (PEpow p21 1); (let Hg := rfl; (let Hg0 := (check_correct (b0) lp21 q (lci , lq) Hg) (⟨H0, I⟩); Rintegral_domain_pow (interpret3 (PEc 1 % Z) (b0)) (interpret3 (PEsub (PEX Z (Pos.of_succ_nat 0)) (PEX Z (Pos.of_succ_nat 1))) (b0)) (N.to_nat 1) integral_domain_one_zero Hg0))))))))))))) (psos_r1 (b0 - b1) 0 H))), (fun H => psos_r1b (b0 - b1) 0 ((((let B := _ - _ b0 b1; (let B0 := zero; (let B1 := _ - _ (b0 - b1) 0; (let B2 := zero; fun H0 => (let p21 := PEsub (PEsub (PEX Z 1) (PEX Z 2)) (PEc 0 % Z); (let lp21 := PEsub (PEX Z 1) (PEX Z 2); (let lci := nil; (let lq := PEc 1 % Z; (let q := PEmul (PEc 1 % Z) (PEpow p21 1); (let Hg := rfl; (let Hg0 := (check_correct (b0) lp21 q (lci , lq) Hg) (⟨H0, I⟩); Rintegral_domain_pow (interpret3 (PEc 1 % Z) (b0)) (interpret3 (PEsub (PEsub (PEX Z (Pos.of_succ_nat 0)) (PEX Z (Pos.of_succ_nat 1))) (PEc 0 % Z)) (b0)) (N.to_nat 1) integral_domain_one_zero Hg0))))))))))))) (psos_r1 b0 b1 H)))⟩
-theorem mulF__eq0_c :
+theorem mulF_eq0_c :
     ∀ (x y z t : @F Tpoint _), (x - y) * (z - t) = 0 ↔ x = y ∨ z = t := by
   intro b0 b1 b2 b3
-  exact ⟨(fun H => (let H0 := symmetry (subF__eq0_c b0 b1); subrelation_proper Morphisms_Prop.or_iff_morphism tt (subrelation_respectful (subrelation_refl iff) (subrelation_respectful (subrelation_refl iff) iff_flip_impl_subrelation)) (b0 = F = b1) (b0 - b1 = F = 0) H0 (b2 = F = b3) (b2 = F = b3) (reflexive_proper_proxy (reflexive_reflexive_proxy iff_Reflexive) (b2 = F = b3)) ((let H1 := symmetry (subF__eq0_c b2 b3); Reflexive_partial_app_morphism (subrelation_proper Morphisms_Prop.or_iff_morphism tt (subrelation_respectful (subrelation_refl iff) (subrelation_respectful (subrelation_refl iff) iff_flip_impl_subrelation))) (reflexive_proper_proxy (reflexive_reflexive_proxy iff_Reflexive) (b0 - b1 = F = 0)) (b2 = F = b3) (b2 - b3 = F = 0) H1 (Fmult_integral_c (b0 - b1) (b2 - b3) H))))), (fun H => (by
+  exact ⟨(fun H => (let H0 := symmetry (subF_eq0_c b0 b1); subrelation_proper Morphisms_Prop.or_iff_morphism tt (subrelation_respectful (subrelation_refl iff) (subrelation_respectful (subrelation_refl iff) iff_flip_impl_subrelation)) (b0 = F = b1) (b0 - b1 = F = 0) H0 (b2 = F = b3) (b2 = F = b3) (reflexive_proper_proxy (reflexive_reflexive_proxy iff_Reflexive) (b2 = F = b3)) ((let H1 := symmetry (subF_eq0_c b2 b3); Reflexive_partial_app_morphism (subrelation_proper Morphisms_Prop.or_iff_morphism tt (subrelation_respectful (subrelation_refl iff) (subrelation_respectful (subrelation_refl iff) iff_flip_impl_subrelation))) (reflexive_proper_proxy (reflexive_reflexive_proxy iff_Reflexive) (b0 - b1 = F = 0)) (b2 = F = b3) (b2 - b3 = F = 0) H1 (Fmult_integral_c (b0 - b1) (b2 - b3) H))))), (fun H => (by
   rcases H with x0 | x0
   · exact psos_r1b (((b0 - b1)) * (b2 - b3)) 0 ((((let B := _ - _ b0 b1; (let B0 := zero; (let B1 := _ - _ (((b0 - b1)) * (b2 - b3)) 0; (let B2 := zero; fun H1 => (let p21 := PEsub (PEmul (PEsub (PEX Z 1) (PEX Z 2)) (PEsub (PEX Z 3) (PEX Z 4))) (PEc 0 % Z); (let lp21 := PEsub (PEX Z 1) (PEX Z 2); (let lci := nil; (let lq := PEadd (PEmul (PEX Z 4) (PEc (- 1) % Z)) (PEX Z 3); (let q := PEmul (PEc 1 % Z) (PEpow p21 1); (let Hg := rfl; (let Hg0 := (check_correct (b0) lp21 q (lci , lq) Hg) (⟨H1, I⟩); Rintegral_domain_pow (interpret3 (PEc 1 % Z) (b0)) (interpret3 (PEsub (PEmul (PEsub (PEX Z (Pos.of_succ_nat 0)) (PEX Z (Pos.of_succ_nat 1))) (PEsub (PEX Z (Pos.of_succ_nat 2)) (PEX Z (Pos.of_succ_nat 3)))) (PEc 0 % Z)) (b0)) (N.to_nat 1) integral_domain_one_zero Hg0))))))))))))) (psos_r1 b0 b1 x0))
   · exact psos_r1b (((b0 - b1)) * (b2 - b3)) 0 ((((let B := _ - _ b2 b3; (let B0 := zero; (let B1 := _ - _ (((b0 - b1)) * (b2 - b3)) 0; (let B2 := zero; fun H1 => (let p21 := PEsub (PEmul (PEsub (PEX Z 3) (PEX Z 4)) (PEsub (PEX Z 1) (PEX Z 2))) (PEc 0 % Z); (let lp21 := PEsub (PEX Z 1) (PEX Z 2); (let lci := nil; (let lq := PEadd (PEmul (PEX Z 4) (PEc (- 1) % Z)) (PEX Z 3); (let q := PEmul (PEc 1 % Z) (PEpow p21 1); (let Hg := rfl; (let Hg0 := (check_correct (b2) lp21 q (lci , lq) Hg) (⟨H1, I⟩); Rintegral_domain_pow (interpret3 (PEc 1 % Z) (b2)) (interpret3 (PEsub (PEmul (PEsub (PEX Z (Pos.of_succ_nat 2)) (PEX Z (Pos.of_succ_nat 3))) (PEsub (PEX Z (Pos.of_succ_nat 0)) (PEX Z (Pos.of_succ_nat 1)))) (PEc 0 % Z)) (b2)) (N.to_nat 1) integral_domain_one_zero Hg0))))))))))))) (psos_r1 b2 b3 x0))))⟩
@@ -529,7 +529,7 @@ theorem AM_Perp_AM_Perp_AM_Par_c :
     · have H5 := (let H5 := fun A0 B0 C0 D0 => (by
   obtain ⟨x1, _⟩ := Perp_AM_Perp_c A0 B0 C0 D0
   exact x1); H5 b4 b5 b2 b3 (⟨b8, (⟨x0, b6⟩)⟩))
-      have H6 := par_perp2__par_c b2 b3 b2 b3 b0 b1 b4 b5 (par_left_comm_c b3 b2 b2 b3 (par_left_comm_c b2 b3 b2 b3 (par_reflexivity_c b3 b6))) (perp_comm_c b3 b2 b1 b0 (perp_comm_c b2 b3 b0 b1 (perp_sym_c b0 b1 b2 b3 H3))) (perp_comm_c b3 b2 b5 b4 (perp_comm_c b2 b3 b4 b5 (perp_sym_c b4 b5 b2 b3 H5)))
+      have H6 := par_perp2_par_c b2 b3 b2 b3 b0 b1 b4 b5 (par_left_comm_c b3 b2 b2 b3 (par_left_comm_c b2 b3 b2 b3 (par_reflexivity_c b3 b6))) (perp_comm_c b3 b2 b1 b0 (perp_comm_c b2 b3 b0 b1 (perp_sym_c b0 b1 b2 b3 H3))) (perp_comm_c b3 b2 b5 b4 (perp_comm_c b2 b3 b4 b5 (perp_sym_c b4 b5 b2 b3 H5)))
       have H7 := fun A0 B0 C0 D0 => (by
   obtain ⟨_, x2⟩ := Par_AM_Par_c A0 B0 C0 D0
   exact x2)
@@ -568,7 +568,7 @@ theorem AM_perp_AM_Par_AM_perp_c :
       have H5 := (let H5 := fun A0 B0 C0 D0 => (by
   obtain ⟨x1, _⟩ := Par_AM_Par_c A0 B0 C0 D0
   exact x1); H5 b0 b1 b4 b5 (⟨b6, (⟨x0, b8⟩)⟩))
-      have H6 := par_perp__perp_c b0 b1 b4 b5 b2 b3 H5 H4
+      have H6 := par_perp_perp_c b0 b1 b4 b5 b2 b3 H5 H4
       have H7 := fun A0 B0 C0 D0 => (by
   obtain ⟨_, x2⟩ := Perp_AM_Perp_c A0 B0 C0 D0
   exact x2)
@@ -630,8 +630,8 @@ theorem triangles_same_base_c :
 #print axioms GeocoqTranslate.Tarski.Base.fieldF_c
 #print axioms GeocoqTranslate.Tarski.Base.Fmult_integral_c
 #print axioms GeocoqTranslate.Tarski.Base.PythFOk_c
-#print axioms GeocoqTranslate.Tarski.Base.subF__eq0_c
-#print axioms GeocoqTranslate.Tarski.Base.mulF__eq0_c
+#print axioms GeocoqTranslate.Tarski.Base.subF_eq0_c
+#print axioms GeocoqTranslate.Tarski.Base.mulF_eq0_c
 #print axioms GeocoqTranslate.Tarski.Base.neqO_mul_neqO_c
 #print axioms GeocoqTranslate.Tarski.Base.oppF_neq0_c
 #print axioms GeocoqTranslate.Tarski.Base.Ps_One_c

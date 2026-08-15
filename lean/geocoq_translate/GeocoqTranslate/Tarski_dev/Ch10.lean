@@ -164,7 +164,7 @@ theorem l10_6_uniqueness_spec_c (A B P P1 P2 : Tpoint)
     (h₁ : ReflectL P P1 A B) (h₂ : ReflectL P P2 A B) : P1 = P2 :=
   l10_2_uniqueness_spec_c A B P P1 P2 (l10_4_spec_c A B P P1 h₁) (l10_4_spec_c A B P P2 h₂)
 
-theorem l10_6_existence_spec_c (A B P' : Tpoint) (hAB : A ≠ B) :
+theorem l10_6_existence_spec_c (A B P' : Tpoint) :
     ∃ P, ReflectL P' P A B := by
   have H0 := l10_2_existence_spec_c A B P'
   obtain ⟨P, H⟩ := H0
@@ -191,7 +191,7 @@ theorem l10_8_c (A B P : Tpoint) (h : Reflect P P A B) : Col P A B := by
     rw [← hAP]
     exact col_trivial_1_c A B
 
-theorem col__refl_c (A B P : Tpoint) (h : Col P A B) : ReflectL P P A B :=
+theorem col_refl_c (A B P : Tpoint) (h : Col P A B) : ReflectL P P A B :=
   ⟨(⟨P, (⟨(l7_3_2_c P), (col_permutation_5_c A P B (col_permutation_4_c P A B h))⟩)⟩), (Or.inr rfl)⟩
 
 theorem is_image_spec_col_cong_c (A B P P' X : Tpoint)
@@ -426,7 +426,7 @@ theorem midpoint_preserves_image_c (A B P P' Q Q' M : Tpoint)
         colx_c M X Q A B hMX hCol hColABX hColMXQ
       exact Or.inl ⟨hAB, ⟨⟨Q, l7_3_2_c Q, hColABQ⟩, Or.inr rfl⟩⟩
 
-theorem col__image_spec_c (A B X : Tpoint) (h : Col A B X) :
+theorem col_image_spec_c (A B X : Tpoint) (h : Col A B X) :
     ReflectL X X A B :=
   ⟨(⟨X, (⟨(l7_3_2_c X), h⟩)⟩), (Or.inr rfl)⟩
 
@@ -434,9 +434,9 @@ theorem image_triv_c (A B : Tpoint) : Reflect A A A B := by
   have o := point_equality_decidability A B
   rcases o with H | H
   · exact Or.inr (⟨H, (l7_3_2_c A)⟩)
-  · exact Or.inl (⟨H, (col__image_spec_c A B A (col_trivial_3_c A B))⟩)
+  · exact Or.inl (⟨H, (col_image_spec_c A B A (col_trivial_3_c A B))⟩)
 
-theorem cong_midpoint__image_c (A B X Y : Tpoint)
+theorem cong_midpoint_image_c (A B X Y : Tpoint)
     (h₁ : Cong A X A Y) (h₂ : Midpoint B X Y) : Reflect Y X A B := by
   rcases eq_dec_points_c A B with rfl | hAB
   · right
@@ -453,17 +453,17 @@ theorem cong_midpoint__image_c (A B X Y : Tpoint)
         apply col_per_perp_c A B X Y hAB hBX (Ne.symm hBY) (Ne.symm hXY) (midpoint_col_c X B Y h₂)
         exact ⟨Y, h₂, h₁⟩
 
-theorem col_image_spec__eq_c (A B P P' : Tpoint)
+theorem col_image_spec_eq_c (A B P P' : Tpoint)
     (h₁ : Col A B P) (h₂ : ReflectL P P' A B) : P = P' :=
-  l10_6_uniqueness_spec_c A B P P P' (col__image_spec_c A B P h₁) h₂
+  l10_6_uniqueness_spec_c A B P P P' (col_image_spec_c A B P h₁) h₂
 
 theorem image_spec_triv_c (A B : Tpoint) : ReflectL A A B B :=
-  col__image_spec_c B B A (col_trivial_1_c B A)
+  col_image_spec_c B B A (col_trivial_1_c B A)
 
-theorem image_spec__eq_c (A P P' : Tpoint) (h : ReflectL P P' A A) : P = P' :=
-  col_image_spec__eq_c A A P P' (col_trivial_1_c A P) h
+theorem image_spec_eq_c (A P P' : Tpoint) (h : ReflectL P P' A A) : P = P' :=
+  col_image_spec_eq_c A A P P' (col_trivial_1_c A P) h
 
-theorem image__midpoint_c (A P P' : Tpoint) (h : Reflect P P' A A) :
+theorem image_midpoint_c (A P P' : Tpoint) (h : Reflect P P' A A) :
     Midpoint A P' P := by
   rcases h with H0 | H0
   · obtain ⟨H1, _⟩ := H0
@@ -484,7 +484,7 @@ theorem is_image_spec_dec_c (A B C D : Tpoint) :
       rcases hOr with hPerp | hEq
       · exact (perp_distinct_c C C B A hPerp).1 rfl
       · exact hAB hEq.symm
-  · obtain ⟨B', hB'⟩ := l10_6_existence_spec_c C D A hCD
+  · obtain ⟨B', hB'⟩ := l10_6_existence_spec_c C D A
     rcases point_equality_decidability B B' with hBB' | hBB'
     · subst hBB'
       exact Or.inl hB'
@@ -576,7 +576,7 @@ theorem exists_cong_per_c (A B X Y : Tpoint) :
 #print axioms GeocoqTranslate.Tarski.Base.l10_6_existence_c
 #print axioms GeocoqTranslate.Tarski.Base.l10_7_c
 #print axioms GeocoqTranslate.Tarski.Base.l10_8_c
-#print axioms GeocoqTranslate.Tarski.Base.col__refl_c
+#print axioms GeocoqTranslate.Tarski.Base.col_refl_c
 #print axioms GeocoqTranslate.Tarski.Base.is_image_spec_col_cong_c
 #print axioms GeocoqTranslate.Tarski.Base.is_image_col_cong_c
 #print axioms GeocoqTranslate.Tarski.Base.image_id_c
@@ -589,13 +589,13 @@ theorem exists_cong_per_c (A B X Y : Tpoint) :
 #print axioms GeocoqTranslate.Tarski.Base.is_image_spec_rev_c
 #print axioms GeocoqTranslate.Tarski.Base.is_image_rev_c
 #print axioms GeocoqTranslate.Tarski.Base.midpoint_preserves_per_c
-#print axioms GeocoqTranslate.Tarski.Base.col__image_spec_c
+#print axioms GeocoqTranslate.Tarski.Base.col_image_spec_c
 #print axioms GeocoqTranslate.Tarski.Base.image_triv_c
-#print axioms GeocoqTranslate.Tarski.Base.cong_midpoint__image_c
-#print axioms GeocoqTranslate.Tarski.Base.col_image_spec__eq_c
+#print axioms GeocoqTranslate.Tarski.Base.cong_midpoint_image_c
+#print axioms GeocoqTranslate.Tarski.Base.col_image_spec_eq_c
 #print axioms GeocoqTranslate.Tarski.Base.image_spec_triv_c
-#print axioms GeocoqTranslate.Tarski.Base.image_spec__eq_c
-#print axioms GeocoqTranslate.Tarski.Base.image__midpoint_c
+#print axioms GeocoqTranslate.Tarski.Base.image_spec_eq_c
+#print axioms GeocoqTranslate.Tarski.Base.image_midpoint_c
 #print axioms GeocoqTranslate.Tarski.Base.is_image_spec_dec_c
 #print axioms GeocoqTranslate.Tarski.Base.l10_14_c
 #print axioms GeocoqTranslate.Tarski.Base.l10_15_c

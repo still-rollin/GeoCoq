@@ -54,7 +54,7 @@ theorem cong3_symmetry_ax (A B C A' B' C' : Tpoint) (h : Cong_3 A B C A' B' C') 
 theorem le_trivial_ax (A C D : Tpoint) : Le A A C D :=
   ⟨C, (⟨(between_symmetry (between_symmetry (between_symmetry (between_symmetry (between_trivial2 C D))))), (cong_trivial_identity A C)⟩)⟩
 
-theorem cong__le_ax (A B C D : Tpoint) (h : Cong A B C D) : Le A B C D :=
+theorem cong_le_ax (A B C D : Tpoint) (h : Cong A B C D) : Le A B C D :=
   ⟨D, (⟨(between_symmetry (between_symmetry (between_symmetry (between_symmetry (between_trivial C D))))), h⟩)⟩
 
 theorem third_point_ax (A B P : Tpoint) (h : Col A B P) :

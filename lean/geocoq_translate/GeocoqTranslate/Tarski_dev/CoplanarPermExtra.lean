@@ -150,18 +150,18 @@ theorem coplanar_trivial_c (A B C : Tpoint) : Coplanar A A B C :=
   ⟨B, (Or.inl (⟨(col_trivial_1_c A B), (col_trivial_3_c B C)⟩))⟩
 
 
-theorem reflectl__coplanar_c (A B C D : Tpoint) (H : ReflectL A B C D) : Coplanar A B C D := by
+theorem reflectl_coplanar_c (A B C D : Tpoint) (H : ReflectL A B C D) : Coplanar A B C D := by
   obtain ⟨⟨X, hMid, hColCD⟩, _⟩ := H
   obtain ⟨hBet, _⟩ := hMid
   exact ⟨X, Or.inl ⟨col_permutation_2_c B X A (bet_col_c B X A hBet), hColCD⟩⟩
 
-theorem reflect__coplanar_c (A B C D : Tpoint) (H : Reflect A B C D) : Coplanar A B C D := by
+theorem reflect_coplanar_c (A B C D : Tpoint) (H : Reflect A B C D) : Coplanar A B C D := by
   rcases H with ⟨_, hR⟩ | ⟨heq, hMid⟩
-  · exact reflectl__coplanar_c A B C D hR
+  · exact reflectl_coplanar_c A B C D hR
   · subst heq
     exact coplanar_perm_16_c C C A B (coplanar_trivial_c C A B)
 
-theorem inangle__coplanar_c (A B C D : Tpoint) (H : InAngle A B C D) : Coplanar A B C D := by
+theorem inangle_coplanar_c (A B C D : Tpoint) (H : InAngle A B C D) : Coplanar A B C D := by
   obtain ⟨_, _, _, X, hBet, hDij⟩ := H
   refine ⟨X, Or.inr (Or.inl ⟨?_, col_permutation_5_c B X D (bet_col_c B X D hBet)⟩)⟩
   rcases hDij with h4 | h4
@@ -169,9 +169,9 @@ theorem inangle__coplanar_c (A B C D : Tpoint) (H : InAngle A B C D) : Coplanar 
     exact col_trivial_2_c A X
   · exact col_permutation_2_c C X A (out_col_c C X A h4)
 
-#print axioms GeocoqTranslate.Tarski.Base.reflectl__coplanar_c
-#print axioms GeocoqTranslate.Tarski.Base.reflect__coplanar_c
-#print axioms GeocoqTranslate.Tarski.Base.inangle__coplanar_c
+#print axioms GeocoqTranslate.Tarski.Base.reflectl_coplanar_c
+#print axioms GeocoqTranslate.Tarski.Base.reflect_coplanar_c
+#print axioms GeocoqTranslate.Tarski.Base.inangle_coplanar_c
 #print axioms GeocoqTranslate.Tarski.Base.coplanar_perm_3_c
 #print axioms GeocoqTranslate.Tarski.Base.coplanar_perm_5_c
 #print axioms GeocoqTranslate.Tarski.Base.coplanar_perm_7_c

@@ -54,13 +54,13 @@ theorem Par_strict_perm_c2 :
     ∀ (A B C D : Tpoint), Par_strict A B C D → Par_strict A B C D ∧ Par_strict B A C D ∧ Par_strict A B D C ∧ Par_strict B A D C ∧ Par_strict C D A B ∧ Par_strict C D B A ∧ Par_strict D C A B ∧ Par_strict D C B A := sorry
 theorem l12_6_c2 :
     ∀ (A B C D : Tpoint), Par_strict A B C D → OS A B C D := sorry
-theorem pars__os3412_c2 :
+theorem pars_os3412_c2 :
     ∀ (A B C D : Tpoint), Par_strict A B C D → OS C D A B := sorry
 theorem perp_dec_c2 :
     ∀ (A B C D : Tpoint), Perp A B C D ∨ ¬ Perp A B C D := sorry
-theorem col_cop2_perp2__col_c2 :
+theorem col_cop2_perp2_col_c2 :
     ∀ (X1 X2 Y1 Y2 A B : Tpoint), Perp X1 X2 A B → Perp Y1 Y2 A B → Col X1 Y1 Y2 → Coplanar A B X2 Y1 → Coplanar A B X2 Y2 → Col X2 Y1 Y2 := sorry
-theorem col_perp2_ncol__col_c2 :
+theorem col_perp2_ncol_col_c2 :
     ∀ (X1 X2 Y1 Y2 A B : Tpoint), Perp X1 X2 A B → Perp Y1 Y2 A B → Col X1 Y1 Y2 → ¬ Col X1 A B → Col X2 Y1 Y2 := sorry
 theorem l12_9_c2 :
     ∀ (A1 A2 B1 B2 C1 C2 : Tpoint), Coplanar C1 C2 A1 B1 → Coplanar C1 C2 A1 B2 → Coplanar C1 C2 A2 B1 → Coplanar C1 C2 A2 B2 → Perp A1 A2 C1 C2 → Perp B1 B2 C1 C2 → Par A1 A2 B1 B2 := sorry
@@ -111,7 +111,7 @@ theorem not_strict_par_c2 :
   fun b0 b1 b2 b3 b4 b5 b6 b7 =>
   ⟨(not_strict_par1_c), (not_strict_par2_c)⟩
 
-theorem col2_par__col4_c2 :
+theorem col2_par_col4_c2 :
     ∀ (A B C D X : Tpoint), Par A B C D → Col A B X → Col C D X → Col A B C ∧ Col A B D ∧ Col A C D ∧ Col B C D := by
   intro b0 b1 b2 b3 b4 b5 b6 b7
   have a := not_strict_par_c
@@ -161,7 +161,7 @@ theorem par_not_col_strict_c2 :
     obtain ⟨H6, H7⟩ := H5
     exact ((b7 (col3_c b2 b3 b0 b1 b4 H4 (col_permutation_5_c b2 b0 b3 (col_permutation_4_c b0 b2 b3 H6)) (col_permutation_5_c b2 b1 b3 (col_permutation_4_c b1 b2 b3 H7)) b6))).elim
 
-theorem col_cop_perp2__pars_c2 :
+theorem col_cop_perp2_pars_c2 :
     ∀ (P Q A B C D : Tpoint), ¬ Col A B P → Col C D P → Coplanar A B C D → Perp A B P Q → Perp C D P Q → Par_strict A B C D := by
   intro b0 b1 b2 b3 b4 b5 b6 b7 b8 b9 b10
   exact par_not_col_strict_c
@@ -222,12 +222,12 @@ theorem par_distinct_c2 :
     obtain ⟨_, _⟩ := H4
     exact ⟨((fun H5 => (let H6 := H1 H5; (H6).elim))), ((fun H5 => (let H6 := H3 H5; (H6).elim)))⟩
 
-theorem par_col4__par_c2 :
+theorem par_col4_par_c2 :
     ∀ (A B C D E F G H : Tpoint), E ≠ F → G ≠ H → Par A B C D → Col A B E → Col A B F → Col C D G → Col C D H → Par E F G H :=
   fun b0 b1 b2 b3 b4 b5 b6 b7 b8 b9 b10 b11 b12 b13 b14 =>
   par_col2_par_c
 
-theorem par_strict_col4__par_strict_c2 :
+theorem par_strict_col4_par_strict_c2 :
     ∀ (A B C D E F G H : Tpoint), E ≠ F → G ≠ H → Par_strict A B C D → Col A B E → Col A B F → Col C D G → Col C D H → Par_strict E F G H :=
   fun b0 b1 b2 b3 b4 b5 b6 b7 b8 b9 b10 b11 b12 b13 b14 =>
   par_strict_col2_par_strict_c
@@ -343,13 +343,13 @@ theorem col_par_c2 :
   fun b0 b1 b2 b3 b4 b5 =>
   Or.inr (⟨((fun H2 => (let H3 := b3 H2; (H3).elim))), (⟨((fun H2 => (let H3 := b4 H2; (H3).elim))), (⟨b5, (col_trivial_1_c b1 b2)⟩)⟩)⟩)
 
-theorem acute_col_perp__out_c2 :
+theorem acute_col_perp_out_c2 :
     ∀ (A B C A' : Tpoint), Acute A B C → Col B C A' → Perp B C A A' → Out B A' C := sorry
 
-theorem acute_col_perp__out_1_c2 :
+theorem acute_col_perp_out_1_c2 :
     ∀ (A B C A' : Tpoint), Acute A B C → Col B C A' → Perp B A A A' → Out B A' C := sorry
 
-theorem conga_cop_inangle_per2__inangle_c2 :
+theorem conga_cop_inangle_per2_inangle_c2 :
     ∀ (A B C P T : Tpoint), Per A B C → InAngle T A B C → CongA P B A P B C → Per B P T → Coplanar A B C P → InAngle P A B C := sorry
 
 theorem perp_not_par_c2 :
@@ -406,10 +406,10 @@ theorem l12_9_2D_c2 :
 #print axioms GeocoqTranslate.Tarski.Base.Par_strict_cases_c2
 #print axioms GeocoqTranslate.Tarski.Base.Par_strict_perm_c2
 #print axioms GeocoqTranslate.Tarski.Base.l12_6_c2
-#print axioms GeocoqTranslate.Tarski.Base.pars__os3412_c2
+#print axioms GeocoqTranslate.Tarski.Base.pars_os3412_c2
 #print axioms GeocoqTranslate.Tarski.Base.perp_dec_c2
-#print axioms GeocoqTranslate.Tarski.Base.col_cop2_perp2__col_c2
-#print axioms GeocoqTranslate.Tarski.Base.col_perp2_ncol__col_c2
+#print axioms GeocoqTranslate.Tarski.Base.col_cop2_perp2_col_c2
+#print axioms GeocoqTranslate.Tarski.Base.col_perp2_ncol_col_c2
 #print axioms GeocoqTranslate.Tarski.Base.l12_9_c2
 #print axioms GeocoqTranslate.Tarski.Base.parallel_existence_c2
 #print axioms GeocoqTranslate.Tarski.Base.par_col_par_c2
@@ -418,14 +418,14 @@ theorem l12_9_2D_c2 :
 #print axioms GeocoqTranslate.Tarski.Base.not_strict_par1_c2
 #print axioms GeocoqTranslate.Tarski.Base.not_strict_par2_c2
 #print axioms GeocoqTranslate.Tarski.Base.not_strict_par_c2
-#print axioms GeocoqTranslate.Tarski.Base.col2_par__col4_c2
+#print axioms GeocoqTranslate.Tarski.Base.col2_par_col4_c2
 #print axioms GeocoqTranslate.Tarski.Base.not_par_not_col_c2
 #print axioms GeocoqTranslate.Tarski.Base.not_par_inter_uniqueness_c2
 #print axioms GeocoqTranslate.Tarski.Base.inter_uniqueness_not_par_c2
 #print axioms GeocoqTranslate.Tarski.Base.col_not_col_not_par_c2
 #print axioms GeocoqTranslate.Tarski.Base.par_distincts_c2
 #print axioms GeocoqTranslate.Tarski.Base.par_not_col_strict_c2
-#print axioms GeocoqTranslate.Tarski.Base.col_cop_perp2__pars_c2
+#print axioms GeocoqTranslate.Tarski.Base.col_cop_perp2_pars_c2
 #print axioms GeocoqTranslate.Tarski.Base.all_one_side_par_strict_c2
 #print axioms GeocoqTranslate.Tarski.Base.par_col_par_2_c2
 #print axioms GeocoqTranslate.Tarski.Base.par_col2_par_c2
@@ -434,8 +434,8 @@ theorem l12_9_2D_c2 :
 #print axioms GeocoqTranslate.Tarski.Base.par_strict_col2_par_strict_c2
 #print axioms GeocoqTranslate.Tarski.Base.line_dec_c2
 #print axioms GeocoqTranslate.Tarski.Base.par_distinct_c2
-#print axioms GeocoqTranslate.Tarski.Base.par_col4__par_c2
-#print axioms GeocoqTranslate.Tarski.Base.par_strict_col4__par_strict_c2
+#print axioms GeocoqTranslate.Tarski.Base.par_col4_par_c2
+#print axioms GeocoqTranslate.Tarski.Base.par_strict_col4_par_strict_c2
 #print axioms GeocoqTranslate.Tarski.Base.par_strict_one_side_c2
 #print axioms GeocoqTranslate.Tarski.Base.par_strict_all_one_side_c2
 #print axioms GeocoqTranslate.Tarski.Base.inter_distincts_c2
@@ -457,9 +457,9 @@ theorem l12_9_2D_c2 :
 #print axioms GeocoqTranslate.Tarski.Base.l12_22_b_c2
 #print axioms GeocoqTranslate.Tarski.Base.par_strict_par_c2
 #print axioms GeocoqTranslate.Tarski.Base.col_par_c2
-#print axioms GeocoqTranslate.Tarski.Base.acute_col_perp__out_c2
-#print axioms GeocoqTranslate.Tarski.Base.acute_col_perp__out_1_c2
-#print axioms GeocoqTranslate.Tarski.Base.conga_cop_inangle_per2__inangle_c2
+#print axioms GeocoqTranslate.Tarski.Base.acute_col_perp_out_c2
+#print axioms GeocoqTranslate.Tarski.Base.acute_col_perp_out_1_c2
+#print axioms GeocoqTranslate.Tarski.Base.conga_cop_inangle_per2_inangle_c2
 #print axioms GeocoqTranslate.Tarski.Base.perp_not_par_c2
 #print axioms GeocoqTranslate.Tarski.Base.cong_conga_perp_c2
 #print axioms GeocoqTranslate.Tarski.Base.perp_inter_exists_c2

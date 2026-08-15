@@ -44,11 +44,11 @@ theorem between_exchange3_ax (A B C D : Tpoint)
   subst H5
   exact H4
 
-theorem bet_neq21__neq_ax (A B C : Tpoint) (h : Bet A B C) (hBA : B ≠ A) : A ≠ C :=
-  bet_neq12__neq h (Ne.symm hBA)
+theorem bet_neq21_neq_ax (A B C : Tpoint) (h : Bet A B C) (hBA : B ≠ A) : A ≠ C :=
+  bet_neq12_neq h (Ne.symm hBA)
 
-theorem bet_neq32__neq_ax (A B C : Tpoint) (h : Bet A B C) (hCB : C ≠ B) : A ≠ C :=
-  bet_neq23__neq h (Ne.symm hCB)
+theorem bet_neq32_neq_ax (A B C : Tpoint) (h : Bet A B C) (hCB : C ≠ B) : A ≠ C :=
+  bet_neq23_neq h (Ne.symm hCB)
 
 theorem outer_transitivity_between2_ax (A B C D : Tpoint)
     (h₁ : Bet A B C) (h₂ : Bet B C D) (hBC : B ≠ C) : Bet A C D := by
@@ -106,8 +106,8 @@ theorem another_point_ax (A : Tpoint) : ∃ B, A ≠ B := by
 #print axioms GeocoqTranslate.Tarski.Base.between_trivial2_ax
 #print axioms GeocoqTranslate.Tarski.Base.between_equality_2_ax
 #print axioms GeocoqTranslate.Tarski.Base.between_exchange3_ax
-#print axioms GeocoqTranslate.Tarski.Base.bet_neq21__neq_ax
-#print axioms GeocoqTranslate.Tarski.Base.bet_neq32__neq_ax
+#print axioms GeocoqTranslate.Tarski.Base.bet_neq21_neq_ax
+#print axioms GeocoqTranslate.Tarski.Base.bet_neq32_neq_ax
 #print axioms GeocoqTranslate.Tarski.Base.outer_transitivity_between2_ax
 #print axioms GeocoqTranslate.Tarski.Base.between_exchange2_ax
 #print axioms GeocoqTranslate.Tarski.Base.outer_transitivity_between_ax

@@ -149,26 +149,26 @@ theorem cong_cong_half_2 (A M B A' M' B' : Tpoint)
     (h₁ : Midpoint M A B) (h₂ : Midpoint M' A' B')
     (h₃ : Cong A B A' B') : Cong B M B' M' := sorry
 
-theorem cong_mid2__cong (A M B A' M' B' : Tpoint)
+theorem cong_mid2_cong (A M B A' M' B' : Tpoint)
     (h₁ : Midpoint M A B) (h₂ : Midpoint M' A' B')
     (h₃ : Cong A M A' M') : Cong A B A' B' := sorry
 
-theorem mid__lt (A M B : Tpoint) (hAB : A ≠ B) (h : Midpoint M A B) :
+theorem mid_lt (A M B : Tpoint) (hAB : A ≠ B) (h : Midpoint M A B) :
     Lt A M A B := sorry
 
-theorem le_mid2__le13 (A M B A' M' B' : Tpoint)
+theorem le_mid2_le13 (A M B A' M' B' : Tpoint)
     (h₁ : Midpoint M A B) (h₂ : Midpoint M' A' B')
     (h₃ : Le A M A' M') : Le A B A' B' := sorry
 
-theorem le_mid2__le12 (A M B A' M' B' : Tpoint)
+theorem le_mid2_le12 (A M B A' M' B' : Tpoint)
     (h₁ : Midpoint M A B) (h₂ : Midpoint M' A' B')
     (h₃ : Le A B A' B') : Le A M A' M' := sorry
 
-theorem lt_mid2__lt13 (A M B A' M' B' : Tpoint)
+theorem lt_mid2_lt13 (A M B A' M' B' : Tpoint)
     (h₁ : Midpoint M A B) (h₂ : Midpoint M' A' B')
     (h₃ : Lt A M A' M') : Lt A B A' B' := sorry
 
-theorem lt_mid2__lt12 (A M B A' M' B' : Tpoint)
+theorem lt_mid2_lt12 (A M B A' M' B' : Tpoint)
     (h₁ : Midpoint M A B) (h₂ : Midpoint M' A' B')
     (h₃ : Lt A B A' B') : Lt A M A' M' := sorry
 
@@ -205,11 +205,11 @@ theorem col_bet2_cong2 (A B C D : Tpoint)
     (hCol : Col A B D) (hBet : Bet A C B)
     (h₁ : Cong A B C D) (h₂ : Bet C A D) : Cong D A B C := sorry
 
-theorem bet2_lt2__lt (O o A B a b : Tpoint)
+theorem bet2_lt2_lt (O o A B a b : Tpoint)
     (h₁ : Bet a o b) (h₂ : Bet A O B)
     (h₃ : Lt o a O A) (h₄ : Lt o b O B) : Lt a b A B := sorry
 
-theorem bet2_lt_le__lt (O o A B a b : Tpoint)
+theorem bet2_lt_le_lt (O o A B a b : Tpoint)
     (h₁ : Bet a o b) (h₂ : Bet A O B)
     (h₃ : Cong o a O A) (h₄ : Lt o b O B) : Lt a b A B := sorry
 

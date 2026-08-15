@@ -148,23 +148,23 @@ theorem out_out_one_side (A B X Y Z : Tpoint)
 theorem out_one_side (A B X Y : Tpoint)
     (h₁ : ¬ Col A B X ∨ ¬ Col A B Y) (h₂ : Out A X Y) : OS A B X Y := sorry
 
-theorem bet__ts (A B X Y : Tpoint)
+theorem bet_ts (A B X Y : Tpoint)
     (hAY : A ≠ Y) (hNCol : ¬ Col A B X) (hBet : Bet X A Y) : TS A B X Y := sorry
 
-theorem bet_ts__ts (A B X Y Z : Tpoint) (h₁ : TS A B X Y) (h₂ : Bet X Y Z) :
+theorem bet_ts_ts (A B X Y Z : Tpoint) (h₁ : TS A B X Y) (h₂ : Bet X Y Z) :
     TS A B X Z := sorry
 
-theorem bet_ts__os (A B X Y Z : Tpoint) (h₁ : TS A B X Y) (h₂ : Bet X Y Z) :
+theorem bet_ts_os (A B X Y Z : Tpoint) (h₁ : TS A B X Y) (h₂ : Bet X Y Z) :
     OS A B Y Z := sorry
 
 theorem l9_31 (A X Y Z : Tpoint) (h₁ : OS A X Y Z) (h₂ : OS A Z Y X) :
     TS A Y X Z := sorry
 
-theorem col123__nos (A B P Q : Tpoint) (h : Col P Q A) : ¬ OS P Q A B := sorry
+theorem col123_nos (A B P Q : Tpoint) (h : Col P Q A) : ¬ OS P Q A B := sorry
 
-theorem col124__nos (A B P Q : Tpoint) (h : Col P Q B) : ¬ OS P Q A B := sorry
+theorem col124_nos (A B P Q : Tpoint) (h : Col P Q B) : ¬ OS P Q A B := sorry
 
-theorem col2_os__os (A B C D X Y : Tpoint)
+theorem col2_os_os (A B C D X Y : Tpoint)
     (hCD : C ≠ D) (h₁ : Col A B C) (h₂ : Col A B D) (h₃ : OS A B X Y) :
     OS C D X Y := sorry
 
@@ -184,10 +184,10 @@ theorem col_one_side_out (A B X Y : Tpoint) (hCol : Col A X Y) (h : OS A B X Y) 
 theorem col_two_sides_bet (A B X Y : Tpoint)
     (hCol : Col A X Y) (h : TS A B X Y) : Bet X A Y := sorry
 
-theorem os_ts1324__os (A X Y Z : Tpoint)
+theorem os_ts1324_os (A X Y Z : Tpoint)
     (h₁ : OS A X Y Z) (h₂ : TS A Y X Z) : OS A Z X Y := sorry
 
-theorem ts2__ex_bet2 (A B C D : Tpoint) (h₁ : TS A C B D) (h₂ : TS B D A C) :
+theorem ts2_ex_bet2 (A B C D : Tpoint) (h₁ : TS A C B D) (h₂ : TS B D A C) :
     ∃ X, Bet A X C ∧ Bet B X D := sorry
 
 theorem out_one_side_1 (A B C D X : Tpoint)
@@ -202,18 +202,18 @@ theorem l8_21_bis (A B C X Y : Tpoint)
     (hXY : X ≠ Y) (hNCol : ¬ Col C A B) :
     ∃ P : Tpoint, Cong A P X Y ∧ Perp A B P A ∧ TS A B C P := sorry
 
-theorem ts__ncol (A B X Y : Tpoint) (h : TS A B X Y) :
+theorem ts_ncol (A B X Y : Tpoint) (h : TS A B X Y) :
     ¬ Col A X Y ∨ ¬ Col B X Y := sorry
 
 theorem one_or_two_sides_aux (A B C D X : Tpoint)
     (hNC1 : ¬ Col C A B) (hNC2 : ¬ Col D A B)
     (h₁ : Col A C X) (h₂ : Col B D X) : TS A B C D ∨ OS A B C D := sorry
 
-theorem cop__one_or_two_sides (A B C D : Tpoint)
+theorem cop_one_or_two_sides (A B C D : Tpoint)
     (hCop : Coplanar A B C D) (hNC1 : ¬ Col C A B) (hNC2 : ¬ Col D A B) :
     TS A B C D ∨ OS A B C D := sorry
 
-theorem os__coplanar (A B C D : Tpoint) (h : OS A B C D) :
+theorem os_coplanar (A B C D : Tpoint) (h : OS A B C D) :
     Coplanar A B C D := sorry
 
 theorem coplanar_trans_1 (P Q R A B : Tpoint)
@@ -221,22 +221,22 @@ theorem coplanar_trans_1 (P Q R A B : Tpoint)
     (h₁ : Coplanar P Q R A) (h₂ : Coplanar P Q R B) :
     Coplanar Q R A B := sorry
 
-theorem col_cop__cop (A B C D E : Tpoint)
+theorem col_cop_cop (A B C D E : Tpoint)
     (hCop : Coplanar A B C D) (hCD : C ≠ D) (hCol : Col C D E) :
     Coplanar A B C E := sorry
 
-theorem bet_cop__cop (A B C D E : Tpoint)
+theorem bet_cop_cop (A B C D E : Tpoint)
     (hCop : Coplanar A B C E) (hBet : Bet C D E) : Coplanar A B C D := sorry
 
-theorem col2_cop__cop (A B C D E F : Tpoint)
+theorem col2_cop_cop (A B C D E F : Tpoint)
     (hCop : Coplanar A B C D) (hCD : C ≠ D)
     (h₁ : Col C D E) (h₂ : Col C D F) : Coplanar A B E F := sorry
 
-theorem col_cop2__cop (A B C U V P : Tpoint)
+theorem col_cop2_cop (A B C U V P : Tpoint)
     (hUV : U ≠ V) (h₁ : Coplanar A B C U) (h₂ : Coplanar A B C V)
     (hCol : Col U V P) : Coplanar A B C P := sorry
 
-theorem bet_cop2__cop (A B C U V W : Tpoint)
+theorem bet_cop2_cop (A B C U V W : Tpoint)
     (h₁ : Coplanar A B C U) (h₂ : Coplanar A B C W) (hBet : Bet U V W) :
     Coplanar A B C V := sorry
 
@@ -253,21 +253,21 @@ theorem l9_30 (A B C D E F P X Y Z : Tpoint)
     (h₄ : Coplanar D E F X) (h₅ : Coplanar D E F Y) (h₆ : Coplanar D E F Z) :
     Col X Y Z := sorry
 
-theorem cop_per2__col (A X Y Z : Tpoint)
+theorem cop_per2_col (A X Y Z : Tpoint)
     (hCop : Coplanar A X Y Z) (hAZ : A ≠ Z)
     (h₁ : Per X Z A) (h₂ : Per Y Z A) : Col X Y Z := sorry
 
-theorem cop_perp2__col (X Y Z A B : Tpoint)
+theorem cop_perp2_col (X Y Z A B : Tpoint)
     (hCop : Coplanar A B Y Z) (h₁ : Perp X Y A B) (h₂ : Perp X Z A B) :
     Col X Y Z := sorry
 
 theorem two_sides_dec (A B C D : Tpoint) : TS A B C D ∨ ¬ TS A B C D := sorry
 
-theorem cop_nts__os (A B C D : Tpoint)
+theorem cop_nts_os (A B C D : Tpoint)
     (hCop : Coplanar A B C D) (hNC1 : ¬ Col C A B) (hNC2 : ¬ Col D A B)
     (hNTS : ¬ TS A B C D) : OS A B C D := sorry
 
-theorem cop_nos__ts (A B C D : Tpoint)
+theorem cop_nos_ts (A B C D : Tpoint)
     (hCop : Coplanar A B C D) (hNC1 : ¬ Col C A B) (hNC2 : ¬ Col D A B)
     (hNOS : ¬ OS A B C D) : TS A B C D := sorry
 
@@ -284,12 +284,12 @@ theorem ex_ncol_cop (A B C D E : Tpoint) (hDE : D ≠ E) :
 theorem ex_ncol_cop2 (A B C D : Tpoint) :
     ∃ E F, Coplanar A B C E ∧ Coplanar A B C F ∧ ¬ Col D E F := sorry
 
-theorem col2_cop2__eq (A B C U V P Q : Tpoint)
+theorem col2_cop2_eq (A B C U V P Q : Tpoint)
     (hNCop : ¬ Coplanar A B C U) (hUV : U ≠ V)
     (h₁ : Coplanar A B C P) (h₂ : Coplanar A B C Q)
     (h₃ : Col U V P) (h₄ : Col U V Q) : P = Q := sorry
 
-theorem cong3_cop2__col (A B C P Q : Tpoint)
+theorem cong3_cop2_col (A B C P Q : Tpoint)
     (h₁ : Coplanar A B C P) (h₂ : Coplanar A B C Q) (hPQ : P ≠ Q)
     (h₃ : Cong A P A Q) (h₄ : Cong B P B Q) (h₅ : Cong C P C Q) :
     Col A B C := sorry
@@ -318,12 +318,12 @@ theorem osp_symmetry (A B C P Q : Tpoint) (h : OSP A B C P Q) :
 theorem osp_transitivity (A B C P Q R : Tpoint)
     (h₁ : OSP A B C P Q) (h₂ : OSP A B C Q R) : OSP A B C P R := sorry
 
-theorem cop3_tsp__tsp (A B C D E F P Q : Tpoint)
+theorem cop3_tsp_tsp (A B C D E F P Q : Tpoint)
     (hNCol : ¬ Col D E F)
     (h₁ : Coplanar A B C D) (h₂ : Coplanar A B C E) (h₃ : Coplanar A B C F)
     (h₄ : TSP A B C P Q) : TSP D E F P Q := sorry
 
-theorem cop3_osp__osp (A B C D E F P Q : Tpoint)
+theorem cop3_osp_osp (A B C D E F P Q : Tpoint)
     (hNCol : ¬ Col D E F)
     (h₁ : Coplanar A B C D) (h₂ : Coplanar A B C E) (h₃ : Coplanar A B C F)
     (h₄ : OSP A B C P Q) : OSP D E F P Q := sorry
@@ -341,36 +341,36 @@ theorem osp_distincts (A B C P Q : Tpoint) (h : OSP A B C P Q) :
     A ≠ P ∧ B ≠ P ∧ C ≠ P ∧
     A ≠ Q ∧ B ≠ Q ∧ C ≠ Q := sorry
 
-theorem tsp__ncop1 (A B C P Q : Tpoint) (h : TSP A B C P Q) :
+theorem tsp_ncop1 (A B C P Q : Tpoint) (h : TSP A B C P Q) :
     ¬ Coplanar A B C P := sorry
 
-theorem tsp__ncop2 (A B C P Q : Tpoint) (h : TSP A B C P Q) :
+theorem tsp_ncop2 (A B C P Q : Tpoint) (h : TSP A B C P Q) :
     ¬ Coplanar A B C Q := sorry
 
-theorem osp__ncop1 (A B C P Q : Tpoint) (h : OSP A B C P Q) :
+theorem osp_ncop1 (A B C P Q : Tpoint) (h : OSP A B C P Q) :
     ¬ Coplanar A B C P := sorry
 
-theorem osp__ncop2 (A B C P Q : Tpoint) (h : OSP A B C P Q) :
+theorem osp_ncop2 (A B C P Q : Tpoint) (h : OSP A B C P Q) :
     ¬ Coplanar A B C Q := sorry
 
-theorem tsp__nosp (A B C P Q : Tpoint) (h : TSP A B C P Q) :
+theorem tsp_nosp (A B C P Q : Tpoint) (h : TSP A B C P Q) :
     ¬ OSP A B C P Q := sorry
 
-theorem osp__ntsp (A B C P Q : Tpoint) (h : OSP A B C P Q) :
+theorem osp_ntsp (A B C P Q : Tpoint) (h : OSP A B C P Q) :
     ¬ TSP A B C P Q := sorry
 
-theorem osp_bet__osp (A B C P Q R : Tpoint)
+theorem osp_bet_osp (A B C P Q R : Tpoint)
     (h₁ : OSP A B C P R) (h₂ : Bet P Q R) : OSP A B C P Q := sorry
 
 theorem l9_18_3 (A B C X Y P : Tpoint)
     (hCop : Coplanar A B C P) (hCol : Col X Y P) :
     TSP A B C X Y ↔ Bet X P Y ∧ ¬ Coplanar A B C X ∧ ¬ Coplanar A B C Y := sorry
 
-theorem bet_cop__tsp (A B C X Y P : Tpoint)
+theorem bet_cop_tsp (A B C X Y P : Tpoint)
     (hNCop : ¬ Coplanar A B C X) (hPY : P ≠ Y)
     (hCop : Coplanar A B C P) (hBet : Bet X P Y) : TSP A B C X Y := sorry
 
-theorem cop_out__osp (A B C X Y P : Tpoint)
+theorem cop_out_osp (A B C X Y P : Tpoint)
     (hNCop : ¬ Coplanar A B C X) (hCop : Coplanar A B C P)
     (hOut : Out P X Y) : OSP A B C X Y := sorry
 
@@ -378,35 +378,35 @@ theorem l9_19_3 (A B C X Y P : Tpoint)
     (hCop : Coplanar A B C P) (hCol : Col X Y P) :
     OSP A B C X Y ↔ Out P X Y ∧ ¬ Coplanar A B C X := sorry
 
-theorem cop2_ts__tsp (A B C D E X Y : Tpoint)
+theorem cop2_ts_tsp (A B C D E X Y : Tpoint)
     (hNCop : ¬ Coplanar A B C X)
     (h₁ : Coplanar A B C D) (h₂ : Coplanar A B C E)
     (h₃ : TS D E X Y) : TSP A B C X Y := sorry
 
-theorem cop2_os__osp (A B C D E X Y : Tpoint)
+theorem cop2_os_osp (A B C D E X Y : Tpoint)
     (hNCop : ¬ Coplanar A B C X)
     (h₁ : Coplanar A B C D) (h₂ : Coplanar A B C E)
     (h₃ : OS D E X Y) : OSP A B C X Y := sorry
 
-theorem cop3_tsp__ts (A B C D E X Y : Tpoint)
+theorem cop3_tsp_ts (A B C D E X Y : Tpoint)
     (hDE : D ≠ E)
     (h₁ : Coplanar A B C D) (h₂ : Coplanar A B C E)
     (h₃ : Coplanar D E X Y) (h₄ : TSP A B C X Y) : TS D E X Y := sorry
 
-theorem cop3_osp__os (A B C D E X Y : Tpoint)
+theorem cop3_osp_os (A B C D E X Y : Tpoint)
     (hDE : D ≠ E)
     (h₁ : Coplanar A B C D) (h₂ : Coplanar A B C E)
     (h₃ : Coplanar D E X Y) (h₄ : OSP A B C X Y) : OS D E X Y := sorry
 
-theorem cop_tsp__ex_cop2 (A B C D E P : Tpoint)
+theorem cop_tsp_ex_cop2 (A B C D E P : Tpoint)
     (hCop : Coplanar A B C P) (h : TSP A B C D E) :
     ∃ Q, Coplanar A B C Q ∧ Coplanar D E P Q ∧ P ≠ Q := sorry
 
-theorem cop_osp__ex_cop2 (A B C D E P : Tpoint)
+theorem cop_osp_ex_cop2 (A B C D E P : Tpoint)
     (hCop : Coplanar A B C P) (h : OSP A B C D E) :
     ∃ Q, Coplanar A B C Q ∧ Coplanar D E P Q ∧ P ≠ Q := sorry
 
-theorem sac__coplanar (A B C D : Tpoint) (h : Saccheri A B C D) :
+theorem sac_coplanar (A B C D : Tpoint) (h : Saccheri A B C D) :
     Coplanar A B C D := sorry
 
 end T9

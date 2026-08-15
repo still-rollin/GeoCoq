@@ -1347,7 +1347,7 @@ theorem l8_24_c (A B P Q R T : Tpoint)
     (col_permutation_5_c A B X hColABX)
     (bet_col_c P X R (between_symmetry_c R X P hBetRXP))⟩
 
-theorem col_per2__per_c (A B C P X : Tpoint)
+theorem col_per2_per_c (A B C P X : Tpoint)
     (hAB : A ≠ B) (hCol : Col A B C)
     (h₁ : Per A X P) (h₂ : Per B X P) : Per C X P := by
   obtain ⟨Q, hQ⟩ := symmetric_point_construction_c P X
@@ -1479,7 +1479,7 @@ theorem perp_in_per_4_c (A B C D X : Tpoint) (h : Perp_at X A B C D) :
 #print axioms GeocoqTranslate.Tarski.Base.perp_in_perp_c
 #print axioms GeocoqTranslate.Tarski.Base.perp_proj_c
 #print axioms GeocoqTranslate.Tarski.Base.l8_24_c
-#print axioms GeocoqTranslate.Tarski.Base.col_per2__per_c
+#print axioms GeocoqTranslate.Tarski.Base.col_per2_per_c
 #print axioms GeocoqTranslate.Tarski.Base.perp_in_per_1_c
 #print axioms GeocoqTranslate.Tarski.Base.perp_in_per_2_c
 #print axioms GeocoqTranslate.Tarski.Base.perp_in_per_3_c

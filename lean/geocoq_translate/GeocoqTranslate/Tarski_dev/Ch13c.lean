@@ -10,7 +10,6 @@ theorem ang_exists_c :
     ∀ (A B C : Tpoint), A ≠ B → C ≠ B → ∃ (a : Tpoint → Tpoint → Tpoint → Prop), Q_CongA a ∧ a A B C :=
   fun b0 b1 b2 b3 b4 =>
   ⟨(fun D E F => CongA b0 b1 b2 D E F), (⟨(⟨b0, (⟨b1, (⟨b2, (⟨b3, (⟨b4, (fun X Y Z => ⟨(fun H1 => H1), (fun H1 => H1)⟩)⟩)⟩)⟩)⟩)⟩), (conga_refl_c b0 b1 b2 b3 b4)⟩)⟩
-
 theorem ex_points_ang_c :
     ∀ (a : Tpoint → Tpoint → Tpoint → Prop), Q_CongA a → ∃ (A : Tpoint), ∃ (B : Tpoint), ∃ (C : Tpoint), a A B C := by
   intro b0 b1
@@ -22,16 +21,20 @@ theorem ex_points_ang_c :
   have HH := H6 A B C
   obtain ⟨x, x0⟩ := HH
   exact ⟨A, (⟨B, (⟨C, (x (conga_refl_c A B C H3 H5))⟩)⟩)⟩
-
 theorem ang_conga_c :
-    ∀ (a : Tpoint → Tpoint → Tpoint → Prop) (A B C A' B' C' : Tpoint), Q_CongA a → a A B C → a A' B' C' → CongA A B C A' B' C' := sorry
+    ∀ (a : Tpoint → Tpoint → Tpoint → Prop) (A B C A' B' C' : Tpoint), Q_CongA a → a A B C → a A' B' C' → CongA A B C A' B' C' := by
+  intro a A B C A' B' C' h1 h2 h3
+  obtain ⟨A0, B0, C0, hA0B0, hC0B0, hIff⟩ := h1
+  have hCongA : CongA A0 B0 C0 A B C := (hIff A B C).2 h2
+  have hCongA' : CongA A0 B0 C0 A' B' C' := (hIff A' B' C').2 h3
+  have hCongASym : CongA A B C A0 B0 C0 := conga_sym_c _ _ _ _ _ _ hCongA
+  exact conga_trans_c A B C A0 B0 C0 A' B' C' hCongASym hCongA'
 theorem is_ang_conga_c :
     ∀ (A B C A' B' C' : Tpoint) (a : Tpoint → Tpoint → Tpoint → Prop), Ang A B C a → Ang A' B' C' a → CongA A B C A' B' C' := by
   intro b0 b1 b2 b3 b4 b5 b6 b7 b8
   obtain ⟨H1, H2⟩ := b8
   obtain ⟨_, H3⟩ := b7
   exact ang_conga_c b6 b0 b1 b2 b3 b4 b5 H1 H3 H2
-
 theorem is_ang_conga_is_ang_c :
     ∀ (A B C A' B' C' : Tpoint) (a : Tpoint → Tpoint → Tpoint → Prop), Ang A B C a → CongA A B C A' B' C' → Ang A' B' C' a := by
   intro b0 b1 b2 b3 b4 b5 b6 b7 b8
@@ -48,19 +51,16 @@ theorem is_ang_conga_is_ang_c :
   obtain ⟨x1, x2⟩ := HH1
   have H10 := x0 H2
   exact x1 (conga_trans_c A0 B0 C0 b0 b1 b2 b3 b4 b5 H10 b8)))⟩
-
 theorem not_conga_not_ang_c :
     ∀ (A B C A' B' C' : Tpoint) (a : Tpoint → Tpoint → Tpoint → Prop), Q_CongA a → ¬ (CongA A B C A' B' C') → a A B C → ¬ (a A' B' C') :=
   fun b0 b1 b2 b3 b4 b5 b6 b7 b8 b9 =>
   (fun H2 => (let HH := ang_conga_c b6 b0 b1 b2 b3 b4 b5 b7 b9 H2; ((b8 HH)).elim))
-
 theorem not_conga_is_ang_c :
     ∀ (A B C A' B' C' : Tpoint) (a : Tpoint → Tpoint → Tpoint → Prop), ¬ (CongA A B C A' B' C') → Ang A B C a → ¬ (a A' B' C') := by
   intro b0 b1 b2 b3 b4 b5 b6 b7 b8
   obtain ⟨H1, H2⟩ := b8
   intro H3
   exact b7 (ang_conga_c b6 b0 b1 b2 b3 b4 b5 H1 H2 H3)
-
 theorem not_cong_is_ang1_c :
     ∀ (A B C A' B' C' : Tpoint) (a : Tpoint → Tpoint → Tpoint → Prop), ¬ (CongA A B C A' B' C') → Ang A B C a → ¬ (Ang A' B' C' a) := by
   intro b0 b1 b2 b3 b4 b5 b6 b7 b8
@@ -68,7 +68,6 @@ theorem not_cong_is_ang1_c :
   obtain ⟨H2, H3⟩ := H1
   obtain ⟨_, H4⟩ := b8
   exact b7 (ang_conga_c b6 b0 b1 b2 b3 b4 b5 H2 H4 H3)
-
 theorem ex_eqa_c :
     ∀ (a1 a2 : Tpoint → Tpoint → Tpoint → Prop), (∃ A , ∃ (B : Tpoint), ∃ (C : Tpoint), Ang A B C a1 ∧ Ang A B C a2) → EqA a1 a2 := by
   intro b0 b1 b2
@@ -86,12 +85,10 @@ theorem ex_eqa_c :
   exact H10)))), (fun H7 => (let H8 := is_ang_conga_c A B C A0 B0 C0 b1 H4 (⟨H5, H7⟩); (let H9 := is_ang_conga_is_ang_c A B C A0 B0 C0 b0 H3 H8; (by
   obtain ⟨_, H10⟩ := H9
   exact H10))))⟩
-
 theorem all_eqa_c :
     ∀ (A B C : Tpoint) (a1 a2 : Tpoint → Tpoint → Tpoint → Prop), Ang A B C a1 → Ang A B C a2 → EqA a1 a2 :=
   fun b0 b1 b2 b3 b4 b5 b6 =>
   ex_eqa_c b3 b4 (⟨b0, (⟨b1, (⟨b2, (⟨b5, b6⟩)⟩)⟩)⟩)
-
 theorem is_ang_distinct_c :
     ∀ (A B C : Tpoint) (a : Tpoint → Tpoint → Tpoint → Prop), Ang A B C a → A ≠ B ∧ C ≠ B := by
   intro b0 b1 b2 b3 b4
@@ -111,25 +108,30 @@ theorem is_ang_distinct_c :
   exact ⟨((fun H14 => (let H15 := H11 H14; (H15).elim))), ((fun H14 => (let H15 := H13 H14; (H15).elim)))⟩
 theorem null_ang_c :
     ∀ (A B C D : Tpoint) (a1 a2 : Tpoint → Tpoint → Tpoint → Prop), Ang A B A a1 → Ang C D C a2 → EqA a1 a2 := sorry
+
 theorem flat_ang_c :
     ∀ (A B C A' B' C' : Tpoint) (a1 a2 : Tpoint → Tpoint → Tpoint → Prop), Bet A B C → Bet A' B' C' → Ang A B C a1 → Ang A' B' C' a2 → EqA a1 a2 := sorry
+
 theorem ang_distinct_c :
     ∀ (a : Tpoint → Tpoint → Tpoint → Prop) (A B C : Tpoint), Q_CongA a → a A B C → A ≠ B ∧ C ≠ B :=
   fun b0 b1 b2 b3 b4 b5 =>
   (let H1 := ⟨b4, b5⟩; is_ang_distinct_c b1 b2 b3 b0 H1)
-
 theorem ex_ang_c :
     ∀ (A B C : Tpoint), B ≠ A → B ≠ C → ∃ (a : Tpoint → Tpoint → Tpoint → Prop), Q_CongA a ∧ a A B C :=
   fun b0 b1 b2 b3 b4 =>
   ⟨(fun X Y Z => CongA b0 b1 b2 X Y Z), (⟨(⟨b0, (⟨b1, (⟨b2, (⟨(Ne.symm b3), (⟨(Ne.symm b4), (fun X Y Z => ⟨(fun H1 => H1), (fun H1 => H1)⟩)⟩)⟩)⟩)⟩)⟩), (conga_refl_c b0 b1 b2 (Ne.symm b3) (Ne.symm b4))⟩)⟩
-
 theorem anga_exists_c :
     ∀ (A B C : Tpoint), A ≠ B → C ≠ B → Acute A B C → ∃ (a : Tpoint → Tpoint → Tpoint → Prop), Q_CongA_Acute a ∧ a A B C :=
   fun b0 b1 b2 b3 b4 b5 =>
   ⟨(fun D E F => CongA b0 b1 b2 D E F), (⟨(⟨b0, (⟨b1, (⟨b2, (⟨b5, (fun X Y Z => ⟨(fun H2 => H2), (fun H2 => H2)⟩)⟩)⟩)⟩)⟩), (conga_refl_c b0 b1 b2 b3 b4)⟩)⟩
-
 theorem anga_is_ang_c :
-    ∀ (a : Tpoint → Tpoint → Tpoint → Prop), Q_CongA_Acute a → Q_CongA a := sorry
+    ∀ (a : Tpoint → Tpoint → Tpoint → Prop), Q_CongA_Acute a → Q_CongA a := by
+  intro a h1
+  obtain ⟨A, B, C, hAcute, hIff⟩ := h1
+  obtain ⟨A', B', C', _hPer, hLeA, _hNotCongA⟩ := hAcute
+  obtain ⟨P, _hInAngle, hCongA⟩ := hLeA
+  obtain ⟨hAB, hCB, _⟩ := hCongA
+  exact ⟨A, B, C, hAB, hCB, hIff⟩
 theorem ex_points_anga_c :
     ∀ (a : Tpoint → Tpoint → Tpoint → Prop), Q_CongA_Acute a → ∃ (A : Tpoint), ∃ (B : Tpoint), ∃ (C : Tpoint), a A B C := by
   intro b0 b1
@@ -142,25 +144,21 @@ theorem ex_points_anga_c :
   obtain ⟨B, tempo_HQ⟩ := tempo_HP
   obtain ⟨C, H1⟩ := tempo_HQ
   exact ⟨A, (⟨B, (⟨C, H1⟩)⟩)⟩
-
 theorem anga_conga_c :
     ∀ (a : Tpoint → Tpoint → Tpoint → Prop) (A B C A' B' C' : Tpoint), Q_CongA_Acute a → a A B C → a A' B' C' → CongA A B C A' B' C' :=
   fun b0 b1 b2 b3 b4 b5 b6 b7 b8 b9 =>
   ang_conga_c b0 b1 b2 b3 b4 b5 b6 (anga_is_ang_c b0 b7) b8 b9
-
 theorem is_anga_to_is_ang_c :
     ∀ (A B C : Tpoint) (a : Tpoint → Tpoint → Tpoint → Prop), Ang_Acute A B C a → Ang A B C a := by
   intro b0 b1 b2 b3 b4
   obtain ⟨H0, H1⟩ := b4
   exact ⟨(anga_is_ang_c b3 H0), H1⟩
-
 theorem is_anga_conga_c :
     ∀ (A B C A' B' C' : Tpoint) (a : Tpoint → Tpoint → Tpoint → Prop), Ang_Acute A B C a → Ang_Acute A' B' C' a → CongA A B C A' B' C' := by
   intro b0 b1 b2 b3 b4 b5 b6 b7 b8
   obtain ⟨H1, H2⟩ := b8
   obtain ⟨_, H3⟩ := b7
   exact anga_conga_c b6 b0 b1 b2 b3 b4 b5 H1 H3 H2
-
 theorem is_anga_conga_is_anga_c :
     ∀ (A B C A' B' C' : Tpoint) (a : Tpoint → Tpoint → Tpoint → Prop), Ang_Acute A B C a → CongA A B C A' B' C' → Ang_Acute A' B' C' a := by
   intro b0 b1 b2 b3 b4 b5 b6 b7 b8
@@ -177,14 +175,12 @@ theorem is_anga_conga_is_anga_c :
   obtain ⟨x1, x2⟩ := HH1
   have H11 := x0 H2
   exact x1 (conga_trans_c A0 B0 C0 b0 b1 b2 b3 b4 b5 H11 b8))))⟩
-
 theorem not_conga_is_anga_c :
     ∀ (A B C A' B' C' : Tpoint) (a : Tpoint → Tpoint → Tpoint → Prop), ¬ CongA A B C A' B' C' → Ang_Acute A B C a → ¬ (a A' B' C') := by
   intro b0 b1 b2 b3 b4 b5 b6 b7 b8
   obtain ⟨H1, H2⟩ := b8
   intro H3
   exact b7 (anga_conga_c b6 b0 b1 b2 b3 b4 b5 H1 H2 H3)
-
 theorem not_cong_is_anga1_c :
     ∀ (A B C A' B' C' : Tpoint) (a : Tpoint → Tpoint → Tpoint → Prop), ¬ CongA A B C A' B' C' → Ang_Acute A B C a → ¬ Ang_Acute A' B' C' a := by
   intro b0 b1 b2 b3 b4 b5 b6 b7 b8
@@ -192,7 +188,6 @@ theorem not_cong_is_anga1_c :
   obtain ⟨H2, H3⟩ := H1
   obtain ⟨_, H4⟩ := b8
   exact b7 (anga_conga_c b6 b0 b1 b2 b3 b4 b5 H2 H4 H3)
-
 theorem ex_eqaa_c :
     ∀ (a1 a2 : Tpoint → Tpoint → Tpoint → Prop), (∃ A , ∃ (B : Tpoint), ∃ (C : Tpoint), Ang_Acute A B C a1 ∧ Ang_Acute A B C a2) → EqA a1 a2 := by
   intro b0 b1 b2
@@ -202,17 +197,14 @@ theorem ex_eqaa_c :
   obtain ⟨C, H2⟩ := H1
   obtain ⟨H3, H4⟩ := H2
   exact ⟨A, (⟨B, (⟨C, (⟨(is_anga_to_is_ang_c A B C b0 H3), (is_anga_to_is_ang_c A B C b1 H4)⟩)⟩)⟩)⟩))
-
 theorem all_eqaa_c :
     ∀ (A B C : Tpoint) (a1 a2 : Tpoint → Tpoint → Tpoint → Prop), Ang_Acute A B C a1 → Ang_Acute A B C a2 → EqA a1 a2 :=
   fun b0 b1 b2 b3 b4 b5 b6 =>
   ex_eqaa_c b3 b4 (⟨b0, (⟨b1, (⟨b2, (⟨b5, b6⟩)⟩)⟩)⟩)
-
 theorem is_anga_distinct_c :
     ∀ (A B C : Tpoint) (a : Tpoint → Tpoint → Tpoint → Prop), Ang_Acute A B C a → A ≠ B ∧ C ≠ B :=
   fun b0 b1 b2 b3 b4 =>
   is_ang_distinct_c b0 b1 b2 b3 (is_anga_to_is_ang_c b0 b1 b2 b3 b4)
-
 theorem null_anga_c :
     ∀ (A B C D : Tpoint) (a1 a2 : Tpoint → Tpoint → Tpoint → Prop), Ang_Acute A B A a1 → Ang_Acute C D C a2 → EqA a1 a2 := sorry
 

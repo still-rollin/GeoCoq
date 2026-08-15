@@ -6,20 +6,20 @@ open Tarski_neutral_dimensionless_with_decidable_point_equality
 
 variable {Tpoint : Type} [Tarski_neutral_dimensionless_with_decidable_point_equality Tpoint]
 
-theorem col__coplanar_c (A B C D : Tpoint) (H : Col A B C) : Coplanar A B C D :=
+theorem col_coplanar_c (A B C D : Tpoint) (H : Col A B C) : Coplanar A B C D :=
   ⟨C, (Or.inl (⟨H, (col_trivial_3_c C D)⟩))⟩
 
-theorem ncop__ncol_c (A B C D : Tpoint) (H : ¬ Coplanar A B C D) : ¬ Col A B C :=
-  (fun H0 => H (col__coplanar_c A B C D H0))
+theorem ncop_ncol_c (A B C D : Tpoint) (H : ¬ Coplanar A B C D) : ¬ Col A B C :=
+  (fun H0 => H (col_coplanar_c A B C D H0))
 
-theorem ts__coplanar_c (A B C D : Tpoint) (H : TS A B C D) : Coplanar A B C D := by
+theorem ts_coplanar_c (A B C D : Tpoint) (H : TS A B C D) : Coplanar A B C D := by
   obtain ⟨x, x0⟩ := H
   obtain ⟨x1, x2⟩ := x0
   obtain ⟨x3, x4⟩ := x2
   obtain ⟨x5, x6⟩ := x4
   exact ⟨x3, (Or.inl (⟨(col_permutation_5_c A x3 B (col_permutation_4_c x3 A B x5)), (col_permutation_5_c C x3 D (bet_col_c C x3 D x6))⟩))⟩
 
-theorem perp__coplanar_c (A B C D : Tpoint) (H : Perp A B C D) : Coplanar A B C D := by
+theorem perp_coplanar_c (A B C D : Tpoint) (H : Perp A B C D) : Coplanar A B C D := by
   obtain ⟨x, x0⟩ := H
   obtain ⟨_, H0⟩ := x0
   obtain ⟨_, H1⟩ := H0
@@ -1104,11 +1104,11 @@ theorem out_one_side_c (A B X Y : Tpoint)
     exact one_side_symmetry_c A B Y X
       (out_out_one_side_c A B Y Y X (one_side_reflexivity_c A B Y hNColYAB) (l6_6_c A X Y h₂))
 
-theorem bet__ts_c (A B X Y : Tpoint)
+theorem bet_ts_c (A B X Y : Tpoint)
     (hAY : A ≠ Y) (hNCol : ¬ Col A B X) (hBet : Bet X A Y) : TS A B X Y :=
   ⟨(not_col_permutation_5_c X B A (not_col_permutation_3_c A B X hNCol)), (⟨((fun H => hNCol (col_transitivity_1_c A Y B X hAY (col_permutation_5_c A B Y (col_permutation_1_c Y A B H)) (col_permutation_1_c X A Y (bet_col_c X A Y hBet))))), (⟨A, (⟨(col_trivial_1_c A B), hBet⟩)⟩)⟩)⟩
 
-theorem bet_ts__ts_c (A B X Y Z : Tpoint) (h₁ : TS A B X Y) (h₂ : Bet X Y Z) :
+theorem bet_ts_ts_c (A B X Y Z : Tpoint) (h₁ : TS A B X Y) (h₂ : Bet X Y Z) :
     TS A B X Z := by
   obtain ⟨hNX, hNY, T, hT1, hT2⟩ := h₁
   have hXY : X ≠ Y := by
@@ -1129,9 +1129,9 @@ theorem bet_ts__ts_c (A B X Y Z : Tpoint) (h₁ : TS A B X Y) (h₂ : Bet X Y Z)
   rw [← hYT] at hT1
   exact hNY hT1
 
-theorem bet_ts__os_c (A B X Y Z : Tpoint) (h₁ : TS A B X Y) (h₂ : Bet X Y Z) :
+theorem bet_ts_os_c (A B X Y Z : Tpoint) (h₁ : TS A B X Y) (h₂ : Bet X Y Z) :
     OS A B Y Z :=
-  ⟨X, (⟨(l9_2_c A B X Y h₁), (l9_2_c A B X Z (bet_ts__ts_c A B X Y Z h₁ h₂))⟩)⟩
+  ⟨X, (⟨(l9_2_c A B X Y h₁), (l9_2_c A B X Z (bet_ts_ts_c A B X Y Z h₁ h₂))⟩)⟩
 
 theorem l9_31_c (A X Y Z : Tpoint) (h₁ : OS A X Y Z) (h₂ : OS A Z Y X) :
     TS A Y X Z := by
@@ -1251,13 +1251,13 @@ theorem l9_31_c (A X Y Z : Tpoint) (h₁ : OS A X Y Z) (h₂ : OS A Z Y X) :
       one_side_transitivity_c A Y Z' T X (invert_one_side_c Y A Z' T hOSYAZ'T) hOSAYTX
     exact l9_8_2_c A Y Z' X Z hTSAYZ'Z hOSAYZ'X
 
-theorem col123__nos_c (A B P Q : Tpoint) (h : Col P Q A) : ¬ OS P Q A B :=
+theorem col123_nos_c (A B P Q : Tpoint) (h : Col P Q A) : ¬ OS P Q A B :=
   (fun HOne => (let H := one_side_not_col123_c P Q A B HOne; H h))
 
-theorem col124__nos_c (A B P Q : Tpoint) (h : Col P Q B) : ¬ OS P Q A B :=
-  (fun HOne => (let HN := col123__nos_c B A P Q h; HN (one_side_symmetry_c P Q A B HOne)))
+theorem col124_nos_c (A B P Q : Tpoint) (h : Col P Q B) : ¬ OS P Q A B :=
+  (fun HOne => (let HN := col123_nos_c B A P Q h; HN (one_side_symmetry_c P Q A B HOne)))
 
-theorem col2_os__os_c (A B C D X Y : Tpoint)
+theorem col2_os_os_c (A B C D X Y : Tpoint)
     (hCD : C ≠ D) (h₁ : Col A B C) (h₂ : Col A B D) (h₃ : OS A B X Y) :
     OS C D X Y := by
   obtain ⟨Z, Hts1, Hts2⟩ := h₃
@@ -1352,7 +1352,7 @@ theorem col_two_sides_bet_c (A B X Y : Tpoint)
       exact hNColYAB (show Col Y A B by colr)
   · exact between_symmetry_c Y A X hCase3
 
-theorem os_ts1324__os_c (A X Y Z : Tpoint)
+theorem os_ts1324_os_c (A X Y Z : Tpoint)
     (h₁ : OS A X Y Z) (h₂ : TS A Y X Z) : OS A Z X Y := by
   obtain ⟨HNColXY, HNColYZ, P, HColP, HPBet⟩ := h₂
   have hNotColAXZ : ¬ Col A X Z := one_side_not_col123_c A X Z Y (one_side_symmetry_c A X Y Z h₁)
@@ -1374,7 +1374,7 @@ theorem os_ts1324__os_c (A X Y Z : Tpoint)
     out_one_side_c A Z P Y (Or.inr (fun hc => HNColYZ (col_permutation_4_c A Z Y hc))) hAPY
   exact one_side_transitivity_c A Z X P Y sub1 sub2
 
-theorem ts2__ex_bet2_c (A B C D : Tpoint) (h₁ : TS A C B D) (h₂ : TS B D A C) :
+theorem ts2_ex_bet2_c (A B C D : Tpoint) (h₁ : TS A C B D) (h₂ : TS B D A C) :
     ∃ X, Bet A X C ∧ Bet B X D := by
   obtain ⟨hNColBAC, hNColDAC, X, hCol, hBet⟩ := h₁
   refine ⟨X, ?_, hBet⟩
@@ -1467,7 +1467,7 @@ theorem l8_21_bis_c (A B C X Y : Tpoint)
   obtain ⟨-, -, T', hColT'AB, hBetCT'P'⟩ := hTSABCP'
   exact ⟨P', hCongAP'XY, finalPerp, hNCol, hNColP'AB, T', hColT'AB, hBetCT'P'⟩
 
-theorem ts__ncol_c (A B X Y : Tpoint) (h : TS A B X Y) :
+theorem ts_ncol_c (A B X Y : Tpoint) (h : TS A B X Y) :
     ¬ Col A X Y ∨ ¬ Col B X Y := by
   obtain ⟨hNX, hNY, T, hTC, hBet⟩ := h
   rcases eq_dec_points_c X T with hXT | hXT
@@ -1550,7 +1550,7 @@ theorem one_or_two_sides_aux_c (A B C D X : Tpoint)
         ⟨hNC1, hNColXAB, A, col_trivial_1_c A B, between_symmetry_c X A C hBetXAC⟩,
         ⟨hNC2, hNColXAB, B, col_trivial_3_c B A, between_symmetry_c X B D hBetXBD⟩⟩
 
-theorem cop__one_or_two_sides_c (A B C D : Tpoint)
+theorem cop_one_or_two_sides_c (A B C D : Tpoint)
     (hCop : Coplanar A B C D) (hNC1 : ¬ Col C A B) (hNC2 : ¬ Col D A B) :
     TS A B C D ∨ OS A B C D := by
   obtain ⟨X, H2⟩ := hCop
@@ -1571,7 +1571,7 @@ theorem cop__one_or_two_sides_c (A B C D : Tpoint)
       · exact Or.inl (l9_2_c A B D C H7)
       · exact Or.inr (one_side_symmetry_c A B D C H7)
 
-theorem os__coplanar_c (A B C D : Tpoint) (h : OS A B C D) :
+theorem os_coplanar_c (A B C D : Tpoint) (h : OS A B C D) :
     Coplanar A B C D := by
   have HOS := h
   have HNCol : ¬ Col A B C := one_side_not_col123_c A B C D HOS
@@ -1615,7 +1615,7 @@ theorem os__coplanar_c (A B C D : Tpoint) (h : OS A B C D) :
       show Col B C C'; colr
     rcases bet_dec_c T B A with hBetTBA | hNBetTBA
     · -- Bet T B A
-      refine coplanar_perm_18_c B C D A (ts__coplanar_c B C D A ?_)
+      refine coplanar_perm_18_c B C D A (ts_coplanar_c B C D A ?_)
       have hTSBCTA : TS B C T A :=
         ⟨hNCol3, HNCol, B, col_trivial_1_c B C, hBetTBA⟩
       have hOSBCTD : OS B C T D :=
@@ -1623,7 +1623,7 @@ theorem os__coplanar_c (A B C D : Tpoint) (h : OS A B C D) :
           (bet_out_c C' T D hC'T.symm (between_symmetry_c D T C' hBetDTC'))
       exact l9_8_2_c B C T D A hTSBCTA hOSBCTD
     · -- ¬ Bet T B A
-      refine coplanar_perm_19_c B D C A (ts__coplanar_c B D C A ?_)
+      refine coplanar_perm_19_c B D C A (ts_coplanar_c B D C A ?_)
       have hColDC'T : Col D C' T := by
         have hh := bet_col_c D T C' hBetDTC'
         show Col D C' T; colr
@@ -1652,10 +1652,10 @@ theorem coplanar_trans_1_c (P Q R A B : Tpoint)
     · rcases col_dec_c Q A B with hColQAB | hNColQAB
       · exact ⟨Q, Or.inl ⟨col_trivial_3_c Q R, by colr⟩⟩
       · have hA : TS Q R P A ∨ OS Q R P A :=
-          cop__one_or_two_sides_c Q R P A (coplanar_perm_8_c P Q R A h₁) hNCol
+          cop_one_or_two_sides_c Q R P A (coplanar_perm_8_c P Q R A h₁) hNCol
             (fun hh => hNColQRA (by colr))
         have hB : TS Q R P B ∨ OS Q R P B :=
-          cop__one_or_two_sides_c Q R P B (coplanar_perm_8_c P Q R B h₂) hNCol
+          cop_one_or_two_sides_c Q R P B (coplanar_perm_8_c P Q R B h₂) hNCol
             (fun hh => hNColQRB (by colr))
         have hDij : TS Q R A B ∨ OS Q R A B := by
           rcases hA with hA_TS | hA_OS
@@ -1666,23 +1666,23 @@ theorem coplanar_trans_1_c (P Q R A B : Tpoint)
             · exact Or.inl (l9_8_2_c Q R P A B hB_TS hA_OS)
             · exact Or.inr (one_side_transitivity_c Q R A P B (one_side_symmetry_c Q R P A hA_OS) hB_OS)
         rcases hDij with hTS | hOS
-        · exact ts__coplanar_c Q R A B hTS
-        · exact os__coplanar_c Q R A B hOS
+        · exact ts_coplanar_c Q R A B hTS
+        · exact os_coplanar_c Q R A B hOS
 
-theorem col_cop__cop_c (A B C D E : Tpoint)
+theorem col_cop_cop_c (A B C D E : Tpoint)
     (hCop : Coplanar A B C D) (hCD : C ≠ D) (hCol : Col C D E) :
     Coplanar A B C E := by
   rcases col_dec_c D A C with hColDAC | hNColDAC
   · have hColECD : Col E C D := by colr
     have hColACD : Col A C D := by colr
     have hColACE : Col A C E := l6_16_1_c C D E A hCD hColECD hColACD
-    exact coplanar_perm_4_c A C E B (col__coplanar_c A C E B hColACE)
+    exact coplanar_perm_4_c A C E B (col_coplanar_c A C E B hColACE)
   · have hColDCE : Col D C E := by colr
     have hCop1 : Coplanar D A C B := coplanar_perm_19_c A B C D hCop
-    have hCop2 : Coplanar D A C E := coplanar_perm_4_c D C E A (col__coplanar_c D C E A hColDCE)
+    have hCop2 : Coplanar D A C E := coplanar_perm_4_c D C E A (col_coplanar_c D C E A hColDCE)
     exact coplanar_perm_2_c A C B E (coplanar_trans_1_c D A C B E hNColDAC hCop1 hCop2)
 
-theorem bet_cop__cop_c (A B C D E : Tpoint)
+theorem bet_cop_cop_c (A B C D E : Tpoint)
     (hCop : Coplanar A B C E) (hBet : Bet C D E) : Coplanar A B C D := by
   have o := point_equality_decidability C E
   rcases o with x | x
@@ -1690,24 +1690,24 @@ theorem bet_cop__cop_c (A B C D E : Tpoint)
     have HBet1 := between_identity C D hBet
     subst HBet1
     exact hCop
-  · exact col_cop__cop_c A B C E D hCop x (col_permutation_5_c C D E (bet_col_c C D E hBet))
+  · exact col_cop_cop_c A B C E D hCop x (col_permutation_5_c C D E (bet_col_c C D E hBet))
 
-theorem col2_cop__cop_c (A B C D E F : Tpoint)
+theorem col2_cop_cop_c (A B C D E F : Tpoint)
     (hCop : Coplanar A B C D) (hCD : C ≠ D)
     (h₁ : Col C D E) (h₂ : Col C D F) : Coplanar A B E F := by
   rcases point_equality_decidability E C with hEC | hEC
-  · exact hEC ▸ col_cop__cop_c A B C D F hCop hCD h₂
+  · exact hEC ▸ col_cop_cop_c A B C D F hCop hCD h₂
   · have hColFCD : Col F C D := by colr
     have hColECD : Col E C D := by colr
     have hColECF : Col E C F := l6_16_1_c C D F E hCD hColFCD hColECD
-    exact col_cop__cop_c A B E C F
-      (coplanar_perm_1_c A B C E (col_cop__cop_c A B C D E hCop hCD h₁)) hEC hColECF
+    exact col_cop_cop_c A B E C F
+      (coplanar_perm_1_c A B C E (col_cop_cop_c A B C D E hCop hCD h₁)) hEC hColECF
 
-theorem col_cop2__cop_c (A B C U V P : Tpoint)
+theorem col_cop2_cop_c (A B C U V P : Tpoint)
     (hUV : U ≠ V) (h₁ : Coplanar A B C U) (h₂ : Coplanar A B C V)
     (hCol : Col U V P) : Coplanar A B C P := by
   rcases col_dec_c A B C with hColABC | hNColABC
-  · exact col__coplanar_c A B C P hColABC
+  · exact col_coplanar_c A B C P hColABC
   · have Haux : ∀ A B C : Tpoint, ¬ Col A B C → ¬ Col U A B →
         Coplanar A B C U → Coplanar A B C V → Coplanar A B C P := by
       intro A B C HNCol HNCol' HU HV
@@ -1715,7 +1715,7 @@ theorem col_cop2__cop_c (A B C U V P : Tpoint)
       have hInner2 : Coplanar A B U V :=
         coplanar_trans_1_c C A B U V (fun hh => HNCol (by colr))
           (coplanar_perm_12_c A B C U HU) (coplanar_perm_12_c A B C V HV)
-      have hABUP : Coplanar A B U P := col_cop__cop_c A B U V P hInner2 hUV hCol
+      have hABUP : Coplanar A B U P := col_cop_cop_c A B U V P hInner2 hUV hCol
       exact coplanar_trans_1_c U A B C P HNCol' hCUAB (coplanar_perm_12_c A B U P hABUP)
     rcases col_dec_c U A B with hColUAB | hNColUAB
     · rcases col_dec_c U A C with hColUAC | hNColUAC
@@ -1734,7 +1734,7 @@ theorem col_cop2__cop_c (A B C U V P : Tpoint)
           (coplanar_perm_2_c A B C U h₁) (coplanar_perm_2_c A B C V h₂))
     · exact Haux A B C hNColABC hNColUAB h₁ h₂
 
-theorem bet_cop2__cop_c (A B C U V W : Tpoint)
+theorem bet_cop2_cop_c (A B C U V W : Tpoint)
     (h₁ : Coplanar A B C U) (h₂ : Coplanar A B C W) (hBet : Bet U V W) :
     Coplanar A B C V := by
   have o := point_equality_decidability U W
@@ -1743,7 +1743,7 @@ theorem bet_cop2__cop_c (A B C U V W : Tpoint)
     have HBet1 := between_identity U V hBet
     subst HBet1
     exact h₁
-  · exact col_cop2__cop_c A B C U W V x h₁ h₂ (col_permutation_5_c U V W (bet_col_c U V W hBet))
+  · exact col_cop2_cop_c A B C U W V x h₁ h₂ (col_permutation_5_c U V W (bet_col_c U V W hBet))
 
 theorem coplanar_pseudo_trans_c (A B C D P Q R : Tpoint)
     (hNCol : ¬ Col P Q R)
@@ -1757,7 +1757,7 @@ theorem coplanar_pseudo_trans_c (A B C D P Q R : Tpoint)
     · have hRQ : R ≠ Q := (not_col_distincts_c P Q R HNC).2.2.1.symm
       have hInner : Coplanar Q R B C := coplanar_trans_1_c P Q R B C HNC HCop2 HCop3
       have hBCRQ : Coplanar B C R Q := coplanar_perm_17_c Q R B C hInner
-      exact coplanar_perm_18_c B C R A (col_cop__cop_c B C R Q A hBCRQ hRQ hColRQA)
+      exact coplanar_perm_18_c B C R A (col_cop_cop_c B C R Q A hBCRQ hRQ hColRQA)
     · have hNColQRA : ¬ Col Q R A := fun hh => hNColRQA (by colr)
       have hCopQRAB : Coplanar Q R A B := coplanar_trans_1_c P Q R A B HNC HCop1 HCop2
       have hCopQRAC : Coplanar Q R A C := coplanar_trans_1_c P Q R A C HNC HCop1 HCop3
@@ -1773,7 +1773,7 @@ theorem coplanar_pseudo_trans_c (A B C D P Q R : Tpoint)
     have hCopAQ : Coplanar A B C Q :=
       Haux P R Q A B C hNColPRQ
         (coplanar_perm_2_c P Q R A h₁) (coplanar_perm_2_c P Q R B h₂) (coplanar_perm_2_c P Q R C h₃)
-    exact col_cop2__cop_c A B C P Q D hPQ hCopAP hCopAQ hColPQD
+    exact col_cop2_cop_c A B C P Q D hPQ hCopAP hCopAQ hColPQD
   · have hNColRPQ : ¬ Col R P Q := fun hh => hNCol (by colr)
     have hCopPQDA : Coplanar P Q D A :=
       coplanar_trans_1_c R P Q D A hNColRPQ (coplanar_perm_12_c P Q R D h₄) (coplanar_perm_12_c P Q R A h₁)
@@ -1792,7 +1792,7 @@ theorem l9_30_c (A B C D E F P X Y Z : Tpoint)
   rcases col_dec_c X Y Z with hCol | hNCol
   · exact hCol
   · exfalso
-    have hNColABC : ¬ Col A B C := ncop__ncol_c A B C P hNCopP
+    have hNColABC : ¬ Col A B C := ncop_ncol_c A B C P hNCopP
     have hCopXYZA : Coplanar X Y Z A :=
       coplanar_pseudo_trans_c X Y Z A A B C hNColABC h₁ h₂ h₃
         ⟨A, Or.inl ⟨col_trivial_3_c A B, col_trivial_2_c C A⟩⟩
@@ -1806,7 +1806,7 @@ theorem l9_30_c (A B C D E F P X Y Z : Tpoint)
       coplanar_pseudo_trans_c X Y Z P D E F hNColDEF h₄ h₅ h₆ hCopDEF_P
     exact hNCopP (coplanar_pseudo_trans_c A B C P X Y Z hNCol hCopXYZA hCopXYZB hCopXYZC hCopXYZP)
 
-theorem cop_per2__col_c (A X Y Z : Tpoint)
+theorem cop_per2_col_c (A X Y Z : Tpoint)
     (hCop : Coplanar A X Y Z) (hAZ : A ≠ Z)
     (h₁ : Per X Z A) (h₂ : Per Y Z A) : Col X Y Z := by
   obtain ⟨B', hMid1, hCong1⟩ := h₁
@@ -1837,8 +1837,7 @@ theorem cop_per2__col_c (A X Y Z : Tpoint)
           have hCongAWBW : Cong A W B W := cong_commutativity_c W A W B hCongW
           rcases hColAWI with hBet1 | hBet1 | hBet1
           · -- Bet A W I
-            have hOutAWI : Out A W I := ⟨hWA, hAI.symm, Or.inl hBet1⟩
-            have hLe1 : Le A W A I := l6_13_2_c A W I hOutAWI hBet1
+            have hLe1 : Le A W A I := l6_13_2_c A W I hBet1
             have hCongAIBI : Cong A I B I :=
               cong_right_commutativity_c A I I B (cong_left_commutativity_c I A I B hCong3)
             have hLe2 : Le A W B I :=
@@ -1934,7 +1933,7 @@ theorem cop_per2__col_c (A X Y Z : Tpoint)
               subst hIZ
               exact hCol2
 
-theorem cop_perp2__col_c (X Y Z A B : Tpoint)
+theorem cop_perp2_col_c (X Y Z A B : Tpoint)
     (hCop : Coplanar A B Y Z) (h₁ : Perp X Y A B) (h₂ : Perp X Z A B) :
     Col X Y Z := by
   rcases col_dec_c A B X with hColABX | hNColABX
@@ -1945,7 +1944,7 @@ theorem cop_perp2__col_c (X Y Z A B : Tpoint)
       have hXB : X ≠ B := (perp_distinct_c X Y X B h₁).2
       have hCopBYZX : Coplanar B Y Z X := coplanar_perm_9_c X B Y Z hCop
       exact col_permutation_2_c Y Z X
-        (cop_per2__col_c B Y Z X hCopBYZX hXB.symm hPerXYB hPerZXB)
+        (cop_per2_col_c B Y Z X hCopBYZX hXB.symm hPerXYB hPerZXB)
     · have hAX : A ≠ X := hXA.symm
       have hAB : A ≠ B := (perp_distinct_c X Y A B h₁).2
       have hPerpAXXY : Perp A X X Y :=
@@ -1956,10 +1955,10 @@ theorem cop_perp2__col_c (X Y Z A B : Tpoint)
       have hPerZXA : Per Z X A := perp_per_1_c X Z A (perp_sym_c A X X Z hPerpAXXZ)
       have hCopYZAB : Coplanar Y Z A B := coplanar_perm_16_c A B Y Z hCop
       have hCopYZAX : Coplanar Y Z A X :=
-        col_cop__cop_c Y Z A B X hCopYZAB hAB hColABX
+        col_cop_cop_c Y Z A B X hCopYZAB hAB hColABX
       have hCopAYZX : Coplanar A Y Z X := coplanar_perm_12_c Y Z A X hCopYZAX
       exact col_permutation_2_c Y Z X
-        (cop_per2__col_c A Y Z X hCopAYZX hAX hPerYXA hPerZXA)
+        (cop_per2_col_c A Y Z X hCopAYZX hAX hPerYXA hPerZXA)
   · have h₁' := h₁
     have h₂' := h₂
     obtain ⟨Y0, hPerpAtY0⟩ := h₁'
@@ -2040,8 +2039,8 @@ theorem two_sides_dec_c (A B C D : Tpoint) : TS A B C D ∨ ¬ TS A B C D := by
         perp_left_comm_c C M A B (perp_sym_c A B C M hPerpABCM)
       have hPerpMDAB : Perp M D A B :=
         perp_left_comm_c D M A B (perp_sym_c A B D M hPerpABDM)
-      have hCopABCD : Coplanar A B C D := ts__coplanar_c A B C D hTS
-      have hColMCD : Col M C D := cop_perp2__col_c M C D A B hCopABCD hPerpMCAB hPerpMDAB
+      have hCopABCD : Coplanar A B C D := ts_coplanar_c A B C D hTS
+      have hColMCD : Col M C D := cop_perp2_col_c M C D A B hCopABCD hPerpMCAB hPerpMDAB
       have hOutMD'D : Out M D' D := hMC0 ▸ hOutC0D'D
       have hDM : D ≠ M := fun hh => hNColABD (hh ▸ hColABM)
       have hColMD'D : Col M D' D := out_col_c M D' D hOutMD'D
@@ -2079,18 +2078,18 @@ theorem two_sides_dec_c (A B C D : Tpoint) : TS A B C D ∨ ¬ TS A B C D := by
       rw [hMM']
       exact between_symmetry_c D' M' C hBetD'M'C
 
-theorem cop_nts__os_c (A B C D : Tpoint)
+theorem cop_nts_os_c (A B C D : Tpoint)
     (hCop : Coplanar A B C D) (hNC1 : ¬ Col C A B) (hNC2 : ¬ Col D A B)
     (hNTS : ¬ TS A B C D) : OS A B C D := by
-  have o := cop__one_or_two_sides_c A B C D hCop hNC1 hNC2
+  have o := cop_one_or_two_sides_c A B C D hCop hNC1 hNC2
   rcases o with H3 | H3
   · exact ((hNTS H3)).elim
   · exact H3
 
-theorem cop_nos__ts_c (A B C D : Tpoint)
+theorem cop_nos_ts_c (A B C D : Tpoint)
     (hCop : Coplanar A B C D) (hNC1 : ¬ Col C A B) (hNC2 : ¬ Col D A B)
     (hNOS : ¬ OS A B C D) : TS A B C D := by
-  have o := cop__one_or_two_sides_c A B C D hCop hNC1 hNC2
+  have o := cop_one_or_two_sides_c A B C D hCop hNC1 hNC2
   rcases o with H3 | H3
   · exact H3
   · exact ((hNOS H3)).elim
@@ -2110,11 +2109,11 @@ theorem cop_dec_c (A B C D : Tpoint) : Coplanar A B C D ∨ ¬ Coplanar A B C D 
   rcases col_dec_c D A B with hColDAB | hNColDAB
   · exact Or.inl ⟨D, Or.inl ⟨col_permutation_1_c D A B hColDAB, col_trivial_2_c C D⟩⟩
   rcases two_sides_dec_c A B C D with hTS | hNTS
-  · exact Or.inl (ts__coplanar_c A B C D hTS)
+  · exact Or.inl (ts_coplanar_c A B C D hTS)
   rcases one_side_dec_c A B C D with hOS | hNOS
-  · exact Or.inl (os__coplanar_c A B C D hOS)
+  · exact Or.inl (os_coplanar_c A B C D hOS)
   · exact Or.inr (fun hCop =>
-      (cop__one_or_two_sides_c A B C D hCop hNColCAB hNColDAB).elim hNTS hNOS)
+      (cop_one_or_two_sides_c A B C D hCop hNColCAB hNColDAB).elim hNTS hNOS)
 
 theorem ex_diff_cop_c (A B C D : Tpoint) :
     ∃ E, Coplanar A B C E ∧ D ≠ E := by
@@ -2145,7 +2144,7 @@ theorem ex_ncol_cop2_c (A B C D : Tpoint) :
   obtain ⟨F, HF, HCol⟩ := ex_ncol_cop_c A B C D E HDE
   exact ⟨E, F, HE, HF, HCol⟩
 
-theorem col2_cop2__eq_c (A B C U V P Q : Tpoint)
+theorem col2_cop2_eq_c (A B C U V P Q : Tpoint)
     (hNCop : ¬ Coplanar A B C U) (hUV : U ≠ V)
     (h₁ : Coplanar A B C P) (h₂ : Coplanar A B C Q)
     (h₃ : Col U V P) (h₄ : Col U V Q) : P = Q := by
@@ -2154,9 +2153,9 @@ theorem col2_cop2__eq_c (A B C U V P Q : Tpoint)
   · exfalso
     have hColUPQ : Col U P Q := col_transitivity_1_c U V P Q hUV h₃ h₄
     have hColPQU : Col P Q U := by colr
-    exact hNCop (col_cop2__cop_c A B C P Q U hPQ h₁ h₂ hColPQU)
+    exact hNCop (col_cop2_cop_c A B C P Q U hPQ h₁ h₂ hColPQU)
 
-theorem cong3_cop2__col_c (A B C P Q : Tpoint)
+theorem cong3_cop2_col_c (A B C P Q : Tpoint)
     (h₁ : Coplanar A B C P) (h₂ : Coplanar A B C Q) (hPQ : P ≠ Q)
     (h₃ : Cong A P A Q) (h₄ : Cong B P B Q) (h₅ : Cong C P C Q) :
     Col A B C := by
@@ -2171,26 +2170,26 @@ theorem cong3_cop2__col_c (A B C P Q : Tpoint)
     · subst hAM
       have hPA : P ≠ A := hMPQ.1.symm
       have hCopPBCA : Coplanar P B C A := coplanar_perm_21_c A B C P h₁
-      exact col_permutation_2_c B C A (cop_per2__col_c P B C A hCopPBCA hPA hPerBMP hPerCMP)
+      exact col_permutation_2_c B C A (cop_per2_col_c P B C A hCopPBCA hPA hPerBMP hPerCMP)
     · have hColPQM : Col P Q M := col_permutation_1_c M P Q (midpoint_col_c P M Q hMid)
       have hNColCAB : ¬ Col C A B := fun hh => hNCol (col_permutation_1_c C A B hh)
       have hCopCABP : Coplanar C A B P := coplanar_perm_12_c A B C P h₁
       have hCopCABQ : Coplanar C A B Q := coplanar_perm_12_c A B C Q h₂
       have hCopABPQ : Coplanar A B P Q :=
         coplanar_trans_1_c C A B P Q hNColCAB hCopCABP hCopCABQ
-      have hCopABPM : Coplanar A B P M := col_cop__cop_c A B P Q M hCopABPQ hPQ hColPQM
+      have hCopABPM : Coplanar A B P M := col_cop_cop_c A B P Q M hCopABPQ hPQ hColPQM
       have hCopPABM : Coplanar P A B M := coplanar_perm_12_c A B P M hCopABPM
       have hColABM : Col A B M :=
-        cop_per2__col_c P A B M hCopPABM hMPQ.1.symm hPerAMP hPerBMP
+        cop_per2_col_c P A B M hCopPABM hMPQ.1.symm hPerAMP hPerBMP
       have hNColBAC : ¬ Col B A C := fun hh => hNCol (col_permutation_4_c B A C hh)
       have hCopBACP : Coplanar B A C P := coplanar_perm_6_c A B C P h₁
       have hCopBACQ : Coplanar B A C Q := coplanar_perm_6_c A B C Q h₂
       have hCopACPQ : Coplanar A C P Q :=
         coplanar_trans_1_c B A C P Q hNColBAC hCopBACP hCopBACQ
-      have hCopACPM : Coplanar A C P M := col_cop__cop_c A C P Q M hCopACPQ hPQ hColPQM
+      have hCopACPM : Coplanar A C P M := col_cop_cop_c A C P Q M hCopACPQ hPQ hColPQM
       have hCopPACM : Coplanar P A C M := coplanar_perm_12_c A C P M hCopACPM
       have hColACM : Col A C M :=
-        cop_per2__col_c P A C M hCopPACM hMPQ.1.symm hPerAMP hPerCMP
+        cop_per2_col_c P A C M hCopPACM hMPQ.1.symm hPerAMP hPerCMP
       exact col_transitivity_1_c A M B C hAM
         (col_permutation_5_c A B M hColABM) (col_permutation_5_c A C M hColACM)
 
@@ -2207,25 +2206,25 @@ theorem l9_39_c (A B C D P Q R : Tpoint)
   have hNCopQ : ¬ Coplanar A B C Q := by
     intro hCopQ
     have hColDQP : Col D Q P := by colr
-    exact HP (col_cop2__cop_c A B C D Q P hDQ hCop hCopQ hColDQP)
+    exact HP (col_cop2_cop_c A B C D Q P hDQ hCop hCopQ hColDQP)
   refine ⟨hNCopQ, HR, ?_⟩
   rcases point_equality_decidability D T with hDT | hDT
-  · refine ⟨D, hDT ▸ HT, bet_out__bet_c P Q R D (hDT ▸ HBet) hOut⟩
+  · refine ⟨D, hDT ▸ HT, bet_out_bet_c P Q R D (hDT ▸ HBet) hOut⟩
   · have hNColPDT : ¬ Col P D T := by
       intro hColPDT
       have hColDTP : Col D T P := by colr
-      exact HP (col_cop2__cop_c A B C D T P hDT hCop HT hColDTP)
+      exact HP (col_cop2_cop_c A B C D T P hDT hCop HT hColDTP)
     have hNColRDT : ¬ Col R D T := by
       intro hColRDT
       have hColDTR : Col D T R := by colr
-      exact HR (col_cop2__cop_c A B C D T R hDT hCop HT hColDTR)
+      exact HR (col_cop2_cop_c A B C D T R hDT hCop HT hColDTR)
     have hTSDTQR : TS D T Q R :=
       l9_8_2_c D T P Q R
         ⟨hNColPDT, hNColRDT, T, col_trivial_3_c T D, HBet⟩
         (out_one_side_c D T P Q (Or.inl (fun hh => hNColPDT (by colr))) hOut)
     obtain ⟨hNColQDT, hNColRDT2, T', hColT'DT, hBetQT'R⟩ := hTSDTQR
     have hColDTT' : Col D T T' := by colr
-    exact ⟨T', col_cop2__cop_c A B C D T T' hDT hCop HT hColDTT', hBetQT'R⟩
+    exact ⟨T', col_cop2_cop_c A B C D T T' hDT hCop HT hColDTT', hBetQT'R⟩
 
 theorem l9_41_1_c (A B C P Q R : Tpoint)
     (h₁ : TSP A B C P R) (h₂ : TSP A B C Q R) : OSP A B C P Q :=
@@ -2254,7 +2253,7 @@ theorem l9_41_2_c (A B C P Q R : Tpoint)
   · -- Case: Col P Q S
     have hColQSX : Col Q S X := by colr
     have hColQSY : Col Q S Y := by colr
-    have hXY : X = Y := col2_cop2__eq_c A B C Q S X Y HQ hQS HX HY hColQSX hColQSY
+    have hXY : X = Y := col2_cop2_eq_c A B C Q S X Y HQ hQS HX HY hColQSX hColQSY
     subst hXY
     have hOutXPQ : Out X P Q := (l6_2_c P Q S X hPX hQY hSX HBetPXS).mp HBetQYS
     exact l9_39_c A B C X P Q R h₁ HX hOutXPQ
@@ -2279,14 +2278,14 @@ theorem l9_41_2_c (A B C P Q R : Tpoint)
 theorem tsp_exists_c (A B C P : Tpoint) (hNCop : ¬ Coplanar A B C P) :
     ∃ Q, TSP A B C P Q := by
   obtain ⟨Q, hBetPAQ, hCongAQAP⟩ := segment_construction P A A P
-  have hHA : Coplanar A B C A := coplanar_perm_1_c A B A C (col__coplanar_c A B A C (col_trivial_3_c A B))
+  have hHA : Coplanar A B C A := coplanar_perm_1_c A B A C (col_coplanar_c A B A C (col_trivial_3_c A B))
   refine ⟨Q, hNCop, ?_, A, hHA, hBetPAQ⟩
   have hAP : A ≠ P := fun e => hNCop (e ▸ hHA)
   have hAQ : A ≠ Q := cong_diff_3_c A Q A P hAP hCongAQAP
   intro hCopQ
   have hColPAQ : Col P A Q := bet_col_c P A Q hBetPAQ
   have hColAQP : Col A Q P := by colr
-  exact hNCop (col_cop2__cop_c A B C A Q P hAQ hHA hCopQ hColAQP)
+  exact hNCop (col_cop2_cop_c A B C A Q P hAQ hHA hCopQ hColAQP)
 
 theorem osp_reflexivity_c (A B C P : Tpoint) (hNCop : ¬ Coplanar A B C P) :
     OSP A B C P P := by
@@ -2303,12 +2302,12 @@ theorem osp_transitivity_c (A B C P Q R : Tpoint)
   obtain ⟨S, HPS, HQS⟩ := h₁
   exact ⟨S, HPS, l9_41_2_c A B C Q R S HQS h₂⟩
 
-theorem cop3_tsp__tsp_c (A B C D E F P Q : Tpoint)
+theorem cop3_tsp_tsp_c (A B C D E F P Q : Tpoint)
     (hNCol : ¬ Col D E F)
     (h₁ : Coplanar A B C D) (h₂ : Coplanar A B C E) (h₃ : Coplanar A B C F)
     (h₄ : TSP A B C P Q) : TSP D E F P Q := by
   obtain ⟨HP, HQ, T, HT, HBet⟩ := h₄
-  have hNColABC : ¬ Col A B C := ncop__ncol_c A B C P HP
+  have hNColABC : ¬ Col A B C := ncop_ncol_c A B C P HP
   have hCopDEFA : Coplanar D E F A :=
     coplanar_pseudo_trans_c D E F A A B C hNColABC h₁ h₂ h₃
       ⟨A, Or.inl ⟨col_trivial_3_c A B, col_trivial_2_c C A⟩⟩
@@ -2326,13 +2325,13 @@ theorem cop3_tsp__tsp_c (A B C D E F P Q : Tpoint)
   · exact fun hCopDEFQ =>
       HQ (coplanar_pseudo_trans_c A B C Q D E F hNCol hCopDEFA hCopDEFB hCopDEFC hCopDEFQ)
 
-theorem cop3_osp__osp_c (A B C D E F P Q : Tpoint)
+theorem cop3_osp_osp_c (A B C D E F P Q : Tpoint)
     (hNCol : ¬ Col D E F)
     (h₁ : Coplanar A B C D) (h₂ : Coplanar A B C E) (h₃ : Coplanar A B C F)
     (h₄ : OSP A B C P Q) : OSP D E F P Q := by
   obtain ⟨R, hPR, hQR⟩ := h₄
-  exact ⟨R, cop3_tsp__tsp_c A B C D E F P R hNCol h₁ h₂ h₃ hPR,
-         cop3_tsp__tsp_c A B C D E F Q R hNCol h₁ h₂ h₃ hQR⟩
+  exact ⟨R, cop3_tsp_tsp_c A B C D E F P R hNCol h₁ h₂ h₃ hPR,
+         cop3_tsp_tsp_c A B C D E F Q R hNCol h₁ h₂ h₃ hQR⟩
 
 theorem ncop_distincts_c (A B C D : Tpoint) (h : ¬ Coplanar A B C D) :
     A ≠ B ∧ A ≠ C ∧ A ≠ D ∧ B ≠ C ∧ B ≠ D ∧ C ≠ D := by
@@ -2375,29 +2374,29 @@ theorem osp_distincts_c (A B C P Q : Tpoint) (h : OSP A B C P Q) :
   obtain ⟨-, -, -, hAQ, hBQ, hCQ, -, -, -, -⟩ := hQR
   exact ⟨hAB, hAC, hBC, hAP, hBP, hCP, hAQ, hBQ, hCQ⟩
 
-theorem tsp__ncop1_c (A B C P Q : Tpoint) (h : TSP A B C P Q) :
+theorem tsp_ncop1_c (A B C P Q : Tpoint) (h : TSP A B C P Q) :
     ¬ Coplanar A B C P := by
   obtain ⟨H0, H1⟩ := h
   obtain ⟨_, _⟩ := H1
   exact H0
 
-theorem tsp__ncop2_c (A B C P Q : Tpoint) (h : TSP A B C P Q) :
+theorem tsp_ncop2_c (A B C P Q : Tpoint) (h : TSP A B C P Q) :
     ¬ Coplanar A B C Q := by
   obtain ⟨_, H0⟩ := h
   obtain ⟨H1, _⟩ := H0
   exact H1
 
-theorem osp__ncop1_c (A B C P Q : Tpoint) (h : OSP A B C P Q) :
+theorem osp_ncop1_c (A B C P Q : Tpoint) (h : OSP A B C P Q) :
     ¬ Coplanar A B C P := by
   rcases h with ⟨R, hTSP, _⟩
-  exact tsp__ncop1_c A B C P R hTSP
+  exact tsp_ncop1_c A B C P R hTSP
 
-theorem osp__ncop2_c (A B C P Q : Tpoint) (h : OSP A B C P Q) :
+theorem osp_ncop2_c (A B C P Q : Tpoint) (h : OSP A B C P Q) :
     ¬ Coplanar A B C Q := by
   obtain ⟨R, H1, H2⟩ := h
-  exact tsp__ncop1_c A B C Q R H2
+  exact tsp_ncop1_c A B C Q R H2
 
-theorem tsp__nosp_c (A B C P Q : Tpoint) (h : TSP A B C P Q) :
+theorem tsp_nosp_c (A B C P Q : Tpoint) (h : TSP A B C P Q) :
     ¬ OSP A B C P Q := by
   intro hOS
   have hAbs : TSP A B C P P :=
@@ -2405,10 +2404,10 @@ theorem tsp__nosp_c (A B C P Q : Tpoint) (h : TSP A B C P Q) :
   obtain ⟨-, -, -, -, -, -, -, -, -, hPP⟩ := tsp_distincts_c A B C P P hAbs
   exact hPP rfl
 
-theorem osp__ntsp_c (A B C P Q : Tpoint) (h : OSP A B C P Q) :
-    ¬ TSP A B C P Q := fun hTSP => tsp__nosp_c A B C P Q hTSP h
+theorem osp_ntsp_c (A B C P Q : Tpoint) (h : OSP A B C P Q) :
+    ¬ TSP A B C P Q := fun hTSP => tsp_nosp_c A B C P Q hTSP h
 
-theorem osp_bet__osp_c (A B C P Q R : Tpoint)
+theorem osp_bet_osp_c (A B C P Q R : Tpoint)
     (h₁ : OSP A B C P R) (h₂ : Bet P Q R) : OSP A B C P Q := by
   obtain ⟨S, hTSP_PS, HR, HS, Y, HY, hBetRYS⟩ := h₁
   have hTSP_PS' := hTSP_PS
@@ -2427,7 +2426,7 @@ theorem osp_bet__osp_c (A B C P Q R : Tpoint)
     have hColRYS : Col R Y S := bet_col_c R Y S hBetRYS
     have hColRSX : Col R S X := by colr
     have hColRSY : Col R S Y := by colr
-    have hXY : X = Y := col2_cop2__eq_c A B C R S X Y HR hRS HX HY hColRSX hColRSY
+    have hXY : X = Y := col2_cop2_eq_c A B C R S X Y HR hRS HX HY hColRSX hColRSY
     subst hXY
     have hOutXPR : Out X P R := (l6_2_c P R S X hPX hRY hSY hBetPXS).mp hBetRYS
     have hOutXPQ : Out X P Q := out_bet_out_1_c P Q R X hOutXPR h₂
@@ -2452,22 +2451,22 @@ theorem osp_bet__osp_c (A B C P Q R : Tpoint)
                 ⟨hNColQXY, -, Y', hColY'XY, hBetQY'S'⟩⟩ := hOSXYPQ
     have hXY : X ≠ Y := fun e => hNColPXY (e ▸ (col_trivial_2_c P X))
     have hCopX' : Coplanar A B C X' :=
-      col_cop2__cop_c A B C X Y X' hXY HX HY (col_permutation_1_c X' X Y hColX'XY)
+      col_cop2_cop_c A B C X Y X' hXY HX HY (col_permutation_1_c X' X Y hColX'XY)
     have hCopY' : Coplanar A B C Y' :=
-      col_cop2__cop_c A B C X Y Y' hXY HX HY (col_permutation_1_c Y' X Y hColY'XY)
+      col_cop2_cop_c A B C X Y Y' hXY HX HY (col_permutation_1_c Y' X Y hColY'XY)
     have hX'S' : X' ≠ S' := fun e => hNColS'XY (e ▸ hColX'XY)
     have hHS' : ¬ Coplanar A B C S' := by
       intro hCopS'
       apply HP
       have hColPX'S' : Col P X' S' := bet_col_c P X' S' hBetPX'S'
       have hColX'S'P : Col X' S' P := col_permutation_1_c P X' S' hColPX'S'
-      exact col_cop2__cop_c A B C X' S' P hX'S' hCopX' hCopS' hColX'S'P
+      exact col_cop2_cop_c A B C X' S' P hX'S' hCopX' hCopS' hColX'S'P
     have hQY' : Q ≠ Y' := fun e => hNColQXY (e ▸ hColY'XY)
     have hNCopQ : ¬ Coplanar A B C Q := by
       intro hCopQ
       apply hHS'
       have hColQY'S' : Col Q Y' S' := bet_col_c Q Y' S' hBetQY'S'
-      exact col_cop2__cop_c A B C Q Y' S' hQY' hCopQ hCopY' hColQY'S'
+      exact col_cop2_cop_c A B C Q Y' S' hQY' hCopQ hCopY' hColQY'S'
     exact ⟨S', ⟨HP, hHS', X', hCopX', hBetPX'S'⟩, ⟨hNCopQ, hHS', Y', hCopY', hBetQY'S'⟩⟩
 
 theorem l9_18_3_c (A B C X Y P : Tpoint)
@@ -2484,13 +2483,13 @@ theorem l9_18_3_c (A B C X Y P : Tpoint)
       exact HT
     have hColXTY : Col X T Y := bet_col_c X T Y HBet
     have hColXYT : Col X Y T := col_permutation_5_c X T Y hColXTY
-    have hTP : T = P := col2_cop2__eq_c A B C X Y T P HX hXY HT hCop hColXYT hCol
+    have hTP : T = P := col2_cop2_eq_c A B C X Y T P HX hXY HT hCop hColXYT hCol
     exact ⟨hTP ▸ HBet, HX, HY⟩
   · intro h
     obtain ⟨hBet, HX, HY⟩ := h
     exact ⟨HX, HY, P, hCop, hBet⟩
 
-theorem bet_cop__tsp_c (A B C X Y P : Tpoint)
+theorem bet_cop_tsp_c (A B C X Y P : Tpoint)
     (hNCop : ¬ Coplanar A B C X) (hPY : P ≠ Y)
     (hCop : Coplanar A B C P) (hBet : Bet X P Y) : TSP A B C X Y := by
   have hColXPY : Col X P Y := bet_col_c X P Y hBet
@@ -2499,10 +2498,10 @@ theorem bet_cop__tsp_c (A B C X Y P : Tpoint)
     intro hCopY
     apply hNCop
     have hColPYX : Col P Y X := col_permutation_1_c X P Y hColXPY
-    exact col_cop2__cop_c A B C P Y X hPY hCop hCopY hColPYX
+    exact col_cop2_cop_c A B C P Y X hPY hCop hCopY hColPYX
   exact (l9_18_3_c A B C X Y P hCop hColXYP).mpr ⟨hBet, hNCop, hNCopY⟩
 
-theorem cop_out__osp_c (A B C X Y P : Tpoint)
+theorem cop_out_osp_c (A B C X Y P : Tpoint)
     (hNCop : ¬ Coplanar A B C X) (hCop : Coplanar A B C P)
     (hOut : Out P X Y) : OSP A B C X Y := by
   have hOut' := hOut
@@ -2513,7 +2512,7 @@ theorem cop_out__osp_c (A B C X Y P : Tpoint)
   have hNCopY : ¬ Coplanar A B C Y := by
     intro hCopY
     apply hNCop
-    exact col_cop2__cop_c A B C P Y X hPY hCop hCopY hColPYX
+    exact col_cop2_cop_c A B C P Y X hPY hCop hCopY hColPYX
   obtain ⟨X', hBetXPX', hCongPX'PX⟩ := segment_construction X P P X
   have hPX' : P ≠ X' := cong_diff_3_c P X' P X hXP.symm hCongPX'PX
   have hColXPX' : Col X P X' := bet_col_c X P X' hBetXPX'
@@ -2521,8 +2520,8 @@ theorem cop_out__osp_c (A B C X Y P : Tpoint)
   have hNCopX' : ¬ Coplanar A B C X' := by
     intro hCopX'
     apply hNCop
-    exact col_cop2__cop_c A B C P X' X hPX' hCop hCopX' hColPX'X
-  have hBetYPX' : Bet Y P X' := bet_out__bet_c X Y X' P hBetXPX' hOut
+    exact col_cop2_cop_c A B C P X' X hPX' hCop hCopX' hColPX'X
+  have hBetYPX' : Bet Y P X' := bet_out_bet_c X Y X' P hBetXPX' hOut
   exact ⟨X', ⟨hNCop, hNCopX', P, hCop, hBetXPX'⟩, ⟨hNCopY, hNCopX', P, hCop, hBetYPX'⟩⟩
 
 theorem l9_19_3_c (A B C X Y P : Tpoint)
@@ -2530,59 +2529,59 @@ theorem l9_19_3_c (A B C X Y P : Tpoint)
     OSP A B C X Y ↔ Out P X Y ∧ ¬ Coplanar A B C X := by
   constructor
   · intro hOS
-    have hNCopX : ¬ Coplanar A B C X := osp__ncop1_c A B C X Y hOS
-    have hNCopY : ¬ Coplanar A B C Y := osp__ncop2_c A B C X Y hOS
+    have hNCopX : ¬ Coplanar A B C X := osp_ncop1_c A B C X Y hOS
+    have hNCopY : ¬ Coplanar A B C Y := osp_ncop2_c A B C X Y hOS
     have hColXPY : Col X P Y := col_permutation_5_c X Y P hCol
     have hNBet : ¬ Bet X P Y := by
       intro hBet
-      exact osp__ntsp_c A B C X Y hOS ⟨hNCopX, hNCopY, P, hCop, hBet⟩
+      exact osp_ntsp_c A B C X Y hOS ⟨hNCopX, hNCopY, P, hCop, hBet⟩
     exact ⟨not_bet_out_c X P Y hColXPY hNBet, hNCopX⟩
   · intro h
     obtain ⟨hOut, hNCop⟩ := h
-    exact cop_out__osp_c A B C X Y P hNCop hCop hOut
+    exact cop_out_osp_c A B C X Y P hNCop hCop hOut
 
-theorem cop2_ts__tsp_c (A B C D E X Y : Tpoint)
+theorem cop2_ts_tsp_c (A B C D E X Y : Tpoint)
     (hNCop : ¬ Coplanar A B C X)
     (h₁ : Coplanar A B C D) (h₂ : Coplanar A B C E)
     (h₃ : TS D E X Y) : TSP A B C X Y := by
   obtain ⟨HNCol, HNCol', T, hColTDE, hBetXTY⟩ := h₃
   have hDE : D ≠ E := fun e => HNCol (e ▸ col_trivial_2_c X D)
   have hColDET : Col D E T := col_permutation_1_c T D E hColTDE
-  have hCopT : Coplanar A B C T := col_cop2__cop_c A B C D E T hDE h₁ h₂ hColDET
+  have hCopT : Coplanar A B C T := col_cop2_cop_c A B C D E T hDE h₁ h₂ hColDET
   have hTY : T ≠ Y := fun e => HNCol' (e ▸ hColTDE)
   have hColXTY : Col X T Y := bet_col_c X T Y hBetXTY
   have hColTYX : Col T Y X := col_permutation_1_c X T Y hColXTY
   have hNCopY : ¬ Coplanar A B C Y := by
     intro hCopY
     apply hNCop
-    exact col_cop2__cop_c A B C T Y X hTY hCopT hCopY hColTYX
+    exact col_cop2_cop_c A B C T Y X hTY hCopT hCopY hColTYX
   exact ⟨hNCop, hNCopY, T, hCopT, hBetXTY⟩
 
-theorem cop2_os__osp_c (A B C D E X Y : Tpoint)
+theorem cop2_os_osp_c (A B C D E X Y : Tpoint)
     (hNCop : ¬ Coplanar A B C X)
     (h₁ : Coplanar A B C D) (h₂ : Coplanar A B C E)
     (h₃ : OS D E X Y) : OSP A B C X Y := by
   obtain ⟨Z, hXZ, hYZ⟩ := h₃
-  have hTSP_XZ : TSP A B C X Z := cop2_ts__tsp_c A B C D E X Z hNCop h₁ h₂ hXZ
-  have hNCopZ : ¬ Coplanar A B C Z := tsp__ncop2_c A B C X Z hTSP_XZ
+  have hTSP_XZ : TSP A B C X Z := cop2_ts_tsp_c A B C D E X Z hNCop h₁ h₂ hXZ
+  have hNCopZ : ¬ Coplanar A B C Z := tsp_ncop2_c A B C X Z hTSP_XZ
   have hTS_ZY : TS D E Z Y := l9_2_c D E Y Z hYZ
-  have hTSP_ZY : TSP A B C Z Y := cop2_ts__tsp_c A B C D E Z Y hNCopZ h₁ h₂ hTS_ZY
+  have hTSP_ZY : TSP A B C Z Y := cop2_ts_tsp_c A B C D E Z Y hNCopZ h₁ h₂ hTS_ZY
   have hTSP_YZ : TSP A B C Y Z := l9_38_c A B C Z Y hTSP_ZY
   exact ⟨Z, hTSP_XZ, hTSP_YZ⟩
 
-theorem cop3_tsp__ts_c (A B C D E X Y : Tpoint)
+theorem cop3_tsp_ts_c (A B C D E X Y : Tpoint)
     (hDE : D ≠ E)
     (h₁ : Coplanar A B C D) (h₂ : Coplanar A B C E)
     (h₃ : Coplanar D E X Y) (h₄ : TSP A B C X Y) : TS D E X Y :=
-  (let HX := tsp__ncop1_c A B C X Y h₄; (let HY := tsp__ncop2_c A B C X Y h₄; cop_nos__ts_c D E X Y h₃ ((fun H => HX (col_cop2__cop_c A B C D E X hDE h₁ h₂ (col_permutation_5_c D X E (col_permutation_4_c X D E H))))) ((fun H => HY (col_cop2__cop_c A B C D E Y hDE h₁ h₂ (col_permutation_5_c D Y E (col_permutation_4_c Y D E H))))) ((fun H => (let HTSP0 := tsp__nosp_c A B C X Y h₄; HTSP0 (cop2_os__osp_c A B C D E X Y HX h₁ h₂ H))))))
+  (let HX := tsp_ncop1_c A B C X Y h₄; (let HY := tsp_ncop2_c A B C X Y h₄; cop_nos_ts_c D E X Y h₃ ((fun H => HX (col_cop2_cop_c A B C D E X hDE h₁ h₂ (col_permutation_5_c D X E (col_permutation_4_c X D E H))))) ((fun H => HY (col_cop2_cop_c A B C D E Y hDE h₁ h₂ (col_permutation_5_c D Y E (col_permutation_4_c Y D E H))))) ((fun H => (let HTSP0 := tsp_nosp_c A B C X Y h₄; HTSP0 (cop2_os_osp_c A B C D E X Y HX h₁ h₂ H))))))
 
-theorem cop3_osp__os_c (A B C D E X Y : Tpoint)
+theorem cop3_osp_os_c (A B C D E X Y : Tpoint)
     (hDE : D ≠ E)
     (h₁ : Coplanar A B C D) (h₂ : Coplanar A B C E)
     (h₃ : Coplanar D E X Y) (h₄ : OSP A B C X Y) : OS D E X Y :=
-  (let HX := osp__ncop1_c A B C X Y h₄; (let HY := osp__ncop2_c A B C X Y h₄; cop_nts__os_c D E X Y h₃ ((fun H => HX (col_cop2__cop_c A B C D E X hDE h₁ h₂ (col_permutation_5_c D X E (col_permutation_4_c X D E H))))) ((fun H => HY (col_cop2__cop_c A B C D E Y hDE h₁ h₂ (col_permutation_5_c D Y E (col_permutation_4_c Y D E H))))) ((fun H => (let HOSP0 := osp__ntsp_c A B C X Y h₄; HOSP0 (cop2_ts__tsp_c A B C D E X Y HX h₁ h₂ H))))))
+  (let HX := osp_ncop1_c A B C X Y h₄; (let HY := osp_ncop2_c A B C X Y h₄; cop_nts_os_c D E X Y h₃ ((fun H => HX (col_cop2_cop_c A B C D E X hDE h₁ h₂ (col_permutation_5_c D X E (col_permutation_4_c X D E H))))) ((fun H => HY (col_cop2_cop_c A B C D E Y hDE h₁ h₂ (col_permutation_5_c D Y E (col_permutation_4_c Y D E H))))) ((fun H => (let HOSP0 := osp_ntsp_c A B C X Y h₄; HOSP0 (cop2_ts_tsp_c A B C D E X Y HX h₁ h₂ H))))))
 
-theorem cop_tsp__ex_cop2_c (A B C D E P : Tpoint)
+theorem cop_tsp_ex_cop2_c (A B C D E P : Tpoint)
     (hCop : Coplanar A B C P) (h : TSP A B C D E) :
     ∃ Q, Coplanar A B C Q ∧ Coplanar D E P Q ∧ P ≠ Q := by
   rcases col_dec_c D E P with hcol | hncol
@@ -2602,7 +2601,7 @@ theorem cop_tsp__ex_cop2_c (A B C D E P : Tpoint)
     rw [e]
     exact hColDET
 
-theorem cop_osp__ex_cop2_c (A B C D E P : Tpoint)
+theorem cop_osp_ex_cop2_c (A B C D E P : Tpoint)
     (hCop : Coplanar A B C P) (h : OSP A B C D E) :
     ∃ Q, Coplanar A B C Q ∧ Coplanar D E P Q ∧ P ≠ Q := by
   rcases col_dec_c D E P with hCol | hNCol
@@ -2623,12 +2622,12 @@ theorem cop_osp__ex_cop2_c (A B C D E P : Tpoint)
       have hColPE'D : Col P E' D := col_permutation_3_c D E' P hColAssume
       have hColPDE : Col P D E := col_transitivity_1_c P E' D E hPE' hColPE'D hColPE'E
       exact hNCol (col_permutation_1_c P D E hColPDE)
-    have hNCopE : ¬ Coplanar A B C E := osp__ncop2_c A B C D E h
+    have hNCopE : ¬ Coplanar A B C E := osp_ncop2_c A B C D E h
     have hTSP_EE' : TSP A B C E E' :=
-      bet_cop__tsp_c A B C E E' P hNCopE hPE' hCop hBetEPE'
+      bet_cop_tsp_c A B C E E' P hNCopE hPE' hCop hBetEPE'
     have hOSPED : OSP A B C E D := osp_symmetry_c A B C D E h
     have hTSP_DE' : TSP A B C D E' := l9_41_2_c A B C E D E' hTSP_EE' hOSPED
-    obtain ⟨Q, hCopQ, hCopDE'PQ, hPQ⟩ := cop_tsp__ex_cop2_c A B C D E' P hCop hTSP_DE'
+    obtain ⟨Q, hCopQ, hCopDE'PQ, hPQ⟩ := cop_tsp_ex_cop2_c A B C D E' P hCop hTSP_DE'
     have hCopDE'PE : Coplanar D E' P E :=
       ⟨E, Or.inr (Or.inr ⟨col_trivial_2_c D E, col_permutation_4_c P E' E hColPE'E⟩)⟩
     have hNColE'DP : ¬ Col E' D P :=
@@ -2639,10 +2638,10 @@ theorem cop_osp__ex_cop2_c (A B C D E P : Tpoint)
     have hCopDEPQ : Coplanar D E P Q := coplanar_perm_4_c D P Q E hCopDPQE
     exact ⟨Q, hCopQ, hCopDEPQ, hPQ⟩
 
-theorem sac__coplanar_c (A B C D : Tpoint) (h : Saccheri A B C D) :
+theorem sac_coplanar_c (A B C D : Tpoint) (h : Saccheri A B C D) :
     Coplanar A B C D := by
   obtain ⟨_, _, _, hOS⟩ := h
-  exact coplanar_perm_4_c A C D B (coplanar_perm_4_c A D B C (os__coplanar_c A D B C hOS))
+  exact coplanar_perm_4_c A C D B (coplanar_perm_4_c A D B C (os_coplanar_c A D B C hOS))
 
 #print axioms GeocoqTranslate.Tarski.Base.ts_distincts_c
 #print axioms GeocoqTranslate.Tarski.Base.l9_2_c
@@ -2680,47 +2679,47 @@ theorem sac__coplanar_c (A B C D : Tpoint) (h : Saccheri A B C D) :
 #print axioms GeocoqTranslate.Tarski.Base.col_one_side_c
 #print axioms GeocoqTranslate.Tarski.Base.out_out_one_side_c
 #print axioms GeocoqTranslate.Tarski.Base.out_one_side_c
-#print axioms GeocoqTranslate.Tarski.Base.bet__ts_c
-#print axioms GeocoqTranslate.Tarski.Base.bet_ts__ts_c
-#print axioms GeocoqTranslate.Tarski.Base.bet_ts__os_c
+#print axioms GeocoqTranslate.Tarski.Base.bet_ts_c
+#print axioms GeocoqTranslate.Tarski.Base.bet_ts_ts_c
+#print axioms GeocoqTranslate.Tarski.Base.bet_ts_os_c
 #print axioms GeocoqTranslate.Tarski.Base.l9_31_c
-#print axioms GeocoqTranslate.Tarski.Base.col123__nos_c
-#print axioms GeocoqTranslate.Tarski.Base.col124__nos_c
-#print axioms GeocoqTranslate.Tarski.Base.col2_os__os_c
+#print axioms GeocoqTranslate.Tarski.Base.col123_nos_c
+#print axioms GeocoqTranslate.Tarski.Base.col124_nos_c
+#print axioms GeocoqTranslate.Tarski.Base.col2_os_os_c
 #print axioms GeocoqTranslate.Tarski.Base.os_out_os_c
 #print axioms GeocoqTranslate.Tarski.Base.ts_ts_os_c
 #print axioms GeocoqTranslate.Tarski.Base.two_sides_not_col_c
 #print axioms GeocoqTranslate.Tarski.Base.col_one_side_out_c
 #print axioms GeocoqTranslate.Tarski.Base.col_two_sides_bet_c
-#print axioms GeocoqTranslate.Tarski.Base.os_ts1324__os_c
-#print axioms GeocoqTranslate.Tarski.Base.ts2__ex_bet2_c
+#print axioms GeocoqTranslate.Tarski.Base.os_ts1324_os_c
+#print axioms GeocoqTranslate.Tarski.Base.ts2_ex_bet2_c
 #print axioms GeocoqTranslate.Tarski.Base.out_one_side_1_c
 #print axioms GeocoqTranslate.Tarski.Base.out_two_sides_two_sides_c
 #print axioms GeocoqTranslate.Tarski.Base.l8_21_bis_c
-#print axioms GeocoqTranslate.Tarski.Base.ts__ncol_c
+#print axioms GeocoqTranslate.Tarski.Base.ts_ncol_c
 #print axioms GeocoqTranslate.Tarski.Base.one_or_two_sides_aux_c
-#print axioms GeocoqTranslate.Tarski.Base.cop__one_or_two_sides_c
-#print axioms GeocoqTranslate.Tarski.Base.os__coplanar_c
+#print axioms GeocoqTranslate.Tarski.Base.cop_one_or_two_sides_c
+#print axioms GeocoqTranslate.Tarski.Base.os_coplanar_c
 #print axioms GeocoqTranslate.Tarski.Base.coplanar_trans_1_c
-#print axioms GeocoqTranslate.Tarski.Base.col_cop__cop_c
-#print axioms GeocoqTranslate.Tarski.Base.bet_cop__cop_c
-#print axioms GeocoqTranslate.Tarski.Base.col2_cop__cop_c
-#print axioms GeocoqTranslate.Tarski.Base.col_cop2__cop_c
-#print axioms GeocoqTranslate.Tarski.Base.bet_cop2__cop_c
+#print axioms GeocoqTranslate.Tarski.Base.col_cop_cop_c
+#print axioms GeocoqTranslate.Tarski.Base.bet_cop_cop_c
+#print axioms GeocoqTranslate.Tarski.Base.col2_cop_cop_c
+#print axioms GeocoqTranslate.Tarski.Base.col_cop2_cop_c
+#print axioms GeocoqTranslate.Tarski.Base.bet_cop2_cop_c
 #print axioms GeocoqTranslate.Tarski.Base.coplanar_pseudo_trans_c
 #print axioms GeocoqTranslate.Tarski.Base.l9_30_c
-#print axioms GeocoqTranslate.Tarski.Base.cop_per2__col_c
-#print axioms GeocoqTranslate.Tarski.Base.cop_perp2__col_c
+#print axioms GeocoqTranslate.Tarski.Base.cop_per2_col_c
+#print axioms GeocoqTranslate.Tarski.Base.cop_perp2_col_c
 #print axioms GeocoqTranslate.Tarski.Base.two_sides_dec_c
-#print axioms GeocoqTranslate.Tarski.Base.cop_nts__os_c
-#print axioms GeocoqTranslate.Tarski.Base.cop_nos__ts_c
+#print axioms GeocoqTranslate.Tarski.Base.cop_nts_os_c
+#print axioms GeocoqTranslate.Tarski.Base.cop_nos_ts_c
 #print axioms GeocoqTranslate.Tarski.Base.one_side_dec_c
 #print axioms GeocoqTranslate.Tarski.Base.cop_dec_c
 #print axioms GeocoqTranslate.Tarski.Base.ex_diff_cop_c
 #print axioms GeocoqTranslate.Tarski.Base.ex_ncol_cop_c
 #print axioms GeocoqTranslate.Tarski.Base.ex_ncol_cop2_c
-#print axioms GeocoqTranslate.Tarski.Base.col2_cop2__eq_c
-#print axioms GeocoqTranslate.Tarski.Base.cong3_cop2__col_c
+#print axioms GeocoqTranslate.Tarski.Base.col2_cop2_eq_c
+#print axioms GeocoqTranslate.Tarski.Base.cong3_cop2_col_c
 #print axioms GeocoqTranslate.Tarski.Base.l9_38_c
 #print axioms GeocoqTranslate.Tarski.Base.l9_39_c
 #print axioms GeocoqTranslate.Tarski.Base.l9_41_1_c
@@ -2729,34 +2728,34 @@ theorem sac__coplanar_c (A B C D : Tpoint) (h : Saccheri A B C D) :
 #print axioms GeocoqTranslate.Tarski.Base.osp_reflexivity_c
 #print axioms GeocoqTranslate.Tarski.Base.osp_symmetry_c
 #print axioms GeocoqTranslate.Tarski.Base.osp_transitivity_c
-#print axioms GeocoqTranslate.Tarski.Base.cop3_tsp__tsp_c
-#print axioms GeocoqTranslate.Tarski.Base.cop3_osp__osp_c
+#print axioms GeocoqTranslate.Tarski.Base.cop3_tsp_tsp_c
+#print axioms GeocoqTranslate.Tarski.Base.cop3_osp_osp_c
 #print axioms GeocoqTranslate.Tarski.Base.ncop_distincts_c
 #print axioms GeocoqTranslate.Tarski.Base.tsp_distincts_c
 #print axioms GeocoqTranslate.Tarski.Base.osp_distincts_c
-#print axioms GeocoqTranslate.Tarski.Base.tsp__ncop1_c
-#print axioms GeocoqTranslate.Tarski.Base.tsp__ncop2_c
-#print axioms GeocoqTranslate.Tarski.Base.osp__ncop1_c
-#print axioms GeocoqTranslate.Tarski.Base.osp__ncop2_c
-#print axioms GeocoqTranslate.Tarski.Base.tsp__nosp_c
-#print axioms GeocoqTranslate.Tarski.Base.osp__ntsp_c
-#print axioms GeocoqTranslate.Tarski.Base.osp_bet__osp_c
+#print axioms GeocoqTranslate.Tarski.Base.tsp_ncop1_c
+#print axioms GeocoqTranslate.Tarski.Base.tsp_ncop2_c
+#print axioms GeocoqTranslate.Tarski.Base.osp_ncop1_c
+#print axioms GeocoqTranslate.Tarski.Base.osp_ncop2_c
+#print axioms GeocoqTranslate.Tarski.Base.tsp_nosp_c
+#print axioms GeocoqTranslate.Tarski.Base.osp_ntsp_c
+#print axioms GeocoqTranslate.Tarski.Base.osp_bet_osp_c
 #print axioms GeocoqTranslate.Tarski.Base.l9_18_3_c
-#print axioms GeocoqTranslate.Tarski.Base.bet_cop__tsp_c
-#print axioms GeocoqTranslate.Tarski.Base.cop_out__osp_c
+#print axioms GeocoqTranslate.Tarski.Base.bet_cop_tsp_c
+#print axioms GeocoqTranslate.Tarski.Base.cop_out_osp_c
 #print axioms GeocoqTranslate.Tarski.Base.l9_19_3_c
-#print axioms GeocoqTranslate.Tarski.Base.cop2_ts__tsp_c
-#print axioms GeocoqTranslate.Tarski.Base.cop2_os__osp_c
-#print axioms GeocoqTranslate.Tarski.Base.cop3_tsp__ts_c
-#print axioms GeocoqTranslate.Tarski.Base.cop3_osp__os_c
-#print axioms GeocoqTranslate.Tarski.Base.cop_tsp__ex_cop2_c
-#print axioms GeocoqTranslate.Tarski.Base.cop_osp__ex_cop2_c
-#print axioms GeocoqTranslate.Tarski.Base.sac__coplanar_c
+#print axioms GeocoqTranslate.Tarski.Base.cop2_ts_tsp_c
+#print axioms GeocoqTranslate.Tarski.Base.cop2_os_osp_c
+#print axioms GeocoqTranslate.Tarski.Base.cop3_tsp_ts_c
+#print axioms GeocoqTranslate.Tarski.Base.cop3_osp_os_c
+#print axioms GeocoqTranslate.Tarski.Base.cop_tsp_ex_cop2_c
+#print axioms GeocoqTranslate.Tarski.Base.cop_osp_ex_cop2_c
+#print axioms GeocoqTranslate.Tarski.Base.sac_coplanar_c
 
-#print axioms GeocoqTranslate.Tarski.Base.col__coplanar_c
-#print axioms GeocoqTranslate.Tarski.Base.ncop__ncol_c
-#print axioms GeocoqTranslate.Tarski.Base.ts__coplanar_c
-#print axioms GeocoqTranslate.Tarski.Base.perp__coplanar_c
+#print axioms GeocoqTranslate.Tarski.Base.col_coplanar_c
+#print axioms GeocoqTranslate.Tarski.Base.ncop_ncol_c
+#print axioms GeocoqTranslate.Tarski.Base.ts_coplanar_c
+#print axioms GeocoqTranslate.Tarski.Base.perp_coplanar_c
 #print axioms GeocoqTranslate.Tarski.Base.coplanar_perm_1_c
 #print axioms GeocoqTranslate.Tarski.Base.coplanar_perm_2_c
 #print axioms GeocoqTranslate.Tarski.Base.coplanar_perm_4_c

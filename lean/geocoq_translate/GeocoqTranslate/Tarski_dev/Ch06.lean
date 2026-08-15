@@ -66,7 +66,7 @@ theorem l6_2_c (A B C P : Tpoint)
         (between_symmetry_c B P C
           (between_exchange3_c A B P C (between_symmetry_c P B A H7) h))
 
-theorem bet_out__bet_c (A B C P : Tpoint) (h₁ : Bet A P C) (h₂ : Out P A B) :
+theorem bet_out_bet_c (A B C P : Tpoint) (h₁ : Bet A P C) (h₂ : Out P A B) :
     Bet B P C := by
   obtain ⟨hAP, hBP, hOr⟩ := h₂
   rcases eq_dec_points_c C P with hCP | hCP
@@ -230,9 +230,9 @@ theorem l6_13_1_c (P A B : Tpoint) (h₁ : Out P A B) (h₂ : Le P A P B) :
     rw [hYA] at hBetY
     exact hBetY
 
-theorem l6_13_2_c (P A B : Tpoint) (h₁ : Out P A B) (h₂ : Bet P A B) :
+theorem l6_13_2_c (P A B : Tpoint) (h₁ : Bet P A B) :
     Le P A P B :=
-  ⟨A, (⟨h₂, (cong_reflexivity P A)⟩)⟩
+  ⟨A, (⟨h₁, (cong_reflexivity P A)⟩)⟩
 
 theorem l6_16_1_c (P Q S X : Tpoint) (hPQ : P ≠ Q)
     (h₁ : Col S P Q) (h₂ : Col X P Q) : Col X P S := by
@@ -281,7 +281,7 @@ theorem l6_21_c (A B C D P Q : Tpoint)
       exact hNCol (col_transitivity_1_c A Q B C (Ne.symm hQA)
         (col_permutation_5_c A B Q h₂) (col_permutation_4_c Q A C s1))
 
-theorem col2__eq_c (A B X Y : Tpoint)
+theorem col2_eq_c (A B X Y : Tpoint)
     (h₁ : Col A X Y) (h₂ : Col B X Y) (h₃ : ¬ Col A X B) : X = Y := by
   apply l6_21_c A X B X X Y h₃
   · intro hBX
@@ -333,7 +333,7 @@ theorem colx_c (A B C X Y : Tpoint) (hAB : A ≠ B)
     exact col3_c A B X Y C hAB (col_permutation_1_c X A B hXAB)
       (col_permutation_1_c Y A B hYAB) h₃
 
-theorem out2__bet_c (A B C : Tpoint) (h₁ : Out A B C) (h₂ : Out C A B) : Bet A B C := by
+theorem out2_bet_c (A B C : Tpoint) (h₁ : Out A B C) (h₂ : Out C A B) : Bet A B C := by
   have Hout3 := l6_4_1_c A B C h₂
   obtain ⟨x, x0⟩ := Hout3
   obtain ⟨x1, x2⟩ := h₁
@@ -342,7 +342,7 @@ theorem out2__bet_c (A B C : Tpoint) (h₁ : Out A B C) (h₂ : Out C A B) : Bet
   · exact x5
   · exact ((x0 x5)).elim
 
-theorem bet2_le2__le1346_c (A B C A' B' C' : Tpoint)
+theorem bet2_le2_le1346_c (A B C A' B' C' : Tpoint)
     (h₁ : Bet A B C) (h₂ : Bet A' B' C')
     (h₃ : Le A B A' B') (h₄ : Le B C B' C') : Le A C A' C' := by
   rcases eq_dec_points_c A B with hAB | hAB
@@ -394,7 +394,7 @@ theorem bet2_le2__le1346_c (A B C A' B' C' : Tpoint)
              l2_11_c A B C A' B0 C0 h₁ hBetA'B0C0 hCongABA'B0
                (cong_symmetry_c B0 C0 B C hCongB0C0BC)⟩
 
-theorem bet2_le2__le2356_c (A B C A' B' C' : Tpoint)
+theorem bet2_le2_le2356_c (A B C A' B' C' : Tpoint)
     (h₁ : Bet A B C) (h₂ : Bet A' B' C')
     (h₃ : Le A B A' B') (h₄ : Le A' C' A C) : Le B' C' B C := by
   rcases eq_dec_points_c A B with hAB | hAB
@@ -436,10 +436,10 @@ theorem bet2_le2__le2356_c (A B C A' B' C' : Tpoint)
         (cong_symmetry_c A' C' A C0 hCongA'C'AC0))
       (cong_reflexivity B C)
 
-theorem bet2_le2__le1245_c (A B C A' B' C' : Tpoint)
+theorem bet2_le2_le1245_c (A B C A' B' C' : Tpoint)
     (h₁ : Bet A B C) (h₂ : Bet A' B' C')
     (h₃ : Le B C B' C') (h₄ : Le A' C' A C) : Le A' B' A B :=
-  le_comm_c B' A' B A (bet2_le2__le2356_c C B A C' B' A' (between_symmetry h₁) (between_symmetry h₂) (le_comm_c B C B' C' h₃) (le_comm_c A' C' A C h₄))
+  le_comm_c B' A' B A (bet2_le2_le2356_c C B A C' B' A' (between_symmetry h₁) (between_symmetry h₂) (le_comm_c B C B' C' h₃) (le_comm_c A' C' A C h₄))
 
 theorem cong_preserves_bet_c (B A' A0 E D' D0 : Tpoint)
     (h₁ : Bet B A' A0) (h₂ : Cong B A' E D') (h₃ : Cong B A0 E D0)
@@ -576,10 +576,10 @@ theorem bet2_out_out_c (A B C B' C' : Tpoint)
       have hAB'C : Bet A B' C := outer_transitivity_between_c A B' C' C h₃ hB'C'C hB'C'
       exact l5_3_c A B B' C h₂ hAB'C
 
-theorem bet2__out_c (A B C B' : Tpoint)
+theorem bet2_out_c (A B C B' : Tpoint)
     (hAB : A ≠ B) (hAB' : A ≠ B')
     (h₁ : Bet A B C) (h₂ : Bet A B' C) : Out A B B' :=
-  bet2_out_out_c A B C B' C (Ne.symm hAB) (Ne.symm hAB') ((let H3 := bet_neq12__neq h₁ hAB; out_trivial (Ne.symm H3))) h₁ h₂
+  bet2_out_out_c A B C B' C (Ne.symm hAB) (Ne.symm hAB') ((let H3 := bet_neq12_neq h₁ hAB; out_trivial (Ne.symm H3))) h₁ h₂
 
 theorem out_bet_out_1_c (A B C P : Tpoint) (h₁ : Out P A C) (h₂ : Bet A B C) :
     Out P A B := by
@@ -598,7 +598,7 @@ theorem out_bet_out_2_c (A B C P : Tpoint) (h₁ : Out P A C) (h₂ : Bet A B C)
     Out P B C :=
   l6_6 (out_bet_out_1_c C B A P (l6_6 h₁) (between_symmetry h₂))
 
-theorem out_bet__out_c (A B P Q : Tpoint) (h₁ : Bet P Q A) (h₂ : Out Q A B) :
+theorem out_bet_out_c (A B P Q : Tpoint) (h₁ : Bet P Q A) (h₂ : Out Q A B) :
     Out P A B := by
   obtain ⟨hAQ, hBQ, hd⟩ := h₂
   have hAP : A ≠ P := by
@@ -613,13 +613,13 @@ theorem out_bet__out_c (A B P Q : Tpoint) (h₁ : Bet P Q A) (h₂ : Out Q A B) 
 theorem segment_reverse_c (A B C : Tpoint) (h : Bet A B C) :
     ∃ B', Bet A B' C ∧ Cong C B' A B := by
   rcases eq_dec_points_c A B with rfl | hAB
-  · exact ⟨C, between_symmetry_c C C A (between_symmetry_c A C C (between_trivial_c A C)), 
+  · exact ⟨C, between_symmetry_c C C A (between_symmetry_c A C C (between_trivial_c A C)),
           le_anti_symmetry_c C C A A (le_trivial_c C A A) (le_trivial_c A C C)⟩
   · have hCA : C ≠ A := fun hCA => by
       rw [hCA] at h
       exact hAB (between_identity A B h)
     rcases segment_construction_3_c C A A B hCA hAB with ⟨B', hOut, hCong⟩
-    exact ⟨B', between_symmetry_c C B' A (cong_preserves_bet_c A B C C B' A h 
+    exact ⟨B', between_symmetry_c C B' A (cong_preserves_bet_c A B C C B' A h
               (cong_symmetry_c C B' A B hCong)
               (cong_symmetry_c C A A C (cong_symmetry_c A C C A (cong_right_commutativity_c A C A C (cong_reflexivity_c A C))))
               (l6_6_c C A B' hOut)), hCong⟩
@@ -718,7 +718,7 @@ theorem Out_cases_c (A B C : Tpoint) (h : Out A B C ∨ Out A C B) : Out A B C :
 #print axioms GeocoqTranslate.Tarski.Base.out_distinct_c
 #print axioms GeocoqTranslate.Tarski.Base.out_col_c
 #print axioms GeocoqTranslate.Tarski.Base.l6_2_c
-#print axioms GeocoqTranslate.Tarski.Base.bet_out__bet_c
+#print axioms GeocoqTranslate.Tarski.Base.bet_out_bet_c
 #print axioms GeocoqTranslate.Tarski.Base.l6_3_1_c
 #print axioms GeocoqTranslate.Tarski.Base.l6_3_2_c
 #print axioms GeocoqTranslate.Tarski.Base.l6_4_1_c
@@ -737,14 +737,14 @@ theorem Out_cases_c (A B C : Tpoint) (h : Out A B C ∨ Out A C B) : Out A B C :
 #print axioms GeocoqTranslate.Tarski.Base.col_transitivity_1_c
 #print axioms GeocoqTranslate.Tarski.Base.col_transitivity_2_c
 #print axioms GeocoqTranslate.Tarski.Base.l6_21_c
-#print axioms GeocoqTranslate.Tarski.Base.col2__eq_c
+#print axioms GeocoqTranslate.Tarski.Base.col2_eq_c
 #print axioms GeocoqTranslate.Tarski.Base.not_col_exists_c
 #print axioms GeocoqTranslate.Tarski.Base.col3_c
 #print axioms GeocoqTranslate.Tarski.Base.colx_c
-#print axioms GeocoqTranslate.Tarski.Base.out2__bet_c
-#print axioms GeocoqTranslate.Tarski.Base.bet2_le2__le1346_c
-#print axioms GeocoqTranslate.Tarski.Base.bet2_le2__le2356_c
-#print axioms GeocoqTranslate.Tarski.Base.bet2_le2__le1245_c
+#print axioms GeocoqTranslate.Tarski.Base.out2_bet_c
+#print axioms GeocoqTranslate.Tarski.Base.bet2_le2_le1346_c
+#print axioms GeocoqTranslate.Tarski.Base.bet2_le2_le2356_c
+#print axioms GeocoqTranslate.Tarski.Base.bet2_le2_le1245_c
 #print axioms GeocoqTranslate.Tarski.Base.cong_preserves_bet_c
 #print axioms GeocoqTranslate.Tarski.Base.out_cong_cong_c
 #print axioms GeocoqTranslate.Tarski.Base.not_out_bet_c
@@ -754,10 +754,10 @@ theorem Out_cases_c (A B C : Tpoint) (h : Out A B C ∨ Out A C B) : Out A B C :
 #print axioms GeocoqTranslate.Tarski.Base.out_to_bet_c
 #print axioms GeocoqTranslate.Tarski.Base.col_out2_col_c
 #print axioms GeocoqTranslate.Tarski.Base.bet2_out_out_c
-#print axioms GeocoqTranslate.Tarski.Base.bet2__out_c
+#print axioms GeocoqTranslate.Tarski.Base.bet2_out_c
 #print axioms GeocoqTranslate.Tarski.Base.out_bet_out_1_c
 #print axioms GeocoqTranslate.Tarski.Base.out_bet_out_2_c
-#print axioms GeocoqTranslate.Tarski.Base.out_bet__out_c
+#print axioms GeocoqTranslate.Tarski.Base.out_bet_out_c
 #print axioms GeocoqTranslate.Tarski.Base.segment_reverse_c
 #print axioms GeocoqTranslate.Tarski.Base.diff_col_ex_c
 #print axioms GeocoqTranslate.Tarski.Base.diff_bet_ex3_c
