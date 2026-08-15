@@ -8,8 +8,8 @@ and a **uniform** `maxHeartbeats = 800000` applied identically to every proof.
 
 > **Honesty invariant:** the per-lemma `proposition_*.lean` / `lemma_*.lean` files are
 > **never hand-edited**. They are produced *only* by the transpiler. All engineering lives
-> in the transpiler and the tactic library — see the paper, §5, for the eight general
-> fix-classes that took coverage from 84.6 % to 100 %.
+> in the transpiler and the tactic library (eight general fix-classes took coverage
+> from 84.6 % to 100 %).
 
 ## Layout
 
@@ -28,9 +28,6 @@ theories/Elements/OriginalProofs/ original Coq sources (for faithfulness compari
 transpiler/
   geolean_transpile.py            the deterministic Coq → Lean 4 transpiler
   audit_true_coverage.py          honest clean-rebuild coverage auditor
-docs/
-  paper/geolean_neurips.pdf       the paper (+ .tex, .sty)
-  the_prop30_thriller.md, …       case-study write-ups
 ```
 
 ## Reproduce the 234/234 result
