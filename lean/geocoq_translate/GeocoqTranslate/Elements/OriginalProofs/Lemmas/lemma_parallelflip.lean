@@ -24,28 +24,28 @@ theorem lemma_parallelflip :
   intro A B C D h1
   obtain ⟨U, V, u, v, X, hAB, hCD, hABU, hABV, hUV, hCDu, hCDv, huv, hnMeet, hbet1, hbet2⟩ := h1
   -- Col reorders (bounded forward_using)
-  have hBAU : Col B A U := by forward_using lemma_collinearorder
-  have hBAV : Col B A V := by forward_using lemma_collinearorder
-  have hDCu : Col D C u := by forward_using lemma_collinearorder
-  have hDCv : Col D C v := by forward_using lemma_collinearorder
+  have hBAU : Col B A U := by perm_close
+  have hBAV : Col B A V := by perm_close
+  have hDCu : Col D C u := by perm_close
+  have hDCv : Col D C v := by perm_close
   have hBA : B ≠ A := hAB.symm
   have hDC : D ≠ C := hCD.symm
   -- ¬ Meet variants, each reduced to ¬ Meet A B C D
   have hnMeetBACD : ¬ Meet B A C D := by
     intro hM
     obtain ⟨P, _, _, hBAP, hCDP⟩ := hM
-    have hABP : Col A B P := by forward_using lemma_collinearorder
+    have hABP : Col A B P := by perm_close
     exact hnMeet ⟨P, hAB, hCD, hABP, hCDP⟩
   have hnMeetABDC : ¬ Meet A B D C := by
     intro hM
     obtain ⟨P, _, _, hABP, hDCP⟩ := hM
-    have hCDP : Col C D P := by forward_using lemma_collinearorder
+    have hCDP : Col C D P := by perm_close
     exact hnMeet ⟨P, hAB, hCD, hABP, hCDP⟩
   have hnMeetBADC : ¬ Meet B A D C := by
     intro hM
     obtain ⟨P, _, _, hBAP, hDCP⟩ := hM
-    have hABP : Col A B P := by forward_using lemma_collinearorder
-    have hCDP : Col C D P := by forward_using lemma_collinearorder
+    have hABP : Col A B P := by perm_close
+    have hCDP : Col C D P := by perm_close
     exact hnMeet ⟨P, hAB, hCD, hABP, hCDP⟩
   refine ⟨?_, ?_, ?_⟩
   · exact ⟨U, V, u, v, X, hBA, hCD, hBAU, hBAV, hUV, hCDu, hCDv, huv, hnMeetBACD, hbet1, hbet2⟩

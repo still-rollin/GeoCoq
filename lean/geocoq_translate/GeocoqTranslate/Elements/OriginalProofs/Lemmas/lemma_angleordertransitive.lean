@@ -70,17 +70,17 @@ theorem lemma_angleordertransitive :
   have : ¬ Col S Q T := by
       intro h
       have : Col Q U S := by conclude lemma_rayimpliescollinear
-      have : Col U Q S := by forward_using lemma_collinearorder
+      have : Col U Q S := by perm_close
       have : Col Q P U := by conclude lemma_rayimpliescollinear
-      have : Col U Q P := by forward_using lemma_collinearorder
+      have : Col U Q P := by perm_close
       have : Q ≠ U := by conclude lemma_raystrict
       have : U ≠ Q := by conclude lemma_inequalitysymmetric
       have : Col Q S P := by conclude lemma_collinear4
-      have : Col S Q P := by forward_using lemma_collinearorder
+      have : Col S Q P := by perm_close
       have : Q ≠ S := by conclude lemma_raystrict
       have : S ≠ Q := by conclude lemma_inequalitysymmetric
       have : Col Q T P := by conclude lemma_collinear4
-      have : Col P Q T := by forward_using lemma_collinearorder
+      have : Col P Q T := by perm_close
       contradict
   have : Triangle S Q T := by (try (have : nCol S Q T := nCol_notCol _ _ _ (by assumption))); conclude_def Triangle
   have : Out Q S U := by conclude lemma_ray5

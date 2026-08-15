@@ -27,17 +27,17 @@ theorem proposition_28A :
   have : Col G H G := by conclude_def Col
   have : ¬ Col G H A := by
       intro h
-      have : Col H G A := by forward_using lemma_collinearorder
+      have : Col H G A := by perm_close
       have : Col E G H := by conclude_def Col
-      have : Col H G E := by forward_using lemma_collinearorder
+      have : Col H G E := by perm_close
       have : G ≠ H := by forward_using lemma_betweennotequal
       have : H ≠ G := by conclude lemma_inequalitysymmetric
       have : Col G A E := by conclude lemma_collinear4
-      have : Col A G E := by forward_using lemma_collinearorder
+      have : Col A G E := by perm_close
       have : Col A G B := by conclude_def Col
       have : A ≠ G := by forward_using lemma_betweennotequal
       have : Col G E B := by conclude lemma_collinear4
-      have : Col E G B := by forward_using lemma_collinearorder
+      have : Col E G B := by perm_close
       contradict
   have : TS A G H B := by (try (have : nCol G H A := nCol_notCol _ _ _ (by assumption))); conclude_def TS
   have : TS B G H A := by conclude lemma_oppositesidesymmetric

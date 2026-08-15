@@ -47,70 +47,70 @@ theorem lemma_angletrichotomy :
       have : ¬ Col B A J := by
           intro h
           have : Col B C J := by conclude lemma_rayimpliescollinear
-          have : Col J B A := by forward_using lemma_collinearorder
-          have : Col J B C := by forward_using lemma_collinearorder
+          have : Col J B A := by perm_close
+          have : Col J B C := by perm_close
           have : B ≠ J := by conclude lemma_raystrict
           have : J ≠ B := by conclude lemma_inequalitysymmetric
           have : Col B A C := by conclude lemma_collinear4
-          have : Col A B C := by forward_using lemma_collinearorder
+          have : Col A B C := by perm_close
           contradict
       have : TS J B A P := by (try (have : nCol B A J := nCol_notCol _ _ _ (by assumption))); conclude_def TS
       have : ¬ Col B U H := by
           intro h
           have : Col B A U := by conclude lemma_rayimpliescollinear
-          have : Col U B A := by forward_using lemma_collinearorder
-          have : Col U B H := by forward_using lemma_collinearorder
+          have : Col U B A := by perm_close
+          have : Col U B H := by perm_close
           have : B ≠ U := by conclude lemma_raystrict
           have : U ≠ B := by conclude lemma_inequalitysymmetric
           have : Col B A H := by conclude lemma_collinear4
           have : Col G H J := by conclude_def Col
-          have : Col A B G := by forward_using lemma_collinearorder
-          have : Col A B H := by forward_using lemma_collinearorder
+          have : Col A B G := by perm_close
+          have : Col A B H := by perm_close
           have : Col B G H := by conclude lemma_collinear4
-          have : Col G H B := by forward_using lemma_collinearorder
+          have : Col G H B := by perm_close
           have : Col G H J := by conclude_def Col
           have : G ≠ H := by forward_using lemma_betweennotequal
           have : Col H B J := by conclude lemma_collinear4
-          have : Col H B A := by forward_using lemma_collinearorder
+          have : Col H B A := by perm_close
           have : ¬ H ≠ B := by
               intro h
               have : Col B J A := by conclude lemma_collinear4
-              have : Col B A J := by forward_using lemma_collinearorder
+              have : Col B A J := by perm_close
               contradict
           have : BetS G B J := by conclude cn_equalitysub
           have : Col G B J := by conclude_def Col
-          have : Col B G J := by forward_using lemma_collinearorder
-          have : Col B G A := by forward_using lemma_collinearorder
+          have : Col B G J := by perm_close
+          have : Col B G A := by perm_close
           have : B ≠ G := by conclude lemma_raystrict
           have : Col G J A := by conclude lemma_collinear4
-          have : Col G J B := by forward_using lemma_collinearorder
+          have : Col G J B := by perm_close
           have : G ≠ J := by forward_using lemma_betweennotequal
           have : Col J A B := by conclude lemma_collinear4
-          have : Col B A J := by forward_using lemma_collinearorder
+          have : Col B A J := by perm_close
           contradict
       have : Out B G U := by conclude lemma_ray3
       have : Col B G U := by conclude lemma_rayimpliescollinear
-      have : Col B U G := by forward_using lemma_collinearorder
+      have : Col B U G := by perm_close
       have : TS H B U P := by (try (have : nCol B U H := nCol_notCol _ _ _ (by assumption))); conclude_def TS
       have : BetS J H G := by conclude axiom_betweennesssymmetry
       have : BetS J G P := by conclude lemma_3_7a
       have : ¬ Col B U J := by
           intro h
           have : Col B C J := by conclude lemma_rayimpliescollinear
-          have : Col B J C := by forward_using lemma_collinearorder
+          have : Col B J C := by perm_close
           have : Col B A U := by conclude lemma_rayimpliescollinear
-          have : Col U B A := by forward_using lemma_collinearorder
-          have : Col U B J := by forward_using lemma_collinearorder
+          have : Col U B A := by perm_close
+          have : Col U B J := by perm_close
           have : B ≠ U := by conclude lemma_raystrict
           have : U ≠ B := by conclude lemma_inequalitysymmetric
           have : Col B A J := by conclude lemma_collinear4
           have : Col B C J := by conclude lemma_rayimpliescollinear
-          have : Col J B C := by forward_using lemma_collinearorder
-          have : Col J B A := by forward_using lemma_collinearorder
+          have : Col J B C := by perm_close
+          have : Col J B A := by perm_close
           have : B ≠ J := by conclude lemma_raystrict
           have : J ≠ B := by conclude lemma_inequalitysymmetric
           have : Col B C A := by conclude lemma_collinear4
-          have : Col A B C := by forward_using lemma_collinearorder
+          have : Col A B C := by perm_close
           contradict
       have : OS J H B U := by (try (have : nCol B U J := nCol_notCol _ _ _ (by assumption))); (try (have : nCol B U H := nCol_notCol _ _ _ (by assumption))); conclude_def OS
       have : OS H J B U := by forward_using lemma_samesidesymmetric
@@ -127,29 +127,29 @@ theorem lemma_angletrichotomy :
       have : Out B H V := by conclude cn_equalitysub
       have : Col B H V := by conclude lemma_rayimpliescollinear
       have : Col B J V := by conclude lemma_rayimpliescollinear
-      have : Col V B J := by forward_using lemma_collinearorder
-      have : Col V B H := by forward_using lemma_collinearorder
+      have : Col V B J := by perm_close
+      have : Col V B H := by perm_close
       have : B ≠ V := by conclude lemma_raystrict
       have : V ≠ B := by conclude lemma_inequalitysymmetric
       have : Col B J H := by conclude lemma_collinear4
       have : Col G H J := by conclude_def Col
-      have : Col H J B := by forward_using lemma_collinearorder
-      have : Col H J G := by forward_using lemma_collinearorder
+      have : Col H J B := by perm_close
+      have : Col H J G := by perm_close
       have : J ≠ H := by forward_using lemma_betweennotequal
       have : H ≠ J := by conclude lemma_inequalitysymmetric
       have : Col J B G := by conclude lemma_collinear4
       have : Col B C J := by conclude lemma_rayimpliescollinear
-      have : Col J B C := by forward_using lemma_collinearorder
+      have : Col J B C := by perm_close
       have : B ≠ J := by conclude lemma_raystrict
       have : J ≠ B := by conclude lemma_inequalitysymmetric
       have : Col B G C := by conclude lemma_collinear4
-      have : Col G B C := by forward_using lemma_collinearorder
+      have : Col G B C := by perm_close
       have : Col B A G := by conclude lemma_rayimpliescollinear
-      have : Col G B A := by forward_using lemma_collinearorder
+      have : Col G B A := by perm_close
       have : B ≠ G := by conclude lemma_raystrict
       have : G ≠ B := by conclude lemma_inequalitysymmetric
       have : Col B C A := by conclude lemma_collinear4
-      have : Col A B C := by forward_using lemma_collinearorder
+      have : Col A B C := by perm_close
       contradict
   close
 

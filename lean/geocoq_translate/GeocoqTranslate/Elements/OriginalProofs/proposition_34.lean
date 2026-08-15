@@ -30,13 +30,13 @@ theorem proposition_34 :
   obtain ⟨M, _, _⟩ : ∃ M, (BetS A M D ∧ BetS C M B) := by conclude lemma_diagonalsmeet
   have : BetS B M C := by conclude axiom_betweennesssymmetry
   have : Col B M C := by conclude_def Col
-  have : Col B C M := by forward_using lemma_collinearorder
+  have : Col B C M := by perm_close
   have : ¬ Meet A B C D := by conclude_def Par
   have : A ≠ B := by conclude_def Par
   have : C ≠ D := by conclude_def Par
   have : ¬ Col B C A := by
       intro h
-      have : Col A B C := by forward_using lemma_collinearorder
+      have : Col A B C := by perm_close
       have : C = C := by conclude cn_equalityreflexive
       have : Col C D C := by conclude_def Col
       have : Meet A B C D := by conclude_def Meet
@@ -45,7 +45,7 @@ theorem proposition_34 :
   have : CongA A B C B C D := by conclude proposition_29B
   have : ¬ Col B C D := by
       intro h
-      have : Col C D B := by forward_using lemma_collinearorder
+      have : Col C D B := by perm_close
       have : B = B := by conclude cn_equalityreflexive
       have : Col A B B := by conclude_def Col
       have : Meet A B C D := by conclude_def Meet
@@ -53,13 +53,13 @@ theorem proposition_34 :
       contradict
   have : CongA B C D D C B := by conclude lemma_ABCequalsCBA
   have : CongA A B C D C B := by conclude lemma_equalanglestransitive
-  have : Col C B M := by forward_using lemma_collinearorder
+  have : Col C B M := by perm_close
   have : nCol C B A := by
       have : nCol B C A := by close
       forward_using lemma_NCorder
   have : TS A C B D := by (try (have : nCol C B A := nCol_notCol _ _ _ (by assumption))); conclude_def TS
   have : CongA A C B C B D := by conclude proposition_29B
-  have : nCol A B C := by forward_using lemma_NCorder
+  have : nCol A B C := by perm_close
   have : CongA B C A A C B := by conclude lemma_ABCequalsCBA
   have : CongA B C A C B D := by conclude lemma_equalanglestransitive
   have : Triangle A B C := by (try (have : nCol A B C := nCol_notCol _ _ _ (by assumption))); conclude_def Triangle

@@ -40,12 +40,12 @@ theorem proposition_18 :
   obtain ⟨D, _, _⟩ : ∃ D, (BetS A D C ∧ Cong A D A B) := by conclude proposition_03
   have : ¬ Col B C D := by
       intro h
-      have : Col D C B := by forward_using lemma_collinearorder
+      have : Col D C B := by perm_close
       have : Col A D C := by conclude_def Col
-      have : Col D C A := by forward_using lemma_collinearorder
+      have : Col D C A := by perm_close
       have : D ≠ C := by forward_using lemma_betweennotequal
       have : Col C B A := by conclude lemma_collinear4
-      have : Col A B C := by forward_using lemma_collinearorder
+      have : Col A B C := by perm_close
       contradict
   have : Triangle B C D := by (try (have : nCol B C D := nCol_notCol _ _ _ (by assumption))); conclude_def Triangle
   have : BetS C D A := by conclude axiom_betweennesssymmetry
@@ -58,12 +58,12 @@ theorem proposition_18 :
   have : ¬ Col A D B := by
       intro h
       have : Col A D C := by conclude_def Col
-      have : Col D A C := by forward_using lemma_collinearorder
-      have : Col D A B := by forward_using lemma_collinearorder
+      have : Col D A C := by perm_close
+      have : Col D A B := by perm_close
       have : A ≠ D := by forward_using lemma_betweennotequal
       have : D ≠ A := by conclude lemma_inequalitysymmetric
       have : Col A C B := by conclude lemma_collinear4
-      have : Col A B C := by forward_using lemma_collinearorder
+      have : Col A B C := by perm_close
       contradict
   have : Triangle A D B := by (try (have : nCol A D B := nCol_notCol _ _ _ (by assumption))); conclude_def Triangle
   have : isosceles A D B := by conclude_def isosceles
@@ -73,7 +73,7 @@ theorem proposition_18 :
   have : Out C B B := by conclude lemma_ray4
   have : ¬ Col A C B := by
       intro h
-      have : Col A B C := by forward_using lemma_collinearorder
+      have : Col A B C := by perm_close
       contradict
   have : CongA A C B A C B := by conclude lemma_equalanglesreflexive
   have : CongA A C B D C B := by conclude lemma_equalangleshelper
@@ -84,7 +84,7 @@ theorem proposition_18 :
   have : LtA A C B A B D := by conclude lemma_angleorderrespectscongruence
   have : ¬ Col B C A := by
       intro h
-      have : Col A B C := by forward_using lemma_collinearorder
+      have : Col A B C := by perm_close
       contradict
   have : CongA B C A A C B := by conclude lemma_ABCequalsCBA
   have : LtA B C A A B D := by conclude lemma_angleorderrespectscongruence2
@@ -94,7 +94,7 @@ theorem proposition_18 :
   have : Out B A A := by conclude lemma_ray4
   have : ¬ Col A B D := by
       intro h
-      have : Col A D B := by forward_using lemma_collinearorder
+      have : Col A D B := by perm_close
       contradict
   have : CongA A B D A B D := by conclude lemma_equalanglesreflexive
   have : LtA A B D A B C := by conclude_def LtA

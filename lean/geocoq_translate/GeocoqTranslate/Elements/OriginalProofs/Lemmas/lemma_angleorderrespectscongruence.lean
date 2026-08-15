@@ -54,7 +54,7 @@ theorem lemma_angleorderrespectscongruence :
   have : Out E H H := by conclude lemma_ray4
   have : CongA A B C G E H := by conclude lemma_equalangleshelper
   have : nCol G E H := by conclude lemma_equalanglesNC
-  have : nCol G H E := by forward_using lemma_NCorder
+  have : nCol G H E := by perm_close
   have : U ≠ V := by forward_using lemma_betweennotequal
   have : Out U V W := by conclude lemma_ray4
   have : Q = Q := by conclude cn_equalityreflexive
@@ -73,11 +73,11 @@ theorem lemma_angleorderrespectscongruence :
   have : CongA Q U W E G H := by conclude lemma_equalangleshelper
   have : CongA E G H Q U W := by conclude lemma_equalanglessymmetric
   have : nCol Q U W := by conclude lemma_equalanglesNC
-  have : nCol U W Q := by forward_using lemma_NCorder
-  have : nCol H G E := by forward_using lemma_NCorder
+  have : nCol U W Q := by perm_close
+  have : nCol H G E := by perm_close
   have : ¬ Col W U Q := by
       intro h
-      have : Col U W Q := by forward_using lemma_collinearorder
+      have : Col U W Q := by perm_close
       contradict
   have : Cong G H U W := by conclude lemma_congruencesymmetric
   have : Cong G E U Q := by forward_using lemma_congruenceflip
@@ -92,7 +92,7 @@ theorem lemma_angleorderrespectscongruence :
   have : ¬ Q = W := by
       intro h
       have : Col Q U W := by conclude_def Col
-      have : Col W U Q := by forward_using lemma_collinearorder
+      have : Col W U Q := by perm_close
       contradict
   have : Out Q W W := by conclude lemma_ray4
   have : Out Q U P := by conclude lemma_ray5

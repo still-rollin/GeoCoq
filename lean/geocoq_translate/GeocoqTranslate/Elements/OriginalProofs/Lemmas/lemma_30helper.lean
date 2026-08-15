@@ -25,8 +25,8 @@ theorem lemma_30helper :
   intro A B E F G H h1 h2 h3 h4
   have : Col A G B := by conclude_def Col
   have : Col E H F := by conclude_def Col
-  have : Col B A G := by forward_using lemma_collinearorder
-  have : Col E F H := by forward_using lemma_collinearorder
+  have : Col B A G := by perm_close
+  have : Col E F H := by perm_close
   have : H ≠ F := by forward_using lemma_betweennotequal
   have : E ≠ H := by forward_using lemma_betweennotequal
   have : H ≠ E := by conclude lemma_inequalitysymmetric
@@ -34,7 +34,7 @@ theorem lemma_30helper :
   have : A ≠ G := by forward_using lemma_betweennotequal
   have : G ≠ A := by conclude lemma_inequalitysymmetric
   have : Par A B F E := by forward_using lemma_parallelflip
-  have : Col F E H := by forward_using lemma_collinearorder
+  have : Col F E H := by perm_close
   have : Par A B H E := by conclude lemma_collinearparallel
   have : Par A B H F := by conclude lemma_collinearparallel
   have : Par H F A B := by conclude lemma_parallelsymmetric
@@ -49,21 +49,21 @@ theorem lemma_30helper :
   have : F ≠ G := by forward_using lemma_betweennotequal
   have : BetS G M F := by conclude axiom_betweennesssymmetry
   have : nCol A E F := by forward_using lemma_parallelNC
-  have : nCol F E A := by forward_using lemma_NCorder
+  have : nCol F E A := by perm_close
   have : BetS F H E := by conclude axiom_betweennesssymmetry
   obtain ⟨p, _, _⟩ : ∃ p, (BetS A p E ∧ BetS F M p) := by conclude postulate_Pasch_outer
   have : nCol A G H := by forward_using lemma_parallelNC
-  have : nCol A H G := by forward_using lemma_NCorder
+  have : nCol A H G := by perm_close
   have : Col F M G := by conclude_def Col
   have : Col F M p := by conclude_def Col
   have : F ≠ M := by forward_using lemma_betweennotequal
   have : Col M G p := by conclude lemma_collinear4
-  have : Col M p G := by forward_using lemma_collinearorder
-  have : Col M p F := by forward_using lemma_collinearorder
+  have : Col M p G := by perm_close
+  have : Col M p F := by perm_close
   have : M ≠ p := by forward_using lemma_betweennotequal
   have : Col p G F := by conclude lemma_collinear4
-  have : Col G F p := by forward_using lemma_collinearorder
-  have : Col H F E := by forward_using lemma_collinearorder
+  have : Col G F p := by perm_close
+  have : Col H F E := by perm_close
   have : A ≠ B := by forward_using lemma_betweennotequal
   have : A ≠ G := by forward_using lemma_betweennotequal
   have : E ≠ F := by forward_using lemma_betweennotequal
@@ -74,16 +74,16 @@ theorem lemma_30helper :
   have : BetS M p G := by conclude lemma_3_6a
   have : BetS G p M := by conclude axiom_betweennesssymmetry
   have : nCol A G H := by forward_using lemma_parallelNC
-  have : nCol A H G := by forward_using lemma_NCorder
+  have : nCol A H G := by perm_close
   obtain ⟨m, _, _⟩ : ∃ m, (BetS G m H ∧ BetS A p m) := by conclude postulate_Pasch_outer
   have : Col A p m := by conclude_def Col
   have : Col A p E := by conclude_def Col
   have : A ≠ p := by forward_using lemma_betweennotequal
   have : Col p m E := by conclude lemma_collinear4
-  have : Col p m A := by forward_using lemma_collinearorder
+  have : Col p m A := by perm_close
   have : p ≠ m := by forward_using lemma_betweennotequal
   have : Col m E A := by conclude lemma_collinear4
-  have : Col A E m := by forward_using lemma_collinearorder
+  have : Col A E m := by perm_close
   have : A ≠ E := by forward_using lemma_NCdistinct
   have : G ≠ H := by forward_using lemma_NCdistinct
   have : G ≠ B := by forward_using lemma_betweennotequal
@@ -92,7 +92,7 @@ theorem lemma_30helper :
   have : Par B G H F := by conclude lemma_parallelsymmetric
   have : Par G B F H := by forward_using lemma_parallelflip
   have : ¬ Meet G B F H := by conclude_def Par
-  have : Col G A B := by forward_using lemma_collinearorder
+  have : Col G A B := by perm_close
   have : BetS A m E := by conclude lemma_collinearbetween
   have : CR A E G H := by conclude_def CR
   close

@@ -27,7 +27,7 @@ theorem proposition_41 :
         have : ET A B C E B C := by conclude cn_equalitysub
         close
       · have : Par A D B C := by conclude_def PG
-        have : Col D A E := by forward_using lemma_collinearorder
+        have : Col D A E := by perm_close
         have : Par B C A D := by conclude lemma_parallelsymmetric
         have : Par B C D A := by forward_using lemma_parallelflip
         have : E ≠ A := by conclude lemma_inequalitysymmetric

@@ -35,27 +35,27 @@ theorem proposition_29B :
   have : D ≠ C := by forward_using lemma_betweennotequal
   have : C ≠ D := by conclude lemma_inequalitysymmetric
   have : Col A G B := by conclude_def Col
-  have : Col G A B := by forward_using lemma_collinearorder
-  have : Col G A a := by forward_using lemma_collinearorder
+  have : Col G A B := by perm_close
+  have : Col G A a := by perm_close
   have : G ≠ A := by conclude lemma_inequalitysymmetric
   have : Col A B a := by conclude lemma_collinear4
-  have : Col G A g := by forward_using lemma_collinearorder
+  have : Col G A g := by perm_close
   have : Col A B g := by conclude lemma_collinear4
   have : Col D H C := by conclude_def Col
-  have : Col H D C := by forward_using lemma_collinearorder
+  have : Col H D C := by perm_close
   have : Col D C h := by conclude lemma_collinear4
-  have : Col C D h := by forward_using lemma_collinearorder
+  have : Col C D h := by perm_close
   have : Col D d C := by conclude lemma_collinear4
-  have : Col C D d := by forward_using lemma_collinearorder
+  have : Col C D d := by perm_close
   have : ¬ Meet A B C D := by
       intro h
       obtain ⟨M, _, _, _, _⟩ : ∃ M, (A ≠ B ∧ C ≠ D ∧ Col A B M ∧ Col C D M) := by conclude_def Meet
-      have : Col B A G := by forward_using lemma_collinearorder
-      have : Col B A M := by forward_using lemma_collinearorder
+      have : Col B A G := by perm_close
+      have : Col B A M := by perm_close
       have : Col A G M := by conclude lemma_collinear4
-      have : Col C D H := by forward_using lemma_collinearorder
+      have : Col C D H := by perm_close
       have : Col D H M := by conclude lemma_collinear4
-      have : Col H D M := by forward_using lemma_collinearorder
+      have : Col H D M := by perm_close
       have : Meet A G H D := by conclude_def Meet
       contradict
   have : Par A B C D := by conclude_def Par

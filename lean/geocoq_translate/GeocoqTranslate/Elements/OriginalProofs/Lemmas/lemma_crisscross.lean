@@ -37,7 +37,7 @@ theorem lemma_crisscross :
   have : B = B := by conclude cn_equalityreflexive
   have : Col B D B := by conclude_def Col
   have : nCol A B D := by forward_using lemma_parallelNC
-  have : nCol B D A := by forward_using lemma_NCorder
+  have : nCol B D A := by perm_close
   have : OS C A B D := by forward_using lemma_samesidesymmetric
   have : TS A B D E := by (try (have : nCol B D A := nCol_notCol _ _ _ (by assumption))); conclude_def TS
   have : TS C B D E := by conclude lemma_planeseparation
@@ -62,27 +62,27 @@ theorem lemma_crisscross :
       · have : ¬ ¬ CR A D B C := by
             intro h
             have : Col C F E := by conclude_def Col
-            have : Col E F C := by forward_using lemma_collinearorder
+            have : Col E F C := by perm_close
             have : B ≠ E := by forward_using lemma_betweennotequal
             have : Col A B E := by conclude_def Col
-            have : Col E B A := by forward_using lemma_collinearorder
-            have : Col E F C := by forward_using lemma_collinearorder
+            have : Col E B A := by perm_close
+            have : Col E F C := by perm_close
             have : Col E B C := by conclude cn_equalitysub
             have : E ≠ B := by conclude lemma_inequalitysymmetric
             have : Col B A C := by conclude lemma_collinear4
-            have : Col A C B := by forward_using lemma_collinearorder
+            have : Col A C B := by perm_close
             have : nCol A C B := by forward_using lemma_parallelNC
             contradict
         close
       · have : nCol A C B := by forward_using lemma_parallelNC
         have : nCol A C F := by conclude cn_equalitysub
-        have : nCol C F A := by forward_using lemma_NCorder
+        have : nCol C F A := by perm_close
         have : Col C F E := by conclude_def Col
         have : C = C := by conclude cn_equalityreflexive
         have : Col C F C := by conclude_def Col
         have : C ≠ E := by forward_using lemma_betweennotequal
         have : nCol C E A := by conclude lemma_NChelper
-        have : nCol A E C := by forward_using lemma_NCorder
+        have : nCol A E C := by perm_close
         obtain ⟨M, _, _⟩ : ∃ M, (BetS A M F ∧ BetS C M B) := by conclude postulate_Pasch_inner
         have : BetS A M D := by conclude cn_equalitysub
         have : BetS B M C := by conclude axiom_betweennesssymmetry
@@ -90,30 +90,30 @@ theorem lemma_crisscross :
         close
       · have : ¬ ¬ CR A D B C := by
             intro h
-            have : nCol D B C := by forward_using lemma_NCorder
+            have : nCol D B C := by perm_close
             have : D = D := by conclude cn_equalityreflexive
             have : Col D B D := by conclude_def Col
-            have : Col D B F := by forward_using lemma_collinearorder
+            have : Col D B F := by perm_close
             have : D ≠ F := by forward_using lemma_betweennotequal
             have : nCol D F C := by conclude lemma_NChelper
-            have : nCol C F D := by forward_using lemma_NCorder
+            have : nCol C F D := by perm_close
             have : Col C F E := by conclude_def Col
             have : C = C := by conclude cn_equalityreflexive
             have : Col C F C := by conclude_def Col
             have : C ≠ E := by forward_using lemma_betweennotequal
             have : nCol C E D := by conclude lemma_NChelper
-            have : nCol E C D := by forward_using lemma_NCorder
+            have : nCol E C D := by perm_close
             have : BetS E F C := by conclude axiom_betweennesssymmetry
             obtain ⟨M, _, _⟩ : ∃ M, (BetS D M C ∧ BetS E B M) := by conclude postulate_Pasch_outer
             have : BetS C M D := by conclude axiom_betweennesssymmetry
             have : BetS M B E := by conclude axiom_betweennesssymmetry
             have : Col A B E := by conclude_def Col
             have : Col E B M := by conclude_def Col
-            have : Col E B A := by forward_using lemma_collinearorder
+            have : Col E B A := by perm_close
             have : B ≠ E := by forward_using lemma_betweennotequal
             have : E ≠ B := by conclude lemma_inequalitysymmetric
             have : Col B M A := by conclude lemma_collinear4
-            have : Col A B M := by forward_using lemma_collinearorder
+            have : Col A B M := by perm_close
             have : Par C A B D := by forward_using lemma_parallelflip
             have : ¬ Meet C A B D := by conclude_def Par
             have : A = A := by conclude cn_equalityreflexive
@@ -129,21 +129,21 @@ theorem lemma_crisscross :
         have : Col A B A := by conclude_def Col
         have : Col A B E := by conclude_def Col
         have : A ≠ E := by forward_using lemma_betweennotequal
-        have : nCol A B C := by forward_using lemma_NCorder
+        have : nCol A B C := by perm_close
         have : nCol A E C := by conclude lemma_NChelper
-        have : Col A E B := by forward_using lemma_collinearorder
+        have : Col A E B := by perm_close
         have : E = E := by conclude cn_equalityreflexive
         have : Col A E E := by conclude_def Col
         have : B ≠ E := by forward_using lemma_betweennotequal
         have : nCol B E C := by conclude lemma_NChelper
-        have : nCol C E B := by forward_using lemma_NCorder
+        have : nCol C E B := by perm_close
         obtain ⟨J, _, _⟩ : ∃ J, (BetS B J E ∧ BetS C D J) := by conclude postulate_Pasch_outer
         have : BetS A J E := by conclude lemma_3_5b
         have : nCol A C B := by forward_using lemma_parallelNC
-        have : nCol A B C := by forward_using lemma_NCorder
+        have : nCol A B C := by perm_close
         have : Col A J E := by conclude_def Col
-        have : Col E A B := by forward_using lemma_collinearorder
-        have : Col E A J := by forward_using lemma_collinearorder
+        have : Col E A B := by perm_close
+        have : Col E A J := by perm_close
         have : A ≠ E := by forward_using lemma_betweennotequal
         have : E ≠ A := by conclude lemma_inequalitysymmetric
         have : Col A B J := by conclude lemma_collinear4
@@ -162,7 +162,7 @@ theorem lemma_crisscross :
         have : Col A B A := by conclude_def Col
         have : A ≠ E := by forward_using lemma_betweennotequal
         have : nCol A E D := by conclude lemma_NChelper
-        have : nCol E A D := by forward_using lemma_NCorder
+        have : nCol E A D := by perm_close
         obtain ⟨Q, _, _⟩ : ∃ Q, (BetS D Q A ∧ BetS E F Q) := by conclude postulate_Pasch_outer
         have : BetS E F C := by conclude axiom_betweennesssymmetry
         have : Col E F Q := by conclude_def Col
@@ -170,10 +170,10 @@ theorem lemma_crisscross :
         have : F ≠ E := by forward_using lemma_betweennotequal
         have : E ≠ F := by conclude lemma_inequalitysymmetric
         have : Col F Q C := by conclude lemma_collinear4
-        have : Col F C Q := by forward_using lemma_collinearorder
+        have : Col F C Q := by perm_close
         have : BetS A Q D := by conclude axiom_betweennesssymmetry
         have : Col B F D := by conclude_def Col
-        have : Col B D F := by forward_using lemma_collinearorder
+        have : Col B D F := by perm_close
         have : F ≠ D := by forward_using lemma_betweennotequal
         have : Par A C F D := by conclude lemma_collinearparallel
         have : ¬ Meet A C F D := by conclude_def Par
@@ -181,10 +181,10 @@ theorem lemma_crisscross :
         have : F = F := by conclude cn_equalityreflexive
         have : Col A C C := by conclude_def Col
         have : Col F F D := by conclude_def Col
-        have : Col C F Q := by forward_using lemma_collinearorder
+        have : Col C F Q := by perm_close
         have : BetS C Q F := by conclude lemma_collinearbetween
         have : nCol A C B := by forward_using lemma_parallelNC
-        have : nCol A B C := by forward_using lemma_NCorder
+        have : nCol A B C := by perm_close
         have : Col A B A := by conclude_def Col
         have : Col A B E := by conclude_def Col
         have : A ≠ E := by forward_using lemma_betweennotequal

@@ -22,7 +22,7 @@ theorem proposition_05b :
   have : ¬ B = C := by
       intro h
       have : Col A B C := by conclude_def Col
-      have : Col A C B := by forward_using lemma_collinearorder
+      have : Col A C B := by perm_close
       contradict
   have : C ≠ B := by conclude lemma_inequalitysymmetric
   have : Out B C C := by conclude lemma_ray4

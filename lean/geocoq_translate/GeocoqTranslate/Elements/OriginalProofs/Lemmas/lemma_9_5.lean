@@ -26,13 +26,13 @@ theorem lemma_9_5 :
             rcases (show BetS R P Q ∨ Q = P ∨ BetS R Q P by first | assumption | exact nCol_or_Col _ _ _ | exact Col_or_nCol _ _ _ | exact Classical.em _ | tauto | aesop) with c1 | c2 | c3
             · have : ¬ Col R Q C := by
                   intro h
-                  have : Col Q R C := by forward_using lemma_collinearorder
+                  have : Col Q R C := by perm_close
                   have : Col R Q P := by conclude lemma_rayimpliescollinear
-                  have : Col Q R P := by forward_using lemma_collinearorder
+                  have : Col Q R P := by perm_close
                   have : R ≠ Q := by forward_using lemma_betweennotequal
                   have : Q ≠ R := by conclude lemma_inequalitysymmetric
                   have : Col R C P := by conclude lemma_collinear4
-                  have : Col C P R := by forward_using lemma_collinearorder
+                  have : Col C P R := by perm_close
                   contradict
               have : TS Q A B C := by conclude lemma_9_5a
               close
@@ -44,7 +44,7 @@ theorem lemma_9_5 :
       · obtain ⟨L, _, _, _⟩ : ∃ L, (BetS P L C ∧ Col A B L ∧ nCol A B P) := by conclude_def TS
         have : Col R Q P := by conclude lemma_rayimpliescollinear
         have : Col P C L := by conclude_def Col
-        have : Col C P L := by forward_using lemma_collinearorder
+        have : Col C P L := by perm_close
         have : P ≠ C := by forward_using lemma_betweennotequal
         have : C ≠ P := by conclude lemma_inequalitysymmetric
         have : Col P L R := by conclude lemma_collinear4
@@ -53,29 +53,29 @@ theorem lemma_9_5 :
             have : Col A B P := by conclude_def Col
             contradict
         have : Col B L R := by conclude lemma_collinear4
-        have : Col L R P := by forward_using lemma_collinearorder
-        have : Col L R B := by forward_using lemma_collinearorder
+        have : Col L R P := by perm_close
+        have : Col L R B := by perm_close
         have : ¬ L ≠ R := by
             intro h
             have : Col R P B := by conclude lemma_collinear4
-            have : Col R B P := by forward_using lemma_collinearorder
-            have : Col R B A := by forward_using lemma_collinearorder
+            have : Col R B P := by perm_close
+            have : Col R B A := by perm_close
             have : ¬ R ≠ B := by
                 intro h
                 have : Col B P A := by conclude lemma_collinear4
-                have : Col A B P := by forward_using lemma_collinearorder
+                have : Col A B P := by perm_close
                 contradict
             have : B ≠ A := by conclude lemma_inequalitysymmetric
             have : R ≠ A := by conclude cn_equalitysub
-            have : Col B A R := by forward_using lemma_collinearorder
-            have : Col B A L := by forward_using lemma_collinearorder
+            have : Col B A R := by perm_close
+            have : Col B A L := by perm_close
             have : Col A L R := by conclude lemma_collinear4
-            have : Col L R A := by forward_using lemma_collinearorder
+            have : Col L R A := by perm_close
             have : Col R P A := by conclude lemma_collinear4
-            have : Col R A P := by forward_using lemma_collinearorder
-            have : Col R A B := by forward_using lemma_collinearorder
+            have : Col R A P := by perm_close
+            have : Col R A B := by perm_close
             have : Col A P B := by conclude lemma_collinear4
-            have : Col A B P := by forward_using lemma_collinearorder
+            have : Col A B P := by perm_close
             contradict
         have : BetS P R C := by conclude cn_equalitysub
         have : BetS C R P := by conclude axiom_betweennesssymmetry
@@ -92,30 +92,30 @@ theorem lemma_9_5 :
             intro h
             have : Col Q R C := by conclude_def Col
             have : Col B Q R := by conclude lemma_collinear4
-            have : Col R B Q := by forward_using lemma_collinearorder
+            have : Col R B Q := by perm_close
             have : Col R Q P := by conclude lemma_rayimpliescollinear
-            have : Col Q R B := by forward_using lemma_collinearorder
-            have : Col Q R P := by forward_using lemma_collinearorder
+            have : Col Q R B := by perm_close
+            have : Col Q R P := by perm_close
             have : Q ≠ R := by forward_using lemma_betweennotequal
             have : Col R B P := by conclude lemma_collinear4
-            have : Col R B A := by forward_using lemma_collinearorder
+            have : Col R B A := by perm_close
             have : ¬ R ≠ B := by
                 intro h
                 have : Col B P A := by conclude lemma_collinear4
-                have : Col A B P := by forward_using lemma_collinearorder
+                have : Col A B P := by perm_close
                 contradict
             have : B ≠ A := by conclude lemma_inequalitysymmetric
             have : R ≠ A := by conclude cn_equalitysub
-            have : Col B A R := by forward_using lemma_collinearorder
-            have : Col B A Q := by forward_using lemma_collinearorder
+            have : Col B A R := by perm_close
+            have : Col B A Q := by perm_close
             have : B ≠ A := by conclude lemma_inequalitysymmetric
             have : Col A Q R := by conclude lemma_collinear4
-            have : Col R A Q := by forward_using lemma_collinearorder
-            have : Col Q R A := by forward_using lemma_collinearorder
+            have : Col R A Q := by perm_close
+            have : Col Q R A := by perm_close
             have : Col R A P := by conclude lemma_collinear4
-            have : Col R A B := by forward_using lemma_collinearorder
+            have : Col R A B := by perm_close
             have : Col A P B := by conclude lemma_collinear4
-            have : Col A B P := by forward_using lemma_collinearorder
+            have : Col A B P := by perm_close
             contradict
         have : TS Q A B C := by (try (have : nCol A B Q := nCol_notCol _ _ _ (by assumption))); conclude_def TS
         close

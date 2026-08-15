@@ -34,17 +34,17 @@ theorem proposition_04 :
   have : b ≠ a := by conclude lemma_inequalitysymmetric
   have : ¬ Col A B C := by
       intro h
-      have : Col B A C := by forward_using lemma_collinearorder
+      have : Col B A C := by perm_close
       contradict
   have : ¬ A = B := by
       intro h
       have : Col A B C := by conclude_def Col
-      have : Col B A C := by forward_using lemma_collinearorder
+      have : Col B A C := by perm_close
       contradict
   have : ¬ A = C := by
       intro h
       have : Col A B C := by conclude_def Col
-      have : Col B A C := by forward_using lemma_collinearorder
+      have : Col B A C := by perm_close
       contradict
   have : C ≠ A := by conclude lemma_inequalitysymmetric
   have : ¬ a = c := by
@@ -60,7 +60,7 @@ theorem proposition_04 :
   have : ¬ B = C := by
       intro h
       have : Col A B C := by conclude_def Col
-      have : Col B A C := by forward_using lemma_collinearorder
+      have : Col B A C := by perm_close
       contradict
   have : C ≠ B := by conclude lemma_inequalitysymmetric
   have : (BetS A U B ∨ B = U ∨ BetS A B U) := by conclude lemma_ray1
@@ -189,7 +189,7 @@ theorem proposition_04 :
   have : Cong C B c b := by forward_using lemma_congruenceflip
   have : ¬ Col A C B := by
       intro h
-      have : Col A B C := by forward_using lemma_collinearorder
+      have : Col A B C := by perm_close
       contradict
   have : CongA A C B a c b := by (try (have : nCol A C B := nCol_notCol _ _ _ (by assumption))); conclude_def CongA
   close

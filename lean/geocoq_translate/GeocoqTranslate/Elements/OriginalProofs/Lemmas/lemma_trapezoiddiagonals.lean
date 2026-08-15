@@ -30,7 +30,7 @@ theorem lemma_trapezoiddiagonals :
   have : B = B := by conclude cn_equalityreflexive
   have : ¬ Col B D C := by
       intro h
-      have : Col C D B := by forward_using lemma_collinearorder
+      have : Col C D B := by perm_close
       have : Col A B B := by conclude_def Col
       have : Meet A B C D := by conclude_def Meet
       contradict
@@ -38,13 +38,13 @@ theorem lemma_trapezoiddiagonals :
   obtain ⟨P, _, _⟩ : ∃ P, (BetS B E P ∧ BetS C D P) := by conclude postulate_Euclid5
   have : ¬ Col B P C := by
       intro h
-      have : Col P C B := by forward_using lemma_collinearorder
+      have : Col P C B := by perm_close
       have : Col C D P := by conclude_def Col
-      have : Col P C D := by forward_using lemma_collinearorder
+      have : Col P C D := by perm_close
       have : C ≠ P := by forward_using lemma_betweennotequal
       have : P ≠ C := by conclude lemma_inequalitysymmetric
       have : Col C B D := by conclude lemma_collinear4
-      have : Col C D B := by forward_using lemma_collinearorder
+      have : Col C D B := by perm_close
       have : Col A B B := by conclude_def Col
       have : Meet A B C D := by conclude_def Meet
       contradict

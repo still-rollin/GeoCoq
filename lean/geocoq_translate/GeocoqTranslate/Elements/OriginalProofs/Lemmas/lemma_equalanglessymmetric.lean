@@ -29,28 +29,28 @@ theorem lemma_equalanglessymmetric :
       have : Col b c v := by conclude lemma_rayimpliescollinear
       have : Col B A U := by conclude lemma_rayimpliescollinear
       have : Col B C V := by conclude lemma_rayimpliescollinear
-      have : Col a b u := by forward_using lemma_collinearorder
+      have : Col a b u := by perm_close
       have : b ≠ a := by conclude lemma_ray2
       have : a ≠ b := by conclude lemma_inequalitysymmetric
       have : Col b u c := by conclude lemma_collinear4
-      have : Col c b u := by forward_using lemma_collinearorder
-      have : Col c b v := by forward_using lemma_collinearorder
+      have : Col c b u := by perm_close
+      have : Col c b v := by perm_close
       have : b ≠ c := by conclude lemma_ray2
       have : c ≠ b := by conclude lemma_inequalitysymmetric
       have : Col b u v := by conclude lemma_collinear4
       have : Cong u v U V := by conclude lemma_congruencesymmetric
       have : Col B U V := by conclude lemma_collinearitypreserved
-      have : Col U B V := by forward_using lemma_collinearorder
-      have : Col U B A := by forward_using lemma_collinearorder
+      have : Col U B V := by perm_close
+      have : Col U B A := by perm_close
       have : B ≠ U := by conclude lemma_raystrict
       have : U ≠ B := by conclude lemma_inequalitysymmetric
       have : Col B V A := by conclude lemma_collinear4
-      have : Col V B A := by forward_using lemma_collinearorder
-      have : Col V B C := by forward_using lemma_collinearorder
+      have : Col V B A := by perm_close
+      have : Col V B C := by perm_close
       have : B ≠ V := by conclude lemma_raystrict
       have : V ≠ B := by conclude lemma_inequalitysymmetric
       have : Col B A C := by conclude lemma_collinear4
-      have : Col A B C := by forward_using lemma_collinearorder
+      have : Col A B C := by perm_close
       contradict
   have : Cong u v U V := by conclude lemma_congruencesymmetric
   have : CongA a b c A B C := by (try (have : nCol a b c := nCol_notCol _ _ _ (by assumption))); conclude_def CongA

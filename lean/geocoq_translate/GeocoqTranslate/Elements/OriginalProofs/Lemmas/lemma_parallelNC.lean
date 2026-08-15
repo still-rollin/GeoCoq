@@ -18,7 +18,7 @@ theorem lemma_parallelNC :
   obtain ⟨a, b, c, d, M, _, _, _, _, _, _, _, _, _, _, _⟩ := h1
   have : ¬ Col A C D := by
       intro h
-      have : Col C D A := by forward_using lemma_collinearorder
+      have : Col C D A := by perm_close
       have : A = A := by conclude cn_equalityreflexive
       have : Col A B A := by conclude_def Col
       have : Meet A B C D := by conclude_def Meet
@@ -31,7 +31,7 @@ theorem lemma_parallelNC :
       contradict
   have : ¬ Col B C D := by
       intro h
-      have : Col C D B := by forward_using lemma_collinearorder
+      have : Col C D B := by perm_close
       have : B = B := by conclude cn_equalityreflexive
       have : Col A B B := by conclude_def Col
       have : Meet A B C D := by conclude_def Meet

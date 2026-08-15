@@ -47,16 +47,16 @@ theorem proposition_38 :
   have : EF E F H D C B G A := by forward_using axiom_EFpermutation
   obtain ⟨M, _, _⟩ : ∃ M, (BetS D M F ∧ BetS H M E) := by conclude lemma_diagonalsmeet
   have : Col D M F := by conclude_def Col
-  have : Col F D M := by forward_using lemma_collinearorder
+  have : Col F D M := by perm_close
   obtain ⟨m, _, _⟩ : ∃ m, (BetS A m B ∧ BetS G m C) := by conclude lemma_diagonalsmeet
   have : Col A m B := by conclude_def Col
-  have : Col B A m := by forward_using lemma_collinearorder
+  have : Col B A m := by perm_close
   have : Par A G B C := by conclude_def PG
   have : nCol A G B := by forward_using lemma_parallelNC
-  have : nCol B A G := by forward_using lemma_NCorder
+  have : nCol B A G := by perm_close
   have : Par D H F E := by conclude_def PG
   have : nCol D H F := by forward_using lemma_parallelNC
-  have : nCol F D H := by forward_using lemma_NCorder
+  have : nCol F D H := by perm_close
   have : TS G B A C := by (try (have : nCol B A G := nCol_notCol _ _ _ (by assumption))); conclude_def TS
   have : TS C B A G := by conclude lemma_oppositesidesymmetric
   have : TS H F D E := by (try (have : nCol F D H := nCol_notCol _ _ _ (by assumption))); conclude_def TS

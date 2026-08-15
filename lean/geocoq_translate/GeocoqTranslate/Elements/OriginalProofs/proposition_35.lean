@@ -55,10 +55,10 @@ theorem proposition_35 :
       have : ¬ BetS A D F := by
           intro h
           have : Col A D F := by conclude_def Col
-          have : Col D A F := by forward_using lemma_collinearorder
-          have : Col D A E := by forward_using lemma_collinearorder
+          have : Col D A F := by perm_close
+          have : Col D A E := by perm_close
           have : Col A F E := by conclude lemma_collinear4
-          have : Col A E F := by forward_using lemma_collinearorder
+          have : Col A E F := by perm_close
           have : EF A B C D E B C F := by conclude proposition_35A
           contradict
       have : ¬ BetS A D E := by
@@ -66,14 +66,14 @@ theorem proposition_35 :
           obtain ⟨H, _, _⟩ : ∃ H, (BetS B H E ∧ BetS C H D) := by conclude lemma_parallelPasch
           have : BetS D H C := by conclude axiom_betweennesssymmetry
           have : Col B H E := by conclude_def Col
-          have : Col B E H := by forward_using lemma_collinearorder
+          have : Col B E H := by perm_close
           have : nCol A D B := by forward_using lemma_parallelNC
           have : Col A D E := by conclude_def Col
           have : D = D := by conclude cn_equalityreflexive
           have : Col A D D := by conclude_def Col
           have : D ≠ E := by forward_using lemma_betweennotequal
           have : nCol D E B := by conclude lemma_NChelper
-          have : nCol B E D := by forward_using lemma_NCorder
+          have : nCol B E D := by perm_close
           have : TS D B E C := by (try (have : nCol B E D := nCol_notCol _ _ _ (by assumption))); conclude_def TS
           have : TS C B E D := by conclude lemma_oppositesidesymmetric
           have : Par F C B E := by forward_using lemma_parallelflip
@@ -88,13 +88,13 @@ theorem proposition_35 :
               intro h
               have : A ≠ D := by forward_using lemma_betweennotequal
               have : Col D E F := by conclude lemma_collinear4
-              have : Col F D E := by forward_using lemma_collinearorder
-              have : Col F D e := by forward_using lemma_collinearorder
+              have : Col F D E := by perm_close
+              have : Col F D e := by perm_close
               have : Col D E e := by conclude lemma_collinear4
-              have : Col e E D := by forward_using lemma_collinearorder
-              have : Col e E B := by forward_using lemma_collinearorder
+              have : Col e E D := by perm_close
+              have : Col e E B := by perm_close
               have : Col E D B := by conclude lemma_collinear4
-              have : Col B E D := by forward_using lemma_collinearorder
+              have : Col B E D := by perm_close
               contradict
           have : BetS F E D := by conclude cn_equalitysub
           have : BetS D E F := by conclude axiom_betweennesssymmetry
@@ -112,10 +112,10 @@ theorem proposition_35 :
           intro h
           have : BetS D A E := by conclude axiom_betweennesssymmetry
           have : Col D A E := by conclude_def Col
-          have : Col A D E := by forward_using lemma_collinearorder
+          have : Col A D E := by perm_close
           have : A ≠ D := by forward_using lemma_betweennotequal
           have : Col D E F := by conclude lemma_collinear4
-          have : Col D F E := by forward_using lemma_collinearorder
+          have : Col D F E := by perm_close
           have : EF D C B A F C B E := by conclude proposition_35A
           have : EF D C B A E B C F := by forward_using axiom_EFpermutation
           have : EF E B C F D C B A := by conclude axiom_EFsymmetric
@@ -127,14 +127,14 @@ theorem proposition_35 :
           obtain ⟨H, _, _⟩ : ∃ H, (BetS C H F ∧ BetS B H A) := by conclude lemma_parallelPasch
           have : BetS A H B := by conclude axiom_betweennesssymmetry
           have : Col C H F := by conclude_def Col
-          have : Col C F H := by forward_using lemma_collinearorder
+          have : Col C F H := by perm_close
           have : nCol D A C := by forward_using lemma_parallelNC
           have : Col D A F := by conclude_def Col
           have : A = A := by conclude cn_equalityreflexive
           have : Col D A A := by conclude_def Col
           have : A ≠ F := by forward_using lemma_betweennotequal
           have : nCol A F C := by conclude lemma_NChelper
-          have : nCol C F A := by forward_using lemma_NCorder
+          have : nCol C F A := by perm_close
           have : TS A C F B := by (try (have : nCol C F A := nCol_notCol _ _ _ (by assumption))); conclude_def TS
           have : TS B C F A := by conclude lemma_oppositesidesymmetric
           have : Par E B C F := by forward_using lemma_parallelflip
@@ -146,17 +146,17 @@ theorem proposition_35 :
           have : E ≠ A := by forward_using lemma_betweennotequal
           have : ¬ e ≠ F := by
               intro h
-              have : Col D A E := by forward_using lemma_collinearorder
+              have : Col D A E := by perm_close
               have : D ≠ A := by forward_using lemma_betweennotequal
               have : Col A F E := by conclude lemma_collinear4
-              have : Col E A F := by forward_using lemma_collinearorder
+              have : Col E A F := by perm_close
               have : Col E e A := by conclude_def Col
-              have : Col E A e := by forward_using lemma_collinearorder
+              have : Col E A e := by perm_close
               have : Col A F e := by conclude lemma_collinear4
-              have : Col e F A := by forward_using lemma_collinearorder
-              have : Col e F C := by forward_using lemma_collinearorder
+              have : Col e F A := by perm_close
+              have : Col e F C := by perm_close
               have : Col F A C := by conclude lemma_collinear4
-              have : Col C F A := by forward_using lemma_collinearorder
+              have : Col C F A := by perm_close
               contradict
           have : BetS E F A := by conclude cn_equalitysub
           have : BetS A F E := by conclude axiom_betweennesssymmetry
@@ -185,8 +185,8 @@ theorem proposition_35 :
                     obtain ⟨p, _, _⟩ : ∃ p, (BetS E p C ∧ BetS B p F) := by conclude lemma_diagonalsmeet
                     have : Col E p C := by conclude_def Col
                     have : Col B p F := by conclude_def Col
-                    have : Col F B p := by forward_using lemma_collinearorder
-                    have : Col E C p := by forward_using lemma_collinearorder
+                    have : Col F B p := by perm_close
+                    have : Col E C p := by perm_close
                     have : nCol E F C := by forward_using lemma_parallelNC
                     have : E ≠ C := by forward_using lemma_NCdistinct
                     have : nCol E F B := by forward_using lemma_parallelNC

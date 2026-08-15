@@ -30,7 +30,7 @@ theorem lemma_righttogether :
   have : Out A B B := by conclude lemma_ray4
   have : Supp G A B B D := by conclude_def Supp
   have : nCol B A G := by conclude_def TS
-  have : nCol G A B := by forward_using lemma_NCorder
+  have : nCol G A B := by perm_close
   have : CongA G A B G A B := by conclude lemma_equalanglesreflexive
   have : Col G A D := by conclude_def Col
   have : A ≠ D := by forward_using lemma_betweennotequal

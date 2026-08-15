@@ -60,24 +60,24 @@ theorem proposition_47A :
       intro h
       have : BetS D q E := by conclude cn_equalitysub
       have : Col D q E := by conclude_def Col
-      have : Col E D q := by forward_using lemma_collinearorder
-      have : Col B C q := by forward_using lemma_collinearorder
+      have : Col E D q := by perm_close
+      have : Col B C q := by perm_close
       have : Meet B C E D := by conclude_def Meet
       contradict
   have : ¬ Col D E A := by
       intro h
-      have : Col D A E := by forward_using lemma_collinearorder
+      have : Col D A E := by perm_close
       have : Col D q A := by conclude_def Col
-      have : Col D A q := by forward_using lemma_collinearorder
+      have : Col D A q := by perm_close
       have : D ≠ A := by forward_using lemma_betweennotequal
       have : Col A E q := by conclude lemma_collinear4
-      have : Col q A E := by forward_using lemma_collinearorder
-      have : Col q A D := by forward_using lemma_collinearorder
+      have : Col q A E := by perm_close
+      have : Col q A D := by perm_close
       have : q ≠ A := by forward_using lemma_betweennotequal
       have : Col A E D := by conclude lemma_collinear4
-      have : Col A E q := by forward_using lemma_collinearorder
+      have : Col A E q := by perm_close
       have : Col E D q := by conclude lemma_collinear4
-      have : Col B C q := by forward_using lemma_collinearorder
+      have : Col B C q := by perm_close
       have : Meet B C E D := by conclude_def Meet
       contradict
   obtain ⟨L, _⟩ : ∃ L, Perp_at A L D E L := by conclude proposition_12
@@ -112,31 +112,31 @@ theorem proposition_47A :
       intro h
       have : Per A D p := by conclude cn_equalitysub
       have : Per p D A := by conclude lemma_8_2
-      have : Col p D E := by forward_using lemma_collinearorder
+      have : Col p D E := by perm_close
       have : Per E D A := by conclude lemma_collinearright
       have : Per E D B := by conclude_def SQ
       have : Out D A B := by conclude lemma_erectedperpendicularunique
       have : Col D A B := by conclude lemma_rayimpliescollinear
-      have : Col A D B := by forward_using lemma_collinearorder
+      have : Col A D B := by perm_close
       have : Col D N A := by conclude_def Col
-      have : Col A D N := by forward_using lemma_collinearorder
+      have : Col A D N := by perm_close
       have : D ≠ A := by forward_using lemma_betweennotequal
       have : A ≠ D := by conclude lemma_inequalitysymmetric
       have : Col D B N := by conclude lemma_collinear4
-      have : Col N B C := by forward_using lemma_collinearorder
-      have : Col N B D := by forward_using lemma_collinearorder
+      have : Col N B C := by perm_close
+      have : Col N B D := by perm_close
       have : Col B C D := by conclude lemma_collinear4
-      have : nCol B C D := by forward_using lemma_NCorder
+      have : nCol B C D := by perm_close
       contradict
   have : L ≠ D := by conclude lemma_inequalitysymmetric
   have : Par B C E D := by forward_using lemma_parallelflip
-  have : Col E D L := by forward_using lemma_collinearorder
+  have : Col E D L := by perm_close
   have : Par B C L D := by conclude lemma_collinearparallel
   have : Par L D B C := by conclude lemma_parallelsymmetric
   have : TP B C L D := by conclude lemma_paralleldef2B
   have : OS L D B C := by conclude_def TP
   have : nCol B C D := by forward_using lemma_parallelNC
-  have : Col B C N := by forward_using lemma_collinearorder
+  have : Col B C N := by perm_close
   have : TS D B C A := by (try (have : nCol B C D := nCol_notCol _ _ _ (by assumption))); conclude_def TS
   have : TS L B C A := by conclude lemma_planeseparation
   obtain ⟨M, _, _, _⟩ : ∃ M, (BetS L M A ∧ Col B C M ∧ nCol B C L) := by conclude_def TS
@@ -146,10 +146,10 @@ theorem proposition_47A :
   have : Out L M A := by conclude lemma_ray4
   have : Out L A M := by conclude lemma_ray5
   have : Per E D B := by conclude_def SQ
-  have : Col E D p := by forward_using lemma_collinearorder
-  have : Col E D L := by forward_using lemma_collinearorder
+  have : Col E D p := by perm_close
+  have : Col E D L := by perm_close
   have : Col D p L := by conclude lemma_collinear4
-  have : Col p L D := by forward_using lemma_collinearorder
+  have : Col p L D := by perm_close
   have : Per D L A := by conclude lemma_collinearright
   have : Per D L M := by conclude lemma_8_3
   have : ¬ B = M := by
@@ -161,7 +161,7 @@ theorem proposition_47A :
       contradict
   have : M ≠ B := by conclude lemma_inequalitysymmetric
   have : Par L D C B := by forward_using lemma_parallelflip
-  have : Col C B M := by forward_using lemma_collinearorder
+  have : Col C B M := by perm_close
   have : Par L D M B := by conclude lemma_collinearparallel
   have : Par L D B M := by forward_using lemma_parallelflip
   have : Par B M L D := by conclude lemma_parallelsymmetric
@@ -201,24 +201,24 @@ theorem proposition_47A :
       have : Par B D E C := by forward_using lemma_parallelflip
       have : Par B D E M := by forward_using lemma_parallelflip
       have : Col E C M := by conclude lemma_Playfair
-      have : Col M C E := by forward_using lemma_collinearorder
-      have : Col M C B := by forward_using lemma_collinearorder
+      have : Col M C E := by perm_close
+      have : Col M C B := by perm_close
       have : Col C E B := by conclude lemma_collinear4
-      have : Col B C E := by forward_using lemma_collinearorder
+      have : Col B C E := by perm_close
       have : nCol B C E := by forward_using lemma_parallelNC
       contradict
   have : Par B M L D := by conclude_def PG
   have : Par B M D L := by forward_using lemma_parallelflip
-  have : Col D L E := by forward_using lemma_collinearorder
+  have : Col D L E := by perm_close
   have : E ≠ L := by conclude lemma_inequalitysymmetric
   have : Par B M E L := by conclude lemma_collinearparallel
   have : Par E L B M := by conclude lemma_parallelsymmetric
-  have : Col B M C := by forward_using lemma_collinearorder
+  have : Col B M C := by perm_close
   have : C ≠ M := by conclude lemma_inequalitysymmetric
   have : Par E L C M := by conclude lemma_collinearparallel
   have : Par C M E L := by conclude lemma_parallelsymmetric
   have : Par M C E L := by forward_using lemma_parallelflip
-  have : Col D L E := by forward_using lemma_collinearorder
+  have : Col D L E := by perm_close
   have : Per E L M := by conclude lemma_collinearright
   have : Per M L E := by conclude lemma_8_2
   have : Per C E D := by conclude_def SQ

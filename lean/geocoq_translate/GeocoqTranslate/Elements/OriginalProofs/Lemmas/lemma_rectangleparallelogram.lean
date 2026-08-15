@@ -32,10 +32,10 @@ theorem lemma_rectangleparallelogram :
       have : ¬ D = P := by
           intro h
           have : Col A B D := by conclude cn_equalitysub
-          have : Col D A B := by forward_using lemma_collinearorder
+          have : Col D A B := by perm_close
           contradict
       have : Per B A D := by conclude lemma_8_2
-      have : Col B A P := by forward_using lemma_collinearorder
+      have : Col B A P := by perm_close
       have : P ≠ A := by conclude lemma_inequalitysymmetric
       have : Per P A D := by conclude lemma_collinearright
       have : P ≠ D := by conclude lemma_inequalitysymmetric
@@ -62,18 +62,18 @@ theorem lemma_rectangleparallelogram :
       have : ¬ A = P := by
           intro h
           have : Col B C A := by conclude cn_equalitysub
-          have : Col A B C := by forward_using lemma_collinearorder
+          have : Col A B C := by perm_close
           contradict
       have : ¬ B = P := by
           intro h
           have : Col A D B := by conclude cn_equalitysub
-          have : Col D A B := by forward_using lemma_collinearorder
+          have : Col D A B := by perm_close
           contradict
       have : P ≠ A := by conclude lemma_inequalitysymmetric
-      have : Col D A P := by forward_using lemma_collinearorder
+      have : Col D A P := by perm_close
       have : Per P A B := by conclude lemma_collinearright
       have : Per C B A := by conclude lemma_8_2
-      have : Col C B P := by forward_using lemma_collinearorder
+      have : Col C B P := by perm_close
       have : P ≠ B := by conclude lemma_inequalitysymmetric
       have : Per P B A := by conclude lemma_collinearright
       have : Per B A P := by conclude lemma_8_2

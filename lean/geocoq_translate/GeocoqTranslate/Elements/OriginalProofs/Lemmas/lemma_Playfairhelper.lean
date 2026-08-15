@@ -42,12 +42,12 @@ theorem lemma_Playfairhelper :
   have : BetS D M A := by conclude axiom_betweennesssymmetry
   have : Col B M C := by conclude_def Col
   have : Col B m C := by conclude_def Col
-  have : Col C B M := by forward_using lemma_collinearorder
-  have : Col C B m := by forward_using lemma_collinearorder
+  have : Col C B M := by perm_close
+  have : Col C B m := by perm_close
   have : nCol B C E := by forward_using lemma_parallelNC
-  have : nCol C B E := by forward_using lemma_NCorder
+  have : nCol C B E := by perm_close
   have : nCol B C D := by forward_using lemma_parallelNC
-  have : nCol C B D := by forward_using lemma_NCorder
+  have : nCol C B D := by perm_close
   have : TS E C B A := by (try (have : nCol C B E := nCol_notCol _ _ _ (by assumption))); conclude_def TS
   have : TS D C B A := by (try (have : nCol C B D := nCol_notCol _ _ _ (by assumption))); conclude_def TS
   have : Par C D A B := by conclude lemma_parallelsymmetric
@@ -65,7 +65,7 @@ theorem lemma_Playfairhelper :
   have : C ≠ B := by conclude lemma_inequalitysymmetric
   have : Out C B B := by conclude lemma_ray4
   have : Cong C B C B := by conclude cn_congruencereflexive
-  have : nCol E C B := by forward_using lemma_NCorder
+  have : nCol E C B := by perm_close
   have : CongA E C B E C B := by conclude lemma_equalanglesreflexive
   have : CongA E C B e C B := by conclude lemma_equalangleshelper
   have : CongA e C B E C B := by conclude lemma_equalanglessymmetric
@@ -73,20 +73,20 @@ theorem lemma_Playfairhelper :
   have : Col C E e := by conclude lemma_rayimpliescollinear
   have : C = C := by conclude cn_equalityreflexive
   have : Col C E C := by conclude_def Col
-  have : nCol C E B := by forward_using lemma_NCorder
+  have : nCol C E B := by perm_close
   have : C ≠ e := by conclude lemma_raystrict
   have : nCol C e B := by conclude lemma_NChelper
-  have : nCol e C B := by forward_using lemma_NCorder
+  have : nCol e C B := by perm_close
   have : Triangle e C B := by (try (have : nCol e C B := nCol_notCol _ _ _ (by assumption))); conclude_def Triangle
-  have : nCol D C B := by forward_using lemma_NCorder
+  have : nCol D C B := by perm_close
   have : Triangle D C B := by (try (have : nCol D C B := nCol_notCol _ _ _ (by assumption))); conclude_def Triangle
   have : Cong e B D B := by conclude proposition_04
   have : nCol B C E := by forward_using lemma_parallelNC
-  have : nCol C B E := by forward_using lemma_NCorder
+  have : nCol C B E := by perm_close
   have : nCol B C D := by forward_using lemma_parallelNC
-  have : nCol C B D := by forward_using lemma_NCorder
+  have : nCol C B D := by perm_close
   have : OS E D C B := by (try (have : nCol C B E := nCol_notCol _ _ _ (by assumption))); (try (have : nCol C B D := nCol_notCol _ _ _ (by assumption))); conclude_def OS
-  have : nCol C B e := by forward_using lemma_NCorder
+  have : nCol C B e := by perm_close
   have : Col C C B := by conclude_def Col
   have : Out C e E := by conclude lemma_ray5
   have : OS e e C B := by conclude lemma_samesidereflexive
@@ -95,7 +95,7 @@ theorem lemma_Playfairhelper :
   have : Cong e C D C := by forward_using lemma_congruenceflip
   have : e = D := by conclude proposition_07
   have : Col C E D := by conclude cn_equalitysub
-  have : Col C D E := by forward_using lemma_collinearorder
+  have : Col C D E := by perm_close
   close
 
 end GeocoqTranslate.Elements

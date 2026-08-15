@@ -28,35 +28,35 @@ theorem proposition_40 :
   have : E ≠ H := by conclude lemma_inequalitysymmetric
   obtain ⟨R, _, _⟩ : ∃ R, (BetS E H R ∧ Cong H R E H) := by conclude lemma_extension
   have : BetS R H E := by conclude axiom_betweennesssymmetry
-  have : nCol H E D := by forward_using lemma_NCorder
+  have : nCol H E D := by perm_close
   have : Col R H E := by conclude_def Col
-  have : Col H E R := by forward_using lemma_collinearorder
+  have : Col H E R := by perm_close
   have : E = E := by conclude cn_equalityreflexive
   have : Col H E E := by conclude_def Col
   have : R ≠ E := by forward_using lemma_betweennotequal
   have : nCol R E D := by conclude lemma_NChelper
   obtain ⟨P, Q, M, _, _, _, _, _⟩ : ∃ P Q M, (BetS P D Q ∧ CongA P D H D H E ∧ Par P Q R E ∧ BetS P M E ∧ BetS D M H) := by conclude proposition_31short
-  have : Col R E H := by forward_using lemma_collinearorder
+  have : Col R E H := by perm_close
   have : Par P Q H E := by conclude lemma_collinearparallel
   have : Col P D Q := by conclude_def Col
-  have : Col P Q D := by forward_using lemma_collinearorder
+  have : Col P Q D := by perm_close
   have : Cong H E B C := by conclude lemma_congruencesymmetric
-  have : Col C B H := by forward_using lemma_collinearorder
-  have : Col C B E := by forward_using lemma_collinearorder
+  have : Col C B H := by perm_close
+  have : Col C B E := by perm_close
   have : nCol A B C := by conclude_def Triangle
   have : B ≠ C := by forward_using lemma_NCdistinct
   have : C ≠ B := by conclude lemma_inequalitysymmetric
   have : Col B H E := by conclude lemma_collinear4
-  have : Col H E B := by forward_using lemma_collinearorder
-  have : Col B C H := by forward_using lemma_collinearorder
-  have : Col B C E := by forward_using lemma_collinearorder
+  have : Col H E B := by perm_close
+  have : Col B C H := by perm_close
+  have : Col B C E := by perm_close
   have : Col C H E := by conclude lemma_collinear4
-  have : Col H E C := by forward_using lemma_collinearorder
+  have : Col H E C := by perm_close
   have : ET D H E D B C := by conclude proposition_38
   have : ET A B C D B C := by conclude axiom_ETtransitive
-  have : nCol H E D := by forward_using lemma_NCorder
+  have : nCol H E D := by perm_close
   have : nCol B C D := by conclude lemma_NChelper
-  have : nCol D B C := by forward_using lemma_NCorder
+  have : nCol D B C := by perm_close
   have : Triangle D B C := by (try (have : nCol D B C := nCol_notCol _ _ _ (by assumption))); conclude_def Triangle
   have : Par A D B C := by conclude proposition_39
   close

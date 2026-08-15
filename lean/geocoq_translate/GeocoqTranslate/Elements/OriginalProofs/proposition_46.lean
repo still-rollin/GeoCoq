@@ -47,7 +47,7 @@ theorem proposition_46 :
   intro A B R h1 h2
   have : B ≠ A := by conclude lemma_inequalitysymmetric
   obtain ⟨F, _, _⟩ : ∃ F, (BetS B A F ∧ Cong A F A B) := by conclude lemma_extension
-  have : nCol B A R := by forward_using lemma_NCorder
+  have : nCol B A R := by perm_close
   have : Col B A F := by conclude_def Col
   have : B = B := by conclude cn_equalityreflexive
   have : Col B A B := by conclude_def Col
@@ -55,7 +55,7 @@ theorem proposition_46 :
   have : nCol B F R := by conclude lemma_NChelper
   obtain ⟨C, _, _⟩ : ∃ C, (Per B A C ∧ TS C B F R) := by conclude proposition_11B
   have : nCol B F C := by conclude_def TS
-  have : Col B F A := by forward_using lemma_collinearorder
+  have : Col B F A := by perm_close
   have : Col B F B := by conclude_def Col
   have : nCol B A C := by conclude lemma_NChelper
   have : A ≠ C := by forward_using lemma_NCdistinct
@@ -64,26 +64,26 @@ theorem proposition_46 :
   have : A = A := by conclude cn_equalityreflexive
   have : Col A B A := by conclude_def Col
   obtain ⟨q, _, _, _⟩ : ∃ q, (BetS C q R ∧ Col B F q ∧ nCol B F C) := by conclude_def TS
-  have : Col F B q := by forward_using lemma_collinearorder
+  have : Col F B q := by perm_close
   have : B = B := by conclude cn_equalityreflexive
   have : nCol A B C := by conclude lemma_NChelper
-  have : Col A B F := by forward_using lemma_collinearorder
-  have : Col F B A := by forward_using lemma_collinearorder
+  have : Col A B F := by perm_close
+  have : Col F B A := by perm_close
   have : B ≠ F := by forward_using lemma_betweennotequal
   have : F ≠ B := by conclude lemma_inequalitysymmetric
   have : Col B A q := by conclude lemma_collinear4
-  have : Col A B q := by forward_using lemma_collinearorder
+  have : Col A B q := by perm_close
   have : TS C A B R := by (try (have : nCol A B C := nCol_notCol _ _ _ (by assumption))); conclude_def TS
   have : TS D A B R := by conclude lemma_9_5
-  have : nCol C A B := by forward_using lemma_NCorder
+  have : nCol C A B := by perm_close
   have : A = A := by conclude cn_equalityreflexive
   have : Col C A A := by conclude_def Col
   have : Col A C D := by conclude lemma_rayimpliescollinear
-  have : Col C A D := by forward_using lemma_collinearorder
+  have : Col C A D := by perm_close
   have : A ≠ D := by conclude lemma_ray2
-  have : nCol C A B := by forward_using lemma_NCorder
+  have : nCol C A B := by perm_close
   have : nCol A D B := by conclude lemma_NChelper
-  have : nCol A B D := by forward_using lemma_NCorder
+  have : nCol A B D := by perm_close
   have : BetS F A B := by conclude axiom_betweennesssymmetry
   have : Col A B B := by conclude_def Col
   have : nCol F B D := by conclude lemma_NChelper
@@ -91,7 +91,7 @@ theorem proposition_46 :
   have : Par G e A B := by conclude lemma_collinearparallel
   have : Par A B G e := by conclude lemma_parallelsymmetric
   have : Col G D e := by conclude_def Col
-  have : Col G e D := by forward_using lemma_collinearorder
+  have : Col G e D := by perm_close
   obtain ⟨E, _, _⟩ : ∃ E, (PG D E B A ∧ Col G e E) := by conclude lemma_triangletoparallelogram
   have : Per C A B := by conclude lemma_8_2
   have : D ≠ A := by conclude lemma_inequalitysymmetric
@@ -108,10 +108,10 @@ theorem proposition_46 :
   have : OS E B D A := by conclude_def TP
   have : D = D := by conclude cn_equalityreflexive
   have : Col D A D := by conclude_def Col
-  have : nCol D A B := by forward_using lemma_NCorder
+  have : nCol D A B := by perm_close
   have : BetS B M G := by conclude axiom_betweennesssymmetry
   have : Col D M A := by conclude_def Col
-  have : Col D A M := by forward_using lemma_collinearorder
+  have : Col D A M := by perm_close
   have : TS B D A G := by (try (have : nCol D A B := nCol_notCol _ _ _ (by assumption))); conclude_def TS
   have : TS E D A G := by conclude lemma_planeseparation
   have : nCol D A E := by conclude_def TS
@@ -137,8 +137,8 @@ theorem proposition_46 :
       have : BetS E D e := by conclude lemma_3_6a
       have : OS E G D A := by (try (have : nCol D A E := nCol_notCol _ _ _ (by assumption))); (try (have : nCol D A G := nCol_notCol _ _ _ (by assumption))); conclude_def OS
       contradict
-  have : Col e G D := by forward_using lemma_collinearorder
-  have : Col e G E := by forward_using lemma_collinearorder
+  have : Col e G D := by perm_close
+  have : Col e G E := by perm_close
   have : nCol G e F := by forward_using lemma_parallelNC
   have : G ≠ e := by forward_using lemma_NCdistinct
   have : e ≠ G := by conclude lemma_inequalitysymmetric

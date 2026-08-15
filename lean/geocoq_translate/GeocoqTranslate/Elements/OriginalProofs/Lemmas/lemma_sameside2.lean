@@ -23,14 +23,14 @@ theorem lemma_sameside2 :
   intro A B C E F G h1 h2 h3
   obtain ⟨Q, U, V, _, _, _, _, _, _⟩ : ∃ Q U V, (Col A C U ∧ Col A C V ∧ BetS E U Q ∧ BetS F V Q ∧ nCol A C E ∧ nCol A C F) := by conclude_def OS
   have : TS F A C Q := by (try (have : nCol A C F := nCol_notCol _ _ _ (by assumption))); conclude_def TS
-  have : Col A C B := by forward_using lemma_collinearorder
+  have : Col A C B := by perm_close
   have : ¬ A = C := by
       intro h
       have : Col A C F := by conclude_def Col
       contradict
   have : Col B F G := by conclude lemma_rayimpliescollinear
-  have : Col B G F := by forward_using lemma_collinearorder
-  have : Col A C B := by forward_using lemma_collinearorder
+  have : Col B G F := by perm_close
+  have : Col A C B := by perm_close
   have : ¬ ¬ TS G A C Q := by
       intro h
       have : ¬ F = G := by
@@ -55,24 +55,24 @@ theorem lemma_sameside2 :
                 close
           have : ¬ Col A C G := by
               intro h
-              have : Col A C B := by forward_using lemma_collinearorder
+              have : Col A C B := by perm_close
               have : Col C G B := by conclude lemma_collinear4
-              have : Col G B C := by forward_using lemma_collinearorder
-              have : Col G B F := by forward_using lemma_collinearorder
+              have : Col G B C := by perm_close
+              have : Col G B F := by perm_close
               have : B ≠ G := by conclude lemma_raystrict
               have : G ≠ B := by conclude lemma_inequalitysymmetric
               have : Col B C F := by conclude lemma_collinear4
               have : ¬ B ≠ C := by
                   intro h
-                  have : Col B C A := by forward_using lemma_collinearorder
+                  have : Col B C A := by perm_close
                   have : Col C F A := by conclude lemma_collinear4
-                  have : Col A C F := by forward_using lemma_collinearorder
+                  have : Col A C F := by perm_close
                   contradict
               have : Col A B G := by conclude cn_equalitysub
               have : A ≠ B := by conclude cn_equalitysub
-              have : Col G B A := by forward_using lemma_collinearorder
+              have : Col G B A := by perm_close
               have : Col B A F := by conclude lemma_collinear4
-              have : Col A B F := by forward_using lemma_collinearorder
+              have : Col A B F := by perm_close
               have : Col A C F := by conclude cn_equalitysub
               contradict
           have : TS G A C Q := by (try (have : nCol A C G := nCol_notCol _ _ _ (by assumption))); conclude_def TS
@@ -80,33 +80,33 @@ theorem lemma_sameside2 :
       have : ¬ Col Q F B := by
           intro h
           have : Col F V Q := by conclude_def Col
-          have : Col Q F V := by forward_using lemma_collinearorder
+          have : Col Q F V := by perm_close
           have : F ≠ Q := by forward_using lemma_betweennotequal
           have : Q ≠ F := by conclude lemma_inequalitysymmetric
           have : Col F B V := by conclude lemma_collinear4
           have : Col C B V := by conclude lemma_collinear4
-          have : Col B V F := by forward_using lemma_collinearorder
-          have : Col B V C := by forward_using lemma_collinearorder
+          have : Col B V F := by perm_close
+          have : Col B V C := by perm_close
           have : Col V F C := by conclude lemma_collinear4
-          have : Col V C F := by forward_using lemma_collinearorder
-          have : Col V C A := by forward_using lemma_collinearorder
+          have : Col V C F := by perm_close
+          have : Col V C A := by perm_close
           have : ¬ V ≠ C := by
               intro h
               have : Col C F A := by conclude lemma_collinear4
-              have : Col A C F := by forward_using lemma_collinearorder
+              have : Col A C F := by perm_close
               contradict
           have : A ≠ V := by conclude cn_equalitysub
           have : V ≠ A := by conclude lemma_inequalitysymmetric
-          have : Col C A B := by forward_using lemma_collinearorder
-          have : Col C A V := by forward_using lemma_collinearorder
+          have : Col C A B := by perm_close
+          have : Col C A V := by perm_close
           have : C ≠ A := by conclude lemma_inequalitysymmetric
           have : Col A B V := by conclude lemma_collinear4
-          have : Col B V A := by forward_using lemma_collinearorder
+          have : Col B V A := by perm_close
           have : Col V F A := by conclude lemma_collinear4
-          have : Col V A F := by forward_using lemma_collinearorder
-          have : Col V A C := by forward_using lemma_collinearorder
+          have : Col V A F := by perm_close
+          have : Col V A C := by perm_close
           have : Col A F C := by conclude lemma_collinear4
-          have : Col A C F := by forward_using lemma_collinearorder
+          have : Col A C F := by perm_close
           contradict
       have : (BetS B G F ∨ F = G ∨ BetS B F G) := by conclude lemma_ray1
       have : TS G A C Q := by
@@ -117,12 +117,12 @@ theorem lemma_sameside2 :
             close
           · have : ¬ Col B G Q := by
                 intro h
-                have : Col G B F := by forward_using lemma_collinearorder
+                have : Col G B F := by perm_close
                 have : B ≠ G := by forward_using lemma_betweennotequal
                 have : G ≠ B := by conclude lemma_inequalitysymmetric
-                have : Col G B Q := by forward_using lemma_collinearorder
+                have : Col G B Q := by perm_close
                 have : Col B F Q := by conclude lemma_collinear4
-                have : Col Q F B := by forward_using lemma_collinearorder
+                have : Col Q F B := by perm_close
                 contradict
             have : TS G A C Q := by conclude lemma_9_5a
             close

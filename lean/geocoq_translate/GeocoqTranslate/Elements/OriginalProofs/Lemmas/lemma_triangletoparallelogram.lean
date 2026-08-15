@@ -38,10 +38,10 @@ theorem lemma_triangletoparallelogram :
   have : ¬ Col B C A := by
       intro h
       have : Col C D B := by conclude_def Col
-      have : Col B C D := by forward_using lemma_collinearorder
+      have : Col B C D := by perm_close
       have : B ≠ C := by forward_using lemma_betweennotequal
       have : Col C A D := by conclude lemma_collinear4
-      have : Col D C A := by forward_using lemma_collinearorder
+      have : Col D C A := by perm_close
       have : Meet D C E F := by conclude_def Meet
       have : ¬ Meet D C E F := by conclude_def Par
       contradict
@@ -53,15 +53,15 @@ theorem lemma_triangletoparallelogram :
   have : BetS C R c := by conclude lemma_3_6b
   have : BetS b A c := by conclude axiom_betweennesssymmetry
   have : nCol c b C := by forward_using lemma_parallelNC
-  have : nCol b c C := by forward_using lemma_NCorder
+  have : nCol b c C := by perm_close
   obtain ⟨Q, _, _⟩ : ∃ Q, (BetS b Q R ∧ BetS C Q A) := by conclude postulate_Pasch_inner
   have : BetS b Q D := by conclude lemma_3_6b
   have : Col C D B := by conclude_def Col
-  have : Col B C D := by forward_using lemma_collinearorder
+  have : Col B C D := by perm_close
   have : Par c b D C := by conclude lemma_collinearparallel
   have : Par D C c b := by conclude lemma_parallelsymmetric
   have : Col c A b := by conclude_def Col
-  have : Col c b A := by forward_using lemma_collinearorder
+  have : Col c b A := by perm_close
   have : A ≠ b := by forward_using lemma_betweennotequal
   have : Par D C A b := by conclude lemma_collinearparallel
   have : Par A b D C := by conclude lemma_parallelsymmetric
@@ -84,14 +84,14 @@ theorem lemma_triangletoparallelogram :
         have : Par D C A E := by conclude lemma_collinearparallel2
         have : Col A b E := by conclude lemma_Playfair
         have : Col F b E := by conclude cn_equalitysub
-        have : Col E F b := by forward_using lemma_collinearorder
+        have : Col E F b := by perm_close
         close
       · have : Par D C A F := by conclude lemma_collinearparallel
         have : Col A b F := by conclude lemma_Playfair
-        have : Col A F b := by forward_using lemma_collinearorder
-        have : Col A F E := by forward_using lemma_collinearorder
+        have : Col A F b := by perm_close
+        have : Col A F E := by perm_close
         have : Col F b E := by conclude lemma_collinear4
-        have : Col E F b := by forward_using lemma_collinearorder
+        have : Col E F b := by perm_close
         close
   close
 

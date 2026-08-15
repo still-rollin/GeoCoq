@@ -17,9 +17,9 @@ theorem lemma_collinearbetween :
   have : ¬ H = E := by
       intro h
       have : Col A H B := by conclude cn_equalitysub
-      have : Col H A B := by forward_using lemma_collinearorder
+      have : Col H A B := by perm_close
       have : Col A H D := by conclude_def Col
-      have : Col H A D := by forward_using lemma_collinearorder
+      have : Col H A D := by perm_close
       have : A ≠ H := by forward_using lemma_betweennotequal
       have : H ≠ A := by conclude lemma_inequalitysymmetric
       have : Col A B D := by conclude lemma_collinear4
@@ -31,10 +31,10 @@ theorem lemma_collinearbetween :
       intro h
       have : Col A H D := by conclude_def Col
       have : Col A F D := by conclude cn_equalitysub
-      have : Col F D A := by forward_using lemma_collinearorder
-      have : Col F D C := by forward_using lemma_collinearorder
+      have : Col F D A := by perm_close
+      have : Col F D C := by perm_close
       have : Col D A C := by conclude lemma_collinear4
-      have : Col C D A := by forward_using lemma_collinearorder
+      have : Col C D A := by perm_close
       have : A = A := by conclude cn_equalityreflexive
       have : Col A B A := by conclude_def Col
       have : Meet A B C D := by conclude_def Meet
@@ -44,8 +44,8 @@ theorem lemma_collinearbetween :
       have : BetS D H A := by conclude axiom_betweennesssymmetry
       have : ¬ Col D A E := by
           intro h
-          have : Col E A B := by forward_using lemma_collinearorder
-          have : Col E A D := by forward_using lemma_collinearorder
+          have : Col E A B := by perm_close
+          have : Col E A D := by perm_close
           have : E ≠ A := by conclude lemma_inequalitysymmetric
           have : Col A B D := by conclude lemma_collinear4
           have : D = D := by conclude cn_equalityreflexive
@@ -55,25 +55,25 @@ theorem lemma_collinearbetween :
       obtain ⟨Q, _, _⟩ : ∃ Q, (BetS E Q A ∧ BetS D F Q) := by conclude postulate_Pasch_outer
       have : Col E Q A := by conclude_def Col
       have : Col D F Q := by conclude_def Col
-      have : Col E A Q := by forward_using lemma_collinearorder
-      have : Col E A B := by forward_using lemma_collinearorder
+      have : Col E A Q := by perm_close
+      have : Col E A B := by perm_close
       have : E ≠ A := by conclude lemma_inequalitysymmetric
       have : Col A Q B := by conclude lemma_collinear4
-      have : Col A B Q := by forward_using lemma_collinearorder
-      have : Col F D Q := by forward_using lemma_collinearorder
-      have : Col F D C := by forward_using lemma_collinearorder
+      have : Col A B Q := by perm_close
+      have : Col F D Q := by perm_close
+      have : Col F D C := by perm_close
       have : Col D Q C := by conclude lemma_collinear4
-      have : Col C D Q := by forward_using lemma_collinearorder
+      have : Col C D Q := by perm_close
       have : Meet A B C D := by conclude_def Meet
       contradict
   have : ¬ BetS F E H := by
       intro h
       have : ¬ Col A D F := by
           intro h
-          have : Col F D C := by forward_using lemma_collinearorder
-          have : Col F D A := by forward_using lemma_collinearorder
+          have : Col F D C := by perm_close
+          have : Col F D A := by perm_close
           have : Col D C A := by conclude lemma_collinear4
-          have : Col C D A := by forward_using lemma_collinearorder
+          have : Col C D A := by perm_close
           have : A = A := by conclude cn_equalityreflexive
           have : Col A B A := by conclude_def Col
           have : Meet A B C D := by conclude_def Meet
@@ -81,22 +81,22 @@ theorem lemma_collinearbetween :
       obtain ⟨R, _, _⟩ : ∃ R, (BetS F R D ∧ BetS A E R) := by conclude postulate_Pasch_outer
       have : Col F R D := by conclude_def Col
       have : Col A E R := by conclude_def Col
-      have : Col F D R := by forward_using lemma_collinearorder
-      have : Col F D C := by forward_using lemma_collinearorder
+      have : Col F D R := by perm_close
+      have : Col F D C := by perm_close
       have : Col D R C := by conclude lemma_collinear4
-      have : Col C D R := by forward_using lemma_collinearorder
-      have : Col E A R := by forward_using lemma_collinearorder
-      have : Col E A B := by forward_using lemma_collinearorder
+      have : Col C D R := by perm_close
+      have : Col E A R := by perm_close
+      have : Col E A B := by perm_close
       have : A ≠ E := by forward_using lemma_betweennotequal
       have : E ≠ A := by conclude lemma_inequalitysymmetric
       have : Col A R B := by conclude lemma_collinear4
-      have : Col A B R := by forward_using lemma_collinearorder
+      have : Col A B R := by perm_close
       have : Meet A B C D := by conclude_def Meet
       contradict
   have : ¬ E = F := by
       intro h
-      have : Col C D F := by forward_using lemma_collinearorder
-      have : Col A B E := by forward_using lemma_collinearorder
+      have : Col C D F := by perm_close
+      have : Col A B E := by perm_close
       have : Col A B F := by conclude cn_equalitysub
       have : Meet A B C D := by conclude_def Meet
       contradict

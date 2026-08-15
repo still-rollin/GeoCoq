@@ -13,23 +13,23 @@ theorem lemma_NCorder :
   intro A B C h1
   have : ¬ Col B A C := by
       intro h
-      have : Col A B C := by forward_using lemma_collinearorder
+      have : Col A B C := by perm_close
       contradict
   have : ¬ Col B C A := by
       intro h
-      have : Col A B C := by forward_using lemma_collinearorder
+      have : Col A B C := by perm_close
       contradict
   have : ¬ Col C A B := by
       intro h
-      have : Col A B C := by forward_using lemma_collinearorder
+      have : Col A B C := by perm_close
       contradict
   have : ¬ Col A C B := by
       intro h
-      have : Col A B C := by forward_using lemma_collinearorder
+      have : Col A B C := by perm_close
       contradict
   have : ¬ Col C B A := by
       intro h
-      have : Col A B C := by forward_using lemma_collinearorder
+      have : Col A B C := by perm_close
       contradict
   close
 

@@ -13,8 +13,8 @@ theorem lemma_oppositesideflip :
     ∀ (A B P Q : Point), TS P A B Q → TS P B A Q := by
   intro A B P Q h1
   obtain ⟨r, _, _, _⟩ : ∃ r, (BetS P r Q ∧ Col A B r ∧ nCol A B P) := by conclude_def TS
-  have : nCol B A P := by forward_using lemma_NCorder
-  have : Col B A r := by forward_using lemma_collinearorder
+  have : nCol B A P := by perm_close
+  have : Col B A r := by perm_close
   have : TS P B A Q := by (try (have : nCol B A P := nCol_notCol _ _ _ (by assumption))); conclude_def TS
   close
 

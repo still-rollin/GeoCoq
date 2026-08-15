@@ -62,13 +62,13 @@ theorem proposition_39 :
           contradict
       have : ¬ ¬ CongA C B D C B A := by
           intro h
-          have : nCol C B A := by forward_using lemma_NCorder
-          have : nCol C B D := by forward_using lemma_NCorder
+          have : nCol C B A := by perm_close
+          have : nCol C B D := by perm_close
           have : LtA C B D C B A := by conclude lemma_angletrichotomy2
           contradict
-      have : nCol A C B := by forward_using lemma_NCorder
+      have : nCol A C B := by perm_close
       have : Triangle A C B := by (try (have : nCol A C B := nCol_notCol _ _ _ (by assumption))); conclude_def Triangle
-      have : nCol D C B := by forward_using lemma_NCorder
+      have : nCol D C B := by perm_close
       have : Triangle D C B := by (try (have : nCol D C B := nCol_notCol _ _ _ (by assumption))); conclude_def Triangle
       have : OS A D C B := by conclude lemma_samesideflip
       have : ET A B C D C B := by forward_using axiom_ETpermutation
@@ -90,8 +90,8 @@ theorem proposition_39 :
           contradict
       have : ¬ ¬ CongA B C D B C A := by
           intro h
-          have : nCol B C A := by forward_using lemma_NCorder
-          have : nCol B C D := by forward_using lemma_NCorder
+          have : nCol B C A := by perm_close
+          have : nCol B C D := by perm_close
           have : LtA B C D B C A := by conclude lemma_angletrichotomy2
           contradict
       have : CongA B C A B C D := by conclude lemma_equalanglessymmetric

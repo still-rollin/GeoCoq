@@ -26,13 +26,13 @@ theorem proposition_15 :
   have : ¬ Col B E D := by
       intro h
       have : Col A E B := by conclude_def Col
-      have : Col B E A := by forward_using lemma_collinearorder
+      have : Col B E A := by perm_close
       have : Col E A D := by conclude lemma_collinear4
       have : Col C E D := by conclude_def Col
-      have : Col D E C := by forward_using lemma_collinearorder
-      have : Col D E A := by forward_using lemma_collinearorder
+      have : Col D E C := by perm_close
+      have : Col D E A := by perm_close
       have : Col E C A := by conclude lemma_collinear4
-      have : Col A E C := by forward_using lemma_collinearorder
+      have : Col A E C := by perm_close
       contradict
   have : D = D := by conclude cn_equalityreflexive
   have : B = B := by conclude cn_equalityreflexive
@@ -46,19 +46,19 @@ theorem proposition_15 :
   have : ¬ Col A E D := by
       intro h
       have : Col C E D := by conclude_def Col
-      have : Col D E C := by forward_using lemma_collinearorder
-      have : Col D E A := by forward_using lemma_collinearorder
+      have : Col D E C := by perm_close
+      have : Col D E A := by perm_close
       have : Col E C A := by conclude lemma_collinear4
-      have : Col A E C := by forward_using lemma_collinearorder
+      have : Col A E C := by perm_close
       contradict
   have : CongA B E D D E B := by conclude lemma_ABCequalsCBA
   have : CongA D E A B E C := by conclude lemma_supplements
   have : ¬ Col B E C := by
       intro h
       have : Col A E B := by conclude_def Col
-      have : Col B E A := by forward_using lemma_collinearorder
+      have : Col B E A := by perm_close
       have : Col E A C := by conclude lemma_collinear4
-      have : Col A E C := by forward_using lemma_collinearorder
+      have : Col A E C := by perm_close
       contradict
   have : CongA B E C C E B := by conclude lemma_ABCequalsCBA
   have : CongA D E A C E B := by conclude lemma_equalanglestransitive
@@ -76,20 +76,20 @@ theorem proposition_15 :
   have : ¬ Col A E C := by
       intro h
       have : Col D E C := by conclude_def Col
-      have : Col C E D := by forward_using lemma_collinearorder
-      have : Col C E A := by forward_using lemma_collinearorder
+      have : Col C E D := by perm_close
+      have : Col C E A := by perm_close
       have : C ≠ E := by forward_using lemma_betweennotequal
       have : Col E D A := by conclude lemma_collinear4
-      have : Col A E D := by forward_using lemma_collinearorder
+      have : Col A E D := by perm_close
       contradict
   have : CongA B E C C E B := by conclude lemma_ABCequalsCBA
   have : CongA C E A B E D := by conclude lemma_supplements
   have : ¬ Col B E D := by
       intro h
       have : Col A E B := by conclude_def Col
-      have : Col B E A := by forward_using lemma_collinearorder
+      have : Col B E A := by perm_close
       have : Col E A D := by conclude lemma_collinear4
-      have : Col A E D := by forward_using lemma_collinearorder
+      have : Col A E D := by perm_close
       contradict
   have : CongA B E D D E B := by conclude lemma_ABCequalsCBA
   have : CongA C E A D E B := by conclude lemma_equalanglestransitive

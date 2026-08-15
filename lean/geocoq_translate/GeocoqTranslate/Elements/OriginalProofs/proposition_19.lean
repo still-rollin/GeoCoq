@@ -24,8 +24,8 @@ theorem proposition_19 :
     ∀ (A B C : Point), Triangle A B C → LtA B C A A B C → Lt A B A C := by
   intro A B C h1 h2
   have : nCol A B C := by conclude_def Triangle
-  have : nCol B C A := by forward_using lemma_NCorder
-  have : nCol A C B := by forward_using lemma_NCorder
+  have : nCol B C A := by perm_close
+  have : nCol A C B := by perm_close
   have : ¬ Cong A C A B := by
       intro h
       have : Cong A B A C := by conclude lemma_congruencesymmetric

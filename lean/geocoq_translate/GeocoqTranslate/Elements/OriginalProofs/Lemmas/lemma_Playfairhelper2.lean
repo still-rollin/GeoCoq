@@ -50,13 +50,13 @@ theorem lemma_Playfairhelper2 :
         have : Par A B C e := by forward_using lemma_parallelflip
         have : nCol A C D := by forward_using lemma_parallelNC
         have : nCol A B C := by forward_using lemma_parallelNC
-        have : nCol B C A := by forward_using lemma_NCorder
+        have : nCol B C A := by perm_close
         obtain ⟨H, _, _⟩ : ∃ H, (BetS B H m ∧ BetS A H M) := by conclude postulate_Pasch_inner
         have : nCol A E C := by forward_using lemma_parallelNC
         have : Col E C e := by conclude_def Col
-        have : Col C E e := by forward_using lemma_collinearorder
+        have : Col C E e := by perm_close
         have : C ≠ E := by conclude lemma_inequalitysymmetric
-        have : nCol C E A := by forward_using lemma_NCorder
+        have : nCol C E A := by perm_close
         have : E = E := by conclude cn_equalityreflexive
         have : Col C E E := by conclude_def Col
         have : E ≠ e := by forward_using lemma_betweennotequal
@@ -65,12 +65,12 @@ theorem lemma_Playfairhelper2 :
         have : BetS e F A := by conclude axiom_betweennesssymmetry
         have : Col E m F := by conclude_def Col
         have : Col E m B := by conclude_def Col
-        have : Col m E F := by forward_using lemma_collinearorder
-        have : Col m E B := by forward_using lemma_collinearorder
+        have : Col m E F := by perm_close
+        have : Col m E B := by perm_close
         have : E ≠ m := by forward_using lemma_betweennotequal
         have : m ≠ E := by conclude lemma_inequalitysymmetric
         have : Col E F B := by conclude lemma_collinear4
-        have : Col E B F := by forward_using lemma_collinearorder
+        have : Col E B F := by perm_close
         have : e ≠ E := by conclude lemma_inequalitysymmetric
         have : E = E := by conclude cn_equalityreflexive
         have : Col e E E := by conclude_def Col
@@ -78,7 +78,7 @@ theorem lemma_Playfairhelper2 :
         have : Col B B A := by conclude_def Col
         have : B ≠ A := by conclude lemma_inequalitysymmetric
         have : Par A B C E := by forward_using lemma_parallelflip
-        have : Col C E e := by forward_using lemma_collinearorder
+        have : Col C E e := by perm_close
         have : Par A B e E := by conclude lemma_collinearparallel
         have : Par e E A B := by conclude lemma_parallelsymmetric
         have : Par e E B A := by forward_using lemma_parallelflip
@@ -87,12 +87,12 @@ theorem lemma_Playfairhelper2 :
         have : BetS B F E := by conclude axiom_betweennesssymmetry
         have : BetS e C E := by conclude axiom_betweennesssymmetry
         have : nCol B E C := by forward_using lemma_parallelNC
-        have : nCol E C B := by forward_using lemma_NCorder
+        have : nCol E C B := by perm_close
         have : Col E C e := by conclude_def Col
         have : E = E := by conclude cn_equalityreflexive
         have : Col E C E := by conclude_def Col
         have : nCol E e B := by conclude lemma_NChelper
-        have : nCol B E e := by forward_using lemma_NCorder
+        have : nCol B E e := by perm_close
         obtain ⟨K, _, _⟩ : ∃ K, (BetS B K C ∧ BetS e K F) := by conclude postulate_Pasch_inner
         have : BetS e F A := by conclude axiom_betweennesssymmetry
         have : BetS e K A := by conclude lemma_3_6b
@@ -100,8 +100,8 @@ theorem lemma_Playfairhelper2 :
         have : A ≠ e := by forward_using lemma_betweennotequal
         have : CR A e B C := by conclude_def CR
         have : Col C D e := by conclude lemma_Playfairhelper
-        have : Col e C D := by forward_using lemma_collinearorder
-        have : Col e C E := by forward_using lemma_collinearorder
+        have : Col e C D := by perm_close
+        have : Col e C E := by perm_close
         have : C ≠ e := by forward_using lemma_betweennotequal
         have : e ≠ C := by conclude lemma_inequalitysymmetric
         have : Col C D E := by conclude lemma_collinear4

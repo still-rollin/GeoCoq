@@ -47,7 +47,7 @@ theorem lemma_angletrichotomy2 :
       contradict
   have : ¬ Col B A C := by
       intro h
-      have : Col A B C := by forward_using lemma_collinearorder
+      have : Col A B C := by perm_close
       contradict
   obtain ⟨G, J, _, _, _⟩ : ∃ G J, (Out B A J ∧ CongA G B J D E F ∧ OS G C B A) := by conclude proposition_23C
   have : nCol B A G := by conclude_def OS
@@ -67,14 +67,14 @@ theorem lemma_angletrichotomy2 :
   have : nCol G B A := by conclude lemma_equalanglesNC
   have : ¬ Col A B G := by
       intro h
-      have : Col B A G := by forward_using lemma_collinearorder
+      have : Col B A G := by perm_close
       contradict
   have : CongA G B A D E F := by conclude lemma_equalanglessymmetric
   have : CongA A B G G B A := by conclude lemma_ABCequalsCBA
   have : CongA A B G D E F := by conclude lemma_equalanglestransitive
   have : ¬ Col A B G := by
       intro h
-      have : Col G B A := by forward_using lemma_collinearorder
+      have : Col G B A := by perm_close
       contradict
   have : ¬ G = A := by
       intro h
@@ -86,7 +86,7 @@ theorem lemma_angletrichotomy2 :
   have : Col B A A := by conclude_def Col
   have : ¬ Col B A G := by
       intro h
-      have : Col G B A := by forward_using lemma_collinearorder
+      have : Col G B A := by perm_close
       contradict
   have : OS C G B A := by forward_using lemma_samesidesymmetric
   have : TS G B A P := by (try (have : nCol B A G := nCol_notCol _ _ _ (by assumption))); conclude_def TS
@@ -104,13 +104,13 @@ theorem lemma_angletrichotomy2 :
                 intro h
                 have : BetS A B G := by conclude cn_equalitysub
                 have : Col A B G := by conclude_def Col
-                have : Col G B A := by forward_using lemma_collinearorder
+                have : Col G B A := by perm_close
                 contradict
             have : H ≠ B := by conclude lemma_inequalitysymmetric
-            have : Col H B A := by forward_using lemma_collinearorder
-            have : Col H B C := by forward_using lemma_collinearorder
+            have : Col H B A := by perm_close
+            have : Col H B C := by perm_close
             have : Col B A C := by conclude lemma_collinear4
-            have : Col A B C := by forward_using lemma_collinearorder
+            have : Col A B C := by perm_close
             contradict
         have : CongA A B H A B H := by conclude lemma_equalanglesreflexive
         have : LtA A B H A B G := by conclude_def LtA
@@ -118,7 +118,7 @@ theorem lemma_angletrichotomy2 :
         have : LtA A B H G B A := by conclude lemma_angleorderrespectscongruence
         have : ¬ Col H B A := by
             intro h
-            have : Col A B H := by forward_using lemma_collinearorder
+            have : Col A B H := by perm_close
             contradict
         have : CongA H B A A B H := by conclude lemma_ABCequalsCBA
         have : LtA H B A G B A := by conclude lemma_angleorderrespectscongruence2
@@ -154,7 +154,7 @@ theorem lemma_angletrichotomy2 :
                   intro h
                   have : ¬ Col B H A := by
                       intro h
-                      have : Col H B A := by forward_using lemma_collinearorder
+                      have : Col H B A := by perm_close
                       contradict
                   contradict
               close
@@ -166,7 +166,7 @@ theorem lemma_angletrichotomy2 :
                         intro h
                         have : ¬ Col B H A := by
                             intro h
-                            have : Col H B A := by forward_using lemma_collinearorder
+                            have : Col H B A := by perm_close
                             contradict
                         contradict
                     close
@@ -202,15 +202,15 @@ theorem lemma_angletrichotomy2 :
                   have : Col C R P := by conclude_def Col
                   have : Col C B P := by conclude cn_equalitysub
                   have : Col G A P := by conclude_def Col
-                  have : Col G P A := by forward_using lemma_collinearorder
-                  have : Col G P C := by forward_using lemma_collinearorder
+                  have : Col G P A := by perm_close
+                  have : Col G P C := by perm_close
                   have : G ≠ P := by forward_using lemma_betweennotequal
                   have : Col P C A := by conclude lemma_collinear4
-                  have : Col P C B := by forward_using lemma_collinearorder
+                  have : Col P C B := by perm_close
                   have : C ≠ P := by forward_using lemma_betweennotequal
                   have : P ≠ C := by conclude lemma_inequalitysymmetric
                   have : Col C A B := by conclude lemma_collinear4
-                  have : Col A B C := by forward_using lemma_collinearorder
+                  have : Col A B C := by perm_close
                   contradict
               obtain ⟨Q, _, _⟩ : ∃ Q, (BetS C Q A ∧ BetS G Q R) := by conclude postulate_Pasch_inner
               have : BetS G Q B := by conclude cn_equalitysub
@@ -273,17 +273,17 @@ theorem lemma_angletrichotomy2 :
               have : ¬ Col C P A := by
                   intro h
                   have : Col C R P := by conclude_def Col
-                  have : Col C P R := by forward_using lemma_collinearorder
+                  have : Col C P R := by perm_close
                   have : C ≠ P := by forward_using lemma_betweennotequal
                   have : Col P A R := by conclude lemma_collinear4
                   have : Col R B A := by conclude_def Col
-                  have : Col R A B := by forward_using lemma_collinearorder
-                  have : Col R A P := by forward_using lemma_collinearorder
+                  have : Col R A B := by perm_close
+                  have : Col R A P := by perm_close
                   have : R ≠ A := by forward_using lemma_betweennotequal
                   have : Col A B P := by conclude lemma_collinear4
-                  have : Col P A B := by forward_using lemma_collinearorder
+                  have : Col P A B := by perm_close
                   have : Col G A P := by conclude_def Col
-                  have : Col P A G := by forward_using lemma_collinearorder
+                  have : Col P A G := by perm_close
                   have : A ≠ P := by forward_using lemma_betweennotequal
                   have : P ≠ A := by conclude lemma_inequalitysymmetric
                   have : Col A B G := by conclude lemma_collinear4
@@ -299,16 +299,16 @@ theorem lemma_angletrichotomy2 :
                   have : BetS P A G := by conclude axiom_betweennesssymmetry
                   have : BetS P M G := by conclude lemma_3_6b
                   have : Col P M G := by conclude_def Col
-                  have : Col M G P := by forward_using lemma_collinearorder
-                  have : Col M G C := by forward_using lemma_collinearorder
+                  have : Col M G P := by perm_close
+                  have : Col M G C := by perm_close
                   have : M ≠ G := by forward_using lemma_betweennotequal
                   have : Col G P C := by conclude lemma_collinear4
                   have : Col P A G := by conclude_def Col
-                  have : Col G P A := by forward_using lemma_collinearorder
+                  have : Col G P A := by perm_close
                   have : P ≠ G := by forward_using lemma_betweennotequal
                   have : G ≠ P := by conclude lemma_inequalitysymmetric
                   have : Col P C A := by conclude lemma_collinear4
-                  have : Col C P A := by forward_using lemma_collinearorder
+                  have : Col C P A := by perm_close
                   contradict
               obtain ⟨Q, _, _⟩ : ∃ Q, (BetS C Q A ∧ BetS G Q B) := by conclude postulate_Pasch_inner
               have : BetS B Q G := by conclude axiom_betweennesssymmetry
@@ -339,15 +339,15 @@ theorem lemma_angletrichotomy2 :
                   intro h
                   have : Col B A R := by conclude_def Col
                   have : Col P R C := by conclude_def Col
-                  have : Col P C R := by forward_using lemma_collinearorder
+                  have : Col P C R := by perm_close
                   have : P ≠ C := by forward_using lemma_betweennotequal
                   have : Col C B R := by conclude lemma_collinear4
-                  have : Col R B C := by forward_using lemma_collinearorder
-                  have : Col R B A := by forward_using lemma_collinearorder
+                  have : Col R B C := by perm_close
+                  have : Col R B A := by perm_close
                   have : B ≠ R := by forward_using lemma_betweennotequal
                   have : R ≠ B := by conclude lemma_inequalitysymmetric
                   have : Col B C A := by conclude lemma_collinear4
-                  have : Col A B C := by forward_using lemma_collinearorder
+                  have : Col A B C := by perm_close
                   contradict
               obtain ⟨Q, _, _⟩ : ∃ Q, (BetS B Q C ∧ BetS P A Q) := by conclude postulate_Pasch_outer
               have : Col B C Q := by conclude_def Col
@@ -369,19 +369,19 @@ theorem lemma_angletrichotomy2 :
                   have : BetS P A G := by conclude axiom_betweennesssymmetry
                   have : Out A G Q := by conclude_def Out
                   have : Col A G Q := by conclude lemma_rayimpliescollinear
-                  have : Col Q C B := by forward_using lemma_collinearorder
-                  have : Col C B G := by forward_using lemma_collinearorder
-                  have : Col C B Q := by forward_using lemma_collinearorder
+                  have : Col Q C B := by perm_close
+                  have : Col C B G := by perm_close
+                  have : Col C B Q := by perm_close
                   have : B ≠ C := by forward_using lemma_betweennotequal
                   have : C ≠ B := by conclude lemma_inequalitysymmetric
                   have : B = B := by conclude cn_equalityreflexive
                   have : Col C B B := by conclude_def Col
                   have : Col G Q B := by conclude lemma_collinear5
-                  have : Col Q G B := by forward_using lemma_collinearorder
-                  have : Col Q G A := by forward_using lemma_collinearorder
+                  have : Col Q G B := by perm_close
+                  have : Col Q G A := by perm_close
                   have : Q ≠ G := by conclude lemma_inequalitysymmetric
                   have : Col G B A := by conclude lemma_collinear4
-                  have : Col A B G := by forward_using lemma_collinearorder
+                  have : Col A B G := by perm_close
                   contradict
               have : ¬ BetS A Q G := by
                   intro h
@@ -409,10 +409,10 @@ theorem lemma_angletrichotomy2 :
                   have : ¬ Col P G B := by
                       intro h
                       have : Col P A G := by conclude_def Col
-                      have : Col P G A := by forward_using lemma_collinearorder
+                      have : Col P G A := by perm_close
                       have : P ≠ G := by forward_using lemma_betweennotequal
                       have : Col G B A := by conclude lemma_collinear4
-                      have : Col A B G := by forward_using lemma_collinearorder
+                      have : Col A B G := by perm_close
                       contradict
                   obtain ⟨Q, _, _⟩ : ∃ Q, (BetS B Q G ∧ BetS P R Q) := by conclude postulate_Pasch_outer
                   have : Q ≠ G := by forward_using lemma_betweennotequal

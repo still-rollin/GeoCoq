@@ -57,12 +57,12 @@ theorem lemma_squareunique :
   have : Out B A A := by conclude lemma_ray4
   have : Out B M D := by conclude lemma_ray4
   have : Out B D M := by conclude lemma_ray5
-  have : nCol A B D := by forward_using lemma_NCorder
+  have : nCol A B D := by perm_close
   have : CongA A B D A B D := by conclude lemma_equalanglesreflexive
   have : CongA A B D A B M := by conclude lemma_equalangleshelper
   have : CongA A B M A B D := by conclude lemma_equalanglessymmetric
   have : CongA A B M A B E := by conclude lemma_equalanglestransitive
-  have : nCol A B E := by forward_using lemma_NCorder
+  have : nCol A B E := by perm_close
   have : CongA A B E A B E := by conclude lemma_equalanglesreflexive
   have : CongA A B E A B N := by conclude lemma_equalangleshelper
   have : CongA A B M A B N := by conclude lemma_equalanglestransitive
@@ -83,10 +83,10 @@ theorem lemma_squareunique :
   have : C = C := by conclude cn_equalityreflexive
   have : Out B C C := by conclude lemma_ray4
   have : nCol B C D := by conclude lemma_rightangleNC
-  have : nCol C B D := by forward_using lemma_NCorder
+  have : nCol C B D := by perm_close
   have : CongA C B D C B D := by conclude lemma_equalanglesreflexive
   have : CongA C B D C B M := by conclude lemma_equalangleshelper
-  have : nCol C B E := by forward_using lemma_NCorder
+  have : nCol C B E := by perm_close
   have : CongA C B E C B E := by conclude lemma_equalanglesreflexive
   have : CongA C B E C B N := by conclude lemma_equalangleshelper
   have : CongA C B E C B D := by conclude lemma_equalanglestransitive

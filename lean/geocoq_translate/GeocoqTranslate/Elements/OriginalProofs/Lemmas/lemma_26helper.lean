@@ -49,12 +49,12 @@ theorem lemma_26helper :
       have : CongA E F D B C A := by conclude lemma_equalanglessymmetric
       have : ¬ Col A C H := by
           intro h
-          have : Col H C A := by forward_using lemma_collinearorder
+          have : Col H C A := by perm_close
           have : Col B H C := by conclude_def Col
-          have : Col H C B := by forward_using lemma_collinearorder
+          have : Col H C B := by perm_close
           have : H ≠ C := by forward_using lemma_betweennotequal
           have : Col C A B := by conclude lemma_collinear4
-          have : Col A B C := by forward_using lemma_collinearorder
+          have : Col A B C := by perm_close
           contradict
       have : Triangle A C H := by (try (have : nCol A C H := nCol_notCol _ _ _ (by assumption))); conclude_def Triangle
       have : BetS C H B := by conclude axiom_betweennesssymmetry
@@ -64,7 +64,7 @@ theorem lemma_26helper :
       have : Out C A A := by conclude lemma_ray4
       have : ¬ Col B C A := by
           intro h
-          have : Col A B C := by forward_using lemma_collinearorder
+          have : Col A B C := by perm_close
           contradict
       have : CongA B C A B C A := by conclude lemma_equalanglesreflexive
       have : CongA B C A H C A := by conclude lemma_equalangleshelper
@@ -73,13 +73,13 @@ theorem lemma_26helper :
       have : LtA E F D A H B := by conclude lemma_angleorderrespectscongruence2
       have : ¬ Col A H B := by
           intro h
-          have : Col H B A := by forward_using lemma_collinearorder
+          have : Col H B A := by perm_close
           have : Col B H C := by conclude_def Col
-          have : Col H B C := by forward_using lemma_collinearorder
+          have : Col H B C := by perm_close
           have : B ≠ H := by forward_using lemma_betweennotequal
           have : H ≠ B := by conclude lemma_inequalitysymmetric
           have : Col B A C := by conclude lemma_collinear4
-          have : Col A B C := by forward_using lemma_collinearorder
+          have : Col A B C := by perm_close
           contradict
       have : CongA A H B B H A := by conclude lemma_ABCequalsCBA
       have : CongA A H B E F D := by conclude lemma_equalanglestransitive

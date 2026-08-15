@@ -70,7 +70,7 @@ theorem proposition_48A :
       have : A ≠ B := by forward_using lemma_betweennotequal
       have : Out A D F := by conclude lemma_ray4
       have : Out A B E := by conclude lemma_ray4
-      have : nCol D A B := by forward_using lemma_NCorder
+      have : nCol D A B := by perm_close
       have : CongA D A B D A B := by conclude lemma_equalanglesreflexive
       have : CongA D A B F A E := by conclude lemma_equalangleshelper
       have : CongA F A E D A B := by conclude lemma_equalanglessymmetric
@@ -100,7 +100,7 @@ theorem proposition_48A :
       have : a ≠ b := by forward_using lemma_betweennotequal
       have : Out a d f := by conclude lemma_ray4
       have : Out a b e := by conclude lemma_ray4
-      have : nCol d a b := by forward_using lemma_NCorder
+      have : nCol d a b := by perm_close
       have : CongA d a b d a b := by conclude lemma_equalanglesreflexive
       have : CongA d a b f a e := by conclude lemma_equalangleshelper
       have : CongA f a e d a b := by conclude lemma_equalanglessymmetric

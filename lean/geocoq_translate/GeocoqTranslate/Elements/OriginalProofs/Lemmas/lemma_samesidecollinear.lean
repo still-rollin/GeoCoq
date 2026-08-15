@@ -21,11 +21,11 @@ theorem lemma_samesidecollinear :
   have : Col A B A := by conclude_def Col
   have : nCol A C P := by conclude lemma_NChelper
   have : nCol A C Q := by conclude lemma_NChelper
-  have : Col B A p := by forward_using lemma_collinearorder
-  have : Col B A C := by forward_using lemma_collinearorder
+  have : Col B A p := by perm_close
+  have : Col B A C := by perm_close
   have : B ≠ A := by conclude lemma_inequalitysymmetric
   have : Col A C p := by conclude lemma_collinear4
-  have : Col B A q := by forward_using lemma_collinearorder
+  have : Col B A q := by perm_close
   have : Col A C q := by conclude lemma_collinear4
   have : OS P Q A C := by (try (have : nCol A C P := nCol_notCol _ _ _ (by assumption))); (try (have : nCol A C Q := nCol_notCol _ _ _ (by assumption))); conclude_def OS
   close

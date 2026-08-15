@@ -39,12 +39,12 @@ theorem proposition_09 :
       intro h
       have : Col A B E := by conclude_def Col
       have : Col A C E := by conclude lemma_rayimpliescollinear
-      have : Col E A B := by forward_using lemma_collinearorder
-      have : Col E A C := by forward_using lemma_collinearorder
+      have : Col E A B := by perm_close
+      have : Col E A C := by perm_close
       have : A ≠ E := by conclude lemma_raystrict
       have : E ≠ A := by conclude lemma_inequalitysymmetric
       have : Col A B C := by conclude lemma_collinear4
-      have : Col B A C := by forward_using lemma_collinearorder
+      have : Col B A C := by perm_close
       contradict
   obtain ⟨F, _, _⟩ : ∃ F, (BetS B F E ∧ Cong F B F E) := by conclude proposition_10
   have : B = B := by conclude cn_equalityreflexive
@@ -56,18 +56,18 @@ theorem proposition_09 :
   have : ¬ Col B A F := by
       intro h
       have : Col B F E := by conclude_def Col
-      have : Col F B E := by forward_using lemma_collinearorder
-      have : Col F B A := by forward_using lemma_collinearorder
+      have : Col F B E := by perm_close
+      have : Col F B A := by perm_close
       have : B ≠ F := by forward_using lemma_betweennotequal
       have : F ≠ B := by conclude lemma_inequalitysymmetric
       have : Col B E A := by conclude lemma_collinear4
       have : Col A C E := by conclude lemma_rayimpliescollinear
-      have : Col E A B := by forward_using lemma_collinearorder
-      have : Col E A C := by forward_using lemma_collinearorder
+      have : Col E A B := by perm_close
+      have : Col E A C := by perm_close
       have : A ≠ E := by conclude lemma_raystrict
       have : E ≠ A := by conclude lemma_inequalitysymmetric
       have : Col A B C := by conclude lemma_collinear4
-      have : Col B A C := by forward_using lemma_collinearorder
+      have : Col B A C := by perm_close
       contradict
   have : Out A B B := by conclude lemma_ray4
   have : ¬ A = F := by

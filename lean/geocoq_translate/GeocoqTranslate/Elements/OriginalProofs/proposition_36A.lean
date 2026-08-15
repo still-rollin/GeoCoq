@@ -50,11 +50,11 @@ theorem proposition_36A :
   have : B ≠ C := by forward_using lemma_NCdistinct
   have : C ≠ B := by conclude lemma_inequalitysymmetric
   have : Col C F G := by conclude lemma_collinear4
-  have : Col G F C := by forward_using lemma_collinearorder
-  have : Col C B F := by forward_using lemma_collinearorder
-  have : Col C B G := by forward_using lemma_collinearorder
+  have : Col G F C := by perm_close
+  have : Col C B F := by perm_close
+  have : Col C B G := by perm_close
   have : Col B F G := by conclude lemma_collinear4
-  have : Col G F B := by forward_using lemma_collinearorder
+  have : Col G F B := by perm_close
   have : PG G H E F := by conclude lemma_PGsymmetric
   have : EF G H E F C H E B := by conclude proposition_35
   have : EF G H E F E B C H := by forward_using axiom_EFpermutation

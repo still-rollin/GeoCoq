@@ -68,8 +68,8 @@ theorem lemma_rightangleNC :
   have : ¬ Col A B C := by
       intro h
       have : Col A B D := by conclude_def Col
-      have : Col B A C := by forward_using lemma_collinearorder
-      have : Col B A D := by forward_using lemma_collinearorder
+      have : Col B A C := by perm_close
+      have : Col B A D := by perm_close
       have : B ≠ A := by conclude lemma_inequalitysymmetric
       have : Col A C D := by conclude lemma_collinear4
       have : (A = C ∨ A = D ∨ C = D ∨ BetS C A D ∨ BetS A C D ∨ BetS A D C) := by conclude_def Col

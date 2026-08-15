@@ -34,14 +34,14 @@ theorem proposition_37 :
   obtain ⟨F, _, _⟩ : ∃ F, (PG D F B C ∧ Col A D F) := by conclude lemma_triangletoparallelogram
   have : PG E B C A := by conclude lemma_PGrotate
   have : PG F B C D := by conclude lemma_PGrotate
-  have : Col D A F := by forward_using lemma_collinearorder
-  have : Col D A E := by forward_using lemma_collinearorder
+  have : Col D A F := by perm_close
+  have : Col D A E := by perm_close
   have : nCol C A D := by forward_using lemma_parallelNC
   have : A ≠ D := by forward_using lemma_NCdistinct
   have : D ≠ A := by conclude lemma_inequalitysymmetric
   have : Col A F E := by conclude lemma_collinear4
-  have : Col E A D := by forward_using lemma_collinearorder
-  have : Col E A F := by forward_using lemma_collinearorder
+  have : Col E A D := by perm_close
+  have : Col E A F := by perm_close
   have : EF E B C A F B C D := by conclude proposition_35
   have : Cong_3 B E A A C B := by conclude proposition_34
   have : Cong_3 B F D D C B := by conclude proposition_34
@@ -49,16 +49,16 @@ theorem proposition_37 :
   obtain ⟨m, _, _⟩ : ∃ m, (BetS F m C ∧ BetS B m D) := by conclude lemma_diagonalsmeet
   have : Col B M A := by conclude_def Col
   have : Col B m D := by conclude_def Col
-  have : Col B A M := by forward_using lemma_collinearorder
-  have : Col B D m := by forward_using lemma_collinearorder
+  have : Col B A M := by perm_close
+  have : Col B D m := by perm_close
   have : Par E B C A := by conclude_def PG
   have : nCol E B A := by forward_using lemma_parallelNC
-  have : nCol B A E := by forward_using lemma_NCorder
+  have : nCol B A E := by perm_close
   have : TS E B A C := by (try (have : nCol B A E := nCol_notCol _ _ _ (by assumption))); conclude_def TS
   have : TS C B A E := by conclude lemma_oppositesidesymmetric
   have : Par D F B C := by conclude_def PG
   have : nCol D F B := by forward_using lemma_parallelNC
-  have : nCol B D F := by forward_using lemma_NCorder
+  have : nCol B D F := by perm_close
   have : TS F B D C := by (try (have : nCol B D F := nCol_notCol _ _ _ (by assumption))); conclude_def TS
   have : TS C B D F := by conclude lemma_oppositesidesymmetric
   have : ET B E A A C B := by conclude axiom_congruentequal

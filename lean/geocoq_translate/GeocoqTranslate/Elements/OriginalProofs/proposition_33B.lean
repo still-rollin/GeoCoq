@@ -20,9 +20,9 @@ theorem proposition_33B :
       intro h
       obtain ⟨M, _, _⟩ : ∃ M, (BetS A M C ∧ BetS B M D) := by conclude_def CR
       have : Col B M D := by conclude_def Col
-      have : Col B D M := by forward_using lemma_collinearorder
+      have : Col B D M := by perm_close
       have : nCol A B D := by forward_using lemma_parallelNC
-      have : nCol B D A := by forward_using lemma_NCorder
+      have : nCol B D A := by perm_close
       have : TS A B D C := by (try (have : nCol B D A := nCol_notCol _ _ _ (by assumption))); conclude_def TS
       have : ¬ TS A B D C := by conclude lemma_samenotopposite
       contradict

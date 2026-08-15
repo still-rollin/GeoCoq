@@ -44,7 +44,7 @@ theorem proposition_28B :
   have : nCol A G H := by conclude lemma_equalanglesNC
   have : ¬ Col G H A := by
       intro h
-      have : Col A G H := by forward_using lemma_collinearorder
+      have : Col A G H := by perm_close
       contradict
   have : TS A G H B := by (try (have : nCol G H A := nCol_notCol _ _ _ (by assumption))); conclude_def TS
   have : TS B G H A := by conclude lemma_oppositesidesymmetric

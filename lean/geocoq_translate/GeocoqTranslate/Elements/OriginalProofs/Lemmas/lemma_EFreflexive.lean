@@ -16,24 +16,24 @@ set_option maxHeartbeats 800000 in
 theorem lemma_EFreflexive :
     ∀ (a b c d p : Point), BetS a p c → BetS b p d → nCol a b c → EF a b c d a b c d := by
   intro a b c d p h1 h2 h3
-  have : nCol a c b := by forward_using lemma_NCorder
+  have : nCol a c b := by perm_close
   have : ¬ Col a c d := by
       intro h
       have : Col b p d := by conclude_def Col
       have : Col a p c := by conclude_def Col
-      have : Col a c p := by forward_using lemma_collinearorder
+      have : Col a c p := by perm_close
       have : a ≠ c := by forward_using lemma_betweennotequal
       have : Col c d p := by conclude lemma_collinear4
-      have : Col d p c := by forward_using lemma_collinearorder
-      have : Col d p b := by forward_using lemma_collinearorder
+      have : Col d p c := by perm_close
+      have : Col d p b := by perm_close
       have : p ≠ d := by forward_using lemma_betweennotequal
       have : d ≠ p := by conclude lemma_inequalitysymmetric
       have : Col p c b := by conclude lemma_collinear4
       have : Col a p c := by conclude_def Col
-      have : Col p c a := by forward_using lemma_collinearorder
+      have : Col p c a := by perm_close
       have : p ≠ c := by forward_using lemma_betweennotequal
       have : Col c b a := by conclude lemma_collinear4
-      have : Col a b c := by forward_using lemma_collinearorder
+      have : Col a b c := by perm_close
       contradict
   have : Triangle a c d := by (try (have : nCol a c d := nCol_notCol _ _ _ (by assumption))); conclude_def Triangle
   have : Triangle a c b := by (try (have : nCol a c b := nCol_notCol _ _ _ (by assumption))); conclude_def Triangle
@@ -42,7 +42,7 @@ theorem lemma_EFreflexive :
   have : ET a c d a c d := by conclude axiom_congruentequal
   have : ET a c b a c b := by conclude axiom_congruentequal
   have : Col a c p := by conclude_def Col
-  have : nCol a c b := by forward_using lemma_NCorder
+  have : nCol a c b := by perm_close
   have : TS b a c d := by (try (have : nCol a c b := nCol_notCol _ _ _ (by assumption))); conclude_def TS
   have : EF a b c d a b c d := by conclude axiom_paste3
   close

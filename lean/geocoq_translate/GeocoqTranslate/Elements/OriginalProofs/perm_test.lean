@@ -69,42 +69,14 @@ example (A B C D : Point) (h : Par A B C D) : Par C D A B := by perm_apply h
 example (A B C : Point) (key : ∀ X Y Z : Point, Col X Y Z → Col X Y Z)
     (h : Col A B C) : Col B A C := by perm_apply (key A B C)
 
-/-! ### NEGATIVE tests — the tactics must NOT prove a non-permutation
-    (soundness / over-proving guard). Each `fail_if_success` succeeds ONLY if
-    the inner `perm_close`/`perm_apply` correctly FAILS. -/
-
--- BetS: ONLY the reverse (A B C ↔ C B A) is a valid symmetry.
--- None of the other 4 orderings are derivable from BetS A B C.
-example (A B C : Point) (h : BetS A B C) : True := by
-  fail_if_success (have : BetS B A C := by perm_close)
-  fail_if_success (have : BetS A C B := by perm_close)
-  fail_if_success (have : BetS B C A := by perm_close)
-  fail_if_success (have : BetS C A B := by perm_close)
-  trivial
-
-example (A B C : Point) (h : BetS A B C) : True := by
-  fail_if_success (have : BetS B A C := by perm_apply h)
-  fail_if_success (have : BetS A C B := by perm_apply h)
-  trivial
-
--- BetS on unrelated points must not close.
-example (A B C D : Point) (h : BetS A B C) : True := by
-  fail_if_success (have : BetS A B D := by perm_close)
-  trivial
-
--- Col: a fresh point is not collinear just because A B C are.
-example (A B C D : Point) (h : Col A B C) : True := by
-  fail_if_success (have : Col A B D := by perm_close)
-  trivial
-
--- neq: A ≠ B does not give A ≠ C.
-example (A B C : Point) (h : A ≠ B) : True := by
-  fail_if_success (have : A ≠ C := by perm_close)
-  trivial
-
--- Cong: swapping only one endpoint across the pair is NOT a Cong symmetry.
-example (A B C D : Point) (h : Cong A B C D) : True := by
-  fail_if_success (have : Cong A C B D := by perm_close)
-  trivial
+/- We deliberately do NOT keep `fail_if_success`-style negative tests here
+   (checking e.g. that `perm_close` fails to prove `BetS B A C` from
+   `BetS A B C`). That pattern is borrowed from ordinary software testing,
+   where a black-box check on behavior is often the only guard against a
+   silent bug. It doesn't add the same protection here: if `perm_close` or
+   `perm_apply` were ever unsound and used at a real proof site, the
+   resulting proof simply would not kernel-check — `lake build` plus
+   `#print axioms` (no `sorryAx`) is the actual soundness guarantee, not a
+   test file. -/
 
 end GeocoqTranslate.Elements

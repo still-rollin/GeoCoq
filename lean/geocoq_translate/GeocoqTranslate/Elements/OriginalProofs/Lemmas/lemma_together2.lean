@@ -105,11 +105,11 @@ theorem lemma_together2 :
       contradict
   have : Col G F N := by conclude lemma_rayimpliescollinear
   have : Col F G M := by conclude lemma_rayimpliescollinear
-  have : Col G F M := by forward_using lemma_collinearorder
+  have : Col G F M := by perm_close
   have : F ≠ G := by forward_using lemma_betweennotequal
   have : G ≠ F := by conclude lemma_inequalitysymmetric
   have : Col F N M := by conclude lemma_collinear4
-  have : Col M F N := by forward_using lemma_collinearorder
+  have : Col M F N := by perm_close
   have : (M = F ∨ M = N ∨ F = N ∨ BetS F M N ∨ BetS M F N ∨ BetS M N F) := by conclude_def Col
   have : Out M F N := by
       rcases (show M = F ∨ M = N ∨ F = N ∨ BetS F M N ∨ BetS M F N ∨ BetS M N F by first | assumption | exact nCol_or_Col _ _ _ | exact Col_or_nCol _ _ _ | exact Classical.em _ | tauto | aesop) with c1 | c2 | c3 | c4 | c5 | c6

@@ -25,10 +25,10 @@ theorem lemma_samesidesymmetric :
     ∀ (A B P Q : Point), OS P Q A B → OS Q P A B ∧ OS P Q B A ∧ OS Q P B A := by
   intro A B P Q h
   obtain ⟨G, E, F, hABE, hABF, hPEG, hQFG, hnP, hnQ⟩ := h
-  have hBAE : Col B A E := by forward_using lemma_collinearorder
-  have hBAF : Col B A F := by forward_using lemma_collinearorder
-  have hnBAP : nCol B A P := by forward_using lemma_NCorder
-  have hnBAQ : nCol B A Q := by forward_using lemma_NCorder
+  have hBAE : Col B A E := by perm_close
+  have hBAF : Col B A F := by perm_close
+  have hnBAP : nCol B A P := by perm_close
+  have hnBAQ : nCol B A Q := by perm_close
   refine ⟨?_, ?_, ?_⟩
   · exact ⟨G, F, E, hABF, hABE, hQFG, hPEG, hnQ, hnP⟩      -- OS Q P A B
   · exact ⟨G, E, F, hBAE, hBAF, hPEG, hQFG, hnBAP, hnBAQ⟩  -- OS P Q B A

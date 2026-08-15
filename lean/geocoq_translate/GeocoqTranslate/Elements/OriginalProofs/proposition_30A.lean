@@ -42,7 +42,7 @@ theorem proposition_30A :
   have : A ≠ G := by forward_using lemma_betweennotequal
   have : G ≠ A := by conclude lemma_inequalitysymmetric
   have : G ≠ H := by forward_using lemma_betweennotequal
-  have : nCol A G H := by forward_using lemma_NCorder
+  have : nCol A G H := by perm_close
   have : CongA A G H G H F := by conclude (proposition_29 A B E F P G H)
   have : A = A := by conclude cn_equalityreflexive
   have : Out G A A := by conclude lemma_ray4
@@ -53,9 +53,9 @@ theorem proposition_30A :
   have : CongA A G K G H F := by conclude lemma_equalanglestransitive
   have : BetS C N F := by conclude axiom_betweennesssymmetry
   have : H = H := by conclude cn_equalityreflexive
-  have : nCol F H K := by forward_using lemma_NCorder
+  have : nCol F H K := by perm_close
   have : Col E H F := by conclude_def Col
-  have : Col F H E := by forward_using lemma_collinearorder
+  have : Col F H E := by perm_close
   have : Col F H H := by conclude_def Col
   have : E ≠ H := by forward_using lemma_betweennotequal
   have : nCol E H K := by conclude lemma_NChelper
@@ -64,10 +64,10 @@ theorem proposition_30A :
   have : H ≠ F := by forward_using lemma_betweennotequal
   have : F ≠ H := by conclude lemma_inequalitysymmetric
   have : nCol F H K := by conclude lemma_NChelper
-  have : nCol H K F := by forward_using lemma_NCorder
+  have : nCol H K F := by perm_close
   have : H = H := by conclude cn_equalityreflexive
   have : Col H K H := by conclude_def Col
-  have : Col K H N := by forward_using lemma_collinearorder
+  have : Col K H N := by perm_close
   have : Col C K D := by conclude_def Col
   have : Col E H F := by conclude_def Col
   have : C ≠ K := by forward_using lemma_betweennotequal
@@ -78,34 +78,34 @@ theorem proposition_30A :
   have : N ≠ H := by forward_using lemma_betweennotequal
   have : H ≠ N := by conclude lemma_inequalitysymmetric
   have : nCol H N F := by conclude lemma_NChelper
-  have : nCol F N H := by forward_using lemma_NCorder
+  have : nCol F N H := by perm_close
   have : BetS F N C := by conclude axiom_betweennesssymmetry
   have : Col F N C := by conclude_def Col
   have : N = N := by conclude cn_equalityreflexive
   have : Col F N N := by conclude_def Col
   have : C ≠ N := by forward_using lemma_betweennotequal
   have : nCol C N H := by conclude lemma_NChelper
-  have : nCol H N C := by forward_using lemma_NCorder
+  have : nCol H N C := by perm_close
   have : BetS H N K := by conclude axiom_betweennesssymmetry
   have : Col H N K := by conclude_def Col
   have : Col H N H := by conclude_def Col
   have : H ≠ K := by forward_using lemma_betweennotequal
   have : nCol H K C := by conclude lemma_NChelper
-  have : nCol H K E := by forward_using lemma_NCorder
+  have : nCol H K E := by perm_close
   have : OS E C H K := by (try (have : nCol H K E := nCol_notCol _ _ _ (by assumption))); (try (have : nCol H K C := nCol_notCol _ _ _ (by assumption))); conclude_def OS
   have : K = K := by conclude cn_equalityreflexive
   have : Col H K K := by conclude_def Col
   have : TS C H K D := by (try (have : nCol H K C := nCol_notCol _ _ _ (by assumption))); conclude_def TS
   have : TS E H K D := by conclude lemma_planeseparation
   have : CongA G H F H K D := by conclude proposition_29
-  have : nCol C K H := by forward_using lemma_NCorder
+  have : nCol C K H := by perm_close
   have : Col C K D := by conclude_def Col
   have : K = K := by conclude cn_equalityreflexive
   have : Col C K K := by conclude_def Col
   have : K ≠ D := by forward_using lemma_betweennotequal
   have : D ≠ K := by conclude lemma_inequalitysymmetric
   have : nCol D K H := by conclude lemma_NChelper
-  have : nCol H K D := by forward_using lemma_NCorder
+  have : nCol H K D := by perm_close
   have : CongA H K D H K D := by conclude lemma_equalanglesreflexive
   have : D = D := by conclude cn_equalityreflexive
   have : Out K D D := by conclude lemma_ray4
@@ -118,18 +118,18 @@ theorem proposition_30A :
   have : Col G H K := by conclude_def Col
   have : G ≠ H := by forward_using lemma_betweennotequal
   have : Col H M K := by conclude lemma_collinear4
-  have : Col H K M := by forward_using lemma_collinearorder
-  have : Col H K G := by forward_using lemma_collinearorder
+  have : Col H K M := by perm_close
+  have : Col H K G := by perm_close
   have : H ≠ K := by forward_using lemma_betweennotequal
   have : Col K M G := by conclude lemma_collinear4
-  have : Col G K M := by forward_using lemma_collinearorder
-  have : Col H K G := by forward_using lemma_collinearorder
+  have : Col G K M := by perm_close
+  have : Col H K G := by perm_close
   have : Col K N G := by conclude lemma_collinear4
-  have : Col G K N := by forward_using lemma_collinearorder
+  have : Col G K N := by perm_close
   have : nCol A G K := by conclude lemma_equalanglesNC
-  have : nCol G K A := by forward_using lemma_NCorder
-  have : nCol H K C := by forward_using lemma_NCorder
-  have : Col H K G := by forward_using lemma_collinearorder
+  have : nCol G K A := by perm_close
+  have : nCol H K C := by perm_close
+  have : Col H K G := by perm_close
   have : Col H K K := by conclude_def Col
   have : G ≠ K := by forward_using lemma_betweennotequal
   have : nCol G K C := by conclude lemma_NChelper

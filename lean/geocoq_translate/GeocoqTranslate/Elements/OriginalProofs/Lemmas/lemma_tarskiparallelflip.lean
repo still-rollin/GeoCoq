@@ -19,7 +19,7 @@ theorem lemma_tarskiparallelflip :
   have : ¬ Meet A B D C := by
       intro h
       obtain ⟨T, _, _, _, _⟩ : ∃ T, (A ≠ B ∧ D ≠ C ∧ Col A B T ∧ Col D C T) := by conclude_def Meet
-      have : Col C D T := by forward_using lemma_collinearorder
+      have : Col C D T := by perm_close
       have : C ≠ D := by conclude lemma_inequalitysymmetric
       have : Meet A B C D := by conclude_def Meet
       contradict
@@ -27,7 +27,7 @@ theorem lemma_tarskiparallelflip :
   have : ¬ Meet B A C D := by
       intro h
       obtain ⟨T, _, _, _, _⟩ : ∃ T, (B ≠ A ∧ C ≠ D ∧ Col B A T ∧ Col C D T) := by conclude_def Meet
-      have : Col A B T := by forward_using lemma_collinearorder
+      have : Col A B T := by perm_close
       have : Meet A B C D := by conclude_def Meet
       contradict
   have : B ≠ A := by conclude lemma_inequalitysymmetric
@@ -38,8 +38,8 @@ theorem lemma_tarskiparallelflip :
   have : ¬ Meet B A D C := by
       intro h
       obtain ⟨T, _, _, _, _⟩ : ∃ T, (B ≠ A ∧ D ≠ C ∧ Col B A T ∧ Col D C T) := by conclude_def Meet
-      have : Col A B T := by forward_using lemma_collinearorder
-      have : Col C D T := by forward_using lemma_collinearorder
+      have : Col A B T := by perm_close
+      have : Col C D T := by perm_close
       have : Meet A B C D := by conclude_def Meet
       contradict
   have : TP B A D C := by conclude_def TP

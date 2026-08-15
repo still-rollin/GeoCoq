@@ -28,8 +28,8 @@ theorem proposition_23C :
   have : ¬ Col A B Q := by
       intro h
       have : Col P A Q := by conclude_def Col
-      have : Col Q A B := by forward_using lemma_collinearorder
-      have : Col Q A P := by forward_using lemma_collinearorder
+      have : Col Q A B := by perm_close
+      have : Col Q A P := by perm_close
       have : A ≠ Q := by forward_using lemma_betweennotequal
       have : Q ≠ A := by conclude lemma_inequalitysymmetric
       have : Col A B P := by conclude lemma_collinear4

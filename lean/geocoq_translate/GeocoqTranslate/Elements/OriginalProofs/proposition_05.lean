@@ -19,7 +19,7 @@ theorem proposition_05 :
   have : nCol A B C := by conclude_def Triangle
   have : ¬ Col C A B := by
       intro h
-      have : Col A B C := by forward_using lemma_collinearorder
+      have : Col A B C := by perm_close
       contradict
   have : CongA C A B B A C := by conclude lemma_ABCequalsCBA
   have : (Cong C B B C ∧ CongA A C B A B C ∧ CongA A B C A C B) := by conclude proposition_04

@@ -25,10 +25,10 @@ theorem lemma_collinear4 :
       · have : Col B C D := by conclude_def Col
         close
       · have : Col C B D := by conclude cn_equalitysub
-        have : Col B C D := by forward_using lemma_collinearorder
+        have : Col B C D := by perm_close
         close
       · have : Col D B C := by conclude cn_equalitysub
-        have : Col B C D := by forward_using lemma_collinearorder
+        have : Col B C D := by perm_close
         close
       · have : (A = B ∨ A = C ∨ B = C ∨ BetS B A C ∨ BetS A B C ∨ BetS A C B) := by conclude_def Col
         have : Col B C D := by
@@ -56,7 +56,7 @@ theorem lemma_collinear4 :
                                 contradict
                             have : C = D := by conclude lemma_outerconnectivity
                             have : Col B C D := by conclude_def Col
-                            have : Col B D C := by forward_using lemma_collinearorder
+                            have : Col B D C := by perm_close
                             contradict
                         have : Col B C D := by forward_using lemma_collinearorder
                         contradict
@@ -64,12 +64,12 @@ theorem lemma_collinear4 :
                   · have : BetS D B A := by conclude axiom_betweennesssymmetry
                     have : BetS D B C := by conclude lemma_3_7b
                     have : Col D B C := by conclude_def Col
-                    have : Col B C D := by forward_using lemma_collinearorder
+                    have : Col B C D := by perm_close
                     close
                   · have : BetS B D A := by conclude axiom_betweennesssymmetry
                     have : BetS B D C := by conclude lemma_3_6b
                     have : Col B D C := by conclude_def Col
-                    have : Col B C D := by forward_using lemma_collinearorder
+                    have : Col B C D := by perm_close
                     close
               close
             · have : (A = B ∨ A = D ∨ B = D ∨ BetS B A D ∨ BetS A B D ∨ BetS A D B) := by conclude_def Col
@@ -78,7 +78,7 @@ theorem lemma_collinear4 :
                   · have : BetS D A B := by conclude axiom_betweennesssymmetry
                     have : BetS D B C := by conclude lemma_3_7a
                     have : Col D B C := by conclude_def Col
-                    have : Col B C D := by forward_using lemma_collinearorder
+                    have : Col B C D := by perm_close
                     close
                   · have : ¬ nCol B C D := by
                         intro h
@@ -89,7 +89,7 @@ theorem lemma_collinear4 :
                         have : ¬ BetS B D C := by
                             intro h
                             have : Col B D C := by conclude_def Col
-                            have : Col B C D := by forward_using lemma_collinearorder
+                            have : Col B C D := by perm_close
                             contradict
                         have : C = D := by conclude lemma_outerconnectivity
                         have : Col B C D := by conclude_def Col
@@ -97,7 +97,7 @@ theorem lemma_collinear4 :
                     close
                   · have : BetS D B C := by conclude lemma_3_6a
                     have : Col D B C := by conclude_def Col
-                    have : Col B C D := by forward_using lemma_collinearorder
+                    have : Col B C D := by perm_close
                     close
               close
             · have : (A = B ∨ A = D ∨ B = D ∨ BetS B A D ∨ BetS A B D ∨ BetS A D B) := by conclude_def Col
@@ -124,7 +124,7 @@ theorem lemma_collinear4 :
                             have : Col B C D := by conclude_def Col
                             contradict
                         have : Col B D C := by conclude_def Col
-                        have : Col B C D := by forward_using lemma_collinearorder
+                        have : Col B C D := by perm_close
                         contradict
                     close
               close

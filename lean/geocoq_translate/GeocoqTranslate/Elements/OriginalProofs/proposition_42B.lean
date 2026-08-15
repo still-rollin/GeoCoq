@@ -41,9 +41,9 @@ theorem proposition_42B :
   have : (BetS b e c ∧ Cong b e e c) := by conclude_def Midpoint
   have : B ≠ C := by forward_using lemma_betweennotequal
   have : nCol a b c := by conclude_def Triangle
-  have : nCol E C R := by forward_using lemma_NCorder
+  have : nCol E C R := by perm_close
   have : Col B E C := by conclude_def Col
-  have : Col E C B := by forward_using lemma_collinearorder
+  have : Col E C B := by perm_close
   have : C = C := by conclude cn_equalityreflexive
   have : Col E C C := by conclude_def Col
   have : nCol B C R := by conclude lemma_NChelper
@@ -73,32 +73,32 @@ theorem proposition_42B :
   have : Cong A E a e := by forward_using lemma_congruenceflip
   have : Cong E B e b := by forward_using lemma_congruenceflip
   have : Col B E C := by conclude_def Col
-  have : Col B C E := by forward_using lemma_collinearorder
-  have : nCol B C A := by forward_using lemma_NCorder
+  have : Col B C E := by perm_close
+  have : nCol B C A := by perm_close
   have : B = B := by conclude cn_equalityreflexive
   have : Col B C B := by conclude_def Col
   have : B ≠ E := by forward_using lemma_betweennotequal
   have : nCol B E A := by conclude lemma_NChelper
-  have : nCol A E B := by forward_using lemma_NCorder
+  have : nCol A E B := by perm_close
   have : Col b e c := by conclude_def Col
-  have : Col b c e := by forward_using lemma_collinearorder
-  have : nCol b c a := by forward_using lemma_NCorder
+  have : Col b c e := by perm_close
+  have : nCol b c a := by perm_close
   have : b = b := by conclude cn_equalityreflexive
   have : Col b c b := by conclude_def Col
   have : b ≠ e := by forward_using lemma_betweennotequal
   have : nCol b e a := by conclude lemma_NChelper
-  have : nCol a e b := by forward_using lemma_NCorder
+  have : nCol a e b := by perm_close
   have : Triangle A E B := by (try (have : nCol A E B := nCol_notCol _ _ _ (by assumption))); conclude_def Triangle
   have : Cong_3 A E B a e b := by conclude_def Cong_3
   have : ET A E B a e b := by conclude axiom_congruentequal
-  have : Col C B E := by forward_using lemma_collinearorder
+  have : Col C B E := by perm_close
   have : E ≠ C := by forward_using lemma_betweennotequal
   have : C ≠ E := by conclude lemma_inequalitysymmetric
-  have : nCol C B A := by forward_using lemma_NCorder
+  have : nCol C B A := by perm_close
   have : C = C := by conclude cn_equalityreflexive
   have : Col C B C := by conclude_def Col
   have : nCol C E A := by conclude lemma_NChelper
-  have : nCol A E C := by forward_using lemma_NCorder
+  have : nCol A E C := by perm_close
   have : Triangle A E C := by (try (have : nCol A E C := nCol_notCol _ _ _ (by assumption))); conclude_def Triangle
   have : Cong_3 A E C a e c := by conclude_def Cong_3
   have : ET A E C a e c := by conclude axiom_congruentequal
@@ -119,7 +119,7 @@ theorem proposition_42B :
   have : OS R A C E := by conclude lemma_samesidecollinear
   have : OS A R C E := by forward_using lemma_samesidesymmetric
   have : OS A R E C := by conclude lemma_samesideflip
-  have : Col G F A := by forward_using lemma_collinearorder
+  have : Col G F A := by perm_close
   have : Par F G E C := by conclude_def PG
   have : Par E C F G := by conclude lemma_parallelsymmetric
   have : Par E C G F := by forward_using lemma_parallelflip

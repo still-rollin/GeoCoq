@@ -47,10 +47,10 @@ theorem proposition_07 :
         have : Cong A C A E := by conclude lemma_congruencesymmetric
         close
       · have : B ≠ A := by conclude lemma_inequalitysymmetric
-        have : Col B A F := by forward_using lemma_collinearorder
-        have : Col B A H := by forward_using lemma_collinearorder
+        have : Col B A F := by perm_close
+        have : Col B A H := by perm_close
         have : Col A F H := by conclude lemma_collinear4
-        have : Col H F A := by forward_using lemma_collinearorder
+        have : Col H F A := by perm_close
         have : Per A F C := by conclude lemma_collinearright
         have : Per C F A := by conclude lemma_8_2
         obtain ⟨P, _, _, _, _⟩ : ∃ P, (BetS C F P ∧ Cong C F P F ∧ Cong C A P A ∧ F ≠ A) := by conclude_def Per
@@ -66,12 +66,12 @@ theorem proposition_07 :
       · have : Cong B E B C := by conclude cn_equalitysub
         have : Cong B C B E := by conclude lemma_congruencesymmetric
         close
-      · have : Col B A F := by forward_using lemma_collinearorder
-        have : Col B A H := by forward_using lemma_collinearorder
-        have : Col A B F := by forward_using lemma_collinearorder
-        have : Col A B H := by forward_using lemma_collinearorder
+      · have : Col B A F := by perm_close
+        have : Col B A H := by perm_close
+        have : Col A B F := by perm_close
+        have : Col A B H := by perm_close
         have : Col B F H := by conclude lemma_collinear4
-        have : Col H F B := by forward_using lemma_collinearorder
+        have : Col H F B := by perm_close
         have : Per B F C := by conclude lemma_collinearright
         have : Per C F B := by conclude lemma_8_2
         obtain ⟨P, _, _, _, _⟩ : ∃ P, (BetS C F P ∧ Cong C F P F ∧ Cong C B P B ∧ F ≠ B) := by conclude_def Per
@@ -151,12 +151,12 @@ theorem proposition_07 :
             have : Per E B J := by conclude lemma_8_3
             have : Per J B E := by conclude lemma_8_2
             have : Col A B J := by conclude_def Col
-            have : Col B A J := by forward_using lemma_collinearorder
+            have : Col B A J := by perm_close
             have : Per B A E := by conclude lemma_8_2
             have : A ≠ J := by forward_using lemma_betweennotequal
             have : J ≠ A := by conclude lemma_inequalitysymmetric
             have : Per J A E := by conclude lemma_collinearright
-            have : Col J A B := by forward_using lemma_collinearorder
+            have : Col J A B := by perm_close
             have : A = B := by conclude lemma_droppedperpendicularunique
             contradict
         have : Per E F B := by conclude_def Per
@@ -196,13 +196,13 @@ theorem proposition_07 :
                   have : Per E A K := by conclude lemma_8_3
                   have : Per K A E := by conclude lemma_8_2
                   have : Col B A K := by conclude_def Col
-                  have : Col A B K := by forward_using lemma_collinearorder
+                  have : Col A B K := by perm_close
                   have : Per A B E := by conclude lemma_8_2
                   have : B ≠ K := by forward_using lemma_betweennotequal
                   have : K ≠ B := by conclude lemma_inequalitysymmetric
                   have : Per K B E := by conclude lemma_collinearright
                   have : Col A B K := by conclude_def Col
-                  have : Col K B A := by forward_using lemma_collinearorder
+                  have : Col K B A := by perm_close
                   have : B = A := by conclude lemma_droppedperpendicularunique
                   have : B ≠ A := by conclude lemma_inequalitysymmetric
                   contradict
@@ -213,7 +213,7 @@ theorem proposition_07 :
               have : Per E G B := by conclude_def Per
               have : Per B G E := by conclude lemma_8_2
               have : Col F B G := by conclude cn_equalitysub
-              have : Col B G F := by forward_using lemma_collinearorder
+              have : Col B G F := by perm_close
               have : G = F := by conclude lemma_droppedperpendicularunique
               have : F = G := by conclude lemma_equalitysymmetric
               close
@@ -228,8 +228,8 @@ theorem proposition_07 :
               have : G ≠ A := by conclude lemma_inequalitysymmetric
               have : Per E G A := by conclude_def Per
               have : Per A G E := by conclude lemma_8_2
-              have : Col B A F := by forward_using lemma_collinearorder
-              have : Col B A G := by forward_using lemma_collinearorder
+              have : Col B A F := by perm_close
+              have : Col B A G := by perm_close
               have : B ≠ A := by conclude lemma_inequalitysymmetric
               have : Col A F G := by conclude lemma_collinear4
               have : F = G := by conclude lemma_droppedperpendicularunique
@@ -240,7 +240,7 @@ theorem proposition_07 :
   have : Cong A F A G := by conclude cn_equalitysub
   have : Cong B F B G := by conclude cn_equalitysub
   have : Cong A B A B := by conclude cn_congruencereflexive
-  have : Col A F B := by forward_using lemma_collinearorder
+  have : Col A F B := by perm_close
   have : Cong F B F B := by conclude cn_congruencereflexive
   have : Cong F B G B := by conclude cn_equalitysub
   have : Cong A C A D := by forward_using lemma_congruenceflip
@@ -255,7 +255,7 @@ theorem proposition_07 :
   have : D = D := by conclude cn_equalityreflexive
   have : ¬ F = D := by
       intro h
-      have : Col A B F := by forward_using lemma_collinearorder
+      have : Col A B F := by perm_close
       have : Col A B D := by conclude cn_equalitysub
       contradict
   have : Out F D D := by conclude lemma_ray4

@@ -58,23 +58,23 @@ theorem proposition_30B :
   obtain ⟨M, _, _, _⟩ : ∃ M, (BetS A M F ∧ Col G H M ∧ nCol G H A) := by conclude_def TS
   obtain ⟨m, _, _, _⟩ : ∃ m, (BetS C m F ∧ Col K H m ∧ nCol K H C) := by conclude_def TS
   have : Col G K H := by conclude_def Col
-  have : Col H G K := by forward_using lemma_collinearorder
-  have : Col H G M := by forward_using lemma_collinearorder
+  have : Col H G K := by perm_close
+  have : Col H G M := by perm_close
   have : H ≠ G := by forward_using lemma_betweennotequal
   have : Col G K M := by conclude lemma_collinear4
-  have : Col K G M := by forward_using lemma_collinearorder
-  have : Col H K m := by forward_using lemma_collinearorder
-  have : Col H K G := by forward_using lemma_collinearorder
+  have : Col K G M := by perm_close
+  have : Col H K m := by perm_close
+  have : Col H K G := by perm_close
   have : H ≠ K := by forward_using lemma_betweennotequal
   have : Col K m G := by conclude lemma_collinear4
-  have : Col K G m := by forward_using lemma_collinearorder
-  have : Col G H K := by forward_using lemma_collinearorder
+  have : Col K G m := by perm_close
+  have : Col G H K := by perm_close
   have : G = G := by conclude cn_equalityreflexive
   have : Col G H G := by conclude_def Col
   have : G ≠ K := by forward_using lemma_betweennotequal
   have : nCol G K A := by conclude lemma_NChelper
-  have : nCol K G A := by forward_using lemma_NCorder
-  have : Col K H G := by forward_using lemma_collinearorder
+  have : nCol K G A := by perm_close
+  have : Col K H G := by perm_close
   have : K = K := by conclude cn_equalityreflexive
   have : Col K H K := by conclude_def Col
   have : G ≠ K := by forward_using lemma_betweennotequal

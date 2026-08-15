@@ -95,17 +95,17 @@ theorem lemma_supplements :
   have : ¬ Col D B F := by
       intro h
       have : Col B C D := by conclude lemma_rayimpliescollinear
-      have : Col D B C := by forward_using lemma_collinearorder
+      have : Col D B C := by perm_close
       have : B ≠ D := by conclude lemma_raystrict
       have : D ≠ B := by conclude lemma_inequalitysymmetric
       have : Col B F C := by conclude lemma_collinear4
       have : Col A B F := by conclude_def Col
-      have : Col F B A := by forward_using lemma_collinearorder
-      have : Col F B C := by forward_using lemma_collinearorder
+      have : Col F B A := by perm_close
+      have : Col F B C := by perm_close
       have : B ≠ F := by forward_using lemma_betweennotequal
       have : F ≠ B := by conclude lemma_inequalitysymmetric
       have : Col B A C := by conclude lemma_collinear4
-      have : Col A B C := by forward_using lemma_collinearorder
+      have : Col A B C := by perm_close
       contradict
   have : Out B D V := by conclude lemma_ray3
   have : Out b d v := by conclude lemma_ray3

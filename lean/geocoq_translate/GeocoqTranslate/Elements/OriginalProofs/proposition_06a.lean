@@ -51,14 +51,14 @@ theorem proposition_06a :
       have : (Cong D C A B ∧ CongA B D C C A B ∧ CongA B C D C B A) := by conclude proposition_04
       have : ¬ Col C B A := by
           intro h
-          have : Col A B C := by forward_using lemma_collinearorder
+          have : Col A B C := by perm_close
           contradict
       have : CongA C B A A B C := by conclude lemma_ABCequalsCBA
       have : CongA B C D A B C := by conclude lemma_equalanglestransitive
       have : CongA B C D A C B := by conclude lemma_equalanglestransitive
       have : ¬ Col A C B := by
           intro h
-          have : Col A B C := by forward_using lemma_collinearorder
+          have : Col A B C := by perm_close
           contradict
       have : CongA A C B B C A := by conclude lemma_ABCequalsCBA
       have : CongA B C D B C A := by conclude lemma_equalanglestransitive
@@ -70,12 +70,12 @@ theorem proposition_06a :
       have : ¬ Col B C D := by
           intro h
           have : Col B D A := by conclude_def Col
-          have : Col D B A := by forward_using lemma_collinearorder
-          have : Col D B C := by forward_using lemma_collinearorder
+          have : Col D B A := by perm_close
+          have : Col D B C := by perm_close
           have : B ≠ D := by forward_using lemma_betweennotequal
           have : D ≠ B := by conclude lemma_inequalitysymmetric
           have : Col B A C := by conclude lemma_collinear4
-          have : Col A B C := by forward_using lemma_collinearorder
+          have : Col A B C := by perm_close
           contradict
       have : CongA B C D B C D := by conclude lemma_equalanglesreflexive
       have : LtA B C D B C A := by conclude_def LtA

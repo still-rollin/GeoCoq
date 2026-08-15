@@ -42,7 +42,7 @@ theorem proposition_39A :
   have : A ≠ B := by forward_using lemma_NCdistinct
   obtain ⟨m, _, _⟩ : ∃ m, (BetS A m B ∧ Cong m A m B) := by conclude proposition_10
   have : Col A m B := by conclude_def Col
-  have : Col A B m := by forward_using lemma_collinearorder
+  have : Col A B m := by perm_close
   have : A = A := by conclude cn_equalityreflexive
   have : Col A B A := by conclude_def Col
   have : A ≠ m := by forward_using lemma_betweennotequal
@@ -58,16 +58,16 @@ theorem proposition_39A :
   have : ¬ Col B A H := by
       intro h
       have : Col A m B := by conclude_def Col
-      have : Col B A m := by forward_using lemma_collinearorder
+      have : Col B A m := by perm_close
       have : B ≠ A := by conclude lemma_inequalitysymmetric
       have : Col A H m := by conclude lemma_collinear4
-      have : Col H m A := by forward_using lemma_collinearorder
+      have : Col H m A := by perm_close
       have : Col C m H := by conclude_def Col
-      have : Col H m C := by forward_using lemma_collinearorder
+      have : Col H m C := by perm_close
       have : m ≠ H := by forward_using lemma_betweennotequal
       have : H ≠ m := by conclude lemma_inequalitysymmetric
       have : Col m A C := by conclude lemma_collinear4
-      have : Col m A B := by forward_using lemma_collinearorder
+      have : Col m A B := by perm_close
       have : A ≠ m := by forward_using lemma_betweennotequal
       have : m ≠ A := by conclude lemma_inequalitysymmetric
       have : Col A B C := by conclude lemma_collinear4
@@ -75,17 +75,17 @@ theorem proposition_39A :
   obtain ⟨E, _, _⟩ : ∃ E, (BetS B M E ∧ BetS H A E) := by conclude postulate_Euclid5
   have : BetS H m C := by conclude axiom_betweennesssymmetry
   have : Col C m H := by conclude_def Col
-  have : Col m C H := by forward_using lemma_collinearorder
+  have : Col m C H := by perm_close
   have : m = m := by conclude cn_equalityreflexive
   have : Col m C m := by conclude_def Col
-  have : nCol m C A := by forward_using lemma_NCorder
+  have : nCol m C A := by perm_close
   have : m ≠ H := by forward_using lemma_betweennotequal
   have : nCol m H A := by conclude lemma_NChelper
-  have : nCol A m H := by forward_using lemma_NCorder
+  have : nCol A m H := by perm_close
   have : CongA A m H C m B := by conclude proposition_15a
-  have : nCol H m A := by forward_using lemma_NCorder
+  have : nCol H m A := by perm_close
   have : Col A m B := by conclude_def Col
-  have : Col A B m := by forward_using lemma_collinearorder
+  have : Col A B m := by perm_close
   have : B = B := by conclude cn_equalityreflexive
   have : Col A B B := by conclude_def Col
   have : m ≠ B := by forward_using lemma_betweennotequal
@@ -114,8 +114,8 @@ theorem proposition_39A :
   have : CongA B C H H C B := by conclude lemma_ABCequalsCBA
   have : CongA A H C H C B := by conclude lemma_equalanglestransitive
   have : Col C m H := by conclude_def Col
-  have : Col H C m := by forward_using lemma_collinearorder
-  have : Col H m C := by forward_using lemma_collinearorder
+  have : Col H C m := by perm_close
+  have : Col H m C := by perm_close
   have : H = H := by conclude cn_equalityreflexive
   have : Col H m H := by conclude_def Col
   have : H ≠ C := by forward_using lemma_betweennotequal
@@ -123,7 +123,7 @@ theorem proposition_39A :
   have : TS A H C B := by (try (have : nCol H C A := nCol_notCol _ _ _ (by assumption))); conclude_def TS
   have : Par A H C B := by conclude proposition_27B
   have : Col H A E := by conclude_def Col
-  have : Col A H E := by forward_using lemma_collinearorder
+  have : Col A H E := by perm_close
   have : Col A H A := by conclude_def Col
   have : A ≠ E := by forward_using lemma_betweennotequal
   have : Par C B A H := by conclude lemma_parallelsymmetric

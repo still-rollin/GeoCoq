@@ -47,9 +47,9 @@ theorem proposition_14 :
   have : B = B := by conclude cn_equalityreflexive
   have : Col A B B := by conclude_def Col
   have : nCol T B C := by conclude lemma_NChelper
-  have : nCol C B T := by forward_using lemma_NCorder
+  have : nCol C B T := by perm_close
   have : Col B C D := by conclude lemma_rayimpliescollinear
-  have : Col C B D := by forward_using lemma_collinearorder
+  have : Col C B D := by perm_close
   have : D ≠ B := by forward_using lemma_NCdistinct
   have : Col C B B := by conclude_def Col
   have : nCol D B T := by conclude lemma_NChelper

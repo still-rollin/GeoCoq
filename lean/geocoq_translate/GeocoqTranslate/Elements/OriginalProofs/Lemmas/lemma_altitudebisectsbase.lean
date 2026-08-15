@@ -56,7 +56,7 @@ theorem lemma_altitudebisectsbase :
   have : nCol A M P := by conclude lemma_rightangleNC
   have : ¬ Col A P M := by
       intro h
-      have : Col A M P := by forward_using lemma_collinearorder
+      have : Col A M P := by perm_close
       contradict
   have : ¬ A = P := by
       intro h

@@ -32,7 +32,7 @@ theorem lemma_legsmallerhypotenuse :
   have : Triangle A B C := by (try (have : nCol A B C := nCol_notCol _ _ _ (by assumption))); conclude_def Triangle
   have : ¬ Col A C B := by
       intro h
-      have : Col A B C := by forward_using lemma_collinearorder
+      have : Col A B C := by perm_close
       contradict
   have : Triangle A C B := by (try (have : nCol A C B := nCol_notCol _ _ _ (by assumption))); conclude_def Triangle
   have : (LtA C A B A B D ∧ LtA B C A A B D) := by conclude proposition_16
@@ -53,12 +53,12 @@ theorem lemma_legsmallerhypotenuse :
   have : ¬ Col A B D := by
       intro h
       have : Col C B D := by conclude_def Col
-      have : Col D B C := by forward_using lemma_collinearorder
-      have : Col D B A := by forward_using lemma_collinearorder
+      have : Col D B C := by perm_close
+      have : Col D B A := by perm_close
       have : B ≠ D := by forward_using lemma_betweennotequal
       have : D ≠ B := by conclude lemma_inequalitysymmetric
       have : Col B C A := by conclude lemma_collinear4
-      have : Col A B C := by forward_using lemma_collinearorder
+      have : Col A B C := by perm_close
       contradict
   have : CongA A B D A B C := by (try (have : nCol A B D := nCol_notCol _ _ _ (by assumption))); conclude_def CongA
   have : CongA A B C A B D := by conclude lemma_equalanglessymmetric
@@ -67,13 +67,13 @@ theorem lemma_legsmallerhypotenuse :
   have : LtA C A B A B C := by conclude lemma_angleorderrespectscongruence
   have : ¬ Col B A C := by
       intro h
-      have : Col A B C := by forward_using lemma_collinearorder
+      have : Col A B C := by perm_close
       contradict
   have : CongA B A C C A B := by conclude lemma_ABCequalsCBA
   have : LtA B A C A B C := by conclude lemma_angleorderrespectscongruence2
   have : ¬ Col C B A := by
       intro h
-      have : Col A B C := by forward_using lemma_collinearorder
+      have : Col A B C := by perm_close
       contradict
   have : Triangle C B A := by (try (have : nCol C B A := nCol_notCol _ _ _ (by assumption))); conclude_def Triangle
   have : CongA C B A A B C := by conclude lemma_ABCequalsCBA

@@ -72,7 +72,7 @@ theorem lemma_paste5 :
   have : EF d b m l D B M L := by forward_using axiom_EFpermutation
   have : EF D B M L d b m l := by conclude axiom_EFsymmetric
   have : Col B M C := by conclude_def Col
-  have : Col M C B := by forward_using lemma_collinearorder
+  have : Col M C B := by perm_close
   have : B ≠ C := by forward_using lemma_betweennotequal
   have : Par E L M C := by conclude lemma_parallelsymmetric
   have : Par E L B C := by conclude lemma_collinearparallel
@@ -87,7 +87,7 @@ theorem lemma_paste5 :
       intro h
       have : ¬ Col C L M := by
           intro h
-          have : Col M C L := by forward_using lemma_collinearorder
+          have : Col M C L := by perm_close
           have : L = L := by conclude cn_equalityreflexive
           have : Col E L L := by conclude_def Col
           have : Meet E L M C := by conclude_def Meet
@@ -95,13 +95,13 @@ theorem lemma_paste5 :
           contradict
       have : ¬ Col C L D := by
           intro h
-          have : Col D L C := by forward_using lemma_collinearorder
+          have : Col D L C := by perm_close
           have : Col E L D := by conclude_def Col
-          have : Col D L E := by forward_using lemma_collinearorder
+          have : Col D L E := by perm_close
           have : L ≠ D := by forward_using lemma_betweennotequal
           have : D ≠ L := by conclude lemma_inequalitysymmetric
           have : Col L E C := by conclude lemma_collinear4
-          have : Col E L C := by forward_using lemma_collinearorder
+          have : Col E L C := by perm_close
           have : C = C := by conclude cn_equalityreflexive
           have : Col M C C := by conclude_def Col
           have : Meet E L M C := by conclude_def Meet
@@ -123,10 +123,10 @@ theorem lemma_paste5 :
       have : ¬ Col B C L := by
           intro h
           have : Col B M C := by conclude_def Col
-          have : Col B C M := by forward_using lemma_collinearorder
+          have : Col B C M := by perm_close
           have : B ≠ C := by forward_using lemma_betweennotequal
           have : Col C M L := by conclude lemma_collinear4
-          have : Col M C L := by forward_using lemma_collinearorder
+          have : Col M C L := by perm_close
           have : Col E L L := by conclude_def Col
           have : Meet E L M C := by conclude_def Meet
           have : ¬ Meet E L M C := by conclude_def Par
@@ -136,7 +136,7 @@ theorem lemma_paste5 :
   have : CR B L D C := by conclude lemma_crisscross
   obtain ⟨R, _, _⟩ : ∃ R, (BetS B R L ∧ BetS D R C) := by conclude_def CR
   have : Col b m c := by conclude_def Col
-  have : Col m c b := by forward_using lemma_collinearorder
+  have : Col m c b := by perm_close
   have : b ≠ c := by forward_using lemma_betweennotequal
   have : Par e l m c := by conclude lemma_parallelsymmetric
   have : Par e l b c := by conclude lemma_collinearparallel
@@ -151,7 +151,7 @@ theorem lemma_paste5 :
       intro h
       have : ¬ Col c l m := by
           intro h
-          have : Col m c l := by forward_using lemma_collinearorder
+          have : Col m c l := by perm_close
           have : l = l := by conclude cn_equalityreflexive
           have : Col e l l := by conclude_def Col
           have : Meet e l m c := by conclude_def Meet
@@ -159,13 +159,13 @@ theorem lemma_paste5 :
           contradict
       have : ¬ Col c l d := by
           intro h
-          have : Col d l c := by forward_using lemma_collinearorder
+          have : Col d l c := by perm_close
           have : Col e l d := by conclude_def Col
-          have : Col d l e := by forward_using lemma_collinearorder
+          have : Col d l e := by perm_close
           have : l ≠ d := by forward_using lemma_betweennotequal
           have : d ≠ l := by conclude lemma_inequalitysymmetric
           have : Col l e c := by conclude lemma_collinear4
-          have : Col e l c := by forward_using lemma_collinearorder
+          have : Col e l c := by perm_close
           have : c = c := by conclude cn_equalityreflexive
           have : Col m c c := by conclude_def Col
           have : Meet e l m c := by conclude_def Meet
@@ -187,10 +187,10 @@ theorem lemma_paste5 :
       have : ¬ Col b c l := by
           intro h
           have : Col b m c := by conclude_def Col
-          have : Col b c m := by forward_using lemma_collinearorder
+          have : Col b c m := by perm_close
           have : b ≠ c := by forward_using lemma_betweennotequal
           have : Col c m l := by conclude lemma_collinear4
-          have : Col m c l := by forward_using lemma_collinearorder
+          have : Col m c l := by perm_close
           have : Col e l l := by conclude_def Col
           have : Meet e l m c := by conclude_def Meet
           have : ¬ Meet e l m c := by conclude_def Par
@@ -212,7 +212,7 @@ theorem lemma_paste5 :
   have : BetS d l e := by conclude axiom_betweennesssymmetry
   have : Par B C L E := by forward_using lemma_parallelflip
   have : Col E L D := by conclude_def Col
-  have : Col L E D := by forward_using lemma_collinearorder
+  have : Col L E D := by perm_close
   have : E ≠ D := by forward_using lemma_betweennotequal
   have : D ≠ E := by conclude lemma_inequalitysymmetric
   have : Par B C D E := by conclude lemma_collinearparallel
@@ -251,7 +251,7 @@ theorem lemma_paste5 :
   obtain ⟨T, _, _⟩ : ∃ T, (BetS B T E ∧ BetS D T C) := by conclude_def CR
   have : Par b c l e := by forward_using lemma_parallelflip
   have : Col e l d := by conclude_def Col
-  have : Col l e d := by forward_using lemma_collinearorder
+  have : Col l e d := by perm_close
   have : e ≠ d := by forward_using lemma_betweennotequal
   have : d ≠ e := by conclude lemma_inequalitysymmetric
   have : Par b c d e := by conclude lemma_collinearparallel

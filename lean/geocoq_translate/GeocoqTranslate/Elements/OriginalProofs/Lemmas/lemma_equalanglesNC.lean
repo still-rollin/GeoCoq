@@ -27,34 +27,34 @@ theorem lemma_equalanglesNC :
   have : Col B C V := by conclude lemma_rayimpliescollinear
   have : Col b a u := by conclude lemma_rayimpliescollinear
   have : Col b c v := by conclude lemma_rayimpliescollinear
-  have : Col a b u := by forward_using lemma_collinearorder
+  have : Col a b u := by perm_close
   have : ¬ Col a b c := by
       intro h
       have : Col b u c := by conclude lemma_collinear4
-      have : Col c b u := by forward_using lemma_collinearorder
-      have : Col c b v := by forward_using lemma_collinearorder
+      have : Col c b u := by perm_close
+      have : Col c b v := by perm_close
       have : b ≠ c := by conclude lemma_ray2
       have : c ≠ b := by conclude lemma_inequalitysymmetric
       have : Col b u v := by conclude lemma_collinear4
       have : Cong u v U V := by conclude lemma_congruencesymmetric
       have : Col B U V := by conclude lemma_collinearitypreserved
-      have : Col B U A := by forward_using lemma_collinearorder
+      have : Col B U A := by perm_close
       have : B ≠ U := by conclude lemma_raystrict
       have : Col U V A := by conclude lemma_collinear4
-      have : Col U V B := by forward_using lemma_collinearorder
+      have : Col U V B := by perm_close
       have : Col V A B := by
           rcases (show U = V ∨ U ≠ V by first | assumption | exact nCol_or_Col _ _ _ | exact Col_or_nCol _ _ _ | exact Classical.em _ | tauto | aesop) with c1 | c2
           · have : Col B A V := by conclude cn_equalitysub
-            have : Col V A B := by forward_using lemma_collinearorder
+            have : Col V A B := by perm_close
             close
           · have : Col V A B := by conclude lemma_collinear4
             close
-      have : Col V B A := by forward_using lemma_collinearorder
-      have : Col V B C := by forward_using lemma_collinearorder
+      have : Col V B A := by perm_close
+      have : Col V B C := by perm_close
       have : B ≠ V := by conclude lemma_raystrict
       have : V ≠ B := by conclude lemma_inequalitysymmetric
       have : Col B A C := by conclude lemma_collinear4
-      have : Col A B C := by forward_using lemma_collinearorder
+      have : Col A B C := by perm_close
       contradict
   close
 

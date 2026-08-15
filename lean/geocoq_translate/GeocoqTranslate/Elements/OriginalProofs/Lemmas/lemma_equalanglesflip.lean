@@ -20,7 +20,7 @@ theorem lemma_equalanglesflip :
   have : nCol A B C := by conclude lemma_equalanglesNC
   have : ¬ Col C B A := by
       intro h
-      have : Col A B C := by forward_using lemma_collinearorder
+      have : Col A B C := by perm_close
       contradict
   have : CongA C B A A B C := by conclude lemma_ABCequalsCBA
   have : CongA C B A D E F := by conclude lemma_equalanglestransitive

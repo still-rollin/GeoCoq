@@ -32,25 +32,25 @@ theorem lemma_parallelPasch :
   have : Col A D D := by conclude_def Col
   have : Col A D E := by conclude_def Col
   have : Col D D E := by conclude lemma_collinear4
-  have : Col E D D := by forward_using lemma_collinearorder
+  have : Col E D D := by perm_close
   have : Col C D D := by conclude_def Col
   have : nCol A C D := by forward_using lemma_parallelNC
-  have : nCol C D A := by forward_using lemma_NCorder
+  have : nCol C D A := by perm_close
   have : TS A C D E := by (try (have : nCol C D A := nCol_notCol _ _ _ (by assumption))); conclude_def TS
   have : TS B C D E := by conclude lemma_planeseparation
   obtain ⟨H, _, _, _⟩ : ∃ H, (BetS B H E ∧ Col C D H ∧ nCol C D B) := by conclude_def TS
   have : BetS E H B := by conclude axiom_betweennesssymmetry
-  have : Col D C H := by forward_using lemma_collinearorder
+  have : Col D C H := by perm_close
   have : A ≠ D := by conclude_def Par
   have : ¬ Meet A D B C := by conclude_def Par
   have : ¬ Meet E D C B := by
       intro h
       obtain ⟨p, _, _, _, _⟩ : ∃ p, (E ≠ D ∧ C ≠ B ∧ Col E D p ∧ Col C B p) := by conclude_def Meet
       have : B ≠ C := by conclude lemma_inequalitysymmetric
-      have : Col B C p := by forward_using lemma_collinearorder
-      have : Col E D A := by forward_using lemma_collinearorder
+      have : Col B C p := by perm_close
+      have : Col E D A := by perm_close
       have : Col D A p := by conclude lemma_collinear4
-      have : Col A D p := by forward_using lemma_collinearorder
+      have : Col A D p := by perm_close
       have : Meet A D B C := by conclude_def Meet
       contradict
   have : C = C := by conclude cn_equalityreflexive

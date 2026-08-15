@@ -20,11 +20,11 @@ theorem lemma_NChelper :
       contradict
   have : Col B P Q := by conclude lemma_collinear4
   have : B ≠ A := by conclude lemma_inequalitysymmetric
-  have : Col B A P := by forward_using lemma_collinearorder
-  have : Col B A Q := by forward_using lemma_collinearorder
+  have : Col B A P := by perm_close
+  have : Col B A Q := by perm_close
   have : Col A P Q := by conclude lemma_collinear4
-  have : Col P Q A := by forward_using lemma_collinearorder
-  have : Col P Q B := by forward_using lemma_collinearorder
+  have : Col P Q A := by perm_close
+  have : Col P Q B := by perm_close
   have : ¬ Col P Q C := by
       intro h
       have : Col A B C := by conclude lemma_collinear5

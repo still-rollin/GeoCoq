@@ -30,29 +30,29 @@ theorem lemma_altitudeofrighttriangle :
   have : ¬ B = M := by
       intro h
       have : Per A B p := by conclude cn_equalitysub
-      have : Col p B C := by forward_using lemma_collinearorder
+      have : Col p B C := by perm_close
       have : Per p B A := by conclude lemma_8_2
       have : Per C B A := by conclude lemma_collinearright
       have : ¬ Per C B A := by conclude lemma_8_7
       contradict
   have : Per p M A := by conclude lemma_8_2
-  have : Col C B p := by forward_using lemma_collinearorder
-  have : Col C B M := by forward_using lemma_collinearorder
+  have : Col C B p := by perm_close
+  have : Col C B M := by perm_close
   have : nCol B A C := by conclude lemma_rightangleNC
   have : C ≠ B := by forward_using lemma_NCdistinct
   have : Col B p M := by conclude lemma_collinear4
-  have : Col p M B := by forward_using lemma_collinearorder
+  have : Col p M B := by perm_close
   have : Per B M A := by conclude lemma_collinearright
-  have : Col B C p := by forward_using lemma_collinearorder
-  have : Col B C M := by forward_using lemma_collinearorder
+  have : Col B C p := by perm_close
+  have : Col B C M := by perm_close
   have : B ≠ C := by conclude lemma_inequalitysymmetric
   have : Col C p M := by conclude lemma_collinear4
-  have : Col p M C := by forward_using lemma_collinearorder
+  have : Col p M C := by perm_close
   have : Per C A B := by conclude lemma_8_2
   have : ¬ C = M := by
       intro h
       have : Per A C p := by conclude cn_equalitysub
-      have : Col p C B := by forward_using lemma_collinearorder
+      have : Col p C B := by perm_close
       have : Per p C A := by conclude lemma_8_2
       have : Per B C A := by conclude lemma_collinearright
       have : ¬ Per B C A := by conclude lemma_8_7

@@ -51,12 +51,12 @@ theorem proposition_23B :
       have : nCol F A G := by conclude lemma_equalanglesNC
       have : Col A B G := by conclude lemma_rayimpliescollinear
       have : Col B F G := by conclude lemma_collinear4
-      have : Col B F A := by forward_using lemma_collinearorder
+      have : Col B F A := by perm_close
       have : ¬ F = B := by
           intro h
           have : Out A F G := by conclude cn_equalitysub
           have : Col A F G := by conclude lemma_rayimpliescollinear
-          have : Col F A G := by forward_using lemma_collinearorder
+          have : Col F A G := by perm_close
           contradict
       have : B ≠ F := by conclude lemma_inequalitysymmetric
       have : Col F A G := by conclude lemma_collinear4
@@ -77,18 +77,18 @@ theorem proposition_23B :
   have : Col J H T := by conclude_def Col
   have : Col B J H := by conclude lemma_collinear4
   have : J ≠ T := by forward_using lemma_betweennotequal
-  have : Col H J B := by forward_using lemma_collinearorder
-  have : Col H J T := by forward_using lemma_collinearorder
+  have : Col H J B := by perm_close
+  have : Col H J T := by perm_close
   have : J ≠ H := by forward_using lemma_betweennotequal
   have : H ≠ J := by conclude lemma_inequalitysymmetric
   have : Col J B T := by conclude lemma_collinear4
-  have : Col J T B := by forward_using lemma_collinearorder
-  have : Col B A J := by forward_using lemma_collinearorder
-  have : Col B A H := by forward_using lemma_collinearorder
+  have : Col J T B := by perm_close
+  have : Col B A J := by perm_close
+  have : Col B A H := by perm_close
   have : Col A J H := by conclude lemma_collinear4
-  have : Col H J A := by forward_using lemma_collinearorder
+  have : Col H J A := by perm_close
   have : Col J A T := by conclude lemma_collinear4
-  have : Col J T A := by forward_using lemma_collinearorder
+  have : Col J T A := by perm_close
   have : ¬ Col J T P := by
       intro h
       have : Col A B P := by conclude lemma_collinear5
@@ -108,7 +108,7 @@ theorem proposition_23B :
   have : D ≠ C := by forward_using lemma_angledistinct
   have : C ≠ D := by conclude lemma_inequalitysymmetric
   have : C ≠ E := by forward_using lemma_angledistinct
-  have : Col J H A := by forward_using lemma_collinearorder
+  have : Col J H A := by perm_close
   have : Per J H S := by conclude lemma_8_3
   have : Per S H J := by conclude lemma_8_2
   have : CongA J H F J H S := by conclude lemma_Euclid4
@@ -144,17 +144,17 @@ theorem proposition_23B :
         have : Cong H A H A := by conclude cn_congruencereflexive
         have : ¬ Col S H A := by
             intro h
-            have : Col A H S := by forward_using lemma_collinearorder
+            have : Col A H S := by perm_close
             contradict
         have : (Cong F A S A ∧ CongA H F A H S A ∧ CongA H A F H A S) := by conclude proposition_04
         have : ¬ Col F A H := by
             intro h
-            have : Col F H A := by forward_using lemma_collinearorder
+            have : Col F H A := by perm_close
             contradict
         have : CongA F A H H A F := by conclude lemma_ABCequalsCBA
         have : ¬ Col H A S := by
             intro h
-            have : Col S H A := by forward_using lemma_collinearorder
+            have : Col S H A := by perm_close
             contradict
         have : CongA H A S S A H := by conclude lemma_ABCequalsCBA
         have : CongA F A H H A S := by conclude lemma_equalanglestransitive
@@ -198,7 +198,7 @@ theorem proposition_23B :
               have : CongA F A H F A H := by conclude lemma_equalanglesreflexive
               have : ¬ Col S A H := by
                   intro h
-                  have : Col S H A := by forward_using lemma_collinearorder
+                  have : Col S H A := by perm_close
                   contradict
               have : CongA S A H S A H := by conclude lemma_equalanglesreflexive
               have : CongA F A H F A G := by conclude lemma_equalangleshelper
@@ -212,7 +212,7 @@ theorem proposition_23B :
               have : CongA F A H F A H := by conclude lemma_equalanglesreflexive
               have : ¬ Col S A H := by
                   intro h
-                  have : Col S H A := by forward_using lemma_collinearorder
+                  have : Col S H A := by perm_close
                   contradict
               have : CongA S A H S A H := by conclude lemma_equalanglesreflexive
               have : CongA F A H F A G := by conclude lemma_equalangleshelper
@@ -231,16 +231,16 @@ theorem proposition_23B :
   have : CongA S A G F A G := by conclude lemma_equalanglessymmetric
   have : CongA S A G D C E := by conclude lemma_equalanglestransitive
   have : Out H S Q := by conclude lemma_ray5
-  have : Col J T H := by forward_using lemma_collinearorder
+  have : Col J T H := by perm_close
   have : TS S J T P := by conclude lemma_9_5
   obtain ⟨M, _, _, _⟩ : ∃ M, (BetS S M P ∧ Col J T M ∧ nCol J T S) := by conclude_def TS
   have : Col T A B := by conclude lemma_collinear4
-  have : Col A B T := by forward_using lemma_collinearorder
-  have : Col B A T := by forward_using lemma_collinearorder
+  have : Col A B T := by perm_close
+  have : Col B A T := by perm_close
   have : Col A J T := by conclude lemma_collinear4
-  have : Col J T A := by forward_using lemma_collinearorder
+  have : Col J T A := by perm_close
   have : Col B J T := by conclude lemma_collinear4
-  have : Col J T B := by forward_using lemma_collinearorder
+  have : Col J T B := by perm_close
   have : Col A B M := by conclude lemma_collinear5
   have : ¬ Col A B S := by
       intro h

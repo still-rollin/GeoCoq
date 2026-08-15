@@ -66,11 +66,11 @@ theorem proposition_47B :
   have : TS G A B C := by conclude lemma_oppositesideflip
   have : TS F A B C := by conclude lemma_planeseparation
   obtain ⟨a, _, _, _⟩ : ∃ a, (BetS F a C ∧ Col A B a ∧ nCol A B F) := by conclude_def TS
-  have : Col B A a := by forward_using lemma_collinearorder
+  have : Col B A a := by perm_close
   have : Par A G B F := by conclude_def PG
   have : Par A G F B := by forward_using lemma_parallelflip
   have : Col G A C := by conclude_def Col
-  have : Col A G C := by forward_using lemma_collinearorder
+  have : Col A G C := by perm_close
   have : G ≠ C := by forward_using lemma_betweennotequal
   have : C ≠ G := by conclude lemma_inequalitysymmetric
   have : Par F B A G := by conclude lemma_parallelsymmetric
@@ -90,7 +90,7 @@ theorem proposition_47B :
   have : F = F := by conclude cn_equalityreflexive
   have : Out B F F := by conclude lemma_ray4
   have : nCol A B F := by forward_using lemma_parallelNC
-  have : nCol F B A := by forward_using lemma_NCorder
+  have : nCol F B A := by perm_close
   have : CongA F B A F B A := by conclude lemma_equalanglesreflexive
   have : Out B A a := by conclude lemma_ray5
   have : CongA F B A F B a := by conclude lemma_equalangleshelper
@@ -105,15 +105,15 @@ theorem proposition_47B :
   have : Par B D C E := by conclude_def PG
   have : Par C E B D := by conclude lemma_parallelsymmetric
   have : Par C E D B := by forward_using lemma_parallelflip
-  have : Col B C c := by forward_using lemma_collinearorder
+  have : Col B C c := by perm_close
   have : Col B M C := by conclude_def Col
-  have : Col C B M := by forward_using lemma_collinearorder
-  have : Col C B c := by forward_using lemma_collinearorder
+  have : Col C B M := by perm_close
+  have : Col C B c := by perm_close
   have : C ≠ B := by forward_using lemma_NCdistinct
   have : Col B M c := by conclude lemma_collinear4
   have : Par B D M L := by conclude_def PG
   have : Col L M A := by conclude_def Col
-  have : Col M L A := by forward_using lemma_collinearorder
+  have : Col M L A := by perm_close
   have : L ≠ A := by forward_using lemma_betweennotequal
   have : A ≠ L := by conclude lemma_inequalitysymmetric
   have : Par B D A L := by conclude lemma_collinearparallel
@@ -133,22 +133,22 @@ theorem proposition_47B :
       intro h
       have : Col D B c := by conclude_def Col
       have : Col D c A := by conclude_def Col
-      have : Col c D B := by forward_using lemma_collinearorder
-      have : Col c D A := by forward_using lemma_collinearorder
+      have : Col c D B := by perm_close
+      have : Col c D A := by perm_close
       have : D ≠ c := by forward_using lemma_betweennotequal
       have : c ≠ D := by conclude lemma_inequalitysymmetric
       have : Col D B A := by conclude lemma_collinear4
       contradict
   have : Out B c C := by conclude lemma_ray4
   have : Out B C c := by conclude lemma_ray5
-  have : nCol C B A := by forward_using lemma_NCorder
+  have : nCol C B A := by perm_close
   have : CongA C B A C B A := by conclude lemma_equalanglesreflexive
   have : A = A := by conclude cn_equalityreflexive
   have : B ≠ A := by forward_using lemma_NCdistinct
   have : Out B A A := by conclude lemma_ray4
   have : CongA C B A c B A := by conclude lemma_equalangleshelper
   have : nCol C D B := by forward_using lemma_parallelNC
-  have : nCol D B C := by forward_using lemma_NCorder
+  have : nCol D B C := by perm_close
   have : CongA D B C D B C := by conclude lemma_equalanglesreflexive
   have : B ≠ D := by conclude lemma_inequalitysymmetric
   have : Out B D D := by conclude lemma_ray4
@@ -160,7 +160,7 @@ theorem proposition_47B :
   have : CongA D B A F B C := by conclude lemma_equalanglessymmetric
   have : ¬ Col C B F := by
       intro h
-      have : Col F B C := by forward_using lemma_collinearorder
+      have : Col F B C := by perm_close
       have : Per C B A := by conclude lemma_collinearright
       have : ¬ Per C B A := by conclude lemma_8_7
       contradict
@@ -179,7 +179,7 @@ theorem proposition_47B :
   have : Cong A D F C := by forward_using lemma_congruenceflip
   have : CongA B F C B A D := by conclude lemma_equalanglessymmetric
   have : nCol B A D := by conclude lemma_equalanglesNC
-  have : nCol A B D := by forward_using lemma_NCorder
+  have : nCol A B D := by perm_close
   have : Triangle A B D := by (try (have : nCol A B D := nCol_notCol _ _ _ (by assumption))); conclude_def Triangle
   have : Cong_3 A B D F B C := by conclude_def Cong_3
   have : ET A B D F B C := by conclude axiom_congruentequal
@@ -188,12 +188,12 @@ theorem proposition_47B :
   have : Par M L B D := by conclude lemma_parallelsymmetric
   have : Par M B D L := by forward_using lemma_parallelflip
   have : PG M B D L := by conclude_def PG
-  have : Col M L A := by forward_using lemma_collinearorder
+  have : Col M L A := by perm_close
   have : ET M B D A B D := by conclude proposition_41
   have : PG A B F G := by conclude lemma_squareparallelogram
   have : PG B A G F := by conclude lemma_PGflip
   have : Col G A C := by conclude_def Col
-  have : Col A G C := by forward_using lemma_collinearorder
+  have : Col A G C := by perm_close
   have : ET A B F C B F := by conclude proposition_41
   have : ET A B F F B C := by forward_using axiom_ETpermutation
   have : ET F B C A B D := by conclude axiom_ETsymmetric
@@ -226,9 +226,9 @@ theorem proposition_47B :
   have : BetS M n D := by conclude_def Midpoint
   have : BetS D n M := by conclude axiom_betweennesssymmetry
   have : Col M n D := by conclude_def Col
-  have : Col D M n := by forward_using lemma_collinearorder
+  have : Col D M n := by perm_close
   have : nCol B M D := by forward_using lemma_parallelNC
-  have : nCol D M B := by forward_using lemma_NCorder
+  have : nCol D M B := by perm_close
   have : EF F B A G D B M L := by conclude axiom_paste3
   have : EF F B A G B M L D := by forward_using axiom_EFpermutation
   have : EF B M L D F B A G := by conclude axiom_EFsymmetric

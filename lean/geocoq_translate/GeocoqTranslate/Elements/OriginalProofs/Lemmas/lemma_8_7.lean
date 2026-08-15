@@ -27,7 +27,7 @@ theorem lemma_8_7 :
   have : C ≠ B := by conclude lemma_inequalitysymmetric
   obtain ⟨E, _, _⟩ : ∃ E, (BetS B C E ∧ Cong C E C B) := by conclude lemma_extension
   have : Col B C E := by conclude_def Col
-  have : Col E C B := by forward_using lemma_collinearorder
+  have : Col E C B := by perm_close
   have : Per A B C := by conclude lemma_8_2
   have : Out B C E := by conclude lemma_ray4
   have : Per A B E := by conclude lemma_8_3

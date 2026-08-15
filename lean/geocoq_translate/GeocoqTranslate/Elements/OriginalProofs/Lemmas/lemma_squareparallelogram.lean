@@ -45,11 +45,11 @@ theorem lemma_squareparallelogram :
   have : Col D A A := by conclude_def Col
   have : R ≠ A := by forward_using lemma_betweennotequal
   have : nCol R A B := by conclude lemma_NChelper
-  have : nCol A B R := by forward_using lemma_NCorder
+  have : nCol A B R := by perm_close
   obtain ⟨c, E, _, _, _⟩ : ∃ c E, (SQ A B c E ∧ TS E A B R ∧ PG A B c E) := by conclude proposition_46
   have : (Cong A B c E ∧ Cong A B B c ∧ Cong A B E A ∧ Per E A B ∧ Per A B c ∧ Per B c E ∧ Per c E A) := by conclude_def SQ
   have : Col R A D := by conclude_def Col
-  have : Col D A R := by forward_using lemma_collinearorder
+  have : Col D A R := by perm_close
   have : Per R A B := by conclude lemma_collinearright
   have : Per B A R := by conclude lemma_8_2
   have : TS E B A R := by conclude lemma_oppositesideflip
@@ -88,22 +88,22 @@ theorem lemma_squareparallelogram :
   have : nCol C D A := by conclude lemma_rightangleNC
   have : Per c D A := by conclude cn_equalitysub
   have : nCol c D A := by conclude lemma_rightangleNC
-  have : nCol A c D := by forward_using lemma_NCorder
+  have : nCol A c D := by perm_close
   have : c = c := by conclude cn_equalityreflexive
   have : Col A c c := by conclude_def Col
   have : Col A m c := by conclude_def Col
-  have : Col A c m := by forward_using lemma_collinearorder
+  have : Col A c m := by perm_close
   have : m ≠ c := by forward_using lemma_betweennotequal
   have : nCol m c D := by conclude lemma_NChelper
-  have : nCol c D m := by forward_using lemma_NCorder
+  have : nCol c D m := by perm_close
   have : ¬ Col C D m := by
       intro h
       have : Col B m D := by conclude_def Col
-      have : Col m D B := by forward_using lemma_collinearorder
-      have : Col m D C := by forward_using lemma_collinearorder
+      have : Col m D B := by perm_close
+      have : Col m D C := by perm_close
       have : m ≠ D := by forward_using lemma_betweennotequal
       have : Col D B C := by conclude lemma_collinear4
-      have : Col B C D := by forward_using lemma_collinearorder
+      have : Col B C D := by perm_close
       have : nCol B C D := by conclude lemma_rightangleNC
       contradict
   have : CongA c D B C D B := by conclude lemma_equalanglessymmetric

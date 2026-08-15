@@ -40,26 +40,26 @@ theorem proposition_48 :
   have : B ≠ A := by conclude lemma_inequalitysymmetric
   obtain ⟨R, _, _⟩ : ∃ R, (BetS B A R ∧ Cong A R A B) := by conclude lemma_extension
   have : Col B A R := by conclude_def Col
-  have : Col A B R := by forward_using lemma_collinearorder
+  have : Col A B R := by perm_close
   have : B = B := by conclude cn_equalityreflexive
   have : Col A B B := by conclude_def Col
   have : B ≠ R := by forward_using lemma_betweennotequal
   have : R ≠ B := by conclude lemma_inequalitysymmetric
   have : nCol R B C := by conclude lemma_NChelper
-  have : nCol B R C := by forward_using lemma_NCorder
+  have : nCol B R C := by perm_close
   obtain ⟨Q, _, _⟩ : ∃ Q, (Per B A Q ∧ TS Q B R C) := by conclude proposition_11B
   have : nCol B A Q := by conclude lemma_rightangleNC
   have : A ≠ Q := by forward_using lemma_NCdistinct
   obtain ⟨c, _, _⟩ : ∃ c, (Out A Q c ∧ Cong A c A C) := by conclude lemma_layoff
   have : Per B A c := by conclude lemma_8_3
   have : nCol B A c := by conclude lemma_rightangleNC
-  have : nCol A B c := by forward_using lemma_NCorder
+  have : nCol A B c := by perm_close
   obtain ⟨f, g, _, _, _⟩ : ∃ f g, (SQ A B f g ∧ TS g A B c ∧ PG A B f g) := by conclude proposition_46
   have : A ≠ c := by forward_using lemma_NCdistinct
-  have : nCol A c B := by forward_using lemma_NCorder
+  have : nCol A c B := by perm_close
   obtain ⟨k, h, _, _, _⟩ : ∃ k h, (SQ A c k h ∧ TS h A c B ∧ PG A c k h) := by conclude proposition_46
   have : B ≠ c := by forward_using lemma_NCdistinct
-  have : nCol B c A := by forward_using lemma_NCorder
+  have : nCol B c A := by perm_close
   obtain ⟨e, d, _, _, _⟩ : ∃ e d, (SQ B c e d ∧ TS d B c A ∧ PG B c e d) := by conclude proposition_46
   have : Triangle A B c := by (try (have : nCol A B c := nCol_notCol _ _ _ (by assumption))); conclude_def Triangle
   have : TS g B A c := by conclude lemma_oppositesideflip
@@ -80,7 +80,7 @@ theorem proposition_48 :
   have : Per B c e := by conclude_def SQ
   have : m ≠ c := by forward_using lemma_betweennotequal
   have : Col B m c := by conclude_def Col
-  have : Col B c m := by forward_using lemma_collinearorder
+  have : Col B c m := by perm_close
   have : Per m c e := by conclude lemma_collinearright
   have : PG c e l m := by conclude lemma_PGrotate
   have : RE c e l m := by conclude lemma_PGrectangle

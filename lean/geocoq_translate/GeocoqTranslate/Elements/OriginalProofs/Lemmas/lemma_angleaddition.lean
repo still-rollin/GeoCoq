@@ -67,15 +67,15 @@ theorem lemma_angleaddition :
   have : Supp P S Q Q R := by conclude_def Supp
   have : RT G H q q H K := by conclude_def RT
   have : Col q s H := by conclude lemma_rayimpliescollinear
-  have : Col q H s := by forward_using lemma_collinearorder
+  have : Col q H s := by perm_close
   have : Col q p G := by conclude lemma_rayimpliescollinear
-  have : Col G q p := by forward_using lemma_collinearorder
+  have : Col G q p := by perm_close
   have : q = q := by conclude cn_equalityreflexive
   have : Col G q q := by conclude_def Col
   have : q ≠ p := by conclude lemma_ray2
   have : p ≠ q := by conclude lemma_inequalitysymmetric
   have : nCol p q H := by conclude lemma_NChelper
-  have : nCol q H p := by forward_using lemma_NCorder
+  have : nCol q H p := by perm_close
   have : TS p q H r := by (try (have : nCol q H p := nCol_notCol _ _ _ (by assumption))); conclude_def TS
   have : TS r q H p := by conclude lemma_oppositesidesymmetric
   have : Col q H q := by conclude_def Col
@@ -94,13 +94,13 @@ theorem lemma_angleaddition :
   have : R = R := by conclude cn_equalityreflexive
   have : Out Q P P := by conclude lemma_ray4
   have : Out Q R R := by conclude lemma_ray4
-  have : nCol P S Q := by forward_using lemma_NCorder
+  have : nCol P S Q := by perm_close
   have : Col P S R := by conclude_def Col
   have : P = P := by conclude cn_equalityreflexive
   have : Col P S P := by conclude_def Col
   have : P ≠ R := by forward_using lemma_betweennotequal
   have : nCol P R Q := by conclude lemma_NChelper
-  have : nCol P Q R := by forward_using lemma_NCorder
+  have : nCol P Q R := by perm_close
   have : Cong Q P q G := by conclude lemma_congruencesymmetric
   have : Cong Q R q K := by conclude lemma_congruencesymmetric
   have : Cong P R G K := by conclude lemma_congruencesymmetric

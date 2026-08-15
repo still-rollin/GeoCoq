@@ -37,23 +37,23 @@ theorem lemma_paralleldef2A :
       -- `conclude cn_equalitysub` (Leibniz subst) makes solve_by_elim do
       -- higher-order unification on the motive and explodes; do the subst directly.
       have : Col D a e := by subst h; assumption
-      have : Col a e C := by forward_using lemma_collinearorder
-      have : Col a e D := by forward_using lemma_collinearorder
+      have : Col a e C := by perm_close
+      have : Col a e D := by perm_close
       have : Col e C D := by conclude lemma_collinear4
-      have : Col e D C := by forward_using lemma_collinearorder
-      have : Col e D b := by forward_using lemma_collinearorder
+      have : Col e D C := by perm_close
+      have : Col e D b := by perm_close
       have : Col D C b := by conclude lemma_collinear4
-      have hCDb : Col C D b := by forward_using lemma_collinearorder
+      have hCDb : Col C D b := by perm_close
       exact hnMeet ⟨b, hAB, hCD, hABb, hCDb⟩
   have hnCeD : ¬ Col C e D := by
       intro h
-      have : Col C e a := by forward_using lemma_collinearorder
+      have : Col C e a := by perm_close
       have : Col e D a := by conclude lemma_collinear4
-      have : Col e D b := by forward_using lemma_collinearorder
+      have : Col e D b := by perm_close
       have : Col D a b := by conclude lemma_collinear4
-      have : Col e D C := by forward_using lemma_collinearorder
+      have : Col e D C := by perm_close
       have : Col D C a := by conclude lemma_collinear4
-      have hCDa : Col C D a := by forward_using lemma_collinearorder
+      have hCDa : Col C D a := by perm_close
       exact hnMeet ⟨a, hAB, hCD, hABa, hCDa⟩
   obtain ⟨M, hCMb, hDMa⟩ : ∃ M, (BetS C M b ∧ BetS D M a) := by conclude postulate_Pasch_inner
   have haMD : BetS a M D := by conclude axiom_betweennesssymmetry

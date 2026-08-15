@@ -19,7 +19,7 @@ theorem proposition_06 :
   have : nCol A B C := by conclude_def Triangle
   have : ¬ Col A C B := by
       intro h
-      have : Col A B C := by forward_using lemma_collinearorder
+      have : Col A B C := by perm_close
       contradict
   have : Triangle A C B := by (try (have : nCol A C B := nCol_notCol _ _ _ (by assumption))); conclude_def Triangle
   have : CongA A C B A B C := by conclude lemma_equalanglessymmetric

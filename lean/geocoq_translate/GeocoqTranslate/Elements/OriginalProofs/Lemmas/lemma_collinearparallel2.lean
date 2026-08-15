@@ -21,10 +21,10 @@ theorem lemma_collinearparallel2 :
   have : nCol A C D := by forward_using lemma_parallelNC
   have : C ≠ D := by forward_using lemma_NCdistinct
   have : D ≠ C := by conclude lemma_inequalitysymmetric
-  have : Col D C E := by forward_using lemma_collinearorder
-  have : Col D C F := by forward_using lemma_collinearorder
+  have : Col D C E := by perm_close
+  have : Col D C F := by perm_close
   have : Col C E F := by conclude lemma_collinear4
-  have : Col C F E := by forward_using lemma_collinearorder
+  have : Col C F E := by perm_close
   have : Par A B D C := by forward_using lemma_parallelflip
   have : Par A B E F := by
       rcases (show E = D ∨ E ≠ D by first | assumption | exact nCol_or_Col _ _ _ | exact Col_or_nCol _ _ _ | exact Classical.em _ | tauto | aesop) with c1 | c2
@@ -32,16 +32,16 @@ theorem lemma_collinearparallel2 :
         have : F ≠ D := by conclude lemma_inequalitysymmetric
         have : Par A B F D := by conclude lemma_collinearparallel
         have : Par A B D F := by forward_using lemma_parallelflip
-        have : Col C F D := by forward_using lemma_collinearorder
-        have : Col C F E := by forward_using lemma_collinearorder
+        have : Col C F D := by perm_close
+        have : Col C F E := by perm_close
         have : Col F D E := by
             rcases (show C = F ∨ C ≠ F by first | assumption | exact nCol_or_Col _ _ _ | exact Col_or_nCol _ _ _ | exact Classical.em _ | tauto | aesop) with c1 | c2
-            · have : Col C D E := by forward_using lemma_collinearorder
+            · have : Col C D E := by perm_close
               have : Col F D E := by conclude cn_equalitysub
               close
             · have : Col F D E := by conclude lemma_collinear4
               close
-        have : Col D F E := by forward_using lemma_collinearorder
+        have : Col D F E := by perm_close
         have : Par A B E F := by conclude lemma_collinearparallel
         close
       · have : Par A B E D := by conclude lemma_collinearparallel

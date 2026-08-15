@@ -49,11 +49,11 @@ theorem lemma_Euclid4 :
   have : nCol p b q := by conclude lemma_rightangleNC
   have : ¬ Col b q p := by
       intro h
-      have : Col p b q := by forward_using lemma_collinearorder
+      have : Col p b q := by perm_close
       contradict
   have : ¬ Col q p b := by
       intro h
-      have : Col p b q := by forward_using lemma_collinearorder
+      have : Col p b q := by perm_close
       contradict
   have : Triangle p b q := by (try (have : nCol p b q := nCol_notCol _ _ _ (by assumption))); conclude_def Triangle
   have : Triangle b q p := by (try (have : nCol b q p := nCol_notCol _ _ _ (by assumption))); conclude_def Triangle

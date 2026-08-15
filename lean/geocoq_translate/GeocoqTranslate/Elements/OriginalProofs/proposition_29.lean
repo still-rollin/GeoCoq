@@ -45,8 +45,8 @@ theorem proposition_29 :
   obtain ⟨R, _, _, _⟩ : ∃ R, (BetS A R D ∧ Col G H R ∧ nCol G H A) := by conclude_def TS
   have : TS D G H A := by conclude lemma_oppositesidesymmetric
   have : nCol G H D := by conclude_def TS
-  have : nCol D H G := by forward_using lemma_NCorder
-  have : Col D H C := by forward_using lemma_collinearorder
+  have : nCol D H G := by perm_close
+  have : Col D H C := by perm_close
   have : H = H := by conclude cn_equalityreflexive
   have : Col D H H := by conclude_def Col
   have : C ≠ H := by forward_using lemma_betweennotequal
@@ -62,10 +62,10 @@ theorem proposition_29 :
   have : G ≠ P := by conclude lemma_inequalitysymmetric
   have : Out G P P := by conclude lemma_ray4
   have : Col G S H := by conclude_def Col
-  have : Col G H S := by forward_using lemma_collinearorder
+  have : Col G H S := by perm_close
   have : CongA G H D P G H := by conclude lemma_equalanglessymmetric
   have : nCol P G H := by conclude lemma_equalanglesNC
-  have : nCol G H P := by forward_using lemma_NCorder
+  have : nCol G H P := by perm_close
   have : OS A P G H := by (try (have : nCol G H A := nCol_notCol _ _ _ (by assumption))); (try (have : nCol G H P := nCol_notCol _ _ _ (by assumption))); conclude_def OS
   have : H = H := by conclude cn_equalityreflexive
   have : G ≠ H := by forward_using lemma_betweennotequal
@@ -78,33 +78,33 @@ theorem proposition_29 :
       obtain ⟨K, _, _⟩ : ∃ K, (BetS G M K ∧ BetS D H K) := by conclude postulate_Euclid5
       have : Col G A M := by conclude lemma_rayimpliescollinear
       have : Col G M K := by conclude_def Col
-      have : Col M G A := by forward_using lemma_collinearorder
-      have : Col M G K := by forward_using lemma_collinearorder
+      have : Col M G A := by perm_close
+      have : Col M G K := by perm_close
       have : G ≠ M := by conclude lemma_raystrict
       have : M ≠ G := by conclude lemma_inequalitysymmetric
       have : Col G A K := by conclude lemma_collinear4
       have : Col A G B := by conclude_def Col
-      have : Col A G K := by forward_using lemma_collinearorder
-      have : Col G A B := by forward_using lemma_collinearorder
-      have : Col G A K := by forward_using lemma_collinearorder
+      have : Col A G K := by perm_close
+      have : Col G A B := by perm_close
+      have : Col G A K := by perm_close
       have : A ≠ G := by forward_using lemma_betweennotequal
       have : G ≠ A := by conclude lemma_inequalitysymmetric
       have : Col A B K := by conclude lemma_collinear4
       have : Col H D K := by conclude_def Col
-      have : Col H D C := by forward_using lemma_collinearorder
+      have : Col H D C := by perm_close
       have : H ≠ D := by forward_using lemma_betweennotequal
       have : Col D K C := by conclude lemma_collinear4
-      have : Col C D K := by forward_using lemma_collinearorder
+      have : Col C D K := by perm_close
       have : Meet A B C D := by conclude_def Meet
       contradict
   have : ¬ LtA H G P H G A := by
       intro h
-      have : nCol P G H := by forward_using lemma_NCorder
+      have : nCol P G H := by perm_close
       have : CongA P G H H G P := by conclude lemma_ABCequalsCBA
       have : LtA P G H H G A := by conclude lemma_angleorderrespectscongruence2
       have : ¬ Col H G A := by
           intro h
-          have : Col G H A := by forward_using lemma_collinearorder
+          have : Col G H A := by perm_close
           contradict
       have : CongA H G A A G H := by conclude lemma_ABCequalsCBA
       have : CongA A G H H G A := by conclude lemma_equalanglessymmetric
@@ -128,12 +128,12 @@ theorem proposition_29 :
       have : ¬ Col G H B := by
           intro h
           have : Col A G B := by conclude_def Col
-          have : Col B G A := by forward_using lemma_collinearorder
-          have : Col B G H := by forward_using lemma_collinearorder
+          have : Col B G A := by perm_close
+          have : Col B G H := by perm_close
           have : G ≠ B := by forward_using lemma_betweennotequal
           have : B ≠ G := by conclude lemma_inequalitysymmetric
           have : Col G A H := by conclude lemma_collinear4
-          have : Col H G A := by forward_using lemma_collinearorder
+          have : Col H G A := by perm_close
           contradict
       have : TS B G H A := by (try (have : nCol G H B := nCol_notCol _ _ _ (by assumption))); conclude_def TS
       have : TS A G H B := by conclude lemma_oppositesidesymmetric
@@ -146,7 +146,7 @@ theorem proposition_29 :
       have : nCol H G Q := by conclude lemma_equalanglesNC
       have : ¬ Col G H Q := by
           intro h
-          have : Col H G Q := by forward_using lemma_collinearorder
+          have : Col H G Q := by perm_close
           contradict
       have : BetS Q G P := by conclude axiom_betweennesssymmetry
       have : OS B Q G H := by (try (have : nCol G H B := nCol_notCol _ _ _ (by assumption))); (try (have : nCol G H Q := nCol_notCol _ _ _ (by assumption))); conclude_def OS
@@ -159,37 +159,37 @@ theorem proposition_29 :
       have : BetS Q S C := by conclude axiom_betweennesssymmetry
       have : Cong S Q C S := by conclude lemma_congruencesymmetric
       have : Cong S Q S C := by forward_using lemma_congruenceflip
-      have : nCol G H C := by forward_using lemma_NCorder
+      have : nCol G H C := by perm_close
       obtain ⟨K, _, _⟩ : ∃ K, (BetS G M K ∧ BetS C H K) := by conclude postulate_Euclid5
       have : Col G B M := by conclude lemma_rayimpliescollinear
       have : Col G M K := by conclude_def Col
-      have : Col M G B := by forward_using lemma_collinearorder
-      have : Col M G K := by forward_using lemma_collinearorder
+      have : Col M G B := by perm_close
+      have : Col M G K := by perm_close
       have : G ≠ M := by conclude lemma_raystrict
       have : M ≠ G := by conclude lemma_inequalitysymmetric
       have : Col G B K := by conclude lemma_collinear4
       have : Col B G A := by conclude_def Col
-      have : Col B G K := by forward_using lemma_collinearorder
-      have : Col G B A := by forward_using lemma_collinearorder
-      have : Col G B K := by forward_using lemma_collinearorder
+      have : Col B G K := by perm_close
+      have : Col G B A := by perm_close
+      have : Col G B K := by perm_close
       have : B ≠ G := by forward_using lemma_betweennotequal
       have : G ≠ B := by conclude lemma_inequalitysymmetric
       have : Col B A K := by conclude lemma_collinear4
-      have : Col A B K := by forward_using lemma_collinearorder
+      have : Col A B K := by perm_close
       have : Col H C K := by conclude_def Col
-      have : Col H C D := by forward_using lemma_collinearorder
+      have : Col H C D := by perm_close
       have : H ≠ C := by forward_using lemma_betweennotequal
       have : Col C K D := by conclude lemma_collinear4
-      have : Col C D K := by forward_using lemma_collinearorder
+      have : Col C D K := by perm_close
       have : Meet A B C D := by conclude_def Meet
       contradict
   have : ¬ Col H G P := by
       intro h
-      have : Col G H P := by forward_using lemma_collinearorder
+      have : Col G H P := by perm_close
       contradict
   have : ¬ Col H G A := by
       intro h
-      have : Col G H A := by forward_using lemma_collinearorder
+      have : Col G H A := by perm_close
       have : nCol G H A := by conclude_def TS
       contradict
   have : ¬ ¬ CongA H G A H G P := by
@@ -203,7 +203,7 @@ theorem proposition_29 :
   have : CongA H G A D H G := by conclude lemma_equalanglestransitive
   have : ¬ Col A G H := by
       intro h
-      have : Col G H A := by forward_using lemma_collinearorder
+      have : Col G H A := by perm_close
       contradict
   have : CongA A G H H G A := by conclude lemma_ABCequalsCBA
   have : CongA A G H D H G := by conclude lemma_equalanglestransitive
@@ -220,11 +220,11 @@ theorem proposition_29 :
   have : ¬ Col B G H := by
       intro h
       have : Col A G B := by conclude_def Col
-      have : Col B G A := by forward_using lemma_collinearorder
+      have : Col B G A := by perm_close
       have : G ≠ B := by forward_using lemma_betweennotequal
       have : B ≠ G := by conclude lemma_inequalitysymmetric
       have : Col G H A := by conclude lemma_collinear4
-      have : Col A G H := by forward_using lemma_collinearorder
+      have : Col A G H := by perm_close
       contradict
   have : CongA B G H B G H := by conclude lemma_equalanglesreflexive
   have : CongA G H D A G H := by conclude lemma_equalanglessymmetric

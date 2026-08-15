@@ -19,11 +19,11 @@ theorem proposition_23 :
   intro A B C D E h1 h2
   have : ¬ Col E C D := by
       intro h
-      have : Col D C E := by forward_using lemma_collinearorder
+      have : Col D C E := by perm_close
       contradict
   have : ¬ Col C E D := by
       intro h
-      have : Col D C E := by forward_using lemma_collinearorder
+      have : Col D C E := by perm_close
       contradict
   have : Triangle D C E := by (try (have : nCol D C E := nCol_notCol _ _ _ (by assumption))); conclude_def Triangle
   have : Triangle C E D := by (try (have : nCol C E D := nCol_notCol _ _ _ (by assumption))); conclude_def Triangle
@@ -51,25 +51,25 @@ theorem proposition_23 :
   have : ¬ C = D := by
       intro h
       have : Col C D E := by conclude_def Col
-      have : Col D C E := by forward_using lemma_collinearorder
+      have : Col D C E := by perm_close
       contradict
   have : Out C E E := by conclude lemma_ray4
   have : Out C D D := by conclude lemma_ray4
   have : ¬ Col F A G := by
       intro h
-      have : Col A G F := by forward_using lemma_collinearorder
+      have : Col A G F := by perm_close
       have : nCol A G F := by conclude_def Triangle
       contradict
   have : ¬ A = F := by
       intro h
       have : Col A F G := by conclude_def Col
-      have : Col F A G := by forward_using lemma_collinearorder
+      have : Col F A G := by perm_close
       contradict
   have : Out A F F := by conclude lemma_ray4
   have : ¬ A = G := by
       intro h
       have : Col A G F := by conclude_def Col
-      have : Col F A G := by forward_using lemma_collinearorder
+      have : Col F A G := by perm_close
       contradict
   have : Out A G G := by conclude lemma_ray4
   have : CongA F A G D C E := by (try (have : nCol F A G := nCol_notCol _ _ _ (by assumption))); conclude_def CongA

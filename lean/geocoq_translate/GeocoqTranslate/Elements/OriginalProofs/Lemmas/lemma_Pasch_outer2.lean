@@ -18,29 +18,29 @@ theorem lemma_Pasch_outer2 :
       intro h
       have : Col A P C := by conclude_def Col
       have : Col B C Q := by conclude_def Col
-      have : Col B Q C := by forward_using lemma_collinearorder
+      have : Col B Q C := by perm_close
       have : ¬ Q = A := by
           intro h
           have : Col B A C := by conclude cn_equalitysub
-          have : Col C A B := by forward_using lemma_collinearorder
-          have : Col C A P := by forward_using lemma_collinearorder
+          have : Col C A B := by perm_close
+          have : Col C A P := by perm_close
           have : A ≠ C := by forward_using lemma_betweennotequal
           have : C ≠ A := by conclude lemma_inequalitysymmetric
           have : Col A B P := by conclude lemma_collinear4
-          have : Col B P A := by forward_using lemma_collinearorder
+          have : Col B P A := by perm_close
           contradict
-      have : Col B Q C := by forward_using lemma_collinearorder
+      have : Col B Q C := by perm_close
       have : B ≠ Q := by forward_using lemma_betweennotequal
       have : Col Q A C := by conclude lemma_collinear4
-      have : Col A C Q := by forward_using lemma_collinearorder
-      have : Col A C P := by forward_using lemma_collinearorder
+      have : Col A C Q := by perm_close
+      have : Col A C P := by perm_close
       have : A ≠ C := by forward_using lemma_betweennotequal
       have : Col C Q P := by conclude lemma_collinear4
-      have : Col C Q B := by forward_using lemma_collinearorder
+      have : Col C Q B := by perm_close
       have : C ≠ Q := by forward_using lemma_betweennotequal
       have : Col Q P B := by conclude lemma_collinear4
-      have : Col Q B P := by forward_using lemma_collinearorder
-      have : Col Q B A := by forward_using lemma_collinearorder
+      have : Col Q B P := by perm_close
+      have : Col Q B A := by perm_close
       have : Q ≠ B := by conclude lemma_inequalitysymmetric
       have : Col B P A := by conclude lemma_collinear4
       contradict

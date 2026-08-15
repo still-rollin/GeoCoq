@@ -22,14 +22,14 @@ theorem proposition_13 :
   have : Out B A A := by conclude lemma_ray4
   have : BetS C B D := by conclude axiom_betweennesssymmetry
   have : Supp C B A A D := by conclude_def Supp
-  have : nCol C B A := by forward_using lemma_NCorder
+  have : nCol C B A := by perm_close
   have : Col D B C := by conclude_def Col
-  have : Col C B D := by forward_using lemma_collinearorder
+  have : Col C B D := by perm_close
   have : B = B := by conclude cn_equalityreflexive
   have : Col C B B := by conclude_def Col
   have : D ≠ B := by forward_using lemma_betweennotequal
   have : nCol D B A := by conclude lemma_NChelper
-  have : nCol A B D := by forward_using lemma_NCorder
+  have : nCol A B D := by perm_close
   have : CongA A B D A B D := by conclude lemma_equalanglesreflexive
   have : CongA C B A C B A := by conclude lemma_equalanglesreflexive
   have : RT C B A A B D := by conclude_def RT

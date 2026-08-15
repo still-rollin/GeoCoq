@@ -27,7 +27,7 @@ theorem lemma_collinearright :
       have : nCol A A D := by conclude cn_equalitysub
       have : A = A := by conclude cn_equalityreflexive
       have : Col D A A := by conclude_def Col
-      have : Col A A D := by forward_using lemma_collinearorder
+      have : Col A A D := by perm_close
       contradict
   have : Per D B A := by conclude lemma_8_2
   have : Per D B C := by

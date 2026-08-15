@@ -27,7 +27,7 @@ theorem proposition_11 :
       intro h
       have : Col A C E := by conclude_def Col
       have : Col A F E := by conclude cn_equalitysub
-      have : Col A E F := by forward_using lemma_collinearorder
+      have : Col A E F := by perm_close
       have : nCol A E F := by conclude_def Triangle
       contradict
   have : Cong C A E C := by forward_using lemma_doublereverse

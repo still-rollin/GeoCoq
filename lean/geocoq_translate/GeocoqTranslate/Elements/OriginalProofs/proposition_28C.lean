@@ -29,12 +29,12 @@ theorem proposition_28C :
   have : BetS C H D := by conclude axiom_betweennesssymmetry
   have : Par A B C D := by conclude proposition_28B
   have : Col D H C := by conclude_def Col
-  have : Col C D H := by forward_using lemma_collinearorder
+  have : Col C D H := by perm_close
   have : H ≠ D := by forward_using lemma_NCdistinct
   have : Par A B H D := by conclude lemma_collinearparallel
   have : Par H D A B := by conclude lemma_parallelsymmetric
   have : Col B G A := by conclude_def Col
-  have : Col A B G := by forward_using lemma_collinearorder
+  have : Col A B G := by perm_close
   have : Par H D G B := by conclude lemma_collinearparallel
   have : Par G B H D := by conclude lemma_parallelsymmetric
   close

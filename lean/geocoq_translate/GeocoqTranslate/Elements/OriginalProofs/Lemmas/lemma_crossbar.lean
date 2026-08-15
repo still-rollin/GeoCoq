@@ -47,21 +47,21 @@ theorem lemma_crossbar :
   obtain ⟨Q, _, _⟩ : ∃ Q, (BetS B C Q ∧ Cong C Q B V) := by conclude lemma_extension
   have : ¬ Col B Q A := by
       intro h
-      have : Col Q B A := by forward_using lemma_collinearorder
+      have : Col Q B A := by perm_close
       have : Col B C Q := by conclude_def Col
-      have : Col Q B C := by forward_using lemma_collinearorder
+      have : Col Q B C := by perm_close
       have : B ≠ Q := by forward_using lemma_betweennotequal
       have : Q ≠ B := by conclude lemma_inequalitysymmetric
       have : Col B A C := by conclude lemma_collinear4
-      have : Col A B C := by forward_using lemma_collinearorder
+      have : Col A B C := by perm_close
       contradict
   obtain ⟨F, _, _⟩ : ∃ F, (BetS A F Q ∧ BetS B E F) := by conclude postulate_Pasch_outer
   have : BetS Q F A := by conclude axiom_betweennesssymmetry
   have : ¬ Col B P Q := by
       intro h
-      have : Col P B Q := by forward_using lemma_collinearorder
+      have : Col P B Q := by perm_close
       have : Col B A P := by conclude_def Col
-      have : Col P B A := by forward_using lemma_collinearorder
+      have : Col P B A := by perm_close
       have : B ≠ P := by forward_using lemma_betweennotequal
       have : P ≠ B := by conclude lemma_inequalitysymmetric
       have : Col B Q A := by conclude lemma_collinear4
@@ -98,20 +98,20 @@ theorem lemma_crossbar :
   have : BetS B V Q := by conclude cn_equalitysub
   have : ¬ Col Q P B := by
       intro h
-      have : Col B P Q := by forward_using lemma_collinearorder
+      have : Col B P Q := by perm_close
       contradict
   obtain ⟨M, _, _⟩ : ∃ M, (BetS Q M U ∧ BetS B M W) := by conclude postulate_Pasch_inner
   have : BetS U M Q := by conclude axiom_betweennesssymmetry
   have : ¬ Col U Q B := by
       intro h
       have : Col B U P := by conclude_def Col
-      have : Col B U Q := by forward_using lemma_collinearorder
+      have : Col B U Q := by perm_close
       have : B ≠ U := by forward_using lemma_betweennotequal
-      have : Col U B P := by forward_using lemma_collinearorder
-      have : Col U B Q := by forward_using lemma_collinearorder
+      have : Col U B P := by perm_close
+      have : Col U B Q := by perm_close
       have : U ≠ B := by conclude lemma_inequalitysymmetric
       have : Col B P Q := by conclude lemma_collinear4
-      have : Col Q P B := by forward_using lemma_collinearorder
+      have : Col Q P B := by perm_close
       contradict
   obtain ⟨H, _, _⟩ : ∃ H, (BetS U H V ∧ BetS B H M) := by conclude postulate_Pasch_inner
   have : ¬ E = B := by

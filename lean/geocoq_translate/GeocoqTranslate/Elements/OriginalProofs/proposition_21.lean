@@ -34,31 +34,31 @@ theorem proposition_21 :
   have : BetS E D B := by conclude axiom_betweennesssymmetry
   have : nCol A B C := by conclude_def Triangle
   have : Col A E C := by conclude_def Col
-  have : Col A C E := by forward_using lemma_collinearorder
+  have : Col A C E := by perm_close
   have : A ≠ E := by forward_using lemma_betweennotequal
-  have : nCol A C B := by forward_using lemma_NCorder
+  have : nCol A C B := by perm_close
   have : A = A := by conclude cn_equalityreflexive
   have : Col A C A := by conclude_def Col
   have : nCol A E B := by conclude lemma_NChelper
-  have : nCol A B E := by forward_using lemma_NCorder
+  have : nCol A B E := by perm_close
   have : Triangle A B E := by (try (have : nCol A B E := nCol_notCol _ _ _ (by assumption))); conclude_def Triangle
   have : TG B A A E B E := by conclude proposition_20
   have : TT B A A C B E E C := by conclude lemma_21helper
-  have : nCol A C B := by forward_using lemma_NCorder
+  have : nCol A C B := by perm_close
   have : Col A E C := by conclude_def Col
-  have : Col A C E := by forward_using lemma_collinearorder
+  have : Col A C E := by perm_close
   have : C = C := by conclude cn_equalityreflexive
   have : Col A C C := by conclude_def Col
   have : E ≠ C := by forward_using lemma_betweennotequal
   have : nCol E C B := by conclude lemma_NChelper
-  have : nCol E B C := by forward_using lemma_NCorder
+  have : nCol E B C := by perm_close
   have : Col E D B := by conclude_def Col
-  have : Col E B D := by forward_using lemma_collinearorder
+  have : Col E B D := by perm_close
   have : E = E := by conclude cn_equalityreflexive
   have : Col E B E := by conclude_def Col
   have : E ≠ D := by forward_using lemma_betweennotequal
   have : nCol E D C := by conclude lemma_NChelper
-  have : nCol E C D := by forward_using lemma_NCorder
+  have : nCol E C D := by perm_close
   have : Triangle E C D := by (try (have : nCol E C D := nCol_notCol _ _ _ (by assumption))); conclude_def Triangle
   have : TG C E E D C D := by conclude proposition_20
   have : TT C E E B C D D B := by conclude lemma_21helper
@@ -66,23 +66,23 @@ theorem proposition_21 :
   have : TT B E E C C D D B := by conclude lemma_TTflip
   have : TT B A A C C D D B := by conclude lemma_TTtransitive
   have : TT B A A C B D D C := by conclude lemma_TTflip2
-  have : nCol C E D := by forward_using lemma_NCorder
+  have : nCol C E D := by perm_close
   have : Triangle C E D := by (try (have : nCol C E D := nCol_notCol _ _ _ (by assumption))); conclude_def Triangle
   have : LtA D E C C D B := by conclude proposition_16
-  have : nCol E B C := by forward_using lemma_NCorder
+  have : nCol E B C := by perm_close
   have : B = B := by conclude cn_equalityreflexive
   have : Col E B B := by conclude_def Col
   have : Col E D B := by conclude_def Col
-  have : Col E B D := by forward_using lemma_collinearorder
+  have : Col E B D := by perm_close
   have : B ≠ D := by forward_using lemma_betweennotequal
   have : D ≠ B := by conclude lemma_inequalitysymmetric
   have : nCol D B C := by conclude lemma_NChelper
-  have : nCol B A E := by forward_using lemma_NCorder
+  have : nCol B A E := by perm_close
   have : Triangle B A E := by (try (have : nCol B A E := nCol_notCol _ _ _ (by assumption))); conclude_def Triangle
   have : LtA E A B B E C := by conclude proposition_16
   have : CongA B A E E A B := by conclude lemma_ABCequalsCBA
   have : LtA B A E B E C := by conclude lemma_angleorderrespectscongruence2
-  have : nCol C E B := by forward_using lemma_NCorder
+  have : nCol C E B := by perm_close
   have : CongA C E B B E C := by conclude lemma_ABCequalsCBA
   have : LtA B A E C E B := by conclude lemma_angleorderrespectscongruence
   have : A ≠ E := by forward_using lemma_betweennotequal
@@ -90,23 +90,23 @@ theorem proposition_21 :
   have : Out A C E := by conclude lemma_ray5
   have : A ≠ B := by forward_using lemma_NCdistinct
   have : Out A B B := by conclude lemma_ray4
-  have : nCol B A C := by forward_using lemma_NCorder
+  have : nCol B A C := by perm_close
   have : CongA B A C B A C := by conclude lemma_equalanglesreflexive
   have : CongA B A C B A E := by conclude lemma_equalangleshelper
   have : BetS E D B := by conclude axiom_betweennesssymmetry
   have : Out E D B := by conclude lemma_ray4
   have : C = C := by conclude cn_equalityreflexive
   have : Out E C C := by conclude lemma_ray4
-  have : nCol C E D := by forward_using lemma_NCorder
+  have : nCol C E D := by perm_close
   have : CongA C E D C E D := by conclude lemma_equalanglesreflexive
   have : CongA C E D C E B := by conclude lemma_equalangleshelper
   have : LtA B A E C E D := by conclude lemma_angleorderrespectscongruence
   have : LtA B A C C E D := by conclude lemma_angleorderrespectscongruence2
-  have : nCol D E C := by forward_using lemma_NCorder
+  have : nCol D E C := by perm_close
   have : CongA D E C C E D := by conclude lemma_ABCequalsCBA
   have : LtA B A C D E C := by conclude lemma_angleorderrespectscongruence
   have : LtA B A C C D B := by conclude lemma_angleordertransitive
-  have : nCol B D C := by forward_using lemma_NCorder
+  have : nCol B D C := by perm_close
   have : CongA B D C C D B := by conclude lemma_ABCequalsCBA
   have : LtA B A C B D C := by conclude lemma_angleorderrespectscongruence
   close

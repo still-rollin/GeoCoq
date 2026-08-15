@@ -40,8 +40,8 @@ theorem lemma_35helper :
   have : Cong B C E F := by conclude lemma_congruencesymmetric
   have : Cong A D E F := by conclude lemma_congruencetransitive
   have : Col A D F := by conclude_def Col
-  have : Col F A E := by forward_using lemma_collinearorder
-  have : Col F A D := by forward_using lemma_collinearorder
+  have : Col F A E := by perm_close
+  have : Col F A D := by perm_close
   have : A ≠ F := by forward_using lemma_betweennotequal
   have : F ≠ A := by conclude lemma_inequalitysymmetric
   have : Col A E D := by conclude lemma_collinear4
@@ -60,8 +60,8 @@ theorem lemma_35helper :
   obtain ⟨Q, _, _⟩ : ∃ Q, (BetS B Q F ∧ BetS A M Q) := by conclude postulate_Pasch_outer
   have : Col A M Q := by conclude_def Col
   have : Col A M C := by conclude_def Col
-  have : Col M A Q := by forward_using lemma_collinearorder
-  have : Col M A C := by forward_using lemma_collinearorder
+  have : Col M A Q := by perm_close
+  have : Col M A C := by perm_close
   have : A ≠ M := by forward_using lemma_betweennotequal
   have : M ≠ A := by conclude lemma_inequalitysymmetric
   have : Col A Q C := by conclude lemma_collinear4
@@ -77,16 +77,16 @@ theorem lemma_35helper :
       intro h
       obtain ⟨p, _, _, _, _⟩ : ∃ p, (F ≠ A ∧ C ≠ B ∧ Col F A p ∧ Col C B p) := by conclude_def Meet
       have : Col A D F := by conclude_def Col
-      have : Col F A D := by forward_using lemma_collinearorder
+      have : Col F A D := by perm_close
       have : A ≠ D := by forward_using lemma_betweennotequal
       have : Col A D p := by conclude lemma_collinear4
-      have : Col B C p := by forward_using lemma_collinearorder
+      have : Col B C p := by perm_close
       have : Meet A D B C := by conclude_def Meet
       have : ¬ Meet A D B C := by conclude_def Par
       contradict
   have : BetS F Q B := by conclude axiom_betweennesssymmetry
   have : ¬ Meet A D B C := by conclude_def Par
-  have : Col A C Q := by forward_using lemma_collinearorder
+  have : Col A C Q := by perm_close
   have : BetS A Q C := by conclude lemma_collinearbetween
   have : BetS C Q A := by conclude axiom_betweennesssymmetry
   have : ¬ A = E := by
@@ -105,20 +105,20 @@ theorem lemma_35helper :
       intro h
       have : BetS E F A := by conclude axiom_betweennesssymmetry
       have : nCol A D C := by forward_using lemma_parallelNC
-      have : Col A D E := by forward_using lemma_collinearorder
+      have : Col A D E := by perm_close
       have : nCol A E C := by conclude lemma_NChelper
-      have : nCol C A E := by forward_using lemma_NCorder
+      have : nCol C A E := by perm_close
       obtain ⟨r, _, _⟩ : ∃ r, (BetS C r F ∧ BetS E r Q) := by conclude postulate_Pasch_inner
       have : BetS Q r E := by conclude axiom_betweennesssymmetry
       have : nCol E B F := by forward_using lemma_parallelNC
-      have : nCol F B E := by forward_using lemma_NCorder
+      have : nCol F B E := by perm_close
       obtain ⟨H, _, _⟩ : ∃ H, (BetS E H B ∧ BetS F r H) := by conclude postulate_Pasch_outer
       have : Col E H B := by conclude_def Col
       have : Col F r H := by conclude_def Col
-      have : Col E B H := by forward_using lemma_collinearorder
+      have : Col E B H := by perm_close
       have : Col C r F := by conclude_def Col
-      have : Col r F C := by forward_using lemma_collinearorder
-      have : Col r F H := by forward_using lemma_collinearorder
+      have : Col r F C := by perm_close
+      have : Col r F H := by perm_close
       have : r ≠ F := by forward_using lemma_betweennotequal
       have : Col F C H := by conclude lemma_collinear4
       have : B ≠ E := by forward_using lemma_NCdistinct
@@ -127,7 +127,7 @@ theorem lemma_35helper :
       have : Meet E B F C := by conclude_def Meet
       have : ¬ Meet E B F C := by conclude_def Par
       contradict
-  have : Col A F E := by forward_using lemma_collinearorder
+  have : Col A F E := by perm_close
   have : (A = F ∨ A = E ∨ F = E ∨ BetS F A E ∨ BetS A F E ∨ BetS A E F) := by conclude_def Col
   have : BetS A E F := by
       rcases (show A = F ∨ A = E ∨ F = E ∨ BetS F A E ∨ BetS A F E ∨ BetS A E F by first | assumption | exact nCol_or_Col _ _ _ | exact Col_or_nCol _ _ _ | exact Classical.em _ | tauto | aesop) with c1 | c2 | c3 | c4 | c5 | c6
@@ -145,7 +145,7 @@ theorem lemma_35helper :
             intro h
             have : E = F := by conclude lemma_equalitysymmetric
             have : Col B E F := by conclude_def Col
-            have : Col E B F := by forward_using lemma_collinearorder
+            have : Col E B F := by perm_close
             have : F = F := by conclude cn_equalityreflexive
             have : Col F C F := by conclude_def Col
             have : E ≠ B := by conclude_def Par

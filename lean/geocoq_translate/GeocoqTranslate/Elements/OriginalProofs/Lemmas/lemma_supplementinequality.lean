@@ -50,27 +50,27 @@ theorem lemma_supplementinequality :
       have : Col B A P := by conclude lemma_rayimpliescollinear
       have : Col A B F := by conclude_def Col
       have : A ≠ B := by forward_using lemma_betweennotequal
-      have : Col A B P := by forward_using lemma_collinearorder
+      have : Col A B P := by perm_close
       have : Col B F P := by conclude lemma_collinear4
-      have : Col F P B := by forward_using lemma_collinearorder
+      have : Col F P B := by perm_close
       have : F ≠ P := by forward_using lemma_betweennotequal
       have : Col P Q B := by conclude lemma_collinear4
-      have : Col P B Q := by forward_using lemma_collinearorder
-      have : Col P B A := by forward_using lemma_collinearorder
+      have : Col P B Q := by perm_close
+      have : Col P B A := by perm_close
       have : B ≠ P := by forward_using lemma_betweennotequal
       have : P ≠ B := by conclude lemma_inequalitysymmetric
       have : Col B Q A := by conclude lemma_collinear4
       have : Col P R Q := by conclude_def Col
-      have : Col P Q R := by forward_using lemma_collinearorder
-      have : Col P Q B := by forward_using lemma_collinearorder
+      have : Col P Q R := by perm_close
+      have : Col P Q B := by perm_close
       have : P ≠ Q := by forward_using lemma_betweennotequal
       have : Col Q R B := by conclude lemma_collinear4
-      have : Col Q B R := by forward_using lemma_collinearorder
-      have : Col Q B A := by forward_using lemma_collinearorder
+      have : Col Q B R := by perm_close
+      have : Col Q B A := by perm_close
       have : B ≠ Q := by conclude lemma_raystrict
       have : Q ≠ B := by conclude lemma_inequalitysymmetric
       have : Col B R A := by conclude lemma_collinear4
-      have : Col A B R := by forward_using lemma_collinearorder
+      have : Col A B R := by perm_close
       contradict
   obtain ⟨M, _, _⟩ : ∃ M, (BetS F M R ∧ BetS Q M B) := by conclude postulate_Pasch_inner
   have : R = R := by conclude cn_equalityreflexive
@@ -89,18 +89,18 @@ theorem lemma_supplementinequality :
   have : nCol R B F := by conclude lemma_equalanglesNC
   have : ¬ Col F B Q := by
       intro h
-      have : Col Q B F := by forward_using lemma_collinearorder
+      have : Col Q B F := by perm_close
       have : Col Q M B := by conclude_def Col
-      have : Col Q B M := by forward_using lemma_collinearorder
+      have : Col Q B M := by perm_close
       have : Q ≠ B := by forward_using lemma_betweennotequal
       have : Col B F M := by conclude lemma_collinear4
       have : Col F M R := by conclude_def Col
-      have : Col M F B := by forward_using lemma_collinearorder
-      have : Col M F R := by forward_using lemma_collinearorder
+      have : Col M F B := by perm_close
+      have : Col M F R := by perm_close
       have : F ≠ M := by forward_using lemma_betweennotequal
       have : M ≠ F := by conclude lemma_inequalitysymmetric
       have : Col F B R := by conclude lemma_collinear4
-      have : Col R B F := by forward_using lemma_collinearorder
+      have : Col R B F := by perm_close
       contradict
   have : CongA F B Q F B Q := by conclude lemma_equalanglesreflexive
   have : BetS B M Q := by conclude axiom_betweennesssymmetry
@@ -118,12 +118,12 @@ theorem lemma_supplementinequality :
   have : ¬ Col F B D := by
       intro h
       have : Col B Q D := by conclude lemma_rayimpliescollinear
-      have : Col D B Q := by forward_using lemma_collinearorder
-      have : Col D B F := by forward_using lemma_collinearorder
+      have : Col D B Q := by perm_close
+      have : Col D B F := by perm_close
       have : B ≠ D := by conclude lemma_raystrict
       have : D ≠ B := by conclude lemma_inequalitysymmetric
       have : Col B Q F := by conclude lemma_collinear4
-      have : Col F B Q := by forward_using lemma_collinearorder
+      have : Col F B Q := by perm_close
       contradict
   have : CongA F B D D B F := by conclude lemma_ABCequalsCBA
   have : CongA F B Q D B F := by conclude lemma_equalanglestransitive
@@ -132,7 +132,7 @@ theorem lemma_supplementinequality :
   have : nCol f b d := by conclude lemma_equalanglesNC
   have : ¬ Col d b f := by
       intro h
-      have : Col f b d := by forward_using lemma_collinearorder
+      have : Col f b d := by perm_close
       contradict
   have : CongA d b f f b d := by conclude lemma_ABCequalsCBA
   have : LtA D B F d b f := by conclude lemma_angleorderrespectscongruence

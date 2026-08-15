@@ -54,14 +54,14 @@ theorem proposition_12 :
   have : Cong P M Q M := by forward_using lemma_congruenceflip
   have : Col P M Q := by conclude_def Col
   have : Col P B Q := by conclude_def Col
-  have : Col P Q B := by forward_using lemma_collinearorder
-  have : Col P Q M := by forward_using lemma_collinearorder
+  have : Col P Q B := by perm_close
+  have : Col P Q M := by perm_close
   have : Col Q B M := by conclude lemma_collinear4
-  have : Col Q B A := by forward_using lemma_collinearorder
+  have : Col Q B A := by perm_close
   have : B ≠ Q := by forward_using lemma_betweennotequal
   have : Q ≠ B := by conclude lemma_inequalitysymmetric
   have : Col B M A := by conclude lemma_collinear4
-  have : Col A B M := by forward_using lemma_collinearorder
+  have : Col A B M := by perm_close
   have : ¬ M = C := by
       intro h
       have : Col A B C := by conclude cn_equalitysub

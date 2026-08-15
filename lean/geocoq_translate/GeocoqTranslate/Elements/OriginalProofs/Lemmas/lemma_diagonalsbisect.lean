@@ -46,14 +46,14 @@ theorem lemma_diagonalsbisect :
   have : BetS D M B := by conclude axiom_betweennesssymmetry
   have : CR B D A C := by conclude_def CR
   have : nCol A B C := by forward_using lemma_parallelNC
-  have : nCol B A C := by forward_using lemma_NCorder
+  have : nCol B A C := by perm_close
   have : TS B A C D := by forward_using lemma_crossimpliesopposite
   have : Cong A B D C := by forward_using proposition_34
   have : Cong A B C D := by forward_using lemma_congruenceflip
   have : ¬ Col M A B := by
       intro h
       have : Col A M C := by conclude_def Col
-      have : Col M A C := by forward_using lemma_collinearorder
+      have : Col M A C := by perm_close
       have : A ≠ M := by forward_using lemma_betweennotequal
       have : M ≠ A := by conclude lemma_inequalitysymmetric
       have : Col A B C := by conclude lemma_collinear4
@@ -63,10 +63,10 @@ theorem lemma_diagonalsbisect :
   have : ¬ Col M C D := by
       intro h
       have : Col A M C := by conclude_def Col
-      have : Col M C A := by forward_using lemma_collinearorder
+      have : Col M C A := by perm_close
       have : M ≠ C := by forward_using lemma_betweennotequal
       have : Col C D A := by conclude lemma_collinear4
-      have : Col A C D := by forward_using lemma_collinearorder
+      have : Col A C D := by perm_close
       have : nCol A C D := by forward_using lemma_parallelNC
       contradict
   have : Triangle M C D := by (try (have : nCol M C D := nCol_notCol _ _ _ (by assumption))); conclude_def Triangle
@@ -92,7 +92,7 @@ theorem lemma_diagonalsbisect :
   have : CongA B A M M C D := by conclude lemma_equalanglestransitive
   have : nCol A C D := by forward_using lemma_parallelNC
   have : Col A M C := by conclude_def Col
-  have : Col A C M := by forward_using lemma_collinearorder
+  have : Col A C M := by perm_close
   have : C = C := by conclude cn_equalityreflexive
   have : Col A C C := by conclude_def Col
   have : M ≠ C := by forward_using lemma_betweennotequal
@@ -121,7 +121,7 @@ theorem lemma_diagonalsbisect :
   have : CongA A B M M D C := by conclude lemma_equalanglestransitive
   have : nCol B D C := by forward_using lemma_parallelNC
   have : Col B M D := by conclude_def Col
-  have : Col B D M := by forward_using lemma_collinearorder
+  have : Col B D M := by perm_close
   have : D = D := by conclude cn_equalityreflexive
   have : Col B D D := by conclude_def Col
   have : M ≠ D := by forward_using lemma_betweennotequal

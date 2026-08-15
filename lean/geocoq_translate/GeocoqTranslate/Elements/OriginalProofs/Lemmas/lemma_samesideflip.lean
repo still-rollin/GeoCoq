@@ -20,10 +20,10 @@ theorem lemma_samesideflip :
     ∀ (A B P Q : Point), OS P Q A B → OS P Q B A := by
   intro A B P Q h
   obtain ⟨r, p, q, hABp, hABq, hPpr, hQqr, hnP, hnQ⟩ := h
-  have hBAp : Col B A p := by forward_using lemma_collinearorder
-  have hBAq : Col B A q := by forward_using lemma_collinearorder
-  have hnBAP : nCol B A P := by forward_using lemma_NCorder
-  have hnBAQ : nCol B A Q := by forward_using lemma_NCorder
+  have hBAp : Col B A p := by perm_close
+  have hBAq : Col B A q := by perm_close
+  have hnBAP : nCol B A P := by perm_close
+  have hnBAQ : nCol B A Q := by perm_close
   exact ⟨r, p, q, hBAp, hBAq, hPpr, hQqr, hnBAP, hnBAQ⟩
 
 end GeocoqTranslate.Elements

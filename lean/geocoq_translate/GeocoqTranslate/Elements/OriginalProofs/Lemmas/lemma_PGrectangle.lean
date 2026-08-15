@@ -30,8 +30,8 @@ theorem lemma_PGrectangle :
   have : (Cong A B C D ∧ Cong A C B D ∧ CongA C A B B D C ∧ CongA A B D D C A ∧ Cong_3 C A B B D C) := by conclude proposition_34
   have : Par A C D B := by conclude_def PG
   have : nCol A C B := by forward_using lemma_parallelNC
-  have : nCol A B C := by forward_using lemma_NCorder
-  have : nCol C A B := by forward_using lemma_NCorder
+  have : nCol A B C := by perm_close
+  have : nCol C A B := by perm_close
   have : CongA C A B B A C := by conclude lemma_ABCequalsCBA
   have : Per C A B := by conclude lemma_8_2
   have : A ≠ B := by forward_using lemma_NCdistinct

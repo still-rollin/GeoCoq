@@ -40,10 +40,10 @@ theorem proposition_44 :
   obtain ⟨E, _, _⟩ : ∃ E, (BetS A B E ∧ Cong B E m c) := by conclude lemma_extension
   have : B ≠ E := by forward_using lemma_betweennotequal
   have : Col A B E := by conclude_def Col
-  have : Col B A E := by forward_using lemma_collinearorder
+  have : Col B A E := by perm_close
   have : B = B := by conclude cn_equalityreflexive
   have : Col B A B := by conclude_def Col
-  have : nCol B A R := by forward_using lemma_NCorder
+  have : nCol B A R := by perm_close
   have : nCol B E R := by conclude lemma_NChelper
   obtain ⟨g, e, _, _, _⟩ : ∃ g e, (Out B E e ∧ CongA g B e J D N ∧ OS g R B E) := by conclude proposition_23C
   have : B ≠ A := by conclude lemma_inequalitysymmetric
@@ -59,12 +59,12 @@ theorem proposition_44 :
   have : BetS Q B E := by conclude axiom_betweennesssymmetry
   have : Cong Q B B E := by forward_using lemma_congruenceflip
   have : Midpoint Q B E := by conclude_def Midpoint
-  have : nCol B A R := by forward_using lemma_NCorder
+  have : nCol B A R := by perm_close
   have : Col A B E := by conclude_def Col
-  have : Col B A E := by forward_using lemma_collinearorder
+  have : Col B A E := by perm_close
   have : B ≠ E := by forward_using lemma_betweennotequal
   have : nCol B E R := by conclude lemma_NChelper
-  have : nCol R B E := by forward_using lemma_NCorder
+  have : nCol R B E := by perm_close
   obtain ⟨G, F, _, _, _, _⟩ : ∃ G F, (PG G B E F ∧ EF a b m c G B E F ∧ CongA E B G J D N ∧ OS R G B E) := by conclude proposition_42B
   have : PG B E F G := by conclude lemma_PGrotate
   obtain ⟨M, L, _, _, _, _⟩ : ∃ M L, (PG A B M L ∧ CongA A B M J D N ∧ EF B E F G L M B A ∧ BetS G B M) := by conclude proposition_44A
@@ -72,8 +72,8 @@ theorem proposition_44 :
   have : Col A B B := by conclude_def Col
   have : Par G B E F := by conclude_def PG
   have : nCol G B E := by forward_using lemma_parallelNC
-  have : nCol E B G := by forward_using lemma_NCorder
-  have : Col E B A := by forward_using lemma_collinearorder
+  have : nCol E B G := by perm_close
+  have : Col E B A := by perm_close
   have : B = B := by conclude cn_equalityreflexive
   have : Col E B B := by conclude_def Col
   have : nCol A B G := by conclude lemma_NChelper
@@ -81,7 +81,7 @@ theorem proposition_44 :
   have : EF a b m c B E F G := by forward_using axiom_EFpermutation
   have : EF a b m c L M B A := by conclude axiom_EFtransitive
   have : EF a b m c A B M L := by forward_using axiom_EFpermutation
-  have : Col B E A := by forward_using lemma_collinearorder
+  have : Col B E A := by perm_close
   have : OS R G B A := by conclude lemma_samesidecollinear
   have : OS R G A B := by conclude lemma_samesideflip
   have : TS R A B M := by conclude lemma_planeseparation

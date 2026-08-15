@@ -20,8 +20,8 @@ theorem lemma_parallelbetween :
   have : nCol M H L := by forward_using lemma_parallelNC
   have : M ≠ B := by forward_using lemma_NCdistinct
   have : H ≠ L := by forward_using lemma_NCdistinct
-  have : nCol M L H := by forward_using lemma_NCorder
-  have : Col M L K := by forward_using lemma_collinearorder
+  have : nCol M L H := by perm_close
+  have : Col M L K := by perm_close
   have : Col H B K := by conclude_def Col
   have : M = M := by conclude cn_equalityreflexive
   have : L = L := by conclude cn_equalityreflexive
@@ -30,14 +30,14 @@ theorem lemma_parallelbetween :
   have : ¬ M = K := by
       intro h
       have : Col H B M := by conclude cn_equalitysub
-      have : Col M B H := by forward_using lemma_collinearorder
+      have : Col M B H := by perm_close
       have : Col H L H := by conclude_def Col
       have : Meet M B H L := by conclude_def Meet
       contradict
-  have : nCol M L H := by forward_using lemma_NCorder
+  have : nCol M L H := by perm_close
   have : Col M L M := by conclude_def Col
   have : nCol M K H := by conclude lemma_NChelper
-  have : nCol H M K := by forward_using lemma_NCorder
+  have : nCol H M K := by perm_close
   have : (L = M ∨ L = K ∨ M = K ∨ BetS M L K ∨ BetS L M K ∨ BetS L K M) := by conclude_def Col
   have : BetS L M K := by
       rcases (show L = M ∨ L = K ∨ M = K ∨ BetS M L K ∨ BetS L M K ∨ BetS L K M by first | assumption | exact nCol_or_Col _ _ _ | exact Col_or_nCol _ _ _ | exact Classical.em _ | tauto | aesop) with c1 | c2 | c3 | c4 | c5 | c6
@@ -52,7 +52,7 @@ theorem lemma_parallelbetween :
       · have : ¬ ¬ BetS L M K := by
             intro h
             have : Col H B L := by conclude cn_equalitysub
-            have : Col H L B := by forward_using lemma_collinearorder
+            have : Col H L B := by perm_close
             have : Col M B B := by conclude_def Col
             have : Meet M B H L := by conclude_def Meet
             contradict
@@ -63,12 +63,12 @@ theorem lemma_parallelbetween :
         close
       · have : ¬ ¬ BetS L M K := by
             intro h
-            have : nCol H K M := by forward_using lemma_NCorder
+            have : nCol H K M := by perm_close
             obtain ⟨E, _, _⟩ : ∃ E, (BetS H E L ∧ BetS M E B) := by conclude postulate_Pasch_inner
             have : Col H E L := by conclude_def Col
             have : Col M E B := by conclude_def Col
-            have : Col H L E := by forward_using lemma_collinearorder
-            have : Col M B E := by forward_using lemma_collinearorder
+            have : Col H L E := by perm_close
+            have : Col M B E := by perm_close
             have : Meet M B H L := by conclude_def Meet
             contradict
         close
@@ -79,7 +79,7 @@ theorem lemma_parallelbetween :
             obtain ⟨E, _, _⟩ : ∃ E, (BetS H E L ∧ BetS M B E) := by conclude postulate_Pasch_outer
             have : Col H E L := by conclude_def Col
             have : Col M B E := by conclude_def Col
-            have : Col H L E := by forward_using lemma_collinearorder
+            have : Col H L E := by perm_close
             have : Meet M B H L := by conclude_def Meet
             contradict
         close

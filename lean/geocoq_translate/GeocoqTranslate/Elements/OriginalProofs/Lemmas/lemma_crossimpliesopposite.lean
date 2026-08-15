@@ -15,11 +15,11 @@ theorem lemma_crossimpliesopposite :
   intro A B C D h1 h2
   obtain ⟨M, _, _⟩ : ∃ M, (BetS A M B ∧ BetS C M D) := by conclude_def CR
   have : Col C M D := by conclude_def Col
-  have : Col C D M := by forward_using lemma_collinearorder
-  have : nCol C D A := by forward_using lemma_NCorder
-  have : nCol D C A := by forward_using lemma_NCorder
+  have : Col C D M := by perm_close
+  have : nCol C D A := by perm_close
+  have : nCol D C A := by perm_close
   have : TS A C D B := by (try (have : nCol C D A := nCol_notCol _ _ _ (by assumption))); conclude_def TS
-  have : Col D C M := by forward_using lemma_collinearorder
+  have : Col D C M := by perm_close
   have : TS A D C B := by (try (have : nCol D C A := nCol_notCol _ _ _ (by assumption))); conclude_def TS
   have : TS B C D A := by conclude lemma_oppositesidesymmetric
   have : TS B D C A := by conclude lemma_oppositesidesymmetric

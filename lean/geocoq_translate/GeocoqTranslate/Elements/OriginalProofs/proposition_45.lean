@@ -70,21 +70,21 @@ theorem proposition_45 :
   have : Col P K R := by conclude_def Col
   have : P ≠ K := by forward_using lemma_betweennotequal
   have : Col K H R := by conclude lemma_collinear4
-  have : Col R K H := by forward_using lemma_collinearorder
-  have : nCol R K S := by forward_using lemma_NCorder
+  have : Col R K H := by perm_close
+  have : nCol R K S := by perm_close
   have : K = K := by conclude cn_equalityreflexive
   have : Col R K K := by conclude_def Col
   have : K ≠ H := by forward_using lemma_betweennotequal
   have : H ≠ K := by conclude lemma_inequalitysymmetric
   have : nCol H K S := by conclude lemma_NChelper
-  have : nCol S K H := by forward_using lemma_NCorder
+  have : nCol S K H := by perm_close
   obtain ⟨F, G, _, _, _, _⟩ : ∃ F G, (PG F K H G ∧ EF A B m D F K H G ∧ CongA H K F J E N ∧ OS S F K H) := by conclude proposition_42B
-  have : nCol D B C := by forward_using lemma_NCorder
+  have : nCol D B C := by perm_close
   have : Triangle D B C := by (try (have : nCol D B C := nCol_notCol _ _ _ (by assumption))); conclude_def Triangle
   have : Par F K H G := by conclude_def PG
   have : nCol K H G := by forward_using lemma_parallelNC
-  have : nCol H G K := by forward_using lemma_NCorder
-  have : nCol G H K := by forward_using lemma_NCorder
+  have : nCol H G K := by perm_close
+  have : nCol G H K := by perm_close
   obtain ⟨M, L, e, _, _, _, _, _⟩ : ∃ M L e, (PG G H M L ∧ CongA G H M J E N ∧ EF D B e C G H M L ∧ Midpoint B e C ∧ TS M G H K) := by conclude proposition_44
   have : BetS B e C := by conclude_def Midpoint
   have : CongA J E N G H M := by conclude lemma_equalanglessymmetric
@@ -100,7 +100,7 @@ theorem proposition_45 :
   have : RT F K H K H G := by conclude proposition_29C
   have : CongA G H M H K F := by conclude lemma_equalanglessymmetric
   have : nCol H K F := by conclude lemma_equalanglesNC
-  have : nCol F K H := by forward_using lemma_NCorder
+  have : nCol F K H := by perm_close
   have : CongA F K H H K F := by conclude lemma_ABCequalsCBA
   have : CongA F K H G H M := by conclude lemma_equalanglestransitive
   have : RT G H M K H G := by conclude lemma_RTcongruence
@@ -130,18 +130,18 @@ theorem proposition_45 :
   have : Par G L H M := by conclude_def PG
   have : Par F G H K := by forward_using lemma_parallelflip
   have : Col K H M := by conclude_def Col
-  have : Col H K M := by forward_using lemma_collinearorder
+  have : Col H K M := by perm_close
   have : K ≠ M := by forward_using lemma_betweennotequal
   have : M ≠ K := by conclude lemma_inequalitysymmetric
   have : Par F G M K := by conclude lemma_collinearparallel
-  have : Col H M K := by forward_using lemma_collinearorder
+  have : Col H M K := by perm_close
   have : Par G L K M := by conclude lemma_collinearparallel
   have : Par G L M K := by forward_using lemma_parallelflip
   have : Par M K G L := by conclude lemma_parallelsymmetric
   have : Par M K F G := by conclude lemma_parallelsymmetric
   have : Par M K G F := by forward_using lemma_parallelflip
   have : Col G L F := by conclude lemma_Playfair
-  have : Col G F L := by forward_using lemma_collinearorder
+  have : Col G F L := by perm_close
   have : nCol F L M := by forward_using lemma_parallelNC
   have : L ≠ F := by forward_using lemma_NCdistinct
   have : Par M K L F := by conclude lemma_collinearparallel
@@ -162,8 +162,8 @@ theorem proposition_45 :
   have : CongA F K M F K H := by conclude lemma_equalangleshelper
   have : CongA F K M J E N := by conclude lemma_equalanglestransitive
   have : Col B O D := by conclude_def Col
-  have : Col B D O := by forward_using lemma_collinearorder
-  have : nCol B D A := by forward_using lemma_NCorder
+  have : Col B D O := by perm_close
+  have : nCol B D A := by perm_close
   have : TS A B D C := by (try (have : nCol B D A := nCol_notCol _ _ _ (by assumption))); conclude_def TS
   have : Par G H L M := by forward_using lemma_parallelflip
   have : TP G H L M := by conclude lemma_paralleldef2B
@@ -179,17 +179,17 @@ theorem proposition_45 :
   have : TS M G H F := by conclude lemma_oppositesidesymmetric
   have : TS L G H F := by conclude lemma_planeseparation
   obtain ⟨t, _, _, _⟩ : ∃ t, (BetS L t F ∧ Col G H t ∧ nCol G H L) := by conclude_def TS
-  have : Col F L G := by forward_using lemma_collinearorder
+  have : Col F L G := by perm_close
   have : Col L t F := by conclude_def Col
-  have : Col F L t := by forward_using lemma_collinearorder
+  have : Col F L t := by perm_close
   have : F ≠ L := by forward_using lemma_NCdistinct
   have : Col L G t := by conclude lemma_collinear4
-  have : Col t G L := by forward_using lemma_collinearorder
-  have : Col t G H := by forward_using lemma_collinearorder
+  have : Col t G L := by perm_close
+  have : Col t G H := by perm_close
   have : ¬ t ≠ G := by
       intro h
       have : Col G L H := by conclude lemma_collinear4
-      have : Col G H L := by forward_using lemma_collinearorder
+      have : Col G H L := by perm_close
       contradict
   have : BetS L G F := by conclude cn_equalitysub
   have : BetS F G L := by conclude axiom_betweennesssymmetry

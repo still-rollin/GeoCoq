@@ -27,12 +27,12 @@ theorem proposition_27B :
   have : BetS C F D := by conclude axiom_betweennesssymmetry
   have : Par A B C D := by conclude proposition_27
   have : Col D F C := by conclude_def Col
-  have : Col C D F := by forward_using lemma_collinearorder
+  have : Col C D F := by perm_close
   have : Par A B F D := by conclude lemma_collinearparallel
   have : Par F D A B := by conclude lemma_parallelsymmetric
   have : Par F D B A := by forward_using lemma_parallelflip
   have : Col A E B := by conclude_def Col
-  have : Col B A E := by forward_using lemma_collinearorder
+  have : Col B A E := by perm_close
   have : A ≠ E := by forward_using lemma_betweennotequal
   have : E ≠ A := by conclude lemma_inequalitysymmetric
   have : Par F D E A := by conclude lemma_collinearparallel

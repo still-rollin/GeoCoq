@@ -28,12 +28,12 @@ theorem proposition_25 :
   have : nCol A B C := by conclude_def Triangle
   have : ¬ Col B A C := by
       intro h
-      have : Col A B C := by forward_using lemma_collinearorder
+      have : Col A B C := by perm_close
       contradict
   have : nCol D E F := by conclude_def Triangle
   have : ¬ Col E D F := by
       intro h
-      have : Col D E F := by forward_using lemma_collinearorder
+      have : Col D E F := by perm_close
       contradict
   have : ¬ CongA E D F B A C := by
       intro h

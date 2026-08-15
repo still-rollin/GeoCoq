@@ -20,10 +20,10 @@ theorem proposition_33 :
   intro A B C D M h1 h2 h3 h4
   obtain ⟨a, b, c, d, m, _, _, _, _, _, _, _, _, _, _, _⟩ : ∃ a b c d m, (A ≠ B ∧ C ≠ D ∧ Col A B a ∧ Col A B b ∧ a ≠ b ∧ Col C D c ∧ Col C D d ∧ c ≠ d ∧ ¬ Meet A B C D ∧ BetS a m d ∧ BetS c m b) := by conclude_def Par
   have : Col B M C := by conclude_def Col
-  have : Col B C M := by forward_using lemma_collinearorder
+  have : Col B C M := by perm_close
   have : ¬ Col B C A := by
       intro h
-      have : Col A B C := by forward_using lemma_collinearorder
+      have : Col A B C := by perm_close
       have : C = C := by conclude cn_equalityreflexive
       have : Col C D C := by conclude_def Col
       have : Meet A B C D := by conclude_def Meet
@@ -32,7 +32,7 @@ theorem proposition_33 :
   have : CongA A B C B C D := by conclude proposition_29B
   have : ¬ Col B C D := by
       intro h
-      have : Col C D B := by forward_using lemma_collinearorder
+      have : Col C D B := by perm_close
       have : B = B := by conclude cn_equalityreflexive
       have : Col A B B := by conclude_def Col
       have : Meet A B C D := by conclude_def Meet
@@ -44,12 +44,12 @@ theorem proposition_33 :
   have : Cong B A C D := by forward_using lemma_congruenceflip
   have : Cong B C C B := by forward_using lemma_congruenceflip
   have : (Cong A C D B ∧ CongA B A C C D B ∧ CongA B C A C B D) := by conclude proposition_04
-  have : nCol A C B := by forward_using lemma_NCorder
+  have : nCol A C B := by perm_close
   have : CongA A C B B C A := by conclude lemma_ABCequalsCBA
   have : CongA A C B C B D := by conclude lemma_equalanglestransitive
   have : Cong A C B D := by forward_using lemma_congruenceflip
-  have : Col C B M := by forward_using lemma_collinearorder
-  have : nCol C B A := by forward_using lemma_NCorder
+  have : Col C B M := by perm_close
+  have : nCol C B A := by perm_close
   have : TS A C B D := by (try (have : nCol C B A := nCol_notCol _ _ _ (by assumption))); conclude_def TS
   have : Par A C B D := by conclude proposition_27B
   close

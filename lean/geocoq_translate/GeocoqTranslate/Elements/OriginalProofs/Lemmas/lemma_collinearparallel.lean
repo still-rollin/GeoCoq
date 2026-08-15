@@ -16,15 +16,15 @@ theorem lemma_collinearparallel :
   obtain ⟨R, a, b, p, q, _, _, _, _, _, _, _, _, _, _, _⟩ : ∃ R a b p q, (A ≠ B ∧ c ≠ d ∧ Col A B a ∧ Col A B b ∧ a ≠ b ∧ Col c d p ∧ Col c d q ∧ p ≠ q ∧ ¬ Meet A B c d ∧ BetS a R q ∧ BetS p R b) := by conclude_def Par
   have : d ≠ C := by conclude lemma_inequalitysymmetric
   have : Col d C p := by conclude lemma_collinear4
-  have : Col C d p := by forward_using lemma_collinearorder
+  have : Col C d p := by perm_close
   have : Col d C q := by conclude lemma_collinear4
-  have : Col C d q := by forward_using lemma_collinearorder
+  have : Col C d q := by perm_close
   have : ¬ Meet A B C d := by
       intro h
       obtain ⟨E, _, _, _, _⟩ : ∃ E, (A ≠ B ∧ C ≠ d ∧ Col A B E ∧ Col C d E) := by conclude_def Meet
-      have : Col C d c := by forward_using lemma_collinearorder
+      have : Col C d c := by perm_close
       have : Col d E c := by conclude lemma_collinear4
-      have : Col c d E := by forward_using lemma_collinearorder
+      have : Col c d E := by perm_close
       have : Meet A B c d := by conclude_def Meet
       contradict
   have : Par A B C d := by conclude_def Par

@@ -58,7 +58,7 @@ theorem proposition_08 :
   have : nCol B A C := by
       apply nCol_notCol
       intro h
-      have : Col A B C := by forward_using lemma_collinearorder
+      have : Col A B C := by perm_close
       contradict
   have : CongA B A C E D F := by conclude_def CongA
   have : Cong B A E D := by forward_using lemma_congruenceflip
@@ -70,7 +70,7 @@ theorem proposition_08 :
   have : nCol C B A := by
       apply nCol_notCol
       intro h
-      have : Col A B C := by forward_using lemma_collinearorder
+      have : Col A B C := by perm_close
       contradict
   have : CongA C B A F E D := by conclude_def CongA
   have : Cong C A F D := by forward_using lemma_congruenceflip
@@ -82,7 +82,7 @@ theorem proposition_08 :
   have : nCol A C B := by
       apply nCol_notCol
       intro h
-      have : Col A B C := by forward_using lemma_collinearorder
+      have : Col A B C := by perm_close
       contradict
   have : CongA A C B D F E := by conclude_def CongA
   close

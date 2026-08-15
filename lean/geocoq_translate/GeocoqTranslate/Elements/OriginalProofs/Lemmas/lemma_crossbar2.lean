@@ -41,12 +41,12 @@ theorem lemma_crossbar2 :
       intro h
       have : Col G H L := by conclude lemma_rayimpliescollinear
       have : Col G P J := by conclude lemma_rayimpliescollinear
-      have : Col L G H := by forward_using lemma_collinearorder
+      have : Col L G H := by perm_close
       have : G ≠ L := by conclude lemma_raystrict
       have : L ≠ G := by conclude lemma_inequalitysymmetric
       have : Col G J H := by conclude lemma_collinear4
-      have : Col J G H := by forward_using lemma_collinearorder
-      have : Col J G P := by forward_using lemma_collinearorder
+      have : Col J G H := by perm_close
+      have : Col J G P := by perm_close
       have : G ≠ J := by conclude lemma_raystrict
       have : J ≠ G := by conclude lemma_inequalitysymmetric
       have : Col G H P := by conclude lemma_collinear4
@@ -69,12 +69,12 @@ theorem lemma_crossbar2 :
   have : ¬ Col H G M := by
       intro h
       have : Col G K M := by conclude lemma_rayimpliescollinear
-      have : Col M G K := by forward_using lemma_collinearorder
-      have : Col M G H := by forward_using lemma_collinearorder
+      have : Col M G K := by perm_close
+      have : Col M G H := by perm_close
       have : G ≠ M := by conclude lemma_raystrict
       have : M ≠ G := by conclude lemma_inequalitysymmetric
       have : Col G K H := by conclude lemma_collinear4
-      have : Col H G K := by forward_using lemma_collinearorder
+      have : Col H G K := by perm_close
       contradict
   have : CongA H G M H G M := by conclude lemma_equalanglesreflexive
   have : Out G M K := by conclude lemma_ray5
@@ -94,7 +94,7 @@ theorem lemma_crossbar2 :
   have : Out S M T := by conclude lemma_ray4
   have : Out S T M := by conclude lemma_ray5
   have : Col G H S := by conclude lemma_rayimpliescollinear
-  have : Col G S H := by forward_using lemma_collinearorder
+  have : Col G S H := by perm_close
   have : OS A M G H := by conclude lemma_sameside2
   have : OS M A G H := by forward_using lemma_samesidesymmetric
   have : OS M N G H := by conclude lemma_sameside2

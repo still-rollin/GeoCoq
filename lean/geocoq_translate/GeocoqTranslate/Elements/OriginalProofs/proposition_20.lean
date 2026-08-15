@@ -28,7 +28,7 @@ theorem proposition_20 :
   have : ¬ B = A := by
       intro h
       have : Col B A C := by conclude_def Col
-      have : Col A B C := by forward_using lemma_collinearorder
+      have : Col A B C := by perm_close
       contradict
   have : ¬ B = C := by
       intro h
@@ -38,7 +38,7 @@ theorem proposition_20 :
   have : ¬ C = A := by
       intro h
       have : Col B C A := by conclude_def Col
-      have : Col A B C := by forward_using lemma_collinearorder
+      have : Col A B C := by perm_close
       contradict
   obtain ⟨D, _, _⟩ : ∃ D, (BetS B A D ∧ Cong A D C A) := by conclude lemma_extension
   have : A ≠ D := by forward_using lemma_betweennotequal
@@ -49,8 +49,8 @@ theorem proposition_20 :
   have : ¬ Col A D C := by
       intro h
       have : Col B A D := by conclude_def Col
-      have : Col D A B := by forward_using lemma_collinearorder
-      have : Col D A C := by forward_using lemma_collinearorder
+      have : Col D A B := by perm_close
+      have : Col D A C := by perm_close
       have : A ≠ D := by forward_using lemma_betweennotequal
       have : D ≠ A := by conclude lemma_inequalitysymmetric
       have : Col A B C := by conclude lemma_collinear4
@@ -64,7 +64,7 @@ theorem proposition_20 :
   have : CongA A D C A C D := by conclude proposition_05
   have : ¬ Col A C D := by
       intro h
-      have : Col A D C := by forward_using lemma_collinearorder
+      have : Col A D C := by perm_close
       contradict
   have : CongA A C D D C A := by conclude lemma_ABCequalsCBA
   have : CongA A D C D C A := by conclude lemma_equalanglestransitive
@@ -91,16 +91,16 @@ theorem proposition_20 :
   have : ¬ Col B C D := by
       intro h
       have : Col B A D := by conclude_def Col
-      have : Col D B A := by forward_using lemma_collinearorder
-      have : Col D B C := by forward_using lemma_collinearorder
+      have : Col D B A := by perm_close
+      have : Col D B C := by perm_close
       have : B ≠ D := by forward_using lemma_betweennotequal
       have : D ≠ B := by conclude lemma_inequalitysymmetric
       have : Col B A C := by conclude lemma_collinear4
-      have : Col A B C := by forward_using lemma_collinearorder
+      have : Col A B C := by perm_close
       contradict
   have : ¬ Col C D B := by
       intro h
-      have : Col B C D := by forward_using lemma_collinearorder
+      have : Col B C D := by perm_close
       contradict
   have : CongA C D B B D C := by conclude lemma_ABCequalsCBA
   have : CongA B C D D C B := by conclude lemma_ABCequalsCBA

@@ -18,53 +18,53 @@ theorem lemma_twolines2 :
   have : D ≠ C := by conclude lemma_inequalitysymmetric
   have : ¬ P ≠ Q := by
       intro h
-      have : Col D C P := by forward_using lemma_collinearorder
-      have : Col D C Q := by forward_using lemma_collinearorder
+      have : Col D C P := by perm_close
+      have : Col D C Q := by perm_close
       have : Col C P Q := by conclude lemma_collinear4
-      have : Col A B P := by forward_using lemma_collinearorder
-      have : Col A B Q := by forward_using lemma_collinearorder
+      have : Col A B P := by perm_close
+      have : Col A B Q := by perm_close
       have : Col B P Q := by conclude lemma_collinear4
-      have : Col P Q B := by forward_using lemma_collinearorder
-      have : Col P Q C := by forward_using lemma_collinearorder
+      have : Col P Q B := by perm_close
+      have : Col P Q C := by perm_close
       have : Col Q C B := by conclude lemma_collinear4
-      have : Col Q C D := by forward_using lemma_collinearorder
+      have : Col Q C D := by perm_close
       have : ¬ Q = C := by
           intro h
-          have : Col C P D := by forward_using lemma_collinearorder
-          have : Col Q P B := by forward_using lemma_collinearorder
-          have : Col B A Q := by forward_using lemma_collinearorder
-          have : Col B A P := by forward_using lemma_collinearorder
+          have : Col C P D := by perm_close
+          have : Col Q P B := by perm_close
+          have : Col B A Q := by perm_close
+          have : Col B A P := by perm_close
           have : Col A Q P := by conclude lemma_collinear4
-          have : Col Q P A := by forward_using lemma_collinearorder
+          have : Col Q P A := by perm_close
           have : Col C P B := by conclude cn_equalitysub
           have : Col C P A := by conclude cn_equalitysub
-          have : Col P C A := by forward_using lemma_collinearorder
-          have : Col P C B := by forward_using lemma_collinearorder
-          have : Col P C D := by forward_using lemma_collinearorder
+          have : Col P C A := by perm_close
+          have : Col P C B := by perm_close
+          have : Col P C D := by perm_close
           have : ¬ P = C := by
               intro h
               have : P = Q := by conclude cn_equalitysub
               contradict
           have : Col C D A := by conclude lemma_collinear4
           have : Col C D B := by conclude lemma_collinear4
-          have : Col A C D := by forward_using lemma_collinearorder
-          have : Col B C D := by forward_using lemma_collinearorder
+          have : Col A C D := by perm_close
+          have : Col B C D := by perm_close
           contradict
       have : Col C B D := by conclude lemma_collinear4
-      have : Col B C D := by forward_using lemma_collinearorder
+      have : Col B C D := by perm_close
       have : ¬ B = A := by
           intro h
           have : A = B := by conclude lemma_equalitysymmetric
           contradict
-      have : Col B A P := by forward_using lemma_collinearorder
-      have : Col B A Q := by forward_using lemma_collinearorder
+      have : Col B A P := by perm_close
+      have : Col B A Q := by perm_close
       have : Col A P Q := by conclude lemma_collinear4
-      have : Col P Q A := by forward_using lemma_collinearorder
-      have : Col P Q C := by forward_using lemma_collinearorder
+      have : Col P Q A := by perm_close
+      have : Col P Q C := by perm_close
       have : Col Q C A := by conclude lemma_collinear4
-      have : Col Q C D := by forward_using lemma_collinearorder
+      have : Col Q C D := by perm_close
       have : Col C A D := by conclude lemma_collinear4
-      have : Col A C D := by forward_using lemma_collinearorder
+      have : Col A C D := by perm_close
       contradict
   close
 

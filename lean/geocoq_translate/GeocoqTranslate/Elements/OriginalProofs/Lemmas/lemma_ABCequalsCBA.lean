@@ -26,7 +26,7 @@ theorem lemma_ABCequalsCBA :
   have : ¬ C = B := by
       intro h
       have : Col C B A := by conclude_def Col
-      have : Col A B C := by forward_using lemma_collinearorder
+      have : Col A B C := by perm_close
       contradict
   obtain ⟨E, _, _⟩ : ∃ E, (BetS B A E ∧ Cong A E C B) := by conclude lemma_extension
   have : ¬ B = C := by

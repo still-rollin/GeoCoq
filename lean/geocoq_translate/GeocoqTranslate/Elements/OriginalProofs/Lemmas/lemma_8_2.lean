@@ -44,15 +44,15 @@ theorem lemma_8_2 :
   have : ¬ Col E B A := by
       intro h
       have : Col C B E := by conclude_def Col
-      have : Col E B C := by forward_using lemma_collinearorder
+      have : Col E B C := by perm_close
       have : B ≠ E := by forward_using lemma_betweennotequal
       have : E ≠ B := by conclude lemma_inequalitysymmetric
       have : Col B A C := by conclude lemma_collinear4
-      have : Col A B C := by forward_using lemma_collinearorder
+      have : Col A B C := by perm_close
       contradict
   have : ¬ Col A B E := by
       intro h
-      have : Col E B A := by forward_using lemma_collinearorder
+      have : Col E B A := by perm_close
       contradict
   have : CongA A B E E B A := by conclude lemma_ABCequalsCBA
   have : CongA C B D E B A := by conclude lemma_equalanglestransitive
